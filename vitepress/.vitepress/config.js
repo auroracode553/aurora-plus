@@ -7,7 +7,7 @@ export default defineConfig({
   title: 'Aurora UI',
   description: '从 Aurora Editor 抽离的 Vue 3 通用组件库',
   cleanUrls: true,
-  lastUpdated: true,
+  lastUpdated: false,
   head: [
     ['meta', { name: 'theme-color', content: '#409eff' }],
   ],
@@ -15,7 +15,7 @@ export default defineConfig({
     plugins: [demoSourcePlugin()],
     resolve: {
       alias: {
-        'aurora-ui': fileURLToPath(new URL('../../src/index.js', import.meta.url)),
+        'aurora-ui': fileURLToPath(new URL('../../ui/src/index.js', import.meta.url)),
       },
       dedupe: ['vue'],
     },
@@ -33,7 +33,7 @@ export default defineConfig({
     },
     nav: [
       { text: '指南', link: '/guide/getting-started' },
-      { text: '组件', link: '/components/overview' },
+      { text: '组件', link: '/components/button' },
       { text: '开发', link: '/development/architecture' },
       { text: 'v0.1.0', items: [{ text: '更新记录', link: '/development/changelog' }] },
     ],
@@ -47,15 +47,8 @@ export default defineConfig({
         ],
       },
       {
-        text: '组件总览',
-        items: [
-          { text: '组件总览', link: '/components/overview' },
-        ],
-      },
-      {
         text: '基础组件',
         items: [
-          { text: '基础组件总览', link: '/components/basic' },
           { text: 'Button 按钮', link: '/components/button' },
           { text: 'Icon 图标', link: '/components/icon' },
           { text: 'CloseButton 关闭按钮', link: '/components/close-button' },
@@ -65,7 +58,6 @@ export default defineConfig({
       {
         text: '反馈组件',
         items: [
-          { text: '反馈组件总览', link: '/components/feedback' },
           { text: 'Message 消息提示', link: '/components/message' },
           { text: 'MessageBox 消息确认框', link: '/components/message-box' },
           { text: 'Dialog 对话框', link: '/components/dialog' },

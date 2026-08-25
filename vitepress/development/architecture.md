@@ -4,12 +4,17 @@
 
 ```text
 aurora-ui/
-├─ src/
-│  ├─ components/        Vue 展示与交互组件，每个组件独立目录和导出入口
-│  ├─ services/          脱离业务状态的命令式反馈服务
-│  ├─ theme/             全局设计变量和明暗主题
-│  ├─ utils/             安装器、滚动锁等内部通用能力
-│  └─ index.js           完整安装入口与公共导出
+├─ ui/
+│  ├─ src/
+│  │  ├─ components/        Vue 展示与交互组件，每个组件独立目录和导出入口
+│  │  ├─ services/          脱离业务状态的命令式反馈服务
+│  │  ├─ theme/             全局设计变量和明暗主题
+│  │  ├─ utils/             安装器、滚动锁等内部通用能力
+│  │  └─ index.js           完整安装入口与公共导出
+│  ├─ index.d.ts            包级 TypeScript 声明
+│  ├─ vite.config.js        Vue 库模式构建配置
+│  ├─ package.json          组件库元数据、依赖与构建脚本
+│  └─ package-lock.json     组件库独立依赖版本锁
 ├─ vitepress/
 │  ├─ .vitepress/        文档站配置、主题与实时示例
 │  ├─ guide/             使用指南
@@ -17,13 +22,10 @@ aurora-ui/
 │  ├─ development/       架构与迁移记录
 │  ├─ package.json       文档站依赖与 npm scripts
 │  └─ package-lock.json  文档站独立依赖版本锁
-├─ index.d.ts            包级 TypeScript 声明
-├─ vite.config.js        Vue 库模式构建配置
-├─ package.json          组件库元数据、依赖与构建脚本
-└─ package-lock.json     组件库独立依赖版本锁
+└─ .gitignore            两个包共享的仓库忽略规则
 ```
 
-根目录是可发布的 `aurora-ui` 组件库包，`vitepress/` 是私有文档包。两者不使用 workspace，各自安装依赖并维护锁文件；在任一目录执行 `npm install` 都不会改写另一方的依赖版本。
+仓库根目录只负责容纳两个独立目录，不再作为 npm package。`ui/` 是可发布的 `aurora-ui` 组件库包，`vitepress/` 是私有文档包。两者不使用 workspace，各自安装依赖并维护锁文件；在任一目录执行 `npm install` 都不会改写另一方的依赖版本。
 
 ## 依赖边界
 
@@ -38,13 +40,13 @@ aurora-ui/
 
 ## 文档与预览
 
-VitePress 以 `vitepress/` 为站点根目录。文档配置将 `aurora-ui` 别名集中指向组件库的 `src/index.js`，主题和示例只使用包名导入，不在多个文件中硬编码跨包相对路径。`vue` 被显式去重并从文档包根解析，避免读取根目录的安装依赖。
+VitePress 以 `vitepress/` 为站点根目录。文档配置将 `aurora-ui` 别名集中指向 `ui/src/index.js`，主题和示例只使用包名导入，不在多个文件中硬编码跨包相对路径。`vue` 被显式去重并从文档包自身解析，不读取 `ui/node_modules`。
 
 实时示例位于 `.vitepress/theme/examples/`。组件页同时把同一个 `.vue` 文件作为组件和 `?demo-source` 源码导入：组件负责预览，构建插件读取原始文本并通过 Shiki 生成明暗主题高亮结果，因此示例数据、事件逻辑和展示源码不会出现两份实现或内容漂移。`DemoBlock.vue` 只负责预览容器、源码折叠、着色结果展示和复制交互，不持有业务示例数据。
 
 文档构建产物与 UI 库构建产物完全隔离：
 
-- UI 库：`dist/`
+- UI 库：`ui/dist/`
 - 文档站：`vitepress/.vitepress/dist/`
 
 ## 公共 API 约定

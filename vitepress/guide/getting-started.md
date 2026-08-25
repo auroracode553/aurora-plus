@@ -7,10 +7,10 @@
 组件库和文档站需要由使用者分别安装依赖：
 
 ```powershell
-cd D:\my_project\front-sdk\aurora-ui
+cd D:\my_project\front-sdk\aurora-ui\ui
 npm install
 
-cd vitepress
+cd ..\vitepress
 npm install
 ```
 
@@ -35,7 +35,7 @@ VitePress 会同时提供 Markdown 文档热更新和 Vue 组件热更新。组�
 
 | 执行目录 | 命令 | 用途 | 输出目录 |
 | --- | --- | --- | --- |
-| 仓库根目录 | `npm run build` | 构建 Aurora UI 库 | `dist/` |
+| `ui/` | `npm run build` | 构建 Aurora UI 库 | `ui/dist/` |
 | `vitepress/` | `npm run build` | 构建文档站 | `.vitepress/dist/` |
 | `vitepress/` | `npm run preview` | 预览已构建的文档站 | 默认端口 `4174` |
 

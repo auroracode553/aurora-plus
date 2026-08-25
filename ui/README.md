@@ -29,7 +29,7 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 - `@vitejs/plugin-vue` `^6.0.7`
 - Vue `^3.5.40`
 
-文档站依赖由 `vitepress/package.json` 独立管理，其中包含 VitePress `^1.6.4`、Vue `^3.5.40` 与用于示例源码着色的 Shiki `^2.5.0`。组件库与文档站分别维护自己的 `package-lock.json`、依赖安装目录和 npm scripts，不使用 workspace。
+文档站依赖由同级目录 `../vitepress/package.json` 独立管理，其中包含 VitePress `^1.6.4`、Vue `^3.5.40` 与用于示例源码着色的 Shiki `^2.5.0`。组件库与文档站分别维护自己的 `package-lock.json`、依赖安装目录和 npm scripts，不使用 workspace。
 
 依赖由使用者自行安装。
 
@@ -188,7 +188,7 @@ function runCommand(item) {
 </template>
 ```
 
-文档站中的每个演示均由实际 `.vue` 文件同时提供预览与完整源码，详细示例和全量 API 请从[组件总览](./vitepress/components/overview.md)进入。
+文档站中的每个演示均由实际 `.vue` 文件同时提供预览与完整源码，详细示例和全量 API 请从[组件文档](../vitepress/components/button.md)进入。
 
 ## 主题
 
@@ -208,13 +208,13 @@ document.documentElement.dataset.theme = 'dark';
 
 ## 文档与实时预览
 
-文档站使用 VitePress，Markdown 文档直接挂载 Aurora UI 源组件，修改 `src/` 后会同步热更新预览。
+同级 `../vitepress/` 目录使用 VitePress，Markdown 文档直接挂载 Aurora UI 源组件，修改 `ui/src/` 后会同步热更新预览。
 
 ```powershell
-cd D:\my_project\front-sdk\aurora-ui
+cd D:\my_project\front-sdk\aurora-ui\ui
 npm install
 
-cd vitepress
+cd ..\vitepress
 npm install
 npm run dev
 ```
@@ -225,7 +225,7 @@ npm run dev
 
 | 执行目录 | 命令 | 用途 |
 | --- | --- | --- |
-| 仓库根目录 | `npm run build` | 构建 UI 库到 `dist/` |
+| `ui/` | `npm run build` | 构建 UI 库到 `ui/dist/` |
 | `vitepress/` | `npm run dev` | 启动文档与组件实时预览 |
 | `vitepress/` | `npm run build` | 构建文档站 |
 | `vitepress/` | `npm run preview` | 预览已经构建的文档站 |

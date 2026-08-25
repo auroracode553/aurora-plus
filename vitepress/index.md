@@ -11,7 +11,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: 浏览组件
-      link: /components/overview
+      link: /components/button
 
 features:
   - title: 真实业务沉淀
@@ -28,6 +28,6 @@ features:
 
 ## 当前版本
 
-Aurora UI `0.1.0` 已包含 8 个组件与 2 个命令式服务。文档包通过开发别名引用组件库的 `src/index.js`，修改组件源码后会热更新到文档页面，同时两个包各自维护依赖与脚本。
+Aurora UI `0.1.0` 已包含 8 个组件与 2 个命令式服务。文档包通过开发别名引用 `ui/src/index.js`，修改组件源码后会热更新到文档页面；`ui/` 与 `vitepress/` 各自维护依赖、锁文件和 npm scripts。
 
 </div>
