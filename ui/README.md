@@ -7,8 +7,8 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 | 导出 | 用途 | 来源 |
 | --- | --- | --- |
 | `AuButton` | 多类型、多尺寸、加载态按钮 | `XButton.vue` |
+| `AuButtonGroup` | 连续按钮组与悬浮控制组 | 通用控制组 |
 | `AuIcon` | SVG 图标渲染与注册 | `SvgIcon.vue` |
-| `AuCloseButton` | 带提示的关闭按钮 | `XCloseButton.vue` |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 | `XTooltip.vue` |
 | `AuDialog` | 模态对话框壳、焦点和滚动管理 | `BaseDialog.vue` |
 | `AuVirtualList` | 固定行高虚拟列表 | `VirtualScrollList.vue` |

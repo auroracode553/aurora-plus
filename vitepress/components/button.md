@@ -25,6 +25,7 @@ import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.v
 - 一个操作区域通常只保留一个 `primary` 按钮，避免多个主操作争夺注意力。
 - 异步提交期间使用 `loading`。加载状态会同时禁用按钮，防止重复提交。
 - 只有图标的按钮应提供 `aria-label`，让读屏软件能够说明按钮用途。
+- 关闭入口直接使用 `<AuButton icon="close" circle aria-label="关闭" />`，无需额外的关闭按钮组件。
 - 表单内若不希望触发表单提交，保留默认的 `native-type="button"`。
 
 ## Button API

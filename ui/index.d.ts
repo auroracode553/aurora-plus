@@ -29,6 +29,16 @@ export interface AuButtonProps {
   loading?: boolean;
 }
 
+export type AuButtonGroupVariant = 'default' | 'floating';
+export type AuButtonGroupOrientation = 'horizontal' | 'vertical';
+
+export interface AuButtonGroupProps {
+  variant?: AuButtonGroupVariant;
+  orientation?: AuButtonGroupOrientation;
+  iconOnly?: boolean;
+  ariaLabel?: string;
+}
+
 export interface AuIconProps {
   name?: string;
   source?: string;
@@ -47,14 +57,6 @@ export interface AuTooltipProps {
   maxWidth?: string | number;
   teleported?: boolean;
   appendTo?: string | HTMLElement;
-}
-
-export interface AuCloseButtonProps {
-  icon?: string;
-  title?: string;
-  tooltip?: string;
-  ariaLabel?: string;
-  disabled?: boolean;
 }
 
 export interface AuDialogProps {
@@ -185,7 +187,7 @@ export interface AuMessageBoxFunction {
 }
 
 export const AuButton: DefineComponent<AuButtonProps> & AuComponent;
-export const AuCloseButton: DefineComponent<AuCloseButtonProps> & AuComponent;
+export const AuButtonGroup: DefineComponent<AuButtonGroupProps> & AuComponent;
 export const AuContextMenu: DefineComponent<AuContextMenuProps> & AuComponent;
 export const AuDialog: DefineComponent<AuDialogProps> & AuComponent;
 export const AuFloatingToolbar: DefineComponent<AuFloatingToolbarProps> & AuComponent;
@@ -210,7 +212,7 @@ export default AuroraUI;
 declare module 'vue' {
   export interface GlobalComponents {
     AuButton: typeof AuButton;
-    AuCloseButton: typeof AuCloseButton;
+    AuButtonGroup: typeof AuButtonGroup;
     AuContextMenu: typeof AuContextMenu;
     AuDialog: typeof AuDialog;
     AuFloatingToolbar: typeof AuFloatingToolbar;

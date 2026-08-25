@@ -22,7 +22,16 @@
             <slot name="header" :close="close">
               <h2 :id="titleId" class="au-dialog__title">{{ title }}</h2>
             </slot>
-            <AuCloseButton v-if="showClose" :tooltip="closeLabel" :aria-label="closeLabel" @click="close('close-button')" />
+            <AuTooltip v-if="showClose" :content="closeLabel" :disabled="!closeLabel">
+              <AuButton
+                class="au-dialog__close"
+                size="small"
+                icon="close"
+                circle
+                :aria-label="closeLabel || '关闭'"
+                @click="close('close-button')"
+              />
+            </AuTooltip>
           </header>
 
           <div class="au-dialog__body"><slot :close="close"></slot></div>
@@ -39,7 +48,8 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
-import { AuCloseButton } from '../close-button/index.js';
+import { AuButton } from '../button/index.js';
+import { AuTooltip } from '../tooltip/index.js';
 
 let dialogSeed = 0;
 
@@ -229,6 +239,10 @@ defineExpose({ close, dialogRef });
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+.au-dialog__close {
+  flex: none;
 }
 
 .au-dialog__body {

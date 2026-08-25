@@ -52,8 +52,8 @@ export default defineConfig({
         text: '基础组件',
         items: [
           { text: 'Button 按钮', link: '/components/button' },
+          { text: 'ButtonGroup 按钮组', link: '/components/button-group' },
           { text: 'Icon 图标', link: '/components/icon' },
-          { text: 'CloseButton 关闭按钮', link: '/components/close-button' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
         ],
       },
