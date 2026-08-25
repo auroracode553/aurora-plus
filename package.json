@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "description": "Aurora Vue 3 UI component library",
   "type": "module",
-  "workspaces": [
-    "vitepress"
-  ],
   "scripts": {
     "build": "vite build"
   },

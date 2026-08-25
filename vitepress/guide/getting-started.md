@@ -4,25 +4,22 @@
 
 建议使用 Node.js 22。组件库的运行时同级依赖为 Vue `>= 3.3.0`，构建环境使用 Vite 和 Vue 插件；文档包独立使用 VitePress 与 Vue。
 
-在项目目录中由使用者手动安装依赖：
+组件库和文档站需要由使用者分别安装依赖：
 
 ```powershell
 cd D:\my_project\front-sdk\aurora-ui
+npm install
+
+cd vitepress
 npm install
 ```
 
 ## 运行文档与组件预览
 
-在仓库根目录通过 workspace 启动：
+进入文档包后启动：
 
 ```powershell
-npm run dev --workspace @aurora-ui/vitepress
-```
-
-也可以进入文档包后启动：
-
-```powershell
-cd vitepress
+cd D:\my_project\front-sdk\aurora-ui\vitepress
 npm run dev
 ```
 
@@ -32,17 +29,17 @@ npm run dev
 http://127.0.0.1:5174
 ```
 
-VitePress 会同时提供 Markdown 文档热更新和 Vue 组件热更新。组件库与文档站的脚本分别位于根目录 `package.json` 和 `vitepress/package.json`。
+VitePress 会同时提供 Markdown 文档热更新和 Vue 组件热更新。组件库与文档站拥有各自的 `package.json`、`package-lock.json`、依赖安装和 npm scripts。
 
 ## 构建命令
 
-| 命令 | 用途 | 输出目录 |
-| --- | --- | --- |
-| `npm run build` | 构建 Aurora UI 库 | `dist/` |
-| `npm run build --workspace @aurora-ui/vitepress` | 构建文档站 | `vitepress/.vitepress/dist/` |
-| `npm run preview --workspace @aurora-ui/vitepress` | 预览已构建的文档站 | 默认端口 `4174` |
+| 执行目录 | 命令 | 用途 | 输出目录 |
+| --- | --- | --- | --- |
+| 仓库根目录 | `npm run build` | 构建 Aurora UI 库 | `dist/` |
+| `vitepress/` | `npm run build` | 构建文档站 | `.vitepress/dist/` |
+| `vitepress/` | `npm run preview` | 预览已构建的文档站 | 默认端口 `4174` |
 
-运行文档预览前需要先构建文档包。在 `vitepress/` 目录内可省略 `--workspace`，直接执行对应脚本。
+运行文档预览前，需要先在 `vitepress/` 目录中构建文档包。
 
 ## 完整安装
 

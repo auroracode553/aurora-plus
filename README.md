@@ -29,7 +29,7 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 - `@vitejs/plugin-vue` `^6.0.7`
 - Vue `^3.5.40`
 
-文档站依赖由 `vitepress/package.json` 独立管理，其中包含 VitePress `^1.6.4` 与 Vue `^3.5.40`。仓库使用 npm workspaces 和根目录锁文件统一锁定版本，但组件库与文档站不再共享依赖声明或脚本。
+文档站依赖由 `vitepress/package.json` 独立管理，其中包含 VitePress `^1.6.4` 与 Vue `^3.5.40`。组件库与文档站分别维护自己的 `package-lock.json`、依赖安装目录和 npm scripts，不使用 workspace。
 
 依赖由使用者自行安装。
 
@@ -165,18 +165,21 @@ document.documentElement.dataset.theme = 'dark';
 ```powershell
 cd D:\my_project\front-sdk\aurora-ui
 npm install
-npm run dev --workspace @aurora-ui/vitepress
+
+cd vitepress
+npm install
+npm run dev
 ```
 
 默认访问 `http://127.0.0.1:5174`。
 
 ## 项目命令
 
-| 命令 | 用途 |
-| --- | --- |
-| `npm run build` | 构建 UI 库到 `dist/` |
-| `npm run dev --workspace @aurora-ui/vitepress` | 启动文档与组件实时预览 |
-| `npm run build --workspace @aurora-ui/vitepress` | 构建文档站 |
-| `npm run preview --workspace @aurora-ui/vitepress` | 预览已经构建的文档站 |
+| 执行目录 | 命令 | 用途 |
+| --- | --- | --- |
+| 仓库根目录 | `npm run build` | 构建 UI 库到 `dist/` |
+| `vitepress/` | `npm run dev` | 启动文档与组件实时预览 |
+| `vitepress/` | `npm run build` | 构建文档站 |
+| `vitepress/` | `npm run preview` | 预览已经构建的文档站 |
 
-也可以进入 `vitepress/` 后执行该包自己的 `npm run dev`、`npm run build` 或 `npm run preview`。更详细的内容在文档站中维护，包括组件示例、API、主题、架构和抽离清单。
+两个包需要分别安装依赖。更详细的内容在 `vitepress/` 文档站中维护，包括组件示例、API、主题、架构和抽离清单。

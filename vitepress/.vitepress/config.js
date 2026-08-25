@@ -15,6 +15,7 @@ export default defineConfig({
       alias: {
         'aurora-ui': fileURLToPath(new URL('../../src/index.js', import.meta.url)),
       },
+      dedupe: ['vue'],
     },
     server: {
       fs: {

@@ -15,14 +15,15 @@ aurora-ui/
 │  ├─ guide/             使用指南
 │  ├─ components/        组件文档
 │  ├─ development/       架构与迁移记录
-│  └─ package.json       文档站依赖与 npm scripts
+│  ├─ package.json       文档站依赖与 npm scripts
+│  └─ package-lock.json  文档站独立依赖版本锁
 ├─ index.d.ts            包级 TypeScript 声明
 ├─ vite.config.js        Vue 库模式构建配置
-├─ package.json          组件库元数据、依赖、构建脚本与 workspace 声明
-└─ package-lock.json     仓库内两个 package 的统一版本锁
+├─ package.json          组件库元数据、依赖与构建脚本
+└─ package-lock.json     组件库独立依赖版本锁
 ```
 
-根目录是可发布的 `aurora-ui` 组件库包，`vitepress/` 是私有文档包。两者仅共享 workspace 锁文件，不共享依赖声明和脚本。
+根目录是可发布的 `aurora-ui` 组件库包，`vitepress/` 是私有文档包。两者不使用 workspace，各自安装依赖并维护锁文件；在任一目录执行 `npm install` 都不会改写另一方的依赖版本。
 
 ## 依赖边界
 
@@ -37,7 +38,7 @@ aurora-ui/
 
 ## 文档与预览
 
-VitePress 以 `vitepress/` 为站点根目录。文档配置将 `aurora-ui` 别名集中指向组件库的 `src/index.js`，主题和示例只使用包名导入，不在多个文件中硬编码跨包相对路径。组件文档内的 Vue 示例就是 UI 库真实源码，不存在独立 Playground 复制层。
+VitePress 以 `vitepress/` 为站点根目录。文档配置将 `aurora-ui` 别名集中指向组件库的 `src/index.js`，主题和示例只使用包名导入，不在多个文件中硬编码跨包相对路径。`vue` 被显式去重并从文档包根解析，避免读取根目录的安装依赖。组件文档内的 Vue 示例就是 UI 库真实源码，不存在独立 Playground 复制层。
 
 文档构建产物与 UI 库构建产物完全隔离：
 
