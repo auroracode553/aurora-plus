@@ -142,7 +142,15 @@ function deactivateDialog() {
 function focusInitialElement() {
   const dialog = dialogRef.value;
   if (!dialog) return;
-  const focusable = dialog.querySelector('[autofocus], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])');
+
+  // 选择器列表按 DOM 顺序匹配，需先单独查找 autofocus，避免关闭按钮抢占初始焦点并触发 Tooltip。
+  const autofocusTarget = dialog.querySelector('[autofocus]:not(:disabled)');
+  if (autofocusTarget) {
+    autofocusTarget.focus();
+    return;
+  }
+
+  const focusable = dialog.querySelector('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])');
   if (focusable) focusable.focus();
   else dialog.focus();
 }
