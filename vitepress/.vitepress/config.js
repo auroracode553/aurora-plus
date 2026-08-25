@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vitepress';
+import { demoSourcePlugin } from './demo-source-plugin.js';
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -11,6 +12,7 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#409eff' }],
   ],
   vite: {
+    plugins: [demoSourcePlugin()],
     resolve: {
       alias: {
         'aurora-ui': fileURLToPath(new URL('../../src/index.js', import.meta.url)),

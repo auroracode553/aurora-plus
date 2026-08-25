@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import IconBasic from '../.vitepress/theme/examples/icon/IconBasic.vue';
-import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?raw';
+import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?demo-source';
 </script>
 
 # Icon 图标

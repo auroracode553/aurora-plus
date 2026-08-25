@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import DialogBasic from '../.vitepress/theme/examples/dialog/DialogBasic.vue';
-import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.vue?raw';
+import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.vue?demo-source';
 </script>
 
 # Dialog 对话框

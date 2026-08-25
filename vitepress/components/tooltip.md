@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import TooltipBasic from '../.vitepress/theme/examples/tooltip/TooltipBasic.vue';
-import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasic.vue?raw';
+import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasic.vue?demo-source';
 </script>
 
 # Tooltip 文字提示

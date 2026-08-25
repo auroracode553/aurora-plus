@@ -20,7 +20,13 @@
       </div>
 
       <div v-show="expanded" :id="sourceId" class="au-doc-demo__code-wrap">
-        <pre class="au-doc-demo__code"><code>{{ normalizedSource }}</code></pre>
+        <!-- highlightedSource 仅来自构建阶段对仓库内示例源码的 Shiki 转换。 -->
+        <div
+          v-if="highlightedSource"
+          class="au-doc-demo__highlighted"
+          v-html="highlightedSource"
+        ></div>
+        <pre v-else class="au-doc-demo__code"><code>{{ normalizedSource }}</code></pre>
       </div>
 
       <button
@@ -45,7 +51,7 @@ let demoSeed = 0;
 const props = defineProps({
   title: { type: String, default: '' },
   description: { type: String, default: '' },
-  source: { type: String, default: '' },
+  source: { type: [String, Object], default: '' },
   language: { type: String, default: 'vue' },
   defaultExpanded: { type: Boolean, default: false },
 });
@@ -53,7 +59,14 @@ const props = defineProps({
 const expanded = ref(props.defaultExpanded);
 const copied = ref(false);
 const sourceId = `au-doc-demo-source-${++demoSeed}`;
-const normalizedSource = computed(() => props.source.trim());
+const normalizedSource = computed(() => {
+  const source = typeof props.source === 'string' ? props.source : props.source?.source;
+  return String(source || '').trim();
+});
+const highlightedSource = computed(() => {
+  if (!props.source || typeof props.source === 'string') return '';
+  return String(props.source.highlighted || '');
+});
 
 let copiedTimer = null;
 

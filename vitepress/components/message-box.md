@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import MessageBoxBasic from '../.vitepress/theme/examples/message-box/MessageBoxBasic.vue';
-import messageBoxBasicSource from '../.vitepress/theme/examples/message-box/MessageBoxBasic.vue?raw';
+import messageBoxBasicSource from '../.vitepress/theme/examples/message-box/MessageBoxBasic.vue?demo-source';
 </script>
 
 # MessageBox 消息确认框

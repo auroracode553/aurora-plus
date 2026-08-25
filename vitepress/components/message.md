@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import MessageBasic from '../.vitepress/theme/examples/message/MessageBasic.vue';
-import messageBasicSource from '../.vitepress/theme/examples/message/MessageBasic.vue?raw';
+import messageBasicSource from '../.vitepress/theme/examples/message/MessageBasic.vue?demo-source';
 </script>
 
 # Message 消息提示

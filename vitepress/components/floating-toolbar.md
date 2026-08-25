@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import FloatingToolbarBasic from '../.vitepress/theme/examples/floating-toolbar/FloatingToolbarBasic.vue';
-import floatingToolbarBasicSource from '../.vitepress/theme/examples/floating-toolbar/FloatingToolbarBasic.vue?raw';
+import floatingToolbarBasicSource from '../.vitepress/theme/examples/floating-toolbar/FloatingToolbarBasic.vue?demo-source';
 </script>
 
 # FloatingToolbar 浮动工具条

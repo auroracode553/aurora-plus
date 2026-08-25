@@ -29,7 +29,7 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 - `@vitejs/plugin-vue` `^6.0.7`
 - Vue `^3.5.40`
 
-文档站依赖由 `vitepress/package.json` 独立管理，其中包含 VitePress `^1.6.4` 与 Vue `^3.5.40`。组件库与文档站分别维护自己的 `package-lock.json`、依赖安装目录和 npm scripts，不使用 workspace。
+文档站依赖由 `vitepress/package.json` 独立管理，其中包含 VitePress `^1.6.4`、Vue `^3.5.40` 与用于示例源码着色的 Shiki `^2.5.0`。组件库与文档站分别维护自己的 `package-lock.json`、依赖安装目录和 npm scripts，不使用 workspace。
 
 依赖由使用者自行安装。
 

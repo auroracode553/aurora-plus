@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import ContextMenuBasic from '../.vitepress/theme/examples/context-menu/ContextMenuBasic.vue';
-import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/ContextMenuBasic.vue?raw';
+import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/ContextMenuBasic.vue?demo-source';
 </script>
 
 # ContextMenu 右键菜单

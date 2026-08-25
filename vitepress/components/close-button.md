@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import CloseButtonBasic from '../.vitepress/theme/examples/close-button/CloseButtonBasic.vue';
-import closeButtonBasicSource from '../.vitepress/theme/examples/close-button/CloseButtonBasic.vue?raw';
+import closeButtonBasicSource from '../.vitepress/theme/examples/close-button/CloseButtonBasic.vue?demo-source';
 </script>
 
 # CloseButton 关闭按钮

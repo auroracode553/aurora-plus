@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import ButtonBasic from '../.vitepress/theme/examples/button/ButtonBasic.vue';
-import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.vue?raw';
+import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.vue?demo-source';
 </script>
 
 # Button 按钮

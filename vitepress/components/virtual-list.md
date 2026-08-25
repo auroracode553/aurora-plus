@@ -1,7 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import VirtualListBasic from '../.vitepress/theme/examples/virtual-list/VirtualListBasic.vue';
-import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/VirtualListBasic.vue?raw';
+import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/VirtualListBasic.vue?demo-source';
 </script>
 
 # VirtualList 虚拟列表

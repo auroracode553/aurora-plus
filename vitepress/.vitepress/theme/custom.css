@@ -119,15 +119,18 @@
   background: var(--vp-code-block-bg);
 }
 
-.vp-doc .au-doc-demo__code {
+.vp-doc .au-doc-demo__code,
+.vp-doc .au-doc-demo__highlighted .vp-code {
   margin: 0;
   padding: 20px 22px;
   border-radius: 0;
   background: transparent;
-  line-height: 1.7;
+  line-height: 1.5;
+  overflow: visible;
 }
 
-.vp-doc .au-doc-demo__code code {
+.vp-doc .au-doc-demo__code code,
+.vp-doc .au-doc-demo__highlighted .vp-code code {
   display: block;
   width: max-content;
   min-width: 100%;
@@ -136,6 +139,14 @@
   background: transparent;
   font-size: 13px;
   white-space: pre;
+}
+
+html:not(.dark) .au-doc-demo__highlighted .vp-code span {
+  color: var(--shiki-light, inherit);
+}
+
+.dark .au-doc-demo__highlighted .vp-code span {
+  color: var(--shiki-dark, inherit);
 }
 
 .au-doc-demo__toggle {
@@ -190,7 +201,8 @@
     padding-left: 15px;
   }
 
-  .vp-doc .au-doc-demo__code {
+  .vp-doc .au-doc-demo__code,
+  .vp-doc .au-doc-demo__highlighted .vp-code {
     padding: 16px;
   }
 }
