@@ -1,8 +1,12 @@
+import { env } from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vitepress';
 import { demoSourcePlugin } from './demo-source-plugin.js';
 
+const siteBase = env.VITEPRESS_BASE || '/';
+
 export default defineConfig({
+  base: siteBase,
   lang: 'zh-CN',
   title: 'Aurora UI',
   description: '从 Aurora Editor 抽离的 Vue 3 通用组件库',
