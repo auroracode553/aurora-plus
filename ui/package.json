@@ -8,16 +8,13 @@
   },
   "main": "./dist/aurora-ui.umd.cjs",
   "module": "./dist/aurora-ui.js",
-  "types": "./index.d.ts",
   "style": "./dist/aurora-ui.css",
   "files": [
     "dist",
-    "index.d.ts",
     "README.md"
   ],
   "exports": {
     ".": {
-      "types": "./index.d.ts",
       "import": "./dist/aurora-ui.js",
       "require": "./dist/aurora-ui.umd.cjs"
     },

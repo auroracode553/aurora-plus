@@ -17,8 +17,8 @@
 defineProps({
   variant: {
     type: String,
-    default: 'default',
-    validator: (value) => ['default', 'floating'].includes(value),
+    default: 'connected',
+    validator: (value) => ['connected', 'floating'].includes(value),
   },
   orientation: {
     type: String,
@@ -45,46 +45,46 @@ defineProps({
   flex-direction: column;
 }
 
-.au-button-group.is-default :deep(> .au-button) {
+.au-button-group.is-connected :deep(> .au-button) {
   position: relative;
   border-radius: 0;
 }
 
-.au-button-group.is-default :deep(> .au-button:hover),
-.au-button-group.is-default :deep(> .au-button:focus-visible),
-.au-button-group.is-default :deep(> .au-button:active) {
+.au-button-group.is-connected :deep(> .au-button:hover),
+.au-button-group.is-connected :deep(> .au-button:focus-visible),
+.au-button-group.is-connected :deep(> .au-button:active) {
   z-index: 1;
 }
 
-.au-button-group.is-horizontal.is-default :deep(> .au-button + .au-button) {
+.au-button-group.is-horizontal.is-connected :deep(> .au-button + .au-button) {
   margin-left: -1px;
 }
 
-.au-button-group.is-horizontal.is-default :deep(> .au-button:first-child) {
+.au-button-group.is-horizontal.is-connected :deep(> .au-button:first-child) {
   border-radius: var(--au-border-radius-base) 0 0 var(--au-border-radius-base);
 }
 
-.au-button-group.is-horizontal.is-default :deep(> .au-button:last-child) {
+.au-button-group.is-horizontal.is-connected :deep(> .au-button:last-child) {
   border-radius: 0 var(--au-border-radius-base) var(--au-border-radius-base) 0;
 }
 
-.au-button-group.is-horizontal.is-default :deep(> .au-button:only-child) {
+.au-button-group.is-horizontal.is-connected :deep(> .au-button:only-child) {
   border-radius: var(--au-border-radius-base);
 }
 
-.au-button-group.is-vertical.is-default :deep(> .au-button + .au-button) {
+.au-button-group.is-vertical.is-connected :deep(> .au-button + .au-button) {
   margin-top: -1px;
 }
 
-.au-button-group.is-vertical.is-default :deep(> .au-button:first-child) {
+.au-button-group.is-vertical.is-connected :deep(> .au-button:first-child) {
   border-radius: var(--au-border-radius-base) var(--au-border-radius-base) 0 0;
 }
 
-.au-button-group.is-vertical.is-default :deep(> .au-button:last-child) {
+.au-button-group.is-vertical.is-connected :deep(> .au-button:last-child) {
   border-radius: 0 0 var(--au-border-radius-base) var(--au-border-radius-base);
 }
 
-.au-button-group.is-vertical.is-default :deep(> .au-button:only-child) {
+.au-button-group.is-vertical.is-connected :deep(> .au-button:only-child) {
   border-radius: var(--au-border-radius-base);
 }
 
