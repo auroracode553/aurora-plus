@@ -34,8 +34,6 @@ export default defineConfig({
     nav: [
       { text: '指南', link: '/guide/getting-started' },
       { text: '组件', link: '/components/button' },
-      { text: '开发', link: '/development/architecture' },
-      { text: 'v0.1.0', items: [{ text: '更新记录', link: '/development/changelog' }] },
     ],
     sidebar: [
       {
@@ -69,14 +67,6 @@ export default defineConfig({
           { text: '虚拟列表', link: '/components/virtual-list' },
           { text: '右键菜单', link: '/components/context-menu' },
           { text: '浮动工具条', link: '/components/floating-toolbar' },
-        ],
-      },
-      {
-        text: '开发说明',
-        items: [
-          { text: '代码架构', link: '/development/architecture' },
-          { text: '抽离清单', link: '/development/extraction-audit' },
-          { text: '更新记录', link: '/development/changelog' },
         ],
       },
     ],

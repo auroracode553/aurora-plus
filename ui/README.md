@@ -29,8 +29,6 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 - `@vitejs/plugin-vue` `^6.0.7`
 - Vue `^3.5.40`
 
-文档站依赖由同级目录 `../vitepress/package.json` 独立管理，其中包含 VitePress `^1.6.4`、Vue `^3.5.40` 与用于示例源码着色的 Shiki `^2.5.0`。组件库与文档站分别维护自己的 `package-lock.json`、依赖安装目录和 npm scripts，不使用 workspace。
-
 依赖由使用者自行安装。
 
 ## 引入
@@ -188,8 +186,6 @@ function runCommand(item) {
 </template>
 ```
 
-文档站中的每个演示均由实际 `.vue` 文件同时提供预览与完整源码，详细示例和全量 API 请从[组件文档](../vitepress/components/button.md)进入。
-
 ## 主题
 
 默认读取根节点上的主题属性，与 Aurora Editor 现有约定兼容：
@@ -206,28 +202,19 @@ document.documentElement.dataset.theme = 'dark';
 
 业务项目可以覆盖 `--au-*` CSS 变量定制颜色、圆角、字体、阴影和层级，完整变量见 `src/theme/index.css`。
 
-## 文档与实时预览
+## 组件库命令
 
-同级 `../vitepress/` 目录使用 VitePress，Markdown 文档直接挂载 Aurora UI 源组件，修改 `ui/src/` 后会同步热更新预览。
+依赖安装：
 
 ```powershell
 cd D:\my_project\front-sdk\aurora-ui\ui
 npm install
-
-cd ..\vitepress
-npm install
-npm run dev
 ```
 
-默认访问 `http://127.0.0.1:5174`。
+构建组件库：
 
-## 项目命令
+```powershell
+npm run build
+```
 
-| 执行目录 | 命令 | 用途 |
-| --- | --- | --- |
-| `ui/` | `npm run build` | 构建 UI 库到 `ui/dist/` |
-| `vitepress/` | `npm run dev` | 启动文档与组件实时预览 |
-| `vitepress/` | `npm run build` | 构建文档站 |
-| `vitepress/` | `npm run preview` | 预览已经构建的文档站 |
-
-两个包需要分别安装依赖。更详细的内容在 `vitepress/` 文档站中维护，包括组件示例、API、主题、架构和抽离清单。
+构建产物输出到当前目录的 `dist/`。命令仅作为手动执行说明，本项目不会自动安装依赖或构建组件库。
