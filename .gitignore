@@ -1,0 +1,6 @@
+node_modules/
+dist/
+vitepress/.vitepress/cache/
+vitepress/.vitepress/dist/
+*.local
+*.log

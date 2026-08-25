@@ -1,0 +1,89 @@
+:root {
+  color-scheme: light;
+
+  --au-color-primary: #409eff;
+  --au-color-success: #67c23a;
+  --au-color-warning: #e6a23c;
+  --au-color-danger: #f56c6c;
+  --au-color-info: #909399;
+
+  --au-color-text-primary: #303133;
+  --au-color-text-regular: #606266;
+  --au-color-text-secondary: #909399;
+  --au-color-text-placeholder: #a8abb2;
+  --au-color-text-disabled: #c0c4cc;
+
+  --au-color-bg: #ffffff;
+  --au-color-bg-soft: #f5f7fa;
+  --au-color-bg-overlay: #ffffff;
+  --au-color-bg-hover: #f2f3f5;
+  --au-color-mask: rgba(0, 0, 0, 0.38);
+
+  --au-color-border: #dcdfe6;
+  --au-color-border-light: #e4e7ed;
+  --au-color-border-lighter: #ebeef5;
+
+  --au-button-default-hover-bg: #ecf5ff;
+  --au-button-default-hover-border: #c6e2ff;
+  --au-button-default-hover-text: #409eff;
+  --au-button-default-active-bg: #ecf5ff;
+  --au-button-default-active-border: #3a8ee6;
+  --au-button-default-active-text: #3a8ee6;
+
+  --au-border-radius-small: 4px;
+  --au-border-radius-base: 6px;
+  --au-border-radius-large: 12px;
+  --au-font-family: "Open Sans", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  --au-font-size-small: 12px;
+  --au-font-size-base: 14px;
+  --au-font-size-large: 16px;
+  --au-shadow-light: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --au-shadow-overlay: 0 16px 48px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --au-transition-duration: 0.18s;
+  --au-z-index-toolbar: 9000;
+  --au-z-index-dialog: 10000;
+  --au-z-index-message: 11000;
+  --au-z-index-tooltip: 12000;
+}
+
+:root.dark,
+:root[data-theme='dark'],
+:root[data-au-theme='dark'],
+[data-au-theme='dark'] {
+  color-scheme: dark;
+
+  --au-color-text-primary: #e5e7eb;
+  --au-color-text-regular: #b0b3b8;
+  --au-color-text-secondary: #8d9199;
+  --au-color-text-placeholder: #6b7078;
+  --au-color-text-disabled: #5c5e62;
+
+  --au-color-bg: #1e1e1e;
+  --au-color-bg-soft: #292a2d;
+  --au-color-bg-overlay: #2b2d31;
+  --au-color-bg-hover: #36393f;
+  --au-color-mask: rgba(0, 0, 0, 0.58);
+
+  --au-color-border: #4c4d4f;
+  --au-color-border-light: #414348;
+  --au-color-border-lighter: #36383d;
+  --au-button-default-hover-bg: rgba(144, 147, 153, 0.1);
+  --au-button-default-hover-border: #6b6d71;
+  --au-button-default-hover-text: #d0d3d8;
+  --au-button-default-active-bg: rgba(144, 147, 153, 0.16);
+  --au-button-default-active-border: #7c7e83;
+  --au-button-default-active-text: #eef0f3;
+  --au-shadow-light: 0 8px 24px rgba(0, 0, 0, 0.34), 0 2px 8px rgba(0, 0, 0, 0.22);
+  --au-shadow-overlay: 0 16px 48px rgba(0, 0, 0, 0.52), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.au-button,
+.au-close-button,
+.au-dialog,
+.au-context-menu,
+.au-context-submenu,
+.au-floating-toolbar,
+.au-message {
+  box-sizing: border-box;
+  font-family: var(--au-font-family);
+}
