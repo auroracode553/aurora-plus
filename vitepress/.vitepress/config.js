@@ -45,11 +45,33 @@ export default defineConfig({
         ],
       },
       {
-        text: '组件',
+        text: '组件总览',
         items: [
           { text: '组件总览', link: '/components/overview' },
-          { text: '基础组件', link: '/components/basic' },
-          { text: '反馈组件', link: '/components/feedback' },
+        ],
+      },
+      {
+        text: '基础组件',
+        items: [
+          { text: '基础组件总览', link: '/components/basic' },
+          { text: 'Button 按钮', link: '/components/button' },
+          { text: 'Icon 图标', link: '/components/icon' },
+          { text: 'CloseButton 关闭按钮', link: '/components/close-button' },
+          { text: 'Tooltip 文字提示', link: '/components/tooltip' },
+        ],
+      },
+      {
+        text: '反馈组件',
+        items: [
+          { text: '反馈组件总览', link: '/components/feedback' },
+          { text: 'Message 消息提示', link: '/components/message' },
+          { text: 'MessageBox 消息确认框', link: '/components/message-box' },
+          { text: 'Dialog 对话框', link: '/components/dialog' },
+        ],
+      },
+      {
+        text: '数据与浮层',
+        items: [
           { text: '虚拟列表', link: '/components/virtual-list' },
           { text: '右键菜单', link: '/components/context-menu' },
           { text: '浮动工具条', link: '/components/floating-toolbar' },

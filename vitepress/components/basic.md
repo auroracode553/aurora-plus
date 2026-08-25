@@ -1,45 +1,12 @@
-<script setup>
-import BasicDemo from '../.vitepress/theme/components/BasicDemo.vue';
-</script>
-
 # 基础组件
 
-本页包含 `AuButton`、`AuIcon`、`AuCloseButton` 和 `AuTooltip`。
+基础组件负责最常见的触发、图标和提示交互。每个组件现在都有独立文档页，示例预览与“完整源代码”来自同一个 `.vue` 文件，展开源码即可看到模板、响应式状态、数组数据、事件处理和样式。
 
-<BasicDemo />
+| 组件 | 适用场景 | 文档 |
+| --- | --- | --- |
+| `AuButton` | 表单提交、主要/次要动作、加载状态 | [按钮](/components/button) |
+| `AuIcon` | 内置图标、业务 SVG 注册、直接 SVG 渲染 | [图标](/components/icon) |
+| `AuCloseButton` | 标签、面板、弹层的关闭动作 | [关闭按钮](/components/close-button) |
+| `AuTooltip` | 对控件用途或状态进行简短补充说明 | [文字提示](/components/tooltip) |
 
-## AuButton
-
-```vue
-<AuButton type="primary" :loading="saving" @click="save">保存</AuButton>
-```
-
-| 属性 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `type` | `default / primary / success / info / warning / danger` | `default` | 视觉类型 |
-| `size` | `small / default / large` | `default` | 尺寸 |
-| `nativeType` | `button / submit / reset` | `button` | 原生按钮类型 |
-| `icon` | `string` | 空 | 已注册图标名称 |
-| `plain` | `boolean` | `false` | 朴素样式 |
-| `round` | `boolean` | `false` | 胶囊圆角 |
-| `circle` | `boolean` | `false` | 圆形按钮 |
-| `disabled` | `boolean` | `false` | 禁用状态 |
-| `loading` | `boolean` | `false` | 加载状态 |
-
-## AuIcon
-
-```vue
-<AuIcon name="close" color="#409eff" :size="20" />
-```
-
-`source` 可以直接覆盖注册表内容。由于 SVG 使用 `v-html` 渲染，`source` 也只能接收可信源码。
-
-## AuTooltip
-
-```vue
-<AuTooltip content="保存文件" placement="top" :show-after="200">
-  <AuButton>保存</AuButton>
-</AuTooltip>
-```
-
-支持 `top`、`bottom`、`left`、`right` 及 `-start`、`-end` 对齐后缀；空间不足时会在主轴方向自动翻转。
+> 所有组件都支持按需导入。使用前需在应用入口引入一次 `aurora-ui/style.css`。

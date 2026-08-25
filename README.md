@@ -88,59 +88,107 @@ app.use(AuroraUI, {
 
 ## 常用示例
 
-对话框：
+所有示例都展示完整数据定义，不省略 `v-model` 状态或 `items` 数组。下面的虚拟列表示例可以直接复制为单文件组件：
 
 ```vue
-<AuDialog v-model="visible" title="编辑资料" width="520px" close-on-click-modal>
-  <div>对话框正文</div>
-  <template #footer>
-    <AuButton @click="visible = false">取消</AuButton>
-    <AuButton type="primary" @click="submit">确定</AuButton>
-  </template>
-</AuDialog>
-```
+<script setup>
+import { AuVirtualList } from 'aurora-ui';
 
-虚拟列表的容器必须有可计算高度，且每项高度应与 `item-height` 一致：
+const files = Array.from({ length: 1000 }, (_, index) => ({
+  id: index + 1,
+  name: `项目文件 ${String(index + 1).padStart(4, '0')}.md`,
+  status: index % 3 === 0 ? '已同步' : '仅本地',
+}));
+</script>
 
-```vue
-<AuVirtualList class="file-list" :items="files" :item-height="36" v-slot="{ item, index }">
-  <div class="file-row">{{ index + 1 }}. {{ item.name }}</div>
-</AuVirtualList>
-```
+<template>
+  <AuVirtualList class="file-list" :items="files" :item-height="36">
+    <template #default="{ item, index }">
+      <div class="file-row">
+        <span>{{ index + 1 }}. {{ item.name }}</span>
+        <small>{{ item.status }}</small>
+      </div>
+    </template>
+  </AuVirtualList>
+</template>
 
-```css
+<style scoped>
 .file-list {
   height: 480px;
 }
 
 .file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 36px;
 }
+</style>
 ```
 
-右键菜单的业务确认通过回调注入：
+虚拟列表容器必须有可计算高度，每项实际高度应与 `item-height` 一致。右键菜单同样使用显式的数据模型：
 
 ```vue
-<AuContextMenu
-  v-model="menuVisible"
-  :items="menuSections"
-  :position="menuPosition"
-  :before-select="beforeSelect"
-  @select="runCommand"
-/>
-```
+<script setup>
+import { ref } from 'vue';
+import { AuContextMenu, AuMessage, AuMessageBox } from 'aurora-ui';
 
-```js
-import { AuMessageBox } from 'aurora-ui';
+const menuVisible = ref(false);
+const menuPosition = ref({ x: 0, y: 0 });
+const menuSections = [
+  {
+    id: 'editing',
+    type: 'button-group',
+    items: [
+      { id: 'copy', label: '复制', shortcut: 'Ctrl+C' },
+      { id: 'rename', label: '重命名' },
+    ],
+  },
+  { id: 'separator', type: 'separator' },
+  {
+    id: 'delete-section',
+    type: 'button',
+    item: {
+      id: 'delete',
+      label: '删除',
+      danger: true,
+      confirmMessage: '确定删除当前记录吗？',
+    },
+  },
+];
+
+function openMenu(event) {
+  menuPosition.value = { x: event.clientX, y: event.clientY };
+  menuVisible.value = true;
+}
 
 async function beforeSelect(item) {
   if (!item.confirmMessage) return true;
   return AuMessageBox.confirm({
     title: '请确认',
     message: item.confirmMessage,
+    confirmButtonType: 'danger',
   });
 }
+
+function runCommand(item) {
+  AuMessage.success(`已执行：${item.label}`);
+}
+</script>
+
+<template>
+  <div @contextmenu.prevent="openMenu">在这里点击右键</div>
+  <AuContextMenu
+    v-model="menuVisible"
+    :items="menuSections"
+    :position="menuPosition"
+    :before-select="beforeSelect"
+    @select="runCommand"
+  />
+</template>
 ```
+
+文档站中的每个演示均由实际 `.vue` 文件同时提供预览与完整源码，详细示例和全量 API 请从[组件总览](./vitepress/components/overview.md)进入。
 
 ## 主题
 

@@ -17,7 +17,7 @@ features:
   - title: 真实业务沉淀
     details: 组件来自 Aurora Editor 的实际交互，再收敛为不依赖 Electron、Pinia 和业务 Store 的公共 API。
   - title: 文档即预览
-    details: VitePress 页面直接挂载 Aurora UI 源码，示例、API 文档和明暗主题验证在同一站点完成。
+    details: VitePress 直接挂载真实示例文件，同一份源码同时用于交互预览、完整代码展示和复制。
   - title: 灵活引入
     details: 支持完整插件安装、组件按需导入、命令式反馈服务和 TypeScript 类型声明。
   - title: 主题可定制
