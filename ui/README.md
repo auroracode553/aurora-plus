@@ -117,6 +117,7 @@ const files = Array.from({ length: 1000 }, (_, index) => ({
   align-items: center;
   justify-content: space-between;
   height: 36px;
+  padding: 0 10px;
 }
 </style>
 ```

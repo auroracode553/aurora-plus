@@ -57,7 +57,13 @@ function handleScroll(event) {
 
 function updateViewportHeight() {
   if (!scrollContainerRef.value) return;
-  viewportHeight.value = scrollContainerRef.value.clientHeight || 0;
+  const container = scrollContainerRef.value;
+  const styles = typeof window === 'undefined' ? null : window.getComputedStyle(container);
+  const paddingTop = Number.parseFloat(styles?.paddingTop) || 0;
+  const paddingBottom = Number.parseFloat(styles?.paddingBottom) || 0;
+
+  // clientHeight includes padding, while the virtual range only covers item rows.
+  viewportHeight.value = Math.max(container.clientHeight - paddingTop - paddingBottom, 0);
   syncScrollBounds();
 }
 
@@ -133,8 +139,12 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 
 <style scoped>
 .au-virtual-list {
+  --au-virtual-list-padding-block: 4px;
+  --au-virtual-list-padding-inline: 6px;
+
   position: relative;
   min-height: 0;
+  padding: var(--au-virtual-list-padding-block) var(--au-virtual-list-padding-inline);
   overflow: auto;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-border-radius-base);
@@ -142,7 +152,13 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   background: transparent;
   scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
   scrollbar-width: thin;
+  scroll-padding-block: var(--au-virtual-list-padding-block);
   contain: strict;
+}
+
+.au-virtual-list:focus-visible {
+  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
+  outline-offset: 1px;
 }
 
 .au-virtual-list::-webkit-scrollbar {
@@ -177,4 +193,9 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   will-change: transform;
 }
 
+@media (prefers-contrast: more) {
+  .au-virtual-list {
+    border-color: var(--au-material-border-strong);
+  }
+}
 </style>

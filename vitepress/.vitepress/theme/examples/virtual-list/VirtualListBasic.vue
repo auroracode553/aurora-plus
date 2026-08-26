@@ -11,14 +11,17 @@
       ref="listRef"
       class="virtual-list-demo"
       :items="filteredItems"
-      :item-height="44"
+      :item-height="36"
       :overscan="6"
       @range-change="renderedRange = $event"
     >
       <template #default="{ item, index }">
-        <div class="virtual-list-demo__row">
+        <div
+          class="virtual-list-demo__row"
+          :class="{ 'is-last': index === filteredItems.length - 1 }"
+        >
           <span class="virtual-list-demo__index">{{ index + 1 }}</span>
-          <span>
+          <span class="virtual-list-demo__identity">
             <strong>{{ item.name }}</strong>
             <small>{{ item.owner }}</small>
           </span>
@@ -83,19 +86,28 @@ function scrollToMiddle() {
 .virtual-list-demo__controls {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .virtual-list-demo__controls input {
   min-width: 210px;
-  padding: 7px 10px;
+  height: 28px;
+  padding: 0 9px;
   border: 1px solid var(--au-color-border);
   border-radius: var(--au-border-radius-base);
   color: var(--au-color-text-primary);
   background: transparent;
+  font: inherit;
+  font-size: 13px;
   outline: none;
+}
+
+.virtual-list-demo__controls input:focus-visible {
+  border-color: color-mix(in srgb, var(--au-color-primary) 58%, var(--au-color-border));
+  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 22%, transparent);
+  outline-offset: 1px;
 }
 
 .virtual-list-demo__controls span {
@@ -106,6 +118,8 @@ function scrollToMiddle() {
 
 .virtual-list-demo {
   height: 330px;
+  --au-virtual-list-padding-block: 6px;
+  --au-virtual-list-padding-inline: 8px;
   border: 1px solid var(--au-color-border-lighter);
   border-radius: 8px;
   background: transparent;
@@ -113,44 +127,89 @@ function scrollToMiddle() {
 
 .virtual-list-demo__row {
   display: grid;
-  grid-template-columns: 42px 1fr auto;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
   align-items: center;
-  height: 44px;
-  padding: 0 14px;
+  height: 36px;
+  padding: 0 10px;
   border-bottom: 1px solid var(--au-color-border-lighter);
   color: var(--au-color-text-regular);
   font-size: 13px;
 }
 
-.virtual-list-demo__row > span:nth-child(2) {
+.virtual-list-demo__row.is-last {
+  border-bottom-color: transparent;
+}
+
+.virtual-list-demo__identity {
   display: flex;
+  align-items: center;
+  gap: 10px;
   min-width: 0;
-  flex-direction: column;
 }
 
 .virtual-list-demo__row strong {
+  min-width: 0;
+  overflow: hidden;
   color: var(--au-color-text-primary);
-  font-weight: 500;
+  font-weight: var(--au-font-weight-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.virtual-list-demo__row small,
 .virtual-list-demo__index {
   color: var(--au-color-text-secondary);
 }
 
+.virtual-list-demo__identity small {
+  position: relative;
+  flex: 0 1 7em;
+  min-width: 0;
+  padding-left: 10px;
+  overflow: hidden;
+  color: var(--au-color-text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.virtual-list-demo__identity small::before {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  width: 1px;
+  background: var(--au-color-border-light);
+  content: '';
+}
+
 .virtual-list-demo__status {
-  padding: 2px 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 20px;
+  padding: 0 7px;
   border-radius: 999px;
-  background: var(--au-color-bg-soft);
   font-size: 11px;
+  font-weight: var(--au-font-weight-medium);
+  line-height: 1;
 }
 
 .virtual-list-demo__status.is-success {
   color: var(--au-color-success);
+  background: color-mix(in srgb, var(--au-color-success) 11%, transparent);
 }
 
 .virtual-list-demo__status.is-warning {
   color: var(--au-color-warning);
+  background: color-mix(in srgb, var(--au-color-warning) 12%, transparent);
+}
+
+.virtual-list-demo__status.is-info {
+  color: var(--au-color-info);
+  background: color-mix(in srgb, var(--au-color-info) 11%, transparent);
 }
 
 .virtual-list-demo__empty {
@@ -159,5 +218,12 @@ function scrollToMiddle() {
   min-height: 180px;
   color: var(--au-color-text-secondary);
   place-items: center;
+}
+
+@media (prefers-contrast: more) {
+  .virtual-list-demo__status {
+    outline: 1px solid currentColor;
+    outline-offset: -1px;
+  }
 }
 </style>

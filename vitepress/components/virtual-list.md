@@ -27,6 +27,7 @@ import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/Vi
 - 每个列表项的实际高度必须与 `itemHeight` 完全一致；当前版本不支持动态行高。
 - `items` 应保持稳定引用，数据筛选可使用 `computed`，不应在模板表达式内反复创建数组。
 - 数据对象存在稳定 ID 时优先使用 `keyField`；复杂场景使用 `itemKey`。
+- 容器默认保留紧凑的内侧留白；可通过 `--au-virtual-list-padding-block` 和 `--au-virtual-list-padding-inline` 局部调整。
 
 ## VirtualList API
 
