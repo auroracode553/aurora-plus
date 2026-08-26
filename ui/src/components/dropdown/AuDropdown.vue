@@ -358,7 +358,7 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
   border-radius: 9px;
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-light);
+  box-shadow: var(--au-shadow-overlay);
   font-family: var(--au-font-family);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);

@@ -134,7 +134,7 @@ function toggle() {
   margin-left: var(--au-switch-thumb-offset);
   border-radius: 50%;
   background: var(--au-material-bg-strong);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--au-color-mask) 22%, transparent);
+  box-shadow: var(--au-shadow-control);
   transform: translateX(0);
   transition:
     transform var(--au-transition-duration) var(--au-transition-ease),

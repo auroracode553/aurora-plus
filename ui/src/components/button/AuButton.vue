@@ -94,7 +94,7 @@ function handleClick(event) {
   border-radius: var(--au-border-radius-base);
   color: var(--au-button-text);
   background: var(--au-button-bg);
-  box-shadow: 0 1px 2px rgba(34, 53, 88, 0.08);
+  box-shadow: var(--au-shadow-control);
   font-family: inherit;
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
@@ -109,6 +109,7 @@ function handleClick(event) {
   transition:
     background var(--au-transition-duration) var(--au-transition-ease),
     border-color var(--au-transition-duration) var(--au-transition-ease),
+    box-shadow var(--au-transition-duration) var(--au-transition-ease),
     color var(--au-transition-duration) var(--au-transition-ease),
     transform var(--au-transition-duration) var(--au-transition-ease);
 }
@@ -117,14 +118,14 @@ function handleClick(event) {
   border-color: var(--au-button-hover-border);
   color: var(--au-button-hover-text);
   background: var(--au-button-hover-bg);
-  box-shadow: 0 2px 5px rgba(44, 69, 111, 0.1);
+  box-shadow: var(--au-shadow-surface);
 }
 
 .au-button:active:not(.is-disabled) {
   border-color: var(--au-button-active-border);
   color: var(--au-button-active-text);
   background: var(--au-button-active-bg);
-  box-shadow: 0 1px 2px rgba(30, 45, 75, 0.12);
+  box-shadow: var(--au-shadow-control);
   transform: scale(0.97);
 }
 

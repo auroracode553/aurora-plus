@@ -12,7 +12,7 @@
   border-radius: var(--au-card-border-radius, 16px);
   color: var(--au-color-text-primary);
   background: var(--au-material-bg);
-  box-shadow: var(--au-shadow-overlay);
+  box-shadow: var(--au-shadow-surface);
   backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
   -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
@@ -22,7 +22,7 @@
     background: var(--au-color-bg-overlay);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    box-shadow: var(--au-shadow-overlay);
+    box-shadow: var(--au-shadow-surface);
   }
 }
 
@@ -30,7 +30,7 @@
   .au-card {
     border-color: var(--au-color-text-secondary);
     background: var(--au-color-bg-overlay);
-    box-shadow: var(--au-shadow-overlay);
+    box-shadow: var(--au-shadow-surface);
   }
 }
 </style>

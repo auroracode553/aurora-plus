@@ -140,7 +140,7 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   border-radius: var(--au-border-radius-base);
   /* Lists inherit the page surface instead of adding a tinted layer. */
   background: transparent;
-  box-shadow: none;
+  box-shadow: var(--au-shadow-surface);
   scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
   scrollbar-width: thin;
   contain: strict;
@@ -181,7 +181,7 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 @media (prefers-reduced-transparency: reduce) {
   .au-virtual-list {
     background: transparent;
-    box-shadow: none;
+    box-shadow: var(--au-shadow-surface);
   }
 }
 </style>

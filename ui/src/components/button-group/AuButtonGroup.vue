@@ -53,7 +53,7 @@ defineProps({
   border-radius: 13px;
   color: var(--au-color-text-regular);
   background: color-mix(in srgb, var(--au-material-bg-subtle) 72%, var(--au-color-bg-soft));
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--au-color-mask) 12%, transparent);
+  box-shadow: var(--au-shadow-surface);
   backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
   -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
@@ -98,9 +98,7 @@ defineProps({
   z-index: 1;
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-strong);
-  box-shadow:
-    0 1px 2px color-mix(in srgb, var(--au-color-mask) 18%, transparent),
-    0 3px 8px color-mix(in srgb, var(--au-color-mask) 10%, transparent);
+  box-shadow: var(--au-shadow-control);
 }
 
 .au-button-group.is-connected :deep(> .au-button:focus-visible) {
@@ -122,7 +120,7 @@ defineProps({
   border-radius: 10px;
   color: var(--au-color-text-regular);
   background: var(--au-button-group-surface);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+  box-shadow: var(--au-shadow-surface);
 }
 
 /* The floating example is intentionally neutral gray, without blue glass tint. */

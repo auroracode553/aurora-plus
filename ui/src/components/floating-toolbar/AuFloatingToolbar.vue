@@ -34,7 +34,7 @@ const props = defineProps({
   refreshTarget: { type: [String, Object], default: '' },
   refreshSelector: { type: String, default: '' },
   ariaLabel: { type: String, default: '工具条' },
-  gap: { type: Number, default: 8 },
+  gap: { type: Number, default: 6 },
   viewportPadding: { type: Number, default: 8 },
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
@@ -202,14 +202,14 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   position: fixed;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  min-height: 40px;
-  padding: 5px 10px;
+  gap: 2px;
+  min-height: 34px;
+  padding: 2px;
   border: 1px solid var(--au-material-border);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--au-color-text-regular);
   background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-light);
+  box-shadow: var(--au-shadow-overlay);
   user-select: none;
   backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
   -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
@@ -226,31 +226,31 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 }
 
 .au-floating-toolbar.is-top::before {
-  bottom: -8px;
-  border-top: 8px solid var(--au-material-border-strong);
-  border-right: 8px solid transparent;
-  border-left: 8px solid transparent;
+  bottom: -6px;
+  border-top: 6px solid var(--au-material-border-strong);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
 }
 
 .au-floating-toolbar.is-top::after {
-  bottom: -7px;
-  border-top: 7px solid var(--au-material-bg-strong);
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
+  bottom: -5px;
+  border-top: 5px solid var(--au-material-bg-strong);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
 }
 
 .au-floating-toolbar.is-bottom::before {
-  top: -8px;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid var(--au-material-border-strong);
-  border-left: 8px solid transparent;
+  top: -6px;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid var(--au-material-border-strong);
+  border-left: 6px solid transparent;
 }
 
 .au-floating-toolbar.is-bottom::after {
-  top: -7px;
-  border-right: 7px solid transparent;
-  border-bottom: 7px solid var(--au-material-bg-strong);
-  border-left: 7px solid transparent;
+  top: -5px;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--au-material-bg-strong);
+  border-left: 5px solid transparent;
 }
 
 .au-floating-toolbar :deep(.au-floating-toolbar__group) {
@@ -261,8 +261,8 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 
 .au-floating-toolbar :deep(.au-floating-toolbar__separator) {
   width: 1px;
-  height: 20px;
-  margin: 0 4px;
+  height: 18px;
+  margin: 0 2px;
   background: var(--au-material-border-strong);
   flex: none;
 }
@@ -271,11 +271,11 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   border: 0;
-  border-radius: var(--au-border-radius-base);
+  border-radius: 6px;
   color: var(--au-color-text-regular);
   background: transparent;
   cursor: pointer;

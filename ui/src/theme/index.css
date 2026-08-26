@@ -1,3 +1,5 @@
+@import './shadows.css';
+
 :root {
   color-scheme: light;
 
@@ -40,8 +42,6 @@
   --au-material-highlight: transparent;
   --au-material-blur: 18px;
   --au-material-saturation: 145%;
-  --au-material-shadow: 0 8px 20px rgba(52, 71, 107, 0.1), 0 1px 4px rgba(52, 71, 107, 0.06);
-  --au-material-shadow-soft: 0 3px 10px rgba(52, 71, 107, 0.06), 0 1px 2px rgba(52, 71, 107, 0.04);
   --au-material-inset: none;
 
   --au-border-radius-small: 4px;
@@ -53,8 +53,6 @@
   --au-font-size-large: 16px;
   --au-font-weight-medium: 520;
   --au-font-weight-semibold: 620;
-  --au-shadow-light: var(--au-material-shadow-soft);
-  --au-shadow-overlay: var(--au-material-shadow);
   --au-transition-duration: 0.2s;
   --au-transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --au-z-index-toolbar: 9000;
@@ -74,8 +72,6 @@
   --au-material-highlight: transparent;
   --au-material-blur: 16px;
   --au-material-saturation: 128%;
-  --au-material-shadow: 0 7px 18px rgba(52, 71, 107, 0.08), 0 1px 4px rgba(52, 71, 107, 0.05);
-  --au-material-shadow-soft: 0 3px 9px rgba(52, 71, 107, 0.055), 0 1px 2px rgba(52, 71, 107, 0.035);
 }
 
 /* Clear maximizes translucency and background color while preserving legibility. */
@@ -89,8 +85,6 @@
   --au-material-highlight: transparent;
   --au-material-blur: 28px;
   --au-material-saturation: 178%;
-  --au-material-shadow: 0 10px 24px rgba(52, 71, 107, 0.11), 0 2px 6px rgba(52, 71, 107, 0.06);
-  --au-material-shadow-soft: 0 4px 12px rgba(52, 71, 107, 0.07), 0 1px 3px rgba(52, 71, 107, 0.045);
 }
 
 /* Solid remains available for dense enterprise screens and transparency fallbacks. */
@@ -104,8 +98,6 @@
   --au-material-highlight: transparent;
   --au-material-blur: 0px;
   --au-material-saturation: 100%;
-  --au-material-shadow: 0 8px 20px rgba(52, 71, 107, 0.1), 0 1px 4px rgba(52, 71, 107, 0.06);
-  --au-material-shadow-soft: 0 3px 10px rgba(52, 71, 107, 0.06), 0 1px 2px rgba(52, 71, 107, 0.04);
 }
 
 :root.dark,
@@ -146,8 +138,6 @@
   --au-material-highlight: transparent;
   --au-material-blur: 18px;
   --au-material-saturation: 145%;
-  --au-material-shadow: 0 10px 24px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.14);
-  --au-material-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 :root.dark[data-au-material='soft'],

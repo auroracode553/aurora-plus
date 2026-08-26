@@ -56,7 +56,7 @@
         :aria-controls="sourceId"
         @click="expanded = false"
       >
-        <span aria-hidden="true">⌃</span>
+        <IconChevronUp :size="15" aria-hidden="true" />
         隐藏源代码
       </button>
     </div>
@@ -65,7 +65,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, ref } from 'vue';
-import { AuMessage, IconCode, IconCopy } from 'aurora-ui';
+import { AuMessage, IconChevronUp, IconCode, IconCopy } from 'aurora-ui';
 import { writeTextToClipboard } from '../utils/clipboard.js';
 
 let demoSeed = 0;

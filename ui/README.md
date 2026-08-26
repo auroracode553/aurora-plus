@@ -197,7 +197,7 @@ document.documentElement.dataset.theme = 'dark';
 <html data-au-theme="dark"></html>
 ```
 
-业务项目可以覆盖 `--au-*` CSS 变量定制颜色、圆角、字体、阴影和层级，完整变量见 `src/theme/index.css`。
+业务项目可以覆盖 `--au-*` CSS 变量定制颜色、圆角、字体、阴影和层级，完整变量见[主题文档](../vitepress/guide/theme.md)。
 
 ## 玻璃材质
 
@@ -246,4 +246,4 @@ console.log(getAuroraMaterial());
 }
 ```
 
-材质不会添加高光渐变或内发光，仅调整表面透明度、模糊、饱和度、边框和轻量阴影。
+材质不会添加高光渐变或内发光，仅调整表面透明度、模糊、饱和度和边框；组件阴影使用统一的控件、表面和浮层层级。

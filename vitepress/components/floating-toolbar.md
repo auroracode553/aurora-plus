@@ -40,7 +40,7 @@ toolbarRect.value = { top, right, bottom, left, width, height };
 | `modelValue / v-model` | 显式控制显示；为 `null` 时跟随 `triggerRect` | `boolean / null` | `null` |
 | `triggerRect` | 定位目标矩形 | `DOMRect / Record<string, number> / null` | `null` |
 | `placement` | 首选方向 | `auto / top / bottom` | `auto` |
-| `gap` | 工具条与目标的距离，单位 px | `number` | `8` |
+| `gap` | 工具条与目标的距离，单位 px | `number` | `6` |
 | `viewportPadding` | 与视口边缘的最小距离，单位 px | `number` | `8` |
 | `refreshTarget` | 滚动/缩放时重新读取矩形的元素或选择器 | `string / HTMLElement` | `''` |
 | `refreshSelector` | `refreshTarget` 的字符串兼容属性 | `string` | `''` |

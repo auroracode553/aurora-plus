@@ -65,10 +65,8 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   border-radius: var(--au-border-radius-base);
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-strong);
-  /* Use depth, not a hard border, to define the glass surface. */
-  box-shadow:
-    0 2px 5px color-mix(in srgb, var(--au-color-mask) 26%, transparent),
-    0 8px 18px color-mix(in srgb, var(--au-color-mask) 18%, transparent);
+  /* 使用全局浮层阴影勾勒无硬边框的消息表面。 */
+  box-shadow: var(--au-shadow-overlay);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.45;

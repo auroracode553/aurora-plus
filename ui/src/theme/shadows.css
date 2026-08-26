@@ -1,0 +1,12 @@
+:root {
+  /* Message 的双层深度结构：近层勾勒轮廓，远层表达悬浮距离。 */
+  --au-shadow-control:
+    0 1px 2px color-mix(in srgb, var(--au-color-mask) 18%, transparent),
+    0 2px 5px color-mix(in srgb, var(--au-color-mask) 8%, transparent);
+  --au-shadow-surface:
+    0 1px 3px color-mix(in srgb, var(--au-color-mask) 18%, transparent),
+    0 4px 10px color-mix(in srgb, var(--au-color-mask) 10%, transparent);
+  --au-shadow-overlay:
+    0 2px 5px color-mix(in srgb, var(--au-color-mask) 26%, transparent),
+    0 8px 18px color-mix(in srgb, var(--au-color-mask) 18%, transparent);
+}

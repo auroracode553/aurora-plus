@@ -93,7 +93,7 @@ console.log(getAuroraMaterial()); // soft
 }
 ```
 
-为了保持扁平、克制的视觉层级，组件不会使用高光渐变或内发光；材质定制只改变表面透明度、模糊、饱和度、边框和轻量阴影。
+为了保持扁平、克制的视觉层级，组件不会使用高光渐变或内发光；材质定制负责表面透明度、模糊、饱和度和边框，阴影由统一的层级变量控制。
 
 ### 材质变量
 
@@ -108,8 +108,6 @@ console.log(getAuroraMaterial()); // soft
 | `--au-material-border-strong` | `rgba(116, 137, 172, 0.28)` | 强调边框和分隔线 |
 | `--au-material-blur` | `18px` | 背景模糊半径 |
 | `--au-material-saturation` | `145%` | 背景饱和度 |
-| `--au-material-shadow` | 轻量弹层阴影 | 卡片和 Dialog 等大表面 |
-| `--au-material-shadow-soft` | 更轻的结构阴影 | Tooltip、Message 和工具栏 |
 
 ## 颜色变量
 
@@ -145,8 +143,9 @@ console.log(getAuroraMaterial()); // soft
 | `--au-font-size-small` | `12px` | 小号文字 |
 | `--au-font-size-base` | `14px` | 正文与控件文字 |
 | `--au-font-size-large` | `16px` | 大号控件文字 |
-| `--au-shadow-light` | 轻量阴影 | Tooltip、Message、工具条 |
-| `--au-shadow-overlay` | 弹层阴影 | Dialog 等大型浮层 |
+| `--au-shadow-control` | 控件阴影 | Button、Checkbox、Switch |
+| `--au-shadow-surface` | 表面阴影 | Card、VirtualList、ButtonGroup |
+| `--au-shadow-overlay` | 浮层阴影 | Message、Tooltip、菜单、工具条和 Dialog |
 | `--au-transition-duration` | `0.18s` | 通用过渡时长 |
 | `--au-z-index-toolbar` | `9000` | 浮动工具条建议层级 |
 | `--au-z-index-dialog` | `10000` | 对话框层级 |

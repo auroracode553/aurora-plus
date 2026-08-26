@@ -290,7 +290,7 @@ defineExpose({ close, menuRef, updatePosition });
   border-radius: var(--au-border-radius-base);
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-light);
+  box-shadow: var(--au-shadow-overlay);
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
   user-select: none;

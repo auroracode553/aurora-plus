@@ -130,6 +130,7 @@ onMounted(syncIndeterminate);
   border: 1px solid var(--au-material-border-strong);
   border-radius: 5px;
   background: var(--au-material-bg-subtle);
+  box-shadow: var(--au-shadow-control);
   transition:
     background var(--au-transition-duration) var(--au-transition-ease),
     border-color var(--au-transition-duration) var(--au-transition-ease),
