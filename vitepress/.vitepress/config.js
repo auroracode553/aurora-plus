@@ -1,9 +1,29 @@
+import { fileURLToPath, URL } from 'node:url';
 import { env } from 'node:process';
 import { defineConfig } from 'vitepress';
 import { demoSourcePlugin } from './demo-source-plugin.js';
 import { iconMetadataPlugin } from './icon-metadata-plugin.js';
 
 const siteBase = env.VITEPRESS_BASE || '/';
+const useAuroraDist = env.AURORA_UI_USE_DIST === 'true';
+const docsRoot = fileURLToPath(new URL('..', import.meta.url));
+const auroraRoot = fileURLToPath(new URL('../../ui', import.meta.url));
+const auroraSourceAliases = useAuroraDist
+  ? []
+  : [
+      {
+        find: /^aurora-ui$/,
+        replacement: fileURLToPath(
+          new URL('../../ui/src/index.js', import.meta.url),
+        ),
+      },
+      {
+        find: /^aurora-ui\/style\.css$/,
+        replacement: fileURLToPath(
+          new URL('../../ui/src/theme/index.css', import.meta.url),
+        ),
+      },
+    ];
 
 export default defineConfig({
   base: siteBase,
@@ -18,10 +38,19 @@ export default defineConfig({
   vite: {
     plugins: [demoSourcePlugin(), iconMetadataPlugin()],
     resolve: {
+      alias: auroraSourceAliases,
       dedupe: ['vue'],
     },
+    server: useAuroraDist
+      ? undefined
+      : {
+          fs: {
+            // 源码位于文档根目录之外，需要显式允许开发服务器读取。
+            allow: [docsRoot, auroraRoot],
+          },
+        },
     optimizeDeps: {
-      // 保持 dist 为可观察源码，UI watch 重建后文档站可以读取最新产物。
+      // 避免源码别名被依赖预构建缓存，保留组件修改后的即时更新。
       exclude: ['aurora-ui'],
     },
   },

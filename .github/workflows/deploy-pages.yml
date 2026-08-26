@@ -50,6 +50,7 @@ jobs:
       - name: Build VitePress
         working-directory: vitepress
         env:
+          AURORA_UI_USE_DIST: 'true'
           VITEPRESS_BASE: /aurora-ui/
         run: npm run build
 

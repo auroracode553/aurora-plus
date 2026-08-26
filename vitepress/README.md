@@ -20,33 +20,29 @@ vitepress/
 
 ## 组件库连接
 
-文档站不直接读取 `../ui/src`，也不在 Vite 配置中硬编码组件库产物路径。`package.json` 使用 `"aurora-ui": "file:../ui"` 声明本地包依赖，`import 'aurora-ui'` 与 `import 'aurora-ui/style.css'` 再由 UI 包自身的 `exports` 映射到 `ui/dist`。
+文档站保留 `"aurora-ui": "file:../ui"` 作为组件库依赖，示例始终使用公开入口 `import 'aurora-ui'`，不暴露组件库内部文件路径。Vite 根据环境切换公开入口的实际来源：
 
-`ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；Tabler 图标通过本地 `aurora-ui` 包的运行时依赖与公共导出使用。本地包链接只建立消费关系，不让文档站读取或编译 UI 源码。
+- 默认开发模式将 `aurora-ui` 和 `aurora-ui/style.css` 映射到 `../ui/src`，组件源码修改后可直接更新实时示例。
+- 设置 `AURORA_UI_USE_DIST=true` 时不启用源码映射，由 UI 包自身的 `exports` 解析到 `ui/dist`，用于发布前验证和 GitHub Pages 构建。
+
+`ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；Tabler 图标通过本地 `aurora-ui` 包的运行时依赖与公共导出使用。源码模式只改变 Vite 的模块解析目标，不改变文档示例展示给使用者的导入方式。
 
 图标目录的分类索引由 `icon-metadata-plugin.js` 在构建期读取 Aurora UI 实际依赖版本的 Tabler 官方元数据，并通过虚拟模块交给文档页面。分类数据不会打进 UI 库产物，也不需要在文档站重复维护图标版本。
 
 ## 联调流程
 
-首次联调前，分别在两个目录手动安装各自依赖。在一个终端启动 UI 库的监听构建：
-
-```powershell
-cd D:\my_project\front-sdk\aurora-ui\ui
-npm install
-npm run dev
-```
-
-`ui` 的 `dev` 脚本执行 `vite build --watch`，持续更新 `ui/dist`。确认产物已生成后，在另一个终端启动文档站：
+首次联调前，分别在 `ui` 和 `vitepress` 目录手动安装各自依赖。源码模式不需要启动 UI 库的监听构建；完成依赖安装后，在文档目录启动开发服务：
 
 ```powershell
 cd D:\my_project\front-sdk\aurora-ui\vitepress
-npm install
 npm run dev
 ```
 
-文档站不会触发 UI 构建；如果 `ui/dist` 不存在，会直接报告组件库入口无法解析。
+VitePress 会直接读取 `ui/src`。修改组件源码或主题样式时，不需要先更新 `ui/dist`。
 
-GitHub Pages 流水线遵循相同顺序：分别执行 `ui` 的依赖安装与正式构建，再安装并构建 VitePress。CI 使用 `npm run build`，不启动本地 watch 进程。
+需要手动验证发布产物时，先在 `ui` 目录构建组件库，再在当前终端设置 `AURORA_UI_USE_DIST=true` 后构建 VitePress。dist 模式会通过 `ui/package.json` 的 `exports` 使用正式 JS 和 CSS 产物。
+
+GitHub Pages 流水线使用 dist 模式：先安装并构建 `ui`，然后以 `AURORA_UI_USE_DIST=true` 构建 VitePress。因此线上文档验证的是当前提交生成的组件库产物，而不是旧的 npm 发布版本。
 
 ## 示例机制
 
