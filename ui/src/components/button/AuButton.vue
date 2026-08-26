@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-button"
+    class="au-button au-component au-depth-control au-focus-ring"
     :class="buttonClasses"
     :type="nativeType"
     :disabled="disabled || loading"
@@ -9,7 +9,7 @@
     @click="handleClick"
   >
     <slot v-if="loading" name="loading">
-      <AuIcon class="au-button__loading-icon" :icon="IconLoader2" />
+      <AuIcon class="au-button__loading-icon au-spin" :icon="IconLoader2" />
     </slot>
     <slot v-else name="icon">
       <AuIcon v-if="icon" class="au-button__icon" :icon="icon" />
@@ -60,6 +60,7 @@ const buttonClasses = computed(() => [
     'is-round': props.round,
     'is-circle': props.circle,
     'is-disabled': props.disabled || props.loading,
+    'au-disabled': props.disabled || props.loading,
     'is-loading': props.loading,
   },
 ]);
@@ -80,6 +81,7 @@ function handleClick(event) {
   --au-button-active-bg: var(--au-button-default-active-bg);
   --au-button-active-border: var(--au-button-default-active-border);
   --au-button-active-text: var(--au-button-default-active-text);
+  --au-focus-ring-offset: 3px;
 
   position: relative;
   display: inline-flex;
@@ -94,8 +96,6 @@ function handleClick(event) {
   border-radius: var(--au-border-radius-base);
   color: var(--au-button-text);
   background: var(--au-button-bg);
-  box-shadow: var(--au-shadow-control);
-  font-family: inherit;
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1;
@@ -103,7 +103,6 @@ function handleClick(event) {
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  outline: none;
   appearance: none;
   transform: translateZ(0);
   transition:
@@ -118,20 +117,15 @@ function handleClick(event) {
   border-color: var(--au-button-hover-border);
   color: var(--au-button-hover-text);
   background: var(--au-button-hover-bg);
-  box-shadow: var(--au-shadow-surface);
+  --au-depth-shadow: var(--au-shadow-surface);
 }
 
 .au-button:active:not(.is-disabled) {
   border-color: var(--au-button-active-border);
   color: var(--au-button-active-text);
   background: var(--au-button-active-bg);
-  box-shadow: var(--au-shadow-control);
+  --au-depth-shadow: var(--au-shadow-control);
   transform: scale(0.97);
-}
-
-.au-button:focus-visible:not(.is-disabled) {
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 52%, transparent);
-  outline-offset: 3px;
 }
 
 .au-button--small {
@@ -166,11 +160,6 @@ function handleClick(event) {
   width: 40px;
 }
 
-.au-button.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
-}
-
 .au-button.is-disabled:active {
   transform: none;
 }
@@ -181,16 +170,6 @@ function handleClick(event) {
   position: relative;
   z-index: 1;
   flex: none;
-}
-
-.au-button__loading-icon {
-  animation: au-button-spin 0.8s linear infinite;
-}
-
-@keyframes au-button-spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .au-button--primary {
@@ -265,13 +244,4 @@ function handleClick(event) {
   --au-button-active-text: #ffffff;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-button {
-    transition: color 0.01ms linear, background 0.01ms linear, border-color 0.01ms linear;
-  }
-
-  .au-button__loading-icon {
-    animation-duration: 1.2s;
-  }
-}
 </style>

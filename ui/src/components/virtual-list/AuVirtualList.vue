@@ -1,5 +1,5 @@
 <template>
-  <div ref="scrollContainerRef" class="au-virtual-list" @scroll.passive="handleScroll">
+  <div ref="scrollContainerRef" class="au-virtual-list au-component au-depth-surface" @scroll.passive="handleScroll">
     <slot v-if="items.length === 0" name="empty"></slot>
     <div v-else class="au-virtual-list__spacer" :style="{ height: `${totalHeight}px` }">
       <div class="au-virtual-list__content" :style="{ transform: `translateY(${offsetTop}px)` }">
@@ -140,7 +140,6 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   border-radius: var(--au-border-radius-base);
   /* Lists inherit the page surface instead of adding a tinted layer. */
   background: transparent;
-  box-shadow: var(--au-shadow-surface);
   scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
   scrollbar-width: thin;
   contain: strict;
@@ -178,10 +177,4 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   will-change: transform;
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .au-virtual-list {
-    background: transparent;
-    box-shadow: var(--au-shadow-surface);
-  }
-}
 </style>

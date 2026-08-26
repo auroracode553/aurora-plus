@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-au-theme] {
   /* Message 的双层深度结构：近层勾勒轮廓，远层表达悬浮距离。 */
   --au-shadow-control:
     0 1px 2px color-mix(in srgb, var(--au-color-mask) 18%, transparent),

@@ -3,7 +3,7 @@
     <div
       v-for="item in items"
       :key="item.id"
-      class="au-message"
+      class="au-message au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere"
       :class="`au-message--${item.type}`"
       role="status"
       @mouseenter="$emit('pause', item.id)"
@@ -14,7 +14,7 @@
       <span v-if="item.repeat > 1" class="au-message__repeat">×{{ item.repeat }}</span>
       <button
         v-if="item.showClose"
-        class="au-message__close"
+        class="au-message__close au-focus-ring"
         type="button"
         aria-label="关闭消息"
         @click="$emit('close', item.id)"
@@ -64,16 +64,10 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   padding: 10px 14px;
   border-radius: var(--au-border-radius-base);
   color: var(--au-color-text-primary);
-  background: var(--au-material-bg-strong);
-  /* 使用全局浮层阴影勾勒无硬边框的消息表面。 */
-  box-shadow: var(--au-shadow-overlay);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.45;
-  overflow-wrap: anywhere;
   pointer-events: auto;
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 .au-message__indicator {
@@ -125,7 +119,7 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   cursor: pointer;
   flex: none;
   border-radius: 7px;
-  transition: color var(--au-transition-duration) var(--au-transition-ease), background var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
+  transition: var(--au-transition-control);
 }
 
 .au-message__close:hover {
@@ -135,17 +129,6 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 
 .au-message__close:active {
   transform: scale(0.9);
-}
-
-.au-message__close:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 52%, transparent);
-  outline-offset: 2px;
-}
-
-.au-message-list-move,
-.au-message-list-enter-active,
-.au-message-list-leave-active {
-  transition: opacity var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-message-list-enter-from,
@@ -158,11 +141,4 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   position: absolute;
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .au-message {
-    background: var(--au-color-bg-overlay);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
 </style>

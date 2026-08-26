@@ -146,7 +146,11 @@ console.log(getAuroraMaterial()); // soft
 | `--au-shadow-control` | 控件阴影 | Button、Checkbox、Switch |
 | `--au-shadow-surface` | 表面阴影 | Card、VirtualList、ButtonGroup |
 | `--au-shadow-overlay` | 浮层阴影 | Message、Tooltip、菜单、工具条和 Dialog |
-| `--au-transition-duration` | `0.18s` | 通用过渡时长 |
+| `--au-focus-ring-color` | 主色半透明 | 键盘焦点轮廓颜色 |
+| `--au-focus-ring-width` | `2px` | 键盘焦点轮廓宽度 |
+| `--au-focus-ring-offset` | `2px` | 键盘焦点轮廓偏移 |
+| `--au-transition-duration` | `0.2s` | 通用过渡时长 |
+| `--au-transition-ease` | `cubic-bezier(0.2, 0.8, 0.2, 1)` | 通用过渡曲线 |
 | `--au-z-index-toolbar` | `9000` | 浮动工具条建议层级 |
 | `--au-z-index-dialog` | `10000` | 对话框层级 |
 | `--au-z-index-message` | `11000` | 消息层级 |

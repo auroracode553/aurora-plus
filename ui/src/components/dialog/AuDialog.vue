@@ -3,14 +3,14 @@
     <Transition name="au-dialog-fade" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave">
       <div
         v-if="visible"
-        class="au-dialog__overlay"
+        class="au-dialog__overlay au-motion-popover"
         :class="{ 'is-modal': modal }"
         :style="overlayStyle"
         @mousedown.self="handleOverlayClick"
       >
         <section
           ref="dialogRef"
-          class="au-dialog"
+          class="au-dialog au-component au-material-surface au-depth-overlay au-motion-popover"
           :style="dialogStyle"
           role="dialog"
           :aria-modal="modal ? 'true' : undefined"
@@ -221,12 +221,8 @@ defineExpose({ close, dialogRef });
   border: 1px solid var(--au-material-border);
   border-radius: 16px;
   color: var(--au-color-text-primary);
-  background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-overlay);
   outline: none;
   pointer-events: auto;
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
   transform-origin: center;
 }
 
@@ -271,16 +267,6 @@ defineExpose({ close, dialogRef });
   flex-shrink: 0;
 }
 
-.au-dialog-fade-enter-active,
-.au-dialog-fade-leave-active {
-  transition: opacity var(--au-transition-duration) var(--au-transition-ease);
-}
-
-.au-dialog-fade-enter-active .au-dialog,
-.au-dialog-fade-leave-active .au-dialog {
-  transition: transform var(--au-transition-duration) var(--au-transition-ease), opacity var(--au-transition-duration) var(--au-transition-ease);
-}
-
 .au-dialog-fade-enter-from,
 .au-dialog-fade-leave-to,
 .au-dialog-fade-enter-from .au-dialog,
@@ -299,11 +285,6 @@ defineExpose({ close, dialogRef });
     -webkit-backdrop-filter: none;
   }
 
-  .au-dialog {
-    background: var(--au-color-bg-overlay);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

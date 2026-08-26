@@ -1,4 +1,5 @@
 @import './shadows.css';
+@import './effects.css';
 
 :root {
   color-scheme: light;
@@ -183,22 +184,6 @@
   --au-material-bg-subtle: #1b2433;
   --au-material-blur: 0px;
   --au-material-saturation: 100%;
-}
-
-.au-button,
-.au-button-group,
-.au-switch,
-.au-checkbox,
-.au-dropdown,
-.au-card,
-.au-dialog,
-.au-context-menu,
-.au-context-submenu,
-.au-floating-toolbar,
-.au-message,
-.au-virtual-list {
-  box-sizing: border-box;
-  font-family: var(--au-font-family);
 }
 
 @media (prefers-reduced-transparency: reduce) {

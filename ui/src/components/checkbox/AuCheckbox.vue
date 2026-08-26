@@ -1,14 +1,19 @@
 <template>
   <label
-    class="au-checkbox"
+    class="au-checkbox au-component"
     :class="[
       `is-${size}`,
-      { 'is-checked': checked, 'is-indeterminate': indeterminate, 'is-disabled': disabled },
+      {
+        'is-checked': checked,
+        'is-indeterminate': indeterminate,
+        'is-disabled': disabled,
+        'au-disabled': disabled,
+      },
     ]"
   >
     <input
       ref="inputRef"
-      class="au-checkbox__input"
+      class="au-checkbox__input au-visually-hidden"
       type="checkbox"
       :name="name || undefined"
       :value="value"
@@ -18,10 +23,10 @@
       v-bind="$attrs"
       @change="handleChange"
     />
-    <span class="au-checkbox__box" aria-hidden="true">
+    <span class="au-checkbox__box au-depth-control" aria-hidden="true">
       <span class="au-checkbox__mark"></span>
     </span>
-    <span v-if="hasLabel" class="au-checkbox__label">
+    <span v-if="hasLabel" class="au-checkbox__label au-wrap-anywhere">
       <slot>{{ label }}</slot>
     </span>
   </label>
@@ -87,7 +92,6 @@ onMounted(syncIndeterminate);
   gap: 7px;
   min-height: 28px;
   color: var(--au-color-text-regular);
-  font-family: var(--au-font-family);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.3;
@@ -107,30 +111,16 @@ onMounted(syncIndeterminate);
   font-size: var(--au-font-size-large);
 }
 
-.au-checkbox__input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .au-checkbox__box {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 18px;
   height: 18px;
-  box-sizing: border-box;
   flex: none;
   border: 1px solid var(--au-material-border-strong);
   border-radius: 5px;
   background: var(--au-material-bg-subtle);
-  box-shadow: var(--au-shadow-control);
   transition:
     background var(--au-transition-duration) var(--au-transition-ease),
     border-color var(--au-transition-duration) var(--au-transition-ease),
@@ -185,29 +175,12 @@ onMounted(syncIndeterminate);
 }
 
 .au-checkbox__input:focus-visible + .au-checkbox__box {
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 52%, transparent);
+  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
   outline-offset: 3px;
 }
 
 .au-checkbox:active:not(.is-disabled) .au-checkbox__box {
   transform: scale(0.94);
-}
-
-.au-checkbox__label {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.au-checkbox.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-checkbox__box,
-  .au-checkbox__mark {
-    transition-duration: 0.01ms;
-  }
 }
 
 @media (prefers-reduced-transparency: reduce) {

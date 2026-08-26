@@ -1,6 +1,6 @@
 <template>
   <span
-    class="au-icon"
+    class="au-icon au-component"
     :style="iconStyle"
     :aria-hidden="ariaLabel ? undefined : 'true'"
     :aria-label="ariaLabel || undefined"

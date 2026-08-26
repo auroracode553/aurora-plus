@@ -1,10 +1,13 @@
 <template>
   <div
-    class="au-button-group"
+    class="au-button-group au-component au-depth-surface"
     :class="[
       `is-${variant}`,
       `is-${orientation}`,
-      { 'is-icon-only': iconOnly },
+      {
+        'is-icon-only': iconOnly,
+        'au-material-blur': variant === 'connected',
+      },
     ]"
     role="group"
     :aria-label="ariaLabel || undefined"
@@ -37,7 +40,6 @@ defineProps({
 
   display: inline-flex;
   align-items: stretch;
-  box-sizing: border-box;
   vertical-align: middle;
   isolation: isolate;
 }
@@ -53,9 +55,6 @@ defineProps({
   border-radius: 13px;
   color: var(--au-color-text-regular);
   background: color-mix(in srgb, var(--au-material-bg-subtle) 72%, var(--au-color-bg-soft));
-  box-shadow: var(--au-shadow-surface);
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 .au-button-group.is-vertical.is-connected {
@@ -103,7 +102,7 @@ defineProps({
 
 .au-button-group.is-connected :deep(> .au-button:focus-visible) {
   z-index: 2;
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 52%, transparent);
+  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
   outline-offset: -1px;
 }
 
@@ -120,7 +119,6 @@ defineProps({
   border-radius: 10px;
   color: var(--au-color-text-regular);
   background: var(--au-button-group-surface);
-  box-shadow: var(--au-shadow-surface);
 }
 
 /* The floating example is intentionally neutral gray, without blue glass tint. */
@@ -161,7 +159,7 @@ defineProps({
 .au-button-group.is-floating :deep(> .au-button:focus-visible) {
   z-index: 1;
   box-shadow: none;
-  outline: 1px solid var(--au-color-primary);
+  outline: 1px solid var(--au-focus-ring-color);
   outline-offset: -1px;
 }
 
@@ -176,8 +174,6 @@ defineProps({
 @media (prefers-reduced-transparency: reduce) {
   .au-button-group.is-connected {
     background: var(--au-color-bg-soft);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
 
   .au-button-group.is-connected :deep(> .au-button.is-active),

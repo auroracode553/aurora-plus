@@ -1,9 +1,14 @@
 <template>
   <button
-    class="au-switch"
+    class="au-switch au-component au-focus-ring"
     :class="[
       `is-${size}`,
-      { 'is-checked': checked, 'is-disabled': disabled, 'is-loading': loading },
+      {
+        'is-checked': checked,
+        'is-disabled': disabled,
+        'is-loading': loading,
+        'au-disabled': disabled || loading,
+      },
     ]"
     type="button"
     role="switch"
@@ -14,11 +19,11 @@
     @click="toggle"
   >
     <span class="au-switch__track" aria-hidden="true">
-      <span class="au-switch__thumb">
-        <AuIcon v-if="loading" class="au-switch__loading" :icon="IconLoader2" />
+      <span class="au-switch__thumb au-depth-control">
+        <AuIcon v-if="loading" class="au-switch__loading au-spin" :icon="IconLoader2" />
       </span>
     </span>
-    <span v-if="hasLabel" class="au-switch__label">
+    <span v-if="hasLabel" class="au-switch__label au-wrap-anywhere">
       <slot>{{ checked ? activeText : inactiveText }}</slot>
     </span>
   </button>
@@ -67,6 +72,7 @@ function toggle() {
   --au-switch-thumb-size: 16px;
   --au-switch-thumb-offset: 2px;
   --au-switch-thumb-travel: 16px;
+  --au-focus-ring-offset: 3px;
 
   display: inline-flex;
   align-items: center;
@@ -74,15 +80,14 @@ function toggle() {
   min-height: 28px;
   padding: 0;
   border: 0;
+  border-radius: var(--au-border-radius-small);
   color: var(--au-color-text-regular);
   background: transparent;
-  font-family: var(--au-font-family);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.3;
   cursor: pointer;
   user-select: none;
-  outline: none;
   appearance: none;
 }
 
@@ -112,7 +117,6 @@ function toggle() {
   position: relative;
   display: inline-flex;
   align-items: center;
-  box-sizing: border-box;
   width: var(--au-switch-track-width);
   height: var(--au-switch-track-height);
   flex: none;
@@ -128,13 +132,11 @@ function toggle() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   width: var(--au-switch-thumb-size);
   height: var(--au-switch-thumb-size);
   margin-left: var(--au-switch-thumb-offset);
   border-radius: 50%;
   background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-control);
   transform: translateX(0);
   transition:
     transform var(--au-transition-duration) var(--au-transition-ease),
@@ -155,13 +157,10 @@ function toggle() {
   width: 0.7em;
   height: 0.7em;
   color: var(--au-color-text-secondary);
-  animation: au-switch-spin 0.8s linear infinite;
 }
 
 .au-switch__label {
-  min-width: 0;
   color: inherit;
-  overflow-wrap: anywhere;
 }
 
 .au-switch:hover:not(:disabled) .au-switch__track {
@@ -174,34 +173,6 @@ function toggle() {
 
 .au-switch.is-checked:active:not(:disabled) .au-switch__thumb {
   transform: translateX(var(--au-switch-thumb-travel)) scale(0.94);
-}
-
-.au-switch:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 52%, transparent);
-  outline-offset: 3px;
-  border-radius: var(--au-border-radius-small);
-}
-
-.au-switch:disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
-}
-
-@keyframes au-switch-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-switch__track,
-  .au-switch__thumb {
-    transition-duration: 0.01ms;
-  }
-
-  .au-switch__loading {
-    animation-duration: 1.2s;
-  }
 }
 
 @media (prefers-reduced-transparency: reduce) {

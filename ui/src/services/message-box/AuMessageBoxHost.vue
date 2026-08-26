@@ -9,7 +9,7 @@
     :close-label="options.closeLabel"
     @close="handleDialogClose"
   >
-    <div class="au-message-box__message">{{ options.message }}</div>
+    <div class="au-message-box__message au-wrap-anywhere">{{ options.message }}</div>
 
     <template #footer>
       <AuButton v-if="options.showCancelButton" :disabled="pending" @click="handleAction('cancel')">
@@ -70,7 +70,6 @@ async function handleAction(action) {
   font-weight: 450;
   line-height: 1.65;
   letter-spacing: 0.002em;
-  overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
 </style>

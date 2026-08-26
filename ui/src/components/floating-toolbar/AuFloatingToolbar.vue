@@ -4,7 +4,7 @@
       <div
         v-if="visible"
         ref="toolbarRef"
-        class="au-floating-toolbar"
+        class="au-floating-toolbar au-component au-material-surface au-depth-overlay au-motion-popover"
         :class="`is-${activePlacement}`"
         :style="toolbarStyle"
         role="toolbar"
@@ -208,11 +208,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   border: 1px solid var(--au-material-border);
   border-radius: 8px;
   color: var(--au-color-text-regular);
-  background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-overlay);
   user-select: none;
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 .au-floating-toolbar::before,
@@ -234,7 +230,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 
 .au-floating-toolbar.is-top::after {
   bottom: -5px;
-  border-top: 5px solid var(--au-material-bg-strong);
+  border-top: 5px solid var(--au-surface-background);
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
 }
@@ -249,7 +245,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 .au-floating-toolbar.is-bottom::after {
   top: -5px;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid var(--au-material-bg-strong);
+  border-bottom: 5px solid var(--au-surface-background);
   border-left: 5px solid transparent;
 }
 
@@ -279,7 +275,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   color: var(--au-color-text-regular);
   background: transparent;
   cursor: pointer;
-  transition: background var(--au-transition-duration) var(--au-transition-ease), color var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
+  transition: var(--au-transition-control);
 }
 
 .au-floating-toolbar :deep(.au-floating-toolbar__button:hover) {
@@ -292,7 +288,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 }
 
 .au-floating-toolbar :deep(.au-floating-toolbar__button:focus-visible) {
-  outline: 2px solid var(--au-color-primary);
+  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
   outline-offset: 1px;
 }
 
@@ -304,22 +300,10 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   color: var(--au-color-danger);
 }
 
-.au-floating-toolbar-fade-enter-active,
-.au-floating-toolbar-fade-leave-active {
-  transition: opacity var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
-}
-
 .au-floating-toolbar-fade-enter-from,
 .au-floating-toolbar-fade-leave-to {
   opacity: 0;
   transform: translateY(3px) scale(0.98);
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .au-floating-toolbar {
-    background: var(--au-color-bg-overlay);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
 </style>

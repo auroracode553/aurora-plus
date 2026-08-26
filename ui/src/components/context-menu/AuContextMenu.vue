@@ -3,7 +3,7 @@
     <div
       v-if="visible"
       ref="menuRef"
-      class="au-context-menu"
+      class="au-context-menu au-component au-material-surface au-depth-overlay au-menu-surface"
       :style="menuStyle"
       role="menu"
       :aria-label="ariaLabel"
@@ -38,7 +38,7 @@
           <button
             v-for="item in section.items"
             :key="item.id"
-            class="au-context-menu__item"
+            class="au-context-menu__item au-menu-item"
             :class="{ 'is-danger': item.danger }"
             type="button"
             role="menuitem"
@@ -54,7 +54,7 @@
 
         <button
           v-else-if="section.type === 'button' || section.type === 'item'"
-          class="au-context-menu__item"
+          class="au-context-menu__item au-menu-item"
           :class="{ 'is-danger': resolveSectionItem(section).danger }"
           type="button"
           role="menuitem"
@@ -73,7 +73,7 @@
           @mouseleave="hideSubmenu"
         >
           <button
-            class="au-context-menu__item has-submenu"
+            class="au-context-menu__item au-menu-item has-submenu"
             :class="{ 'is-active': activeSubmenu === section.id }"
             type="button"
             role="menuitem"
@@ -89,7 +89,7 @@
 
           <div
             v-if="activeSubmenu === section.id"
-            class="au-context-submenu"
+            class="au-context-submenu au-component au-material-surface au-depth-overlay au-menu-surface"
             role="menu"
             @mouseenter="showSubmenu(section.id)"
             @mouseleave="hideSubmenu"
@@ -98,7 +98,7 @@
               <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator"></div>
               <button
                 v-else
-                class="au-context-menu__item is-submenu-item"
+                class="au-context-menu__item au-menu-item is-submenu-item"
                 :class="{ 'is-danger': item.danger }"
                 type="button"
                 role="menuitem"
@@ -286,17 +286,9 @@ defineExpose({ close, menuRef, updatePosition });
   position: fixed;
   min-width: 190px;
   padding: 6px 0;
-  border: 1px solid var(--au-material-border);
   border-radius: var(--au-border-radius-base);
-  color: var(--au-color-text-primary);
-  background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-overlay);
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
-  user-select: none;
-  outline: none;
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 .au-context-menu__icon-row,
@@ -318,7 +310,7 @@ defineExpose({ close, menuRef, updatePosition });
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-subtle);
   cursor: pointer;
-  transition: background var(--au-transition-duration) var(--au-transition-ease), border-color var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
+  transition: var(--au-transition-control);
 }
 
 .au-context-menu__tool-button:hover:not(:disabled),
@@ -332,15 +324,13 @@ defineExpose({ close, menuRef, updatePosition });
   transform: scale(0.94);
 }
 
-.au-context-menu__tool-button:disabled,
-.au-context-menu__item:disabled {
+.au-context-menu__tool-button:disabled {
   color: var(--au-color-text-disabled);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.au-context-menu__tool-button.is-danger:not(:disabled),
-.au-context-menu__item.is-danger:not(:disabled) {
+.au-context-menu__tool-button.is-danger:not(:disabled) {
   color: var(--au-color-danger);
 }
 
@@ -349,27 +339,8 @@ defineExpose({ close, menuRef, updatePosition });
 }
 
 .au-context-menu__item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  width: 100%;
   height: 32px;
   padding: 0 18px;
-  border: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
-  text-align: left;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background var(--au-transition-duration) var(--au-transition-ease), color var(--au-transition-duration) var(--au-transition-ease);
-}
-
-.au-context-menu__item:hover:not(:disabled),
-.au-context-menu__item:focus-visible,
-.au-context-menu__item.is-active {
-  background: color-mix(in srgb, var(--au-color-primary) 11%, transparent);
-  outline: none;
 }
 
 .au-context-menu__item-icon,
@@ -402,12 +373,4 @@ defineExpose({ close, menuRef, updatePosition });
   min-width: 200px;
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .au-context-menu,
-  .au-context-submenu {
-    background: var(--au-color-bg-overlay);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
 </style>

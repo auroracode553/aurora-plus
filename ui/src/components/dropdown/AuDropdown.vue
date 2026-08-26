@@ -1,5 +1,5 @@
 <template>
-  <div class="au-dropdown" :class="{ 'is-open': visible, 'is-disabled': disabled }" v-bind="$attrs">
+  <div class="au-dropdown au-component" :class="{ 'is-open': visible, 'is-disabled': disabled }" v-bind="$attrs">
     <span
       ref="triggerRef"
       class="au-dropdown__trigger"
@@ -23,7 +23,7 @@
           v-if="visible"
           ref="menuRef"
           :id="menuId"
-          class="au-dropdown__menu"
+          class="au-dropdown__menu au-component au-material-surface au-depth-overlay au-motion-popover au-menu-surface"
           :class="`is-${activePlacement}`"
           :style="menuStyle"
           role="menu"
@@ -42,7 +42,7 @@
               <button
                 v-else
                 :id="itemId(index)"
-                class="au-dropdown__item"
+                class="au-dropdown__item au-menu-item"
                 :class="{ 'is-danger': item.danger, 'is-active': item.active }"
                 type="button"
                 role="menuitem"
@@ -354,18 +354,9 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
   position: fixed;
   min-width: 180px;
   padding: 5px 0;
-  border: 1px solid var(--au-material-border);
   border-radius: 9px;
-  color: var(--au-color-text-primary);
-  background: var(--au-material-bg-strong);
-  box-shadow: var(--au-shadow-overlay);
-  font-family: var(--au-font-family);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
-  user-select: none;
-  outline: none;
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
   transform-origin: top left;
 }
 
@@ -376,43 +367,7 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 }
 
 .au-dropdown__item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  width: 100%;
-  min-height: 32px;
-  box-sizing: border-box;
   padding: 0 13px;
-  border: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
-  text-align: left;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color var(--au-transition-duration) var(--au-transition-ease), background var(--au-transition-duration) var(--au-transition-ease);
-}
-
-.au-dropdown__item:hover:not(:disabled),
-.au-dropdown__item:focus-visible,
-.au-dropdown__item.is-active {
-  color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
-  outline: none;
-}
-
-.au-dropdown__item:active:not(:disabled) {
-  background: color-mix(in srgb, var(--au-color-primary) 15%, transparent);
-}
-
-.au-dropdown__item.is-danger {
-  color: var(--au-color-danger);
-}
-
-.au-dropdown__item:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
-  opacity: 0.58;
 }
 
 .au-dropdown__item-icon,
@@ -447,11 +402,6 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
   font-size: var(--au-font-size-small);
 }
 
-.au-dropdown-fade-enter-active,
-.au-dropdown-fade-leave-active {
-  transition: opacity var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
-}
-
 .au-dropdown-fade-enter-from,
 .au-dropdown-fade-leave-to {
   opacity: 0;
@@ -472,22 +422,10 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .au-dropdown-fade-enter-active,
-  .au-dropdown-fade-leave-active {
-    transition: opacity 0.01ms linear;
-  }
-
   .au-dropdown-fade-enter-from,
   .au-dropdown-fade-leave-to {
     transform: none;
   }
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .au-dropdown__menu {
-    background: var(--au-color-bg-overlay);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
 </style>
