@@ -7,6 +7,7 @@
   --vp-home-hero-name-background: linear-gradient(120deg, #409eff 20%, #8b5cf6 80%);
   --vp-home-hero-image-background-image: radial-gradient(circle, rgba(64, 158, 255, 0.28), rgba(139, 92, 246, 0.08) 50%, transparent 72%);
   --vp-home-hero-image-filter: blur(42px);
+  --vp-sidebar-bg-color: var(--vp-c-bg);
 }
 
 .VPDoc .content-container {
