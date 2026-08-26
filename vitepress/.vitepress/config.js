@@ -53,6 +53,9 @@ export default defineConfig({
         items: [
           { text: 'Button 按钮', link: '/components/button' },
           { text: 'ButtonGroup 按钮组', link: '/components/button-group' },
+          { text: 'Switch 开关', link: '/components/switch' },
+          { text: 'Checkbox 多选框', link: '/components/checkbox' },
+          { text: 'Dropdown 下拉菜单', link: '/components/dropdown' },
           { text: 'Icon 图标', link: '/components/icon' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
         ],
