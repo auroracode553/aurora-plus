@@ -79,14 +79,25 @@
   background: var(--vp-c-bg-soft);
 }
 
+.au-doc-demo__source-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
 .au-doc-demo__language {
   font-family: var(--vp-font-family-mono);
   font-size: 12px;
   text-transform: lowercase;
 }
 
-.au-doc-demo__action,
-.au-doc-demo__toggle {
+.au-doc-demo__icon-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
   margin: 0;
   border: 0;
   color: var(--vp-c-text-2);
@@ -96,18 +107,39 @@
   transition: color 0.18s ease, background 0.18s ease;
 }
 
-.au-doc-demo__action {
-  padding: 6px 9px;
-  border-radius: 5px;
-  font-size: 12px;
+.au-doc-demo__icon-action .au-icon {
+  font-size: 16px;
 }
 
-.au-doc-demo__action:hover,
+.au-doc-demo__icon-action {
+  border-radius: 5px;
+}
+
+.au-doc-demo__icon-action:hover {
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-default-soft);
+}
+
+.au-doc-demo__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-top: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-bg);
+  font-family: var(--vp-font-family-base);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
 .au-doc-demo__toggle:hover {
   color: var(--vp-c-brand-1);
-}
-
-.au-doc-demo__action:hover {
   background: var(--vp-c-default-soft);
 }
 
@@ -148,19 +180,7 @@ html:not(.dark) .au-doc-demo__highlighted .vp-code span {
   color: var(--shiki-dark, inherit);
 }
 
-.au-doc-demo__toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  width: 100%;
-  min-height: 42px;
-  padding: 0 12px;
-  border-top: 1px solid var(--vp-c-divider);
-  font-size: 12px;
-}
-
-.au-doc-demo__action:focus-visible,
+.au-doc-demo__icon-action:focus-visible,
 .au-doc-demo__toggle:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: -2px;

@@ -11,15 +11,11 @@
         {{ action.label }}
       </AuButton>
     </AuButtonGroup>
-
-    <p class="button-group-connected-demo__result">
-      当前工具：{{ selectedLabel }}
-    </p>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { AuButton, AuButtonGroup } from 'aurora-ui';
 
 const actions = [
@@ -30,13 +26,4 @@ const actions = [
 ];
 
 const selectedAction = ref('window');
-const selectedLabel = computed(() => actions.find((action) => action.key === selectedAction.value)?.label || '未选择');
 </script>
-
-<style scoped>
-.button-group-connected-demo__result {
-  margin: 16px 0 0;
-  color: var(--au-color-text-secondary);
-  font-size: 13px;
-}
-</style>

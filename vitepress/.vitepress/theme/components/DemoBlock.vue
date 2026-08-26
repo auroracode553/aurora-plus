@@ -14,9 +14,28 @@
     <div v-if="normalizedSource" class="au-doc-demo__source">
       <div class="au-doc-demo__source-actions">
         <span class="au-doc-demo__language">{{ language }}</span>
-        <button type="button" class="au-doc-demo__action" @click="copySource">
-          {{ copied ? '已复制' : '复制代码' }}
-        </button>
+        <div class="au-doc-demo__source-actions-right">
+          <button
+            type="button"
+            class="au-doc-demo__icon-action"
+            :aria-label="copied ? '已复制代码' : '复制代码'"
+            :title="copied ? '已复制' : '复制代码'"
+            @click="copySource"
+          >
+            <AuIcon name="copy" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            class="au-doc-demo__icon-action"
+            :aria-label="expanded ? '隐藏源代码' : '显示源代码'"
+            :title="expanded ? '隐藏源代码' : '显示源代码'"
+            :aria-expanded="expanded"
+            :aria-controls="sourceId"
+            @click="expanded = !expanded"
+          >
+            <AuIcon name="code" aria-hidden="true" />
+          </button>
+        </div>
       </div>
 
       <div v-show="expanded" :id="sourceId" class="au-doc-demo__code-wrap">
@@ -30,14 +49,15 @@
       </div>
 
       <button
+        v-if="expanded"
         type="button"
         class="au-doc-demo__toggle"
         :aria-expanded="expanded"
         :aria-controls="sourceId"
-        @click="expanded = !expanded"
+        @click="expanded = false"
       >
-        <span aria-hidden="true">{{ expanded ? '⌃' : '⌄' }}</span>
-        {{ expanded ? '收起源代码' : '查看完整源代码（含数据）' }}
+        <span aria-hidden="true">⌃</span>
+        隐藏源代码
       </button>
     </div>
   </section>
@@ -45,6 +65,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, ref } from 'vue';
+import { AuIcon, AuMessage } from 'aurora-ui';
 
 let demoSeed = 0;
 
@@ -76,12 +97,14 @@ async function copySource() {
   try {
     await writeToClipboard(normalizedSource.value);
     copied.value = true;
+    AuMessage.success('代码已复制');
     clearTimeout(copiedTimer);
     copiedTimer = globalThis.setTimeout(() => {
       copied.value = false;
     }, 1600);
   } catch {
     copied.value = false;
+    AuMessage.error('复制失败，请手动复制');
   }
 }
 

@@ -20,8 +20,6 @@
         {{ option.label }}
       </AuCheckbox>
     </div>
-
-    <p class="checkbox-demo__result">已选择：{{ selectedLabels || '暂无' }}</p>
   </div>
 </template>
 
@@ -38,7 +36,6 @@ const options = [
 const selected = ref(['design']);
 const allSelected = computed(() => selected.value.length === options.length);
 const partiallySelected = computed(() => selected.value.length > 0 && !allSelected.value);
-const selectedLabels = computed(() => options.filter((option) => selected.value.includes(option.value)).map((option) => option.label).join('、'));
 
 function toggleAll(checked) {
   selected.value = checked ? options.map((option) => option.value) : [];
@@ -58,9 +55,4 @@ function toggleAll(checked) {
   padding-left: 25px;
 }
 
-.checkbox-demo__result {
-  margin: 2px 0 0;
-  color: var(--au-color-text-secondary);
-  font-size: 13px;
-}
 </style>

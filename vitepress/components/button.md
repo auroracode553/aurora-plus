@@ -10,11 +10,11 @@ import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.v
 
 ## 基础用法
 
-按钮列表、尺寸列表和交互状态都由示例脚本中的真实数据驱动。展开源码可以直接查看并复制 `buttonTypes`、`buttonSizes`、`saving` 和 `lastAction`。
+按钮列表、尺寸列表和交互状态都由示例脚本中的真实数据驱动。展开源码可以直接查看并复制 `buttonTypes`、`buttonSizes` 和 `saving`。
 
 <DemoBlock
   title="类型、状态与尺寸"
-  description="点击类型按钮可查看事件结果；加载按钮展示 loading 对点击和禁用状态的影响。"
+  description="类型、尺寸、禁用和 loading 状态集中展示，点击加载按钮可观察即时状态变化。"
   :source="buttonBasicSource"
 >
   <ButtonBasic />

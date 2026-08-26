@@ -12,7 +12,7 @@ import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.v
 
 <DemoBlock
   title="编辑项目资料"
-  description="表单绑定 draftProfile，保存后同步到 savedProfile；展开源码可查看完整数据流。"
+  description="表单绑定 draftProfile，并通过底部操作区完成取消或保存。"
   :source="dialogBasicSource"
 >
   <DialogBasic />

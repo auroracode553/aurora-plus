@@ -12,18 +12,12 @@
         :icon="action.icon"
         :aria-label="action.label"
         :title="action.label"
-        @click="runAction(action.label)"
       />
     </AuButtonGroup>
-
-    <p class="button-group-floating-demo__result">
-      最近操作：{{ lastAction || '暂无' }}
-    </p>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { AuButton, AuButtonGroup } from 'aurora-ui';
 
 const panelActions = [
@@ -31,17 +25,4 @@ const panelActions = [
   { label: '切换视图', icon: 'panel' },
   { label: '查看源码', icon: 'code' },
 ];
-const lastAction = ref('');
-
-function runAction(action) {
-  lastAction.value = action;
-}
 </script>
-
-<style scoped>
-.button-group-floating-demo__result {
-  margin: 16px 0 0;
-  color: var(--au-color-text-secondary);
-  font-size: 13px;
-}
-</style>

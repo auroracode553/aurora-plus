@@ -6,10 +6,6 @@
       <span>菜单坐标来自鼠标事件，并自动限制在浏览器视口内</span>
     </div>
 
-    <p class="context-menu-demo__result">
-      最近选择：{{ selectedItem ? `${selectedItem.label}（${selectedItem.id}）` : '暂无' }}；关闭来源：{{ closeReason || '暂无' }}
-    </p>
-
     <AuContextMenu
       v-model="visible"
       :items="menuSections"
@@ -17,7 +13,6 @@
       :before-select="beforeSelect"
       @select="handleSelect"
       @cancel="handleCancel"
-      @close="closeReason = $event"
     />
   </div>
 </template>
@@ -42,8 +37,6 @@ registerIcons({
 
 const visible = ref(false);
 const position = ref({ x: 0, y: 0 });
-const selectedItem = ref(null);
-const closeReason = ref('');
 
 const menuSections = [
   {
@@ -104,7 +97,6 @@ async function beforeSelect(item) {
 }
 
 function handleSelect(item) {
-  selectedItem.value = item;
   AuMessage.success(`已执行：${item.label}`);
 }
 
@@ -133,13 +125,8 @@ function handleCancel(item) {
   font-size: 15px;
 }
 
-.context-menu-demo span,
-.context-menu-demo__result {
+.context-menu-demo span {
   color: var(--au-color-text-secondary);
   font-size: 12px;
-}
-
-.context-menu-demo__result {
-  margin: 12px 0 0;
 }
 </style>

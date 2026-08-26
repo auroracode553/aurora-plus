@@ -5,7 +5,6 @@
         v-for="button in buttonTypes"
         :key="button.type"
         :type="button.type"
-        @click="lastAction = button.label"
       >
         {{ button.label }}
       </AuButton>
@@ -28,8 +27,6 @@
         {{ size.label }}
       </AuButton>
     </div>
-
-    <p class="button-demo__result">最近点击：{{ lastAction || '暂无' }}</p>
   </div>
 </template>
 
@@ -53,13 +50,4 @@ const buttonSizes = [
 ];
 
 const saving = ref(false);
-const lastAction = ref('');
 </script>
-
-<style scoped>
-.button-demo__result {
-  margin: 16px 0 0;
-  color: var(--au-color-text-secondary);
-  font-size: 13px;
-}
-</style>

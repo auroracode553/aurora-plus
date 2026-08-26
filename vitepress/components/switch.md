@@ -18,15 +18,6 @@ import switchBasicSource from '../.vitepress/theme/examples/switch/SwitchBasic.v
   <SwitchBasic />
 </DemoBlock>
 
-```vue
-<AuSwitch
-  v-model="enabled"
-  active-text="已开启"
-  inactive-text="已关闭"
-  @change="handleChange"
-/>
-```
-
 ## 使用建议
 
 - 开关表示立即生效的二元设置；需要确认后再执行的操作应使用 `AuCheckbox` 或按钮。

@@ -3,9 +3,6 @@
     <button ref="anchorRef" class="floating-toolbar-demo__anchor" type="button" @click="showToolbar">
       点击此处显示浮动工具条
     </button>
-
-    <p class="floating-toolbar-demo__result">最近操作：{{ lastAction || '暂无' }}</p>
-
     <AuFloatingToolbar
       ref="toolbarRef"
       :trigger-rect="toolbarRect"
@@ -53,7 +50,6 @@ const deleteAction = { id: 'delete', label: '删除', text: '×' };
 const anchorRef = ref(null);
 const toolbarRef = ref(null);
 const toolbarRect = ref(null);
-const lastAction = ref('');
 
 function showToolbar() {
   const rect = anchorRef.value?.getBoundingClientRect();
@@ -69,7 +65,6 @@ function showToolbar() {
 }
 
 function runAction(action) {
-  lastAction.value = `${action.label}（${action.id}）`;
   AuMessage.info(`已执行：${action.label}`);
 }
 
@@ -92,9 +87,4 @@ function handleHide() {
   place-items: center;
 }
 
-.floating-toolbar-demo__result {
-  margin: 12px 0 0;
-  color: var(--au-color-text-secondary);
-  font-size: 12px;
-}
 </style>

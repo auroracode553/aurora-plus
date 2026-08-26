@@ -20,14 +20,6 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
   <DropdownBasic />
 </DemoBlock>
 
-```vue
-<AuDropdown :items="items" @select="handleSelect">
-  <template #trigger>
-    <AuButton>项目操作</AuButton>
-  </template>
-</AuDropdown>
-```
-
 ### 菜单项结构
 
 | 字段 | 说明 | 类型 |

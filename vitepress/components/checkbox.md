@@ -18,11 +18,6 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
   <CheckboxBasic />
 </DemoBlock>
 
-```vue
-<AuCheckbox v-model="selected" value="design">设计</AuCheckbox>
-<AuCheckbox v-model="selected" value="frontend">前端</AuCheckbox>
-```
-
 ## 使用建议
 
 - 单个设置使用布尔值模型；同组多选时让每个复选框传入不同的 `value`，并绑定到同一个数组。
