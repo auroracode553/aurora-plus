@@ -34,7 +34,7 @@ import { IconHome, IconSearch } from 'aurora-ui';
 
 ## 图标集合
 
-下方目录收录当前安装版本导出的全部 Tabler Vue 图标。可以按英文组件名搜索，点击任一图标即可复制组件名。
+下方目录收录当前版本的全部 Tabler Vue 图标。可以按功能分类、样式或英文组件名筛选，点击图标即可复制组件名。
 
 <IconGallery />
 

@@ -16,6 +16,31 @@
       </span>
     </div>
 
+    <div class="au-icon-gallery__filters" aria-label="图标筛选">
+      <label class="au-icon-gallery__filter">
+        <span>分类</span>
+        <select v-model="selectedCategory">
+          <option value="">全部分类（{{ allIcons.length }}）</option>
+          <option
+            v-for="category in categoryOptions"
+            :key="category.value"
+            :value="category.value"
+          >
+            {{ category.label }}（{{ category.count }}）
+          </option>
+        </select>
+      </label>
+
+      <label class="au-icon-gallery__filter">
+        <span>样式</span>
+        <select v-model="selectedStyle">
+          <option value="">全部样式</option>
+          <option value="outline">描边</option>
+          <option value="filled">填充</option>
+        </select>
+      </label>
+    </div>
+
     <p id="au-icon-gallery-title" class="au-icon-gallery__hint">
       点击图标复制组件名；在代码中直接从 <code>aurora-ui</code> 按需导入。
     </p>
@@ -35,7 +60,7 @@
       </button>
     </div>
 
-    <p v-else class="au-icon-gallery__empty">没有匹配“{{ query }}”的图标。</p>
+    <p v-else class="au-icon-gallery__empty">当前筛选条件下没有匹配的图标。</p>
 
     <div v-if="hasMore" class="au-icon-gallery__more">
       <AuButton @click="visibleLimit += PAGE_SIZE">
@@ -48,31 +73,106 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { AuButton, AuMessage, IconSearch, icons as tablerIcons } from 'aurora-ui';
+import iconMetadata from 'virtual:aurora-icon-metadata';
 import { writeTextToClipboard } from '../utils/clipboard.js';
 
-const PAGE_SIZE = 144;
+const PAGE_SIZE = 1000;
+const CATEGORY_LABELS = {
+  Animals: '动物',
+  Arrows: '箭头',
+  Badges: '徽章',
+  Brand: '品牌',
+  Buildings: '建筑',
+  Charts: '图表',
+  Communication: '通讯',
+  Computers: '计算机',
+  Currencies: '货币',
+  Database: '数据库',
+  Design: '设计',
+  Development: '开发',
+  Devices: '设备',
+  Document: '文档',
+  'E-commerce': '电商',
+  Electrical: '电气',
+  Extensions: '扩展',
+  Food: '食物',
+  Games: '游戏',
+  Gender: '性别',
+  Gestures: '手势',
+  Health: '医疗健康',
+  Laundry: '洗护',
+  Letters: '字母',
+  Logic: '逻辑',
+  Map: '地图',
+  Math: '数学',
+  Media: '媒体',
+  Mood: '表情',
+  Nature: '自然',
+  Numbers: '数字',
+  Photography: '摄影',
+  Shapes: '形状',
+  Sport: '运动',
+  Symbols: '符号',
+  System: '系统',
+  Text: '文本',
+  Vehicles: '交通工具',
+  'Version control': '版本控制',
+  Weather: '天气',
+  Zodiac: '星座',
+};
 const query = ref('');
+const selectedCategory = ref('');
+const selectedStyle = ref('');
 const visibleLimit = ref(PAGE_SIZE);
 
 const allIcons = Object.entries(tablerIcons)
   .filter(([name, component]) => name.startsWith('Icon') && component)
-  .map(([name, component]) => ({
-    name,
-    component,
-    searchText: name.slice(4).replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase(),
-  }))
+  .map(([name, component]) => {
+    const [category = 'Other', style = name.endsWith('Filled') ? 'filled' : 'outline'] =
+      iconMetadata[name] || [];
+    const categoryLabel = CATEGORY_LABELS[category] || category;
+
+    return {
+      name,
+      component,
+      category,
+      style,
+      searchText: [
+        name.slice(4).replace(/([a-z0-9])([A-Z])/g, '$1 $2'),
+        category,
+        categoryLabel,
+      ].join(' ').toLowerCase(),
+    };
+  })
   .sort((left, right) => left.name.localeCompare(right.name));
+
+const categoryOptions = Object.entries(
+  allIcons.reduce((counts, icon) => {
+    counts[icon.category] = (counts[icon.category] || 0) + 1;
+    return counts;
+  }, {}),
+)
+  .map(([value, count]) => ({
+    value,
+    count,
+    label: CATEGORY_LABELS[value] || value,
+  }))
+  .sort((left, right) => left.label.localeCompare(right.label, 'zh-CN'));
 
 const filteredIcons = computed(() => {
   const keywords = query.value.toLowerCase().split(/\s+/).filter(Boolean);
-  if (!keywords.length) return allIcons;
-  return allIcons.filter((item) => keywords.every((keyword) => item.searchText.includes(keyword)));
+
+  return allIcons.filter((item) => {
+    if (selectedCategory.value && item.category !== selectedCategory.value) return false;
+    if (selectedStyle.value && item.style !== selectedStyle.value) return false;
+    return keywords.every((keyword) => item.searchText.includes(keyword));
+  });
 });
 
 const visibleIcons = computed(() => filteredIcons.value.slice(0, visibleLimit.value));
 const hasMore = computed(() => visibleIcons.value.length < filteredIcons.value.length);
 
-watch(query, () => {
+watch([query, selectedCategory, selectedStyle], () => {
   visibleLimit.value = PAGE_SIZE;
 });
 
@@ -142,6 +242,42 @@ async function copyIconName(name) {
 
 .au-icon-gallery__count {
   white-space: nowrap;
+}
+
+.au-icon-gallery__filters {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 14px;
+}
+
+.au-icon-gallery__filter {
+  display: flex;
+  align-items: center;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  gap: 7px;
+}
+
+.au-icon-gallery__filter select {
+  height: 32px;
+  padding: 0 28px 0 9px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 7px;
+  color: var(--vp-c-text-1);
+  background-color: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.au-icon-gallery__filter select:focus-visible {
+  border-color: var(--vp-c-brand-1);
+  outline: 2px solid color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+}
+
+.au-icon-gallery__filter option {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
 }
 
 .au-icon-gallery__hint {
@@ -228,6 +364,20 @@ async function copyIconName(name) {
 
   .au-icon-gallery__search {
     width: 100%;
+  }
+
+  .au-icon-gallery__filters {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .au-icon-gallery__filter {
+    justify-content: space-between;
+  }
+
+  .au-icon-gallery__filter select {
+    width: min(78%, 260px);
   }
 
   .au-icon-gallery__grid {

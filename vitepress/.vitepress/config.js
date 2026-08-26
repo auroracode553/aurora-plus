@@ -1,6 +1,7 @@
 import { env } from 'node:process';
 import { defineConfig } from 'vitepress';
 import { demoSourcePlugin } from './demo-source-plugin.js';
+import { iconMetadataPlugin } from './icon-metadata-plugin.js';
 
 const siteBase = env.VITEPRESS_BASE || '/';
 
@@ -15,7 +16,7 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#409eff' }],
   ],
   vite: {
-    plugins: [demoSourcePlugin()],
+    plugins: [demoSourcePlugin(), iconMetadataPlugin()],
     resolve: {
       dedupe: ['vue'],
     },

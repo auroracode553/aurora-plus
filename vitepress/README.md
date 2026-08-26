@@ -9,6 +9,7 @@ vitepress/
 ├─ .vitepress/
 │  ├─ config.js              导航、侧栏和 Vite 配置
 │  ├─ demo-source-plugin.js  示例源码的构建期语法高亮
+│  ├─ icon-metadata-plugin.js 图标官方分类的构建期索引
 │  └─ theme/                 文档主题、DemoBlock 和真实示例
 ├─ guide/                    介绍、快速开始和主题定制
 ├─ components/               每个组件的独立文档页
@@ -22,6 +23,8 @@ vitepress/
 文档站不直接读取 `../ui/src`，也不在 Vite 配置中硬编码组件库产物路径。`package.json` 使用 `"aurora-ui": "file:../ui"` 声明本地包依赖，`import 'aurora-ui'` 与 `import 'aurora-ui/style.css'` 再由 UI 包自身的 `exports` 映射到 `ui/dist`。
 
 `ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；Tabler 图标通过本地 `aurora-ui` 包的运行时依赖与公共导出使用。本地包链接只建立消费关系，不让文档站读取或编译 UI 源码。
+
+图标目录的分类索引由 `icon-metadata-plugin.js` 在构建期读取 Aurora UI 实际依赖版本的 Tabler 官方元数据，并通过虚拟模块交给文档页面。分类数据不会打进 UI 库产物，也不需要在文档站重复维护图标版本。
 
 ## 联调流程
 
