@@ -136,7 +136,35 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   position: relative;
   min-height: 0;
   overflow: auto;
+  border: 1px solid var(--au-material-border);
+  border-radius: var(--au-border-radius-base);
+  /* Lists inherit the page surface instead of adding a tinted layer. */
+  background: transparent;
+  box-shadow: none;
+  scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
+  scrollbar-width: thin;
   contain: strict;
+}
+
+.au-virtual-list::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.au-virtual-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.au-virtual-list::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--au-color-text-secondary) 34%, transparent);
+  background-clip: padding-box;
+}
+
+.au-virtual-list::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--au-color-text-secondary) 52%, transparent);
+  background-clip: padding-box;
 }
 
 .au-virtual-list__spacer {
@@ -148,5 +176,12 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   position: absolute;
   inset: 0 0 auto;
   will-change: transform;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-virtual-list {
+    background: transparent;
+    box-shadow: none;
+  }
 }
 </style>

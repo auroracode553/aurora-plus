@@ -7,14 +7,14 @@
 <style scoped>
 .au-card {
   box-sizing: border-box;
-  padding: var(--au-card-padding, 30px);
-  border: 1px solid color-mix(in srgb, var(--au-color-border-light) 72%, transparent);
-  border-radius: var(--au-card-border-radius, 28px);
+  padding: var(--au-card-padding, 24px);
+  border: 1px solid var(--au-material-border);
+  border-radius: var(--au-card-border-radius, 16px);
   color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-bg-overlay) 86%, transparent);
+  background: var(--au-material-bg);
   box-shadow: var(--au-shadow-overlay);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -22,6 +22,7 @@
     background: var(--au-color-bg-overlay);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    box-shadow: var(--au-shadow-overlay);
   }
 }
 
@@ -29,6 +30,7 @@
   .au-card {
     border-color: var(--au-color-text-secondary);
     background: var(--au-color-bg-overlay);
+    box-shadow: var(--au-shadow-overlay);
   }
 }
 </style>

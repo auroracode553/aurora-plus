@@ -49,11 +49,22 @@ const iconStyle = computed(() => {
   color: inherit;
   line-height: 1;
   vertical-align: middle;
+  flex: none;
+  overflow: hidden;
+  font-variant-numeric: tabular-nums;
+  contain: paint;
+  transition: color var(--au-transition-duration) var(--au-transition-ease), opacity var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-icon :deep(svg) {
   display: block;
   width: 100%;
   height: 100%;
+  overflow: visible;
+  fill: currentColor;
+}
+
+.au-icon[aria-label] {
+  vertical-align: -0.125em;
 }
 </style>

@@ -198,11 +198,13 @@ defineExpose({ close, dialogRef });
   align-items: center;
   justify-content: center;
   padding: 16px;
+  overscroll-behavior: contain;
 }
 
 .au-dialog__overlay.is-modal {
   background: var(--au-color-mask);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(12px) saturate(110%);
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
 }
 
 .au-dialog__overlay:not(.is-modal) {
@@ -210,26 +212,30 @@ defineExpose({ close, dialogRef });
 }
 
 .au-dialog {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid var(--au-color-border-lighter);
+  border: 1px solid var(--au-material-border);
   border-radius: 16px;
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-overlay);
+  background: var(--au-material-bg-strong);
   box-shadow: var(--au-shadow-overlay);
   outline: none;
   pointer-events: auto;
+  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  transform-origin: center;
 }
 
 .au-dialog__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;
-  padding: 14px 24px;
-  border-bottom: 1px solid var(--au-color-border-lighter);
+  min-height: 56px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--au-material-border-strong);
   flex-shrink: 0;
 }
 
@@ -237,8 +243,9 @@ defineExpose({ close, dialogRef });
   margin: 0;
   color: var(--au-color-text-primary);
   font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: var(--au-font-weight-semibold);
+  letter-spacing: -0.018em;
+  line-height: 1.2;
 }
 
 .au-dialog__close {
@@ -248,28 +255,29 @@ defineExpose({ close, dialogRef });
 .au-dialog__body {
   flex: 1;
   min-height: 0;
-  padding: 20px 24px;
+  padding: 16px 18px;
   overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .au-dialog__footer {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  padding: 16px 24px;
-  border-top: 1px solid var(--au-color-border-lighter);
-  background: var(--au-color-bg-overlay);
+  gap: 8px;
+  padding: 12px 18px 14px;
+  border-top: 1px solid var(--au-material-border-strong);
+  background: color-mix(in srgb, var(--au-material-bg-subtle) 72%, transparent);
   flex-shrink: 0;
 }
 
 .au-dialog-fade-enter-active,
 .au-dialog-fade-leave-active {
-  transition: opacity 0.18s ease;
+  transition: opacity var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-dialog-fade-enter-active .au-dialog,
 .au-dialog-fade-leave-active .au-dialog {
-  transition: transform 0.18s ease, opacity 0.18s ease;
+  transition: transform var(--au-transition-duration) var(--au-transition-ease), opacity var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-dialog-fade-enter-from,
@@ -282,5 +290,25 @@ defineExpose({ close, dialogRef });
 .au-dialog-fade-enter-from .au-dialog,
 .au-dialog-fade-leave-to .au-dialog {
   transform: translateY(-8px) scale(0.985);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-dialog__overlay.is-modal {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .au-dialog {
+    background: var(--au-color-bg-overlay);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-dialog-fade-enter-from .au-dialog,
+  .au-dialog-fade-leave-to .au-dialog {
+    transform: none;
+  }
 }
 </style>

@@ -48,3 +48,29 @@ registerIcons({ bold: boldIcon });
 ```
 
 注册内容通过 `v-html` 渲染，只应传入项目内可信 SVG，禁止直接注册用户输入。
+
+## 玻璃材质
+
+Aurora UI 默认使用柔和（`soft`）材质，也可以在完整安装时设置为清透（`clear`）或实色（`solid`）：
+
+```js
+import { createApp } from 'vue';
+import AuroraUI, { setAuroraMaterial } from 'aurora-ui';
+import App from './App.vue';
+
+const app = createApp(App);
+app.use(AuroraUI, { material: 'clear' }).mount('#app');
+
+// 运行时切换全局材质
+setAuroraMaterial('soft');
+```
+
+也可以只为某个区域设置材质：
+
+```html
+<section data-au-material="clear">
+  <!-- 该区域内的 Aurora UI 组件使用清透材质 -->
+</section>
+```
+
+材质只影响表面透明度、模糊、饱和度和阴影，不会改变组件 API。系统开启“减少透明度”或高对比度后，组件会自动切换为更清晰的实色表面。

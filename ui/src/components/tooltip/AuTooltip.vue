@@ -203,23 +203,29 @@ defineExpose({ hide, show, updatePosition });
 <style scoped>
 .au-tooltip__trigger {
   display: inline-flex;
+  vertical-align: middle;
 }
 
 .au-tooltip__popper {
   position: fixed;
   z-index: var(--au-z-index-tooltip);
   box-sizing: border-box;
-  padding: 7px 10px;
-  border: 1px solid var(--au-color-border);
+  min-height: 24px;
+  padding: 5px 8px;
+  border: 1px solid var(--au-material-border-strong);
   border-radius: var(--au-border-radius-small);
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-overlay);
+  background: var(--au-material-bg-strong);
   box-shadow: var(--au-shadow-light);
   font-family: var(--au-font-family);
   font-size: var(--au-font-size-small);
+  font-weight: var(--au-font-weight-medium);
   line-height: 1.35;
+  letter-spacing: 0.005em;
   overflow-wrap: anywhere;
   pointer-events: none;
+  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 .au-tooltip__content {
@@ -231,8 +237,8 @@ defineExpose({ hide, show, updatePosition });
   position: absolute;
   width: 8px;
   height: 8px;
-  border: 1px solid var(--au-color-border);
-  background: inherit;
+  border: 1px solid var(--au-material-border-strong);
+  background: var(--au-material-bg-strong);
   transform: rotate(45deg);
 }
 
@@ -266,12 +272,29 @@ defineExpose({ hide, show, updatePosition });
 
 .au-tooltip-fade-enter-active,
 .au-tooltip-fade-leave-active {
-  transition: opacity 0.14s ease, transform 0.14s ease;
+  transition: opacity var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-tooltip-fade-enter-from,
 .au-tooltip-fade-leave-to {
   opacity: 0;
-  transform: translateY(2px);
+  transform: translateY(4px) scale(0.98);
+}
+
+.au-tooltip__popper.is-bottom.au-tooltip-fade-enter-from,
+.au-tooltip__popper.is-bottom.au-tooltip-fade-leave-to {
+  transform: translateY(-4px) scale(0.98);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-tooltip__popper {
+    background: var(--au-color-bg-overlay);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .au-tooltip__arrow {
+    background: var(--au-color-bg-overlay);
+  }
 }
 </style>

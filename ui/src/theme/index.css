@@ -1,49 +1,111 @@
 :root {
   color-scheme: light;
 
-  --au-color-primary: #409eff;
-  --au-color-success: #67c23a;
-  --au-color-warning: #e6a23c;
-  --au-color-danger: #f56c6c;
-  --au-color-info: #909399;
+  --au-color-primary: #3478f6;
+  --au-color-success: #2f9e72;
+  --au-color-warning: #d98a24;
+  --au-color-danger: #df4c62;
+  --au-color-info: #718096;
 
-  --au-color-text-primary: #303133;
-  --au-color-text-regular: #606266;
-  --au-color-text-secondary: #909399;
-  --au-color-text-placeholder: #a8abb2;
-  --au-color-text-disabled: #c0c4cc;
+  --au-color-text-primary: #172033;
+  --au-color-text-regular: #3e4a61;
+  --au-color-text-secondary: #6d7890;
+  --au-color-text-placeholder: #99a3b5;
+  --au-color-text-disabled: #b5bdca;
 
-  --au-color-bg: #ffffff;
-  --au-color-bg-soft: #f5f7fa;
+  --au-color-bg: #f5f7fb;
+  --au-color-bg-soft: #edf1f8;
   --au-color-bg-overlay: #ffffff;
-  --au-color-bg-hover: #f2f3f5;
-  --au-color-mask: rgba(0, 0, 0, 0.38);
+  --au-color-bg-hover: rgba(31, 44, 68, 0.07);
+  --au-color-mask: rgba(18, 27, 45, 0.42);
 
-  --au-color-border: #dcdfe6;
-  --au-color-border-light: #e4e7ed;
-  --au-color-border-lighter: #ebeef5;
+  --au-color-border: rgba(105, 123, 154, 0.3);
+  --au-color-border-light: rgba(105, 123, 154, 0.2);
+  --au-color-border-lighter: rgba(105, 123, 154, 0.13);
 
-  --au-button-default-hover-bg: #ecf5ff;
-  --au-button-default-hover-border: #c6e2ff;
-  --au-button-default-hover-text: #409eff;
-  --au-button-default-active-bg: #ecf5ff;
-  --au-button-default-active-border: #3a8ee6;
-  --au-button-default-active-text: #3a8ee6;
+  --au-button-default-hover-bg: rgba(255, 255, 255, 0.72);
+  --au-button-default-hover-border: rgba(52, 120, 246, 0.42);
+  --au-button-default-hover-text: #245fc7;
+  --au-button-default-active-bg: rgba(229, 237, 253, 0.86);
+  --au-button-default-active-border: rgba(52, 120, 246, 0.58);
+  --au-button-default-active-text: #245fc7;
+
+  /* Glass material tokens: inherited by every component and locally overridable. */
+  --au-material-bg: rgba(255, 255, 255, 0.68);
+  --au-material-bg-strong: rgba(255, 255, 255, 0.82);
+  --au-material-bg-subtle: rgba(255, 255, 255, 0.42);
+  --au-material-border: rgba(255, 255, 255, 0.68);
+  --au-material-border-strong: rgba(116, 137, 172, 0.28);
+  /* Highlight layers are intentionally disabled; surfaces stay flat and calm. */
+  --au-material-highlight: transparent;
+  --au-material-blur: 18px;
+  --au-material-saturation: 145%;
+  --au-material-shadow: 0 8px 20px rgba(52, 71, 107, 0.1), 0 1px 4px rgba(52, 71, 107, 0.06);
+  --au-material-shadow-soft: 0 3px 10px rgba(52, 71, 107, 0.06), 0 1px 2px rgba(52, 71, 107, 0.04);
+  --au-material-inset: none;
 
   --au-border-radius-small: 4px;
   --au-border-radius-base: 6px;
   --au-border-radius-large: 12px;
-  --au-font-family: "Open Sans", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  --au-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --au-font-size-small: 12px;
   --au-font-size-base: 14px;
   --au-font-size-large: 16px;
-  --au-shadow-light: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
-  --au-shadow-overlay: 0 16px 48px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.08);
-  --au-transition-duration: 0.18s;
+  --au-font-weight-medium: 520;
+  --au-font-weight-semibold: 620;
+  --au-shadow-light: var(--au-material-shadow-soft);
+  --au-shadow-overlay: var(--au-material-shadow);
+  --au-transition-duration: 0.2s;
+  --au-transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --au-z-index-toolbar: 9000;
   --au-z-index-dialog: 10000;
   --au-z-index-message: 11000;
   --au-z-index-tooltip: 12000;
+}
+
+/* Soft is the calm default: more frost, softer contrast and less visual weight. */
+:root[data-au-material='soft'],
+[data-au-material='soft'] {
+  --au-material-bg: rgba(255, 255, 255, 0.72);
+  --au-material-bg-strong: rgba(255, 255, 255, 0.86);
+  --au-material-bg-subtle: rgba(255, 255, 255, 0.5);
+  --au-material-border: rgba(255, 255, 255, 0.76);
+  --au-material-border-strong: rgba(116, 137, 172, 0.22);
+  --au-material-highlight: transparent;
+  --au-material-blur: 16px;
+  --au-material-saturation: 128%;
+  --au-material-shadow: 0 7px 18px rgba(52, 71, 107, 0.08), 0 1px 4px rgba(52, 71, 107, 0.05);
+  --au-material-shadow-soft: 0 3px 9px rgba(52, 71, 107, 0.055), 0 1px 2px rgba(52, 71, 107, 0.035);
+}
+
+/* Clear maximizes translucency and background color while preserving legibility. */
+:root[data-au-material='clear'],
+[data-au-material='clear'] {
+  --au-material-bg: rgba(255, 255, 255, 0.46);
+  --au-material-bg-strong: rgba(255, 255, 255, 0.64);
+  --au-material-bg-subtle: rgba(255, 255, 255, 0.28);
+  --au-material-border: rgba(255, 255, 255, 0.78);
+  --au-material-border-strong: rgba(105, 123, 154, 0.34);
+  --au-material-highlight: transparent;
+  --au-material-blur: 28px;
+  --au-material-saturation: 178%;
+  --au-material-shadow: 0 10px 24px rgba(52, 71, 107, 0.11), 0 2px 6px rgba(52, 71, 107, 0.06);
+  --au-material-shadow-soft: 0 4px 12px rgba(52, 71, 107, 0.07), 0 1px 3px rgba(52, 71, 107, 0.045);
+}
+
+/* Solid remains available for dense enterprise screens and transparency fallbacks. */
+:root[data-au-material='solid'],
+[data-au-material='solid'] {
+  --au-material-bg: #ffffff;
+  --au-material-bg-strong: #ffffff;
+  --au-material-bg-subtle: #f5f7fb;
+  --au-material-border: var(--au-color-border-light);
+  --au-material-border-strong: var(--au-color-border);
+  --au-material-highlight: transparent;
+  --au-material-blur: 0px;
+  --au-material-saturation: 100%;
+  --au-material-shadow: 0 8px 20px rgba(52, 71, 107, 0.1), 0 1px 4px rgba(52, 71, 107, 0.06);
+  --au-material-shadow-soft: 0 3px 10px rgba(52, 71, 107, 0.06), 0 1px 2px rgba(52, 71, 107, 0.04);
 }
 
 :root.dark,
@@ -52,29 +114,85 @@
 [data-au-theme='dark'] {
   color-scheme: dark;
 
-  --au-color-text-primary: #e5e7eb;
-  --au-color-text-regular: #b0b3b8;
-  --au-color-text-secondary: #8d9199;
-  --au-color-text-placeholder: #6b7078;
-  --au-color-text-disabled: #5c5e62;
+  --au-color-primary: #70a4ff;
+  --au-color-success: #5ed0a2;
+  --au-color-warning: #f2b35d;
+  --au-color-danger: #ff7c8d;
+  --au-color-info: #aab6ca;
+  --au-color-text-primary: #f3f6fc;
+  --au-color-text-regular: #cdd6e6;
+  --au-color-text-secondary: #9ca9bd;
+  --au-color-text-placeholder: #738198;
+  --au-color-text-disabled: #5e6a7d;
+  --au-color-bg: #111722;
+  --au-color-bg-soft: #1b2433;
+  --au-color-bg-overlay: #202b3d;
+  --au-color-bg-hover: rgba(255, 255, 255, 0.1);
+  --au-color-mask: rgba(3, 8, 16, 0.66);
+  --au-color-border: rgba(182, 201, 230, 0.3);
+  --au-color-border-light: rgba(182, 201, 230, 0.2);
+  --au-color-border-lighter: rgba(182, 201, 230, 0.13);
+  --au-button-default-hover-bg: rgba(255, 255, 255, 0.1);
+  --au-button-default-hover-border: rgba(112, 164, 255, 0.54);
+  --au-button-default-hover-text: #a9c6ff;
+  --au-button-default-active-bg: rgba(112, 164, 255, 0.2);
+  --au-button-default-active-border: rgba(112, 164, 255, 0.72);
+  --au-button-default-active-text: #c2d7ff;
+  --au-material-bg: rgba(32, 43, 61, 0.7);
+  --au-material-bg-strong: rgba(34, 47, 67, 0.86);
+  --au-material-bg-subtle: rgba(34, 47, 67, 0.46);
+  --au-material-border: rgba(255, 255, 255, 0.18);
+  --au-material-border-strong: rgba(182, 201, 230, 0.28);
+  --au-material-highlight: transparent;
+  --au-material-blur: 18px;
+  --au-material-saturation: 145%;
+  --au-material-shadow: 0 10px 24px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.14);
+  --au-material-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
 
-  --au-color-bg: #1e1e1e;
-  --au-color-bg-soft: #292a2d;
-  --au-color-bg-overlay: #2b2d31;
-  --au-color-bg-hover: #36393f;
-  --au-color-mask: rgba(0, 0, 0, 0.58);
+:root.dark[data-au-material='soft'],
+:root[data-theme='dark'][data-au-material='soft'],
+:root[data-au-theme='dark'][data-au-material='soft'],
+:root[data-au-material='soft'][data-theme='dark'],
+[data-au-theme='dark'][data-au-material='soft'],
+:root.dark [data-au-material='soft'],
+:root[data-theme='dark'] [data-au-material='soft'],
+:root[data-au-theme='dark'] [data-au-material='soft'] {
+  --au-material-bg: rgba(32, 43, 61, 0.76);
+  --au-material-bg-strong: rgba(34, 47, 67, 0.9);
+  --au-material-bg-subtle: rgba(34, 47, 67, 0.52);
+  --au-material-blur: 16px;
+  --au-material-saturation: 128%;
+}
 
-  --au-color-border: #4c4d4f;
-  --au-color-border-light: #414348;
-  --au-color-border-lighter: #36383d;
-  --au-button-default-hover-bg: rgba(144, 147, 153, 0.1);
-  --au-button-default-hover-border: #6b6d71;
-  --au-button-default-hover-text: #d0d3d8;
-  --au-button-default-active-bg: rgba(144, 147, 153, 0.16);
-  --au-button-default-active-border: #7c7e83;
-  --au-button-default-active-text: #eef0f3;
-  --au-shadow-light: 0 8px 24px rgba(0, 0, 0, 0.34), 0 2px 8px rgba(0, 0, 0, 0.22);
-  --au-shadow-overlay: 0 16px 48px rgba(0, 0, 0, 0.52), 0 4px 12px rgba(0, 0, 0, 0.3);
+:root.dark[data-au-material='clear'],
+:root[data-theme='dark'][data-au-material='clear'],
+:root[data-au-theme='dark'][data-au-material='clear'],
+:root[data-au-material='clear'][data-theme='dark'],
+[data-au-theme='dark'][data-au-material='clear'],
+:root.dark [data-au-material='clear'],
+:root[data-theme='dark'] [data-au-material='clear'],
+:root[data-au-theme='dark'] [data-au-material='clear'] {
+  --au-material-bg: rgba(32, 43, 61, 0.5);
+  --au-material-bg-strong: rgba(34, 47, 67, 0.68);
+  --au-material-bg-subtle: rgba(34, 47, 67, 0.3);
+  --au-material-blur: 28px;
+  --au-material-saturation: 178%;
+}
+
+:root.dark[data-au-material='solid'],
+:root[data-theme='dark'][data-au-material='solid'],
+:root[data-au-theme='dark'][data-au-material='solid'],
+:root[data-au-material='solid'][data-theme='dark'],
+[data-au-theme='dark'][data-au-material='solid'],
+:root.dark [data-au-material='solid'],
+:root[data-theme='dark'] [data-au-material='solid'],
+:root[data-au-theme='dark'] [data-au-material='solid'] {
+  --au-material-bg: #202b3d;
+  --au-material-bg-strong: #202b3d;
+  --au-material-bg-subtle: #1b2433;
+  --au-material-blur: 0px;
+  --au-material-saturation: 100%;
 }
 
 .au-button,
@@ -84,7 +202,41 @@
 .au-context-menu,
 .au-context-submenu,
 .au-floating-toolbar,
-.au-message {
+.au-message,
+.au-virtual-list {
   box-sizing: border-box;
   font-family: var(--au-font-family);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root,
+  :root[data-au-material],
+  [data-au-material] {
+    --au-material-bg: var(--au-color-bg-overlay);
+    --au-material-bg-strong: var(--au-color-bg-overlay);
+    --au-material-bg-subtle: var(--au-color-bg-soft);
+    --au-material-border: var(--au-color-border);
+    --au-material-blur: 0px;
+    --au-material-saturation: 100%;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root,
+  :root[data-au-material],
+  [data-au-material] {
+    --au-material-bg: var(--au-color-bg-overlay);
+    --au-material-bg-strong: var(--au-color-bg-overlay);
+    --au-material-bg-subtle: var(--au-color-bg-soft);
+    --au-material-border: var(--au-color-border);
+    --au-material-border-strong: var(--au-color-text-secondary);
+    --au-material-blur: 0px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --au-transition-duration: 0.01ms;
+    --au-transition-ease: linear;
+  }
 }

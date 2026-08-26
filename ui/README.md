@@ -196,3 +196,29 @@ document.documentElement.dataset.theme = 'dark';
 ```
 
 业务项目可以覆盖 `--au-*` CSS 变量定制颜色、圆角、字体、阴影和层级，完整变量见 `src/theme/index.css`。
+
+## 玻璃材质
+
+组件默认使用柔和（`soft`）材质。完整安装时可以选择清透（`clear`）或实色（`solid`）：
+
+```js
+import AuroraUI from 'aurora-ui';
+
+app.use(AuroraUI, { material: 'clear' });
+```
+
+运行时也可以切换全局材质，或通过 `data-au-material` 只覆盖某个容器：
+
+```js
+import { setAuroraMaterial } from 'aurora-ui';
+
+setAuroraMaterial('soft');
+```
+
+```html
+<section data-au-material="solid">
+  <!-- 该区域内的 Aurora UI 组件使用实色材质 -->
+</section>
+```
+
+可选值：`soft`（柔和）、`clear`（清透）、`solid`（实色）。系统开启减少透明度或高对比度后，组件会自动使用更清晰的表面。

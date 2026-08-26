@@ -62,7 +62,7 @@
 
 .au-doc-demo__preview {
   padding: 28px 24px;
-  background: var(--au-color-bg);
+  background: transparent;
 }
 
 .au-doc-demo__source {

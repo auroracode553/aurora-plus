@@ -32,6 +32,7 @@ defineProps({
 
 <style scoped>
 .au-button-group {
+  /* Keep groups dense by default; glass is expressed through surface tokens. */
   --au-button-group-control-size: 28px;
 
   display: inline-flex;
@@ -89,37 +90,61 @@ defineProps({
 }
 
 .au-button-group.is-floating {
+  --au-button-group-control-size: 28px;
+  --au-button-group-surface: color-mix(in srgb, var(--au-color-bg-overlay) 88%, #000000 12%);
+  --au-button-group-border: color-mix(in srgb, var(--au-color-text-primary) 22%, transparent);
+  --au-button-group-control-surface: color-mix(in srgb, var(--au-color-text-primary) 8%, transparent);
+  --au-button-group-control-border: color-mix(in srgb, var(--au-color-text-primary) 18%, transparent);
+
   gap: 2px;
   padding: 2px;
-  border: 1px solid color-mix(in srgb, var(--au-color-text-primary) 14%, transparent);
+  border: 1px solid var(--au-button-group-border);
   border-radius: 10px;
   color: var(--au-color-text-regular);
-  background: color-mix(in srgb, var(--au-color-bg-overlay) 82%, transparent);
-  box-shadow: var(--au-shadow-light);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--au-button-group-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+}
+
+/* The floating example is intentionally neutral gray, without blue glass tint. */
+.au-button-group.is-floating[data-au-theme='dark'],
+[data-au-theme='dark'] .au-button-group.is-floating {
+  --au-button-group-surface: #46474b;
+  --au-button-group-border: rgba(255, 255, 255, 0.3);
+  --au-button-group-control-surface: rgba(255, 255, 255, 0.06);
+  --au-button-group-control-border: rgba(255, 255, 255, 0.3);
+  color: #e1e3e7;
 }
 
 .au-button-group.is-floating :deep(> .au-button--default) {
-  border-color: transparent;
+  border: 1px solid var(--au-button-group-control-border);
+  border-radius: 8px;
   color: var(--au-color-text-regular);
-  background: transparent;
+  background: var(--au-button-group-control-surface);
+  box-shadow: none;
 }
 
 .au-button-group.is-floating :deep(> .au-button--default:hover:not(.is-disabled)) {
-  border-color: transparent;
+  border-color: color-mix(in srgb, var(--au-color-text-primary) 36%, transparent);
   color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-text-primary) 11%, transparent);
+  background: color-mix(in srgb, var(--au-color-text-primary) 13%, transparent);
+  box-shadow: none;
 }
 
 .au-button-group.is-floating :deep(> .au-button--default:active:not(.is-disabled)) {
-  border-color: transparent;
-  background: color-mix(in srgb, var(--au-color-text-primary) 16%, transparent);
+  border-color: color-mix(in srgb, var(--au-color-text-primary) 28%, transparent);
+  background: color-mix(in srgb, #000000 14%, transparent);
+  transform: none;
+}
+
+.au-button-group.is-floating :deep(> .au-button::before) {
+  display: none;
 }
 
 .au-button-group.is-floating :deep(> .au-button:focus-visible) {
   z-index: 1;
-  outline-offset: -2px;
+  box-shadow: none;
+  outline: 1px solid var(--au-color-primary);
+  outline-offset: -1px;
 }
 
 .au-button-group.is-icon-only :deep(> .au-button) {
@@ -128,5 +153,11 @@ defineProps({
   height: var(--au-button-group-control-size);
   padding: 0;
   border-radius: 7px;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-button-group.is-floating {
+    background: var(--au-color-bg-overlay);
+  }
 }
 </style>

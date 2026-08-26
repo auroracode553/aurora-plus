@@ -69,8 +69,8 @@ function handleClick(event) {
 
 <style scoped>
 .au-button {
-  --au-button-bg: var(--au-color-bg);
-  --au-button-border: var(--au-color-border);
+  --au-button-bg: var(--au-material-bg);
+  --au-button-border: var(--au-material-border-strong);
   --au-button-text: var(--au-color-text-regular);
   --au-button-hover-bg: var(--au-button-default-hover-bg);
   --au-button-hover-border: var(--au-button-default-hover-border);
@@ -79,48 +79,56 @@ function handleClick(event) {
   --au-button-active-border: var(--au-button-default-active-border);
   --au-button-active-text: var(--au-button-default-active-text);
 
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   height: 32px;
+  gap: 6px;
   margin: 0;
   padding: 8px 15px;
+  overflow: hidden;
   border: 1px solid var(--au-button-border);
   border-radius: var(--au-border-radius-base);
   color: var(--au-button-text);
   background: var(--au-button-bg);
+  box-shadow: 0 1px 2px rgba(34, 53, 88, 0.08);
+  font-family: inherit;
   font-size: var(--au-font-size-base);
-  font-weight: 500;
+  font-weight: var(--au-font-weight-medium);
   line-height: 1;
+  letter-spacing: -0.005em;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
   outline: none;
   appearance: none;
+  transform: translateZ(0);
   transition:
-    background var(--au-transition-duration) ease,
-    border-color var(--au-transition-duration) ease,
-    color var(--au-transition-duration) ease,
-    box-shadow var(--au-transition-duration) ease;
+    background var(--au-transition-duration) var(--au-transition-ease),
+    border-color var(--au-transition-duration) var(--au-transition-ease),
+    color var(--au-transition-duration) var(--au-transition-ease),
+    transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-button:hover:not(.is-disabled) {
   border-color: var(--au-button-hover-border);
   color: var(--au-button-hover-text);
   background: var(--au-button-hover-bg);
+  box-shadow: 0 2px 5px rgba(44, 69, 111, 0.1);
 }
 
 .au-button:active:not(.is-disabled) {
   border-color: var(--au-button-active-border);
   color: var(--au-button-active-text);
   background: var(--au-button-active-bg);
+  box-shadow: 0 1px 2px rgba(30, 45, 75, 0.12);
   transform: scale(0.97);
 }
 
 .au-button:focus-visible:not(.is-disabled) {
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 42%, transparent);
-  outline-offset: 2px;
+  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 52%, transparent);
+  outline-offset: 3px;
 }
 
 .au-button--small {
@@ -157,17 +165,19 @@ function handleClick(event) {
 
 .au-button.is-disabled {
   cursor: not-allowed;
-  opacity: 0.55;
+  opacity: 0.48;
 }
 
 .au-button.is-disabled:active {
   transform: none;
 }
 
+.au-button__content,
 .au-button__icon,
 .au-button__loading-icon {
+  position: relative;
+  z-index: 1;
   flex: none;
-  font-size: 1em;
 }
 
 .au-button__loading-icon {
@@ -181,62 +191,62 @@ function handleClick(event) {
 }
 
 .au-button--primary {
-  --au-button-bg: var(--au-color-primary);
-  --au-button-border: var(--au-color-primary);
+  --au-button-bg: color-mix(in srgb, var(--au-color-primary) 92%, #ffffff);
+  --au-button-border: color-mix(in srgb, var(--au-color-primary) 78%, #ffffff);
   --au-button-text: #ffffff;
-  --au-button-hover-bg: #66b1ff;
-  --au-button-hover-border: #66b1ff;
+  --au-button-hover-bg: color-mix(in srgb, var(--au-color-primary) 82%, #ffffff);
+  --au-button-hover-border: var(--au-color-primary);
   --au-button-hover-text: #ffffff;
-  --au-button-active-bg: #3a8ee6;
-  --au-button-active-border: #3a8ee6;
+  --au-button-active-bg: color-mix(in srgb, var(--au-color-primary) 100%, #102f72);
+  --au-button-active-border: var(--au-color-primary);
   --au-button-active-text: #ffffff;
 }
 
 .au-button--success {
-  --au-button-bg: var(--au-color-success);
-  --au-button-border: var(--au-color-success);
+  --au-button-bg: color-mix(in srgb, var(--au-color-success) 92%, #ffffff);
+  --au-button-border: color-mix(in srgb, var(--au-color-success) 78%, #ffffff);
   --au-button-text: #ffffff;
-  --au-button-hover-bg: #85ce61;
-  --au-button-hover-border: #85ce61;
+  --au-button-hover-bg: color-mix(in srgb, var(--au-color-success) 82%, #ffffff);
+  --au-button-hover-border: var(--au-color-success);
   --au-button-hover-text: #ffffff;
-  --au-button-active-bg: #5daf34;
-  --au-button-active-border: #5daf34;
+  --au-button-active-bg: color-mix(in srgb, var(--au-color-success) 100%, #15573e);
+  --au-button-active-border: var(--au-color-success);
   --au-button-active-text: #ffffff;
 }
 
 .au-button--info {
-  --au-button-bg: var(--au-color-info);
-  --au-button-border: var(--au-color-info);
+  --au-button-bg: color-mix(in srgb, var(--au-color-info) 92%, #ffffff);
+  --au-button-border: color-mix(in srgb, var(--au-color-info) 78%, #ffffff);
   --au-button-text: #ffffff;
-  --au-button-hover-bg: #a6a9ad;
-  --au-button-hover-border: #a6a9ad;
+  --au-button-hover-bg: color-mix(in srgb, var(--au-color-info) 82%, #ffffff);
+  --au-button-hover-border: var(--au-color-info);
   --au-button-hover-text: #ffffff;
-  --au-button-active-bg: #82848a;
-  --au-button-active-border: #82848a;
+  --au-button-active-bg: color-mix(in srgb, var(--au-color-info) 100%, #3d4657);
+  --au-button-active-border: var(--au-color-info);
   --au-button-active-text: #ffffff;
 }
 
 .au-button--warning {
-  --au-button-bg: var(--au-color-warning);
-  --au-button-border: var(--au-color-warning);
+  --au-button-bg: color-mix(in srgb, var(--au-color-warning) 92%, #ffffff);
+  --au-button-border: color-mix(in srgb, var(--au-color-warning) 78%, #ffffff);
   --au-button-text: #ffffff;
-  --au-button-hover-bg: #ebb563;
-  --au-button-hover-border: #ebb563;
+  --au-button-hover-bg: color-mix(in srgb, var(--au-color-warning) 82%, #ffffff);
+  --au-button-hover-border: var(--au-color-warning);
   --au-button-hover-text: #ffffff;
-  --au-button-active-bg: #cf9236;
-  --au-button-active-border: #cf9236;
+  --au-button-active-bg: color-mix(in srgb, var(--au-color-warning) 100%, #754815);
+  --au-button-active-border: var(--au-color-warning);
   --au-button-active-text: #ffffff;
 }
 
 .au-button--danger {
-  --au-button-bg: var(--au-color-danger);
-  --au-button-border: var(--au-color-danger);
+  --au-button-bg: color-mix(in srgb, var(--au-color-danger) 92%, #ffffff);
+  --au-button-border: color-mix(in srgb, var(--au-color-danger) 78%, #ffffff);
   --au-button-text: #ffffff;
-  --au-button-hover-bg: #f78989;
-  --au-button-hover-border: #f78989;
+  --au-button-hover-bg: color-mix(in srgb, var(--au-color-danger) 82%, #ffffff);
+  --au-button-hover-border: var(--au-color-danger);
   --au-button-hover-text: #ffffff;
-  --au-button-active-bg: #dd6161;
-  --au-button-active-border: #dd6161;
+  --au-button-active-bg: color-mix(in srgb, var(--au-color-danger) 100%, #7e1e32);
+  --au-button-active-border: var(--au-color-danger);
   --au-button-active-text: #ffffff;
 }
 
@@ -245,10 +255,20 @@ function handleClick(event) {
 .au-button--info.is-plain,
 .au-button--warning.is-plain,
 .au-button--danger.is-plain {
-  --au-button-bg: color-mix(in srgb, var(--au-button-border) 10%, var(--au-color-bg));
+  --au-button-bg: color-mix(in srgb, var(--au-button-border) 12%, var(--au-material-bg));
   --au-button-text: var(--au-button-border);
   --au-button-hover-bg: var(--au-button-border);
   --au-button-hover-text: #ffffff;
   --au-button-active-text: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-button {
+    transition: color 0.01ms linear, background 0.01ms linear, border-color 0.01ms linear;
+  }
+
+  .au-button__loading-icon {
+    animation-duration: 1.2s;
+  }
 }
 </style>

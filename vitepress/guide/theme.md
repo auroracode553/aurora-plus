@@ -14,28 +14,46 @@ Aurora UI 使用 CSS 变量提供主题能力，不要求额外的主题运行�
 
 其中 `.dark` 和 `data-theme` 适合应用级主题切换，`data-au-theme` 可用于独立使用 Aurora UI 的项目或局部容器。
 
+## 玻璃材质
+
+Aurora UI 的浮层、卡片、按钮组、消息和菜单会读取根节点上的 `data-au-material`：
+
+```html
+<html data-au-material="soft"></html>
+```
+
+可选材质如下：
+
+| 值 | 视觉特征 | 适用场景 |
+| --- | --- | --- |
+| `soft` | 柔和、低对比、轻模糊 | 日常工作台和内容型页面（默认） |
+| `clear` | 清透、高饱和、背景层次明显 | 需要突出玻璃质感的首页或仪表盘 |
+| `solid` | 不透明、边界清晰 | 信息密集或对比度要求高的页面 |
+
+也可以在 `app.use(AuroraUI, { material: 'clear' })` 时初始化，或调用 `setAuroraMaterial('soft')` 运行时切换。将 `data-au-material` 放在任意容器上，可只覆盖该容器内的组件。
+
 ## 颜色变量
 
 | 变量 | 默认值 | 用途 |
 | --- | --- | --- |
-| `--au-color-primary` | `#409eff` | 品牌与主要动作 |
-| `--au-color-success` | `#67c23a` | 成功状态 |
-| `--au-color-warning` | `#e6a23c` | 警告状态 |
-| `--au-color-danger` | `#f56c6c` | 危险状态 |
-| `--au-color-info` | `#909399` | 中性信息状态 |
-| `--au-color-text-primary` | `#303133` | 标题与主要文本 |
-| `--au-color-text-regular` | `#606266` | 正文文本 |
-| `--au-color-text-secondary` | `#909399` | 辅助文本 |
-| `--au-color-text-placeholder` | `#a8abb2` | 占位文本 |
-| `--au-color-text-disabled` | `#c0c4cc` | 禁用文本 |
-| `--au-color-bg` | `#ffffff` | 页面及组件背景 |
+| `--au-color-primary` | `#3478f6` | 品牌与主要动作 |
+| `--au-color-success` | `#2f9e72` | 成功状态 |
+| `--au-color-warning` | `#d98a24` | 警告状态 |
+| `--au-color-danger` | `#df4c62` | 危险状态 |
+| `--au-color-info` | `#718096` | 中性信息状态 |
+| `--au-color-text-primary` | `#172033` | 标题与主要文本 |
+| `--au-color-text-regular` | `#3e4a61` | 正文文本 |
+| `--au-color-text-secondary` | `#6d7890` | 辅助文本 |
+| `--au-color-text-placeholder` | `#99a3b5` | 占位文本 |
+| `--au-color-text-disabled` | `#b5bdca` | 禁用文本 |
+| `--au-color-bg` | `#f5f7fb` | 页面及组件背景 |
 | `--au-color-bg-overlay` | `#ffffff` | 弹层背景 |
-| `--au-color-bg-soft` | `#f5f7fa` | 柔和区域背景 |
-| `--au-color-bg-hover` | `#f2f3f5` | 悬停背景 |
-| `--au-color-mask` | `rgba(0, 0, 0, 0.38)` | 模态遮罩 |
-| `--au-color-border` | `#dcdfe6` | 常规边框 |
-| `--au-color-border-light` | `#e4e7ed` | 较浅边框 |
-| `--au-color-border-lighter` | `#ebeef5` | 最浅分隔线 |
+| `--au-color-bg-soft` | `#edf1f8` | 柔和区域背景 |
+| `--au-color-bg-hover` | `rgba(31, 44, 68, 0.07)` | 悬停背景 |
+| `--au-color-mask` | `rgba(18, 27, 45, 0.42)` | 模态遮罩 |
+| `--au-color-border` | `rgba(105, 123, 154, 0.3)` | 常规边框 |
+| `--au-color-border-light` | `rgba(105, 123, 154, 0.2)` | 较浅边框 |
+| `--au-color-border-lighter` | `rgba(105, 123, 154, 0.13)` | 最浅分隔线 |
 
 ## 尺寸、阴影与层级
 

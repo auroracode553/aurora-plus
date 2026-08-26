@@ -205,12 +205,14 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   gap: 4px;
   min-height: 40px;
   padding: 5px 10px;
-  border: 1px solid var(--au-color-border-light);
+  border: 1px solid var(--au-material-border);
   border-radius: 10px;
   color: var(--au-color-text-regular);
-  background: var(--au-color-bg-overlay);
+  background: var(--au-material-bg-strong);
   box-shadow: var(--au-shadow-light);
   user-select: none;
+  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 .au-floating-toolbar::before,
@@ -225,14 +227,14 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 
 .au-floating-toolbar.is-top::before {
   bottom: -8px;
-  border-top: 8px solid var(--au-color-border-light);
+  border-top: 8px solid var(--au-material-border-strong);
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
 }
 
 .au-floating-toolbar.is-top::after {
   bottom: -7px;
-  border-top: 7px solid var(--au-color-bg-overlay);
+  border-top: 7px solid var(--au-material-bg-strong);
   border-right: 7px solid transparent;
   border-left: 7px solid transparent;
 }
@@ -240,14 +242,14 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 .au-floating-toolbar.is-bottom::before {
   top: -8px;
   border-right: 8px solid transparent;
-  border-bottom: 8px solid var(--au-color-border-light);
+  border-bottom: 8px solid var(--au-material-border-strong);
   border-left: 8px solid transparent;
 }
 
 .au-floating-toolbar.is-bottom::after {
   top: -7px;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid var(--au-color-bg-overlay);
+  border-bottom: 7px solid var(--au-material-bg-strong);
   border-left: 7px solid transparent;
 }
 
@@ -261,7 +263,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   width: 1px;
   height: 20px;
   margin: 0 4px;
-  background: var(--au-color-border-light);
+  background: var(--au-material-border-strong);
   flex: none;
 }
 
@@ -277,12 +279,16 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   color: var(--au-color-text-regular);
   background: transparent;
   cursor: pointer;
-  transition: background 0.14s ease, color 0.14s ease;
+  transition: background var(--au-transition-duration) var(--au-transition-ease), color var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-floating-toolbar :deep(.au-floating-toolbar__button:hover) {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
+}
+
+.au-floating-toolbar :deep(.au-floating-toolbar__button:active) {
+  transform: scale(0.94);
 }
 
 .au-floating-toolbar :deep(.au-floating-toolbar__button:focus-visible) {
@@ -300,12 +306,20 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 
 .au-floating-toolbar-fade-enter-active,
 .au-floating-toolbar-fade-leave-active {
-  transition: opacity 0.14s ease, transform 0.14s ease;
+  transition: opacity var(--au-transition-duration) var(--au-transition-ease), transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-floating-toolbar-fade-enter-from,
 .au-floating-toolbar-fade-leave-to {
   opacity: 0;
   transform: translateY(3px) scale(0.98);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-floating-toolbar {
+    background: var(--au-color-bg-overlay);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 </style>

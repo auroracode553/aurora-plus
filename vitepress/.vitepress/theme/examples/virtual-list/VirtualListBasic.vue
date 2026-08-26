@@ -94,7 +94,7 @@ function scrollToMiddle() {
   border: 1px solid var(--au-color-border);
   border-radius: var(--au-border-radius-base);
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg);
+  background: transparent;
   outline: none;
 }
 
@@ -108,7 +108,7 @@ function scrollToMiddle() {
   height: 330px;
   border: 1px solid var(--au-color-border-lighter);
   border-radius: 8px;
-  background: var(--au-color-bg);
+  background: transparent;
 }
 
 .virtual-list-demo__row {

@@ -11,6 +11,13 @@ import { AuTooltip } from './components/tooltip/index.js';
 import { AuVirtualList } from './components/virtual-list/index.js';
 import { AuMessage } from './services/message/index.js';
 import { AuMessageBox } from './services/message-box/index.js';
+import {
+  AURORA_MATERIALS,
+  DEFAULT_AURORA_MATERIAL,
+  getAuroraMaterial,
+  isAuroraMaterial,
+  setAuroraMaterial,
+} from './utils/material.js';
 
 const components = [
   AuButton,
@@ -30,6 +37,7 @@ export const AuroraUI = {
   version,
   install(app, options = {}) {
     if (options.icons) registerIcons(options.icons);
+    if (options.material) setAuroraMaterial(options.material);
     components.forEach((component) => app.component(component.componentName, component));
     app.config.globalProperties.$message = AuMessage;
     app.config.globalProperties.$messageBox = AuMessageBox;
@@ -52,6 +60,11 @@ export {
   getIconSource,
   registerIcons,
   unregisterIcon,
+  AURORA_MATERIALS,
+  DEFAULT_AURORA_MATERIAL,
+  getAuroraMaterial,
+  isAuroraMaterial,
+  setAuroraMaterial,
 };
 
 export default AuroraUI;
