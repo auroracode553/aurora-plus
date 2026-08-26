@@ -8,6 +8,7 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 | --- | --- | --- |
 | `AuButton` | 多类型、多尺寸、加载态按钮 | `XButton.vue` |
 | `AuButtonGroup` | `connected` 连体按钮组与 `floating` 悬浮控制组 | 通用控制组 |
+| `AuCard` | 带玻璃质感的空卡片容器 | 通用卡片 |
 | `AuIcon` | SVG 图标渲染与注册 | `SvgIcon.vue` |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 | `XTooltip.vue` |
 | `AuDialog` | 模态对话框壳、焦点和滚动管理 | `BaseDialog.vue` |

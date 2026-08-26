@@ -2,6 +2,7 @@ import './theme/index.css';
 
 import { AuButton } from './components/button/index.js';
 import { AuButtonGroup } from './components/button-group/index.js';
+import { AuCard } from './components/card/index.js';
 import { AuContextMenu } from './components/context-menu/index.js';
 import { AuDialog } from './components/dialog/index.js';
 import { AuFloatingToolbar } from './components/floating-toolbar/index.js';
@@ -14,6 +15,7 @@ import { AuMessageBox } from './services/message-box/index.js';
 const components = [
   AuButton,
   AuButtonGroup,
+  AuCard,
   AuContextMenu,
   AuDialog,
   AuFloatingToolbar,
@@ -38,6 +40,7 @@ export const AuroraUI = {
 export {
   AuButton,
   AuButtonGroup,
+  AuCard,
   AuContextMenu,
   AuDialog,
   AuFloatingToolbar,

@@ -68,6 +68,7 @@ export default defineConfig({
       {
         text: '数据与浮层',
         items: [
+          { text: 'Card 卡片', link: '/components/card' },
           { text: '虚拟列表', link: '/components/virtual-list' },
           { text: '右键菜单', link: '/components/context-menu' },
           { text: '浮动工具条', link: '/components/floating-toolbar' },

@@ -15,7 +15,7 @@ Aurora UI 是从 Aurora Editor 中抽离出的 Vue 3 通用组件库。它只保
 | 分类 | 当前能力 |
 | --- | --- |
 | 基础 | [Button](/components/button)、[ButtonGroup](/components/button-group)、[Icon](/components/icon)、[Tooltip](/components/tooltip) |
-| 容器 | [Dialog](/components/dialog)、[FloatingToolbar](/components/floating-toolbar) |
+| 容器 | [Card](/components/card)、[Dialog](/components/dialog)、[FloatingToolbar](/components/floating-toolbar) |
 | 数据展示 | [VirtualList](/components/virtual-list)、[ContextMenu](/components/context-menu) |
 | 反馈服务 | [Message](/components/message)、[MessageBox](/components/message-box) |
 
