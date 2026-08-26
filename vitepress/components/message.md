@@ -48,6 +48,8 @@ AuMessage.warning({
 
 `AuMessageHandler` 包含一个 `close(): void` 方法，可精确关闭本次调用创建或合并到的消息。
 
+四种消息类型使用相同的默认关闭时长。`AuMessage.error()` 默认也会自动关闭；只有显式传入 `duration: 0` 时，消息才会常驻并等待手动关闭。
+
 ### Options
 
 | 配置 | 说明 | 类型 | 默认值 |

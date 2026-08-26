@@ -35,6 +35,8 @@ export function demoSourcePlugin() {
       if (!id.startsWith(VIRTUAL_MODULE_PREFIX) || !id.endsWith(VIRTUAL_MODULE_SUFFIX)) return null;
 
       const filePath = id.slice(VIRTUAL_MODULE_PREFIX.length, -VIRTUAL_MODULE_SUFFIX.length);
+      // 让 Vite 在示例文件变更时失效对应的虚拟源码模块，避免文档仍显示旧代码。
+      this.addWatchFile(filePath);
 
       const source = compactSource(await readFile(filePath, 'utf8'));
       const highlighter = await getHighlighter();

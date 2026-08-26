@@ -39,10 +39,10 @@ const messageExamples = [
     options: { message: '磁盘剩余空间不足 10%', showClose: true },
   },
   {
-    label: '常驻错误',
+    label: '错误消息',
     method: 'error',
     buttonType: 'danger',
-    options: { message: '无法连接到远程仓库', duration: 0, showClose: true },
+    options: { message: '无法连接到远程仓库', duration: 3000, showClose: true },
   },
 ];
 

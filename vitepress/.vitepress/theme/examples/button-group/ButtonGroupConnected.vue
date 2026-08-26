@@ -1,31 +1,36 @@
 <template>
   <div class="button-group-connected-demo">
-    <AuButtonGroup variant="connected" aria-label="内容对齐">
+    <AuButtonGroup variant="connected" aria-label="工作台工具">
       <AuButton
-        v-for="alignment in alignments"
-        :key="alignment"
-        @click="selectAlignment(alignment)"
+        v-for="action in actions"
+        :key="action.key"
+        :icon="action.icon"
+        :aria-pressed="selectedAction === action.key"
+        @click="selectedAction = action.key"
       >
-        {{ alignment }}
+        {{ action.label }}
       </AuButton>
     </AuButtonGroup>
 
     <p class="button-group-connected-demo__result">
-      当前对齐：{{ selectedAlignment || '未选择' }}
+      当前工具：{{ selectedLabel }}
     </p>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { AuButton, AuButtonGroup } from 'aurora-ui';
 
-const alignments = ['左对齐', '居中', '右对齐'];
-const selectedAlignment = ref('');
+const actions = [
+  { key: 'window', label: '窗口', icon: 'panel' },
+  { key: 'preferences', label: '偏好', icon: 'sliders' },
+  { key: 'notifications', label: '提醒', icon: 'bell' },
+  { key: 'more', label: '更多', icon: 'more' },
+];
 
-function selectAlignment(alignment) {
-  selectedAlignment.value = alignment;
-}
+const selectedAction = ref('window');
+const selectedLabel = computed(() => actions.find((action) => action.key === selectedAction.value)?.label || '未选择');
 </script>
 
 <style scoped>

@@ -46,47 +46,67 @@ defineProps({
   flex-direction: column;
 }
 
+.au-button-group.is-connected {
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--au-material-border-strong);
+  border-radius: 13px;
+  color: var(--au-color-text-regular);
+  background: color-mix(in srgb, var(--au-material-bg-subtle) 72%, var(--au-color-bg-soft));
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--au-color-mask) 12%, transparent);
+  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+}
+
+.au-button-group.is-vertical.is-connected {
+  align-items: stretch;
+}
+
 .au-button-group.is-connected :deep(> .au-button) {
   position: relative;
-  border-radius: 0;
+  height: 30px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--au-color-text-secondary);
+  background: transparent;
+  box-shadow: none;
+  font-weight: var(--au-font-weight-medium);
+  transform: none;
 }
 
-.au-button-group.is-connected :deep(> .au-button:hover),
-.au-button-group.is-connected :deep(> .au-button:focus-visible),
-.au-button-group.is-connected :deep(> .au-button:active) {
+.au-button-group.is-vertical.is-connected :deep(> .au-button) {
+  justify-content: flex-start;
+}
+
+.au-button-group.is-connected :deep(> .au-button:hover:not(.is-disabled)) {
+  color: var(--au-color-text-primary);
+  background: color-mix(in srgb, var(--au-color-text-primary) 7%, transparent);
+  box-shadow: none;
+}
+
+.au-button-group.is-connected :deep(> .au-button:active:not(.is-disabled)) {
+  color: var(--au-color-text-primary);
+  background: color-mix(in srgb, var(--au-color-text-primary) 11%, transparent);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.au-button-group.is-connected :deep(> .au-button.is-active),
+.au-button-group.is-connected :deep(> .au-button[aria-pressed='true']),
+.au-button-group.is-connected :deep(> .au-button[aria-current='true']) {
   z-index: 1;
+  color: var(--au-color-text-primary);
+  background: var(--au-material-bg-strong);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--au-color-mask) 18%, transparent),
+    0 3px 8px color-mix(in srgb, var(--au-color-mask) 10%, transparent);
 }
 
-.au-button-group.is-horizontal.is-connected :deep(> .au-button + .au-button) {
-  margin-left: -1px;
-}
-
-.au-button-group.is-horizontal.is-connected :deep(> .au-button:first-child) {
-  border-radius: var(--au-border-radius-base) 0 0 var(--au-border-radius-base);
-}
-
-.au-button-group.is-horizontal.is-connected :deep(> .au-button:last-child) {
-  border-radius: 0 var(--au-border-radius-base) var(--au-border-radius-base) 0;
-}
-
-.au-button-group.is-horizontal.is-connected :deep(> .au-button:only-child) {
-  border-radius: var(--au-border-radius-base);
-}
-
-.au-button-group.is-vertical.is-connected :deep(> .au-button + .au-button) {
-  margin-top: -1px;
-}
-
-.au-button-group.is-vertical.is-connected :deep(> .au-button:first-child) {
-  border-radius: var(--au-border-radius-base) var(--au-border-radius-base) 0 0;
-}
-
-.au-button-group.is-vertical.is-connected :deep(> .au-button:last-child) {
-  border-radius: 0 0 var(--au-border-radius-base) var(--au-border-radius-base);
-}
-
-.au-button-group.is-vertical.is-connected :deep(> .au-button:only-child) {
-  border-radius: var(--au-border-radius-base);
+.au-button-group.is-connected :deep(> .au-button:focus-visible) {
+  z-index: 2;
+  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 52%, transparent);
+  outline-offset: -1px;
 }
 
 .au-button-group.is-floating {
@@ -156,6 +176,18 @@ defineProps({
 }
 
 @media (prefers-reduced-transparency: reduce) {
+  .au-button-group.is-connected {
+    background: var(--au-color-bg-soft);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .au-button-group.is-connected :deep(> .au-button.is-active),
+  .au-button-group.is-connected :deep(> .au-button[aria-pressed='true']),
+  .au-button-group.is-connected :deep(> .au-button[aria-current='true']) {
+    background: var(--au-color-bg-overlay);
+  }
+
   .au-button-group.is-floating {
     background: var(--au-color-bg-overlay);
   }

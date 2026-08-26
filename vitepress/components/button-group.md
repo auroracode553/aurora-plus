@@ -12,11 +12,11 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 ## 连体按钮组
 
-`variant="connected"` 合并相邻按钮的边框和圆角，适合对齐、筛选和视图切换等并列文字操作。它也是组件的默认外观，但建议在需要强调设计语义的示例和业务封装中显式声明。
+`variant="connected"` 使用统一的半透明材质容器承载多个分段操作，适合窗口工具、筛选和视图切换。按钮不再用硬边框拼接；当前项通过 `aria-pressed="true"`、`aria-current="true"` 或 `is-active` 类获得独立材质层。它也是组件的默认外观，但建议在业务封装中显式声明。
 
 <DemoBlock
   title="Connected 连体按钮组"
-  description="相邻按钮共享边界，形成一个连续的操作单元。"
+  description="Apple 风格分段工具条；当前项使用独立材质层，其他操作保持透明。"
   :source="buttonGroupConnectedSource"
 >
   <ButtonGroupConnected />
@@ -38,7 +38,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 | 外观 | 适用场景 | 视觉关系 | 常见内容 |
 | --- | --- | --- | --- |
-| `connected` | 筛选、对齐、视图切换 | 按钮边框相连 | 文字或文字加图标 |
+| `connected` | 工具切换、筛选、视图切换 | 统一材质容器与独立选中项 | 文字或文字加图标 |
 | `floating` | 卡片、画布、面板快捷操作 | 独立按钮位于悬浮面板内 | 纯图标 |
 
 `AuButtonGroup` 不负责定位和显隐。如果控件需要跟随选区或锚点浮动，请使用 `AuFloatingToolbar` 处理定位，并在其插槽中组织操作内容。
@@ -46,6 +46,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 ## 使用建议
 
 - 按钮组用于直接执行的并列操作，不应替代点击后展开选项的 Menu。
+- 表示互斥选中状态时，为当前按钮设置 `aria-pressed="true"`；仅执行一次动作的按钮不需要持久选中状态。
 - 没有可见文字时，为按钮组提供 `aria-label`，并为每个图标按钮单独提供 `aria-label`。
 - `icon-only` 只应用于纯图标按钮；包含文字的按钮应保留默认尺寸。
 - 可通过 `--au-button-group-control-size` 覆盖紧凑按钮尺寸，默认值为 `28px`。

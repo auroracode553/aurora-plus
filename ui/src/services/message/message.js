@@ -2,6 +2,7 @@ import { createVNode, reactive, render } from 'vue';
 import MessageHost from './AuMessageHost.vue';
 
 const state = reactive({ items: [] });
+const DEFAULT_MESSAGE_DURATION = 2000;
 let messageSeed = 0;
 let hostContainer = null;
 let destroyTimer = null;
@@ -12,7 +13,7 @@ function normalizeOptions(options) {
   return {
     message: String(normalized.message ?? ''),
     type,
-    duration: normalized.duration == null ? 2000 : Math.max(Number(normalized.duration) || 0, 0),
+    duration: normalized.duration == null ? DEFAULT_MESSAGE_DURATION : Math.max(Number(normalized.duration) || 0, 0),
     showClose: Boolean(normalized.showClose),
     grouping: Boolean(normalized.grouping),
     onClose: typeof normalized.onClose === 'function' ? normalized.onClose : null,
