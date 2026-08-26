@@ -222,3 +222,26 @@ setAuroraMaterial('soft');
 ```
 
 可选值：`soft`（柔和）、`clear`（清透）、`solid`（实色）。系统开启减少透明度或高对比度后，组件会自动使用更清晰的表面。
+
+材质常量和读取方法也可以直接使用：
+
+```js
+import { AURORA_MATERIALS, getAuroraMaterial } from 'aurora-ui';
+
+console.log(AURORA_MATERIALS); // ['soft', 'clear', 'solid']
+console.log(getAuroraMaterial());
+```
+
+如需微调材质，只覆盖对应容器上的 CSS 变量即可：
+
+```css
+.dashboard-shell {
+  --au-material-bg: rgba(255, 255, 255, 0.58);
+  --au-material-bg-strong: rgba(255, 255, 255, 0.76);
+  --au-material-border: rgba(255, 255, 255, 0.64);
+  --au-material-blur: 20px;
+  --au-material-saturation: 140%;
+}
+```
+
+材质不会添加高光渐变或内发光，仅调整表面透明度、模糊、饱和度、边框和轻量阴影。

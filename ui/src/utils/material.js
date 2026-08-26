@@ -21,7 +21,8 @@ export function setAuroraMaterial(material, target) {
 
 export function getAuroraMaterial(target) {
   const element = target || getDefaultTarget();
-  return element?.dataset?.auMaterial || DEFAULT_AURORA_MATERIAL;
+  const material = element?.dataset?.auMaterial;
+  return isAuroraMaterial(material) ? material : DEFAULT_AURORA_MATERIAL;
 }
 
 function getDefaultTarget() {

@@ -1,3 +1,9 @@
+<script setup>
+import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
+import MaterialPreview from '../.vitepress/theme/examples/theme/MaterialPreview.vue';
+import materialPreviewSource from '../.vitepress/theme/examples/theme/MaterialPreview.vue?demo-source';
+</script>
+
 # 主题定制
 
 Aurora UI 使用 CSS 变量提供主题能力，不要求额外的主题运行时。
@@ -31,6 +37,79 @@ Aurora UI 的浮层、卡片、按钮组、消息和菜单会读取根节点上�
 | `solid` | 不透明、边界清晰 | 信息密集或对比度要求高的页面 |
 
 也可以在 `app.use(AuroraUI, { material: 'clear' })` 时初始化，或调用 `setAuroraMaterial('soft')` 运行时切换。将 `data-au-material` 放在任意容器上，可只覆盖该容器内的组件。
+
+### 交互预览
+
+下面的示例可以直接切换材质，观察同一组组件在不同透明度、模糊和背景层级下的变化：
+
+<DemoBlock
+  title="材质切换预览"
+  description="选择柔和、清透或实色，预览局部容器内组件的材质效果。"
+  :source="materialPreviewSource"
+>
+  <MaterialPreview />
+</DemoBlock>
+
+### 全局配置
+
+在安装组件库时传入 `material`，即可为整个应用设置默认材质：
+
+```js
+import { createApp } from 'vue';
+import AuroraUI from 'aurora-ui';
+import App from './App.vue';
+
+createApp(App).use(AuroraUI, { material: 'clear' }).mount('#app');
+```
+
+运行时可通过 `setAuroraMaterial` 切换全局材质。传入无效值时不会修改当前设置：
+
+```js
+import { getAuroraMaterial, setAuroraMaterial } from 'aurora-ui';
+
+setAuroraMaterial('soft');
+console.log(getAuroraMaterial()); // soft
+```
+
+### 局部配置
+
+将 `data-au-material` 放在任意容器上，只影响该容器内的 Aurora UI 组件：
+
+```vue
+<section data-au-material="clear">
+  <AuCard>清透材质只作用于这个区域</AuCard>
+</section>
+```
+
+也可以覆盖材质变量，微调透明度、边框和模糊强度。覆盖应放在 `aurora-ui/style.css` 之后：
+
+```css
+.dashboard-shell {
+  --au-material-bg: rgba(255, 255, 255, 0.58);
+  --au-material-bg-strong: rgba(255, 255, 255, 0.76);
+  --au-material-border: rgba(255, 255, 255, 0.64);
+  --au-material-blur: 20px;
+  --au-material-saturation: 140%;
+}
+```
+
+为了保持扁平、克制的视觉层级，组件不会使用高光渐变或内发光；材质定制只改变表面透明度、模糊、饱和度、边框和轻量阴影。
+
+### 材质变量
+
+以下变量可以在根节点或局部容器上覆盖：
+
+| 变量 | 默认值 | 作用 |
+| --- | --- | --- |
+| `--au-material-bg` | `rgba(255, 255, 255, 0.68)` | 普通材质表面 |
+| `--au-material-bg-strong` | `rgba(255, 255, 255, 0.82)` | 弹层和强调表面 |
+| `--au-material-bg-subtle` | `rgba(255, 255, 255, 0.42)` | 次级表面 |
+| `--au-material-border` | `rgba(255, 255, 255, 0.68)` | 材质边框 |
+| `--au-material-border-strong` | `rgba(116, 137, 172, 0.28)` | 强调边框和分隔线 |
+| `--au-material-blur` | `18px` | 背景模糊半径 |
+| `--au-material-saturation` | `145%` | 背景饱和度 |
+| `--au-material-shadow` | 轻量弹层阴影 | 卡片和 Dialog 等大表面 |
+| `--au-material-shadow-soft` | 更轻的结构阴影 | Tooltip、Message 和工具栏 |
 
 ## 颜色变量
 
