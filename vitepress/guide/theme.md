@@ -12,7 +12,7 @@ Aurora UI 使用 CSS 变量提供主题能力，不要求额外的主题运行�
 <html data-au-theme="dark"></html>
 ```
 
-其中 `.dark` 用于兼容 VitePress，`data-theme` 与 Aurora Editor 现有约定一致，`data-au-theme` 适合独立使用 Aurora UI 的项目。
+其中 `.dark` 和 `data-theme` 适合应用级主题切换，`data-au-theme` 可用于独立使用 Aurora UI 的项目或局部容器。
 
 ## 颜色变量
 

@@ -16,18 +16,16 @@ hero:
 features:
   - title: 真实业务沉淀
     details: 组件来自 Aurora Editor 的实际交互，再收敛为不依赖 Electron、Pinia 和业务 Store 的公共 API。
-  - title: 文档即预览
-    details: VitePress 直接挂载真实示例文件，同一份源码同时用于交互预览、完整代码展示和复制。
   - title: 灵活引入
     details: 支持完整插件安装、组件按需导入、命令式反馈服务和 TypeScript 类型声明。
   - title: 主题可定制
-    details: 使用 au- 前缀与 --au-* 设计变量，兼容 data-theme、data-au-theme 和 VitePress 暗色模式。
+    details: 使用 au- 前缀与 --au-* 设计变量，支持 data-theme、data-au-theme 和 dark class 暗色模式。
 ---
 
 <div class="home-intro">
 
 ## 当前版本
 
-Aurora UI `0.1.0` 已包含 9 个组件与 2 个命令式服务。文档包通过开发别名引用 `ui/src/index.js`，修改组件源码后会热更新到文档页面；`ui/` 与 `vitepress/` 各自维护依赖、锁文件和 npm scripts。
+Aurora UI `0.1.0` 已包含 9 个组件与 2 个命令式服务，支持完整安装、按需导入、业务图标注册和 CSS 变量主题定制。
 
 </div>

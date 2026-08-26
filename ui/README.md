@@ -24,13 +24,7 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 
 - Vue `>= 3.3.0`
 
-本地开发依赖：
-
-- Vite `^8.1.5`
-- `@vitejs/plugin-vue` `^6.0.7`
-- Vue `^3.5.40`
-
-依赖由使用者自行安装。
+在业务项目中安装 `aurora-ui` 时，请同时安装满足版本要求的 Vue。
 
 ## 引入
 
@@ -202,20 +196,3 @@ document.documentElement.dataset.theme = 'dark';
 ```
 
 业务项目可以覆盖 `--au-*` CSS 变量定制颜色、圆角、字体、阴影和层级，完整变量见 `src/theme/index.css`。
-
-## 组件库命令
-
-依赖安装：
-
-```powershell
-cd D:\my_project\front-sdk\aurora-ui\ui
-npm install
-```
-
-构建组件库：
-
-```powershell
-npm run build
-```
-
-构建产物输出到当前目录的 `dist/`。命令仅作为手动执行说明，本项目不会自动安装依赖或构建组件库。

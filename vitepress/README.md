@@ -54,3 +54,7 @@ npm install
 | `npm run preview` | 预览构建产物 | `http://127.0.0.1:4174` |
 
 命令仅作为手动执行说明，本项目不会自动启动或构建文档站。
+
+## 文档内容边界
+
+`index.md`、`guide/` 和 `components/` 面向 Aurora UI 使用者，只记录组件库的安装、API、示例和主题等内容，不介绍文档站工具链。VitePress 的依赖、脚本、配置和维护说明统一保留在本 README；修改文档站实现时请只更新这里。
