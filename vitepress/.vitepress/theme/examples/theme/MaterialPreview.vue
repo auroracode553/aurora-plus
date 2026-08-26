@@ -40,9 +40,9 @@
         <div class="material-preview__card-footer">
           <span>按钮组、卡片和文字会同步响应</span>
           <AuButtonGroup variant="floating" icon-only aria-label="面板操作">
-            <AuButton icon="minus" aria-label="收起面板" />
-            <AuButton icon="panel" aria-label="切换视图" />
-            <AuButton icon="code" aria-label="查看源码" />
+            <AuButton :icon="IconMinus" aria-label="收起面板" />
+            <AuButton :icon="IconLayoutSidebar" aria-label="切换视图" />
+            <AuButton :icon="IconCode" aria-label="查看源码" />
           </AuButtonGroup>
         </div>
       </AuCard>
@@ -52,7 +52,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuButton, AuButtonGroup, AuCard } from 'aurora-ui';
+import { AuButton, AuButtonGroup, AuCard, IconCode, IconLayoutSidebar, IconMinus } from 'aurora-ui';
 
 const options = [
   { value: 'soft', label: '柔和', description: '低对比、轻模糊（默认）' },

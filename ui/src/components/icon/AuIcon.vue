@@ -6,25 +6,29 @@
     :aria-label="ariaLabel || undefined"
     role="img"
     v-bind="$attrs"
-    v-html="svgContent"
-  ></span>
+  >
+    <component
+      :is="icon"
+      v-if="icon"
+      :color="color || undefined"
+      :stroke-width="strokeWidth || undefined"
+    />
+  </span>
 </template>
 
 <script setup>
 import { computed } from 'vue';
-import { getIconSource } from './icon-registry.js';
 
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
-  name: { type: String, default: '' },
-  source: { type: String, default: '' },
+  /** Tabler Icons Vue 组件，例如 IconHome、IconSearch。 */
+  icon: { type: [Object, Function], default: null },
   color: { type: String, default: '' },
   size: { type: [String, Number], default: '' },
+  strokeWidth: { type: Number, default: 2 },
   ariaLabel: { type: String, default: '' },
 });
-
-const svgContent = computed(() => props.source || getIconSource(props.name));
 
 const iconStyle = computed(() => {
   const style = {};
@@ -61,7 +65,6 @@ const iconStyle = computed(() => {
   width: 100%;
   height: 100%;
   overflow: visible;
-  fill: currentColor;
 }
 
 .au-icon[aria-label] {

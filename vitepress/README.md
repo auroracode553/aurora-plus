@@ -19,7 +19,31 @@ vitepress/
 
 ## 组件库连接
 
-文档配置将包名 `aurora-ui` 映射到同级 `../ui/src/index.js`，因此实时示例直接使用组件库源码。文档站仍从自己的 `node_modules` 解析 Vue，不与组件库共用依赖目录。
+文档站不直接读取 `../ui/src`，也不在 Vite 配置中硬编码组件库产物路径。`package.json` 使用 `"aurora-ui": "file:../ui"` 声明本地包依赖，`import 'aurora-ui'` 与 `import 'aurora-ui/style.css'` 再由 UI 包自身的 `exports` 映射到 `ui/dist`。
+
+`ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；Tabler 图标通过本地 `aurora-ui` 包的运行时依赖与公共导出使用。本地包链接只建立消费关系，不让文档站读取或编译 UI 源码。
+
+## 联调流程
+
+首次联调前，分别在两个目录手动安装各自依赖。在一个终端启动 UI 库的监听构建：
+
+```powershell
+cd D:\my_project\front-sdk\aurora-ui\ui
+npm install
+npm run dev
+```
+
+`ui` 的 `dev` 脚本执行 `vite build --watch`，持续更新 `ui/dist`。确认产物已生成后，在另一个终端启动文档站：
+
+```powershell
+cd D:\my_project\front-sdk\aurora-ui\vitepress
+npm install
+npm run dev
+```
+
+文档站不会触发 UI 构建；如果 `ui/dist` 不存在，会直接报告组件库入口无法解析。
+
+GitHub Pages 流水线遵循相同顺序：分别执行 `ui` 的依赖安装与正式构建，再安装并构建 VitePress。CI 使用 `npm run build`，不启动本地 watch 进程。
 
 ## 示例机制
 

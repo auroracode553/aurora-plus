@@ -26,7 +26,7 @@
               <AuButton
                 class="au-dialog__close"
                 size="small"
-                icon="close"
+                :icon="IconX"
                 circle
                 :aria-label="closeLabel || '关闭'"
                 @click="close('close-button')"
@@ -47,6 +47,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
+import { IconX } from '@tabler/icons-vue';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButton } from '../button/index.js';
 import { AuTooltip } from '../tooltip/index.js';

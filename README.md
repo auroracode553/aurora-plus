@@ -12,4 +12,4 @@ aurora-ui/
 └─ AGENTS.md   协作与文档边界规则
 ```
 
-组件库的安装、引入方式、图标注册和主题定制说明请查看 [UI README](./ui/README.md)。
+组件库的安装、引入方式、Tabler 图标和主题定制说明请查看 [UI README](./ui/README.md)。

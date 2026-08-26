@@ -29,7 +29,7 @@
               :aria-label="item.label"
               @click="selectItem(item)"
             >
-              <AuIcon class="au-context-menu__tool-icon" :name="item.icon" :color="iconColor" />
+              <AuIcon class="au-context-menu__tool-icon" :icon="item.icon" :color="iconColor" />
             </button>
           </AuTooltip>
         </div>
@@ -46,7 +46,7 @@
             :disabled="item.disabled || selecting"
             @click="selectItem(item)"
           >
-            <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :name="item.icon" />
+            <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
             <span>{{ item.label }}</span>
             <span v-if="item.shortcut" class="au-context-menu__shortcut">{{ item.shortcut }}</span>
           </button>
@@ -61,7 +61,7 @@
           :disabled="resolveSectionItem(section).disabled || selecting"
           @click="selectItem(resolveSectionItem(section))"
         >
-          <AuIcon v-if="resolveSectionItem(section).icon" class="au-context-menu__item-icon" :name="resolveSectionItem(section).icon" />
+          <AuIcon v-if="resolveSectionItem(section).icon" class="au-context-menu__item-icon" :icon="resolveSectionItem(section).icon" />
           <span>{{ resolveSectionItem(section).label }}</span>
           <span v-if="resolveSectionItem(section).shortcut" class="au-context-menu__shortcut">{{ resolveSectionItem(section).shortcut }}</span>
         </button>
@@ -82,9 +82,9 @@
             :disabled="section.disabled"
             @focus="showSubmenu(section.id)"
           >
-            <AuIcon v-if="section.icon" class="au-context-menu__item-icon" :name="section.icon" />
+            <AuIcon v-if="section.icon" class="au-context-menu__item-icon" :icon="section.icon" />
             <span>{{ section.label }}</span>
-            <AuIcon class="au-context-menu__arrow" name="chevron-right" />
+            <AuIcon class="au-context-menu__arrow" :icon="IconChevronRight" />
           </button>
 
           <div
@@ -105,7 +105,7 @@
                 :disabled="item.disabled || selecting"
                 @click="selectItem(item)"
               >
-                <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :name="item.icon" />
+                <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
                 <span>{{ item.label }}</span>
                 <span v-if="item.shortcut" class="au-context-menu__shortcut">{{ item.shortcut }}</span>
               </button>
@@ -121,6 +121,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { IconChevronRight } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 

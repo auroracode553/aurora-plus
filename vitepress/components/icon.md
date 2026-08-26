@@ -1,66 +1,99 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
+import IconGallery from '../.vitepress/theme/components/IconGallery.vue';
 import IconBasic from '../.vitepress/theme/examples/icon/IconBasic.vue';
 import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?demo-source';
 </script>
 
 # Icon 图标
 
-`AuIcon` 渲染内置或已注册的 SVG。组件库内置 `close`、`loading`、`chevron-right`，业务图标由应用显式注册，组件库不会扫描宿主项目目录。
+Aurora UI 使用 [Tabler Icons](https://tabler.io/icons) 作为唯一图标来源。Tabler 为每个图标提供独立的 Vue 组件，支持按需导入、尺寸、颜色和描边宽度调整。图标组件本身保持 SVG 语义，`AuIcon` 只负责统一尺寸、颜色和无障碍外壳。
 
 ## 基础用法
 
+从 `aurora-ui` 导入需要的图标组件即可。图标仍保留独立的 ESM 导出，业务构建工具可以按需裁剪未使用图标：
+
+```vue
+<script setup>
+import { IconHome, IconSearch } from 'aurora-ui';
+</script>
+
+<template>
+  <IconHome />
+  <IconSearch size="20" color="var(--au-color-primary)" />
+</template>
+```
+
 <DemoBlock
-  title="名称、颜色、尺寸与 SVG 源码"
-  description="前三个图标读取注册表，最后一个图标直接使用可信 source。"
+  title="常用图标"
+  description="图标组件可以直接使用，也可以交给 AuIcon 统一控制尺寸、颜色和描边。"
   :source="iconBasicSource"
 >
   <IconBasic />
 </DemoBlock>
 
-## 注册业务图标
+## 图标集合
 
-建议在应用入口集中注册，组件内只使用稳定的图标名称：
+下方目录收录当前安装版本导出的全部 Tabler Vue 图标。可以按英文组件名搜索，点击任一图标即可复制组件名。
 
-```js
-import saveIcon from './assets/save.svg?raw';
-import { registerIcons } from 'aurora-ui';
+<IconGallery />
 
-registerIcons({ save: saveIcon });
+## 在 Aurora 组件中使用
+
+接受图标的 Aurora 组件统一接收 Vue 图标组件本身，而不是字符串名称：
+
+```vue
+<script setup>
+import { AuButton, AuDropdown, IconDownload, IconSettings } from 'aurora-ui';
+
+const menuItems = [
+  { id: 'download', label: '下载', icon: IconDownload },
+  { id: 'settings', label: '设置', icon: IconSettings },
+];
+</script>
+
+<template>
+  <AuButton :icon="IconDownload">下载</AuButton>
+  <AuDropdown :items="menuItems" />
+</template>
 ```
 
-完整安装时也可以通过插件选项注入：
+`AuButton`、`AuDropdown` 和 `AuContextMenu` 的 `icon` 字段都遵循同一约定。这样可以保持按需导入，并且可以直接使用 Tabler 的描边和填充图标变体。
 
-```js
-app.use(AuroraUI, {
-  icons: { save: saveIcon },
-});
+## AuIcon API
+
+`AuIcon` 适合需要统一对齐、尺寸或无障碍属性的场景，也可以包裹任意 Tabler 图标组件：
+
+```vue
+<script setup>
+import { AuIcon, IconHeart } from 'aurora-ui';
+</script>
+
+<template>
+  <AuIcon
+    :icon="IconHeart"
+    size="28"
+    color="#e5484d"
+    :stroke-width="1.5"
+    aria-label="收藏"
+  />
+</template>
 ```
-
-::: warning 安全边界
-`source` 和注册表中的 SVG 会通过 `v-html` 渲染。只允许传入项目内可信的 SVG 源码，不要传入用户输入或未经清洗的远程内容。
-:::
-
-## Icon API
 
 ### Attributes
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `name` | 注册表中的图标名称 | `string` | `''` |
-| `source` | 直接渲染的可信 SVG；优先级高于 `name` | `string` | `''` |
-| `color` | 图标颜色，SVG 通常应使用 `currentColor` | `string` | `''` |
-| `size` | 宽、高及字号；数字会转换为 px | `string / number` | `''` |
-| `ariaLabel` | 图标的无障碍名称；为空时设置 `aria-hidden` | `string` | `''` |
+| `icon` | Tabler Icons Vue 组件 | `Component` | `null` |
+| `color` | 图标颜色，会传递给 Tabler 的 `color` 属性 | `string` | `''` |
+| `size` | 根节点宽高及字号；数字会转换为 px | `string / number` | `''` |
+| `strokeWidth` | Tabler 图标描边宽度 | `number` | `2` |
+| `ariaLabel` | 图标的无障碍名称；为空时设置 `aria-hidden="true"` | `string` | `''` |
 
-其他 HTML 属性会透传到图标根节点 `<span>`。
+其他 HTML 属性会透传到 `.au-icon` 根节点。装饰性图标保持默认的隐藏语义；表达操作含义时请提供 `aria-label`，或在按钮上提供可见文本。
 
-### 图标注册方法
+## 图标变体与查找
 
-| 方法 | 参数 | 说明 |
-| --- | --- | --- |
-| `registerIcons(icons, options?)` | `Record<string, string>`, `{ overwrite?: boolean }` | 批量注册 SVG；`overwrite` 默认为 `true` |
-| `unregisterIcon(name)` | `string` | 删除指定业务图标 |
-| `getIconSource(name)` | `string` | 获取 SVG 字符串；不存在时返回空字符串 |
+Tabler 同时提供描边和填充变体，组件名以 `Icon` 开头，例如 `IconHeart` 与 `IconHeartFilled`。完整图标清单、预览和每个图标的组件名请参阅 [Tabler Icons 图标目录](https://tabler.io/icons)。
 
-带命名空间的名称会自动取最后一段，例如 `mdi:close` 与 `close` 使用同一个注册键。
+组件库不再维护 SVG 字符串注册表，也不接受 `name`、`source` 或运行时注册方法；图标实现由 Aurora UI 集成的 Tabler 运行时依赖统一提供。

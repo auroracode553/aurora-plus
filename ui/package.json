@@ -4,6 +4,7 @@
   "description": "Aurora Vue 3 UI component library",
   "type": "module",
   "scripts": {
+    "dev": "vite build --watch",
     "build": "vite build"
   },
   "main": "./dist/aurora-ui.umd.cjs",
@@ -25,6 +26,9 @@
     "**/*.css",
     "**/*.vue"
   ],
+  "dependencies": {
+    "@tabler/icons-vue": "^3.46.0"
+  },
   "peerDependencies": {
     "vue": ">=3.3.0"
   },

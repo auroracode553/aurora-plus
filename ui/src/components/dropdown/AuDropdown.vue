@@ -50,7 +50,7 @@
                 :disabled="item.disabled || selecting"
                 @click="selectItem(item)"
               >
-                <AuIcon v-if="item.icon" class="au-dropdown__item-icon" :name="item.icon" />
+                <AuIcon v-if="item.icon" class="au-dropdown__item-icon" :icon="item.icon" />
                 <span class="au-dropdown__item-label">{{ resolveItemLabel(item) }}</span>
                 <span v-if="item.shortcut" class="au-dropdown__shortcut">{{ item.shortcut }}</span>
               </button>

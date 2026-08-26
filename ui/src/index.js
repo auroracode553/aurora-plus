@@ -8,7 +8,7 @@ import { AuContextMenu } from './components/context-menu/index.js';
 import { AuDialog } from './components/dialog/index.js';
 import { AuDropdown } from './components/dropdown/index.js';
 import { AuFloatingToolbar } from './components/floating-toolbar/index.js';
-import { AuIcon, getIconSource, registerIcons, unregisterIcon } from './components/icon/index.js';
+import { AuIcon } from './components/icon/index.js';
 import { AuSwitch } from './components/switch/index.js';
 import { AuTooltip } from './components/tooltip/index.js';
 import { AuVirtualList } from './components/virtual-list/index.js';
@@ -42,7 +42,6 @@ export const version = '0.1.0';
 export const AuroraUI = {
   version,
   install(app, options = {}) {
-    if (options.icons) registerIcons(options.icons);
     if (options.material) setAuroraMaterial(options.material);
     components.forEach((component) => app.component(component.componentName, component));
     app.config.globalProperties.$message = AuMessage;
@@ -66,14 +65,14 @@ export {
   AuSwitch,
   AuTooltip,
   AuVirtualList,
-  getIconSource,
-  registerIcons,
-  unregisterIcon,
   AURORA_MATERIALS,
   DEFAULT_AURORA_MATERIAL,
   getAuroraMaterial,
   isAuroraMaterial,
   setAuroraMaterial,
 };
+
+// Aurora UI 统一暴露 Tabler 图标，业务侧无需直接依赖图标包的导入路径。
+export * from '@tabler/icons-vue';
 
 export default AuroraUI;

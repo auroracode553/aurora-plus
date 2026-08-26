@@ -12,7 +12,7 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 | `AuCheckbox` | 布尔值、数组和半选状态复选框 | 通用复选框 |
 | `AuDropdown` | 带视口避让和键盘导航的下拉菜单 | 通用下拉菜单 |
 | `AuCard` | 带玻璃质感的空卡片容器 | 通用卡片 |
-| `AuIcon` | SVG 图标渲染与注册 | `SvgIcon.vue` |
+| `AuIcon` | Tabler 图标组件的尺寸、颜色与无障碍外壳 | `AuIcon.vue` |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 | `XTooltip.vue` |
 | `AuDialog` | 模态对话框壳、焦点和滚动管理 | `BaseDialog.vue` |
 | `AuVirtualList` | 固定行高虚拟列表 | `VirtualScrollList.vue` |
@@ -23,11 +23,16 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 
 ## 依赖
 
-运行时同级依赖：
+运行时依赖：
 
 - Vue `>= 3.3.0`
+- `@tabler/icons-vue` `^3.46.0`（随 Aurora UI 自动安装）
 
-在业务项目中安装 `aurora-ui` 时，请同时安装满足版本要求的 Vue。
+在业务项目中安装 `aurora-ui` 时，请同时安装满足版本要求的 Vue。Tabler 图标属于 Aurora UI 的运行时依赖，无需单独安装：
+
+```bash
+npm install aurora-ui vue
+```
 
 ## 引入
 
@@ -59,28 +64,22 @@ function save() {
 </template>
 ```
 
-## 图标注册
+## 使用 Tabler 图标
 
-`AuIcon` 内置 `close`、`loading`、`chevron-right` 及原组件使用的兼容名称。业务图标由宿主显式注册，UI 库不会扫描宿主源码目录。
+Aurora UI 不再维护字符串图标注册表。Tabler 图标由组件库统一导出，将图标组件本身传给 `AuIcon` 或其他接受图标的 Aurora 组件：
 
-```js
-import boldIcon from './assets/bold.svg?raw';
-import { registerIcons } from 'aurora-ui';
+```vue
+<script setup>
+import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
+</script>
 
-registerIcons({ bold: boldIcon });
+<template>
+  <AuButton :icon="IconBold">加粗</AuButton>
+  <AuIcon :icon="IconHeart" size="24" color="var(--au-color-danger)" aria-label="收藏" />
+</template>
 ```
 
-也可以在完整安装时注入：
-
-```js
-app.use(AuroraUI, {
-  icons: {
-    bold: boldIcon,
-  },
-});
-```
-
-注册内容通过 `v-html` 渲染，只能传入项目内可信 SVG，禁止直接注册用户输入。
+完整图标清单与组件名请参阅 [Icon 图标文档](../vitepress/components/icon.md) 或 [Tabler Icons 目录](https://tabler.io/icons)。
 
 ## 常用示例
 

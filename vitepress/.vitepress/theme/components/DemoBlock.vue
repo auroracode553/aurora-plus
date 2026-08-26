@@ -22,7 +22,7 @@
             :title="copied ? '已复制' : '复制代码'"
             @click="copySource"
           >
-            <AuIcon name="copy" aria-hidden="true" />
+            <IconCopy aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -33,7 +33,7 @@
             :aria-controls="sourceId"
             @click="expanded = !expanded"
           >
-            <AuIcon name="code" aria-hidden="true" />
+            <IconCode aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -65,7 +65,8 @@
 
 <script setup>
 import { computed, onBeforeUnmount, ref } from 'vue';
-import { AuIcon, AuMessage } from 'aurora-ui';
+import { AuMessage, IconCode, IconCopy } from 'aurora-ui';
+import { writeTextToClipboard } from '../utils/clipboard.js';
 
 let demoSeed = 0;
 
@@ -95,7 +96,7 @@ async function copySource() {
   if (!normalizedSource.value) return;
 
   try {
-    await writeToClipboard(normalizedSource.value);
+    await writeTextToClipboard(normalizedSource.value);
     copied.value = true;
     AuMessage.success('代码已复制');
     clearTimeout(copiedTimer);
@@ -106,29 +107,6 @@ async function copySource() {
     copied.value = false;
     AuMessage.error('复制失败，请手动复制');
   }
-}
-
-async function writeToClipboard(text) {
-  if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(text);
-    return;
-  }
-
-  if (typeof document === 'undefined') throw new Error('Clipboard API is unavailable.');
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.setAttribute('readonly', '');
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
-  textarea.select();
-  let copiedSuccessfully = false;
-  try {
-    copiedSuccessfully = document.execCommand('copy');
-  } finally {
-    textarea.remove();
-  }
-  if (!copiedSuccessfully) throw new Error('Copy command failed.');
 }
 
 onBeforeUnmount(() => clearTimeout(copiedTimer));

@@ -19,11 +19,12 @@ export default defineConfig({
     },
     cssCodeSplit: false,
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', '@tabler/icons-vue'],
       output: {
         exports: 'named',
         globals: {
           vue: 'Vue',
+          '@tabler/icons-vue': 'TablerIconsVue',
         },
       },
     },

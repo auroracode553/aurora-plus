@@ -9,6 +9,9 @@
     "build": "vitepress build .",
     "preview": "vitepress preview . --host 127.0.0.1 --port 4174"
   },
+  "dependencies": {
+    "aurora-ui": "file:../ui"
+  },
   "devDependencies": {
     "shiki": "^2.5.0",
     "vitepress": "^1.6.4",

@@ -9,10 +9,10 @@
     @click="handleClick"
   >
     <slot v-if="loading" name="loading">
-      <AuIcon class="au-button__loading-icon" name="loading" />
+      <AuIcon class="au-button__loading-icon" :icon="IconLoader2" />
     </slot>
     <slot v-else name="icon">
-      <AuIcon v-if="icon" class="au-button__icon" :name="icon" />
+      <AuIcon v-if="icon" class="au-button__icon" :icon="icon" />
     </slot>
     <span v-if="$slots.default" class="au-button__content"><slot></slot></span>
   </button>
@@ -20,6 +20,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import { IconLoader2 } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
 
 defineOptions({ inheritAttrs: false });
@@ -40,7 +41,8 @@ const props = defineProps({
     default: 'button',
     validator: (value) => ['button', 'submit', 'reset'].includes(value),
   },
-  icon: { type: String, default: '' },
+  /** Tabler Icons Vue 组件，传入组件本身而不是字符串名称。 */
+  icon: { type: [Object, Function], default: null },
   plain: { type: Boolean, default: false },
   round: { type: Boolean, default: false },
   circle: { type: Boolean, default: false },

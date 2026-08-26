@@ -19,7 +19,7 @@
         aria-label="关闭消息"
         @click="$emit('close', item.id)"
       >
-        <AuIcon name="close" />
+        <AuIcon :icon="IconX" />
       </button>
     </div>
   </TransitionGroup>
@@ -27,6 +27,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import { IconX } from '@tabler/icons-vue';
 import { AuIcon } from '../../components/icon/index.js';
 
 const props = defineProps({

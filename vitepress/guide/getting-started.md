@@ -8,6 +8,8 @@ Aurora UI 是 Vue 3 组件库，运行时需要 Vue `>= 3.3.0`。在业务项目
 npm install aurora-ui vue
 ```
 
+Tabler 图标已经集成到 Aurora UI，无需安装额外图标包。
+
 ## 完整安装
 
 ```js
@@ -38,16 +40,19 @@ function save() {
 </template>
 ```
 
-## 注册业务图标
+## 使用 Tabler 图标
 
-```js
-import boldIcon from './assets/bold.svg?raw';
-import { registerIcons } from 'aurora-ui';
+```vue
+<script setup>
+import { AuButton, IconBold } from 'aurora-ui';
+</script>
 
-registerIcons({ bold: boldIcon });
+<template>
+  <AuButton :icon="IconBold">加粗</AuButton>
+</template>
 ```
 
-注册内容通过 `v-html` 渲染，只应传入项目内可信 SVG，禁止直接注册用户输入。
+图标按需从 `aurora-ui` 导入，完整用法和 `AuIcon` API 见 [Icon 图标](/components/icon)。
 
 ## 玻璃材质
 

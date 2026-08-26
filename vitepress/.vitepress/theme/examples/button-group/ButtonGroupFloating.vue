@@ -18,11 +18,11 @@
 </template>
 
 <script setup>
-import { AuButton, AuButtonGroup } from 'aurora-ui';
+import { AuButton, AuButtonGroup, IconCode, IconLayoutSidebar, IconMinus } from 'aurora-ui';
 
 const panelActions = [
-  { label: '收起面板', icon: 'minus' },
-  { label: '切换视图', icon: 'panel' },
-  { label: '查看源码', icon: 'code' },
+  { label: '收起面板', icon: IconMinus },
+  { label: '切换视图', icon: IconLayoutSidebar },
+  { label: '查看源码', icon: IconCode },
 ];
 </script>

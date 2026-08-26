@@ -1,5 +1,4 @@
 import { env } from 'node:process';
-import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vitepress';
 import { demoSourcePlugin } from './demo-source-plugin.js';
 
@@ -18,15 +17,11 @@ export default defineConfig({
   vite: {
     plugins: [demoSourcePlugin()],
     resolve: {
-      alias: {
-        'aurora-ui': fileURLToPath(new URL('../../ui/src/index.js', import.meta.url)),
-      },
       dedupe: ['vue'],
     },
-    server: {
-      fs: {
-        allow: [fileURLToPath(new URL('../..', import.meta.url))],
-      },
+    optimizeDeps: {
+      // 保持 dist 为可观察源码，UI watch 重建后文档站可以读取最新产物。
+      exclude: ['aurora-ui'],
     },
   },
   themeConfig: {

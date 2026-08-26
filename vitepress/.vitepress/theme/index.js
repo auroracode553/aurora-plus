@@ -1,9 +1,7 @@
 import DefaultTheme from 'vitepress/theme';
-import AuroraUI, { registerIcons } from 'aurora-ui';
-import { docIcons } from './doc-icons.js';
+import AuroraUI from 'aurora-ui';
+import 'aurora-ui/style.css';
 import './custom.css';
-
-registerIcons(docIcons);
 
 export default {
   extends: DefaultTheme,

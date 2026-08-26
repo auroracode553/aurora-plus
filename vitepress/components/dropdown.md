@@ -27,7 +27,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `id` | 菜单项唯一标识 | `string / number` |
 | `label` | 显示文字；也可使用 `text` | `string` |
 | `value` | 业务值，同时作为未设置 command 时的回传值 | `unknown` |
-| `icon` | 已注册的图标名称 | `string` |
+| `icon` | Tabler Icons Vue 图标组件 | `Component` |
 | `shortcut` | 仅展示的快捷键提示 | `string` |
 | `disabled` | 是否禁用 | `boolean` |
 | `danger` | 是否使用危险色 | `boolean` |

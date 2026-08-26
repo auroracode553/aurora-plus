@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="context-menu-demo" @contextmenu.prevent="openMenu">
-      <AuIcon name="menu" size="28" />
+      <AuIcon :icon="IconMenu2" :size="28" />
       <strong>在这里点击右键</strong>
       <span>菜单坐标来自鼠标事件，并自动限制在浏览器视口内</span>
     </div>
@@ -24,16 +24,11 @@ import {
   AuIcon,
   AuMessage,
   AuMessageBox,
-  registerIcons,
+  IconCopy,
+  IconMenu2,
+  IconStar,
+  IconTrash,
 } from 'aurora-ui';
-
-// 示例需要的业务图标由应用显式注册。
-registerIcons({
-  menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 10h8M8 14h5"/></svg>',
-  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
-  star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.1 6.3 6.9 1-5 4.8 1.2 6.9-6.2-3.2L5.8 21 7 14.1 2 9.3l6.9-1Z"/></svg>',
-  trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v6M14 11v6"/></svg>',
-});
 
 const visible = ref(false);
 const position = ref({ x: 0, y: 0 });
@@ -44,8 +39,8 @@ const menuSections = [
     type: 'icon-row',
     ariaLabel: '快捷操作',
     items: [
-      { id: 'copy-link', label: '复制链接', icon: 'copy' },
-      { id: 'favorite', label: '收藏项目', icon: 'star' },
+      { id: 'copy-link', label: '复制链接', icon: IconCopy },
+      { id: 'favorite', label: '收藏项目', icon: IconStar },
     ],
   },
   { id: 'separator-1', type: 'separator' },
@@ -53,8 +48,8 @@ const menuSections = [
     id: 'main-actions',
     type: 'button-group',
     items: [
-      { id: 'copy', label: '复制', icon: 'copy', shortcut: 'Ctrl+C' },
-      { id: 'favorite-menu', label: '收藏', icon: 'star' },
+      { id: 'copy', label: '复制', icon: IconCopy, shortcut: 'Ctrl+C' },
+      { id: 'favorite-menu', label: '收藏', icon: IconStar },
     ],
   },
   {
@@ -75,7 +70,7 @@ const menuSections = [
     item: {
       id: 'delete',
       label: '删除',
-      icon: 'trash',
+      icon: IconTrash,
       danger: true,
       confirmMessage: '确定删除这个示例项目吗？',
     },

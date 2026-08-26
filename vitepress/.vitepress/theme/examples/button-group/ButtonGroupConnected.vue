@@ -16,13 +16,20 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuButtonGroup } from 'aurora-ui';
+import {
+  AuButton,
+  AuButtonGroup,
+  IconAdjustmentsHorizontal,
+  IconBell,
+  IconDots,
+  IconLayoutSidebar,
+} from 'aurora-ui';
 
 const actions = [
-  { key: 'window', label: '窗口', icon: 'panel' },
-  { key: 'preferences', label: '偏好', icon: 'sliders' },
-  { key: 'notifications', label: '提醒', icon: 'bell' },
-  { key: 'more', label: '更多', icon: 'more' },
+  { key: 'window', label: '窗口', icon: IconLayoutSidebar },
+  { key: 'preferences', label: '偏好', icon: IconAdjustmentsHorizontal },
+  { key: 'notifications', label: '提醒', icon: IconBell },
+  { key: 'more', label: '更多', icon: IconDots },
 ];
 
 const selectedAction = ref('window');

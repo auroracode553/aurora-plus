@@ -15,7 +15,7 @@
   >
     <span class="au-switch__track" aria-hidden="true">
       <span class="au-switch__thumb">
-        <AuIcon v-if="loading" class="au-switch__loading" name="loading" />
+        <AuIcon v-if="loading" class="au-switch__loading" :icon="IconLoader2" />
       </span>
     </span>
     <span v-if="hasLabel" class="au-switch__label">
@@ -26,6 +26,7 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
+import { IconLoader2 } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
 
 defineOptions({ inheritAttrs: false });
