@@ -19,7 +19,7 @@
 
 | 项目 | Vue 入口 | 接入状态 | 已有直接用例 |
 | --- | --- | --- | --- |
-| `elctron_typora` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 公共按钮、输入框、Tooltip、Dialog、导航菜单、右键菜单、虚拟列表、浮动工具栏、复选框、Git 下拉菜单、窗口标题栏及反馈服务均已使用库组件 |
+| `elctron_typora` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 公共按钮、输入框、Tooltip、Dialog、导航菜单、分组菜单列表、右键菜单、虚拟列表、浮动工具栏、复选框、Git 下拉菜单、窗口标题栏及反馈服务均已使用库组件 |
 | `electron-st` | `src/renderer/index.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 通用弹窗、提醒按钮、金价开关、短时周期按钮组及反馈服务均已使用库组件 |
 | `translate-pc` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 设置页使用 `AuCard`、`AuSwitch`、`AuButtonGroup`、`AuButton`，全局通知使用 `AuMessage` |
 
@@ -39,7 +39,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 | 表单输入 | `AuInput` |
 | 表单选择 | `AuSwitch`、`AuCheckbox` |
 | 内容容器 | `AuCard`、`AuVirtualList` |
-| 导航 | `AuMenu`、`AuMenuItem` |
+| 导航 | `AuMenu`、`AuMenuItem`、`AuMenuList`、`AuMenuListItem` |
 | 浮层 | `AuTooltip`、`AuDropdown`、`AuContextMenu`、`AuDialog`、`AuFloatingToolbar` |
 | 桌面窗口 | `AuWindowTitleBar` |
 | 反馈服务 | `AuMessage`、`AuMessageBox` |
@@ -59,6 +59,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 | `AuTooltip` | `XTooltip` 公共适配器 | Dialog 关闭按钮内部使用 | — |
 | `AuDropdown` | Git 远程仓库和 Fetch 周期 | — | — |
 | `AuMenu`、`AuMenuItem` | 偏好设置分类导航 | — | — |
+| `AuMenuList`、`AuMenuListItem` | 偏好设置分组面板 | — | — |
 | `AuContextMenu` | 文档右键菜单 | — | — |
 | `AuDialog` | `BaseDialog` 公共适配器 | `BaseModal` 公共适配器 | — |
 | `AuFloatingToolbar` | 图片、音频和白板浮动工具条 | — | — |
@@ -80,6 +81,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 | `commonComponents/SvgIcon.vue` | `AuIcon` 与 Aurora UI 导出的 Tabler 图标 | 本地专用 SVG 可继续由业务适配器承载 |
 | `commonComponents/BaseDialog.vue` | `AuDialog` | 已迁移为薄适配器，业务表单和原 footer 插槽保持不变 |
 | `preference/PreferenceDialog.vue` 左侧导航 | `AuMenu`、`AuMenuItem` | 已迁移；业务侧只保留菜单数据 |
+| `preference/PreferenceDialog.vue` 设置面板 | `AuMenuList`、`AuMenuListItem` | 已迁移；圆角、分隔线、材质与阴影由组件库统一提供 |
 | `outline/OutlinePanel.vue` 搜索框 | `AuInput` | 已迁移；搜索状态和滚轮触发逻辑继续留在业务侧 |
 | `commonComponents/ContextMenu.vue`、`context-menu/DocumentContextMenu.vue` | `AuContextMenu` | 已迁移；适配器负责旧菜单数据和 Tabler 图标映射 |
 | `commonComponents/VirtualScrollList.vue` | `AuVirtualList` | 已迁移并保留滚动方法、事件和作用域插槽 |
@@ -140,7 +142,6 @@ D:\my_project\front-sdk\aurora-ui\ui
 | `AuMenuBar`、`AuSubmenu` | Typora 风格应用菜单和多级导航 | 基于已有 `AuMenu` / `AuMenuItem` 扩展菜单树、快捷键文本、危险态、左右方向键和 Escape 行为 |
 | `AuTabs`、`AuTabPane` | 偏好设置分区、工作区视图切换、详情分区 | 受控选中、延迟内容、键盘导航和溢出处理 |
 | `AuTree`、`AuTreeItem` | Markdown 大纲、目录树 | 展开、选择、键盘导航、自定义节点、虚拟化扩展点 |
-| `AuList`、`AuListItem` | 文件、历史记录、股票、自选项、提醒列表 | 选中、禁用、操作插槽、空状态；排序拖拽保持为可选扩展 |
 | `AuTable` | 股票提醒表格及后续通用数据列表 | 列配置、插槽、空状态、固定表头、横向滚动；排序与虚拟化后续增加 |
 | `AuToolbar` | 应用控制条、编辑器/图片/音频/白板常驻工具条 | 分组、分隔、紧凑图标按钮、`aria-pressed`、横向溢出；与 `AuFloatingToolbar` 共享按钮规范 |
 | `AuTag`、`AuBadge`、`AuStatus` | 引擎状态、股票涨跌、Git 文件状态、版本和提醒状态 | 语义色、圆点/文本、可关闭 Tag、无障碍文本 |
@@ -173,7 +174,7 @@ Aurora UI 只提供这些业务组件内部可复用的按钮、表单、布局�
 
 1. 基于已有 `AuInput`，继续完成 `AuTextarea`、`AuSelect`、`AuInputNumber`、`AuRadioGroup` 和 `AuFormItem`，覆盖三个项目最集中的重复样式。
 2. 完成 `AuPopover` 后，在其上组合 `AuCombobox`，再迁移股票搜索、文件搜索和历史搜索。
-3. 完成 `AuMenuBar`、`AuTabs`、`AuTree`、`AuList` 和 `AuToolbar`，处理桌面工作台的导航与密集操作区。
+3. 完成 `AuMenuBar`、`AuTabs`、`AuTree` 和 `AuToolbar`，处理桌面工作台的导航与密集操作区。
 4. 补齐状态、空态、加载和进度组件，统一异步反馈。
 5. 最后按真实复用需求实现 `AuSplitPane`、`AuImageViewer`、`AuTimeline` 等体量较大的桌面组件。
 
