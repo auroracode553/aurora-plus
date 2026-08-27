@@ -1,6 +1,6 @@
 # Aurora UI
 
-Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本聚焦桌面端与 Web 管理界面常用的基础交互，公共 API 使用 `Au` 前缀，设计方式参考 Element Plus 的“完整安装 + 按需导入 + 命令式服务”。
+Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本聚焦桌面端与 Web 管理界面常用的基础交互，公共 API 使用 `Au` 前缀，支持完整安装、按需导入和命令式服务。
 
 ## 当前组件
 
@@ -12,7 +12,7 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 | `AuCheckbox` | 布尔值、数组和半选状态复选框 | 通用复选框 |
 | `AuDropdown` | 带视口避让和键盘导航的下拉菜单 | 通用下拉菜单 |
 | `AuCard` | 带玻璃质感的空卡片容器 | 通用卡片 |
-| `AuIcon` | Tabler 图标组件的尺寸、颜色与无障碍外壳 | `AuIcon.vue` |
+| `AuIcon` | 图标组件的尺寸、颜色与无障碍外壳 | `AuIcon.vue` |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 | `XTooltip.vue` |
 | `AuDialog` | 模态对话框壳、焦点和滚动管理 | `BaseDialog.vue` |
 | `AuVirtualList` | 固定行高虚拟列表 | `VirtualScrollList.vue` |
@@ -21,17 +21,10 @@ Aurora UI 是从 Aurora Editor 中拆出的 Vue 3 通用组件库。首个版本
 | `AuMessage` | 命令式消息提示 | `toast.js` |
 | `AuMessageBox` | Promise 风格确认框 | `confirm.js` |
 
-## 依赖
-
-运行时依赖：
-
-- Vue `>= 3.3.0`
-- `@tabler/icons-vue` `^3.46.0`（随 Aurora UI 自动安装）
-
-在业务项目中安装 `aurora-ui` 时，请同时安装满足版本要求的 Vue。Tabler 图标属于 Aurora UI 的运行时依赖，无需单独安装：
+## 安装
 
 ```bash
-npm install aurora-ui vue
+npm install aurora-ui
 ```
 
 ## 引入
@@ -64,9 +57,9 @@ function save() {
 </template>
 ```
 
-## 使用 Tabler 图标
+## 使用图标
 
-Aurora UI 不再维护字符串图标注册表。Tabler 图标由组件库统一导出，将图标组件本身传给 `AuIcon` 或其他接受图标的 Aurora 组件：
+从 `aurora-ui` 导入图标组件，并传给 `AuIcon` 或其他接受图标的 Aurora 组件：
 
 ```vue
 <script setup>
@@ -79,7 +72,7 @@ import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
 </template>
 ```
 
-完整图标清单与组件名请参阅 [Icon 图标文档](../vitepress/components/icon.md) 或 [Tabler Icons 目录](https://tabler.io/icons)。
+完整图标清单与组件名请参阅 [Icon 图标文档](../vitepress/components/icon.md)。
 
 ## 常用示例
 

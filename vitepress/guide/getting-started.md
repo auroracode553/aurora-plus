@@ -1,14 +1,10 @@
 # 快速开始
 
-## 环境与依赖
-
-Aurora UI 是 Vue 3 组件库，运行时需要 Vue `>= 3.3.0`。在业务项目中安装组件库及其运行时依赖：
+## 安装
 
 ```bash
-npm install aurora-ui vue
+npm install aurora-ui
 ```
-
-Tabler 图标已经集成到 Aurora UI，无需安装额外图标包。
 
 ## 完整安装
 
@@ -40,7 +36,7 @@ function save() {
 </template>
 ```
 
-## 使用 Tabler 图标
+## 使用图标
 
 ```vue
 <script setup>

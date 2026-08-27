@@ -43,7 +43,7 @@ import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/Co
 | `id` | 业务动作标识，建议必填且唯一 | `string / number` |
 | `label` | 展示文本及图标按钮提示 | `string` |
 | `title` | 原生 title，主要用于普通菜单项 | `string` |
-| `icon` | Tabler Icons Vue 图标组件 | `Component` |
+| `icon` | 图标组件 | `Component` |
 | `shortcut` | 右侧快捷键提示，仅展示、不监听键盘 | `string` |
 | `danger` | 是否使用危险色 | `boolean` |
 | `disabled` | 是否禁用 | `boolean` |

@@ -7,7 +7,7 @@ import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?dem
 
 # Icon 图标
 
-Aurora UI 使用 [Tabler Icons](https://tabler.io/icons) 作为唯一图标来源。Tabler 为每个图标提供独立的 Vue 组件，支持按需导入、尺寸、颜色和描边宽度调整。图标组件本身保持 SVG 语义，`AuIcon` 只负责统一尺寸、颜色和无障碍外壳。
+Aurora UI 提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。`AuIcon` 用于统一图标的尺寸、颜色和无障碍属性。
 
 ## 基础用法
 
@@ -34,7 +34,7 @@ import { IconHome, IconSearch } from 'aurora-ui';
 
 ## 图标集合
 
-下方目录收录当前版本的全部 Tabler Vue 图标。可以按功能分类、样式或英文组件名筛选，点击图标即可复制组件名。
+下方目录收录当前版本的全部图标。可以按功能分类、样式或英文组件名筛选，点击图标即可复制组件名。
 
 <IconGallery />
 
@@ -58,11 +58,11 @@ const menuItems = [
 </template>
 ```
 
-`AuButton`、`AuDropdown` 和 `AuContextMenu` 的 `icon` 字段都遵循同一约定。这样可以保持按需导入，并且可以直接使用 Tabler 的描边和填充图标变体。
+`AuButton`、`AuDropdown` 和 `AuContextMenu` 的 `icon` 字段都遵循同一约定，并支持描边和填充图标变体。
 
 ## AuIcon API
 
-`AuIcon` 适合需要统一对齐、尺寸或无障碍属性的场景，也可以包裹任意 Tabler 图标组件：
+`AuIcon` 适合需要统一对齐、尺寸或无障碍属性的场景：
 
 ```vue
 <script setup>
@@ -84,16 +84,14 @@ import { AuIcon, IconHeart } from 'aurora-ui';
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `icon` | Tabler Icons Vue 组件 | `Component` | `null` |
-| `color` | 图标颜色，会传递给 Tabler 的 `color` 属性 | `string` | `''` |
+| `icon` | 图标组件 | `Component` | `null` |
+| `color` | 图标颜色 | `string` | `''` |
 | `size` | 根节点宽高及字号；数字会转换为 px | `string / number` | `''` |
-| `strokeWidth` | Tabler 图标描边宽度 | `number` | `2` |
+| `strokeWidth` | 图标描边宽度 | `number` | `2` |
 | `ariaLabel` | 图标的无障碍名称；为空时设置 `aria-hidden="true"` | `string` | `''` |
 
 其他 HTML 属性会透传到 `.au-icon` 根节点。装饰性图标保持默认的隐藏语义；表达操作含义时请提供 `aria-label`，或在按钮上提供可见文本。
 
 ## 图标变体与查找
 
-Tabler 同时提供描边和填充变体，组件名以 `Icon` 开头，例如 `IconHeart` 与 `IconHeartFilled`。完整图标清单、预览和每个图标的组件名请参阅 [Tabler Icons 图标目录](https://tabler.io/icons)。
-
-组件库不再维护 SVG 字符串注册表，也不接受 `name`、`source` 或运行时注册方法；图标实现由 Aurora UI 集成的 Tabler 运行时依赖统一提供。
+图标组件名以 `Icon` 开头，例如 `IconHeart` 与 `IconHeartFilled`。完整图标清单、预览和组件名可在本页的图标集合中查看。

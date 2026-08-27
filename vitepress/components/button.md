@@ -37,7 +37,7 @@ import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.v
 | `type` | 视觉类型 | `string` | `default / primary / success / info / warning / danger` | `default` |
 | `size` | 按钮尺寸 | `string` | `small / default / large` | `default` |
 | `nativeType` | 原生 `button` 的 `type` | `string` | `button / submit / reset` | `button` |
-| `icon` | Tabler Icons Vue 图标组件 | `Component` | — | `null` |
+| `icon` | 图标组件 | `Component` | — | `null` |
 | `plain` | 是否使用朴素样式 | `boolean` | — | `false` |
 | `round` | 是否使用胶囊圆角 | `boolean` | — | `false` |
 | `circle` | 是否为圆形图标按钮 | `boolean` | — | `false` |
