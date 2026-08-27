@@ -26,7 +26,6 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 - 默认表面透明，菜单所在的侧栏或容器负责背景与边界。
 - 纵向菜单使用 `ArrowUp`、`ArrowDown`，横向菜单使用 `ArrowLeft`、`ArrowRight`；`Home`、`End` 定位首尾项，Enter 和 Space 选择当前项。
 - 折叠菜单应为每个菜单项提供 `label`，组件会将它保留为无障碍名称与鼠标提示。
-- 业务尺寸与颜色优先通过组件 CSS 变量局部覆盖，不需要穿透修改内部 DOM。
 
 ## AuMenu API
 
@@ -85,22 +84,3 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | `default` | — | 菜单项文字 |
 | `icon` | `{ active, disabled }` | 自定义图标 |
 | `suffix` | `{ active, disabled }` | 徽标、数量或快捷提示等尾部内容 |
-
-## CSS 变量
-
-| 变量 | 默认值 | 说明 |
-| --- | --- | --- |
-| `--au-menu-padding` | `4px` | 菜单内边距 |
-| `--au-menu-gap` | `2px` | 菜单项间距 |
-| `--au-menu-collapse-width` | `48px` | 折叠宽度 |
-| `--au-menu-item-min-height` | `36px` | 菜单项最小高度 |
-| `--au-menu-item-padding-block` | `7px` | 菜单项纵向内边距 |
-| `--au-menu-item-padding-inline` | `12px` | 菜单项横向内边距 |
-| `--au-menu-item-gap` | `10px` | 图标与文字间距 |
-| `--au-menu-item-radius` | `var(--au-border-radius-base)` | 菜单项圆角 |
-| `--au-menu-item-color` | `var(--au-color-text-regular)` | 默认文字颜色 |
-| `--au-menu-item-hover-color` | `var(--au-color-text-primary)` | 悬停文字颜色 |
-| `--au-menu-item-hover-bg` | 主题状态色 | 悬停背景 |
-| `--au-menu-item-active-color` | `var(--au-color-primary)` | 选中文字颜色 |
-| `--au-menu-item-active-bg` | 主题状态色 | 选中背景 |
-| `--au-menu-item-pressed-bg` | 主题状态色 | 按下背景 |

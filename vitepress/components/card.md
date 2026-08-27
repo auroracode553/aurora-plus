@@ -17,5 +17,3 @@ import cardBasicSource from '../.vitepress/theme/examples/card/CardBasic.vue?dem
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 卡片内容 |
-
-可通过 `--au-card-padding` 和 `--au-card-border-radius` 调整内边距与圆角。

@@ -49,7 +49,6 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 - 表示互斥选中状态时，为当前按钮设置 `aria-pressed="true"`；仅执行一次动作的按钮不需要持久选中状态。
 - 没有可见文字时，为按钮组提供 `aria-label`，并为每个图标按钮单独提供 `aria-label`。
 - `icon-only` 只应用于纯图标按钮；包含文字的按钮应保留默认尺寸。
-- 可通过 `--au-button-group-control-size` 覆盖紧凑按钮尺寸，默认值为 `28px`。
 
 ## ButtonGroup API
 

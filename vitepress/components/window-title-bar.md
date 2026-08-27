@@ -72,21 +72,3 @@ import windowTitleBarBasicSource from '../.vitepress/theme/examples/window-title
 | `maximize-icon` | 自定义最大化图标 | — |
 | `restore-icon` | 自定义还原图标 | — |
 | `close-icon` | 自定义关闭图标 | — |
-
-### CSS Variables
-
-| 变量 | 说明 | 默认值 |
-| --- | --- | --- |
-| `--au-window-title-bar-height` | 标题栏高度 | `32px` |
-| `--au-window-title-bar-z-index` | 标题栏层级 | `10001` |
-| `--au-window-title-bar-bg` | 标题栏背景 | `--au-color-bg-overlay` |
-| `--au-window-title-bar-border-color` | 底部分隔线颜色 | `--au-color-border` |
-| `--au-window-title-bar-text-color` | 标题与按钮颜色 | `--au-color-text-primary` |
-| `--au-window-title-bar-hover-bg` | 普通控制按钮悬停背景 | `--au-color-bg-hover` |
-| `--au-window-title-bar-close-hover-bg` | 关闭按钮悬停背景 | `#e81123` |
-| `--au-window-title-bar-close-hover-color` | 关闭按钮悬停文字颜色 | `#ffffff` |
-| `--au-window-title-bar-icon-area-width` | 应用图标区域宽度 | `32px` |
-| `--au-window-title-bar-icon-size` | 应用图标尺寸 | `18px` |
-| `--au-window-title-bar-font-size` | 标题字号 | `13px` |
-| `--au-window-title-bar-control-width` | 单个控制按钮宽度 | `40px` |
-| `--au-window-title-bar-control-icon-size` | 控制按钮图标尺寸 | `12px` |
