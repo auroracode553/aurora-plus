@@ -81,6 +81,7 @@ export default defineConfig({
           { text: 'Switch 开关', link: '/components/switch' },
           { text: 'Checkbox 多选框', link: '/components/checkbox' },
           { text: 'Dropdown 下拉菜单', link: '/components/dropdown' },
+          { text: 'Menu 导航菜单', link: '/components/menu' },
           { text: 'Icon 图标', link: '/components/icon' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
         ],

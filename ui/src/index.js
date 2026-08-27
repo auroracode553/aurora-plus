@@ -9,6 +9,7 @@ import { AuDialog } from './components/dialog/index.js';
 import { AuDropdown } from './components/dropdown/index.js';
 import { AuFloatingToolbar } from './components/floating-toolbar/index.js';
 import { AuIcon } from './components/icon/index.js';
+import { AuMenu, AuMenuItem } from './components/menu/index.js';
 import { AuSwitch } from './components/switch/index.js';
 import { AuTooltip } from './components/tooltip/index.js';
 import { AuVirtualList } from './components/virtual-list/index.js';
@@ -33,6 +34,8 @@ const components = [
   AuDropdown,
   AuFloatingToolbar,
   AuIcon,
+  AuMenu,
+  AuMenuItem,
   AuSwitch,
   AuTooltip,
   AuVirtualList,
@@ -62,6 +65,8 @@ export {
   AuDropdown,
   AuFloatingToolbar,
   AuIcon,
+  AuMenu,
+  AuMenuItem,
   AuMessage,
   AuMessageBox,
   AuSwitch,
