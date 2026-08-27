@@ -310,7 +310,11 @@ defineExpose({ close, menuRef, updatePosition });
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-subtle);
   cursor: pointer;
-  transition: var(--au-transition-control);
+  transition:
+    color var(--au-transition-duration) var(--au-transition-ease),
+    background var(--au-transition-duration) var(--au-transition-ease),
+    border-color var(--au-transition-duration) var(--au-transition-ease),
+    transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-context-menu__tool-button:hover:not(:disabled),

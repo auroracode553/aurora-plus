@@ -139,12 +139,9 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 
 <style scoped>
 .au-virtual-list {
-  --au-virtual-list-padding-block: 4px;
-  --au-virtual-list-padding-inline: 6px;
-
   position: relative;
   min-height: 0;
-  padding: var(--au-virtual-list-padding-block) var(--au-virtual-list-padding-inline);
+  padding: 4px 6px;
   overflow: auto;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-border-radius-base);
@@ -152,7 +149,7 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   background: transparent;
   scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
   scrollbar-width: thin;
-  scroll-padding-block: var(--au-virtual-list-padding-block);
+  scroll-padding-block: 4px;
   contain: strict;
 }
 

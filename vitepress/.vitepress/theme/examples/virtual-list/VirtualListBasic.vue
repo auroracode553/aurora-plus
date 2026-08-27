@@ -118,8 +118,6 @@ function scrollToMiddle() {
 
 .virtual-list-demo {
   height: 330px;
-  --au-virtual-list-padding-block: 6px;
-  --au-virtual-list-padding-inline: 8px;
   border: 1px solid var(--au-color-border-lighter);
   border-radius: 8px;
   background: transparent;

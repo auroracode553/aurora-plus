@@ -6,9 +6,9 @@
 
 <style scoped>
 .au-card {
-  padding: var(--au-card-padding, 24px);
+  padding: 24px;
   border: 1px solid var(--au-material-border);
-  border-radius: var(--au-card-border-radius, 16px);
+  border-radius: 16px;
   color: var(--au-color-text-primary);
 }
 

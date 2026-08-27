@@ -231,7 +231,7 @@ defineExpose({ hide, show, updatePosition });
   width: 8px;
   height: 8px;
   border: 1px solid var(--au-material-border-strong);
-  background: var(--au-surface-background);
+  background: var(--au-material-bg-strong);
   transform: rotate(45deg);
 }
 
@@ -261,6 +261,12 @@ defineExpose({ hide, show, updatePosition });
   border-top-color: transparent;
   border-right-color: transparent;
   transform: translateY(-50%) rotate(45deg);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-tooltip__arrow {
+    background: var(--au-color-bg-overlay);
+  }
 }
 
 .au-tooltip-fade-enter-from,

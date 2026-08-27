@@ -35,10 +35,7 @@ function toggleMaximize() {
   overflow: hidden;
   border: 1px solid var(--au-color-border-light);
   border-radius: var(--au-border-radius-base);
-}
-
-.window-title-bar-demo__bar {
-  --au-window-title-bar-z-index: 1;
+  isolation: isolate;
 }
 
 .window-title-bar-demo__status {

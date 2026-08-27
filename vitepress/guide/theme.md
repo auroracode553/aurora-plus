@@ -139,8 +139,6 @@ console.log(getAuroraMaterial()); // soft
 | `--au-font-size-small` | `12px` | 小号文字 |
 | `--au-font-size-base` | `14px` | 正文与控件文字 |
 | `--au-font-size-large` | `16px` | 大号控件文字 |
-| `--au-virtual-list-padding-block` | `4px` | VirtualList 上下内边距 |
-| `--au-virtual-list-padding-inline` | `6px` | VirtualList 左右内边距 |
 | `--au-shadow-control` | 控件阴影 | Button、Checkbox、Switch |
 | `--au-shadow-surface` | 表面阴影 | Card、VirtualList、ButtonGroup |
 | `--au-shadow-overlay` | 浮层阴影 | Message、Tooltip、菜单、工具条和 Dialog |

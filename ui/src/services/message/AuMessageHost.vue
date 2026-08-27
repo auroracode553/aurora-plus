@@ -119,7 +119,11 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   cursor: pointer;
   flex: none;
   border-radius: 7px;
-  transition: var(--au-transition-control);
+  transition:
+    color var(--au-transition-duration) var(--au-transition-ease),
+    background var(--au-transition-duration) var(--au-transition-ease),
+    border-color var(--au-transition-duration) var(--au-transition-ease),
+    transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-message__close:hover {

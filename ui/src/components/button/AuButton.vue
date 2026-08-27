@@ -72,15 +72,6 @@ function handleClick(event) {
 
 <style scoped>
 .au-button {
-  --au-button-bg: var(--au-material-bg);
-  --au-button-border: var(--au-material-border-strong);
-  --au-button-text: var(--au-color-text-regular);
-  --au-button-hover-bg: var(--au-button-default-hover-bg);
-  --au-button-hover-border: var(--au-button-default-hover-border);
-  --au-button-hover-text: var(--au-button-default-hover-text);
-  --au-button-active-bg: var(--au-button-default-active-bg);
-  --au-button-active-border: var(--au-button-default-active-border);
-  --au-button-active-text: var(--au-button-default-active-text);
   --au-focus-ring-offset: 3px;
 
   position: relative;
@@ -92,10 +83,10 @@ function handleClick(event) {
   margin: 0;
   padding: 8px 15px;
   overflow: hidden;
-  border: 1px solid var(--au-button-border);
+  border: 1px solid var(--au-material-border-strong);
   border-radius: var(--au-border-radius-base);
-  color: var(--au-button-text);
-  background: var(--au-button-bg);
+  color: var(--au-color-text-regular);
+  background: var(--au-material-bg);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1;
@@ -114,17 +105,17 @@ function handleClick(event) {
 }
 
 .au-button:hover:not(.is-disabled) {
-  border-color: var(--au-button-hover-border);
-  color: var(--au-button-hover-text);
-  background: var(--au-button-hover-bg);
-  --au-depth-shadow: var(--au-shadow-surface);
+  border-color: color-mix(in srgb, var(--au-color-primary) 42%, transparent);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-material-bg));
+  box-shadow: var(--au-shadow-surface);
 }
 
 .au-button:active:not(.is-disabled) {
-  border-color: var(--au-button-active-border);
-  color: var(--au-button-active-text);
-  background: var(--au-button-active-bg);
-  --au-depth-shadow: var(--au-shadow-control);
+  border-color: color-mix(in srgb, var(--au-color-primary) 58%, transparent);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 14%, var(--au-material-bg));
+  box-shadow: var(--au-shadow-control);
   transform: scale(0.97);
 }
 
@@ -173,75 +164,143 @@ function handleClick(event) {
 }
 
 .au-button--primary {
-  --au-button-bg: color-mix(in srgb, var(--au-color-primary) 92%, #ffffff);
-  --au-button-border: color-mix(in srgb, var(--au-color-primary) 78%, #ffffff);
-  --au-button-text: #ffffff;
-  --au-button-hover-bg: color-mix(in srgb, var(--au-color-primary) 82%, #ffffff);
-  --au-button-hover-border: var(--au-color-primary);
-  --au-button-hover-text: #ffffff;
-  --au-button-active-bg: color-mix(in srgb, var(--au-color-primary) 100%, #102f72);
-  --au-button-active-border: var(--au-color-primary);
-  --au-button-active-text: #ffffff;
+  border-color: color-mix(in srgb, var(--au-color-primary) 78%, #ffffff);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-primary) 92%, #ffffff);
 }
 
 .au-button--success {
-  --au-button-bg: color-mix(in srgb, var(--au-color-success) 92%, #ffffff);
-  --au-button-border: color-mix(in srgb, var(--au-color-success) 78%, #ffffff);
-  --au-button-text: #ffffff;
-  --au-button-hover-bg: color-mix(in srgb, var(--au-color-success) 82%, #ffffff);
-  --au-button-hover-border: var(--au-color-success);
-  --au-button-hover-text: #ffffff;
-  --au-button-active-bg: color-mix(in srgb, var(--au-color-success) 100%, #15573e);
-  --au-button-active-border: var(--au-color-success);
-  --au-button-active-text: #ffffff;
+  border-color: color-mix(in srgb, var(--au-color-success) 78%, #ffffff);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-success) 92%, #ffffff);
 }
 
 .au-button--info {
-  --au-button-bg: color-mix(in srgb, var(--au-color-info) 92%, #ffffff);
-  --au-button-border: color-mix(in srgb, var(--au-color-info) 78%, #ffffff);
-  --au-button-text: #ffffff;
-  --au-button-hover-bg: color-mix(in srgb, var(--au-color-info) 82%, #ffffff);
-  --au-button-hover-border: var(--au-color-info);
-  --au-button-hover-text: #ffffff;
-  --au-button-active-bg: color-mix(in srgb, var(--au-color-info) 100%, #3d4657);
-  --au-button-active-border: var(--au-color-info);
-  --au-button-active-text: #ffffff;
+  border-color: color-mix(in srgb, var(--au-color-info) 78%, #ffffff);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-info) 92%, #ffffff);
 }
 
 .au-button--warning {
-  --au-button-bg: color-mix(in srgb, var(--au-color-warning) 92%, #ffffff);
-  --au-button-border: color-mix(in srgb, var(--au-color-warning) 78%, #ffffff);
-  --au-button-text: #ffffff;
-  --au-button-hover-bg: color-mix(in srgb, var(--au-color-warning) 82%, #ffffff);
-  --au-button-hover-border: var(--au-color-warning);
-  --au-button-hover-text: #ffffff;
-  --au-button-active-bg: color-mix(in srgb, var(--au-color-warning) 100%, #754815);
-  --au-button-active-border: var(--au-color-warning);
-  --au-button-active-text: #ffffff;
+  border-color: color-mix(in srgb, var(--au-color-warning) 78%, #ffffff);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-warning) 92%, #ffffff);
 }
 
 .au-button--danger {
-  --au-button-bg: color-mix(in srgb, var(--au-color-danger) 92%, #ffffff);
-  --au-button-border: color-mix(in srgb, var(--au-color-danger) 78%, #ffffff);
-  --au-button-text: #ffffff;
-  --au-button-hover-bg: color-mix(in srgb, var(--au-color-danger) 82%, #ffffff);
-  --au-button-hover-border: var(--au-color-danger);
-  --au-button-hover-text: #ffffff;
-  --au-button-active-bg: color-mix(in srgb, var(--au-color-danger) 100%, #7e1e32);
-  --au-button-active-border: var(--au-color-danger);
-  --au-button-active-text: #ffffff;
+  border-color: color-mix(in srgb, var(--au-color-danger) 78%, #ffffff);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-danger) 92%, #ffffff);
 }
 
-.au-button--primary.is-plain,
-.au-button--success.is-plain,
-.au-button--info.is-plain,
-.au-button--warning.is-plain,
+.au-button--primary:hover:not(.is-disabled) {
+  border-color: var(--au-color-primary);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-primary) 82%, #ffffff);
+}
+
+.au-button--success:hover:not(.is-disabled) {
+  border-color: var(--au-color-success);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-success) 82%, #ffffff);
+}
+
+.au-button--info:hover:not(.is-disabled) {
+  border-color: var(--au-color-info);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-info) 82%, #ffffff);
+}
+
+.au-button--warning:hover:not(.is-disabled) {
+  border-color: var(--au-color-warning);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-warning) 82%, #ffffff);
+}
+
+.au-button--danger:hover:not(.is-disabled) {
+  border-color: var(--au-color-danger);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-danger) 82%, #ffffff);
+}
+
+.au-button--primary:active:not(.is-disabled) {
+  border-color: var(--au-color-primary);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-primary) 100%, #102f72);
+}
+
+.au-button--success:active:not(.is-disabled) {
+  border-color: var(--au-color-success);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-success) 100%, #15573e);
+}
+
+.au-button--info:active:not(.is-disabled) {
+  border-color: var(--au-color-info);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-info) 100%, #3d4657);
+}
+
+.au-button--warning:active:not(.is-disabled) {
+  border-color: var(--au-color-warning);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-warning) 100%, #754815);
+}
+
+.au-button--danger:active:not(.is-disabled) {
+  border-color: var(--au-color-danger);
+  color: #ffffff;
+  background: color-mix(in srgb, var(--au-color-danger) 100%, #7e1e32);
+}
+
+.au-button--primary.is-plain {
+  border-color: var(--au-color-primary);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-bg));
+}
+
+.au-button--success.is-plain {
+  border-color: var(--au-color-success);
+  color: var(--au-color-success);
+  background: color-mix(in srgb, var(--au-color-success) 12%, var(--au-material-bg));
+}
+
+.au-button--info.is-plain {
+  border-color: var(--au-color-info);
+  color: var(--au-color-info);
+  background: color-mix(in srgb, var(--au-color-info) 12%, var(--au-material-bg));
+}
+
+.au-button--warning.is-plain {
+  border-color: var(--au-color-warning);
+  color: var(--au-color-warning);
+  background: color-mix(in srgb, var(--au-color-warning) 12%, var(--au-material-bg));
+}
+
 .au-button--danger.is-plain {
-  --au-button-bg: color-mix(in srgb, var(--au-button-border) 12%, var(--au-material-bg));
-  --au-button-text: var(--au-button-border);
-  --au-button-hover-bg: var(--au-button-border);
-  --au-button-hover-text: #ffffff;
-  --au-button-active-text: #ffffff;
+  border-color: var(--au-color-danger);
+  color: var(--au-color-danger);
+  background: color-mix(in srgb, var(--au-color-danger) 12%, var(--au-material-bg));
+}
+
+.au-button--primary.is-plain:hover:not(.is-disabled) {
+  background: var(--au-color-primary);
+}
+
+.au-button--success.is-plain:hover:not(.is-disabled) {
+  background: var(--au-color-success);
+}
+
+.au-button--info.is-plain:hover:not(.is-disabled) {
+  background: var(--au-color-info);
+}
+
+.au-button--warning.is-plain:hover:not(.is-disabled) {
+  background: var(--au-color-warning);
+}
+
+.au-button--danger.is-plain:hover:not(.is-disabled) {
+  background: var(--au-color-danger);
 }
 
 </style>

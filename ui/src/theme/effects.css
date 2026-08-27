@@ -3,14 +3,6 @@
   --au-focus-ring-color: color-mix(in srgb, var(--au-color-primary) 52%, transparent);
   --au-focus-ring-width: 2px;
   --au-focus-ring-offset: 2px;
-  --au-transition-popover:
-    opacity var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
-  --au-transition-control:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-component,
@@ -33,19 +25,15 @@
 }
 
 .au-material-surface {
-  --au-surface-background: var(--au-material-bg-strong);
-
-  background: var(--au-surface-background);
+  background: var(--au-material-bg-strong);
 }
 
 .au-material-surface--base {
-  --au-surface-background: var(--au-material-bg);
+  background: var(--au-material-bg);
 }
 
 .au-depth-control {
-  --au-depth-shadow: var(--au-shadow-control);
-
-  box-shadow: var(--au-depth-shadow);
+  box-shadow: var(--au-shadow-control);
 }
 
 .au-depth-surface {
@@ -66,7 +54,9 @@
 }
 
 .au-motion-popover {
-  transition: var(--au-transition-popover);
+  transition:
+    opacity var(--au-transition-duration) var(--au-transition-ease),
+    transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-menu-surface {
@@ -122,7 +112,7 @@
 
 .au-component.au-disabled {
   cursor: not-allowed;
-  opacity: var(--au-disabled-opacity, 0.48);
+  opacity: 0.48;
 }
 
 .au-wrap-anywhere {
@@ -151,7 +141,7 @@
 
 @media (prefers-reduced-transparency: reduce) {
   .au-material-surface {
-    --au-surface-background: var(--au-color-bg-overlay);
+    background: var(--au-color-bg-overlay);
   }
 
   .au-material-surface,

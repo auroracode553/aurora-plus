@@ -26,24 +26,14 @@
   --au-color-border-light: rgba(105, 123, 154, 0.2);
   --au-color-border-lighter: rgba(105, 123, 154, 0.13);
 
-  --au-button-default-hover-bg: rgba(255, 255, 255, 0.72);
-  --au-button-default-hover-border: rgba(52, 120, 246, 0.42);
-  --au-button-default-hover-text: #245fc7;
-  --au-button-default-active-bg: rgba(229, 237, 253, 0.86);
-  --au-button-default-active-border: rgba(52, 120, 246, 0.58);
-  --au-button-default-active-text: #245fc7;
-
   /* Glass material tokens: inherited by every component and locally overridable. */
   --au-material-bg: rgba(255, 255, 255, 0.68);
   --au-material-bg-strong: rgba(255, 255, 255, 0.82);
   --au-material-bg-subtle: rgba(255, 255, 255, 0.42);
   --au-material-border: rgba(255, 255, 255, 0.68);
   --au-material-border-strong: rgba(116, 137, 172, 0.28);
-  /* Highlight layers are intentionally disabled; surfaces stay flat and calm. */
-  --au-material-highlight: transparent;
   --au-material-blur: 18px;
   --au-material-saturation: 145%;
-  --au-material-inset: none;
 
   --au-border-radius-small: 4px;
   --au-border-radius-base: 6px;
@@ -70,7 +60,6 @@
   --au-material-bg-subtle: rgba(255, 255, 255, 0.5);
   --au-material-border: rgba(255, 255, 255, 0.76);
   --au-material-border-strong: rgba(116, 137, 172, 0.22);
-  --au-material-highlight: transparent;
   --au-material-blur: 16px;
   --au-material-saturation: 128%;
 }
@@ -83,7 +72,6 @@
   --au-material-bg-subtle: rgba(255, 255, 255, 0.28);
   --au-material-border: rgba(255, 255, 255, 0.78);
   --au-material-border-strong: rgba(105, 123, 154, 0.34);
-  --au-material-highlight: transparent;
   --au-material-blur: 28px;
   --au-material-saturation: 178%;
 }
@@ -96,7 +84,6 @@
   --au-material-bg-subtle: #f5f7fb;
   --au-material-border: var(--au-color-border-light);
   --au-material-border-strong: var(--au-color-border);
-  --au-material-highlight: transparent;
   --au-material-blur: 0px;
   --au-material-saturation: 100%;
 }
@@ -125,18 +112,11 @@
   --au-color-border: rgba(182, 201, 230, 0.3);
   --au-color-border-light: rgba(182, 201, 230, 0.2);
   --au-color-border-lighter: rgba(182, 201, 230, 0.13);
-  --au-button-default-hover-bg: rgba(255, 255, 255, 0.1);
-  --au-button-default-hover-border: rgba(112, 164, 255, 0.54);
-  --au-button-default-hover-text: #a9c6ff;
-  --au-button-default-active-bg: rgba(112, 164, 255, 0.2);
-  --au-button-default-active-border: rgba(112, 164, 255, 0.72);
-  --au-button-default-active-text: #c2d7ff;
   --au-material-bg: rgba(32, 43, 61, 0.7);
   --au-material-bg-strong: rgba(34, 47, 67, 0.86);
   --au-material-bg-subtle: rgba(34, 47, 67, 0.46);
   --au-material-border: rgba(255, 255, 255, 0.18);
   --au-material-border-strong: rgba(182, 201, 230, 0.28);
-  --au-material-highlight: transparent;
   --au-material-blur: 18px;
   --au-material-saturation: 145%;
 }

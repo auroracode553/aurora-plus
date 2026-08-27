@@ -102,18 +102,18 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: var(--au-menu-item-min-height);
+  min-height: 36px;
   margin: 0;
-  padding: var(--au-menu-item-padding-block) var(--au-menu-item-padding-inline);
-  gap: var(--au-menu-item-gap);
+  padding: 7px 12px;
+  gap: 10px;
   overflow: hidden;
   border: 0;
-  border-radius: var(--au-menu-item-radius);
-  color: var(--au-menu-item-color);
+  border-radius: var(--au-border-radius-base);
+  color: var(--au-color-text-regular);
   background: transparent;
   font: inherit;
-  font-size: var(--au-menu-item-font-size);
-  font-weight: var(--au-menu-item-font-weight);
+  font-size: var(--au-font-size-base);
+  font-weight: var(--au-font-weight-medium);
   line-height: 1.35;
   text-align: left;
   white-space: nowrap;
@@ -127,19 +127,19 @@ onBeforeUnmount(() => {
 
 .au-menu-item__content:hover:not(:disabled),
 .au-menu-item__content:focus-visible {
-  color: var(--au-menu-item-hover-color);
-  background: var(--au-menu-item-hover-bg);
+  color: var(--au-color-text-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 8%, transparent);
 }
 
 .au-menu-item__content.is-active,
 .au-menu-item__content.is-active:hover,
 .au-menu-item__content.is-active:focus-visible {
-  color: var(--au-menu-item-active-color);
-  background: var(--au-menu-item-active-bg);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
 }
 
 .au-menu-item__content:active:not(:disabled) {
-  background: var(--au-menu-item-pressed-bg);
+  background: color-mix(in srgb, var(--au-color-primary) 26%, transparent);
 }
 
 .au-menu-item__content:focus-visible {
@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
 
 .au-menu-item__content:disabled {
   cursor: not-allowed;
-  opacity: var(--au-menu-item-disabled-opacity);
+  opacity: 0.48;
 }
 
 .au-menu-item__icon {
@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
   height: 1em;
   flex: none;
   color: currentColor;
-  font-size: var(--au-menu-item-icon-size);
+  font-size: 18px;
 }
 
 .au-menu-item__icon :deep(svg) {

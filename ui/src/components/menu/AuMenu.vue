@@ -186,33 +186,14 @@ defineExpose({ focus, menuRef });
 
 <style scoped>
 .au-menu {
-  --au-menu-padding: 4px;
-  --au-menu-gap: 2px;
-  --au-menu-collapse-width: 48px;
-  --au-menu-item-min-height: 36px;
-  --au-menu-item-padding-block: 7px;
-  --au-menu-item-padding-inline: 12px;
-  --au-menu-item-gap: 10px;
-  --au-menu-item-radius: var(--au-border-radius-base);
-  --au-menu-item-font-size: var(--au-font-size-base);
-  --au-menu-item-font-weight: var(--au-font-weight-medium);
-  --au-menu-item-icon-size: 18px;
-  --au-menu-item-color: var(--au-color-text-regular);
-  --au-menu-item-hover-color: var(--au-color-text-primary);
-  --au-menu-item-hover-bg: color-mix(in srgb, var(--au-color-primary) 8%, transparent);
-  --au-menu-item-active-color: var(--au-color-primary);
-  --au-menu-item-active-bg: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
-  --au-menu-item-pressed-bg: color-mix(in srgb, var(--au-menu-item-active-bg) 84%, var(--au-menu-item-active-color));
-  --au-menu-item-disabled-opacity: 0.48;
-
   display: flex;
   min-width: 0;
   margin: 0;
-  padding: var(--au-menu-padding);
-  gap: var(--au-menu-gap);
-  color: var(--au-menu-item-color);
+  padding: 4px;
+  gap: 2px;
+  color: var(--au-color-text-regular);
   background: transparent;
-  font-size: var(--au-menu-item-font-size);
+  font-size: var(--au-font-size-base);
   list-style: none;
 }
 
@@ -230,7 +211,7 @@ defineExpose({ focus, menuRef });
 }
 
 .au-menu.is-collapsed.is-vertical {
-  width: var(--au-menu-collapse-width);
+  width: 48px;
 }
 
 .au-menu.is-disabled {

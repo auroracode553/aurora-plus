@@ -217,7 +217,7 @@ defineExpose({ close, dialogRef });
   border: 1px solid var(--au-material-border);
   border-radius: 16px;
   color: var(--au-color-text-primary);
-  background: var(--au-dialog-background, var(--au-color-bg-overlay));
+  background: var(--au-color-bg-overlay);
   outline: none;
   pointer-events: auto;
   transform-origin: center;
@@ -260,7 +260,7 @@ defineExpose({ close, dialogRef });
   gap: 8px;
   padding: 12px 18px 14px;
   border-top: 1px solid var(--au-material-border-strong);
-  background: var(--au-dialog-footer-background, var(--au-dialog-background, var(--au-color-bg-overlay)));
+  background: var(--au-color-bg-overlay);
   flex-shrink: 0;
 }
 

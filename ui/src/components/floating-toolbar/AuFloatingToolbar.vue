@@ -12,6 +12,16 @@
         @pointerdown.stop
         @click.stop
       >
+        <span
+          class="au-floating-toolbar__arrow au-floating-toolbar__arrow--border"
+          :style="{ left: `${arrowLeft}px` }"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="au-floating-toolbar__arrow au-floating-toolbar__arrow--surface"
+          :style="{ left: `${arrowLeft}px` }"
+          aria-hidden="true"
+        ></span>
         <slot :hide="hide" :placement="activePlacement"></slot>
       </div>
     </Transition>
@@ -46,6 +56,7 @@ const toolbarRef = ref(null);
 const visible = ref(props.modelValue == null ? Boolean(props.triggerRect) : props.modelValue);
 const targetRect = ref(props.triggerRect ? copyRect(props.triggerRect) : null);
 const activePlacement = ref('top');
+const arrowLeft = ref(12);
 const toolbarStyle = ref({ display: 'none' });
 
 let updateFrame = null;
@@ -95,14 +106,14 @@ function updatePosition() {
   const left = clamp(targetCenter - toolbarRect.width / 2, padding, window.innerWidth - toolbarRect.width - padding);
   const desiredTop = placement === 'top' ? rect.top - props.gap - toolbarRect.height : rect.bottom + props.gap;
   const top = clamp(desiredTop, padding, window.innerHeight - toolbarRect.height - padding);
-  const arrowLeft = clamp(targetCenter - left, 12, toolbarRect.width - 12);
+  const nextArrowLeft = clamp(targetCenter - left, 12, toolbarRect.width - 12);
 
   activePlacement.value = placement;
+  arrowLeft.value = nextArrowLeft;
   toolbarStyle.value = {
     left: `${left}px`,
     top: `${top}px`,
     zIndex: props.zIndex,
-    '--au-floating-arrow-left': `${arrowLeft}px`,
   };
 }
 
@@ -211,41 +222,39 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   user-select: none;
 }
 
-.au-floating-toolbar::before,
-.au-floating-toolbar::after {
+.au-floating-toolbar__arrow {
   position: absolute;
-  left: var(--au-floating-arrow-left);
   width: 0;
   height: 0;
-  content: '';
   transform: translateX(-50%);
+  pointer-events: none;
 }
 
-.au-floating-toolbar.is-top::before {
+.au-floating-toolbar.is-top .au-floating-toolbar__arrow--border {
   bottom: -6px;
   border-top: 6px solid var(--au-material-border-strong);
   border-right: 6px solid transparent;
   border-left: 6px solid transparent;
 }
 
-.au-floating-toolbar.is-top::after {
+.au-floating-toolbar.is-top .au-floating-toolbar__arrow--surface {
   bottom: -5px;
-  border-top: 5px solid var(--au-surface-background);
+  border-top: 5px solid var(--au-material-bg-strong);
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
 }
 
-.au-floating-toolbar.is-bottom::before {
+.au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--border {
   top: -6px;
   border-right: 6px solid transparent;
   border-bottom: 6px solid var(--au-material-border-strong);
   border-left: 6px solid transparent;
 }
 
-.au-floating-toolbar.is-bottom::after {
+.au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--surface {
   top: -5px;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid var(--au-surface-background);
+  border-bottom: 5px solid var(--au-material-bg-strong);
   border-left: 5px solid transparent;
 }
 
@@ -275,7 +284,11 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   color: var(--au-color-text-regular);
   background: transparent;
   cursor: pointer;
-  transition: var(--au-transition-control);
+  transition:
+    color var(--au-transition-duration) var(--au-transition-ease),
+    background var(--au-transition-duration) var(--au-transition-ease),
+    border-color var(--au-transition-duration) var(--au-transition-ease),
+    transform var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-floating-toolbar :deep(.au-floating-toolbar__button:hover) {
@@ -304,6 +317,16 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 .au-floating-toolbar-fade-leave-to {
   opacity: 0;
   transform: translateY(3px) scale(0.98);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-floating-toolbar.is-top .au-floating-toolbar__arrow--surface {
+    border-top-color: var(--au-color-bg-overlay);
+  }
+
+  .au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--surface {
+    border-bottom-color: var(--au-color-bg-overlay);
+  }
 }
 
 </style>

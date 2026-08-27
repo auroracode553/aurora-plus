@@ -199,26 +199,17 @@ function handleTitleDoubleClick(event) {
 <style scoped>
 .au-window-title-bar {
   position: relative;
-  z-index: var(--au-window-title-bar-z-index, 10001);
+  z-index: 10001;
   display: flex;
   align-items: center;
   flex: none;
   width: 100%;
-  height: var(--au-window-title-bar-height, 32px);
-  min-height: var(--au-window-title-bar-height, 32px);
+  height: 32px;
+  min-height: 32px;
   padding: 0;
-  border-bottom: 1px solid var(
-    --au-window-title-bar-border-color,
-    var(--au-color-border, rgba(105, 123, 154, 0.3))
-  );
-  color: var(
-    --au-window-title-bar-text-color,
-    var(--au-color-text-primary, #172033)
-  );
-  background: var(
-    --au-window-title-bar-bg,
-    var(--au-color-bg-overlay, #ffffff)
-  );
+  border-bottom: 1px solid var(--au-color-border);
+  color: var(--au-color-text-primary);
+  background: var(--au-color-bg-overlay);
   -webkit-app-region: drag;
   user-select: none;
   pointer-events: none;
@@ -234,7 +225,7 @@ function handleTitleDoubleClick(event) {
   align-items: center;
   justify-content: center;
   flex: none;
-  width: var(--au-window-title-bar-icon-area-width, 32px);
+  width: 32px;
   height: 100%;
   padding: 6px;
   -webkit-app-region: no-drag;
@@ -243,8 +234,8 @@ function handleTitleDoubleClick(event) {
 
 .au-window-title-bar__icon img {
   display: block;
-  width: var(--au-window-title-bar-icon-size, 18px);
-  height: var(--au-window-title-bar-icon-size, 18px);
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
@@ -257,7 +248,7 @@ function handleTitleDoubleClick(event) {
   padding: 0 8px;
   overflow: hidden;
   color: inherit;
-  font-size: var(--au-window-title-bar-font-size, 13px);
+  font-size: 13px;
   font-weight: 400;
   line-height: 1;
   text-overflow: ellipsis;
@@ -292,7 +283,7 @@ function handleTitleDoubleClick(event) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--au-window-title-bar-control-width, 40px);
+  width: 40px;
   height: 100%;
   padding: 0;
   margin: 0;
@@ -304,26 +295,23 @@ function handleTitleDoubleClick(event) {
   cursor: pointer;
   appearance: none;
   transition:
-    color var(--au-transition-duration, 0.2s) var(--au-transition-ease, ease),
-    background-color var(--au-transition-duration, 0.2s) var(--au-transition-ease, ease),
-    opacity var(--au-transition-duration, 0.2s) var(--au-transition-ease, ease);
+    color var(--au-transition-duration) var(--au-transition-ease),
+    background-color var(--au-transition-duration) var(--au-transition-ease),
+    opacity var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-window-title-bar__button:hover:not(:disabled) {
-  background: var(
-    --au-window-title-bar-hover-bg,
-    var(--au-color-bg-hover, rgba(31, 44, 68, 0.07))
-  );
+  background: var(--au-color-bg-hover);
 }
 
 .au-window-title-bar__button.is-close:hover:not(:disabled) {
-  color: var(--au-window-title-bar-close-hover-color, #ffffff);
-  background: var(--au-window-title-bar-close-hover-bg, #e81123);
+  color: #ffffff;
+  background: #e81123;
 }
 
 .au-window-title-bar__button:disabled {
   cursor: not-allowed;
-  opacity: var(--au-disabled-opacity, 0.48);
+  opacity: 0.48;
 }
 
 .au-window-title-bar__button:focus-visible {
@@ -331,8 +319,8 @@ function handleTitleDoubleClick(event) {
 }
 
 .au-window-title-bar__button :deep(.au-icon) {
-  width: var(--au-window-title-bar-control-icon-size, 12px);
-  height: var(--au-window-title-bar-control-icon-size, 12px);
+  width: 12px;
+  height: 12px;
 }
 
 @media (prefers-reduced-motion: reduce) {
