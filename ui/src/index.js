@@ -12,6 +12,7 @@ import { AuIcon } from './components/icon/index.js';
 import { AuSwitch } from './components/switch/index.js';
 import { AuTooltip } from './components/tooltip/index.js';
 import { AuVirtualList } from './components/virtual-list/index.js';
+import { AuWindowTitleBar } from './components/window-title-bar/index.js';
 import { AuMessage } from './services/message/index.js';
 import { AuMessageBox } from './services/message-box/index.js';
 import {
@@ -35,6 +36,7 @@ const components = [
   AuSwitch,
   AuTooltip,
   AuVirtualList,
+  AuWindowTitleBar,
 ];
 
 export const version = '0.1.0';
@@ -65,6 +67,7 @@ export {
   AuSwitch,
   AuTooltip,
   AuVirtualList,
+  AuWindowTitleBar,
   AURORA_MATERIALS,
   DEFAULT_AURORA_MATERIAL,
   getAuroraMaterial,

@@ -18,6 +18,7 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 | `AuVirtualList` | 固定行高虚拟列表 |
 | `AuContextMenu` | 配置式右键菜单 |
 | `AuFloatingToolbar` | 锚点浮动工具条 |
+| `AuWindowTitleBar` | 桌面无边框窗口的受控标题栏 |
 | `AuMessage` | 命令式消息提示 |
 | `AuMessageBox` | Promise 风格确认框 |
 

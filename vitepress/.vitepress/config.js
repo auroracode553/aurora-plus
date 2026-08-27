@@ -86,6 +86,12 @@ export default defineConfig({
         ],
       },
       {
+        text: '应用外壳',
+        items: [
+          { text: 'WindowTitleBar 窗口标题栏', link: '/components/window-title-bar' },
+        ],
+      },
+      {
         text: '反馈组件',
         items: [
           { text: 'Message 消息提示', link: '/components/message' },
