@@ -10,7 +10,7 @@ import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/Vi
 
 ## 基础用法
 
-示例用 1,000 条真实对象数据展示筛选、范围变化和命令式滚动。展开源代码可看到数据生成规则、`computed` 筛选和插槽字段。
+示例用 1,000 条数据展示筛选、范围变化和命令式滚动。
 
 <DemoBlock
   title="1,000 条项目数据"
@@ -24,7 +24,7 @@ import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/Vi
 ## 使用约束
 
 - 容器必须具备可计算高度，例如 `height: 400px` 或由父级布局确定的高度。
-- 每个列表项的实际高度必须与 `itemHeight` 完全一致；当前版本不支持动态行高。
+- 每个列表项的实际高度必须与 `itemHeight` 完全一致；组件不支持动态行高。
 - `items` 应保持稳定引用，数据筛选可使用 `computed`，不应在模板表达式内反复创建数组。
 - 数据对象存在稳定 ID 时优先使用 `keyField`；复杂场景使用 `itemKey`。
 - 容器默认保留紧凑的内侧留白；可通过 `--au-virtual-list-padding-block` 和 `--au-virtual-list-padding-inline` 局部调整。

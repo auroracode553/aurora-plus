@@ -10,8 +10,6 @@ import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.v
 
 ## 基础用法
 
-按钮列表、尺寸列表和交互状态都由示例脚本中的真实数据驱动。展开源码可以直接查看并复制 `buttonTypes`、`buttonSizes` 和 `saving`。
-
 <DemoBlock
   title="类型、状态与尺寸"
   description="类型、尺寸、禁用和 loading 状态集中展示，点击加载按钮可观察即时状态变化。"

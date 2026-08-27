@@ -6,7 +6,7 @@ import switchBasicSource from '../.vitepress/theme/examples/switch/SwitchBasic.v
 
 # Switch 开关
 
-用于在两个互斥状态之间快速切换。`AuSwitch` 使用紧凑的 Apple 风格轨道和滑块，材质会跟随全局 `soft`、`clear` 或 `solid` 设置。
+用于在两个互斥状态之间快速切换。
 
 ## 基础用法
 

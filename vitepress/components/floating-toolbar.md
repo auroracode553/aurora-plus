@@ -10,11 +10,11 @@ import floatingToolbarBasicSource from '../.vitepress/theme/examples/floating-to
 
 ## 基础用法
 
-工具条内容完全由默认插槽提供。示例中的 `toolbarActions` 是真实动作数据，`triggerRect` 来自目标元素的 `getBoundingClientRect()`。
+工具条内容由默认插槽提供，`triggerRect` 可通过目标元素的 `getBoundingClientRect()` 获取。
 
 <DemoBlock
   title="锚点工具条"
-  description="点击锚点打开；滚动时根据真实元素刷新矩形，点击外部关闭。"
+  description="点击锚点打开；滚动时刷新位置，点击外部关闭。"
   :source="floatingToolbarBasicSource"
 >
   <FloatingToolbarBasic />

@@ -12,7 +12,7 @@ import messageBasicSource from '../.vitepress/theme/examples/message/MessageBasi
 
 <DemoBlock
   title="消息类型与合并"
-  description="按钮由 messageExamples 配置数组渲染；连续发送会展示 grouping 的计数效果。"
+  description="连续发送相同消息可查看合并计数效果。"
   :source="messageBasicSource"
 >
   <MessageBasic />

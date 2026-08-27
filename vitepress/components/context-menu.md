@@ -10,7 +10,7 @@ import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/Co
 
 ## 基础用法
 
-下面的演示覆盖图标行、按钮组、二级菜单、禁用项、分隔线和危险操作。`menuSections` 是传给组件的完整真实数据，不再只展示一个看不到定义的 `:items="sections"`。
+下面的演示包含图标行、按钮组、二级菜单、禁用项、分隔线和危险操作。
 
 <DemoBlock
   title="配置式菜单"

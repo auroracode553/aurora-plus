@@ -6,7 +6,7 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
 
 # Checkbox 多选框
 
-用于表达可独立选择的选项，也可以把多个复选框绑定到同一个数组来管理多选结果。组件保持紧凑尺寸，选中和半选状态只使用扁平颜色变化，不添加高光层。
+用于表达可独立选择的选项，也可以把多个复选框绑定到同一个数组来管理多选结果。
 
 ## 基础用法
 

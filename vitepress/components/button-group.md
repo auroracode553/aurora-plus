@@ -12,11 +12,11 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 ## 连体按钮组
 
-`variant="connected"` 使用统一的半透明材质容器承载多个分段操作，适合窗口工具、筛选和视图切换。按钮不再用硬边框拼接；当前项通过 `aria-pressed="true"`、`aria-current="true"` 或 `is-active` 类获得独立材质层。它也是组件的默认外观，但建议在业务封装中显式声明。
+`variant="connected"` 使用统一的半透明材质容器承载多个分段操作，适合窗口工具、筛选和视图切换。当前项通过 `aria-pressed="true"`、`aria-current="true"` 或 `is-active` 类获得独立材质层。
 
 <DemoBlock
   title="Connected 连体按钮组"
-  description="Apple 风格分段工具条；当前项使用独立材质层，其他操作保持透明。"
+  description="当前项使用独立材质层，其他操作保持透明。"
   :source="buttonGroupConnectedSource"
 >
   <ButtonGroupConnected />

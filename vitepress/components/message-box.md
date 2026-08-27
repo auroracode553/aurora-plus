@@ -12,7 +12,7 @@ import messageBoxBasicSource from '../.vitepress/theme/examples/message-box/Mess
 
 <DemoBlock
   title="数据驱动的确认动作"
-  description="发布与删除配置来自 confirmActions 数组，点击后展示不同的确认配置。"
+  description="点击操作按钮查看不同的确认配置。"
   :source="messageBoxBasicSource"
 >
   <MessageBoxBasic />

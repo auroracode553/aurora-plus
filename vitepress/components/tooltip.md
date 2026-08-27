@@ -12,7 +12,7 @@ import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasi
 
 <DemoBlock
   title="方向与自定义内容"
-  description="方向配置来自 tooltipItems 数组；将鼠标移到按钮上或使用键盘聚焦按钮。"
+  description="将鼠标移到按钮上或使用键盘聚焦按钮。"
   :source="tooltipBasicSource"
 >
   <TooltipBasic />

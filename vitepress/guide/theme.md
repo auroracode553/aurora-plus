@@ -6,7 +6,7 @@ import materialPreviewSource from '../.vitepress/theme/examples/theme/MaterialPr
 
 # 主题定制
 
-Aurora UI 使用 CSS 变量提供主题能力，不要求额外的主题运行时。
+Aurora UI 使用 CSS 变量提供主题能力。
 
 ## 暗色模式
 
@@ -32,11 +32,9 @@ Aurora UI 的浮层、卡片、按钮组、消息和菜单会读取根节点上�
 
 | 值 | 视觉特征 | 适用场景 |
 | --- | --- | --- |
-| `soft` | 柔和、低对比、轻模糊 | 日常工作台和内容型页面（默认） |
+| `soft` | 柔和、低对比、轻模糊 | 日常工作台和内容型页面 |
 | `clear` | 清透、高饱和、背景层次明显 | 需要突出玻璃质感的首页或仪表盘 |
 | `solid` | 不透明、边界清晰 | 信息密集或对比度要求高的页面 |
-
-也可以在 `app.use(AuroraUI, { material: 'clear' })` 时初始化，或调用 `setAuroraMaterial('soft')` 运行时切换。将 `data-au-material` 放在任意容器上，可只覆盖该容器内的组件。
 
 ### 交互预览
 
@@ -92,8 +90,6 @@ console.log(getAuroraMaterial()); // soft
   --au-material-saturation: 140%;
 }
 ```
-
-为了保持扁平、克制的视觉层级，组件不会使用高光渐变或内发光；材质定制负责表面透明度、模糊、饱和度和边框，阴影由统一的层级变量控制。
 
 ### 材质变量
 
@@ -186,4 +182,4 @@ import './styles/brand-theme.css';
 </section>
 ```
 
-命令式服务和默认 Teleport 到 `body` 的组件不在该局部容器内，需使用根节点主题，或为支持的组件配置 `teleported="false"` / `append-to`。完整变量源码位于组件库包的 `src/theme/index.css`。
+命令式服务和默认 Teleport 到 `body` 的组件不在该局部容器内，需使用根节点主题，或为支持的组件配置 `teleported="false"` / `append-to`。

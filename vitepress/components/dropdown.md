@@ -6,7 +6,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 
 # Dropdown 下拉菜单
 
-用于将一组低频或次级操作收纳到触发器附近。菜单是独立的半透明材质层，打开后会自动进行视口避让，并支持鼠标、键盘和点击外部关闭。
+用于将一组低频或次级操作收纳到触发器附近。打开后会自动进行视口避让，并支持鼠标、键盘和点击外部关闭。
 
 ## 基础用法
 
