@@ -22,7 +22,7 @@ Aurora UI 使用 CSS 变量提供主题能力。
 
 ## 玻璃材质
 
-Aurora UI 的浮层、卡片、按钮组、消息和菜单会读取根节点上的 `data-au-material`：
+Aurora UI 的对话框、浮层、卡片、按钮组、消息和菜单会读取材质变量：
 
 ```html
 <html data-au-material="soft"></html>

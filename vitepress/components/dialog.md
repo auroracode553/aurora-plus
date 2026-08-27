@@ -8,7 +8,9 @@ import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.v
 
 通过 `v-model` 控制的模态内容容器。组件负责遮罩、Escape、焦点进入与恢复、滚动锁和过渡事件；表单数据及提交逻辑由业务层维护。
 
-Dialog 固定使用不透明实色面板，footer 与正文使用相同背景。模态交互遮罩保持透明，不进行全屏变暗或背景模糊；切换 `data-au-material` 不会让 Dialog 面板变为透明材质。
+Dialog 在浅色模式下使用清晰的实色表面；深色模式下使用中性黑色柔光玻璃，并让内部 Aurora UI 组件继承一致的黑灰材质。模态交互层保持完全透明，不改变对话框之外的页面亮度；面板自身使用背景模糊、细边框和通用浮层阴影表达层级。
+
+系统启用“减少透明度”时，深色玻璃会自动切换为不透明黑色表面并关闭背景模糊；高对比度模式还会增强边界和分隔线。
 
 打开时默认聚焦对话框容器，不会自动聚焦关闭按钮。需要让表单控件或操作按钮获得初始焦点时，在目标元素上显式添加 `autofocus`。
 
@@ -34,7 +36,7 @@ Dialog 固定使用不透明实色面板，footer 与正文使用相同背景。
 | `height` | 固定高度；数字转换为 px | `string / number` | `''` |
 | `maxHeight` | 最大高度；数字转换为 px | `string / number` | `90vh` |
 | `top` | 对话框顶部外边距；数字转换为 px | `string / number` | `''` |
-| `modal` | 是否启用透明模态交互遮罩并设置 `aria-modal` | `boolean` | `true` |
+| `modal` | 是否启用透明模态交互层并设置 `aria-modal` | `boolean` | `true` |
 | `lockScroll` | 显示期间是否锁定页面滚动 | `boolean` | `true` |
 | `appendToBody` | 是否 Teleport 到 `body` | `boolean` | `true` |
 | `closeOnClickModal` | 点击遮罩是否关闭 | `boolean` | `false` |

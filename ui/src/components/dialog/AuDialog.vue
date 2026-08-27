@@ -10,7 +10,7 @@
       >
         <section
           ref="dialogRef"
-          class="au-dialog au-component au-depth-overlay au-motion-popover"
+          class="au-dialog au-component au-material-blur au-depth-overlay au-motion-popover"
           :style="dialogStyle"
           role="dialog"
           :aria-modal="modal ? 'true' : undefined"
@@ -223,6 +223,33 @@ defineExpose({ close, dialogRef });
   transform-origin: center;
 }
 
+/* 深色 Dialog 使用中性黑玻璃，并为内部 Aurora UI 组件提供同一材质上下文。 */
+:global(:root.dark) .au-dialog,
+:global(:root[data-theme='dark']) .au-dialog,
+:global(:root[data-au-theme='dark']) .au-dialog,
+:global([data-au-theme='dark']) .au-dialog {
+  --au-color-primary: #0a84ff;
+  --au-color-text-primary: rgba(255, 255, 255, 0.92);
+  --au-color-text-regular: rgba(255, 255, 255, 0.76);
+  --au-color-text-secondary: rgba(255, 255, 255, 0.56);
+  --au-color-text-placeholder: rgba(255, 255, 255, 0.36);
+  --au-color-text-disabled: rgba(255, 255, 255, 0.28);
+  --au-color-bg-overlay: #1c1c1e;
+  --au-color-bg-soft: #2c2c2e;
+  --au-color-bg-hover: rgba(255, 255, 255, 0.08);
+  --au-color-border: rgba(255, 255, 255, 0.16);
+  --au-color-border-light: rgba(255, 255, 255, 0.12);
+  --au-color-border-lighter: rgba(255, 255, 255, 0.08);
+  --au-material-bg: rgba(44, 44, 46, 0.64);
+  --au-material-bg-strong: rgba(20, 20, 22, 0.78);
+  --au-material-bg-subtle: rgba(58, 58, 60, 0.42);
+  --au-material-border: rgba(255, 255, 255, 0.16);
+  --au-material-border-strong: rgba(255, 255, 255, 0.1);
+  --au-material-blur: 28px;
+  --au-material-saturation: 125%;
+  background: var(--au-material-bg-strong);
+}
+
 .au-dialog__header {
   display: flex;
   align-items: center;
@@ -260,7 +287,7 @@ defineExpose({ close, dialogRef });
   gap: 8px;
   padding: 12px 18px 14px;
   border-top: 1px solid var(--au-material-border-strong);
-  background: var(--au-color-bg-overlay);
+  background: transparent;
   flex-shrink: 0;
 }
 
@@ -280,6 +307,34 @@ defineExpose({ close, dialogRef });
   .au-dialog-fade-enter-from .au-dialog,
   .au-dialog-fade-leave-to .au-dialog {
     transform: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :global(:root.dark) .au-dialog,
+  :global(:root[data-theme='dark']) .au-dialog,
+  :global(:root[data-au-theme='dark']) .au-dialog,
+  :global([data-au-theme='dark']) .au-dialog {
+    --au-material-bg: #242426;
+    --au-material-bg-strong: var(--au-color-bg-overlay);
+    --au-material-bg-subtle: var(--au-color-bg-soft);
+    --au-material-blur: 0px;
+    --au-material-saturation: 100%;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :global(:root.dark) .au-dialog,
+  :global(:root[data-theme='dark']) .au-dialog,
+  :global(:root[data-au-theme='dark']) .au-dialog,
+  :global([data-au-theme='dark']) .au-dialog {
+    --au-material-bg: var(--au-color-bg-overlay);
+    --au-material-bg-strong: var(--au-color-bg-overlay);
+    --au-material-bg-subtle: var(--au-color-bg-soft);
+    --au-material-border: rgba(255, 255, 255, 0.42);
+    --au-material-border-strong: rgba(255, 255, 255, 0.3);
+    --au-material-blur: 0px;
+    --au-material-saturation: 100%;
   }
 }
 </style>
