@@ -19,9 +19,9 @@
 
 | 项目 | Vue 入口 | 接入状态 | 已有直接用例 |
 | --- | --- | --- | --- |
-| `elctron_typora` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | `AuWindowTitleBar` |
-| `electron-st` | `src/renderer/index.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 全局组件及 `$message`、`$messageBox`、`$confirm` 已可用 |
-| `translate-pc` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 全局组件及 `$message`、`$messageBox`、`$confirm` 已可用 |
+| `elctron_typora` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 公共按钮、Tooltip、Dialog、右键菜单、虚拟列表、浮动工具栏、复选框、Git 下拉菜单、窗口标题栏及反馈服务均已使用库组件 |
+| `electron-st` | `src/renderer/index.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 通用弹窗、提醒按钮、金价开关、短时周期按钮组及反馈服务均已使用库组件 |
+| `translate-pc` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 设置页使用 `AuCard`、`AuSwitch`、`AuButtonGroup`、`AuButton`，全局通知使用 `AuMessage` |
 
 本机三个 `node_modules/aurora-ui` 均应指向：
 
@@ -42,7 +42,27 @@ D:\my_project\front-sdk\aurora-ui\ui
 | 桌面窗口 | `AuWindowTitleBar` |
 | 反馈服务 | `AuMessage`、`AuMessageBox` |
 
-下面列出的 `AuButton`、`AuSwitch`、`AuCheckbox`、对话框、消息等现有重复实现，不代表 Aurora UI 缺少组件，只代表业务项目尚未完成迁移。
+### 3.1 现有组件的实际落地覆盖
+
+| Aurora UI 能力 | `elctron_typora` | `electron-st` | `translate-pc` |
+| --- | --- | --- | --- |
+| `AuButton` | `XButton` 公共适配器 | 弹窗和添加关注操作 | 设置保存、服务检测、分段选项 |
+| `AuButtonGroup` | — | 短时提醒周期 | 主题与字号 |
+| `AuIcon` | 由按钮、菜单和反馈组件内部使用 | 由按钮和反馈组件内部使用 | 由按钮和反馈组件内部使用 |
+| `AuSwitch` | — | 金价提醒开关 | 设置页布尔选项 |
+| `AuCheckbox` | 查找选项、自动 Fetch | — | — |
+| `AuCard` | — | — | 设置页四个设置分区 |
+| `AuVirtualList` | 公共虚拟列表适配器 | — | — |
+| `AuTooltip` | `XTooltip` 公共适配器 | Dialog 关闭按钮内部使用 | — |
+| `AuDropdown` | Git 远程仓库和 Fetch 周期 | — | — |
+| `AuContextMenu` | 文档右键菜单 | — | — |
+| `AuDialog` | `BaseDialog` 公共适配器 | `BaseModal` 公共适配器 | — |
+| `AuFloatingToolbar` | 图片、音频和白板浮动工具条 | — | — |
+| `AuWindowTitleBar` | Electron 窗口标题栏 | — | — |
+| `AuMessage` | Toast 适配器 | 全局反馈服务 | `useToast` 适配器 |
+| `AuMessageBox` | Confirm 适配器 | 全局确认服务 | — |
+
+现有公开组件均已有至少一个真实业务用例。表中的空白表示该项目当前没有合适场景，不代表组件未实现；输入、选择器、单选、表单等仍然重复的部分属于组件库缺口。
 
 ## 4. 现有能力可直接替换的项目组件
 
@@ -51,39 +71,43 @@ D:\my_project\front-sdk\aurora-ui\ui
 | 项目内实现 | Aurora UI 对应能力 | 建议 |
 | --- | --- | --- |
 | `components/window/WindowTitleBar.vue` | `AuWindowTitleBar` | 已迁移；项目组件只保留 Electron IPC 适配 |
-| `commonComponents/XButton.vue`、`XCloseButton.vue` | `AuButton` | 按按钮类型、尺寸和图标逐步替换 |
-| `commonComponents/XTooltip.vue` | `AuTooltip` | 可直接迁移，先核对延迟和 placement 默认值 |
+| `commonComponents/XButton.vue` | `AuButton` | 已迁移为薄适配器，现有 `XButton` 调用均由 `AuButton` 渲染；`XCloseButton` 的专用交互暂时保留 |
+| `commonComponents/XTooltip.vue` | `AuTooltip` | 已迁移为薄适配器并保留原插槽与公开方法 |
 | `commonComponents/SvgIcon.vue` | `AuIcon` 与 Aurora UI 导出的 Tabler 图标 | 本地专用 SVG 可继续由业务适配器承载 |
-| `commonComponents/BaseDialog.vue` | `AuDialog` | 保留业务表单，替换通用遮罩、焦点和关闭逻辑 |
-| `commonComponents/ContextMenu.vue`、`context-menu/DocumentContextMenu.vue` | `AuContextMenu` | 将项目菜单项结构转换为库的配置结构 |
-| `commonComponents/VirtualScrollList.vue` | `AuVirtualList` | 核对行高、滚动定位和插槽参数后迁移 |
-| `FloatingToolbar.vue`、`ImageToolbar.vue`、`AudioToolbar.vue` | `AuFloatingToolbar`、`AuButtonGroup`、`AuTooltip` | 通用定位和按钮反馈交给组件库，保留编辑器命令 |
-| `utils/confirm.js`、`utils/toast.js` | `AuMessageBox`、`AuMessage` | 业务工具可保留为薄适配层，统一返回值和错误处理 |
+| `commonComponents/BaseDialog.vue` | `AuDialog` | 已迁移为薄适配器，业务表单和原 footer 插槽保持不变 |
+| `commonComponents/ContextMenu.vue`、`context-menu/DocumentContextMenu.vue` | `AuContextMenu` | 已迁移；适配器负责旧菜单数据和 Tabler 图标映射 |
+| `commonComponents/VirtualScrollList.vue` | `AuVirtualList` | 已迁移并保留滚动方法、事件和作用域插槽 |
+| `FloatingToolbar.vue`、`ImageToolbar.vue`、`AudioToolbar.vue` | `AuFloatingToolbar`、`AuTooltip` | 已迁移通用定位和可见性逻辑，编辑器命令仍留在业务组件 |
+| 查找选项、Git 自动 Fetch | `AuCheckbox` | 已迁移三个复选项 |
+| Git 远程仓库和 Fetch 周期选择 | `AuDropdown` | 已迁移两个简单枚举菜单；复杂表单选择仍等待 `AuSelect` |
+| `utils/confirm.js`、`utils/toast.js` | `AuMessageBox`、`AuMessage` | 已迁移；业务工具仅保留兼容原调用签名的薄适配层 |
 
 ### 4.2 electron-st
 
 | 项目内实现 | Aurora UI 对应能力 | 建议 |
 | --- | --- | --- |
-| `shared/ui/BaseModal.vue` | `AuDialog` | 用业务外壳补充说明文本即可，不再重复焦点和 Escape 逻辑 |
-| `shared/ui/AppConfirmDialog.vue` | `AuMessageBox` | `tone: danger` 映射为 `confirmButtonType: 'danger'` |
-| `shared/ui/AppToastViewport.vue` | `AuMessage` | `notify*` 方法可改成服务薄封装 |
-| 各页面原生操作按钮 | `AuButton`、`AuButtonGroup` | 优先迁移弹窗页脚和工具条按钮 |
-| 原生布尔选项 | `AuSwitch`、`AuCheckbox` | 根据“即时生效”或“批量选择”语义分别使用 |
+| `shared/ui/BaseModal.vue` | `AuDialog` | 已迁移为业务薄外壳，并保留原 Tab 焦点循环和说明文本 |
+| `shared/ui/AppConfirmDialog.vue` | `AuMessageBox` | 已迁移并移除旧 Host；`tone: danger` 已映射为 `confirmButtonType: 'danger'` |
+| `shared/ui/AppToastViewport.vue` | `AuMessage` | 已迁移并移除旧 Viewport；`feedbackService.js` 保留为业务薄封装 |
+| 弹窗按钮、添加关注按钮 | `AuButton` | 已迁移；列表内部的无样式原生按钮按业务交互继续保留 |
+| 短时提醒周期 | `AuButtonGroup`、`AuButton` | 已迁移为带 `aria-pressed` 的分段按钮组 |
+| 金价提醒布尔选项 | `AuSwitch` | 四个即时开关已迁移 |
 | 信息卡片和模块卡片 | `AuCard` | 只迁移通用容器，不把行情业务结构放入 UI 库 |
 
 ### 4.3 translate-pc
 
 | 项目内实现 | Aurora UI 对应能力 | 建议 |
 | --- | --- | --- |
-| `components/ToastMessage.vue` | `AuMessage` | `useToast` 可保留为业务适配层 |
-| 设置页的 8 个布尔开关 | `AuSwitch` | 保留标题和说明文案插槽或外层布局 |
-| 页面按钮和图标按钮 | `AuButton`、`AuButtonGroup`、`AuTooltip` | 优先迁移保存、检测、复制和清理操作 |
-| 工作区、词典和历史卡片 | `AuCard` | 只替换表面容器，业务数据展示继续留在项目内 |
+| `components/ToastMessage.vue` | `AuMessage` | 已迁移并移除旧组件；`useToast` 保留为业务适配层 |
+| 设置页的 8 个布尔开关 | `AuSwitch` | 已迁移，标题和说明文案继续由设置页布局承载 |
+| 页面按钮和分段选项 | `AuButton`、`AuButtonGroup` | 设置页保存、两个检测按钮、主题和字号选项已迁移；高度定制的图标按钮继续保留业务样式 |
+| 设置页卡片 | `AuCard` | 四个设置分区已迁移，业务数据和内部布局继续留在项目内 |
+| 工作区、词典和历史卡片 | `AuCard` | 后续可按页面逐步迁移，不需要把业务结构放入 UI 库 |
 | `AppIcon.vue` | `AuIcon` 与 Aurora UI 导出的 Tabler 图标 | 专用品牌图形仍保留在应用侧 |
 
 ## 5. 尚未实现的通用组件
 
-源码中的原生控件数量说明了基础表单组件应优先补齐：
+本轮迁移前的源码原生控件数量说明了基础表单组件应优先补齐：
 
 | 项目 | `input` | `select` | `textarea` | `form` | `table` |
 | --- | ---: | ---: | ---: | ---: | ---: |

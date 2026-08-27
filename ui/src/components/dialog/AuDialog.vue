@@ -10,7 +10,7 @@
       >
         <section
           ref="dialogRef"
-          class="au-dialog au-component au-material-surface au-depth-overlay au-motion-popover"
+          class="au-dialog au-component au-depth-overlay au-motion-popover"
           :style="dialogStyle"
           role="dialog"
           :aria-modal="modal ? 'true' : undefined"
@@ -154,16 +154,14 @@ function focusInitialElement() {
   const dialog = dialogRef.value;
   if (!dialog) return;
 
-  // 选择器列表按 DOM 顺序匹配，需先单独查找 autofocus，避免关闭按钮抢占初始焦点并触发 Tooltip。
+  // 只有业务显式声明 autofocus 时才聚焦控件，避免关闭按钮抢占初始焦点并触发 Tooltip。
   const autofocusTarget = dialog.querySelector('[autofocus]:not(:disabled)');
   if (autofocusTarget) {
-    autofocusTarget.focus();
+    autofocusTarget.focus({ preventScroll: true });
     return;
   }
 
-  const focusable = dialog.querySelector('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])');
-  if (focusable) focusable.focus();
-  else dialog.focus();
+  dialog.focus({ preventScroll: true });
 }
 
 function handleAfterEnter() {
@@ -203,9 +201,7 @@ defineExpose({ close, dialogRef });
 }
 
 .au-dialog__overlay.is-modal {
-  background: var(--au-color-mask);
-  backdrop-filter: blur(12px) saturate(110%);
-  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  background: transparent;
 }
 
 .au-dialog__overlay:not(.is-modal) {
@@ -221,6 +217,7 @@ defineExpose({ close, dialogRef });
   border: 1px solid var(--au-material-border);
   border-radius: 16px;
   color: var(--au-color-text-primary);
+  background: var(--au-dialog-background, var(--au-color-bg-overlay));
   outline: none;
   pointer-events: auto;
   transform-origin: center;
@@ -263,7 +260,7 @@ defineExpose({ close, dialogRef });
   gap: 8px;
   padding: 12px 18px 14px;
   border-top: 1px solid var(--au-material-border-strong);
-  background: color-mix(in srgb, var(--au-material-bg-subtle) 72%, transparent);
+  background: var(--au-dialog-footer-background, var(--au-dialog-background, var(--au-color-bg-overlay)));
   flex-shrink: 0;
 }
 
@@ -277,14 +274,6 @@ defineExpose({ close, dialogRef });
 .au-dialog-fade-enter-from .au-dialog,
 .au-dialog-fade-leave-to .au-dialog {
   transform: translateY(-8px) scale(0.985);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-dialog__overlay.is-modal {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
 }
 
 @media (prefers-reduced-motion: reduce) {

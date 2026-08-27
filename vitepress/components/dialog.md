@@ -8,6 +8,10 @@ import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.v
 
 通过 `v-model` 控制的模态内容容器。组件负责遮罩、Escape、焦点进入与恢复、滚动锁和过渡事件；表单数据及提交逻辑由业务层维护。
 
+Dialog 固定使用不透明实色面板，footer 与正文使用相同背景。模态交互遮罩保持透明，不进行全屏变暗或背景模糊；切换 `data-au-material` 不会让 Dialog 面板变为透明材质。
+
+打开时默认聚焦对话框容器，不会自动聚焦关闭按钮。需要让表单控件或操作按钮获得初始焦点时，在目标元素上显式添加 `autofocus`。
+
 ## 基础用法
 
 <DemoBlock
@@ -30,7 +34,7 @@ import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.v
 | `height` | 固定高度；数字转换为 px | `string / number` | `''` |
 | `maxHeight` | 最大高度；数字转换为 px | `string / number` | `90vh` |
 | `top` | 对话框顶部外边距；数字转换为 px | `string / number` | `''` |
-| `modal` | 是否显示模态遮罩样式并设置 `aria-modal` | `boolean` | `true` |
+| `modal` | 是否启用透明模态交互遮罩并设置 `aria-modal` | `boolean` | `true` |
 | `lockScroll` | 显示期间是否锁定页面滚动 | `boolean` | `true` |
 | `appendToBody` | 是否 Teleport 到 `body` | `boolean` | `true` |
 | `closeOnClickModal` | 点击遮罩是否关闭 | `boolean` | `false` |
