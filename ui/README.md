@@ -8,6 +8,7 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 | --- | --- |
 | `AuButton` | 多类型、多尺寸、加载态按钮 |
 | `AuButtonGroup` | 连体按钮组与悬浮控制组 |
+| `AuInput` | 支持清空、前后缀和错误态的单行输入框 |
 | `AuSwitch` | 二元状态切换开关 |
 | `AuCheckbox` | 布尔值、数组和半选状态复选框 |
 | `AuDropdown` | 带视口避让和键盘导航的下拉菜单 |
