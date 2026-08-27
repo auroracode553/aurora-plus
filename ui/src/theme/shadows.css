@@ -1,13 +1,22 @@
 :root,
 [data-au-theme] {
-  /* Message 的双层深度结构：近层勾勒轮廓，远层表达悬浮距离。 */
+  /*
+   * 通用深度由四层阴影组成：四周轮廓、上沿环境光、接触阴影和下沿景深。
+   * 上沿使用负向偏移，避免表面只在底部出现阴影。
+   */
   --au-shadow-control:
-    0 1px 2px color-mix(in srgb, var(--au-color-mask) 18%, transparent),
-    0 2px 5px color-mix(in srgb, var(--au-color-mask) 8%, transparent);
+    0 0 0 0.5px color-mix(in srgb, var(--au-color-mask) 14%, transparent),
+    0 -1px 2px color-mix(in srgb, var(--au-color-mask) 10%, transparent),
+    0 1px 2px color-mix(in srgb, var(--au-color-mask) 16%, transparent),
+    0 3px 7px color-mix(in srgb, var(--au-color-mask) 7%, transparent);
   --au-shadow-surface:
-    0 1px 3px color-mix(in srgb, var(--au-color-mask) 18%, transparent),
-    0 4px 10px color-mix(in srgb, var(--au-color-mask) 10%, transparent);
+    0 0 0 0.5px color-mix(in srgb, var(--au-color-mask) 16%, transparent),
+    0 -3px 8px color-mix(in srgb, var(--au-color-mask) 12%, transparent),
+    0 2px 6px color-mix(in srgb, var(--au-color-mask) 16%, transparent),
+    0 10px 24px color-mix(in srgb, var(--au-color-mask) 9%, transparent);
   --au-shadow-overlay:
-    0 2px 5px color-mix(in srgb, var(--au-color-mask) 26%, transparent),
-    0 8px 18px color-mix(in srgb, var(--au-color-mask) 18%, transparent);
+    0 0 0 0.5px color-mix(in srgb, var(--au-color-mask) 20%, transparent),
+    0 -5px 14px color-mix(in srgb, var(--au-color-mask) 14%, transparent),
+    0 4px 10px color-mix(in srgb, var(--au-color-mask) 22%, transparent),
+    0 18px 40px color-mix(in srgb, var(--au-color-mask) 16%, transparent);
 }

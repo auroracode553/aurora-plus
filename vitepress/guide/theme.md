@@ -137,9 +137,9 @@ console.log(getAuroraMaterial()); // soft
 | `--au-font-size-small` | `12px` | 小号文字 |
 | `--au-font-size-base` | `14px` | 正文与控件文字 |
 | `--au-font-size-large` | `16px` | 大号控件文字 |
-| `--au-shadow-control` | 控件阴影 | Button、Checkbox、Switch |
-| `--au-shadow-surface` | 表面阴影 | Card、VirtualList、ButtonGroup |
-| `--au-shadow-overlay` | 浮层阴影 | Message、Tooltip、菜单、工具条和 Dialog |
+| `--au-shadow-control` | 低层级四向阴影 | Button、Checkbox、Switch |
+| `--au-shadow-surface` | 中层级四向阴影 | Card、MenuList、VirtualList、ButtonGroup |
+| `--au-shadow-overlay` | 高层级四向阴影 | Message、Tooltip、菜单、工具条和 Dialog |
 | `--au-focus-ring-color` | 主色半透明 | 键盘焦点轮廓颜色 |
 | `--au-focus-ring-width` | `2px` | 键盘焦点轮廓宽度 |
 | `--au-focus-ring-offset` | `2px` | 键盘焦点轮廓偏移 |
