@@ -5,10 +5,7 @@
       `is-${size}`,
       {
         'is-disabled': disabled,
-        'is-readonly': readonly,
         'is-invalid': invalid,
-        'has-prefix': hasPrefix,
-        'has-suffix': hasSuffix,
       },
       $attrs.class,
     ]"

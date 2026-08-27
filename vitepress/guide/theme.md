@@ -119,7 +119,6 @@ console.log(getAuroraMaterial()); // soft
 | `--au-color-text-secondary` | `#6d7890` | 辅助文本 |
 | `--au-color-text-placeholder` | `#99a3b5` | 占位文本 |
 | `--au-color-text-disabled` | `#b5bdca` | 禁用文本 |
-| `--au-color-bg` | `#f5f7fb` | 页面及组件背景 |
 | `--au-color-bg-overlay` | `#ffffff` | 弹层背景 |
 | `--au-color-bg-soft` | `#edf1f8` | 柔和区域背景 |
 | `--au-color-bg-hover` | `rgba(31, 44, 68, 0.07)` | 悬停背景 |
@@ -134,7 +133,6 @@ console.log(getAuroraMaterial()); // soft
 | --- | --- | --- |
 | `--au-border-radius-small` | `4px` | 小型控件圆角 |
 | `--au-border-radius-base` | `6px` | 常规控件圆角 |
-| `--au-border-radius-large` | `12px` | 容器圆角 |
 | `--au-font-family` | 系统字体栈 | 组件字体 |
 | `--au-font-size-small` | `12px` | 小号文字 |
 | `--au-font-size-base` | `14px` | 正文与控件文字 |
@@ -147,8 +145,6 @@ console.log(getAuroraMaterial()); // soft
 | `--au-focus-ring-offset` | `2px` | 键盘焦点轮廓偏移 |
 | `--au-transition-duration` | `0.2s` | 通用过渡时长 |
 | `--au-transition-ease` | `cubic-bezier(0.2, 0.8, 0.2, 1)` | 通用过渡曲线 |
-| `--au-z-index-toolbar` | `9000` | 浮动工具条建议层级 |
-| `--au-z-index-dialog` | `10000` | 对话框层级 |
 | `--au-z-index-message` | `11000` | 消息层级 |
 | `--au-z-index-tooltip` | `12000` | 文字提示层级 |
 

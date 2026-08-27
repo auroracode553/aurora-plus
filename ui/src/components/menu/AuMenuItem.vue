@@ -7,7 +7,7 @@
     <button
       ref="buttonRef"
       class="au-menu-item__content au-focus-ring"
-      :class="{ 'is-active': active, 'is-disabled': itemDisabled }"
+      :class="{ 'is-active': active }"
       type="button"
       role="menuitem"
       data-au-menu-item

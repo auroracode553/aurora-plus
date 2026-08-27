@@ -1,7 +1,6 @@
 <template>
   <div class="window-title-bar-demo">
     <AuWindowTitleBar
-      class="window-title-bar-demo__bar"
       title="Aurora Notes"
       :maximized="maximized"
       @minimize="lastAction = '请求最小化窗口'"

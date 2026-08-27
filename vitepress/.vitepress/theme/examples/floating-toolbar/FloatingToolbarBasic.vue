@@ -91,7 +91,7 @@ function handleHide() {
   border: 1px dashed var(--au-color-primary);
   border-radius: 8px;
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-color-bg));
+  background: color-mix(in srgb, var(--au-color-primary) 7%, transparent);
   cursor: pointer;
   place-items: center;
 }

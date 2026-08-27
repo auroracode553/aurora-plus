@@ -5,8 +5,6 @@
       `is-${size}`,
       {
         'is-checked': checked,
-        'is-disabled': disabled,
-        'is-loading': loading,
         'au-disabled': disabled || loading,
       },
     ]"

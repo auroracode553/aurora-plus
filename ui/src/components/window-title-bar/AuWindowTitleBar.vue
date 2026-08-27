@@ -2,7 +2,6 @@
   <div
     class="au-window-title-bar au-component"
     :class="{
-      'is-maximized': maximized,
       'is-drag-disabled': !draggable,
       'is-controls-start': controlsPosition === 'start',
     }"
@@ -60,7 +59,7 @@
           :disabled="!showTooltips"
         >
           <button
-            class="au-window-title-bar__button is-minimize au-focus-ring"
+            class="au-window-title-bar__button au-focus-ring"
             type="button"
             :aria-label="minimizeLabel"
             :disabled="minimizeDisabled"
@@ -80,7 +79,7 @@
           :disabled="!showTooltips"
         >
           <button
-            class="au-window-title-bar__button is-maximize au-focus-ring"
+            class="au-window-title-bar__button au-focus-ring"
             type="button"
             :aria-label="maximizeButtonLabel"
             :aria-pressed="maximized ? 'true' : 'false'"

@@ -62,7 +62,7 @@ function saveProfile() {
   border: 1px solid var(--au-color-border);
   border-radius: var(--au-border-radius-base);
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg);
+  background: transparent;
   outline: none;
   resize: vertical;
 }

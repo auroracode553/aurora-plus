@@ -98,7 +98,7 @@
               <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator"></div>
               <button
                 v-else
-                class="au-context-menu__item au-menu-item is-submenu-item"
+                class="au-context-menu__item au-menu-item"
                 :class="{ 'is-danger': item.danger }"
                 type="button"
                 role="menuitem"

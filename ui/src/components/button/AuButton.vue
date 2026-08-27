@@ -61,7 +61,6 @@ const buttonClasses = computed(() => [
     'is-circle': props.circle,
     'is-disabled': props.disabled || props.loading,
     'au-disabled': props.disabled || props.loading,
-    'is-loading': props.loading,
   },
 ]);
 

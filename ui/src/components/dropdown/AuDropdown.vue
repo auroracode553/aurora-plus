@@ -1,5 +1,5 @@
 <template>
-  <div class="au-dropdown au-component" :class="{ 'is-open': visible, 'is-disabled': disabled }" v-bind="$attrs">
+  <div class="au-dropdown au-component" :class="{ 'is-disabled': disabled }" v-bind="$attrs">
     <span
       ref="triggerRef"
       class="au-dropdown__trigger"

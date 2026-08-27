@@ -38,7 +38,7 @@ const activeItem = ref('general');
 .menu-demo__menu {
   width: 220px;
   border: 1px solid var(--au-color-border-lighter);
-  border-radius: var(--au-border-radius-large);
+  border-radius: 12px;
 }
 
 .menu-demo__result {
