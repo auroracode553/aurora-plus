@@ -1,18 +1,20 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import ButtonGroupConnected from '../.vitepress/theme/examples/button-group/ButtonGroupConnected.vue';
+import ButtonGroupSegmented from '../.vitepress/theme/examples/button-group/ButtonGroupSegmented.vue';
 import ButtonGroupFloating from '../.vitepress/theme/examples/button-group/ButtonGroupFloating.vue';
 import buttonGroupConnectedSource from '../.vitepress/theme/examples/button-group/ButtonGroupConnected.vue?demo-source';
+import buttonGroupSegmentedSource from '../.vitepress/theme/examples/button-group/ButtonGroupSegmented.vue?demo-source';
 import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group/ButtonGroupFloating.vue?demo-source';
 </script>
 
 # ButtonGroup 按钮组
 
-`AuButtonGroup` 将一组相关操作组织成统一的操作单元。它提供两种职责明确的外观：`connected` 连体按钮组和 `floating` 悬浮控制组。组件只管理布局与视觉关系，按钮文案、图标和业务事件仍由插槽中的 `AuButton` 提供。
+`AuButtonGroup` 将一组相关操作组织成统一的操作单元。它提供 `connected` 连体工具组、`segmented` 等宽分段选择和 `floating` 悬浮控制组三种外观。组件只管理布局与视觉关系，按钮文案、图标和业务事件仍由插槽中的 `AuButton` 提供。
 
 ## 连体按钮组
 
-`variant="connected"` 使用统一的半透明材质容器承载多个分段操作，适合窗口工具、筛选和视图切换。当前项通过 `aria-pressed="true"`、`aria-current="true"` 或 `is-active` 类获得独立材质层。
+`variant="connected"` 使用统一的半透明材质容器承载多个操作，适合顶部菜单、窗口工具和视图切换。当前项通过 `aria-pressed="true"`、`aria-current="true"`、`aria-expanded="true"` 或 `is-active` 类获得独立材质层。
 
 <DemoBlock
   title="Connected 连体按钮组"
@@ -20,6 +22,20 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
   :source="buttonGroupConnectedSource"
 >
   <ButtonGroupConnected />
+</DemoBlock>
+
+带弹层的工具项可使用 `AuButtonGroupItem` 包裹一个 `AuButton` 和对应弹层。包装项只提供相对定位上下文，按钮的外观仍由 `AuButtonGroup` 统一管理。
+
+## 分段选择
+
+`variant="segmented"` 将直接子按钮均分为紧凑选项，适合透明度、显示密度等少量互斥值。当前值使用 `aria-pressed="true"` 表达，容器默认占满可用宽度。
+
+<DemoBlock
+  title="Segmented 分段选择"
+  description="等宽选项与独立选中材质层，适合在设置面板中快速切换。"
+  :source="buttonGroupSegmentedSource"
+>
+  <ButtonGroupSegmented />
 </DemoBlock>
 
 ## 悬浮控制组
@@ -38,7 +54,8 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 | 外观 | 适用场景 | 视觉关系 | 常见内容 |
 | --- | --- | --- | --- |
-| `connected` | 工具切换、筛选、视图切换 | 统一材质容器与独立选中项 | 文字或文字加图标 |
+| `connected` | 顶部菜单、工具切换、视图切换 | 统一材质容器与独立展开/选中项 | 文字或文字加图标 |
+| `segmented` | 透明度、显示密度、枚举设置 | 等宽选项与独立选中项 | 简短文字或数值 |
 | `floating` | 卡片、画布、面板快捷操作 | 独立按钮位于悬浮面板内 | 纯图标 |
 
 `AuButtonGroup` 不负责定位和显隐。如果控件需要跟随选区或锚点浮动，请使用 `AuFloatingToolbar` 处理定位，并在其插槽中组织操作内容。
@@ -56,15 +73,22 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 | 属性 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
-| `variant` | 外观类型 | `string` | `connected / floating` | `connected` |
+| `variant` | 外观类型 | `string` | `connected / segmented / floating` | `connected` |
 | `orientation` | 按钮排列方向 | `string` | `horizontal / vertical` | `horizontal` |
+| `role` | 根元素的无障碍角色 | `string` | `group / toolbar` | `group` |
 | `iconOnly` | 是否将直接子按钮统一为方形图标按钮 | `boolean` | — | `false` |
 | `ariaLabel` | 按钮组的无障碍名称 | `string` | — | `''` |
 
-未声明的原生属性会透传到根元素。根元素使用 `role="group"`，每个按钮保留原生键盘与焦点行为。
+未声明的原生属性会透传到根元素。每个按钮保留原生键盘与焦点行为；`toolbar` 会同时输出与排列方向一致的 `aria-orientation`。
 
 ### Slots
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `default` | 一组直接子级 `AuButton` |
+| `default` | 一组直接子级 `AuButton`，或用于承载弹层的 `AuButtonGroupItem` |
+
+### AuButtonGroupItem Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 一个 `AuButton`，以及需要锚定到该按钮的弹层内容 |

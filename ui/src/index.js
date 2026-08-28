@@ -1,7 +1,7 @@
 import './theme/index.css';
 
 import { AuButton } from './components/button/index.js';
-import { AuButtonGroup } from './components/button-group/index.js';
+import { AuButtonGroup, AuButtonGroupItem } from './components/button-group/index.js';
 import { AuCard } from './components/card/index.js';
 import { AuCheckbox } from './components/checkbox/index.js';
 import { AuColorPicker, AuColorSwatch } from './components/color-picker/index.js';
@@ -35,6 +35,7 @@ import {
 const components = [
   AuButton,
   AuButtonGroup,
+  AuButtonGroupItem,
   AuCard,
   AuCheckbox,
   AuColorPicker,
@@ -76,6 +77,7 @@ export const AuroraUI = {
 export {
   AuButton,
   AuButtonGroup,
+  AuButtonGroupItem,
   AuCard,
   AuCheckbox,
   AuColorPicker,

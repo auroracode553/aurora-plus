@@ -1,15 +1,18 @@
 <template>
   <div class="button-group-connected-demo">
     <AuButtonGroup variant="connected" aria-label="工作台工具">
-      <AuButton
+      <AuButtonGroupItem
         v-for="action in actions"
         :key="action.key"
-        :icon="action.icon"
-        :aria-pressed="selectedAction === action.key"
-        @click="selectedAction = action.key"
       >
-        {{ action.label }}
-      </AuButton>
+        <AuButton
+          :icon="action.icon"
+          :aria-pressed="selectedAction === action.key"
+          @click="selectedAction = action.key"
+        >
+          {{ action.label }}
+        </AuButton>
+      </AuButtonGroupItem>
     </AuButtonGroup>
   </div>
 </template>
@@ -19,6 +22,7 @@ import { ref } from 'vue';
 import {
   AuButton,
   AuButtonGroup,
+  AuButtonGroupItem,
   IconAdjustmentsHorizontal,
   IconBell,
   IconDots,
