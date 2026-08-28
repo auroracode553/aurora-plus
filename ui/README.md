@@ -13,7 +13,7 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 | `AuSelect` | 支持尺寸、禁用态和错误态的原生下拉选择框 |
 | `AuSwitch` | 二元状态切换开关 |
 | `AuCheckbox` | 布尔值、数组和半选状态复选框 |
-| `AuColorPicker` | 使用系统取色面板的颜色选择控件 |
+| `AuColorPicker`、`AuColorSwatch` | 系统取色与预设颜色选择控件 |
 | `AuDropdown` | 带视口避让和键盘导航的下拉菜单 |
 | `AuMenu`、`AuMenuItem` | 支持受控选中和键盘导航的持久导航菜单 |
 | `AuMenuBar` | 桌面应用顶部菜单栏与层级命令菜单 |

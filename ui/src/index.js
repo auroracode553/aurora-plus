@@ -4,7 +4,7 @@ import { AuButton } from './components/button/index.js';
 import { AuButtonGroup } from './components/button-group/index.js';
 import { AuCard } from './components/card/index.js';
 import { AuCheckbox } from './components/checkbox/index.js';
-import { AuColorPicker } from './components/color-picker/index.js';
+import { AuColorPicker, AuColorSwatch } from './components/color-picker/index.js';
 import { AuContextMenu } from './components/context-menu/index.js';
 import { AuDialog } from './components/dialog/index.js';
 import { AuDropdown } from './components/dropdown/index.js';
@@ -38,6 +38,7 @@ const components = [
   AuCard,
   AuCheckbox,
   AuColorPicker,
+  AuColorSwatch,
   AuContextMenu,
   AuDialog,
   AuDropdown,
@@ -78,6 +79,7 @@ export {
   AuCard,
   AuCheckbox,
   AuColorPicker,
+  AuColorSwatch,
   AuContextMenu,
   AuDialog,
   AuDropdown,
