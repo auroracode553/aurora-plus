@@ -74,47 +74,57 @@ export default defineConfig({
         ],
       },
       {
-        text: '基础组件',
+        text: 'Basic 基础组件',
         items: [
           { text: 'Button 按钮', link: '/components/button' },
           { text: 'ButtonGroup 按钮组', link: '/components/button-group' },
+          { text: 'Icon 图标', link: '/components/icon' },
+        ],
+      },
+      {
+        text: 'Form 表单组件',
+        items: [
           { text: 'Input 输入框', link: '/components/input' },
           { text: 'Textarea 多行输入框', link: '/components/textarea' },
           { text: 'Select 选择器', link: '/components/select' },
           { text: 'ColorPicker 颜色选择器', link: '/components/color-picker' },
           { text: 'Switch 开关', link: '/components/switch' },
           { text: 'Checkbox 多选框', link: '/components/checkbox' },
+        ],
+      },
+      {
+        text: 'Data 数据展示',
+        items: [
+          { text: 'Card 卡片', link: '/components/card' },
+          { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' },
+        ],
+      },
+      {
+        text: 'Navigation 导航',
+        items: [
           { text: 'Dropdown 下拉菜单', link: '/components/dropdown' },
           { text: 'Menu 导航菜单', link: '/components/menu' },
           { text: 'MenuBar 应用菜单栏', link: '/components/menu-bar' },
           { text: 'MenuList 菜单列表', link: '/components/menu-list' },
           { text: 'Tabs 标签页', link: '/components/tabs' },
-          { text: 'Icon 图标', link: '/components/icon' },
+          { text: 'Tree 树形导航', link: '/components/tree' },
+          { text: 'ContextMenu 右键菜单', link: '/components/context-menu' },
+        ],
+      },
+      {
+        text: 'Feedback 反馈组件',
+        items: [
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
-        ],
-      },
-      {
-        text: '应用外壳',
-        items: [
-          { text: 'WindowTitleBar 窗口标题栏', link: '/components/window-title-bar' },
-        ],
-      },
-      {
-        text: '反馈组件',
-        items: [
+          { text: 'Dialog 对话框', link: '/components/dialog' },
           { text: 'Message 消息提示', link: '/components/message' },
           { text: 'MessageBox 消息确认框', link: '/components/message-box' },
-          { text: 'Dialog 对话框', link: '/components/dialog' },
         ],
       },
       {
-        text: '数据与浮层',
+        text: 'Application 应用组件',
         items: [
-          { text: 'Card 卡片', link: '/components/card' },
-          { text: '虚拟列表', link: '/components/virtual-list' },
-          { text: 'Tree 树形导航', link: '/components/tree' },
-          { text: '右键菜单', link: '/components/context-menu' },
-          { text: '浮动工具条', link: '/components/floating-toolbar' },
+          { text: 'FloatingToolbar 浮动工具条', link: '/components/floating-toolbar' },
+          { text: 'WindowTitleBar 窗口标题栏', link: '/components/window-title-bar' },
         ],
       },
     ],

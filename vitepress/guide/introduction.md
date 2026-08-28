@@ -1,13 +1,14 @@
 # 介绍
 
-Aurora UI 是 Vue 3 通用组件库，提供基础组件、容器、数据展示和反馈服务，支持完整安装与按需导入。
+Aurora UI 是 Vue 3 通用组件库，提供基础、表单、数据展示、导航、反馈和应用组件，支持完整安装与按需导入。
 
 ## 组件范围
 
 | 分类 | 当前能力 |
 | --- | --- |
-| 基础 | [Button](/components/button)、[ButtonGroup](/components/button-group)、[Switch](/components/switch)、[Checkbox](/components/checkbox)、[Dropdown](/components/dropdown)、[Icon](/components/icon)、[Tooltip](/components/tooltip) |
-| 容器 | [Card](/components/card)、[Dialog](/components/dialog)、[FloatingToolbar](/components/floating-toolbar) |
-| 数据展示 | [VirtualList](/components/virtual-list)、[ContextMenu](/components/context-menu) |
-| 应用外壳 | [WindowTitleBar](/components/window-title-bar) |
-| 反馈服务 | [Message](/components/message)、[MessageBox](/components/message-box) |
+| Basic 基础组件 | [Button](/components/button)、[ButtonGroup](/components/button-group)、[Icon](/components/icon) |
+| Form 表单组件 | [Input](/components/input)、[Textarea](/components/textarea)、[Select](/components/select)、[ColorPicker](/components/color-picker)、[Switch](/components/switch)、[Checkbox](/components/checkbox) |
+| Data 数据展示 | [Card](/components/card)、[VirtualList](/components/virtual-list) |
+| Navigation 导航 | [Dropdown](/components/dropdown)、[Menu](/components/menu)、[MenuBar](/components/menu-bar)、[MenuList](/components/menu-list)、[Tabs](/components/tabs)、[Tree](/components/tree)、[ContextMenu](/components/context-menu) |
+| Feedback 反馈组件 | [Tooltip](/components/tooltip)、[Dialog](/components/dialog)、[Message](/components/message)、[MessageBox](/components/message-box) |
+| Application 应用组件 | [FloatingToolbar](/components/floating-toolbar)、[WindowTitleBar](/components/window-title-bar) |
