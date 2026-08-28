@@ -122,10 +122,10 @@ function handleClick(event) {
   position: absolute;
   right: 0;
   bottom: 0;
-  left: var(--au-menu-list-divider-inset);
+  left: 16px;
   z-index: 2;
   height: 1px;
-  background: var(--au-menu-list-divider);
+  background: var(--au-color-border-lighter);
   transform: scaleY(0.5);
   transform-origin: bottom;
   pointer-events: none;
@@ -137,10 +137,10 @@ function handleClick(event) {
   align-items: center;
   width: 100%;
   min-width: 0;
-  min-height: var(--au-menu-list-row-min-height);
+  min-height: 52px;
   margin: 0;
-  padding: var(--au-menu-list-row-padding-block) var(--au-menu-list-row-padding-inline);
-  gap: var(--au-menu-list-row-gap);
+  padding: 12px 16px;
+  gap: 12px;
   border: 0;
   color: inherit;
   background: transparent;
@@ -160,11 +160,11 @@ function handleClick(event) {
 .au-menu-list-item.is-interactive .au-menu-list-item__row:hover,
 .au-menu-list-item.is-interactive .au-menu-list-item__row:focus-visible,
 .au-menu-list-item.is-selected .au-menu-list-item__row {
-  background: var(--au-menu-list-interactive-bg);
+  background: color-mix(in srgb, var(--au-color-primary) 7%, transparent);
 }
 
 .au-menu-list-item.is-interactive .au-menu-list-item__row:active {
-  background: var(--au-menu-list-pressed-bg);
+  background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
 }
 
 .au-menu-list-item__row:focus-visible {
@@ -209,7 +209,7 @@ function handleClick(event) {
 
 .au-menu-list-item__title {
   color: var(--au-color-text-primary);
-  font-size: var(--au-menu-list-title-size);
+  font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.35;
   letter-spacing: -0.005em;
@@ -217,7 +217,7 @@ function handleClick(event) {
 
 .au-menu-list-item__description {
   color: var(--au-color-text-secondary);
-  font-size: var(--au-menu-list-description-size);
+  font-size: var(--au-font-size-small);
   font-weight: 400;
   line-height: 1.4;
 }
@@ -235,6 +235,24 @@ function handleClick(event) {
 .au-menu-list-item__chevron {
   color: var(--au-color-text-secondary);
   font-size: 20px;
+}
+
+.au-menu-list-item.is-compact .au-menu-list-item__row {
+  min-height: 44px;
+  padding-block: 10px;
+}
+
+.au-menu-list-item.is-relaxed .au-menu-list-item__row {
+  min-height: 64px;
+  padding: 14px 18px;
+}
+
+.au-menu-list-item.is-relaxed .au-menu-list-item__title {
+  font-size: var(--au-font-size-large);
+}
+
+.au-menu-list-item.is-relaxed .au-menu-list-item__description {
+  font-size: var(--au-font-size-base);
 }
 
 @media (prefers-reduced-motion: reduce) {

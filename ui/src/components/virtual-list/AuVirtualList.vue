@@ -1,5 +1,10 @@
 <template>
-  <div ref="scrollContainerRef" class="au-virtual-list au-component au-depth-surface" @scroll.passive="handleScroll">
+  <div
+    ref="scrollContainerRef"
+    class="au-virtual-list au-component"
+    :class="{ 'au-depth-surface': !plain, 'is-plain': plain, 'is-fill': fill }"
+    @scroll.passive="handleScroll"
+  >
     <slot v-if="items.length === 0" name="empty"></slot>
     <div v-else class="au-virtual-list__spacer" :style="{ height: `${totalHeight}px` }">
       <div class="au-virtual-list__content" :style="{ transform: `translateY(${offsetTop}px)` }">
@@ -23,6 +28,8 @@ const props = defineProps({
   overscan: { type: Number, default: 8, validator: (value) => value >= 0 },
   keyField: { type: String, default: 'id' },
   itemKey: { type: Function, default: null },
+  plain: { type: Boolean, default: false },
+  fill: { type: Boolean, default: false },
 });
 
 const emit = defineEmits(['scroll', 'range-change']);
@@ -156,6 +163,22 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 .au-virtual-list:focus-visible {
   outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
   outline-offset: 1px;
+}
+
+.au-virtual-list.is-plain {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  contain: content;
+}
+
+.au-virtual-list.is-fill {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
 }
 
 .au-virtual-list::-webkit-scrollbar {

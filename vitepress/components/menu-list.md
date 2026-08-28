@@ -8,7 +8,7 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 
 `AuMenuList` 与 `AuMenuListItem` 用于苹果式分组菜单、设置入口和带尾部控件的配置行。它与导航选中的 `AuMenu`、大数据滚动的 `AuVirtualList` 职责不同。
 
-默认面板使用 Aurora UI 材质、圆角与 `--au-shadow-surface` 阴影，自动适配明暗主题、减少透明度和高对比度偏好。
+默认面板使用 Aurora UI 的材质、圆角与表面阴影，自动适配明暗主题、减少透明度和高对比度偏好。
 
 ## 基础用法
 
@@ -79,16 +79,3 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 | `description` | — | 自定义次级说明 |
 | `leading` | `{ disabled, selected }` | 自定义前导内容 |
 | `trailing` | `{ disabled, selected }` | 尾部控件或状态 |
-
-## CSS 变量
-
-| 变量 | 默认值 | 说明 |
-| --- | --- | --- |
-| `--au-menu-list-radius` | `14px` | 面板圆角 |
-| `--au-menu-list-border` | `var(--au-material-border)` | 面板边框 |
-| `--au-menu-list-divider` | `var(--au-color-border-lighter)` | 分隔线颜色 |
-| `--au-menu-list-divider-inset` | `16px` | 分隔线左侧缩进 |
-| `--au-menu-list-row-min-height` | `52px` | 默认行高 |
-| `--au-menu-list-row-padding-block` | `12px` | 行纵向内边距 |
-| `--au-menu-list-row-padding-inline` | `16px` | 行横向内边距 |
-| `--au-menu-list-row-gap` | `12px` | 行内容间距 |

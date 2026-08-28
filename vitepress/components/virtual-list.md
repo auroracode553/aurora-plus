@@ -39,6 +39,8 @@ import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/Vi
 | `overscan` | 视口上下额外渲染的行数 | `number` | `8` |
 | `keyField` | 从对象数据读取 key 的字段 | `string` | `id` |
 | `itemKey` | 自定义 key 计算函数，优先级高于 `keyField` | `(item: T, index: number) => string \| number` | — |
+| `plain` | 移除容器边框、内边距和表面阴影，供复合组件承载内容 | `boolean` | `false` |
+| `fill` | 填满父级可用宽高并参与弹性布局 | `boolean` | `false` |
 
 ### Events
 
