@@ -8,7 +8,7 @@ Aurora UI 是 Vue 3 通用组件库，提供基础、表单、数据展示、导
 | --- | --- |
 | Basic 基础组件 | [Button](/components/button)、[ButtonGroup](/components/button-group)、[Icon](/components/icon) |
 | Form 表单组件 | [Input](/components/input)、[Textarea](/components/textarea)、[Select](/components/select)、[ColorPicker](/components/color-picker)、[Switch](/components/switch)、[Checkbox](/components/checkbox) |
-| Data 数据展示 | [Card](/components/card)、[VirtualList](/components/virtual-list) |
+| Data 数据展示 | [Panel](/components/panel)、[Card](/components/card)、[VirtualList](/components/virtual-list) |
 | Navigation 导航 | [Dropdown](/components/dropdown)、[Menu](/components/menu)、[MenuBar](/components/menu-bar)、[MenuList](/components/menu-list)、[Tabs](/components/tabs)、[Tree](/components/tree)、[ContextMenu](/components/context-menu) |
-| Feedback 反馈组件 | [Tooltip](/components/tooltip)、[Dialog](/components/dialog)、[Message](/components/message)、[MessageBox](/components/message-box) |
+| Feedback 反馈组件 | [Popover](/components/popover)、[Tooltip](/components/tooltip)、[Dialog](/components/dialog)、[Message](/components/message)、[MessageBox](/components/message-box) |
 | Application 应用组件 | [FloatingToolbar](/components/floating-toolbar)、[WindowTitleBar](/components/window-title-bar) |

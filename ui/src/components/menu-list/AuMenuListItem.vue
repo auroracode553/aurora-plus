@@ -8,6 +8,8 @@
         'is-interactive': interactive,
         'is-disabled': disabled,
         'is-selected': selected,
+        [`is-tone-${tone}`]: true,
+        [`has-leading-${leadingVariant}`]: true,
       },
       $attrs.class,
     ]"
@@ -27,7 +29,7 @@
       @click="handleClick"
     >
       <span v-if="$slots.leading || leadingIcon" class="au-menu-list-item__leading" aria-hidden="true">
-        <slot name="leading" :disabled="disabled" :selected="selected">
+        <slot name="leading" :disabled="disabled" :selected="selected" :tone="tone">
           <AuIcon :icon="leadingIcon" />
         </slot>
       </span>
@@ -41,8 +43,12 @@
         </span>
       </span>
 
-      <span v-if="$slots.trailing || accessory !== 'none'" class="au-menu-list-item__trailing">
-        <slot name="trailing" :disabled="disabled" :selected="selected"></slot>
+      <span
+        v-if="$slots.trailing || shortcut || accessory !== 'none'"
+        class="au-menu-list-item__trailing"
+      >
+        <slot name="trailing" :disabled="disabled" :selected="selected" :tone="tone"></slot>
+        <kbd v-if="shortcut" class="au-menu-list-item__shortcut">{{ shortcut }}</kbd>
         <AuIcon
           v-if="accessory === 'chevron'"
           class="au-menu-list-item__chevron"
@@ -65,6 +71,16 @@ const props = defineProps({
   title: { type: String, default: '' },
   description: { type: String, default: '' },
   leadingIcon: { type: [Object, Function], default: null },
+  leadingVariant: {
+    type: String,
+    default: 'plain',
+    validator: (value) => ['plain', 'tinted'].includes(value),
+  },
+  tone: {
+    type: String,
+    default: 'default',
+    validator: (value) => ['default', 'primary', 'success', 'warning', 'danger'].includes(value),
+  },
   accessory: {
     type: String,
     default: 'none',
@@ -77,6 +93,7 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   selected: { type: Boolean, default: false },
   ariaCurrent: { type: String, default: 'page' },
+  shortcut: { type: String, default: '' },
 });
 
 const emit = defineEmits(['click']);
@@ -150,7 +167,8 @@ function handleClick(event) {
   appearance: none;
   transition:
     color var(--au-transition-duration) var(--au-transition-ease),
-    background 100ms ease-out;
+    background 100ms ease-out,
+    transform 90ms ease-out;
 }
 
 .au-menu-list-item.is-interactive .au-menu-list-item__row {
@@ -165,6 +183,7 @@ function handleClick(event) {
 
 .au-menu-list-item.is-interactive .au-menu-list-item__row:active {
   background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
+  transform: scale(0.99);
 }
 
 .au-menu-list-item__row:focus-visible {
@@ -190,6 +209,15 @@ function handleClick(event) {
   flex: none;
   color: var(--au-color-primary);
   font-size: 20px;
+}
+
+.au-menu-list-item.has-leading-tinted .au-menu-list-item__leading {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--au-radius-control);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
+  font-size: 18px;
 }
 
 .au-menu-list-item__content {
@@ -237,6 +265,79 @@ function handleClick(event) {
   font-size: 20px;
 }
 
+.au-menu-list-item__shortcut {
+  margin: 0;
+  color: var(--au-color-text-secondary);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--au-font-size-small);
+  font-weight: var(--au-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.au-menu-list-item.is-tone-primary .au-menu-list-item__title,
+.au-menu-list-item.is-tone-primary .au-menu-list-item__leading {
+  color: var(--au-color-primary);
+}
+
+.au-menu-list-item.is-tone-success .au-menu-list-item__title,
+.au-menu-list-item.is-tone-success .au-menu-list-item__leading {
+  color: var(--au-color-success);
+}
+
+.au-menu-list-item.is-tone-warning .au-menu-list-item__title,
+.au-menu-list-item.is-tone-warning .au-menu-list-item__leading {
+  color: var(--au-color-warning);
+}
+
+.au-menu-list-item.is-tone-danger .au-menu-list-item__title,
+.au-menu-list-item.is-tone-danger .au-menu-list-item__leading {
+  color: var(--au-color-danger);
+}
+
+.au-menu-list-item.is-tone-success.has-leading-tinted .au-menu-list-item__leading {
+  background: color-mix(in srgb, var(--au-color-success) 10%, transparent);
+}
+
+.au-menu-list-item.is-tone-warning.has-leading-tinted .au-menu-list-item__leading {
+  background: color-mix(in srgb, var(--au-color-warning) 10%, transparent);
+}
+
+.au-menu-list-item.is-tone-danger.has-leading-tinted .au-menu-list-item__leading {
+  background: color-mix(in srgb, var(--au-color-danger) 10%, transparent);
+}
+
+.au-menu-list-item.is-interactive.is-tone-success .au-menu-list-item__row:hover,
+.au-menu-list-item.is-interactive.is-tone-success .au-menu-list-item__row:focus-visible,
+.au-menu-list-item.is-tone-success.is-selected .au-menu-list-item__row {
+  background: color-mix(in srgb, var(--au-color-success) 8%, transparent);
+}
+
+.au-menu-list-item.is-interactive.is-tone-warning .au-menu-list-item__row:hover,
+.au-menu-list-item.is-interactive.is-tone-warning .au-menu-list-item__row:focus-visible,
+.au-menu-list-item.is-tone-warning.is-selected .au-menu-list-item__row {
+  background: color-mix(in srgb, var(--au-color-warning) 8%, transparent);
+}
+
+.au-menu-list-item.is-interactive.is-tone-danger .au-menu-list-item__row:hover,
+.au-menu-list-item.is-interactive.is-tone-danger .au-menu-list-item__row:focus-visible,
+.au-menu-list-item.is-tone-danger.is-selected .au-menu-list-item__row {
+  background: color-mix(in srgb, var(--au-color-danger) 8%, transparent);
+}
+
+.au-menu-list-item.is-interactive.is-tone-success .au-menu-list-item__row:active {
+  background: color-mix(in srgb, var(--au-color-success) 13%, transparent);
+}
+
+.au-menu-list-item.is-interactive.is-tone-warning .au-menu-list-item__row:active {
+  background: color-mix(in srgb, var(--au-color-warning) 13%, transparent);
+}
+
+.au-menu-list-item.is-interactive.is-tone-danger .au-menu-list-item__row:active {
+  background: color-mix(in srgb, var(--au-color-danger) 13%, transparent);
+}
+
 .au-menu-list-item.is-compact .au-menu-list-item__row {
   min-height: 44px;
   padding-block: 10px;
@@ -258,6 +359,19 @@ function handleClick(event) {
 @media (prefers-reduced-motion: reduce) {
   .au-menu-list-item__row {
     transition: none;
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .au-menu-list-item.has-leading-tinted .au-menu-list-item__leading {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+
+  .au-menu-list-item.is-interactive .au-menu-list-item__row:focus-visible {
+    color: HighlightText;
+    background: Highlight;
   }
 }
 </style>

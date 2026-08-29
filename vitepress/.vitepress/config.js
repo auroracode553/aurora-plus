@@ -95,6 +95,7 @@ export default defineConfig({
       {
         text: 'Data 数据展示',
         items: [
+          { text: 'Panel 通用面板', link: '/components/panel' },
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' },
         ],
@@ -114,6 +115,7 @@ export default defineConfig({
       {
         text: 'Feedback 反馈组件',
         items: [
+          { text: 'Popover 弹出层', link: '/components/popover' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
           { text: 'Dialog 对话框', link: '/components/dialog' },
           { text: 'Message 消息提示', link: '/components/message' },

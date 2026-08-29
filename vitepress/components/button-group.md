@@ -24,7 +24,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
   <ButtonGroupConnected />
 </DemoBlock>
 
-带弹层的工具项可使用 `AuButtonGroupItem` 包裹一个 `AuButton` 和对应弹层。包装项只提供相对定位上下文，按钮的外观仍由 `AuButtonGroup` 统一管理。
+带弹层的工具项可使用 `AuButtonGroupItem` 包裹 `AuPopover`，并把 `AuButton` 放入 Popover 的 `trigger` 插槽。连体按钮外观与 `aria-expanded` 选中材质仍由 `AuButtonGroup` 统一管理，浮层定位和关闭行为由 `AuPopover` 负责。
 
 ## 分段选择
 
@@ -58,7 +58,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 | `segmented` | 透明度、显示密度、枚举设置 | 等宽选项与独立选中项 | 简短文字或数值 |
 | `floating` | 卡片、画布、面板快捷操作 | 独立按钮位于悬浮面板内 | 纯图标 |
 
-`AuButtonGroup` 不负责定位和显隐。如果控件需要跟随选区或锚点浮动，请使用 `AuFloatingToolbar` 处理定位，并在其插槽中组织操作内容。
+`AuButtonGroup` 不负责定位和显隐。按钮触发的任意内容使用 `AuPopover`；跟随编辑选区浮动的工具组使用 `AuFloatingToolbar`。
 
 ## 使用建议
 
@@ -91,4 +91,4 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `default` | 一个 `AuButton`，以及需要锚定到该按钮的弹层内容 |
+| `default` | 一个直接子 `AuButton`，或以 `AuButton` 为触发器的 `AuPopover` |

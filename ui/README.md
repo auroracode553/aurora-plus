@@ -18,6 +18,8 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 | `AuMenu`、`AuMenuItem` | 支持受控选中和键盘导航的持久导航菜单 |
 | `AuMenuBar` | 桌面应用顶部菜单栏与层级命令菜单 |
 | `AuMenuList`、`AuMenuListItem` | 苹果式分组菜单与设置行 |
+| `AuPanel` | 仅提供表面、尺寸、滚动和区域插槽的通用面板 |
+| `AuPopover` | 支持任意内容、自动翻转和视口避让的锚点浮层 |
 | `AuTabs` | 紧凑的受控标签页导航 |
 | `AuCard` | 卡片容器 |
 | `AuIcon` | 图标尺寸、颜色与无障碍外壳 |

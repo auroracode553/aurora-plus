@@ -25,12 +25,25 @@
         </template>
       </AuMenuListItem>
     </AuMenuList>
+
+    <AuMenuList :divided="false" aria-label="单项操作">
+      <AuMenuListItem
+        title="清除最近记录"
+        description="移除当前设备保存的历史记录"
+        :leading-icon="IconTrash"
+        leading-variant="tinted"
+        tone="danger"
+        shortcut="Shift Del"
+        clickable
+        @click="selectedItem = '清除最近记录'"
+      />
+    </AuMenuList>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { AuMenuList, AuMenuListItem, AuSwitch } from 'aurora-ui';
+import { AuMenuList, AuMenuListItem, AuSwitch, IconTrash } from 'aurora-ui';
 
 const selectedItem = ref('');
 const autoplay = ref(true);

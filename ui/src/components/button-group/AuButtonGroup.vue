@@ -60,6 +60,10 @@ defineProps({
   width: 100%;
 }
 
+.au-button-group.is-vertical :deep(> .au-button-group-item > .au-popover) {
+  width: 100%;
+}
+
 .au-button-group.is-connected {
   gap: 2px;
   padding: 3px;
@@ -74,7 +78,8 @@ defineProps({
 }
 
 .au-button-group.is-connected :deep(> .au-button),
-.au-button-group.is-connected :deep(> .au-button-group-item > .au-button) {
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-button),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button) {
   position: relative;
   height: 30px;
   padding: 0 10px;
@@ -88,20 +93,23 @@ defineProps({
 }
 
 .au-button-group.is-vertical.is-connected :deep(> .au-button),
-.au-button-group.is-vertical.is-connected :deep(> .au-button-group-item > .au-button) {
+.au-button-group.is-vertical.is-connected :deep(> .au-button-group-item > .au-button),
+.au-button-group.is-vertical.is-connected :deep(> .au-button-group-item > .au-popover > .au-button) {
   width: 100%;
   justify-content: flex-start;
 }
 
 .au-button-group.is-connected :deep(> .au-button:hover:not(.is-disabled)),
-.au-button-group.is-connected :deep(> .au-button-group-item > .au-button:hover:not(.is-disabled)) {
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-button:hover:not(.is-disabled)),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button:hover:not(.is-disabled)) {
   color: var(--au-color-text-primary);
   background: color-mix(in srgb, var(--au-color-text-primary) 7%, transparent);
   box-shadow: none;
 }
 
 .au-button-group.is-connected :deep(> .au-button:active:not(.is-disabled)),
-.au-button-group.is-connected :deep(> .au-button-group-item > .au-button:active:not(.is-disabled)) {
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-button:active:not(.is-disabled)),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button:active:not(.is-disabled)) {
   color: var(--au-color-text-primary);
   background: color-mix(in srgb, var(--au-color-text-primary) 11%, transparent);
   box-shadow: none;
@@ -115,7 +123,11 @@ defineProps({
 .au-button-group.is-connected :deep(> .au-button-group-item > .au-button.is-active),
 .au-button-group.is-connected :deep(> .au-button-group-item > .au-button[aria-pressed='true']),
 .au-button-group.is-connected :deep(> .au-button-group-item > .au-button[aria-current='true']),
-.au-button-group.is-connected :deep(> .au-button-group-item > .au-button[aria-expanded='true']) {
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-button[aria-expanded='true']),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button.is-active),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button[aria-pressed='true']),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button[aria-current='true']),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button[aria-expanded='true']) {
   z-index: 1;
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-strong);
@@ -123,7 +135,8 @@ defineProps({
 }
 
 .au-button-group.is-connected :deep(> .au-button:focus-visible),
-.au-button-group.is-connected :deep(> .au-button-group-item > .au-button:focus-visible) {
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-button:focus-visible),
+.au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button:focus-visible) {
   z-index: 2;
   outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
   outline-offset: -1px;
@@ -280,6 +293,10 @@ defineProps({
   .au-button-group.is-connected :deep(> .au-button-group-item > .au-button[aria-pressed='true']),
   .au-button-group.is-connected :deep(> .au-button-group-item > .au-button[aria-current='true']),
   .au-button-group.is-connected :deep(> .au-button-group-item > .au-button[aria-expanded='true']),
+  .au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button.is-active),
+  .au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button[aria-pressed='true']),
+  .au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button[aria-current='true']),
+  .au-button-group.is-connected :deep(> .au-button-group-item > .au-popover > .au-button[aria-expanded='true']),
   .au-button-group.is-segmented :deep(> .au-button.is-active),
   .au-button-group.is-segmented :deep(> .au-button[aria-pressed='true']),
   .au-button-group.is-segmented :deep(> .au-button[aria-current='true']),

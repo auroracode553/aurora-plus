@@ -1,6 +1,6 @@
 # 三个桌面项目的 Aurora UI 接入与组件缺口
 
-更新日期：2026-08-27
+更新日期：2026-08-29
 
 ## 1. 盘点范围
 
@@ -38,9 +38,9 @@ D:\my_project\front-sdk\aurora-ui\ui
 | 基础操作 | `AuButton`、`AuButtonGroup`、`AuIcon` |
 | 表单输入 | `AuInput` |
 | 表单选择 | `AuSwitch`、`AuCheckbox` |
-| 内容容器 | `AuCard`、`AuVirtualList` |
+| 内容容器 | `AuPanel`、`AuCard`、`AuVirtualList` |
 | 导航 | `AuMenu`、`AuMenuItem`、`AuMenuList`、`AuMenuListItem` |
-| 浮层 | `AuTooltip`、`AuDropdown`、`AuContextMenu`、`AuDialog`、`AuFloatingToolbar` |
+| 浮层 | `AuPopover`、`AuTooltip`、`AuDropdown`、`AuContextMenu`、`AuDialog`、`AuFloatingToolbar` |
 | 桌面窗口 | `AuWindowTitleBar` |
 | 反馈服务 | `AuMessage`、`AuMessageBox` |
 
@@ -60,6 +60,8 @@ D:\my_project\front-sdk\aurora-ui\ui
 | `AuDropdown` | Git 远程仓库和 Fetch 周期 | — | — |
 | `AuMenu`、`AuMenuItem` | 偏好设置分类导航 | — | — |
 | `AuMenuList`、`AuMenuListItem` | 偏好设置分组面板 | — | — |
+| `AuPanel`、`AuMenuList`、`AuMenuListItem` | — | 应用控制中心弹层内容 | — |
+| `AuPopover` | — | 应用控制中心锚点浮层 | — |
 | `AuContextMenu` | 文档右键菜单 | — | — |
 | `AuDialog` | `BaseDialog` 公共适配器 | `BaseModal` 公共适配器 | — |
 | `AuFloatingToolbar` | 图片、音频和白板浮动工具条 | — | — |
@@ -100,6 +102,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 | 弹窗按钮、添加关注按钮 | `AuButton` | 已迁移；列表内部的无样式原生按钮按业务交互继续保留 |
 | 短时提醒周期 | `AuButtonGroup`、`AuButton` | 已迁移为带 `aria-pressed` 的分段按钮组 |
 | 金价提醒布尔选项 | `AuSwitch` | 四个即时开关已迁移 |
+| 应用控制中心弹层与操作项 | `AuPopover`、`AuPanel`、`AuMenuList`、`AuMenuListItem` | UI 库只提供锚点行为、插槽面板和通用菜单项；标题、状态、分区及 Electron 动作继续由应用插槽渲染 |
 | 信息卡片和模块卡片 | `AuCard` | 只迁移通用容器，不把行情业务结构放入 UI 库 |
 
 ### 4.3 translate-pc
@@ -123,7 +126,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 | `electron-st` | 15 | 0 | 0 | 2 | 1 |
 | `translate-pc` | 24 | 7 | 1 | 0 | 0 |
 
-### P0：基础表单与锚点浮层
+### P0：基础表单
 
 | 建议组件 | 主要需求来源 | 首版范围 |
 | --- | --- | --- |
@@ -132,7 +135,6 @@ D:\my_project\front-sdk\aurora-ui\ui
 | `AuInputNumber` | 表格行列、提醒阈值、请求超时等数值输入 | 最小/最大值、步进、精度、键盘增减、单位后缀 |
 | `AuRadio`、`AuRadioGroup` | `electron-st` 的类型选择，`translate-pc` 的主题和字号选择 | `v-model`、禁用、横向/纵向布局、完整键盘行为 |
 | `AuForm`、`AuFormItem` | 插入链接/表格、提醒设置、翻译服务配置 | 标签、说明、错误消息、必填状态、提交校验；校验器通过入参注入 |
-| `AuPopover` | `AppControlPopover`、复杂设置提示、不能由配置式 Dropdown 承载的任意内容 | 触发/内容插槽、受控显示、点击外部关闭、焦点返回、自动翻转和视口避让 |
 
 ### P1：搜索、导航与数据展示
 
@@ -173,7 +175,7 @@ Aurora UI 只提供这些业务组件内部可复用的按钮、表单、布局�
 ## 7. 推荐实施顺序
 
 1. 基于已有 `AuInput`，继续完成 `AuTextarea`、`AuSelect`、`AuInputNumber`、`AuRadioGroup` 和 `AuFormItem`，覆盖三个项目最集中的重复样式。
-2. 完成 `AuPopover` 后，在其上组合 `AuCombobox`，再迁移股票搜索、文件搜索和历史搜索。
+2. 基于已完成的 `AuPopover` 组合 `AuCombobox`，再迁移股票搜索、文件搜索和历史搜索。
 3. 完成 `AuMenuBar`、`AuTabs`、`AuTree` 和 `AuToolbar`，处理桌面工作台的导航与密集操作区。
 4. 补齐状态、空态、加载和进度组件，统一异步反馈。
 5. 最后按真实复用需求实现 `AuSplitPane`、`AuImageViewer`、`AuTimeline` 等体量较大的桌面组件。
