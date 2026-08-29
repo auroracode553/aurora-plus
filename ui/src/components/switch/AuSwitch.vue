@@ -73,7 +73,7 @@ function toggle() {
   min-height: 28px;
   padding: 0;
   border: 0;
-  border-radius: var(--au-border-radius-small);
+  border-radius: var(--au-radius-small);
   color: var(--au-color-text-regular);
   background: transparent;
   font-size: var(--au-font-size-base);
@@ -104,7 +104,7 @@ function toggle() {
   height: 20px;
   flex: none;
   border: 1px solid var(--au-material-border-strong);
-  border-radius: 999px;
+  border-radius: var(--au-radius-round);
   background: var(--au-material-bg-subtle);
   transition:
     background var(--au-transition-duration) var(--au-transition-ease),
@@ -118,7 +118,7 @@ function toggle() {
   width: 16px;
   height: 16px;
   margin-left: 2px;
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
   background: var(--au-material-bg-strong);
   transform: translateX(0);
   transition:

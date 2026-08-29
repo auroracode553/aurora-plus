@@ -64,7 +64,7 @@ defineProps({
   gap: 2px;
   padding: 3px;
   border: 1px solid var(--au-material-border-strong);
-  border-radius: 13px;
+  border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
   background: color-mix(in srgb, var(--au-material-bg-subtle) 72%, var(--au-color-bg-soft));
 }
@@ -79,7 +79,7 @@ defineProps({
   height: 30px;
   padding: 0 10px;
   border: 0;
-  border-radius: 9px;
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-secondary);
   background: transparent;
   box-shadow: none;
@@ -134,7 +134,7 @@ defineProps({
   gap: 3px;
   padding: 3px;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
   background: color-mix(in srgb, var(--au-color-bg-soft) 88%, var(--au-material-bg-subtle));
 }
@@ -152,7 +152,7 @@ defineProps({
   height: 28px;
   padding: 0 6px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-secondary);
   background: transparent;
   box-shadow: none;
@@ -199,7 +199,7 @@ defineProps({
   gap: 2px;
   padding: 2px;
   border: 1px solid color-mix(in srgb, var(--au-color-text-primary) 22%, transparent);
-  border-radius: 10px;
+  border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
   background: color-mix(in srgb, var(--au-color-bg-overlay) 88%, #000000 12%);
 }
@@ -215,7 +215,7 @@ defineProps({
 .au-button-group.is-floating :deep(> .au-button--default),
 .au-button-group.is-floating :deep(> .au-button-group-item > .au-button--default) {
   border: 1px solid color-mix(in srgb, var(--au-color-text-primary) 18%, transparent);
-  border-radius: 8px;
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
   background: color-mix(in srgb, var(--au-color-text-primary) 8%, transparent);
   box-shadow: none;
@@ -263,7 +263,7 @@ defineProps({
   min-width: 28px;
   height: 28px;
   padding: 0;
-  border-radius: 7px;
+  border-radius: var(--au-radius-small);
 }
 
 @media (prefers-reduced-transparency: reduce) {

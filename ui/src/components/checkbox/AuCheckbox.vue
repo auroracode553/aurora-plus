@@ -119,7 +119,7 @@ onMounted(syncIndeterminate);
   height: 18px;
   flex: none;
   border: 1px solid var(--au-material-border-strong);
-  border-radius: 5px;
+  border-radius: var(--au-radius-small);
   background: var(--au-material-bg-subtle);
   transition:
     background var(--au-transition-duration) var(--au-transition-ease),
@@ -130,13 +130,13 @@ onMounted(syncIndeterminate);
 .is-small .au-checkbox__box {
   width: 16px;
   height: 16px;
-  border-radius: 4px;
+  border-radius: var(--au-radius-small);
 }
 
 .is-large .au-checkbox__box {
   width: 20px;
   height: 20px;
-  border-radius: 6px;
+  border-radius: var(--au-radius-small);
 }
 
 .au-checkbox__mark {
@@ -164,7 +164,7 @@ onMounted(syncIndeterminate);
   width: 9px;
   height: 2px;
   border: 0;
-  border-radius: 2px;
+  border-radius: var(--au-radius-round);
   background: #ffffff;
   opacity: 1;
   transform: none;

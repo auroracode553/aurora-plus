@@ -6,7 +6,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 
 # Dropdown 下拉菜单
 
-用于将一组低频或次级操作收纳到触发器附近。打开后会自动进行视口避让，并支持鼠标、键盘和点击外部关闭。
+用于将一组低频或次级操作收纳到触发器附近。菜单使用 Aurora UI 统一的 Apple 风格圆角材质，打开后会自动进行视口避让，并支持鼠标、键盘和点击外部关闭。
 
 ## 基础用法
 
@@ -14,7 +14,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 
 <DemoBlock
   title="项目操作"
-  description="支持图标、快捷键提示、分隔线、禁用项和危险操作。"
+  description="圆角菜单项使用轻量状态色，支持图标、快捷键提示、分隔线、禁用项和危险操作。"
   :source="dropdownBasicSource"
 >
   <DropdownBasic />
@@ -62,7 +62,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `ariaLabel` | 菜单无障碍名称 | `string` | `下拉菜单` |
 | `zIndex` | 菜单层级 | `number` | `1200` |
 
-`placement` 可选 `top-start`、`top`、`top-end`、`bottom-start`、`bottom`、`bottom-end`。未声明的属性会透传到根元素。
+`placement` 可选 `top-start`、`top`、`top-end`、`bottom-start`、`bottom`、`bottom-end`；`top` 与 `bottom` 居中对齐，带 `start` / `end` 后缀时按对应边缘对齐。未声明的属性会透传到根元素。
 
 ### Events
 

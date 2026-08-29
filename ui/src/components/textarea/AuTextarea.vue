@@ -104,7 +104,7 @@ defineExpose({ focus, blur, select, textareaRef });
   width: 100%;
   min-width: 0;
   border: 0.5px solid var(--au-color-border-lighter);
-  border-radius: 7px;
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
   background: var(--au-color-bg-hover);
   font-size: 13px;
@@ -115,12 +115,12 @@ defineExpose({ focus, blur, select, textareaRef });
 }
 
 .au-textarea.is-small {
-  border-radius: 6px;
+  border-radius: var(--au-radius-small);
   font-size: var(--au-font-size-small);
 }
 
 .au-textarea.is-large {
-  border-radius: 8px;
+  border-radius: var(--au-radius-control);
   font-size: var(--au-font-size-base);
 }
 

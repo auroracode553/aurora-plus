@@ -127,19 +127,22 @@ console.log(getAuroraMaterial()); // soft
 | `--au-color-border-light` | `rgba(105, 123, 154, 0.2)` | 较浅边框 |
 | `--au-color-border-lighter` | `rgba(105, 123, 154, 0.13)` | 最浅分隔线 |
 
-## 尺寸、阴影与层级
+## 圆角、尺寸、阴影与层级
 
 | 变量 | 默认值 | 用途 |
 | --- | --- | --- |
-| `--au-border-radius-small` | `4px` | 小型控件圆角 |
-| `--au-border-radius-base` | `6px` | 常规控件圆角 |
+| `--au-radius-small` | `6px` | 小型控件与内部元素圆角 |
+| `--au-radius-control` | `8px` | 按钮、输入框和菜单项等标准控件圆角 |
+| `--au-radius-surface` | `12px` | 卡片、列表和工具条等承载表面圆角 |
+| `--au-radius-overlay` | `14px` | 下拉菜单、对话框和消息等浮层圆角 |
+| `--au-radius-round` | `999px` | 胶囊、圆形控件和状态点 |
 | `--au-font-family` | 系统字体栈 | 组件字体 |
 | `--au-font-size-small` | `12px` | 小号文字 |
 | `--au-font-size-base` | `14px` | 正文与控件文字 |
 | `--au-font-size-large` | `16px` | 大号控件文字 |
 | `--au-shadow-control` | 低层级四向阴影 | Button、Checkbox、Switch |
-| `--au-shadow-surface` | 中层级四向阴影 | Card、MenuList、VirtualList、ButtonGroup |
-| `--au-shadow-overlay` | 高层级四向阴影 | Message、Tooltip、菜单、工具条和 Dialog |
+| `--au-shadow-surface` | 中层级四向阴影 | Card、MenuList、VirtualList、ButtonGroup、Dropdown |
+| `--au-shadow-overlay` | 高层级四向阴影 | Message、Tooltip、上下文菜单、工具条和 Dialog |
 | `--au-focus-ring-color` | 主色半透明 | 键盘焦点轮廓颜色 |
 | `--au-focus-ring-width` | `2px` | 键盘焦点轮廓宽度 |
 | `--au-focus-ring-offset` | `2px` | 键盘焦点轮廓偏移 |
@@ -148,13 +151,17 @@ console.log(getAuroraMaterial()); // soft
 | `--au-z-index-message` | `11000` | 消息层级 |
 | `--au-z-index-tooltip` | `12000` | 文字提示层级 |
 
+`--au-border-radius-small` 与 `--au-border-radius-base` 保留用于兼容已有主题，并分别作为 `--au-radius-small`、`--au-radius-control` 的默认来源。新主题优先覆盖 `--au-radius-*` 语义变量，使控件、表面和浮层保持一致层级。
+
 ## 覆盖变量
 
 ```css
 :root {
   --au-color-primary: #7c3aed;
   --au-color-bg-soft: #faf5ff;
-  --au-border-radius-base: 8px;
+  --au-radius-control: 9px;
+  --au-radius-surface: 13px;
+  --au-radius-overlay: 15px;
   --au-font-family: Inter, "PingFang SC", sans-serif;
 }
 ```

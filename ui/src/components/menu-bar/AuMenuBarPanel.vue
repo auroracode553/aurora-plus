@@ -86,7 +86,7 @@ function resolveItemKey(item, index) {
   z-index: 1;
   min-width: 190px;
   padding: 5px;
-  border-radius: var(--au-border-radius-base);
+  border-radius: var(--au-radius-overlay);
   color: var(--au-color-text-primary);
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
@@ -95,7 +95,7 @@ function resolveItemKey(item, index) {
 .au-menu-bar-panel__item {
   min-height: 28px;
   padding: 0 8px;
-  border-radius: var(--au-border-radius-small);
+  border-radius: var(--au-radius-control);
 }
 
 .au-menu-bar-panel__check,

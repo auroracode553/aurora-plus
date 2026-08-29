@@ -178,7 +178,7 @@ defineExpose({ focus, blur, select, inputRef });
   padding: 0 10px;
   gap: 7px;
   border: 0.5px solid var(--au-color-border-lighter);
-  border-radius: 7px;
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
   background: var(--au-color-bg-hover);
   font-size: 13px;
@@ -192,7 +192,7 @@ defineExpose({ focus, blur, select, inputRef });
   height: 26px;
   padding-inline: 8px;
   gap: 6px;
-  border-radius: 6px;
+  border-radius: var(--au-radius-small);
   font-size: var(--au-font-size-small);
 }
 
@@ -200,7 +200,7 @@ defineExpose({ focus, blur, select, inputRef });
   height: 36px;
   padding-inline: 12px;
   gap: 8px;
-  border-radius: 8px;
+  border-radius: var(--au-radius-control);
   font-size: var(--au-font-size-base);
 }
 
@@ -282,7 +282,7 @@ defineExpose({ focus, blur, select, inputRef });
   margin: 0 -4px 0 0;
   padding: 0;
   border: 0;
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
   color: var(--au-color-text-secondary);
   background: transparent;
   font-size: 14px;

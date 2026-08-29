@@ -151,7 +151,7 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   padding: 4px 6px;
   overflow: auto;
   border: 1px solid var(--au-material-border);
-  border-radius: var(--au-border-radius-base);
+  border-radius: var(--au-radius-surface);
   /* Lists inherit the page surface instead of adding a tinted layer. */
   background: transparent;
   scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
@@ -192,7 +192,7 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 
 .au-virtual-list::-webkit-scrollbar-thumb {
   border: 3px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--au-radius-round);
   background: color-mix(in srgb, var(--au-color-text-secondary) 34%, transparent);
   background-clip: padding-box;
 }

@@ -108,7 +108,7 @@ onBeforeUnmount(() => {
   gap: 10px;
   overflow: hidden;
   border: 0;
-  border-radius: var(--au-border-radius-base);
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
   background: transparent;
   font: inherit;

@@ -121,7 +121,7 @@ function handleKeydown(event) {
   bottom: -1px;
   left: 28%;
   height: 2px;
-  border-radius: 999px;
+  border-radius: var(--au-radius-round);
   background: var(--au-color-primary);
   opacity: 0;
   transform: scaleX(0.5);

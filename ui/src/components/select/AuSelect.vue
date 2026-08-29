@@ -490,7 +490,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   min-width: 0;
   height: 30px;
   border: 0.5px solid var(--au-color-border-lighter);
-  border-radius: 7px;
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
   background: var(--au-color-bg-hover);
   font-size: 13px;
@@ -502,13 +502,13 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 
 .au-select.is-small {
   height: 26px;
-  border-radius: 6px;
+  border-radius: var(--au-radius-small);
   font-size: var(--au-font-size-small);
 }
 
 .au-select.is-large {
   height: 36px;
-  border-radius: 8px;
+  border-radius: var(--au-radius-control);
   font-size: var(--au-font-size-base);
 }
 
@@ -597,7 +597,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   padding: 4px;
   overflow-x: hidden;
   overflow-y: auto;
-  border-radius: 9px;
+  border-radius: var(--au-radius-overlay);
   font-size: 13px;
   line-height: 1.3;
   overscroll-behavior: contain;
@@ -615,7 +615,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   min-height: 30px;
   padding: 5px 7px 5px 9px;
   gap: 8px;
-  border-radius: 6px;
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
   cursor: pointer;
   user-select: none;

@@ -99,6 +99,8 @@ import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
 ```css
 :root {
   --au-color-primary: #7c3aed;
-  --au-border-radius-base: 8px;
+  --au-radius-control: 9px;
+  --au-radius-surface: 13px;
+  --au-radius-overlay: 15px;
 }
 ```

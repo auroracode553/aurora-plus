@@ -212,7 +212,7 @@ defineExpose({ hide, show, updatePosition });
   min-height: 24px;
   padding: 5px 8px;
   border: 1px solid var(--au-material-border-strong);
-  border-radius: var(--au-border-radius-small);
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-primary);
   font-size: var(--au-font-size-small);
   font-weight: var(--au-font-weight-medium);

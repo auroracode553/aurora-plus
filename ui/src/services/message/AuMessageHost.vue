@@ -62,7 +62,7 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   max-width: 100%;
   min-height: 40px;
   padding: 10px 14px;
-  border-radius: var(--au-border-radius-base);
+  border-radius: var(--au-radius-overlay);
   color: var(--au-color-text-primary);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
@@ -74,7 +74,7 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   width: 8px;
   height: 8px;
   margin-top: 6px;
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
   background: var(--au-color-info);
   flex: none;
 }
@@ -98,7 +98,7 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 .au-message__repeat {
   min-width: 20px;
   padding: 1px 6px;
-  border-radius: 999px;
+  border-radius: var(--au-radius-round);
   color: var(--au-color-text-secondary);
   background: var(--au-material-bg-subtle);
   font-size: 11px;
@@ -118,7 +118,7 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   background: transparent;
   cursor: pointer;
   flex: none;
-  border-radius: 7px;
+  border-radius: var(--au-radius-small);
   transition:
     color var(--au-transition-duration) var(--au-transition-ease),
     background var(--au-transition-duration) var(--au-transition-ease),

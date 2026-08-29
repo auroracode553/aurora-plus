@@ -61,6 +61,7 @@
 
 .au-menu-surface {
   border: 1px solid var(--au-material-border);
+  border-radius: var(--au-radius-overlay);
   color: var(--au-color-text-primary);
   user-select: none;
   outline: none;
@@ -73,6 +74,7 @@
   width: 100%;
   min-height: 32px;
   border: 0;
+  border-radius: var(--au-radius-control);
   color: inherit;
   background: transparent;
   font: inherit;
@@ -94,6 +96,7 @@
 
 .au-menu-item:active:not(:disabled) {
   background: color-mix(in srgb, var(--au-color-primary) 15%, transparent);
+  transition-duration: 0s;
 }
 
 .au-menu-item.is-danger:not(:disabled) {
@@ -158,5 +161,19 @@
 
   .au-spin {
     animation-duration: 1.2s;
+  }
+}
+
+@media (forced-colors: active) {
+  .au-menu-surface {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+
+  .au-menu-item:hover:not(:disabled),
+  .au-menu-item:focus-visible,
+  .au-menu-item.is-active {
+    color: HighlightText;
+    background: Highlight;
   }
 }

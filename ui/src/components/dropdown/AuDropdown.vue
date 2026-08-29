@@ -23,7 +23,7 @@
           v-if="visible"
           ref="menuRef"
           :id="menuId"
-          class="au-dropdown__menu au-component au-material-surface au-depth-overlay au-motion-popover au-menu-surface"
+          class="au-dropdown__menu au-component au-material-surface au-depth-surface au-motion-popover au-menu-surface"
           :class="`is-${activePlacement}`"
           :style="menuStyle"
           role="menu"
@@ -249,14 +249,15 @@ function updatePosition() {
 
   const triggerRect = trigger.getBoundingClientRect();
   const menuRect = menu.getBoundingClientRect();
-  const [requestedBase, align = 'start'] = props.placement.split('-');
+  const [requestedBase, requestedAlign] = props.placement.split('-');
+  const align = requestedAlign || 'center';
   const base = chooseBase(requestedBase, triggerRect, menuRect);
   const left = alignMenuHorizontal(align, triggerRect, menuRect);
   const desiredTop = base === 'top'
     ? triggerRect.top - props.offset - menuRect.height
     : triggerRect.bottom + props.offset;
 
-  activePlacement.value = `${base}-${align}`;
+  activePlacement.value = align === 'center' ? base : `${base}-${align}`;
   triggerWidth.value = triggerRect.width;
   menuPosition.value = {
     x: clamp(left, VIEWPORT_GAP, window.innerWidth - menuRect.width - VIEWPORT_GAP),
@@ -353,21 +354,39 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 .au-dropdown__menu {
   position: fixed;
   min-width: 180px;
-  padding: 5px 0;
-  border-radius: 9px;
+  max-height: min(320px, calc(100vh - 16px));
+  padding: 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
+  line-height: 1.3;
+  overscroll-behavior: contain;
   transform-origin: top left;
 }
 
-.au-dropdown__menu.is-top-start,
-.au-dropdown__menu.is-top,
-.au-dropdown__menu.is-top-end {
+.au-dropdown__menu.is-bottom {
+  transform-origin: top center;
+}
+
+.au-dropdown__menu.is-bottom-end {
+  transform-origin: top right;
+}
+
+.au-dropdown__menu.is-top-start {
   transform-origin: bottom left;
 }
 
+.au-dropdown__menu.is-top {
+  transform-origin: bottom center;
+}
+
+.au-dropdown__menu.is-top-end {
+  transform-origin: bottom right;
+}
+
 .au-dropdown__item {
-  padding: 0 13px;
+  padding: 0 9px;
 }
 
 .au-dropdown__item-icon,
@@ -390,14 +409,19 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
   font-size: var(--au-font-size-small);
 }
 
+.au-dropdown__item.is-danger:hover:not(:disabled),
+.au-dropdown__item.is-danger:focus-visible {
+  background: color-mix(in srgb, var(--au-color-danger) 10%, transparent);
+}
+
 .au-dropdown__divider {
   height: 1px;
-  margin: 5px 0;
+  margin: 4px 5px;
   background: var(--au-material-border-strong);
 }
 
 .au-dropdown__empty {
-  padding: 7px 13px;
+  padding: 7px 9px;
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
 }
@@ -405,7 +429,7 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 .au-dropdown-fade-enter-from,
 .au-dropdown-fade-leave-to {
   opacity: 0;
-  transform: translateY(-3px) scale(0.98);
+  transform: translateY(-3px) scale(0.985);
 }
 
 .au-dropdown__menu.is-top-start.au-dropdown-fade-enter-from,
@@ -414,7 +438,7 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 .au-dropdown__menu.is-top-start.au-dropdown-fade-leave-to,
 .au-dropdown__menu.is-top.au-dropdown-fade-leave-to,
 .au-dropdown__menu.is-top-end.au-dropdown-fade-leave-to {
-  transform: translateY(3px) scale(0.98);
+  transform: translateY(3px) scale(0.985);
 }
 
 .au-dropdown.is-disabled {

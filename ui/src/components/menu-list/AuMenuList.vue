@@ -38,7 +38,7 @@ provide(AU_MENU_LIST_CONTEXT_KEY, {
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--au-material-border);
-  border-radius: 14px;
+  border-radius: var(--au-radius-surface);
   color: var(--au-color-text-primary);
   list-style: none;
 }

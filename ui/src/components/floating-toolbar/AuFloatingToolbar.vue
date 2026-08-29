@@ -217,7 +217,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   min-height: 34px;
   padding: 2px;
   border: 1px solid var(--au-material-border);
-  border-radius: 8px;
+  border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
   user-select: none;
 }
@@ -280,7 +280,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   height: 28px;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--au-radius-small);
   color: var(--au-color-text-regular);
   background: transparent;
   cursor: pointer;

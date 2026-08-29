@@ -34,8 +34,14 @@
   --au-material-blur: 18px;
   --au-material-saturation: 145%;
 
-  --au-border-radius-small: 4px;
-  --au-border-radius-base: 6px;
+  /* Apple-style radius scale: compact inside elements, broader floating surfaces. */
+  --au-border-radius-small: 6px;
+  --au-border-radius-base: 8px;
+  --au-radius-small: var(--au-border-radius-small);
+  --au-radius-control: var(--au-border-radius-base);
+  --au-radius-surface: 12px;
+  --au-radius-overlay: 14px;
+  --au-radius-round: 999px;
   --au-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --au-font-size-small: 12px;
   --au-font-size-base: 14px;

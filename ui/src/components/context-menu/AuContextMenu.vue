@@ -285,8 +285,8 @@ defineExpose({ close, menuRef, updatePosition });
 .au-context-submenu {
   position: fixed;
   min-width: 190px;
-  padding: 6px 0;
-  border-radius: var(--au-border-radius-base);
+  padding: 5px;
+  border-radius: var(--au-radius-overlay);
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
 }
@@ -306,7 +306,7 @@ defineExpose({ close, menuRef, updatePosition });
   height: 28px;
   padding: 0;
   border: 1px solid var(--au-material-border-strong);
-  border-radius: var(--au-border-radius-small);
+  border-radius: var(--au-radius-small);
   color: var(--au-color-text-primary);
   background: var(--au-material-bg-subtle);
   cursor: pointer;
@@ -344,7 +344,7 @@ defineExpose({ close, menuRef, updatePosition });
 
 .au-context-menu__item {
   height: 32px;
-  padding: 0 18px;
+  padding: 0 13px;
 }
 
 .au-context-menu__item-icon,
@@ -362,7 +362,7 @@ defineExpose({ close, menuRef, updatePosition });
 
 .au-context-menu__separator {
   height: 1px;
-  margin: 6px 0;
+  margin: 5px 4px;
   background: var(--au-material-border-strong);
 }
 
@@ -372,7 +372,7 @@ defineExpose({ close, menuRef, updatePosition });
 
 .au-context-submenu {
   position: absolute;
-  top: -6px;
+  top: -5px;
   left: calc(100% + 6px);
   min-width: 200px;
 }

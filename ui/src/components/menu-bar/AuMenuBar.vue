@@ -186,7 +186,7 @@ defineExpose({ close: closeMenu, menuBarRef });
   height: 26px;
   padding: 0 9px;
   border: 0;
-  border-radius: var(--au-border-radius-base);
+  border-radius: var(--au-radius-small);
   color: inherit;
   background: transparent;
   font: inherit;

@@ -89,7 +89,7 @@ function clampChannel(value) {
   height: 32px;
   padding: 3px;
   border: 1px solid transparent;
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
   color: var(--au-color-text-primary);
   background: transparent;
   cursor: pointer;
@@ -136,7 +136,7 @@ function clampChannel(value) {
   width: 22px;
   height: 22px;
   border: 1px solid var(--au-color-border-light);
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
 }
 
 .au-color-swatch.is-small .au-color-swatch__color {

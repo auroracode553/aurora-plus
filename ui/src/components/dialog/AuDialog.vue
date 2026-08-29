@@ -215,7 +215,7 @@ defineExpose({ close, dialogRef });
   min-width: 0;
   overflow: hidden;
   border: 1px solid var(--au-material-border);
-  border-radius: 16px;
+  border-radius: var(--au-radius-overlay);
   color: var(--au-color-text-primary);
   background: var(--au-color-bg-overlay);
   outline: none;

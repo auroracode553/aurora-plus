@@ -83,7 +83,7 @@ function handleClick(event) {
   padding: 8px 15px;
   overflow: hidden;
   border: 1px solid var(--au-material-border-strong);
-  border-radius: var(--au-border-radius-base);
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
   background: var(--au-material-bg);
   font-size: var(--au-font-size-base);
@@ -121,25 +121,25 @@ function handleClick(event) {
 .au-button--small {
   height: 28px;
   padding: 5px 11px;
-  border-radius: var(--au-border-radius-small);
+  border-radius: var(--au-radius-small);
   font-size: var(--au-font-size-small);
 }
 
 .au-button--large {
   height: 40px;
   padding: 10px 19px;
-  border-radius: 8px;
+  border-radius: var(--au-radius-control);
   font-size: var(--au-font-size-large);
 }
 
 .au-button.is-round {
-  border-radius: 999px;
+  border-radius: var(--au-radius-round);
 }
 
 .au-button.is-circle {
   width: 32px;
   padding: 0;
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
 }
 
 .au-button--small.is-circle {

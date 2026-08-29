@@ -78,7 +78,7 @@ defineExpose({ focus, inputRef });
   height: 32px;
   padding: 0;
   border: 0.5px solid var(--au-color-border-lighter);
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
   background: var(--au-material-bg-subtle);
   cursor: pointer;
   transition:
@@ -116,7 +116,7 @@ defineExpose({ focus, inputRef });
   width: 18px;
   height: 18px;
   border: 0.5px solid var(--au-color-border-lighter);
-  border-radius: 50%;
+  border-radius: var(--au-radius-round);
   pointer-events: none;
 }
 
