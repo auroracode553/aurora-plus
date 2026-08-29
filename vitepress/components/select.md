@@ -6,13 +6,13 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 
 # Select 选择器
 
-`AuSelect` 使用原生下拉选择能力，并统一 Aurora UI 的尺寸、焦点、禁用态和错误态。
+`AuSelect` 使用 Aurora UI 的紧凑列表弹层呈现选项，并统一尺寸、焦点、禁用态和错误态。选项仍通过熟悉的 `option` 与 `optgroup` 声明。
 
 ## 基础用法
 
 <DemoBlock
-  title="原生选项与尺寸"
-  description="选择器保留系统下拉行为，同时提供 Aurora UI 的默认、小尺寸和禁用状态。"
+  title="选项与尺寸"
+  description="下拉选项使用轻量材质、状态色和选中标记，同时提供默认、小尺寸和禁用状态。"
   :source="selectBasicSource"
 >
   <SelectBasic />
@@ -21,8 +21,9 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 ## 使用建议
 
 - 选项较少且互斥时使用 `AuSelect`；需要执行命令的操作集合使用 `AuDropdown`。
-- 通过默认插槽传入原生 `option` 或 `optgroup`，不要在业务层覆盖选择器内部样式。
+- 通过默认插槽传入 `option` 或 `optgroup`；组件会将这些声明转换为统一风格的选项列表。
 - 字段名称使用可见的 `label`，错误状态同时提供文字说明。
+- 键盘可使用方向键、`Home`、`End` 导航，使用 `Enter` 或空格确认，使用 `Escape` 关闭。
 
 ## Select API
 
@@ -34,15 +35,18 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 | `size` | 尺寸 | `small / default / large` | `default` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `invalid` | 是否显示错误态 | `boolean` | `false` |
+| `teleported` | 是否将选项弹层传送到目标容器 | `boolean` | `true` |
+| `appendTo` | 选项弹层挂载目标 | `string / HTMLElement` | `'body'` |
+| `zIndex` | 选项弹层层级 | `number` | `1200` |
 
-未声明的原生 select 属性与监听器会透传给内部选择框。
+未声明的 `id`、`title`、`tabindex`、`aria-*`、`data-*` 和监听器会作用于选择触发器。传入 `name` 与 `form` 时，当前值会通过隐藏字段参与表单提交；`required` 会映射为 `aria-required`。
 
 ### Events
 
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
 | `update:modelValue` | 选中值变化 | `(value)` |
-| `change` | 原生 change 触发 | `(value, event)` |
+| `change` | 选中值变化 | `(value, sourceEvent)` |
 | `focus` | 获得焦点 | `(event)` |
 | `blur` | 失去焦点 | `(event)` |
 
@@ -50,7 +54,7 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `default` | 原生 `option` 或 `optgroup` 内容 |
+| `default` | `option` 或 `optgroup` 选项声明 |
 
 ### Exposes
 
@@ -58,4 +62,8 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 | --- | --- |
 | `focus(options?)` | 聚焦选择框 |
 | `blur()` | 移除焦点 |
-| `selectRef` | 内部 select 元素引用 |
+| `open()` | 打开选项弹层 |
+| `close()` | 关闭选项弹层 |
+| `toggle()` | 切换选项弹层 |
+| `selectRef` | 选择触发按钮引用 |
+| `listboxRef` | 选项列表引用 |
