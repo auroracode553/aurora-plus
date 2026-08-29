@@ -6,7 +6,7 @@ Aurora UI 是 Vue 3 通用组件库，提供基础、表单、数据展示、导
 
 | 分类 | 当前能力 |
 | --- | --- |
-| Basic 基础组件 | [Button](/components/button)、[ButtonGroup](/components/button-group)、[Icon](/components/icon) |
+| Basic 基础组件 | [Button](/components/button)、[ButtonGroup](/components/button-group)、[Link](/components/link)、[Icon](/components/icon) |
 | Form 表单组件 | [Input](/components/input)、[Textarea](/components/textarea)、[Select](/components/select)、[ColorPicker](/components/color-picker)、[Switch](/components/switch)、[Checkbox](/components/checkbox) |
 | Data 数据展示 | [Panel](/components/panel)、[Card](/components/card)、[VirtualList](/components/virtual-list) |
 | Navigation 导航 | [Dropdown](/components/dropdown)、[Menu](/components/menu)、[MenuBar](/components/menu-bar)、[MenuList](/components/menu-list)、[Tabs](/components/tabs)、[Tree](/components/tree)、[ContextMenu](/components/context-menu) |
