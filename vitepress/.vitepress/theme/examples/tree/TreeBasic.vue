@@ -1,12 +1,20 @@
 <template>
   <div class="tree-demo">
+    <div class="tree-demo__controls">
+      <AuSwitch
+        v-model="collapsible"
+        active-text="开启折叠"
+        inactive-text="关闭折叠"
+        aria-label="切换树形导航折叠模式"
+      />
+    </div>
     <AuTree
       class="tree-demo__tree"
       :items="visibleItems"
       :selected-key="selectedKey"
       item-key="id"
       label-key="title"
-      collapsible
+      :collapsible="collapsible"
       aria-label="文档目录"
       @select="selectedKey = $event.id"
       @toggle="toggleItem"
@@ -17,10 +25,11 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuTree } from 'aurora-ui';
+import { AuSwitch, AuTree } from 'aurora-ui';
 
 const selectedKey = ref('introduction');
 const collapsedKeys = ref(new Set());
+const collapsible = ref(true);
 
 const treeItems = [
   {
@@ -37,8 +46,14 @@ const treeItems = [
     title: '组件',
     children: [
       { id: 'button', title: 'Button 按钮' },
-      { id: 'tree', title: 'Tree 树形导航' },
-      { id: 'virtual-list', title: 'VirtualList 虚拟列表' },
+      {
+        id: 'navigation',
+        title: '导航组件',
+        children: [
+          { id: 'tree', title: 'Tree 树形导航' },
+          { id: 'virtual-list', title: 'VirtualList 虚拟列表' },
+        ],
+      },
     ],
   },
   { id: 'changelog', title: '更新日志' },
@@ -52,7 +67,7 @@ const selectedItem = computed(() =>
 function flattenVisibleItems(items, displayDepth = 0) {
   return items.flatMap((item) => {
     const hasChildren = Array.isArray(item.children) && item.children.length > 0;
-    const isCollapsed = collapsedKeys.value.has(item.id);
+    const isCollapsed = collapsible.value && collapsedKeys.value.has(item.id);
     const row = {
       id: item.id,
       title: item.title,
@@ -78,6 +93,12 @@ function toggleItem(item) {
 </script>
 
 <style scoped>
+.tree-demo__controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .tree-demo__tree {
   height: 252px;
   border: 1px solid var(--au-color-border-lighter);
