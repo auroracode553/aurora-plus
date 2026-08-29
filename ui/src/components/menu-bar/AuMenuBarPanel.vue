@@ -1,6 +1,7 @@
 <template>
   <div
     class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-menu-surface"
+    :class="{ 'has-leading-column': hasLeadingColumn }"
     role="menu"
     @mousedown.prevent
     @keydown.esc.stop="emit('close')"
@@ -25,7 +26,13 @@
           @focus="activeSubmenuKey = resolveItemKey(item, index)"
           @keydown.right.prevent="activeSubmenuKey = resolveItemKey(item, index)"
         >
-          <span class="au-menu-bar-panel__check" aria-hidden="true"></span>
+          <span
+            v-if="hasLeadingColumn"
+            class="au-menu-bar-panel__leading"
+            aria-hidden="true"
+          >
+            <AuIcon v-if="item.icon" :icon="item.icon" />
+          </span>
           <span class="au-menu-bar-panel__label">{{ item.label }}</span>
           <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut">{{ item.accelerator }}</span>
           <AuIcon class="au-menu-bar-panel__arrow" :icon="IconChevronRight" />
@@ -44,13 +51,19 @@
         v-else
         class="au-menu-bar-panel__item au-menu-item"
         type="button"
-        role="menuitem"
+        :role="isCheckableItem(item) ? 'menuitemcheckbox' : 'menuitem'"
+        :aria-checked="isCheckableItem(item) ? Boolean(item.checked) : undefined"
         :disabled="item.disabled"
         @mouseenter="activeSubmenuKey = ''"
         @click="emit('select', item)"
       >
-        <span class="au-menu-bar-panel__check" aria-hidden="true">
-          <AuIcon v-if="item.type === 'checkbox' && item.checked" :icon="IconCheck" />
+        <span
+          v-if="hasLeadingColumn"
+          class="au-menu-bar-panel__leading"
+          :class="{ 'is-checkable': isCheckableItem(item) }"
+          aria-hidden="true"
+        >
+          <AuIcon v-if="resolveLeadingIcon(item)" :icon="resolveLeadingIcon(item)" />
         </span>
         <span class="au-menu-bar-panel__label">{{ item.label }}</span>
         <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut">{{ item.accelerator }}</span>
@@ -60,18 +73,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { IconCheck, IconChevronRight } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
 
 defineOptions({ name: 'AuMenuBarPanel' });
 
-defineProps({
+const props = defineProps({
   items: { type: Array, default: () => [] },
 });
 
 const emit = defineEmits(['select', 'close']);
 const activeSubmenuKey = ref('');
+const hasLeadingColumn = computed(() => props.items.some((item) => (
+  item?.type !== 'separator' && Boolean(item?.icon || isCheckableItem(item))
+)));
+
+function isCheckableItem(item) {
+  return item?.type === 'checkbox';
+}
+
+function resolveLeadingIcon(item) {
+  if (isCheckableItem(item)) return item.checked ? IconCheck : null;
+  return item.icon || null;
+}
 
 function resolveItemKey(item, index) {
   return item.id || item.command || `${item.type || 'item'}-${item.label || index}-${index}`;
@@ -98,7 +123,7 @@ function resolveItemKey(item, index) {
   border-radius: var(--au-radius-control);
 }
 
-.au-menu-bar-panel__check,
+.au-menu-bar-panel__leading,
 .au-menu-bar-panel__arrow {
   display: inline-flex;
   align-items: center;
@@ -106,10 +131,14 @@ function resolveItemKey(item, index) {
   width: 14px;
   height: 14px;
   flex: 0 0 14px;
+  color: var(--au-color-text-secondary);
+}
+
+.au-menu-bar-panel__leading.is-checkable {
   color: var(--au-color-primary);
 }
 
-.au-menu-bar-panel__check :deep(svg),
+.au-menu-bar-panel__leading :deep(svg),
 .au-menu-bar-panel__arrow :deep(svg) {
   width: 14px;
   height: 14px;
@@ -124,7 +153,6 @@ function resolveItemKey(item, index) {
 
 .au-menu-bar-panel__shortcut,
 .au-menu-bar-panel__arrow {
-  margin-left: auto;
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
   white-space: nowrap;

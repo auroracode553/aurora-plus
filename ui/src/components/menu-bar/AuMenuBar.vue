@@ -93,7 +93,7 @@ function getRootButtons() {
 
 async function focusPanelFirstItem() {
   await nextTick();
-  const firstItem = menuBarRef.value?.querySelector('.au-menu-bar-panel [role="menuitem"]:not(:disabled)');
+  const firstItem = menuBarRef.value?.querySelector('.au-menu-bar-panel [role^="menuitem"]:not(:disabled)');
   if (firstItem) firstItem.focus();
 }
 
