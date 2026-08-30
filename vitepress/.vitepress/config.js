@@ -62,6 +62,13 @@ export default defineConfig({
     },
     nav: [
       { text: '指南', link: '/guide/getting-started' },
+      {
+        text: '设计',
+        items: [
+          { text: 'Color 颜色', link: '/guide/colors' },
+          { text: 'Theme 主题配置', link: '/guide/theme' },
+        ],
+      },
       { text: '组件', link: '/components/button' },
     ],
     sidebar: [
@@ -70,7 +77,13 @@ export default defineConfig({
         items: [
           { text: '介绍', link: '/guide/introduction' },
           { text: '快速开始', link: '/guide/getting-started' },
-          { text: '主题配置', link: '/guide/theme' },
+        ],
+      },
+      {
+        text: 'Design 设计基础',
+        items: [
+          { text: 'Color 颜色', link: '/guide/colors' },
+          { text: 'Theme 主题配置', link: '/guide/theme' },
         ],
       },
       {
