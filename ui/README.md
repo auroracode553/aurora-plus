@@ -91,7 +91,7 @@ import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
 <html data-au-theme="dark"></html>
 ```
 
-使用 `data-au-material` 设置 `soft`、`clear` 或 `solid` 材质：
+所有带承载表面的组件都会继承玻璃材质；默认使用 `soft`，也可通过 `data-au-material` 设置 `clear` 或 `solid`：
 
 ```html
 <html data-au-material="clear"></html>

@@ -22,7 +22,7 @@ Aurora UI 使用 CSS 变量提供主题能力。
 
 ## 玻璃材质
 
-Aurora UI 的对话框、浮层、卡片、按钮组、消息和菜单会读取材质变量：
+Aurora UI 的组件统一继承材质变量。按钮、输入类控件和选择控件使用轻量材质表面，对话框、浮层、卡片、按钮组、消息、菜单和窗口标题栏使用带背景模糊的玻璃表面：
 
 ```html
 <html data-au-material="soft"></html>
@@ -35,6 +35,8 @@ Aurora UI 的对话框、浮层、卡片、按钮组、消息和菜单会读取�
 | `soft` | 柔和、低对比、轻模糊 | 日常工作台和内容型页面 |
 | `clear` | 清透、高饱和、背景层次明显 | 需要突出玻璃质感的首页或仪表盘 |
 | `solid` | 不透明、边界清晰 | 信息密集或对比度要求高的页面 |
+
+未显式设置时默认使用 `soft`。Icon、Link、Tabs、Tree、VirtualList 等没有独立承载表面的组件保持透明，但仍继承同一套颜色、边框、状态和无障碍回退；不会为它们额外制造玻璃背景层。
 
 ### 交互预览
 
@@ -97,13 +99,13 @@ console.log(getAuroraMaterial()); // soft
 
 | 变量 | 默认值 | 作用 |
 | --- | --- | --- |
-| `--au-material-bg` | `rgba(255, 255, 255, 0.68)` | 普通材质表面 |
-| `--au-material-bg-strong` | `rgba(255, 255, 255, 0.82)` | 弹层和强调表面 |
-| `--au-material-bg-subtle` | `rgba(255, 255, 255, 0.42)` | 次级表面 |
-| `--au-material-border` | `rgba(255, 255, 255, 0.68)` | 材质边框 |
-| `--au-material-border-strong` | `rgba(116, 137, 172, 0.28)` | 强调边框和分隔线 |
-| `--au-material-blur` | `18px` | 背景模糊半径 |
-| `--au-material-saturation` | `145%` | 背景饱和度 |
+| `--au-material-bg` | `rgba(255, 255, 255, 0.72)` | 普通材质表面 |
+| `--au-material-bg-strong` | `rgba(255, 255, 255, 0.86)` | 弹层和强调表面 |
+| `--au-material-bg-subtle` | `rgba(255, 255, 255, 0.5)` | 次级表面 |
+| `--au-material-border` | `rgba(255, 255, 255, 0.76)` | 材质边框 |
+| `--au-material-border-strong` | `rgba(116, 137, 172, 0.22)` | 强调边框和分隔线 |
+| `--au-material-blur` | `16px` | 背景模糊半径 |
+| `--au-material-saturation` | `128%` | 背景饱和度 |
 
 ## 颜色变量
 
@@ -183,4 +185,4 @@ import './styles/brand-theme.css';
 </section>
 ```
 
-命令式服务和默认 Teleport 到 `body` 的组件不在该局部容器内，需使用根节点主题，或为支持的组件配置 `teleported="false"` / `append-to`。
+命令式服务和默认 Teleport 到 `body` 的组件不在局部主题或局部材质容器内，需使用根节点配置，或为支持的组件配置 `teleported="false"` / `append-to`。

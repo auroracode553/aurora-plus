@@ -103,10 +103,10 @@ defineExpose({ focus, blur, select, textareaRef });
   display: inline-flex;
   width: 100%;
   min-width: 0;
-  border: 0.5px solid var(--au-color-border-lighter);
+  border: 0.5px solid var(--au-material-border-strong);
   border-radius: var(--au-radius-control);
   color: var(--au-color-text-regular);
-  background: var(--au-color-bg-hover);
+  background: var(--au-material-bg-subtle);
   font-size: 13px;
   transition:
     border-color var(--au-transition-duration) var(--au-transition-ease),

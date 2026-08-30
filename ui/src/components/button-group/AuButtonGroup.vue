@@ -1,13 +1,12 @@
 <template>
   <div
-    class="au-button-group au-component"
+    class="au-button-group au-component au-material-blur"
     :class="[
       `is-${variant}`,
       `is-${orientation}`,
       {
         'is-icon-only': iconOnly,
         'au-depth-surface': variant !== 'segmented',
-        'au-material-blur': variant === 'connected',
       },
     ]"
     :role="role"
@@ -70,7 +69,7 @@ defineProps({
   border: 1px solid var(--au-material-border-strong);
   border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
-  background: color-mix(in srgb, var(--au-material-bg-subtle) 72%, var(--au-color-bg-soft));
+  background: var(--au-material-bg-subtle);
 }
 
 .au-button-group.is-vertical.is-connected {
@@ -149,7 +148,7 @@ defineProps({
   border: 0;
   border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
-  background: color-mix(in srgb, var(--au-color-bg-soft) 88%, var(--au-material-bg-subtle));
+  background: var(--au-material-bg-subtle);
 }
 
 .au-button-group.is-segmented :deep(> .au-button-group-item) {
@@ -211,18 +210,10 @@ defineProps({
 .au-button-group.is-floating {
   gap: 2px;
   padding: 2px;
-  border: 1px solid color-mix(in srgb, var(--au-color-text-primary) 22%, transparent);
+  border: 1px solid var(--au-material-border-strong);
   border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
-  background: color-mix(in srgb, var(--au-color-bg-overlay) 88%, #000000 12%);
-}
-
-/* The floating example is intentionally neutral gray, without blue glass tint. */
-.au-button-group.is-floating[data-au-theme='dark'],
-[data-au-theme='dark'] .au-button-group.is-floating {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #e1e3e7;
-  background: #46474b;
+  background: var(--au-material-bg-strong);
 }
 
 .au-button-group.is-floating :deep(> .au-button--default),
@@ -232,14 +223,6 @@ defineProps({
   color: var(--au-color-text-regular);
   background: color-mix(in srgb, var(--au-color-text-primary) 8%, transparent);
   box-shadow: none;
-}
-
-.au-button-group.is-floating[data-au-theme='dark'] :deep(> .au-button--default),
-.au-button-group.is-floating[data-au-theme='dark'] :deep(> .au-button-group-item > .au-button--default),
-[data-au-theme='dark'] .au-button-group.is-floating :deep(> .au-button--default),
-[data-au-theme='dark'] .au-button-group.is-floating :deep(> .au-button-group-item > .au-button--default) {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.06);
 }
 
 .au-button-group.is-floating :deep(> .au-button--default:hover:not(.is-disabled)),
@@ -303,10 +286,6 @@ defineProps({
   .au-button-group.is-segmented :deep(> .au-button-group-item > .au-button.is-active),
   .au-button-group.is-segmented :deep(> .au-button-group-item > .au-button[aria-pressed='true']),
   .au-button-group.is-segmented :deep(> .au-button-group-item > .au-button[aria-current='true']) {
-    background: var(--au-color-bg-overlay);
-  }
-
-  .au-button-group.is-floating {
     background: var(--au-color-bg-overlay);
   }
 }

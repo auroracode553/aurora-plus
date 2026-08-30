@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-window-title-bar au-component"
+    class="au-window-title-bar au-component au-material-surface au-material-surface--base"
     :class="{
       'is-drag-disabled': !draggable,
       'is-controls-start': controlsPosition === 'start',
@@ -206,9 +206,8 @@ function handleTitleDoubleClick(event) {
   height: 32px;
   min-height: 32px;
   padding: 0;
-  border-bottom: 1px solid var(--au-color-border);
+  border-bottom: 1px solid var(--au-material-border-strong);
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-overlay);
   -webkit-app-region: drag;
   user-select: none;
   pointer-events: none;
