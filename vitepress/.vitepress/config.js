@@ -70,7 +70,7 @@ export default defineConfig({
         items: [
           { text: '介绍', link: '/guide/introduction' },
           { text: '快速开始', link: '/guide/getting-started' },
-          { text: '主题定制', link: '/guide/theme' },
+          { text: '主题配置', link: '/guide/theme' },
         ],
       },
       {

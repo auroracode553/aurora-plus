@@ -29,7 +29,7 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 - 快捷键使用 `shortcut`，组件会以适合尾部信息的 `kbd` 样式展示。
 - `trailing` 可放置 `AuSwitch`、状态文字或业务按钮；包含交互控件时不要同时设置 `clickable`，避免嵌套交互元素。
 - 标题保持短而明确，补充信息放在 `description`，不要把整段说明塞入标题。
-- 面板阴影统一来自 Aurora UI 深度 token，业务页面不需要重复设置背景、圆角、分隔线或 box-shadow。
+- 面板阴影由组件内置处理，业务页面不需要重复设置背景、圆角、分隔线或 box-shadow。
 
 ## AuMenuList API
 
@@ -39,7 +39,7 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 | --- | --- | --- | --- |
 | `density` | 行密度，可选 `compact / default / relaxed` | `string` | `default` |
 | `divided` | 是否显示内缩分隔线 | `boolean` | `true` |
-| `elevated` | 是否使用 `--au-shadow-surface` | `boolean` | `true` |
+| `elevated` | 是否显示表面阴影 | `boolean` | `true` |
 | `ariaLabel` | 列表无障碍名称 | `string` | `''` |
 
 ### Slots

@@ -79,7 +79,7 @@ import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
 
 <template>
   <AuButton :icon="IconBold">加粗</AuButton>
-  <AuIcon :icon="IconHeart" size="24" color="var(--au-color-danger)" aria-label="收藏" />
+  <AuIcon :icon="IconHeart" size="24" color="#df4c62" aria-label="收藏" />
 </template>
 ```
 
@@ -94,19 +94,11 @@ setAuroraTheme('dark');
 setAuroraTheme('light');
 ```
 
-所有带承载表面的组件都会继承材质设置；默认使用 `solid`，也可通过 `data-au-material` 切换为 `soft` 或 `clear`：
+使用 `setAuroraMaterial` 切换玻璃材质，默认 `solid`，可选 `soft`、`clear` 和 `solid`：
 
-```html
-<html data-au-material="clear"></html>
-```
+```js
+import { setAuroraMaterial } from 'aurora-ui';
 
-可以覆盖 `--au-*` CSS 变量定制主题：
-
-```css
-:root {
-  --au-color-primary: #7c3aed;
-  --au-radius-control: 9px;
-  --au-radius-surface: 13px;
-  --au-radius-overlay: 15px;
-}
+setAuroraMaterial('clear');
+setAuroraMaterial('solid');
 ```

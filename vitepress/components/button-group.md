@@ -40,11 +40,11 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 ## 悬浮控制组
 
-`variant="floating"` 使用独立按钮间距和悬浮面板外观，适合卡片、画布或面板角落中的轻量操作。搭配 `icon-only` 时，直接子按钮会统一为方形图标控制按钮。示例的 `data-au-theme="dark"` 只给控制组自身应用深色主题，不需要外层深色卡片。
+`variant="floating"` 使用独立按钮间距和悬浮面板外观，适合卡片、画布或面板角落中的轻量操作。搭配 `icon-only` 时，直接子按钮会统一为方形图标控制按钮。
 
 <DemoBlock
   title="Floating 悬浮控制组"
-  description="紧凑的图标操作组；深色主题仅作用于组件本身。"
+  description="紧凑的图标操作组，适合贴近内容区域放置。"
   :source="buttonGroupFloatingSource"
 >
   <ButtonGroupFloating />

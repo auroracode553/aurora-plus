@@ -1,7 +1,6 @@
 <template>
   <div class="button-group-floating-demo">
     <AuButtonGroup
-      data-au-theme="dark"
       variant="floating"
       icon-only
       aria-label="面板操作"

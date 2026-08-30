@@ -20,7 +20,7 @@ import { IconHome, IconSearch } from 'aurora-ui';
 
 <template>
   <IconHome />
-  <IconSearch size="20" color="var(--au-color-primary)" />
+  <IconSearch size="20" color="#3478f6" />
 </template>
 ```
 
