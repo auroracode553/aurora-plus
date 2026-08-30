@@ -1,8 +1,10 @@
 <template>
-  <AuCard class="card-demo">
-    <h3>工作区与显示</h3>
-    <p>这是一个空卡片，内容完全由默认插槽提供。</p>
-  </AuCard>
+  <div class="card-demo">
+    <AuCard>
+      <h3>工作区与显示</h3>
+      <p>这是一个空卡片，内容完全由默认插槽提供。</p>
+    </AuCard>
+  </div>
 </template>
 
 <script setup>

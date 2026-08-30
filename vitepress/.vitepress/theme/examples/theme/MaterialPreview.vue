@@ -12,40 +12,40 @@
         <span>{{ currentOption.description }}</span>
       </div>
 
-      <div class="material-preview__switch" role="radiogroup" aria-label="选择材质">
+      <AuButtonGroup variant="segmented" aria-label="选择材质">
         <AuButton
           v-for="option in options"
           :key="option.value"
           size="small"
-          :class="{ 'is-active': material === option.value }"
-          :aria-checked="material === option.value"
-          role="radio"
+          :aria-pressed="material === option.value"
           @click="selectMaterial(option.value)"
         >
           {{ option.label }}
         </AuButton>
-      </div>
+      </AuButtonGroup>
     </div>
 
     <div class="material-preview__stage">
-      <AuCard class="material-preview__card">
-        <div class="material-preview__card-heading">
-          <div>
-            <strong>工作台面板</strong>
-            <span>同一套组件切换不同材质</span>
+      <div class="material-preview__card">
+        <AuCard>
+          <div class="material-preview__card-heading">
+            <div>
+              <strong>工作台面板</strong>
+              <span>同一套组件切换不同材质</span>
+            </div>
+            <AuButton size="small" type="primary">保存</AuButton>
           </div>
-          <AuButton size="small" type="primary">保存</AuButton>
-        </div>
 
-        <div class="material-preview__card-footer">
-          <span>按钮组、卡片和文字会同步响应</span>
-          <AuButtonGroup variant="floating" icon-only aria-label="面板操作">
-            <AuButton :icon="IconMinus" aria-label="收起面板" />
-            <AuButton :icon="IconLayoutSidebar" aria-label="切换视图" />
-            <AuButton :icon="IconCode" aria-label="查看源码" />
-          </AuButtonGroup>
-        </div>
-      </AuCard>
+          <div class="material-preview__card-footer">
+            <span>按钮组、卡片和文字会同步响应</span>
+            <AuButtonGroup variant="floating" icon-only aria-label="面板操作">
+              <AuButton :icon="IconMinus" aria-label="收起面板" />
+              <AuButton :icon="IconLayoutSidebar" aria-label="切换视图" />
+              <AuButton :icon="IconCode" aria-label="查看源码" />
+            </AuButtonGroup>
+          </div>
+        </AuCard>
+      </div>
     </div>
   </section>
 </template>
@@ -154,46 +154,6 @@ function selectMaterial(value) {
   font-size: 12px;
 }
 
-.material-preview__switch {
-  display: inline-flex;
-  gap: 2px;
-  padding: 2px;
-  border: 1px solid rgba(31, 41, 55, 0.24);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.34);
-}
-
-.material-preview__switch :deep(.au-button) {
-  height: 26px;
-  padding: 4px 8px;
-  border: 0;
-  border-radius: 5px;
-  color: #334155;
-  background: transparent;
-  box-shadow: none;
-  font-size: 12px;
-  transform: none;
-}
-
-.material-preview__switch :deep(.au-button:hover:not(.is-disabled)),
-.material-preview__switch :deep(.au-button:active:not(.is-disabled)) {
-  color: #162033;
-  background: rgba(255, 255, 255, 0.52);
-  box-shadow: none;
-  transform: none;
-}
-
-.material-preview__switch :deep(.au-button.is-active) {
-  color: #162033;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: none;
-}
-
-.material-preview__switch :deep(.au-button:focus-visible) {
-  outline: 2px solid #3478f6;
-  outline-offset: -1px;
-}
-
 .material-preview__stage {
   display: flex;
   justify-content: center;
@@ -202,7 +162,6 @@ function selectMaterial(value) {
 
 .material-preview__card {
   width: min(100%, 420px);
-  padding: 16px;
 }
 
 .material-preview__card-heading,

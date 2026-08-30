@@ -67,7 +67,7 @@ toolbarRect.value = { top, right, bottom, left, width, height };
 | --- | --- | --- |
 | `default` | `{ hide, placement }` | 工具条内容与当前实际方向 |
 
-组件内置 `.au-floating-toolbar__group`、`.au-floating-toolbar__button`、`.au-floating-toolbar__separator`，可用于组织默认插槽内容。
+默认插槽中直接使用 `AuButton`、`AuButtonGroup` 等公开组件组织操作，不依赖内部类名。
 
 ### Exposes
 

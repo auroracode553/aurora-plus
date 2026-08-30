@@ -7,33 +7,36 @@
       <span>共 {{ filteredItems.length }} 条，当前渲染 {{ renderedRangeText }}</span>
     </div>
 
-    <AuVirtualList
-      ref="listRef"
-      class="virtual-list-demo"
-      :items="filteredItems"
-      :item-height="36"
-      :overscan="6"
-      @range-change="renderedRange = $event"
-    >
-      <template #default="{ item, index }">
-        <div
-          class="virtual-list-demo__row"
-          :class="{ 'is-last': index === filteredItems.length - 1 }"
-        >
-          <span class="virtual-list-demo__index">{{ index + 1 }}</span>
-          <span class="virtual-list-demo__identity">
-            <strong>{{ item.name }}</strong>
-            <small>{{ item.owner }}</small>
-          </span>
-          <span class="virtual-list-demo__status" :class="`is-${item.statusType}`">
-            {{ item.status }}
-          </span>
-        </div>
-      </template>
-      <template #empty>
-        <div class="virtual-list-demo__empty">没有匹配的数据</div>
-      </template>
-    </AuVirtualList>
+    <div class="virtual-list-demo">
+      <AuVirtualList
+        ref="listRef"
+        :items="filteredItems"
+        :item-height="36"
+        :overscan="6"
+        plain
+        fill
+        @range-change="renderedRange = $event"
+      >
+        <template #default="{ item, index }">
+          <div
+            class="virtual-list-demo__row"
+            :class="{ 'is-last': index === filteredItems.length - 1 }"
+          >
+            <span class="virtual-list-demo__index">{{ index + 1 }}</span>
+            <span class="virtual-list-demo__identity">
+              <strong>{{ item.name }}</strong>
+              <small>{{ item.owner }}</small>
+            </span>
+            <span class="virtual-list-demo__status" :class="`is-${item.statusType}`">
+              {{ item.status }}
+            </span>
+          </div>
+        </template>
+        <template #empty>
+          <div class="virtual-list-demo__empty">没有匹配的数据</div>
+        </template>
+      </AuVirtualList>
+    </div>
   </div>
 </template>
 
@@ -83,6 +86,14 @@ function scrollToMiddle() {
 </script>
 
 <style scoped>
+.virtual-list-demo {
+  height: 330px;
+  overflow: hidden;
+  border: 1px solid var(--au-color-border-lighter);
+  border-radius: 8px;
+  background: transparent;
+}
+
 .virtual-list-demo__controls {
   display: flex;
   align-items: center;
@@ -114,13 +125,6 @@ function scrollToMiddle() {
   margin-left: auto;
   color: var(--au-color-text-secondary);
   font-size: 12px;
-}
-
-.virtual-list-demo {
-  height: 330px;
-  border: 1px solid var(--au-color-border-lighter);
-  border-radius: 8px;
-  background: transparent;
 }
 
 .virtual-list-demo__row {

@@ -4,36 +4,30 @@
       点击此处显示浮动工具条
     </button>
     <AuFloatingToolbar
-      ref="toolbarRef"
       :trigger-rect="toolbarRect"
       :refresh-target="anchorRef"
       :keep-visible-target="anchorRef"
       @hide="handleHide"
     >
-      <div class="au-floating-toolbar__group">
-        <button
-          v-for="action in toolbarActions"
-          :key="action.id"
-          class="au-floating-toolbar__button"
-          :class="action.className"
-          type="button"
-          :title="action.label"
-          :aria-label="action.label"
-          @click="runAction(action)"
-        >
-          <component :is="action.icon" :size="16" aria-hidden="true" />
-        </button>
-      </div>
-      <span class="au-floating-toolbar__separator"></span>
-      <button
-        class="au-floating-toolbar__button is-danger"
-        type="button"
+      <AuButton
+        v-for="action in toolbarActions"
+        :key="action.id"
+        :icon="action.icon"
+        size="small"
+        circle
+        :title="action.label"
+        :aria-label="action.label"
+        @click="runAction(action)"
+      />
+      <AuButton
+        :icon="deleteAction.icon"
+        type="danger"
+        size="small"
+        circle
         title="删除"
         aria-label="删除"
         @click="runAction(deleteAction)"
-      >
-        <component :is="deleteAction.icon" :size="16" aria-hidden="true" />
-      </button>
+      />
     </AuFloatingToolbar>
   </div>
 </template>
@@ -41,6 +35,7 @@
 <script setup>
 import { ref } from 'vue';
 import {
+  AuButton,
   AuFloatingToolbar,
   AuMessage,
   IconBold,
@@ -50,14 +45,13 @@ import {
 } from 'aurora-ui';
 
 const toolbarActions = [
-  { id: 'bold', label: '加粗', icon: IconBold, className: 'is-primary' },
-  { id: 'italic', label: '斜体', icon: IconItalic, className: '' },
-  { id: 'underline', label: '下划线', icon: IconUnderline, className: '' },
+  { id: 'bold', label: '加粗', icon: IconBold },
+  { id: 'italic', label: '斜体', icon: IconItalic },
+  { id: 'underline', label: '下划线', icon: IconUnderline },
 ];
 
 const deleteAction = { id: 'delete', label: '删除', icon: IconTrash };
 const anchorRef = ref(null);
-const toolbarRef = ref(null);
 const toolbarRect = ref(null);
 
 function showToolbar() {

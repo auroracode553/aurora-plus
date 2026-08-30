@@ -8,17 +8,18 @@
         aria-label="切换树形导航折叠模式"
       />
     </div>
-    <AuTree
-      class="tree-demo__tree"
-      :items="visibleItems"
-      :selected-key="selectedKey"
-      item-key="id"
-      label-key="title"
-      :collapsible="collapsible"
-      aria-label="文档目录"
-      @select="selectedKey = $event.id"
-      @toggle="toggleItem"
-    />
+    <div class="tree-demo__tree">
+      <AuTree
+        :items="visibleItems"
+        :selected-key="selectedKey"
+        item-key="id"
+        label-key="title"
+        :collapsible="collapsible"
+        aria-label="文档目录"
+        @select="selectedKey = $event.id"
+        @toggle="toggleItem"
+      />
+    </div>
     <p class="tree-demo__result">当前选择：{{ selectedItem?.title ?? '未选择' }}</p>
   </div>
 </template>
@@ -101,6 +102,7 @@ function toggleItem(item) {
 
 .tree-demo__tree {
   height: 252px;
+  overflow: hidden;
   border: 1px solid var(--au-color-border-lighter);
   border-radius: 8px;
 }
