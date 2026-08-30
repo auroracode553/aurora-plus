@@ -8,11 +8,11 @@
       :aria-label="action.label"
       @click="activeAction = action.value"
     />
-    <span
+    <AuDivider
       v-if="index < actions.length - 1"
-      class="button-menu-demo__divider"
+      orientation="vertical"
       aria-hidden="true"
-    ></span>
+    />
   </template>
 
   <p class="button-menu-demo__hint">
@@ -24,6 +24,7 @@
 import { ref } from 'vue';
 import {
   AuButton,
+  AuDivider,
   IconArrowUp,
   IconBrandGit,
   IconCode,
@@ -41,15 +42,6 @@ const actions = [
 </script>
 
 <style scoped>
-.button-menu-demo__divider {
-  display: inline-flex;
-  width: 1px;
-  height: 16px;
-  margin: 0 5px;
-  vertical-align: middle;
-  background: var(--au-color-border-light);
-}
-
 .button-menu-demo__hint {
   margin: 8px 0 0;
   color: var(--au-color-text-secondary);

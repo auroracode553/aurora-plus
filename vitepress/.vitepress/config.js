@@ -91,6 +91,7 @@ export default defineConfig({
         items: [
           { text: 'Button 按钮', link: '/components/button' },
           { text: 'ButtonGroup 按钮组', link: '/components/button-group' },
+          { text: 'Divider 分割线', link: '/components/divider' },
           { text: 'Link 文字链接', link: '/components/link' },
           { text: 'Icon 图标', link: '/components/icon' },
         ],
