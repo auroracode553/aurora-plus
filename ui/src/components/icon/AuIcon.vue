@@ -48,8 +48,9 @@ const iconStyle = computed(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1em;
+  width: auto;
   height: 1em;
+  aspect-ratio: 1;
   color: inherit;
   line-height: 1;
   vertical-align: middle;

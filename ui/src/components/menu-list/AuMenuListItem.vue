@@ -204,15 +204,15 @@ function handleClick(event) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
+  width: auto;
   height: 30px;
+  aspect-ratio: 1;
   flex: none;
   color: var(--au-color-primary);
   font-size: 20px;
 }
 
 .au-menu-list-item.has-leading-tinted .au-menu-list-item__leading {
-  width: 32px;
   height: 32px;
   border-radius: var(--au-radius-control);
   color: var(--au-color-primary);
@@ -255,8 +255,10 @@ function handleClick(event) {
   align-items: center;
   justify-content: flex-end;
   min-width: 0;
+  max-width: 100%;
   gap: 8px;
-  flex: none;
+  flex: 0 1 auto;
+  overflow: hidden;
   color: var(--au-color-text-secondary);
 }
 

@@ -69,6 +69,8 @@ function toggle() {
 
   display: inline-flex;
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
   gap: 7px;
   min-height: 28px;
   padding: 0;
@@ -100,8 +102,9 @@ function toggle() {
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 36px;
+  width: auto;
   height: 20px;
+  aspect-ratio: 9 / 5;
   flex: none;
   border: 1px solid var(--au-material-border-strong);
   border-radius: var(--au-radius-round);
@@ -115,8 +118,9 @@ function toggle() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
+  width: auto;
   height: 16px;
+  aspect-ratio: 1;
   margin-left: 2px;
   border-radius: var(--au-radius-round);
   background: var(--au-material-bg-strong);
@@ -137,12 +141,11 @@ function toggle() {
 }
 
 .au-switch.is-small .au-switch__track {
-  width: 30px;
   height: 18px;
+  aspect-ratio: 5 / 3;
 }
 
 .au-switch.is-small .au-switch__thumb {
-  width: 14px;
   height: 14px;
 }
 
@@ -151,12 +154,11 @@ function toggle() {
 }
 
 .au-switch.is-large .au-switch__track {
-  width: 42px;
   height: 24px;
+  aspect-ratio: 7 / 4;
 }
 
 .au-switch.is-large .au-switch__thumb {
-  width: 20px;
   height: 20px;
 }
 
@@ -165,12 +167,15 @@ function toggle() {
 }
 
 .au-switch__loading {
-  width: 0.7em;
+  width: auto;
   height: 0.7em;
+  aspect-ratio: 1;
   color: var(--au-color-text-secondary);
 }
 
 .au-switch__label {
+  min-width: 0;
+  flex: 1 1 auto;
   color: inherit;
 }
 

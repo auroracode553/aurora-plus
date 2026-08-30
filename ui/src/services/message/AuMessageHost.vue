@@ -71,8 +71,9 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 }
 
 .au-message__indicator {
-  width: 8px;
+  width: auto;
   height: 8px;
+  aspect-ratio: 1;
   margin-top: 6px;
   border-radius: var(--au-radius-round);
   background: var(--au-color-info);
@@ -109,8 +110,9 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 .au-message__close {
   display: inline-grid;
   place-items: center;
-  width: 20px;
+  width: auto;
   height: 20px;
+  aspect-ratio: 1;
   margin: 0 0 0 2px;
   padding: 0;
   border: 0;

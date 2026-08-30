@@ -213,6 +213,7 @@ defineExpose({ close, dialogRef });
   display: flex;
   flex-direction: column;
   min-width: 0;
+  max-width: calc(100vw - 32px);
   overflow: hidden;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-overlay);
@@ -233,7 +234,9 @@ defineExpose({ close, dialogRef });
 }
 
 .au-dialog__title {
+  min-width: 0;
   margin: 0;
+  overflow-wrap: anywhere;
   color: var(--au-color-text-primary);
   font-size: 18px;
   font-weight: var(--au-font-weight-semibold);
@@ -247,6 +250,7 @@ defineExpose({ close, dialogRef });
 
 .au-dialog__body {
   flex: 1;
+  min-width: 0;
   min-height: 0;
   padding: 16px 18px;
   overflow: auto;
@@ -256,7 +260,9 @@ defineExpose({ close, dialogRef });
 .au-dialog__footer {
   display: flex;
   justify-content: flex-end;
+  min-width: 0;
   gap: 8px;
+  flex-wrap: wrap;
   padding: 12px 18px 14px;
   border-top: 1px solid var(--au-material-border-strong);
   background: transparent;

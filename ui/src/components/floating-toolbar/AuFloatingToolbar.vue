@@ -100,19 +100,23 @@ function updatePosition() {
 
   const toolbarRect = toolbar.getBoundingClientRect();
   const padding = Math.max(props.viewportPadding, 0);
+  const maxToolbarWidth = Math.max(window.innerWidth - padding * 2, 0);
+  const toolbarWidth = Math.min(toolbarRect.width, maxToolbarWidth);
   const roomAbove = rect.top - props.gap;
   const placement = props.placement === 'auto' ? (roomAbove >= toolbarRect.height + padding ? 'top' : 'bottom') : props.placement;
   const targetCenter = rect.left + rect.width / 2;
-  const left = clamp(targetCenter - toolbarRect.width / 2, padding, window.innerWidth - toolbarRect.width - padding);
+  const left = clamp(targetCenter - toolbarWidth / 2, padding, window.innerWidth - toolbarWidth - padding);
   const desiredTop = placement === 'top' ? rect.top - props.gap - toolbarRect.height : rect.bottom + props.gap;
   const top = clamp(desiredTop, padding, window.innerHeight - toolbarRect.height - padding);
-  const nextArrowLeft = clamp(targetCenter - left, 12, toolbarRect.width - 12);
+  const arrowInset = Math.min(12, toolbarWidth / 2);
+  const nextArrowLeft = clamp(targetCenter - left, arrowInset, toolbarWidth - arrowInset);
 
   activePlacement.value = placement;
   arrowLeft.value = nextArrowLeft;
   toolbarStyle.value = {
     left: `${left}px`,
     top: `${top}px`,
+    maxWidth: `${maxToolbarWidth}px`,
     zIndex: props.zIndex,
   };
 }
@@ -213,12 +217,16 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   position: fixed;
   display: inline-flex;
   align-items: center;
+  max-width: calc(100vw - 16px);
   gap: 2px;
   min-height: 34px;
   padding: 2px;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-surface);
   color: var(--au-color-text-regular);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
   user-select: none;
 }
 
@@ -262,6 +270,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   display: inline-flex;
   align-items: center;
   gap: 2px;
+  flex: none;
 }
 
 .au-floating-toolbar :deep(.au-floating-toolbar__separator) {
@@ -276,8 +285,9 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
+  width: auto;
   height: 28px;
+  aspect-ratio: 1;
   padding: 0;
   border: 0;
   border-radius: var(--au-radius-small);

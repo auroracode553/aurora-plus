@@ -147,6 +147,8 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 <style scoped>
 .au-virtual-list {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
   min-height: 0;
   padding: 4px 6px;
   overflow: auto;

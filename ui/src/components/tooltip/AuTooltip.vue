@@ -68,7 +68,7 @@ const maxWidthValue = computed(() => (typeof props.maxWidth === 'number' ? `${pr
 const popperStyle = computed(() => ({
   left: `${popperPosition.value.x}px`,
   top: `${popperPosition.value.y}px`,
-  maxWidth: maxWidthValue.value,
+  maxWidth: `min(${maxWidthValue.value}, calc(100vw - ${VIEWPORT_GAP * 2}px))`,
 }));
 const arrowStyle = computed(() => arrowPosition.value);
 
@@ -203,6 +203,8 @@ defineExpose({ hide, show, updatePosition });
 <style scoped>
 .au-tooltip__trigger {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   vertical-align: middle;
 }
 
@@ -224,12 +226,15 @@ defineExpose({ hide, show, updatePosition });
 .au-tooltip__content {
   position: relative;
   z-index: 1;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .au-tooltip__arrow {
   position: absolute;
-  width: 8px;
+  width: auto;
   height: 8px;
+  aspect-ratio: 1;
   border: 1px solid var(--au-material-border-strong);
   background: var(--au-material-bg-strong);
   transform: rotate(45deg);

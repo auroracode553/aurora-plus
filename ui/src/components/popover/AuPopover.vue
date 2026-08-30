@@ -197,12 +197,15 @@ function focusFirstContent() {
   focusTarget?.focus?.({ preventScroll: true });
 }
 
-function updatePosition() {
+async function updatePosition() {
   const triggerElement = getTriggerElement();
   const contentElement = contentRef.value;
   if (!triggerElement || !contentElement || typeof window === 'undefined') return;
 
   const triggerRect = triggerElement.getBoundingClientRect();
+  triggerWidth.value = Math.min(triggerRect.width, Math.max(window.innerWidth - VIEWPORT_GAP * 2, 0));
+  if (props.matchTriggerWidth) await nextTick();
+  if (!contentRef.value) return;
   const contentRect = contentElement.getBoundingClientRect();
   const position = resolveFloatingPosition({
     placement: props.placement,
@@ -215,7 +218,6 @@ function updatePosition() {
   });
 
   activePlacement.value = position.placement;
-  triggerWidth.value = triggerRect.width;
   contentPosition.value = { x: position.x, y: position.y };
 }
 
@@ -297,6 +299,8 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, contentRef });
 <style scoped>
 .au-popover {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   vertical-align: middle;
 }
 
@@ -314,7 +318,7 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, contentRef });
 }
 
 .au-popover__content.has-surface {
-  min-width: 180px;
+  min-width: min(180px, calc(100vw - 16px));
   padding: 12px;
   overflow: auto;
   border: 1px solid var(--au-material-border);

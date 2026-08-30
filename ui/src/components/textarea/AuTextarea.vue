@@ -143,6 +143,7 @@ defineExpose({ focus, blur, select, textareaRef });
   display: block;
   width: 100%;
   min-width: 0;
+  max-width: 100%;
   min-height: 68px;
   padding: 8px 10px;
   border: 0;

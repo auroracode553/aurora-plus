@@ -223,8 +223,9 @@ function handleTitleDoubleClick(event) {
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 32px;
+  width: auto;
   height: 100%;
+  aspect-ratio: 1;
   padding: 6px;
   -webkit-app-region: no-drag;
   pointer-events: auto;
@@ -232,8 +233,9 @@ function handleTitleDoubleClick(event) {
 
 .au-window-title-bar__icon img {
   display: block;
-  width: 18px;
+  width: auto;
   height: 18px;
+  aspect-ratio: 1;
   object-fit: contain;
 }
 
@@ -317,8 +319,9 @@ function handleTitleDoubleClick(event) {
 }
 
 .au-window-title-bar__button :deep(.au-icon) {
-  width: 12px;
+  width: auto;
   height: 12px;
+  aspect-ratio: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

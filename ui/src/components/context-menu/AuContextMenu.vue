@@ -47,7 +47,7 @@
             @click="selectItem(item)"
           >
             <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
-            <span>{{ item.label }}</span>
+            <span class="au-context-menu__label">{{ item.label }}</span>
             <span v-if="item.shortcut" class="au-context-menu__shortcut">{{ item.shortcut }}</span>
           </button>
         </template>
@@ -62,7 +62,7 @@
           @click="selectItem(resolveSectionItem(section))"
         >
           <AuIcon v-if="resolveSectionItem(section).icon" class="au-context-menu__item-icon" :icon="resolveSectionItem(section).icon" />
-          <span>{{ resolveSectionItem(section).label }}</span>
+          <span class="au-context-menu__label">{{ resolveSectionItem(section).label }}</span>
           <span v-if="resolveSectionItem(section).shortcut" class="au-context-menu__shortcut">{{ resolveSectionItem(section).shortcut }}</span>
         </button>
 
@@ -83,7 +83,7 @@
             @focus="showSubmenu(section.id)"
           >
             <AuIcon v-if="section.icon" class="au-context-menu__item-icon" :icon="section.icon" />
-            <span>{{ section.label }}</span>
+            <span class="au-context-menu__label">{{ section.label }}</span>
             <AuIcon class="au-context-menu__arrow" :icon="IconChevronRight" />
           </button>
 
@@ -106,7 +106,7 @@
                 @click="selectItem(item)"
               >
                 <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
-                <span>{{ item.label }}</span>
+                <span class="au-context-menu__label">{{ item.label }}</span>
                 <span v-if="item.shortcut" class="au-context-menu__shortcut">{{ item.shortcut }}</span>
               </button>
             </template>
@@ -159,6 +159,7 @@ const menuStyle = computed(() => ({
 function showSubmenu(name) {
   clearTimeout(submenuCloseTimer);
   activeSubmenu.value = name;
+  nextTick(updatePosition);
 }
 
 function hideSubmenu() {
@@ -264,6 +265,7 @@ watch(
 
 onMounted(() => {
   if (typeof document !== 'undefined') document.addEventListener('pointerdown', handleOutsidePointer, true);
+  if (typeof window !== 'undefined') window.addEventListener('resize', updatePosition);
   if (visible.value) {
     updatePosition();
     nextTick(() => {
@@ -275,6 +277,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   clearTimeout(submenuCloseTimer);
   if (typeof document !== 'undefined') document.removeEventListener('pointerdown', handleOutsidePointer, true);
+  if (typeof window !== 'undefined') window.removeEventListener('resize', updatePosition);
 });
 
 defineExpose({ close, menuRef, updatePosition });
@@ -284,7 +287,9 @@ defineExpose({ close, menuRef, updatePosition });
 .au-context-menu,
 .au-context-submenu {
   position: fixed;
-  min-width: 190px;
+  width: max-content;
+  min-width: min(190px, calc(100vw - 16px));
+  max-width: calc(100vw - 16px);
   padding: 5px;
   border-radius: var(--au-radius-overlay);
   font-size: 13px;
@@ -353,6 +358,13 @@ defineExpose({ close, menuRef, updatePosition });
   font-size: 14px;
 }
 
+.au-context-menu__label {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .au-context-menu__item.has-submenu .au-context-menu__arrow,
 .au-context-menu__shortcut {
   margin-left: auto;
@@ -374,7 +386,18 @@ defineExpose({ close, menuRef, updatePosition });
   position: absolute;
   top: -5px;
   left: calc(100% + 6px);
-  min-width: 200px;
+  min-width: min(200px, calc(100vw - 16px));
+}
+
+@media (max-width: 480px) {
+  .au-context-submenu {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-top: 2px;
+    box-shadow: none;
+  }
 }
 
 </style>

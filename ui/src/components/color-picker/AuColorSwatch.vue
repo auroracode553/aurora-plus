@@ -85,8 +85,9 @@ function clampChannel(value) {
 .au-color-swatch {
   display: inline-grid;
   place-items: center;
-  width: 32px;
+  width: auto;
   height: 32px;
+  aspect-ratio: 1;
   padding: 3px;
   border: 1px solid transparent;
   border-radius: var(--au-radius-round);
@@ -101,12 +102,10 @@ function clampChannel(value) {
 }
 
 .au-color-swatch.is-small {
-  width: 28px;
   height: 28px;
 }
 
 .au-color-swatch.is-large {
-  width: 40px;
   height: 40px;
   padding: 4px;
 }
@@ -133,31 +132,31 @@ function clampChannel(value) {
 .au-color-swatch__color {
   display: grid;
   place-items: center;
-  width: 22px;
+  width: auto;
   height: 22px;
+  aspect-ratio: 1;
   border: 1px solid var(--au-color-border-light);
   border-radius: var(--au-radius-round);
 }
 
 .au-color-swatch.is-small .au-color-swatch__color {
-  width: 18px;
   height: 18px;
 }
 
 .au-color-swatch.is-large .au-color-swatch__color {
-  width: 30px;
   height: 30px;
 }
 
 .au-color-swatch__check {
-  width: 14px;
+  width: auto;
   height: 14px;
+  aspect-ratio: 1;
 }
 
 .au-color-swatch__check :deep(svg) {
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 100%;
+  height: 100%;
   stroke-width: 2.5;
 }
 

@@ -181,8 +181,9 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
+  width: auto;
   height: 20px;
+  aspect-ratio: 1;
   flex: none;
   color: currentColor;
   font-size: 20px;
@@ -229,8 +230,9 @@ onBeforeUnmount(() => {
 }
 
 .au-menu-item__indicator {
-  width: 8px;
+  width: auto;
   height: 8px;
+  aspect-ratio: 1;
   border-radius: var(--au-radius-round);
   background: var(--au-color-text-secondary);
 }

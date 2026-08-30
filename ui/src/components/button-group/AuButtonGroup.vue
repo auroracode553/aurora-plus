@@ -43,6 +43,8 @@ defineProps({
 .au-button-group {
   display: inline-flex;
   align-items: stretch;
+  min-width: 0;
+  max-width: 100%;
   vertical-align: middle;
   isolation: isolate;
 }
@@ -52,7 +54,14 @@ defineProps({
 }
 
 .au-button-group :deep(> .au-button-group-item) {
-  flex: 0 0 auto;
+  min-width: 0;
+  max-width: 100%;
+  flex: 0 1 auto;
+}
+
+.au-button-group :deep(> .au-button-group-item > .au-popover) {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .au-button-group.is-vertical :deep(> .au-button-group-item) {
@@ -255,9 +264,10 @@ defineProps({
 
 .au-button-group.is-icon-only :deep(> .au-button),
 .au-button-group.is-icon-only :deep(> .au-button-group-item > .au-button) {
-  width: 28px;
-  min-width: 28px;
+  width: auto;
+  min-width: 0;
   height: 28px;
+  aspect-ratio: 1;
   padding: 0;
   border-radius: var(--au-radius-small);
 }

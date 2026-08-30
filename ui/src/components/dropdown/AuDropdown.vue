@@ -242,12 +242,15 @@ function itemId(index) {
   return `${dropdownId}-${index}`;
 }
 
-function updatePosition() {
+async function updatePosition() {
   const trigger = getTriggerElement();
   const menu = menuRef.value;
   if (!trigger || !menu || typeof window === 'undefined') return;
 
   const triggerRect = trigger.getBoundingClientRect();
+  triggerWidth.value = Math.min(triggerRect.width, Math.max(window.innerWidth - VIEWPORT_GAP * 2, 0));
+  if (props.matchTriggerWidth) await nextTick();
+  if (!menuRef.value) return;
   const menuRect = menu.getBoundingClientRect();
   const [requestedBase, requestedAlign] = props.placement.split('-');
   const align = requestedAlign || 'center';
@@ -258,7 +261,6 @@ function updatePosition() {
     : triggerRect.bottom + props.offset;
 
   activePlacement.value = align === 'center' ? base : `${base}-${align}`;
-  triggerWidth.value = triggerRect.width;
   menuPosition.value = {
     x: clamp(left, VIEWPORT_GAP, window.innerWidth - menuRect.width - VIEWPORT_GAP),
     y: clamp(desiredTop, VIEWPORT_GAP, window.innerHeight - menuRect.height - VIEWPORT_GAP),
@@ -343,17 +345,23 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 .au-dropdown {
   position: relative;
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   vertical-align: middle;
 }
 
 .au-dropdown__trigger {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   vertical-align: middle;
 }
 
 .au-dropdown__menu {
   position: fixed;
-  min-width: 180px;
+  width: max-content;
+  min-width: min(180px, calc(100vw - 16px));
+  max-width: calc(100vw - 16px);
   max-height: min(320px, calc(100vh - 16px));
   padding: 5px;
   overflow-x: hidden;
@@ -400,6 +408,8 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 }
 
 .au-dropdown__item-label {
+  min-width: 0;
+  flex: 1 1 auto;
   overflow: hidden;
   text-overflow: ellipsis;
 }

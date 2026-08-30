@@ -89,6 +89,8 @@ onMounted(syncIndeterminate);
 .au-checkbox {
   display: inline-flex;
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
   gap: 7px;
   min-height: 28px;
   color: var(--au-color-text-regular);
@@ -97,6 +99,11 @@ onMounted(syncIndeterminate);
   line-height: 1.3;
   cursor: pointer;
   user-select: none;
+}
+
+.au-checkbox__label {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .au-checkbox.is-small {
@@ -115,8 +122,9 @@ onMounted(syncIndeterminate);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
+  width: auto;
   height: 18px;
+  aspect-ratio: 1;
   flex: none;
   border: 1px solid var(--au-material-border-strong);
   border-radius: var(--au-radius-small);
@@ -128,13 +136,11 @@ onMounted(syncIndeterminate);
 }
 
 .is-small .au-checkbox__box {
-  width: 16px;
   height: 16px;
   border-radius: var(--au-radius-small);
 }
 
 .is-large .au-checkbox__box {
-  width: 20px;
   height: 20px;
   border-radius: var(--au-radius-small);
 }

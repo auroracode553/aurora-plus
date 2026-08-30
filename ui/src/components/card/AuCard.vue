@@ -6,6 +6,8 @@
 
 <style scoped>
 .au-card {
+  min-width: 0;
+  max-width: 100%;
   padding: 8px 10px;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-surface);

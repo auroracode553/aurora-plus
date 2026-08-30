@@ -156,6 +156,8 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
 
 <style scoped>
 .au-tree {
+  min-width: 0;
+  max-width: 100%;
   color: var(--au-color-text-regular);
   font-size: 13px;
 }
@@ -173,8 +175,9 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
 }
 
 .au-tree__empty :deep(svg) {
-  width: 26px;
+  width: auto;
   height: 26px;
+  aspect-ratio: 1;
   opacity: 0.52;
 }
 

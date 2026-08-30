@@ -65,6 +65,8 @@ function handleClick(event) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  max-width: 100%;
   gap: 4px;
   padding: 0;
   color: var(--au-color-text-regular);
@@ -74,7 +76,7 @@ function handleClick(event) {
   line-height: 1.35;
   text-decoration: none;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
   cursor: pointer;
   transition: color var(--au-transition-duration) var(--au-transition-ease);
 }
@@ -83,6 +85,7 @@ function handleClick(event) {
   display: inline-flex;
   align-items: center;
   min-width: 0;
+  overflow-wrap: anywhere;
   text-decoration-color: currentcolor;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;

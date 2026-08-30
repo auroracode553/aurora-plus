@@ -85,33 +85,45 @@ function handleKeydown(event) {
 .au-tabs {
   display: flex;
   align-items: stretch;
+  width: 100%;
   min-width: 0;
+  max-width: 100%;
   min-height: 36px;
   padding: 0 8px;
   gap: 4px;
   border-bottom: 1px solid var(--au-color-border-lighter);
   color: var(--au-color-text-secondary);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
 }
 
 .au-tabs__tab {
   position: relative;
   min-width: 0;
+  max-width: 100%;
   min-height: 36px;
   padding: 0 10px;
+  overflow: hidden;
   border: 0;
   color: inherit;
   background: transparent;
   font: inherit;
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
+  text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
   appearance: none;
   transition: color var(--au-transition-duration) var(--au-transition-ease);
 }
 
+.au-tabs:not(.is-fill) .au-tabs__tab {
+  flex: none;
+}
+
 .au-tabs.is-fill .au-tabs__tab {
-  flex: 1;
+  flex: 1 1 0;
 }
 
 .au-tabs__tab::after {

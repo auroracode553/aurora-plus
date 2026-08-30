@@ -34,6 +34,13 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 | `AuMessage` | 命令式消息提示 |
 | `AuMessageBox` | Promise 风格确认框 |
 
+## 弹性布局
+
+- 表单、列表、面板和导航组件默认允许随父容器收缩，长文本会换行、截断或在横向导航内滚动，避免内容撑破布局。
+- Dialog、Popover、Dropdown、Tooltip、ContextMenu 和 FloatingToolbar 的可用宽度受视口约束；窄屏下的层级菜单会改为容器内展开。
+- Button、Link、Checkbox 和 Switch 保留内容驱动宽度，但不会超过父容器；可伸缩文本区域不会挤压图标、状态标记等结构元素。
+- 图标、颜色样本、开关轨道、圆形按钮和桌面窗口控制键需要保持形状，因此仍使用明确的结构尺寸。控件高度继续由 `size` 或组件变体控制，不随屏幕宽度自动放大。
+
 ## 安装
 
 ```bash

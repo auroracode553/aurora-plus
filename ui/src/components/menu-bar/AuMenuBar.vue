@@ -167,8 +167,10 @@ defineExpose({ close: closeMenu, menuBarRef });
 .au-menu-bar__roots {
   display: flex;
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
   height: 100%;
-  flex: none;
+  flex: 0 1 auto;
   gap: 2px;
   -webkit-app-region: no-drag;
 }
@@ -177,20 +179,25 @@ defineExpose({ close: closeMenu, menuBarRef });
   position: relative;
   display: flex;
   align-items: center;
+  min-width: 0;
   height: 100%;
-  flex: none;
+  flex: 0 1 auto;
 }
 
 .au-menu-bar__trigger {
-  min-width: 42px;
+  min-width: 0;
+  max-width: 100%;
   height: 26px;
-  padding: 0 9px;
+  padding: 0 clamp(4px, 2vw, 9px);
+  overflow: hidden;
   border: 0;
   border-radius: var(--au-radius-small);
   color: inherit;
   background: transparent;
   font: inherit;
   line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   cursor: pointer;
   appearance: none;
   -webkit-app-region: no-drag;

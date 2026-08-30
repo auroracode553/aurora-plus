@@ -77,6 +77,8 @@ function handleClick(event) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  max-width: 100%;
   height: 32px;
   gap: 6px;
   margin: 0;
@@ -137,24 +139,24 @@ function handleClick(event) {
 }
 
 .au-button.is-circle {
-  width: 32px;
+  width: auto;
+  aspect-ratio: 1;
   padding: 0;
   border-radius: var(--au-radius-round);
-}
-
-.au-button--small.is-circle {
-  width: 28px;
-}
-
-.au-button--large.is-circle {
-  width: 40px;
 }
 
 .au-button.is-disabled:active {
   transform: none;
 }
 
-.au-button__content,
+.au-button__content {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .au-button__icon,
 .au-button__loading-icon {
   position: relative;

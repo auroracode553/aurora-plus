@@ -74,8 +74,9 @@ defineExpose({ focus, inputRef });
   display: inline-grid;
   place-items: center;
   flex: none;
-  width: 32px;
+  width: auto;
   height: 32px;
+  aspect-ratio: 1;
   padding: 0;
   border: 0.5px solid var(--au-color-border-lighter);
   border-radius: var(--au-radius-round);
@@ -88,12 +89,10 @@ defineExpose({ focus, inputRef });
 }
 
 .au-color-picker.is-small {
-  width: 28px;
   height: 28px;
 }
 
 .au-color-picker.is-large {
-  width: 40px;
   height: 40px;
 }
 
@@ -113,20 +112,19 @@ defineExpose({ focus, inputRef });
 }
 
 .au-color-picker__swatch {
-  width: 18px;
+  width: auto;
   height: 18px;
+  aspect-ratio: 1;
   border: 0.5px solid var(--au-color-border-lighter);
   border-radius: var(--au-radius-round);
   pointer-events: none;
 }
 
 .au-color-picker.is-small .au-color-picker__swatch {
-  width: 16px;
   height: 16px;
 }
 
 .au-color-picker.is-large .au-color-picker__swatch {
-  width: 22px;
   height: 22px;
 }
 
