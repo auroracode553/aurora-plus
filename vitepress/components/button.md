@@ -45,7 +45,7 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
 | `type` | 视觉类型 | `string` | `default / primary / success / info / warning / danger / menu` | `default` |
 | `size` | 按钮尺寸 | `string` | `small / default / large` | `default` |
 | `selected` | 是否选中；设置后同步输出 `aria-pressed` | `boolean` | — | `undefined` |
-| `selectedColor` | `menu` 类型的选中强调色，背景由组件自动生成 | `string` | `primary / success / info / warning / danger` 或合法颜色值 | `''` |
+| `selectedColor` | `menu` 类型的选中颜色，背景由组件自动生成 | `string` | 十六进制、`rgb()`、`rgba()` 等颜色值 | `''` |
 | `nativeType` | 原生 `button` 的 `type` | `string` | `button / submit / reset` | `button` |
 | `icon` | 图标组件 | `Component` | — | `null` |
 | `plain` | 是否使用朴素样式 | `boolean` | — | `false` |

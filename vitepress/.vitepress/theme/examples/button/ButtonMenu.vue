@@ -16,7 +16,7 @@
   </template>
 
   <p class="button-menu-demo__hint">
-    每个选项直接通过 <code>selected-color</code> 设置强调色，选中背景由组件自动生成。
+    每个选项通过 <code>selected-color</code> 传入 <code>rgb()</code>、<code>rgba()</code> 等颜色值，选中背景由组件自动生成。
   </p>
 </template>
 
@@ -34,10 +34,10 @@ import {
 const activeAction = ref('sidebar');
 
 const actions = [
-  { value: 'sidebar', label: '侧边栏', icon: IconLayoutSidebar, color: 'primary' },
-  { value: 'source', label: '源码模式', icon: IconCode, color: 'info' },
-  { value: 'git', label: '源代码管理', icon: IconBrandGit, color: 'warning' },
-  { value: 'top', label: '回到顶部', icon: IconArrowUp, color: 'success' },
+  { value: 'sidebar', label: '侧边栏', icon: IconLayoutSidebar, color: 'rgb(52, 120, 246)' },
+  { value: 'source', label: '源码模式', icon: IconCode, color: 'rgba(113, 128, 150, 0.95)' },
+  { value: 'git', label: '源代码管理', icon: IconBrandGit, color: 'rgb(217, 138, 36)' },
+  { value: 'top', label: '回到顶部', icon: IconArrowUp, color: '#2f9e72' },
 ];
 </script>
 

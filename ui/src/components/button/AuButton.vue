@@ -72,7 +72,7 @@ const isIconOnly = computed(() => {
 });
 
 const buttonStyle = computed(() => {
-  const color = resolveSelectedColor(props.selectedColor);
+  const color = String(props.selectedColor || '').trim();
   if (props.type !== 'menu' || !isSelected.value || !color || props.disabled || props.loading) {
     return undefined;
   }
@@ -97,14 +97,6 @@ const buttonClasses = computed(() => [
 
 function isAriaTrue(value) {
   return value === true || value === 'true';
-}
-
-function resolveSelectedColor(value) {
-  const color = String(value || '').trim();
-  if (['primary', 'success', 'info', 'warning', 'danger'].includes(color)) {
-    return `var(--au-color-${color})`;
-  }
-  return color;
 }
 
 function handleClick(event) {
