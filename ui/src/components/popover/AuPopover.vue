@@ -233,7 +233,17 @@ function handleOutsidePointer(event) {
   if (!visible.value || !props.closeOnClickOutside) return;
   const target = event.target;
   if (triggerRef.value?.contains(target) || contentRef.value?.contains(target)) return;
+  if (isOwnedFloatingTarget(target)) return;
   close('outside');
+}
+
+/** Teleport 到外部的子浮层仍属于当前 Popover，不应触发外部关闭。 */
+function isOwnedFloatingTarget(target) {
+  const floatingElement = target?.closest?.('[data-au-floating-owner]');
+  const ownerId = floatingElement?.getAttribute('data-au-floating-owner');
+  if (!ownerId || !contentRef.value) return false;
+  return [...contentRef.value.querySelectorAll('[data-au-floating-owner]')]
+    .some((element) => element.getAttribute('data-au-floating-owner') === ownerId);
 }
 
 function observeGeometry() {

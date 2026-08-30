@@ -40,13 +40,22 @@
       <span v-if="showWordLimit && maxlength != null" class="au-input__count" aria-live="polite">
         {{ wordCount }}/{{ maxlength }}
       </span>
-      <slot name="suffix">
-        <AuIcon v-if="suffixIcon" :icon="suffixIcon" />
-      </slot>
+      <span
+        v-if="hasSuffixContent && !shouldReplaceSuffix"
+        class="au-input__suffix-content"
+        :class="{ 'au-input__replaceable-suffix': replaceSuffixOnClear }"
+      >
+        <slot name="suffix">
+          <AuIcon v-if="suffixIcon" :icon="suffixIcon" />
+        </slot>
+      </span>
       <button
-        v-if="clearable"
+        v-if="shouldRenderClear"
         class="au-input__clear au-focus-ring"
-        :class="{ 'is-visible': canClear }"
+        :class="{
+          'is-visible': canClear,
+          'is-replacement': shouldReplaceSuffix,
+        }"
         type="button"
         :disabled="!canClear"
         :tabindex="canClear ? 0 : -1"
@@ -80,6 +89,8 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
   clearable: { type: Boolean, default: false },
+  clearableWhenReadonly: { type: Boolean, default: false },
+  replaceSuffixOnClear: { type: Boolean, default: false },
   prefixIcon: { type: [Object, Function], default: null },
   suffixIcon: { type: [Object, Function], default: null },
   maxlength: { type: [Number, String], default: null },
@@ -95,10 +106,22 @@ const isComposing = ref(false);
 
 const inputValue = computed(() => (props.modelValue == null ? '' : String(props.modelValue)));
 const hasPrefix = computed(() => Boolean(slots.prefix || props.prefixIcon));
-const canClear = computed(() => props.clearable && inputValue.value.length > 0 && !props.disabled && !props.readonly);
+const canClear = computed(() => (
+  props.clearable
+  && inputValue.value.length > 0
+  && !props.disabled
+  && (!props.readonly || props.clearableWhenReadonly)
+));
+const hasSuffixContent = computed(() => Boolean(slots.suffix || props.suffixIcon));
+const shouldReplaceSuffix = computed(() => (
+  props.replaceSuffixOnClear && hasSuffixContent.value && canClear.value
+));
+const shouldRenderClear = computed(() => (
+  props.clearable
+  && (!props.replaceSuffixOnClear || !hasSuffixContent.value || canClear.value)
+));
 const hasSuffix = computed(() => Boolean(
-  slots.suffix
-  || props.suffixIcon
+  hasSuffixContent.value
   || props.clearable
   || (props.showWordLimit && props.maxlength != null),
 ));
@@ -262,7 +285,8 @@ defineExpose({ focus, blur, select, inputRef });
   min-width: 0;
   max-width: 50%;
   gap: 5px;
-  flex: 0 1 auto;
+  /* 中间输入区负责收缩，避免图标与清除按钮被 affix 的裁剪区域截断。 */
+  flex: 0 0 auto;
   overflow: hidden;
   color: var(--au-color-text-secondary);
   font-size: 16px;
@@ -276,15 +300,32 @@ defineExpose({ focus, blur, select, inputRef });
   white-space: nowrap;
 }
 
+.au-input__suffix-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.au-input__replaceable-suffix {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
 .au-input__clear {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: auto;
+  width: 20px;
+  min-width: 20px;
   height: 20px;
-  aspect-ratio: 1;
-  margin: 0 -4px 0 0;
+  flex: 0 0 20px;
+  margin: 0;
   padding: 0;
+  overflow: visible;
   border: 0;
   border-radius: var(--au-radius-round);
   color: var(--au-color-text-secondary);
@@ -299,8 +340,21 @@ defineExpose({ focus, blur, select, inputRef });
     opacity var(--au-transition-duration) var(--au-transition-ease);
 }
 
+.au-input__clear :deep(.au-icon) {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  overflow: visible;
+  contain: none;
+}
+
 .au-input__clear.is-visible {
   pointer-events: auto;
+}
+
+.au-input__clear.is-replacement {
+  opacity: 1;
 }
 
 .au-input:hover .au-input__clear.is-visible,

@@ -40,6 +40,8 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `readonly` | 是否只读 | `boolean` | `false` |
 | `clearable` | 有内容时是否显示清除按钮 | `boolean` | `false` |
+| `clearableWhenReadonly` | 原生输入只读时是否仍允许独立的清空操作 | `boolean` | `false` |
+| `replaceSuffixOnClear` | 有内容且可清空时，是否用清除按钮替换后缀内容 | `boolean` | `false` |
 | `prefixIcon` | 前缀图标组件 | `Component` | `null` |
 | `suffixIcon` | 后缀图标组件 | `Component` | `null` |
 | `maxlength` | 原生最大字符数 | `number / string` | `null` |

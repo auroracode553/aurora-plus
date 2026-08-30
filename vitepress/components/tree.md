@@ -24,6 +24,7 @@ import treeBasicSource from '../.vitepress/theme/examples/tree/TreeBasic.vue?dem
 ## 使用建议
 
 - 每个节点需要稳定的唯一 key；可用 `itemKey` 与 `labelKey` 映射已有数据字段。
+- `disabledKey` 指向值为真时不可选择的字段；禁用节点仍可通过独立折叠按钮展开子级。
 - `collapsible` 默认为 `false`；关闭时按普通层级列表显示，不渲染展开/收起控件。
 - 开启 `collapsible` 后，父节点需提供 `hasChildren` 与 `isCollapsed`，并由 `toggle` 事件更新折叠状态。
 - 组件负责渲染可见行，业务侧负责将嵌套数据转换为带 `displayDepth` 的扁平数组。
@@ -36,6 +37,7 @@ import treeBasicSource from '../.vitepress/theme/examples/tree/TreeBasic.vue?dem
 | `selectedKey` | 当前选中节点 key | `string \| number \| null` | `null` |
 | `itemKey` | 节点 key 字段名 | `string` | `id` |
 | `labelKey` | 节点标题字段名 | `string` | `label` |
+| `disabledKey` | 节点禁用字段名 | `string` | `disabled` |
 | `itemHeight` | 固定行高 | `number` | `28` |
 | `overscan` | 视口外预渲染行数 | `number` | `8` |
 | `baseIndent` | 根节点起始缩进 | `number` | `10` |

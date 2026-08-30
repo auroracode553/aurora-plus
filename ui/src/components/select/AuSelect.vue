@@ -2,6 +2,7 @@
   <span
     ref="rootRef"
     class="au-select au-component"
+    :data-au-floating-owner="selectId"
     :class="[
       `is-${size}`,
       {
@@ -53,6 +54,7 @@
         :id="listboxId"
         ref="listboxRef"
         class="au-select__listbox au-component au-material-surface au-depth-surface au-motion-popover au-menu-surface"
+        :data-au-floating-owner="selectId"
         :class="[`is-${size}`, `is-${activePlacement}`]"
         :style="listboxStyle"
         role="listbox"
@@ -124,6 +126,7 @@ defineOptions({ inheritAttrs: false });
 const VIEWPORT_GAP = 8;
 const LISTBOX_OFFSET = 5;
 const MAX_LISTBOX_HEIGHT = 240;
+const MIN_LISTBOX_WIDTH = 80;
 const TYPEAHEAD_RESET_DELAY = 650;
 const SELECT_ID_PREFIX = 'au-select-';
 let selectSeed = 0;
@@ -375,7 +378,13 @@ function handleControlBlur(event) {
 function prepareListboxWidth() {
   const triggerRect = selectRef.value?.getBoundingClientRect();
   if (!triggerRect || typeof window === 'undefined') return;
-  listboxWidth.value = Math.min(triggerRect.width, window.innerWidth - VIEWPORT_GAP * 2);
+  listboxWidth.value = resolveListboxWidth(triggerRect.width);
+}
+
+/** 窄触发器仍需为选项文字、勾选标记与系统滚动条保留可读空间。 */
+function resolveListboxWidth(triggerWidth) {
+  const availableWidth = Math.max(window.innerWidth - VIEWPORT_GAP * 2, 0);
+  return Math.min(Math.max(triggerWidth, MIN_LISTBOX_WIDTH), availableWidth);
 }
 
 function updatePosition() {
@@ -398,7 +407,7 @@ function updatePosition() {
   const desiredTop = useTopPlacement
     ? triggerRect.top - LISTBOX_OFFSET - renderedHeight
     : triggerRect.bottom + LISTBOX_OFFSET;
-  const width = Math.min(triggerRect.width, window.innerWidth - VIEWPORT_GAP * 2);
+  const width = resolveListboxWidth(triggerRect.width);
 
   activePlacement.value = useTopPlacement ? 'top' : 'bottom';
   listboxWidth.value = width;
@@ -627,6 +636,13 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 .au-select__listbox.is-small .au-select__option {
   min-height: 28px;
   padding-block: 4px;
+  padding-inline: 7px 5px;
+  gap: 5px;
+  font-size: var(--au-font-size-small);
+}
+
+.au-select__listbox.is-small .au-select__option-marker {
+  height: 14px;
   font-size: var(--au-font-size-small);
 }
 
