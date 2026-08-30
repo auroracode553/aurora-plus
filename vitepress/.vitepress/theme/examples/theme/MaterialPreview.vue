@@ -67,9 +67,9 @@ import {
 } from '../../utils/material-preference.js';
 
 const options = [
-  { value: 'soft', label: '柔和', description: '低对比、轻模糊（默认）' },
+  { value: 'soft', label: '柔和', description: '低对比、轻模糊' },
   { value: 'clear', label: '清透', description: '更透明、背景层次更明显' },
-  { value: 'solid', label: '实色', description: '不透明、边界清晰' },
+  { value: 'solid', label: '实色', description: '不透明、边界清晰（默认）' },
 ];
 
 const material = useDocsMaterial();

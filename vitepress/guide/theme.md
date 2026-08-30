@@ -34,9 +34,9 @@ Aurora UI 的组件统一继承材质变量。按钮、输入类控件和选择�
 | --- | --- | --- |
 | `soft` | 柔和、低对比、轻模糊 | 日常工作台和内容型页面 |
 | `clear` | 清透、高饱和、背景层次明显 | 需要突出玻璃质感的首页或仪表盘 |
-| `solid` | 不透明、边界清晰 | 信息密集或对比度要求高的页面 |
+| `solid` | 不透明、边界清晰（默认） | 信息密集或对比度要求高的页面 |
 
-未显式设置时默认使用 `soft`。Icon、Link、Tabs、Tree、VirtualList 等没有独立承载表面的组件保持透明，但仍继承同一套颜色、边框、状态和无障碍回退；不会为它们额外制造玻璃背景层。
+未显式设置时默认使用 `solid`。Icon、Link、Tabs、Tree、VirtualList 等没有独立承载表面的组件保持透明，但仍继承同一套颜色、边框、状态和无障碍回退；不会为它们额外制造玻璃背景层。
 
 ### 交互预览
 
@@ -99,13 +99,13 @@ console.log(getAuroraMaterial()); // soft
 
 | 变量 | 默认值 | 作用 |
 | --- | --- | --- |
-| `--au-material-bg` | `rgba(255, 255, 255, 0.72)` | 普通材质表面 |
-| `--au-material-bg-strong` | `rgba(255, 255, 255, 0.86)` | 弹层和强调表面 |
-| `--au-material-bg-subtle` | `rgba(255, 255, 255, 0.5)` | 次级表面 |
-| `--au-material-border` | `rgba(255, 255, 255, 0.76)` | 材质边框 |
-| `--au-material-border-strong` | `rgba(116, 137, 172, 0.22)` | 强调边框和分隔线 |
-| `--au-material-blur` | `16px` | 背景模糊半径 |
-| `--au-material-saturation` | `128%` | 背景饱和度 |
+| `--au-material-bg` | `#ffffff` | 普通材质表面 |
+| `--au-material-bg-strong` | `#ffffff` | 弹层和强调表面 |
+| `--au-material-bg-subtle` | `#f5f7fb` | 次级表面 |
+| `--au-material-border` | `var(--au-color-border-light)` | 材质边框 |
+| `--au-material-border-strong` | `var(--au-color-border)` | 强调边框和分隔线 |
+| `--au-material-blur` | `0px` | 背景模糊半径 |
+| `--au-material-saturation` | `100%` | 背景饱和度 |
 
 ## 颜色变量
 

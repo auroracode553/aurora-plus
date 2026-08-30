@@ -53,7 +53,7 @@ GitHub Pages 流水线使用 dist 模式：先安装并构建 `ui`，然后以 `
 - Shiki 生成支持明暗主题的 Vue 语法高亮。
 - `DemoBlock.vue` 提供展开、收起和复制功能。
 
-文档主题入口通过 Aurora UI 插件将全站默认材质设为 `soft`。`theme/utils/material-preference.js` 负责读取、更新和持久化文档站材质偏好；主题定制页的 `MaterialPreview.vue` 通过该工具调用组件库公开的 `setAuroraMaterial` 修改根节点材质，不再使用局部预览容器覆盖。因此普通示例、Teleport 浮层和命令式服务都会继承同一材质，切换路由或刷新页面后仍保持一致。
+文档主题入口直接继承 Aurora UI 的全站默认 `solid` 材质。`theme/utils/material-preference.js` 负责读取、更新和持久化文档站材质偏好；主题定制页的 `MaterialPreview.vue` 通过该工具调用组件库公开的 `setAuroraMaterial` 修改根节点材质，不再使用局部预览容器覆盖。因此普通示例、Teleport 浮层和命令式服务都会继承同一材质，切换路由或刷新页面后仍保持一致。
 
 新增示例时，应把演示数据、状态、事件逻辑和必要样式完整写入示例文件，避免展示未定义的 `items`、`visible` 等变量。
 

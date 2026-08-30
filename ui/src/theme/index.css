@@ -25,14 +25,14 @@
   --au-color-border-light: rgba(105, 123, 154, 0.2);
   --au-color-border-lighter: rgba(105, 123, 154, 0.13);
 
-  /* Glass material tokens: inherited by every component and locally overridable. */
-  --au-material-bg: rgba(255, 255, 255, 0.72);
-  --au-material-bg-strong: rgba(255, 255, 255, 0.86);
-  --au-material-bg-subtle: rgba(255, 255, 255, 0.5);
-  --au-material-border: rgba(255, 255, 255, 0.76);
-  --au-material-border-strong: rgba(116, 137, 172, 0.22);
-  --au-material-blur: 16px;
-  --au-material-saturation: 128%;
+  /* Solid material is the default; every component inherits these overridable tokens. */
+  --au-material-bg: #ffffff;
+  --au-material-bg-strong: #ffffff;
+  --au-material-bg-subtle: #f5f7fb;
+  --au-material-border: var(--au-color-border-light);
+  --au-material-border-strong: var(--au-color-border);
+  --au-material-blur: 0px;
+  --au-material-saturation: 100%;
 
   /* Apple-style radius scale: compact inside elements, broader floating surfaces. */
   --au-border-radius-small: 6px;
@@ -54,7 +54,7 @@
   --au-z-index-tooltip: 12000;
 }
 
-/* Soft is the calm default: more frost, softer contrast and less visual weight. */
+/* Soft adds more frost, softer contrast and less visual weight. */
 :root[data-au-material='soft'],
 [data-au-material='soft'] {
   --au-material-bg: rgba(255, 255, 255, 0.72);
@@ -78,7 +78,7 @@
   --au-material-saturation: 178%;
 }
 
-/* Solid remains available for dense enterprise screens and transparency fallbacks. */
+/* Solid is the default for dense interfaces and transparency fallbacks. */
 :root[data-au-material='solid'],
 [data-au-material='solid'] {
   --au-material-bg: #ffffff;
@@ -113,13 +113,13 @@
   --au-color-border: rgba(182, 201, 230, 0.3);
   --au-color-border-light: rgba(182, 201, 230, 0.2);
   --au-color-border-lighter: rgba(182, 201, 230, 0.13);
-  --au-material-bg: rgba(32, 43, 61, 0.76);
-  --au-material-bg-strong: rgba(34, 47, 67, 0.9);
-  --au-material-bg-subtle: rgba(34, 47, 67, 0.52);
-  --au-material-border: rgba(255, 255, 255, 0.18);
-  --au-material-border-strong: rgba(182, 201, 230, 0.28);
-  --au-material-blur: 16px;
-  --au-material-saturation: 128%;
+  --au-material-bg: #202b3d;
+  --au-material-bg-strong: #202b3d;
+  --au-material-bg-subtle: #1b2433;
+  --au-material-border: var(--au-color-border-light);
+  --au-material-border-strong: var(--au-color-border);
+  --au-material-blur: 0px;
+  --au-material-saturation: 100%;
 }
 
 :root.dark[data-au-material='soft'],
@@ -163,6 +163,8 @@
   --au-material-bg: #202b3d;
   --au-material-bg-strong: #202b3d;
   --au-material-bg-subtle: #1b2433;
+  --au-material-border: var(--au-color-border-light);
+  --au-material-border-strong: var(--au-color-border);
   --au-material-blur: 0px;
   --au-material-saturation: 100%;
 }

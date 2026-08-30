@@ -7,7 +7,7 @@ import { initializeDocsMaterial } from './utils/material-preference.js';
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
-    app.use(AuroraUI, { material: 'soft' });
+    app.use(AuroraUI);
     initializeDocsMaterial();
   },
 };
