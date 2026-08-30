@@ -1,5 +1,5 @@
 <template>
-  <section class="material-preview" :data-au-material="material">
+  <section class="material-preview">
     <div class="material-preview__backdrop" aria-hidden="true">
       <span class="material-preview__swatch is-blue"></span>
       <span class="material-preview__swatch is-lilac"></span>
@@ -8,7 +8,7 @@
 
     <div class="material-preview__toolbar">
       <div>
-        <strong>材质预览</strong>
+        <strong>全站材质</strong>
         <span>{{ currentOption.description }}</span>
       </div>
 
@@ -20,7 +20,7 @@
           :class="{ 'is-active': material === option.value }"
           :aria-checked="material === option.value"
           role="radio"
-          @click="material = option.value"
+          @click="selectMaterial(option.value)"
         >
           {{ option.label }}
         </AuButton>
@@ -51,8 +51,20 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-import { AuButton, AuButtonGroup, AuCard, IconCode, IconLayoutSidebar, IconMinus } from 'aurora-ui';
+import { computed, onMounted } from 'vue';
+import {
+  AuButton,
+  AuButtonGroup,
+  AuCard,
+  IconCode,
+  IconLayoutSidebar,
+  IconMinus,
+} from 'aurora-ui';
+import {
+  setDocsMaterial,
+  syncDocsMaterial,
+  useDocsMaterial,
+} from '../../utils/material-preference.js';
 
 const options = [
   { value: 'soft', label: '柔和', description: '低对比、轻模糊（默认）' },
@@ -60,8 +72,14 @@ const options = [
   { value: 'solid', label: '实色', description: '不透明、边界清晰' },
 ];
 
-const material = ref('soft');
+const material = useDocsMaterial();
 const currentOption = computed(() => options.find((option) => option.value === material.value) || options[0]);
+
+onMounted(syncDocsMaterial);
+
+function selectMaterial(value) {
+  setDocsMaterial(value);
+}
 </script>
 
 <style scoped>
