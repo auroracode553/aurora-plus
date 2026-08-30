@@ -18,6 +18,7 @@ import { AuMenuList, AuMenuListItem } from './components/menu-list/index.js';
 import { AuPanel } from './components/panel/index.js';
 import { AuPopover } from './components/popover/index.js';
 import { AuSelect } from './components/select/index.js';
+import { AuSlider } from './components/slider/index.js';
 import { AuSwitch } from './components/switch/index.js';
 import { AuTabs } from './components/tabs/index.js';
 import { AuTextarea } from './components/textarea/index.js';
@@ -66,6 +67,7 @@ const components = [
   AuPanel,
   AuPopover,
   AuSelect,
+  AuSlider,
   AuSwitch,
   AuTabs,
   AuTextarea,
@@ -115,6 +117,7 @@ export {
   AuMessage,
   AuMessageBox,
   AuSelect,
+  AuSlider,
   AuSwitch,
   AuTabs,
   AuTextarea,

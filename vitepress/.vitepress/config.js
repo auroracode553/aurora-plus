@@ -89,6 +89,7 @@ export default defineConfig({
           { text: 'Textarea 多行输入框', link: '/components/textarea' },
           { text: 'Select 选择器', link: '/components/select' },
           { text: 'ColorPicker 颜色选择器', link: '/components/color-picker' },
+          { text: 'Slider 滑块', link: '/components/slider' },
           { text: 'Switch 开关', link: '/components/switch' },
           { text: 'Checkbox 多选框', link: '/components/checkbox' },
         ],
