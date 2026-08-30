@@ -4,8 +4,10 @@
     :class="buttonClasses"
     :type="nativeType"
     :disabled="disabled || loading"
-    :aria-busy="loading ? 'true' : undefined"
     v-bind="$attrs"
+    :aria-busy="loading ? 'true' : undefined"
+    :aria-pressed="resolvedAriaPressed"
+    :style="buttonStyle"
     @click="handleClick"
   >
     <slot v-if="loading" name="loading">
@@ -19,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, useAttrs, useSlots } from 'vue';
 import { IconLoader2 } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
 
@@ -29,13 +31,15 @@ const props = defineProps({
   type: {
     type: String,
     default: 'default',
-    validator: (value) => ['default', 'primary', 'success', 'info', 'warning', 'danger'].includes(value),
+    validator: (value) => ['default', 'primary', 'success', 'info', 'warning', 'danger', 'menu'].includes(value),
   },
   size: {
     type: String,
     default: 'default',
     validator: (value) => ['small', 'default', 'large'].includes(value),
   },
+  selected: { type: Boolean, default: undefined },
+  selectedColor: { type: String, default: '' },
   nativeType: {
     type: String,
     default: 'button',
@@ -51,6 +55,31 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['click']);
+const attrs = useAttrs();
+const slots = useSlots();
+
+const resolvedAriaPressed = computed(() => {
+  if (props.selected === undefined) return attrs['aria-pressed'];
+  return props.selected ? 'true' : 'false';
+});
+
+const isSelected = computed(() => {
+  return [resolvedAriaPressed.value, attrs['aria-current'], attrs['aria-expanded']].some(isAriaTrue);
+});
+
+const isIconOnly = computed(() => {
+  return !slots.default && Boolean(props.icon || slots.icon || props.loading);
+});
+
+const buttonStyle = computed(() => {
+  const color = resolveSelectedColor(props.selectedColor);
+  if (props.type !== 'menu' || !isSelected.value || !color || props.disabled || props.loading) {
+    return undefined;
+  }
+
+  // 只注入选中强调色，浅色背景由 CSS 基于 currentColor 自动生成。
+  return { color };
+});
 
 const buttonClasses = computed(() => [
   `au-button--${props.type}`,
@@ -59,10 +88,24 @@ const buttonClasses = computed(() => [
     'is-plain': props.plain,
     'is-round': props.round,
     'is-circle': props.circle,
+    'is-icon-only': isIconOnly.value,
+    'is-selected': isSelected.value,
     'is-disabled': props.disabled || props.loading,
     'au-disabled': props.disabled || props.loading,
   },
 ]);
+
+function isAriaTrue(value) {
+  return value === true || value === 'true';
+}
+
+function resolveSelectedColor(value) {
+  const color = String(value || '').trim();
+  if (['primary', 'success', 'info', 'warning', 'danger'].includes(color)) {
+    return `var(--au-color-${color})`;
+  }
+  return color;
+}
 
 function handleClick(event) {
   if (!props.disabled && !props.loading) emit('click', event);
@@ -302,6 +345,124 @@ function handleClick(event) {
 
 .au-button--danger.is-plain:hover:not(.is-disabled) {
   background: var(--au-color-danger);
+}
+
+.au-button.au-button--menu {
+  --au-focus-ring-offset: 0;
+
+  min-width: 26px;
+  height: 26px;
+  gap: 4px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: var(--au-radius-small);
+  color: var(--au-color-text-regular);
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+  font-weight: var(--au-font-weight-medium);
+  letter-spacing: 0;
+  -webkit-app-region: no-drag;
+}
+
+.au-button.au-button--menu.au-button--small {
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: var(--au-radius-small);
+  font-size: var(--au-font-size-small);
+}
+
+.au-button.au-button--menu.au-button--large {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 10px;
+  font-size: var(--au-font-size-base);
+}
+
+.au-button.au-button--menu.is-circle,
+.au-button.au-button--menu.is-icon-only {
+  width: 36px;
+  padding: 0;
+  border-radius: var(--au-radius-small);
+}
+
+.au-button.au-button--menu.au-button--small.is-circle,
+.au-button.au-button--menu.au-button--small.is-icon-only {
+  width: 32px;
+}
+
+.au-button.au-button--menu.au-button--large.is-circle,
+.au-button.au-button--menu.au-button--large.is-icon-only {
+  width: 40px;
+}
+
+.au-button.au-button--menu:hover:not(.is-disabled),
+.au-button.au-button--menu:focus-visible {
+  color: var(--au-color-text-primary);
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  box-shadow: none;
+}
+
+.au-button.au-button--menu:active:not(.is-disabled) {
+  border-color: transparent;
+  color: var(--au-color-text-primary);
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.au-button.au-button--menu.is-selected {
+  border-color: color-mix(in srgb, currentColor 18%, transparent);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, currentColor 13%, transparent);
+  box-shadow: none;
+}
+
+.au-button.au-button--menu.is-selected:hover:not(.is-disabled),
+.au-button.au-button--menu.is-selected:focus-visible {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+}
+
+.au-button.au-button--menu.is-selected:active:not(.is-disabled) {
+  border-color: color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 20%, transparent);
+}
+
+.au-button.au-button--menu.is-disabled {
+  color: var(--au-color-text-disabled);
+  background: transparent;
+  box-shadow: none;
+}
+
+.au-button.au-button--menu.is-selected.is-disabled {
+  border-color: color-mix(in srgb, currentColor 14%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.au-button.au-button--menu:focus-visible {
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-button.au-button--menu.is-selected {
+    background: color-mix(in srgb, currentColor 13%, var(--au-color-bg-overlay));
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-button.au-button--menu.is-selected {
+    border-color: currentColor;
+    background: transparent;
+  }
+}
+
+@media (forced-colors: active) {
+  .au-button.au-button--menu.is-selected {
+    border-color: Highlight;
+    color: HighlightText;
+    background: Highlight;
+  }
 }
 
 </style>

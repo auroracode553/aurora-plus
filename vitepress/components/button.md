@@ -1,12 +1,14 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import ButtonBasic from '../.vitepress/theme/examples/button/ButtonBasic.vue';
+import ButtonMenu from '../.vitepress/theme/examples/button/ButtonMenu.vue';
 import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.vue?demo-source';
+import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue?demo-source';
 </script>
 
 # Button 按钮
 
-常用的操作触发器。支持六种视觉类型、三种尺寸、加载态、禁用态以及图标插槽。
+常用的操作触发器。支持七种视觉类型、三种尺寸、加载态、禁用态以及图标插槽。
 
 ## 基础用法
 
@@ -16,6 +18,14 @@ import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.v
   :source="buttonBasicSource"
 >
   <ButtonBasic />
+</DemoBlock>
+
+## 菜单式按钮
+
+<DemoBlock
+  :source="buttonMenuSource"
+>
+  <ButtonMenu />
 </DemoBlock>
 
 ## 使用建议
@@ -32,8 +42,10 @@ import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.v
 
 | 属性 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
-| `type` | 视觉类型 | `string` | `default / primary / success / info / warning / danger` | `default` |
+| `type` | 视觉类型 | `string` | `default / primary / success / info / warning / danger / menu` | `default` |
 | `size` | 按钮尺寸 | `string` | `small / default / large` | `default` |
+| `selected` | 是否选中；设置后同步输出 `aria-pressed` | `boolean` | — | `undefined` |
+| `selectedColor` | `menu` 类型的选中强调色，背景由组件自动生成 | `string` | `primary / success / info / warning / danger` 或合法颜色值 | `''` |
 | `nativeType` | 原生 `button` 的 `type` | `string` | `button / submit / reset` | `button` |
 | `icon` | 图标组件 | `Component` | — | `null` |
 | `plain` | 是否使用朴素样式 | `boolean` | — | `false` |
