@@ -186,11 +186,12 @@ defineExpose({ focus, menuRef });
 
 <style scoped>
 .au-menu {
+  box-sizing: border-box;
   display: flex;
   min-width: 0;
   margin: 0;
-  padding: 4px;
-  gap: 2px;
+  padding: 0;
+  gap: 4px;
   color: var(--au-color-text-regular);
   background: transparent;
   font-size: var(--au-font-size-base);
@@ -199,6 +200,7 @@ defineExpose({ focus, menuRef });
 
 .au-menu.is-vertical {
   width: 100%;
+  padding-left: 14px;
   flex-direction: column;
 }
 
@@ -206,12 +208,15 @@ defineExpose({ focus, menuRef });
   width: max-content;
   max-width: 100%;
   flex-direction: row;
+  gap: 4px;
   overflow-x: auto;
   overflow-y: hidden;
 }
 
 .au-menu.is-collapsed.is-vertical {
   width: 48px;
+  padding-left: 0;
+  align-items: center;
 }
 
 .au-menu.is-disabled {

@@ -26,15 +26,18 @@
         </slot>
       </span>
       <span class="au-menu-item__label"><slot>{{ label }}</slot></span>
-      <span v-if="$slots.suffix" class="au-menu-item__suffix">
-        <slot name="suffix" :active="active" :disabled="itemDisabled"></slot>
+      <span v-if="hasMeta" class="au-menu-item__meta">
+        <slot name="suffix" :active="active" :disabled="itemDisabled">
+          <span v-if="hasBadge" class="au-menu-item__badge">{{ badge }}</span>
+          <span v-if="indicator" class="au-menu-item__indicator" aria-hidden="true"></span>
+        </slot>
       </span>
     </button>
   </li>
 </template>
 
 <script setup>
-import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, ref, useSlots } from 'vue';
 import { AuIcon } from '../icon/index.js';
 import { AU_MENU_CONTEXT_KEY } from './menu-context.js';
 
@@ -45,6 +48,8 @@ const props = defineProps({
   label: { type: String, default: '' },
   icon: { type: [Object, Function], default: null },
   iconColor: { type: String, default: '' },
+  badge: { type: [String, Number], default: '' },
+  indicator: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   title: { type: String, default: '' },
   ariaCurrent: { type: String, default: 'page' },
@@ -52,6 +57,7 @@ const props = defineProps({
 
 const menu = inject(AU_MENU_CONTEXT_KEY, null);
 const instance = getCurrentInstance();
+const slots = useSlots();
 const buttonRef = ref(null);
 const indexRef = computed(() => props.index);
 const ownDisabled = computed(() => props.disabled);
@@ -59,6 +65,8 @@ const menuMode = computed(() => menu?.mode.value || 'vertical');
 const collapsed = computed(() => Boolean(menu?.collapsed.value));
 const itemDisabled = computed(() => props.disabled || Boolean(menu?.disabled.value));
 const active = computed(() => Boolean(menu?.isActive(props.index)));
+const hasBadge = computed(() => props.badge !== '');
+const hasMeta = computed(() => hasBadge.value || props.indicator || Boolean(slots.suffix));
 const tabIndex = computed(() => {
   if (itemDisabled.value) return -1;
   return menu ? menu.getItemTabIndex(instance.uid) : 0;
@@ -99,47 +107,65 @@ onBeforeUnmount(() => {
 }
 
 .au-menu-item__content {
+  position: relative;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 36px;
+  min-height: 42px;
   margin: 0;
-  padding: 7px 12px;
-  gap: 10px;
-  overflow: hidden;
-  border: 0;
+  padding: 0 12px;
+  gap: 11px;
+  overflow: visible;
+  border: 1px solid transparent;
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-secondary);
   background: transparent;
   font: inherit;
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.35;
+  letter-spacing: 0;
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
   appearance: none;
   transition:
+    transform 0.14s var(--au-transition-ease),
     color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease);
+    background var(--au-transition-duration) var(--au-transition-ease),
+    border-color var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-menu-item__content:hover:not(:disabled),
 .au-menu-item__content:focus-visible {
-  color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 8%, transparent);
+  color: var(--au-color-text-regular);
+  background: color-mix(in srgb, var(--au-color-primary) 6%, transparent);
 }
 
 .au-menu-item__content.is-active,
 .au-menu-item__content.is-active:hover,
 .au-menu-item__content.is-active:focus-visible {
   color: var(--au-color-primary);
+  border-color: color-mix(in srgb, var(--au-color-primary) 24%, transparent);
   background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
 }
 
+.au-menu-item__content.is-active::before {
+  position: absolute;
+  top: 50%;
+  left: -14px;
+  width: 3px;
+  height: 24px;
+  border-radius: 0 var(--au-radius-small) var(--au-radius-small) 0;
+  background: var(--au-color-primary);
+  content: "";
+  transform: translateY(-50%);
+}
+
 .au-menu-item__content:active:not(:disabled) {
-  background: color-mix(in srgb, var(--au-color-primary) 26%, transparent);
+  transform: scale(0.98);
 }
 
 .au-menu-item__content:focus-visible {
@@ -155,11 +181,12 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1em;
-  height: 1em;
+  width: 20px;
+  height: 20px;
   flex: none;
   color: currentColor;
-  font-size: 18px;
+  font-size: 20px;
+  transition: color var(--au-transition-duration) var(--au-transition-ease);
 }
 
 .au-menu-item__icon :deep(svg) {
@@ -170,20 +197,52 @@ onBeforeUnmount(() => {
 
 .au-menu-item__label {
   min-width: 0;
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.au-menu-item__suffix {
+.au-menu-item__meta {
   display: inline-flex;
   align-items: center;
-  margin-left: auto;
+  justify-content: center;
+  gap: 6px;
   flex: none;
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
 }
 
+.au-menu-item__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--au-color-primary) 18%, var(--au-color-border-lighter));
+  border-radius: var(--au-radius-round);
+  background: color-mix(in srgb, var(--au-color-primary) 8%, var(--au-material-bg-subtle));
+  color: var(--au-color-text-secondary);
+  font-size: 11px;
+  font-weight: var(--au-font-weight-semibold);
+  line-height: 1;
+}
+
+.au-menu-item__indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--au-radius-round);
+  background: var(--au-color-text-secondary);
+}
+
+.au-menu-item__content.is-active .au-menu-item__badge {
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-bg-subtle));
+}
+
 .au-menu-item.is-collapsed .au-menu-item__content {
+  width: 44px;
+  min-height: 44px;
   justify-content: center;
   padding-inline: 0;
 }
@@ -201,8 +260,30 @@ onBeforeUnmount(() => {
   white-space: nowrap;
 }
 
-.au-menu-item.is-collapsed .au-menu-item__suffix {
+.au-menu-item.is-collapsed .au-menu-item__meta {
   display: none;
+}
+
+.au-menu-item.is-collapsed .au-menu-item__content.is-active::before {
+  left: -4px;
+}
+
+.au-menu-item.is-horizontal .au-menu-item__content {
+  width: auto;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: var(--au-radius-control);
+}
+
+.au-menu-item.is-horizontal .au-menu-item__content.is-active::before {
+  top: auto;
+  right: 12px;
+  bottom: -4px;
+  left: 12px;
+  width: auto;
+  height: 2px;
+  border-radius: var(--au-radius-round);
+  transform: none;
 }
 
 @media (prefers-contrast: more) {

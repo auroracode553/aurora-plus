@@ -12,7 +12,7 @@ import { AuFloatingToolbar } from './components/floating-toolbar/index.js';
 import { AuIcon } from './components/icon/index.js';
 import { AuInput } from './components/input/index.js';
 import { AuLink } from './components/link/index.js';
-import { AuMenu, AuMenuItem } from './components/menu/index.js';
+import { AuMenu, AuMenuGroup, AuMenuItem } from './components/menu/index.js';
 import { AuMenuBar } from './components/menu-bar/index.js';
 import { AuMenuList, AuMenuListItem } from './components/menu-list/index.js';
 import { AuPanel } from './components/panel/index.js';
@@ -58,6 +58,7 @@ const components = [
   AuInput,
   AuLink,
   AuMenu,
+  AuMenuGroup,
   AuMenuItem,
   AuMenuBar,
   AuMenuList,
@@ -104,6 +105,7 @@ export {
   AuInput,
   AuLink,
   AuMenu,
+  AuMenuGroup,
   AuMenuItem,
   AuMenuBar,
   AuMenuList,

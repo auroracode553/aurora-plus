@@ -6,15 +6,15 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 
 # Menu 导航菜单
 
-`AuMenu` 与 `AuMenuItem` 用于侧栏、设置分类和工作区视图等持续可见的导航。临时操作集合应使用 `AuDropdown` 或 `AuContextMenu`。
+`AuMenu`、`AuMenuGroup` 与 `AuMenuItem` 用于侧栏、设置分类和工作区视图等持续可见的导航。临时操作集合应使用 `AuDropdown` 或 `AuContextMenu`。
 
 ## 基础用法
 
 使用 `v-model` 管理当前项，菜单项的 `index` 是唯一业务值。图标既可通过 `icon` 属性传入，也可由 `icon` 插槽完全自定义。
 
 <DemoBlock
-  title="设置导航"
-  description="支持选中、禁用、图标、尾部内容和完整键盘导航。"
+  title="侧栏导航"
+  description="支持分组、选中、图标、徽标、状态点和完整键盘导航。"
   :source="menuBasicSource"
   default-expanded
 >
@@ -23,7 +23,8 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 
 ## 使用建议
 
-- 默认表面透明，菜单所在的侧栏或容器负责背景与边界。
+- 菜单适合放在持续可见的侧栏或设置区域中，当前项会显示浅色选中面和左侧激活条。
+- 分组标题使用 `AuMenuGroup`，需要更大的段落间距时设置 `spaced`。
 - 纵向菜单使用 `ArrowUp`、`ArrowDown`，横向菜单使用 `ArrowLeft`、`ArrowRight`；`Home`、`End` 定位首尾项，Enter 和 Space 选择当前项。
 - 折叠菜单应为每个菜单项提供 `label`，组件会将它保留为无障碍名称与鼠标提示。
 
@@ -63,6 +64,21 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | `focus(index?)` | 聚焦指定可用项；未找到时聚焦当前项或首个可用项 |
 | `menuRef` | 菜单根元素引用 |
 
+## AuMenuGroup API
+
+### Attributes
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `label` | 分组标题 | `string` | `''` |
+| `spaced` | 是否增加与上一组的间距 | `boolean` | `false` |
+
+### Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 自定义分组标题 |
+
 ## AuMenuItem API
 
 ### Attributes
@@ -73,6 +89,8 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | `label` | 文本回退值，并为折叠模式提供无障碍名称 | `string` | `''` |
 | `icon` | Aurora UI 图标组件 | `Component` | `null` |
 | `iconColor` | 图标颜色 | `string` | `''` |
+| `badge` | 尾部徽标文本 | `string / number` | `''` |
+| `indicator` | 是否显示尾部状态点 | `boolean` | `false` |
 | `disabled` | 是否禁用当前项 | `boolean` | `false` |
 | `title` | 原生鼠标提示；折叠时默认回退为 `label` | `string` | `''` |
 | `ariaCurrent` | 选中项的 `aria-current` 值 | `string` | `page` |
