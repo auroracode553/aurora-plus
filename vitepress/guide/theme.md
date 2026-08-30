@@ -10,15 +10,28 @@ Aurora UI 使用 CSS 变量提供主题能力。
 
 ## 暗色模式
 
-以下三种方式均可启用暗色变量：
+运行时调用 `setAuroraTheme` 切换亮色和暗色：
 
-```html
-<html class="dark"></html>
-<html data-theme="dark"></html>
-<html data-au-theme="dark"></html>
+```js
+import { getAuroraTheme, setAuroraTheme } from 'aurora-ui';
+
+setAuroraTheme('dark');
+console.log(getAuroraTheme()); // dark
+
+setAuroraTheme('light');
 ```
 
-其中 `.dark` 和 `data-theme` 适合应用级主题切换，`data-au-theme` 可用于独立使用 Aurora UI 的项目或局部容器。
+安装组件库时传入 `theme`，即可设置初始主题：
+
+```js
+import { createApp } from 'vue';
+import AuroraUI from 'aurora-ui';
+import App from './App.vue';
+
+createApp(App).use(AuroraUI, { theme: 'dark' }).mount('#app');
+```
+
+有效值为 `light` 和 `dark`。传入无效值时不会修改当前设置。
 
 ## 玻璃材质
 
@@ -177,12 +190,12 @@ import './styles/brand-theme.css';
 
 ## 局部主题
 
-`data-au-theme="dark"` 也可放在局部容器上，让容器内的 Aurora UI 组件读取暗色变量：
+需要只切换某个区域时，将目标元素作为第二个参数传入：
 
-```html
-<section data-au-theme="dark">
-  <!-- 此区域内的 Aurora UI 组件使用暗色变量 -->
-</section>
+```js
+import { setAuroraTheme } from 'aurora-ui';
+
+const panel = document.querySelector('#settings-panel');
+
+setAuroraTheme('dark', panel);
 ```
-
-命令式服务和默认 Teleport 到 `body` 的组件不在局部主题或局部材质容器内，需使用根节点配置，或为支持的组件配置 `teleported="false"` / `append-to`。

@@ -90,8 +90,6 @@
   --au-material-saturation: 100%;
 }
 
-:root.dark,
-:root[data-theme='dark'],
 :root[data-au-theme='dark'],
 [data-au-theme='dark'] {
   color-scheme: dark;
@@ -122,13 +120,8 @@
   --au-material-saturation: 100%;
 }
 
-:root.dark[data-au-material='soft'],
-:root[data-theme='dark'][data-au-material='soft'],
 :root[data-au-theme='dark'][data-au-material='soft'],
-:root[data-au-material='soft'][data-theme='dark'],
 [data-au-theme='dark'][data-au-material='soft'],
-:root.dark [data-au-material='soft'],
-:root[data-theme='dark'] [data-au-material='soft'],
 :root[data-au-theme='dark'] [data-au-material='soft'] {
   --au-material-bg: rgba(32, 43, 61, 0.76);
   --au-material-bg-strong: rgba(34, 47, 67, 0.9);
@@ -137,13 +130,8 @@
   --au-material-saturation: 128%;
 }
 
-:root.dark[data-au-material='clear'],
-:root[data-theme='dark'][data-au-material='clear'],
 :root[data-au-theme='dark'][data-au-material='clear'],
-:root[data-au-material='clear'][data-theme='dark'],
 [data-au-theme='dark'][data-au-material='clear'],
-:root.dark [data-au-material='clear'],
-:root[data-theme='dark'] [data-au-material='clear'],
 :root[data-au-theme='dark'] [data-au-material='clear'] {
   --au-material-bg: rgba(32, 43, 61, 0.5);
   --au-material-bg-strong: rgba(34, 47, 67, 0.68);
@@ -152,13 +140,8 @@
   --au-material-saturation: 178%;
 }
 
-:root.dark[data-au-material='solid'],
-:root[data-theme='dark'][data-au-material='solid'],
 :root[data-au-theme='dark'][data-au-material='solid'],
-:root[data-au-material='solid'][data-theme='dark'],
 [data-au-theme='dark'][data-au-material='solid'],
-:root.dark [data-au-material='solid'],
-:root[data-theme='dark'] [data-au-material='solid'],
 :root[data-au-theme='dark'] [data-au-material='solid'] {
   --au-material-bg: #202b3d;
   --au-material-bg-strong: #202b3d;

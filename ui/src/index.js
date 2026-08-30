@@ -34,6 +34,13 @@ import {
   isAuroraMaterial,
   setAuroraMaterial,
 } from './utils/material.js';
+import {
+  AURORA_THEMES,
+  DEFAULT_AURORA_THEME,
+  getAuroraTheme,
+  isAuroraTheme,
+  setAuroraTheme,
+} from './utils/theme.js';
 
 const components = [
   AuButton,
@@ -72,6 +79,7 @@ export const version = '0.1.0';
 export const AuroraUI = {
   version,
   install(app, options = {}) {
+    if (options.theme) setAuroraTheme(options.theme);
     if (options.material) setAuroraMaterial(options.material);
     components.forEach((component) => app.component(component.componentName, component));
     app.config.globalProperties.$message = AuMessage;
@@ -113,10 +121,15 @@ export {
   AuVirtualList,
   AuWindowTitleBar,
   AURORA_MATERIALS,
+  AURORA_THEMES,
   DEFAULT_AURORA_MATERIAL,
+  DEFAULT_AURORA_THEME,
   getAuroraMaterial,
+  getAuroraTheme,
   isAuroraMaterial,
+  isAuroraTheme,
   setAuroraMaterial,
+  setAuroraTheme,
 };
 
 // Aurora UI 统一暴露 Tabler 图标，业务侧无需直接依赖图标包的导入路径。

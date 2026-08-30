@@ -19,5 +19,5 @@ features:
   - title: 灵活引入
     details: 支持完整安装、组件按需导入和命令式反馈服务。
   - title: 主题可定制
-    details: 使用 au- 前缀与 --au-* 设计变量，支持 data-theme、data-au-theme 和 dark class 暗色模式。
+    details: 使用 au- 前缀与 --au-* 设计变量，支持暗色模式、玻璃材质和公开配置 API。
 ---

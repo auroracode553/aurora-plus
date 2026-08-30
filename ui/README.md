@@ -85,10 +85,13 @@ import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
 
 ## 主题
 
-使用 `data-au-theme` 设置暗色主题：
+使用 `setAuroraTheme` 在运行时切换亮色和暗色：
 
-```html
-<html data-au-theme="dark"></html>
+```js
+import { setAuroraTheme } from 'aurora-ui';
+
+setAuroraTheme('dark');
+setAuroraTheme('light');
 ```
 
 所有带承载表面的组件都会继承材质设置；默认使用 `solid`，也可通过 `data-au-material` 切换为 `soft` 或 `clear`：
