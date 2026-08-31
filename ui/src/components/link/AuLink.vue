@@ -69,7 +69,7 @@ function handleClick(event) {
   max-width: 100%;
   gap: 4px;
   padding: 0;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   background: transparent;
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
@@ -78,7 +78,7 @@ function handleClick(event) {
   vertical-align: middle;
   white-space: normal;
   cursor: pointer;
-  transition: color var(--au-transition-duration) var(--au-transition-ease);
+  transition: color var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-link__inner {

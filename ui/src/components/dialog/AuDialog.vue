@@ -229,7 +229,7 @@ defineExpose({ close, dialogRef });
   justify-content: space-between;
   min-height: 56px;
   padding: 12px 18px;
-  border-bottom: 1px solid var(--au-material-border-strong);
+  border-bottom: 1px solid var(--au-material-border-emphasis);
   flex-shrink: 0;
 }
 
@@ -264,7 +264,7 @@ defineExpose({ close, dialogRef });
   gap: 8px;
   flex-wrap: wrap;
   padding: 12px 18px 14px;
-  border-top: 1px solid var(--au-material-border-strong);
+  border-top: 1px solid var(--au-material-border-emphasis);
   background: transparent;
   flex-shrink: 0;
 }

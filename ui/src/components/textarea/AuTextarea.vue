@@ -103,19 +103,19 @@ defineExpose({ focus, blur, select, textareaRef });
   display: inline-flex;
   width: 100%;
   min-width: 0;
-  border: 0.5px solid var(--au-material-border-strong);
+  border: 0.5px solid var(--au-material-border-emphasis);
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-regular);
-  background: var(--au-material-bg-subtle);
+  color: var(--au-color-text-default);
+  background: var(--au-material-background-subtle);
   font-size: 13px;
   transition:
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    box-shadow var(--au-transition-duration) var(--au-transition-ease);
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    box-shadow var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-textarea.is-small {
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   font-size: var(--au-font-size-small);
 }
 
@@ -126,7 +126,7 @@ defineExpose({ focus, blur, select, textareaRef });
 
 .au-textarea:focus-within:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 45%, transparent);
-  background: var(--au-material-bg-subtle);
+  background: var(--au-material-background-subtle);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 8%, transparent);
 }
 

@@ -25,11 +25,11 @@
 }
 
 .au-material-surface {
-  background: var(--au-material-bg-strong);
+  background: var(--au-material-background-elevated);
 }
 
 .au-material-surface--base {
-  background: var(--au-material-bg);
+  background: var(--au-material-background);
 }
 
 .au-depth-control {
@@ -53,10 +53,109 @@
   outline-offset: var(--au-focus-ring-offset);
 }
 
+/*
+ * 控制组中的按钮共用统一外观：容器表达玻璃材质，按钮只表达交互状态。
+ * 三种选择器分别覆盖直接按钮、ButtonGroupItem 按钮和 Popover 触发按钮。
+ */
+.au-control-group.au-component > .au-button.au-component,
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component,
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component {
+  position: relative;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--au-radius-compact);
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.au-control-group.au-component > .au-button.au-component:is(.is-icon-only, .is-circle),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component:is(.is-icon-only, .is-circle),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:is(.is-icon-only, .is-circle) {
+  width: auto;
+  aspect-ratio: 1;
+  padding: 0;
+}
+
+.au-control-group.au-component > .au-button.au-component:hover:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component:hover:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:hover:not(.is-disabled) {
+  border-color: transparent;
+  color: var(--au-color-text-primary);
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  box-shadow: none;
+}
+
+.au-control-group.au-component > .au-button.au-component:active:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component:active:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:active:not(.is-disabled) {
+  border-color: transparent;
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  box-shadow: none;
+  transform: scale(0.97);
+}
+
+.au-control-group.au-component > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']) {
+  z-index: 1;
+  color: var(--au-color-text-primary);
+  background: var(--au-material-background-elevated);
+  box-shadow: var(--au-shadow-control);
+}
+
+.au-control-group.au-component > .au-button.au-component:focus-visible,
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component:focus-visible,
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:focus-visible {
+  z-index: 2;
+  box-shadow: none;
+  outline-offset: -1px;
+}
+
+.au-control-group.au-component > .au-button.au-component.is-disabled,
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component.is-disabled,
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component.is-disabled {
+  color: var(--au-color-text-disabled);
+  background: transparent;
+}
+
+/* 语义按钮在透明控制组中只保留文字或图标颜色，不重复绘制实色按钮表面。 */
+.au-control-group.au-component > .au-button.au-component.au-button--primary:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component.au-button--primary:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component.au-button--primary:not(.is-disabled) {
+  color: var(--au-color-primary);
+}
+
+.au-control-group.au-component > .au-button.au-component.au-button--success:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component.au-button--success:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component.au-button--success:not(.is-disabled) {
+  color: var(--au-color-success);
+}
+
+.au-control-group.au-component > .au-button.au-component.au-button--info:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component.au-button--info:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component.au-button--info:not(.is-disabled) {
+  color: var(--au-color-info);
+}
+
+.au-control-group.au-component > .au-button.au-component.au-button--warning:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component.au-button--warning:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component.au-button--warning:not(.is-disabled) {
+  color: var(--au-color-warning);
+}
+
+.au-control-group.au-component > .au-button.au-component.au-button--danger:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-button.au-component.au-button--danger:not(.is-disabled),
+.au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component.au-button--danger:not(.is-disabled) {
+  color: var(--au-color-danger);
+}
+
 .au-motion-popover {
   transition:
-    opacity var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    opacity var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-menu-surface {
@@ -83,8 +182,8 @@
   white-space: nowrap;
   cursor: pointer;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-menu-item:hover:not(:disabled),
@@ -145,7 +244,7 @@
 
 @media (prefers-reduced-transparency: reduce) {
   .au-material-surface {
-    background: var(--au-color-bg-overlay);
+    background: var(--au-color-background-overlay);
   }
 
   .au-material-surface,
@@ -160,8 +259,23 @@
     transition: opacity 0.01ms linear;
   }
 
+  .au-control-group.au-component > .au-button.au-component:active:not(.is-disabled),
+  .au-control-group.au-component > .au-button-group-item > .au-button.au-component:active:not(.is-disabled),
+  .au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:active:not(.is-disabled) {
+    transform: none;
+  }
+
   .au-spin {
     animation-duration: 1.2s;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-control-group.au-component > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled),
+  .au-control-group.au-component > .au-button-group-item > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled),
+  .au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled) {
+    outline: 1px solid currentColor;
+    outline-offset: -1px;
   }
 }
 
@@ -174,6 +288,21 @@
   .au-menu-item:hover:not(:disabled),
   .au-menu-item:focus-visible,
   .au-menu-item.is-active {
+    color: HighlightText;
+    background: Highlight;
+  }
+
+  .au-control-group.au-component > .au-button.au-component,
+  .au-control-group.au-component > .au-button-group-item > .au-button.au-component,
+  .au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component {
+    border: 1px solid ButtonText;
+    color: ButtonText;
+    background: Canvas;
+  }
+
+  .au-control-group.au-component > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled),
+  .au-control-group.au-component > .au-button-group-item > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled),
+  .au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component:is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled) {
     color: HighlightText;
     background: Highlight;
   }

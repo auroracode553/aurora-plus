@@ -91,7 +91,7 @@ function handleKeydown(event) {
   min-height: 36px;
   padding: 0 8px;
   gap: 4px;
-  border-bottom: 1px solid var(--au-color-border-lighter);
+  border-bottom: 1px solid var(--au-color-border-muted);
   color: var(--au-color-text-secondary);
   overflow-x: auto;
   overflow-y: hidden;
@@ -115,7 +115,7 @@ function handleKeydown(event) {
   white-space: nowrap;
   cursor: pointer;
   appearance: none;
-  transition: color var(--au-transition-duration) var(--au-transition-ease);
+  transition: color var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-tabs:not(.is-fill) .au-tabs__tab {
@@ -133,13 +133,13 @@ function handleKeydown(event) {
   bottom: -1px;
   left: 28%;
   height: 2px;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   background: var(--au-color-primary);
   opacity: 0;
   transform: scaleX(0.5);
   transition:
-    opacity var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    opacity var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-tabs__tab:hover:not(:disabled),

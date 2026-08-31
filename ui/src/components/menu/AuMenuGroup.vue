@@ -1,6 +1,6 @@
 <template>
   <li
-    class="au-menu-group"
+    class="au-menu-group au-component"
     :class="[`is-${menuMode}`, { 'is-collapsed': collapsed, 'is-spaced': spaced }]"
     role="presentation"
   >
@@ -24,7 +24,6 @@ const collapsed = computed(() => Boolean(menu?.collapsed.value));
 
 <style scoped>
 .au-menu-group {
-  box-sizing: border-box;
   display: block;
   min-width: 0;
   margin: 0;

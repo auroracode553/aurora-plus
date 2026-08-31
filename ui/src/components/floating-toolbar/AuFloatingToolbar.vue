@@ -4,7 +4,7 @@
       <div
         v-if="visible"
         ref="toolbarRef"
-        class="au-floating-toolbar au-component au-material-surface au-depth-overlay au-motion-popover"
+        class="au-floating-toolbar au-component au-control-group au-material-surface au-depth-overlay au-motion-popover"
         :class="`is-${activePlacement}`"
         :style="toolbarStyle"
         role="toolbar"
@@ -223,7 +223,7 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
   padding: 2px;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-surface);
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-inline: contain;
@@ -240,14 +240,14 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 
 .au-floating-toolbar.is-top .au-floating-toolbar__arrow--border {
   bottom: -6px;
-  border-top: 6px solid var(--au-material-border-strong);
+  border-top: 6px solid var(--au-material-border-emphasis);
   border-right: 6px solid transparent;
   border-left: 6px solid transparent;
 }
 
 .au-floating-toolbar.is-top .au-floating-toolbar__arrow--surface {
   bottom: -5px;
-  border-top: 5px solid var(--au-material-bg-strong);
+  border-top: 5px solid var(--au-material-background-elevated);
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
 }
@@ -255,72 +255,15 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 .au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--border {
   top: -6px;
   border-right: 6px solid transparent;
-  border-bottom: 6px solid var(--au-material-border-strong);
+  border-bottom: 6px solid var(--au-material-border-emphasis);
   border-left: 6px solid transparent;
 }
 
 .au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--surface {
   top: -5px;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid var(--au-material-bg-strong);
+  border-bottom: 5px solid var(--au-material-background-elevated);
   border-left: 5px solid transparent;
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__group) {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  flex: none;
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__separator) {
-  width: 1px;
-  height: 18px;
-  margin: 0 2px;
-  background: var(--au-material-border-strong);
-  flex: none;
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__button) {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: 28px;
-  aspect-ratio: 1;
-  padding: 0;
-  border: 0;
-  border-radius: var(--au-radius-small);
-  color: var(--au-color-text-regular);
-  background: transparent;
-  cursor: pointer;
-  transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__button:hover) {
-  color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__button:active) {
-  transform: scale(0.94);
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__button:focus-visible) {
-  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
-  outline-offset: 1px;
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__button.is-primary) {
-  color: var(--au-color-primary);
-}
-
-.au-floating-toolbar :deep(.au-floating-toolbar__button.is-danger) {
-  color: var(--au-color-danger);
 }
 
 .au-floating-toolbar-fade-enter-from,
@@ -331,11 +274,11 @@ defineExpose({ hide, show, toolbarRef, updatePosition });
 
 @media (prefers-reduced-transparency: reduce) {
   .au-floating-toolbar.is-top .au-floating-toolbar__arrow--surface {
-    border-top-color: var(--au-color-bg-overlay);
+    border-top-color: var(--au-color-background-overlay);
   }
 
   .au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--surface {
-    border-bottom-color: var(--au-color-bg-overlay);
+    border-bottom-color: var(--au-color-background-overlay);
   }
 }
 

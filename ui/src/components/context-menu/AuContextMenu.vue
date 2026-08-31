@@ -310,22 +310,22 @@ defineExpose({ close, menuRef, updatePosition });
   width: 100%;
   height: 28px;
   padding: 0;
-  border: 1px solid var(--au-material-border-strong);
-  border-radius: var(--au-radius-small);
+  border: 1px solid var(--au-material-border-emphasis);
+  border-radius: var(--au-radius-compact);
   color: var(--au-color-text-primary);
-  background: var(--au-material-bg-subtle);
+  background: var(--au-material-background-subtle);
   cursor: pointer;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-context-menu__tool-button:hover:not(:disabled),
 .au-context-menu__tool-button:focus-visible {
-  border-color: color-mix(in srgb, var(--au-color-primary) 55%, var(--au-material-border-strong));
-  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-bg-subtle));
+  border-color: color-mix(in srgb, var(--au-color-primary) 55%, var(--au-material-border-emphasis));
+  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-background-subtle));
   outline: none;
 }
 
@@ -375,7 +375,7 @@ defineExpose({ close, menuRef, updatePosition });
 .au-context-menu__separator {
   height: 1px;
   margin: 5px 4px;
-  background: var(--au-material-border-strong);
+  background: var(--au-material-border-emphasis);
 }
 
 .au-context-menu__submenu-wrapper {

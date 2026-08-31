@@ -21,9 +21,8 @@
     0 18px 40px color-mix(in srgb, var(--au-color-mask) 16%, transparent);
 }
 
-:root[data-au-theme='dark'],
 [data-au-theme='dark'] {
-  /* Dark glass needs a light outer rim; black shadows alone disappear into the canvas. */
+  /* 深色玻璃使用独立亮边，避免黑色投影与页面背景融为一体。 */
   --au-shadow-edge: rgba(255, 255, 255, 0.1);
   --au-shadow-contact: rgba(0, 0, 0, 0.38);
   --au-shadow-ambient: rgba(0, 0, 0, 0.22);

@@ -525,20 +525,20 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   width: 100%;
   min-width: 0;
   height: 30px;
-  border: 0.5px solid var(--au-material-border-strong);
+  border: 0.5px solid var(--au-material-border-emphasis);
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-regular);
-  background: var(--au-material-bg-subtle);
+  color: var(--au-color-text-default);
+  background: var(--au-material-background-subtle);
   font-size: 13px;
   transition:
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    box-shadow var(--au-transition-duration) var(--au-transition-ease);
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    box-shadow var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-select.is-small {
   height: 26px;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   font-size: var(--au-font-size-small);
 }
 
@@ -562,13 +562,13 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 
 .au-select:hover:not(.is-disabled),
 .au-select.is-open:not(.is-disabled) {
-  border-color: var(--au-material-border-strong);
-  background: var(--au-material-bg-subtle);
+  border-color: var(--au-material-border-emphasis);
+  background: var(--au-material-background-subtle);
 }
 
 .au-select:focus-within:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 45%, transparent);
-  background: var(--au-material-bg-subtle);
+  background: var(--au-material-background-subtle);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 8%, transparent);
 }
 
@@ -659,7 +659,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   flex: none;
   color: var(--au-color-text-secondary);
   pointer-events: none;
-  transition: transform var(--au-transition-duration) var(--au-transition-ease);
+  transition: transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-select.is-open .au-select__icon {
@@ -691,12 +691,12 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   padding: 5px 7px 5px 9px;
   gap: 8px;
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   cursor: pointer;
   user-select: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-select__listbox.is-small .au-select__option {
@@ -762,7 +762,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 .au-select__group + .au-select__group {
   margin-top: 3px;
   padding-top: 3px;
-  border-top: 1px solid var(--au-material-border-strong);
+  border-top: 1px solid var(--au-material-border-emphasis);
 }
 
 .au-select__group-label {
@@ -794,7 +794,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   .au-select:hover:not(.is-disabled),
   .au-select.is-open:not(.is-disabled),
   .au-select:focus-within:not(.is-disabled) {
-    background: var(--au-color-bg-overlay);
+    background: var(--au-color-background-overlay);
   }
 }
 
@@ -812,7 +812,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   .au-select,
   .au-select__listbox {
     border-width: 1px;
-    border-color: var(--au-color-border);
+    border-color: var(--au-color-border-default);
   }
 }
 

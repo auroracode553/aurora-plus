@@ -194,7 +194,7 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 
 .au-virtual-list::-webkit-scrollbar-thumb {
   border: 3px solid transparent;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   background: color-mix(in srgb, var(--au-color-text-secondary) 34%, transparent);
   background-clip: padding-box;
 }
@@ -217,7 +217,7 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 
 @media (prefers-contrast: more) {
   .au-virtual-list {
-    border-color: var(--au-material-border-strong);
+    border-color: var(--au-material-border-emphasis);
   }
 }
 </style>

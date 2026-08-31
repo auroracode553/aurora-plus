@@ -210,10 +210,10 @@ defineExpose({ hide, show, updatePosition });
 
 .au-tooltip__popper {
   position: fixed;
-  z-index: var(--au-z-index-tooltip);
+  z-index: var(--au-z-index-hint);
   min-height: 24px;
   padding: 5px 8px;
-  border: 1px solid var(--au-material-border-strong);
+  border: 1px solid var(--au-material-border-emphasis);
   border-radius: var(--au-radius-control);
   color: var(--au-color-text-primary);
   font-size: var(--au-font-size-small);
@@ -235,8 +235,8 @@ defineExpose({ hide, show, updatePosition });
   width: auto;
   height: 8px;
   aspect-ratio: 1;
-  border: 1px solid var(--au-material-border-strong);
-  background: var(--au-material-bg-strong);
+  border: 1px solid var(--au-material-border-emphasis);
+  background: var(--au-material-background-elevated);
   transform: rotate(45deg);
 }
 
@@ -270,7 +270,7 @@ defineExpose({ hide, show, updatePosition });
 
 @media (prefers-reduced-transparency: reduce) {
   .au-tooltip__arrow {
-    background: var(--au-color-bg-overlay);
+    background: var(--au-color-background-overlay);
   }
 }
 

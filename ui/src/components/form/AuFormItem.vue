@@ -259,7 +259,7 @@ defineExpose(fieldContext);
   min-height: 30px;
   padding-right: 10px;
   flex: 0 0 auto;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   font-size: 13px;
   line-height: 1.35;
 }
@@ -352,7 +352,7 @@ defineExpose(fieldContext);
 
 .au-form-item-message-enter-active,
 .au-form-item-message-leave-active {
-  transition: opacity var(--au-transition-duration) var(--au-transition-ease);
+  transition: opacity var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-form-item-message-enter-from,

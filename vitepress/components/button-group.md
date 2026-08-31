@@ -40,7 +40,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 ## 悬浮控制组
 
-`variant="floating"` 使用独立按钮间距和悬浮面板外观，适合卡片、画布或面板角落中的轻量操作。搭配 `icon-only` 时，直接子按钮会统一为方形图标控制按钮。
+`variant="floating"` 使用统一玻璃容器承载透明图标控制，适合卡片、画布或面板角落中的轻量操作。搭配 `icon-only` 时，直接子按钮会统一为紧凑方形控制，只有悬停、按下或选中时显示状态层。
 
 <DemoBlock
   title="Floating 悬浮控制组"
@@ -56,7 +56,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 | --- | --- | --- | --- |
 | `connected` | 顶部菜单、工具切换、视图切换 | 统一材质容器与独立展开/选中项 | 文字或文字加图标 |
 | `segmented` | 透明度、显示密度、枚举设置 | 等宽选项与独立选中项 | 简短文字或数值 |
-| `floating` | 卡片、画布、面板快捷操作 | 独立按钮位于悬浮面板内 | 纯图标 |
+| `floating` | 卡片、画布、面板快捷操作 | 统一悬浮玻璃容器内的透明控制 | 纯图标 |
 
 `AuButtonGroup` 不负责定位和显隐。按钮触发的任意内容使用 `AuPopover`；跟随编辑选区浮动的工具组使用 `AuFloatingToolbar`。
 

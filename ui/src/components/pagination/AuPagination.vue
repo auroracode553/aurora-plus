@@ -268,7 +268,7 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   min-width: 0;
   gap: 6px;
   flex-wrap: wrap;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   font-size: var(--au-font-size-small);
   font-variant-numeric: tabular-nums;
 }
@@ -281,17 +281,17 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 .au-pagination__button,
 .au-pagination__input {
   height: 28px;
-  border: 1px solid var(--au-material-border-strong);
-  border-radius: var(--au-radius-small);
+  border: 1px solid var(--au-material-border-emphasis);
+  border-radius: var(--au-radius-compact);
   color: inherit;
   background: transparent;
   font: inherit;
   appearance: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-pagination__button {
@@ -327,7 +327,7 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 }
 
 .au-pagination.has-background .au-pagination__button {
-  background: var(--au-material-bg-subtle);
+  background: var(--au-material-background-subtle);
 }
 
 .au-pagination__button:disabled,

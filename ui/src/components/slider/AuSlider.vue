@@ -281,7 +281,7 @@ defineExpose({ focus, blur, inputRef });
   width: 100%;
   min-width: 0;
   gap: 8px;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   font-size: var(--au-font-size-base);
 }
 
@@ -320,8 +320,8 @@ defineExpose({ focus, blur, inputRef });
   inset-inline: 8px;
   top: 50%;
   height: 4px;
-  border-radius: var(--au-radius-round);
-  background: var(--au-color-border);
+  border-radius: var(--au-radius-pill);
+  background: var(--au-color-border-default);
   transform: translateY(-50%);
 }
 
@@ -348,12 +348,12 @@ defineExpose({ focus, blur, inputRef });
   top: 50%;
   width: 16px;
   height: 16px;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   background: var(--au-color-primary);
   transform: translate(-50%, -50%);
   transition:
-    transform var(--au-transition-duration) var(--au-transition-ease),
-    box-shadow var(--au-transition-duration) var(--au-transition-ease);
+    transform var(--au-transition-duration) var(--au-transition-timing),
+    box-shadow var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-slider:dir(rtl) .au-slider__thumb {

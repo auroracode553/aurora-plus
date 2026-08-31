@@ -1,6 +1,6 @@
 <template>
   <li
-    class="au-menu-item"
+    class="au-menu-item au-component"
     :class="[`is-${menuMode}`, { 'is-collapsed': collapsed }]"
     role="none"
   >
@@ -108,7 +108,6 @@ onBeforeUnmount(() => {
 
 .au-menu-item__content {
   position: relative;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   width: 100%;
@@ -132,15 +131,15 @@ onBeforeUnmount(() => {
   user-select: none;
   appearance: none;
   transition:
-    transform 0.14s var(--au-transition-ease),
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease);
+    transform 0.14s var(--au-transition-timing),
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    border-color var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-menu-item__content:hover:not(:disabled),
 .au-menu-item__content:focus-visible {
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   background: color-mix(in srgb, var(--au-color-primary) 6%, transparent);
 }
 
@@ -158,7 +157,7 @@ onBeforeUnmount(() => {
   left: -14px;
   width: 3px;
   height: 24px;
-  border-radius: 0 var(--au-radius-small) var(--au-radius-small) 0;
+  border-radius: 0 var(--au-radius-compact) var(--au-radius-compact) 0;
   background: var(--au-color-primary);
   content: "";
   transform: translateY(-50%);
@@ -187,7 +186,7 @@ onBeforeUnmount(() => {
   flex: none;
   color: currentColor;
   font-size: 20px;
-  transition: color var(--au-transition-duration) var(--au-transition-ease);
+  transition: color var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-menu-item__icon :deep(svg) {
@@ -220,9 +219,9 @@ onBeforeUnmount(() => {
   min-width: 28px;
   height: 20px;
   padding: 0 8px;
-  border: 1px solid color-mix(in srgb, var(--au-color-primary) 18%, var(--au-color-border-lighter));
-  border-radius: var(--au-radius-round);
-  background: color-mix(in srgb, var(--au-color-primary) 8%, var(--au-material-bg-subtle));
+  border: 1px solid color-mix(in srgb, var(--au-color-primary) 18%, var(--au-color-border-muted));
+  border-radius: var(--au-radius-pill);
+  background: color-mix(in srgb, var(--au-color-primary) 8%, var(--au-material-background-subtle));
   color: var(--au-color-text-secondary);
   font-size: 11px;
   font-weight: var(--au-font-weight-semibold);
@@ -233,13 +232,13 @@ onBeforeUnmount(() => {
   width: auto;
   height: 8px;
   aspect-ratio: 1;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   background: var(--au-color-text-secondary);
 }
 
 .au-menu-item__content.is-active .au-menu-item__badge {
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-bg-subtle));
+  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-background-subtle));
 }
 
 .au-menu-item.is-collapsed .au-menu-item__content {
@@ -284,7 +283,7 @@ onBeforeUnmount(() => {
   left: 12px;
   width: auto;
   height: 2px;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   transform: none;
 }
 

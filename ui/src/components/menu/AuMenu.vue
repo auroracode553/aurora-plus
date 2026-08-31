@@ -186,13 +186,12 @@ defineExpose({ focus, menuRef });
 
 <style scoped>
 .au-menu {
-  box-sizing: border-box;
   display: flex;
   min-width: 0;
   margin: 0;
   padding: 0;
   gap: 4px;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   background: transparent;
   font-size: var(--au-font-size-base);
   list-style: none;

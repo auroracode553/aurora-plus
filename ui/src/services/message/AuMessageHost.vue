@@ -44,7 +44,7 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 .au-message-host {
   position: fixed;
   left: 50%;
-  z-index: var(--au-z-index-message);
+  z-index: var(--au-z-index-notification);
   display: flex;
   align-items: center;
   width: min(560px, calc(100vw - 32px));
@@ -75,7 +75,7 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   height: 8px;
   aspect-ratio: 1;
   margin-top: 6px;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   background: var(--au-color-info);
   flex: none;
 }
@@ -99,9 +99,9 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 .au-message__repeat {
   min-width: 20px;
   padding: 1px 6px;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   color: var(--au-color-text-secondary);
-  background: var(--au-material-bg-subtle);
+  background: var(--au-material-background-subtle);
   font-size: 11px;
   line-height: 1.5;
   flex: none;
@@ -120,17 +120,17 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
   background: transparent;
   cursor: pointer;
   flex: none;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-message__close:hover {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-message__close:active {

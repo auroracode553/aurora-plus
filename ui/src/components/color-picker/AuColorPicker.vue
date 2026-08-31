@@ -78,14 +78,14 @@ defineExpose({ focus, inputRef });
   height: 32px;
   aspect-ratio: 1;
   padding: 0;
-  border: 0.5px solid var(--au-color-border-lighter);
-  border-radius: var(--au-radius-round);
-  background: var(--au-material-bg-subtle);
+  border: 0.5px solid var(--au-color-border-muted);
+  border-radius: var(--au-radius-pill);
+  background: var(--au-material-background-subtle);
   cursor: pointer;
   transition:
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    box-shadow var(--au-transition-duration) var(--au-transition-ease);
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    box-shadow var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-color-picker.is-small {
@@ -97,8 +97,8 @@ defineExpose({ focus, inputRef });
 }
 
 .au-color-picker:hover:not(.is-disabled) {
-  border-color: color-mix(in srgb, var(--au-color-primary) 30%, var(--au-color-border-lighter));
-  background: var(--au-color-bg-hover);
+  border-color: color-mix(in srgb, var(--au-color-primary) 30%, var(--au-color-border-muted));
+  background: var(--au-color-background-hover);
 }
 
 .au-color-picker:focus-within:not(.is-disabled) {
@@ -115,8 +115,8 @@ defineExpose({ focus, inputRef });
   width: auto;
   height: 18px;
   aspect-ratio: 1;
-  border: 0.5px solid var(--au-color-border-lighter);
-  border-radius: var(--au-radius-round);
+  border: 0.5px solid var(--au-color-border-muted);
+  border-radius: var(--au-radius-pill);
   pointer-events: none;
 }
 

@@ -517,13 +517,13 @@ defineExpose({
   height: 32px;
   gap: 6px;
   padding: 0 9px;
-  border: 1px solid var(--au-material-border-strong);
+  border: 1px solid var(--au-material-border-emphasis);
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-regular);
-  background: var(--au-material-bg);
+  color: var(--au-color-text-default);
+  background: var(--au-material-background);
   transition:
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    box-shadow var(--au-transition-duration) var(--au-transition-ease);
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    box-shadow var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-date-range-picker__trigger:hover:not(.is-disabled),
@@ -537,7 +537,7 @@ defineExpose({
 
 .au-date-range-picker__trigger.is-disabled {
   color: var(--au-color-text-disabled);
-  background: var(--au-material-bg-subtle);
+  background: var(--au-material-background-subtle);
   cursor: not-allowed;
 }
 
@@ -581,7 +581,7 @@ defineExpose({
   height: 20px;
   padding: 0;
   border: 0;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   color: var(--au-color-text-secondary);
   background: transparent;
   cursor: pointer;
@@ -590,7 +590,7 @@ defineExpose({
 
 .au-date-range-picker__clear:hover {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-date-range-picker__panel {
@@ -600,7 +600,6 @@ defineExpose({
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-overlay);
   color: var(--au-color-text-primary);
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
   overscroll-behavior: contain;
 }
 
@@ -638,13 +637,6 @@ defineExpose({
 @media (prefers-reduced-motion: reduce) {
   .au-date-range-picker__trigger {
     transition: none;
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-date-range-picker__panel {
-    background: var(--au-color-bg-overlay);
-    backdrop-filter: none;
   }
 }
 

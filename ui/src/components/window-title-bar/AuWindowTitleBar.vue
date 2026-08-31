@@ -206,7 +206,7 @@ function handleTitleDoubleClick(event) {
   height: 32px;
   min-height: 32px;
   padding: 0;
-  border-bottom: 1px solid var(--au-material-border-strong);
+  border-bottom: 1px solid var(--au-material-border-emphasis);
   color: var(--au-color-text-primary);
   -webkit-app-region: drag;
   user-select: none;
@@ -295,13 +295,13 @@ function handleTitleDoubleClick(event) {
   cursor: pointer;
   appearance: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background-color var(--au-transition-duration) var(--au-transition-ease),
-    opacity var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background-color var(--au-transition-duration) var(--au-transition-timing),
+    opacity var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-window-title-bar__button:hover:not(:disabled) {
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-window-title-bar__button.is-close:hover:not(:disabled) {

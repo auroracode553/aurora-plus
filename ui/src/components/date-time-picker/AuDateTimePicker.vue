@@ -453,7 +453,7 @@ defineExpose({ focus, blur, open, close, inputRef, datePaneRef, popoverRef });
 
 .au-date-time-picker__action:hover:not(:disabled) {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-date-time-picker__action.is-primary {

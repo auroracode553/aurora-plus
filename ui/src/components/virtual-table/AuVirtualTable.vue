@@ -92,7 +92,11 @@
       </template>
     </div>
 
-    <div v-if="loading" class="au-virtual-table__loading" aria-live="polite">
+    <div
+      v-if="loading"
+      class="au-virtual-table__loading au-material-surface au-depth-surface"
+      aria-live="polite"
+    >
       <slot name="loading">
         <AuIcon class="au-spin" :icon="IconLoader2" />
         <span>{{ loadingText }}</span>
@@ -393,7 +397,7 @@ defineExpose({
   overflow: auto;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-surface);
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   background: transparent;
   font-size: 13px;
   scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
@@ -423,7 +427,7 @@ defineExpose({
   top: 0;
   z-index: 4;
   color: var(--au-color-text-primary);
-  background: var(--au-material-bg-strong);
+  background: var(--au-material-background-elevated);
   font-weight: var(--au-font-weight-semibold);
 }
 
@@ -431,11 +435,11 @@ defineExpose({
   position: absolute;
   top: 0;
   left: 0;
-  transition: background var(--au-transition-duration) var(--au-transition-ease);
+  transition: background var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-virtual-table__row:hover {
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-virtual-table__row.is-striped-row {
@@ -461,11 +465,11 @@ defineExpose({
 .au-virtual-table__header-cell.is-fixed,
 .au-virtual-table__cell.is-fixed {
   position: sticky;
-  background: var(--au-material-bg-strong);
+  background: var(--au-material-background-elevated);
 }
 
 .au-virtual-table__row:hover .au-virtual-table__cell.is-fixed {
-  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-bg-strong));
+  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
 }
 
 .au-virtual-table__cell-text {
@@ -484,7 +488,7 @@ defineExpose({
   margin: 0 -6px;
   padding: 0 6px;
   border: 0;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   color: inherit;
   background: transparent;
   font: inherit;
@@ -493,7 +497,7 @@ defineExpose({
 
 .au-virtual-table__sort-button:hover {
   color: var(--au-color-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-virtual-table__sort-icon {
@@ -523,10 +527,8 @@ defineExpose({
   margin: -38px auto 8px;
   padding: 6px 10px;
   border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   color: var(--au-color-text-primary);
-  background: var(--au-material-bg-strong);
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -539,7 +541,7 @@ defineExpose({
   .au-virtual-table,
   .au-virtual-table__header-cell,
   .au-virtual-table__cell {
-    border-color: var(--au-material-border-strong);
+    border-color: var(--au-material-border-emphasis);
   }
 }
 

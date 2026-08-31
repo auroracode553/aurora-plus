@@ -427,7 +427,7 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 .au-dropdown__divider {
   height: 1px;
   margin: 4px 5px;
-  background: var(--au-material-border-strong);
+  background: var(--au-material-border-emphasis);
 }
 
 .au-dropdown__empty {

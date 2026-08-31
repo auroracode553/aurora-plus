@@ -178,7 +178,7 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
 .au-tree {
   min-width: 0;
   max-width: 100%;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   font-size: 13px;
 }
 
@@ -212,17 +212,17 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
   gap: 3px;
   overflow: hidden;
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   background: transparent;
   user-select: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-tree__item:hover {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-tree__item.is-selected {
@@ -254,21 +254,21 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
   place-items: center;
   padding: 0;
   border: 0;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   color: var(--au-color-text-secondary);
   background: transparent;
   cursor: pointer;
   appearance: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-tree__toggle:hover,
 .au-tree__toggle:focus-visible {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-tree__toggle.is-expanded {

@@ -387,9 +387,9 @@ defineExpose({ focus, showDate, paneRef });
   cursor: pointer;
   appearance: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-date-picker-pane__nav {
@@ -400,7 +400,7 @@ defineExpose({ focus, showDate, paneRef });
 .au-date-picker-pane__nav:hover,
 .au-date-picker-pane__today:hover:not(:disabled) {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-date-picker-pane__nav:active,
@@ -446,8 +446,8 @@ defineExpose({ focus, showDate, paneRef });
   justify-self: center;
   padding: 0;
   border: 0;
-  border-radius: var(--au-radius-round);
-  color: var(--au-color-text-regular);
+  border-radius: var(--au-radius-pill);
+  color: var(--au-color-text-default);
   background: transparent;
   font: inherit;
   font-size: 13px;
@@ -455,15 +455,15 @@ defineExpose({ focus, showDate, paneRef });
   cursor: pointer;
   appearance: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-date-picker-pane__day:hover:not(:disabled),
 .au-date-picker-pane__day:focus-visible:not(.is-selected) {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-date-picker-pane__day.is-adjacent {
@@ -476,7 +476,7 @@ defineExpose({ focus, showDate, paneRef });
 }
 
 .au-date-picker-pane__day.is-in-range {
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   color: var(--au-color-primary);
   background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
 }
@@ -492,7 +492,7 @@ defineExpose({ focus, showDate, paneRef });
   bottom: 3px;
   width: 3px;
   height: 3px;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   background: currentColor;
   content: '';
 }

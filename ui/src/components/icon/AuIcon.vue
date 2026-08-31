@@ -58,7 +58,7 @@ const iconStyle = computed(() => {
   overflow: hidden;
   font-variant-numeric: tabular-nums;
   contain: paint;
-  transition: color var(--au-transition-duration) var(--au-transition-ease), opacity var(--au-transition-duration) var(--au-transition-ease);
+  transition: color var(--au-transition-duration) var(--au-transition-timing), opacity var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-icon :deep(svg) {

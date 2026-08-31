@@ -164,7 +164,7 @@ function resolveItemKey(item, index) {
 .au-menu-bar-panel__separator {
   height: 1px;
   margin: 5px 4px;
-  background: var(--au-color-border-lighter);
+  background: var(--au-color-border-muted);
 }
 
 .au-menu-bar-panel__submenu {

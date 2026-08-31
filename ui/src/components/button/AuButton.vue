@@ -119,10 +119,10 @@ function handleClick(event) {
   margin: 0;
   padding: 8px 15px;
   overflow: hidden;
-  border: 1px solid var(--au-material-border-strong);
+  border: 1px solid var(--au-material-border-emphasis);
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-regular);
-  background: var(--au-material-bg);
+  color: var(--au-color-text-default);
+  background: var(--au-material-background);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1;
@@ -133,24 +133,24 @@ function handleClick(event) {
   appearance: none;
   transform: translateZ(0);
   transition:
-    background var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    box-shadow var(--au-transition-duration) var(--au-transition-ease),
-    color var(--au-transition-duration) var(--au-transition-ease),
-    transform var(--au-transition-duration) var(--au-transition-ease);
+    background var(--au-transition-duration) var(--au-transition-timing),
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    box-shadow var(--au-transition-duration) var(--au-transition-timing),
+    color var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-button:hover:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 42%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-material-bg));
+  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-material-background));
   box-shadow: var(--au-shadow-surface);
 }
 
 .au-button:active:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 58%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 14%, var(--au-material-bg));
+  background: color-mix(in srgb, var(--au-color-primary) 14%, var(--au-material-background));
   box-shadow: var(--au-shadow-control);
   transform: scale(0.97);
 }
@@ -158,7 +158,7 @@ function handleClick(event) {
 .au-button--small {
   height: 28px;
   padding: 5px 11px;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   font-size: var(--au-font-size-small);
 }
 
@@ -170,14 +170,14 @@ function handleClick(event) {
 }
 
 .au-button.is-round {
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
 }
 
 .au-button.is-circle {
   width: auto;
   aspect-ratio: 1;
   padding: 0;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
 }
 
 .au-button.is-disabled:active {
@@ -292,31 +292,31 @@ function handleClick(event) {
 .au-button--primary.is-plain {
   border-color: var(--au-color-primary);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-bg));
+  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-background));
 }
 
 .au-button--success.is-plain {
   border-color: var(--au-color-success);
   color: var(--au-color-success);
-  background: color-mix(in srgb, var(--au-color-success) 12%, var(--au-material-bg));
+  background: color-mix(in srgb, var(--au-color-success) 12%, var(--au-material-background));
 }
 
 .au-button--info.is-plain {
   border-color: var(--au-color-info);
   color: var(--au-color-info);
-  background: color-mix(in srgb, var(--au-color-info) 12%, var(--au-material-bg));
+  background: color-mix(in srgb, var(--au-color-info) 12%, var(--au-material-background));
 }
 
 .au-button--warning.is-plain {
   border-color: var(--au-color-warning);
   color: var(--au-color-warning);
-  background: color-mix(in srgb, var(--au-color-warning) 12%, var(--au-material-bg));
+  background: color-mix(in srgb, var(--au-color-warning) 12%, var(--au-material-background));
 }
 
 .au-button--danger.is-plain {
   border-color: var(--au-color-danger);
   color: var(--au-color-danger);
-  background: color-mix(in srgb, var(--au-color-danger) 12%, var(--au-material-bg));
+  background: color-mix(in srgb, var(--au-color-danger) 12%, var(--au-material-background));
 }
 
 .au-button--primary.is-plain:hover:not(.is-disabled) {
@@ -347,8 +347,8 @@ function handleClick(event) {
   gap: 4px;
   padding: 0 8px;
   border: 1px solid transparent;
-  border-radius: var(--au-radius-small);
-  color: var(--au-color-text-regular);
+  border-radius: var(--au-radius-compact);
+  color: var(--au-color-text-default);
   background: transparent;
   box-shadow: none;
   font-size: 13px;
@@ -361,7 +361,7 @@ function handleClick(event) {
   min-width: 24px;
   height: 24px;
   padding: 0 6px;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   font-size: var(--au-font-size-small);
 }
 
@@ -376,7 +376,7 @@ function handleClick(event) {
 .au-button.au-button--menu.is-icon-only {
   width: 36px;
   padding: 0;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
 }
 
 .au-button.au-button--menu.au-button--small.is-circle,
@@ -438,7 +438,7 @@ function handleClick(event) {
 
 @media (prefers-reduced-transparency: reduce) {
   .au-button.au-button--menu.is-selected {
-    background: color-mix(in srgb, currentColor 13%, var(--au-color-bg-overlay));
+    background: color-mix(in srgb, currentColor 13%, var(--au-color-background-overlay));
   }
 }
 

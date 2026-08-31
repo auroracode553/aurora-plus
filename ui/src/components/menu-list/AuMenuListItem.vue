@@ -142,7 +142,7 @@ function handleClick(event) {
   left: 16px;
   z-index: 2;
   height: 1px;
-  background: var(--au-color-border-lighter);
+  background: var(--au-color-border-muted);
   transform: scaleY(0.5);
   transform-origin: bottom;
   pointer-events: none;
@@ -166,7 +166,7 @@ function handleClick(event) {
   text-decoration: none;
   appearance: none;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
+    color var(--au-transition-duration) var(--au-transition-timing),
     background 100ms ease-out,
     transform 90ms ease-out;
 }

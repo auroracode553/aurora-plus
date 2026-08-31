@@ -288,7 +288,7 @@ defineExpose({ focus, blur, open, close, inputRef, treeRef, popoverRef });
 }
 
 .au-tree-select :deep(.au-input__suffix > .au-icon) {
-  transition: transform var(--au-transition-duration) var(--au-transition-ease);
+  transition: transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-tree-select[aria-expanded='true'] :deep(.au-input__suffix > .au-icon) {

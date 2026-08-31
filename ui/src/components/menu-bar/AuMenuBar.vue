@@ -157,8 +157,8 @@ defineExpose({ close: closeMenu, menuBarRef });
   height: 30px;
   min-height: 30px;
   padding: 0 8px;
-  border-bottom: 1px solid var(--au-color-border-lighter);
-  color: var(--au-color-text-regular);
+  border-bottom: 1px solid var(--au-color-border-muted);
+  color: var(--au-color-text-default);
   background: transparent;
   font-size: 13px;
   user-select: none;
@@ -191,7 +191,7 @@ defineExpose({ close: closeMenu, menuBarRef });
   padding: 0 clamp(4px, 2vw, 9px);
   overflow: hidden;
   border: 0;
-  border-radius: var(--au-radius-small);
+  border-radius: var(--au-radius-compact);
   color: inherit;
   background: transparent;
   font: inherit;
@@ -202,15 +202,15 @@ defineExpose({ close: closeMenu, menuBarRef });
   appearance: none;
   -webkit-app-region: no-drag;
   transition:
-    color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease);
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-menu-bar__trigger:hover:not(:disabled),
 .au-menu-bar__trigger:focus-visible,
 .au-menu-bar__trigger.is-open {
   color: var(--au-color-text-primary);
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-menu-bar__trigger:active:not(:disabled) {

@@ -13,28 +13,28 @@
 
   /* 文字颜色按信息重要度递减。 */
   --au-color-text-primary: #172033;
-  --au-color-text-regular: #3e4a61;
+  --au-color-text-default: #3e4a61;
   --au-color-text-secondary: #6d7890;
   --au-color-text-placeholder: #99a3b5;
   --au-color-text-disabled: #b5bdca;
 
   /* 页面背景、浮层背景与交互反馈。 */
-  --au-color-bg-soft: #edf1f8;
-  --au-color-bg-overlay: #ffffff;
-  --au-color-bg-hover: rgba(31, 44, 68, 0.07);
+  --au-color-background-subtle: #edf1f8;
+  --au-color-background-overlay: #ffffff;
+  --au-color-background-hover: rgba(31, 44, 68, 0.07);
   --au-color-mask: rgba(18, 27, 45, 0.42);
 
   /* 通用边框按分隔强度递减。 */
-  --au-color-border: rgba(105, 123, 154, 0.3);
-  --au-color-border-light: rgba(105, 123, 154, 0.2);
-  --au-color-border-lighter: rgba(105, 123, 154, 0.13);
+  --au-color-border-default: rgba(105, 123, 154, 0.3);
+  --au-color-border-subtle: rgba(105, 123, 154, 0.2);
+  --au-color-border-muted: rgba(105, 123, 154, 0.13);
 
   /* 圆角只保留组件实际使用的四级尺寸。 */
-  --au-radius-small: 6px;
+  --au-radius-compact: 6px;
   --au-radius-control: 8px;
   --au-radius-surface: 12px;
   --au-radius-overlay: 14px;
-  --au-radius-round: 999px;
+  --au-radius-pill: 999px;
 
   /* 字体使用系统字族，并维持紧凑控件字号。 */
   --au-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -46,11 +46,11 @@
 
   /* 所有组件共用一套轻量、可中断的状态过渡。 */
   --au-transition-duration: 0.2s;
-  --au-transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --au-transition-timing: cubic-bezier(0.2, 0.8, 0.2, 1);
 
   /* 全局服务浮层层级。 */
-  --au-z-index-message: 11000;
-  --au-z-index-tooltip: 12000;
+  --au-z-index-notification: 11000;
+  --au-z-index-hint: 12000;
 }
 
 [data-au-theme='dark'] {
@@ -63,30 +63,30 @@
   --au-color-danger: #ff453a;
   --au-color-info: #98989d;
   --au-color-text-primary: #f5f5f7;
-  --au-color-text-regular: rgba(235, 235, 245, 0.82);
+  --au-color-text-default: rgba(235, 235, 245, 0.82);
   --au-color-text-secondary: rgba(235, 235, 245, 0.6);
   --au-color-text-placeholder: rgba(235, 235, 245, 0.3);
   --au-color-text-disabled: rgba(235, 235, 245, 0.2);
 
   /* 中性石墨表面避免深色界面坍缩成纯黑。 */
-  --au-color-bg-soft: #202023;
-  --au-color-bg-overlay: #2c2c30;
-  --au-color-bg-hover: rgba(255, 255, 255, 0.08);
+  --au-color-background-subtle: #202023;
+  --au-color-background-overlay: #2c2c30;
+  --au-color-background-hover: rgba(255, 255, 255, 0.08);
   --au-color-mask: rgba(0, 0, 0, 0.52);
-  --au-color-border: rgba(255, 255, 255, 0.18);
-  --au-color-border-light: rgba(255, 255, 255, 0.12);
-  --au-color-border-lighter: rgba(255, 255, 255, 0.075);
+  --au-color-border-default: rgba(255, 255, 255, 0.18);
+  --au-color-border-subtle: rgba(255, 255, 255, 0.12);
+  --au-color-border-muted: rgba(255, 255, 255, 0.075);
 }
 
 /* 默认实色材质；局部 solid 容器也用它覆盖父级玻璃材质。 */
 :root,
 [data-au-theme],
 [data-au-material='solid'] {
-  --au-material-bg: var(--au-color-bg-overlay);
-  --au-material-bg-strong: var(--au-material-bg);
-  --au-material-bg-subtle: var(--au-color-bg-soft);
-  --au-material-border: var(--au-color-border-light);
-  --au-material-border-strong: var(--au-color-border);
+  --au-material-background: var(--au-color-background-overlay);
+  --au-material-background-elevated: var(--au-material-background);
+  --au-material-background-subtle: var(--au-color-background-subtle);
+  --au-material-border: var(--au-color-border-subtle);
+  --au-material-border-emphasis: var(--au-color-border-default);
   --au-material-blur: 0px;
   --au-material-saturation: 100%;
 }
@@ -95,23 +95,23 @@
 [data-au-material='soft'],
 [data-au-material='clear'] {
   --au-material-border: rgba(255, 255, 255, 0.78);
-  --au-material-border-strong: rgba(105, 123, 154, 0.28);
+  --au-material-border-emphasis: rgba(105, 123, 154, 0.28);
 }
 
 /* 柔和玻璃：同一套颜色语义，仅降低表面不透明度并增加模糊。 */
 [data-au-material='soft'] {
-  --au-material-bg: color-mix(in srgb, var(--au-color-bg-overlay) 72%, transparent);
-  --au-material-bg-strong: color-mix(in srgb, var(--au-color-bg-overlay) 82%, transparent);
-  --au-material-bg-subtle: color-mix(in srgb, var(--au-color-bg-overlay) 52%, transparent);
+  --au-material-background: color-mix(in srgb, var(--au-color-background-overlay) 72%, transparent);
+  --au-material-background-elevated: color-mix(in srgb, var(--au-color-background-overlay) 82%, transparent);
+  --au-material-background-subtle: color-mix(in srgb, var(--au-color-background-overlay) 52%, transparent);
   --au-material-blur: 20px;
   --au-material-saturation: 140%;
 }
 
 /* 清透玻璃：继续降低不透明度，以更强模糊维持内容可读性。 */
 [data-au-material='clear'] {
-  --au-material-bg: color-mix(in srgb, var(--au-color-bg-overlay) 46%, transparent);
-  --au-material-bg-strong: color-mix(in srgb, var(--au-color-bg-overlay) 60%, transparent);
-  --au-material-bg-subtle: color-mix(in srgb, var(--au-color-bg-overlay) 30%, transparent);
+  --au-material-background: color-mix(in srgb, var(--au-color-background-overlay) 46%, transparent);
+  --au-material-background-elevated: color-mix(in srgb, var(--au-color-background-overlay) 60%, transparent);
+  --au-material-background-subtle: color-mix(in srgb, var(--au-color-background-overlay) 30%, transparent);
   --au-material-blur: 32px;
   --au-material-saturation: 160%;
 }
@@ -120,7 +120,7 @@
 :where([data-au-theme='dark']):is([data-au-material='soft'], [data-au-material='clear']),
 :where([data-au-theme='dark']) :is([data-au-material='soft'], [data-au-material='clear']) {
   --au-material-border: rgba(255, 255, 255, 0.2);
-  --au-material-border-strong: rgba(255, 255, 255, 0.26);
+  --au-material-border-emphasis: rgba(255, 255, 255, 0.26);
 }
 
 /* 无障碍回退共用实色表面，避免透明内容影响辨识。 */
@@ -128,10 +128,10 @@
   :root,
   [data-au-theme],
   [data-au-material] {
-    --au-material-bg: var(--au-color-bg-overlay);
-    --au-material-bg-strong: var(--au-material-bg);
-    --au-material-bg-subtle: var(--au-color-bg-soft);
-    --au-material-border: var(--au-color-border);
+    --au-material-background: var(--au-color-background-overlay);
+    --au-material-background-elevated: var(--au-material-background);
+    --au-material-background-subtle: var(--au-color-background-subtle);
+    --au-material-border: var(--au-color-border-default);
     --au-material-blur: 0px;
     --au-material-saturation: 100%;
   }
@@ -142,7 +142,7 @@
   :root,
   [data-au-theme],
   [data-au-material] {
-    --au-material-border-strong: var(--au-color-text-secondary);
+    --au-material-border-emphasis: var(--au-color-text-secondary);
   }
 }
 
@@ -150,6 +150,6 @@
 @media (prefers-reduced-motion: reduce) {
   :root {
     --au-transition-duration: 0.01ms;
-    --au-transition-ease: linear;
+    --au-transition-timing: linear;
   }
 }

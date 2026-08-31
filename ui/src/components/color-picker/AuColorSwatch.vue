@@ -90,14 +90,14 @@ function clampChannel(value) {
   aspect-ratio: 1;
   padding: 3px;
   border: 1px solid transparent;
-  border-radius: var(--au-radius-round);
+  border-radius: var(--au-radius-pill);
   color: var(--au-color-text-primary);
   background: transparent;
   cursor: pointer;
   appearance: none;
   transition:
-    border-color var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease),
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
     transform 100ms ease-out;
 }
 
@@ -112,7 +112,7 @@ function clampChannel(value) {
 
 .au-color-swatch:hover:not(.is-disabled),
 .au-color-swatch:focus-visible {
-  background: var(--au-color-bg-hover);
+  background: var(--au-color-background-hover);
 }
 
 .au-color-swatch.is-selected {
@@ -135,8 +135,8 @@ function clampChannel(value) {
   width: auto;
   height: 22px;
   aspect-ratio: 1;
-  border: 1px solid var(--au-color-border-light);
-  border-radius: var(--au-radius-round);
+  border: 1px solid var(--au-color-border-subtle);
+  border-radius: var(--au-radius-pill);
 }
 
 .au-color-swatch.is-small .au-color-swatch__color {
@@ -168,7 +168,7 @@ function clampChannel(value) {
 
 @media (prefers-contrast: more) {
   .au-color-swatch {
-    border-color: var(--au-color-border);
+    border-color: var(--au-color-border-default);
   }
 
   .au-color-swatch.is-selected {

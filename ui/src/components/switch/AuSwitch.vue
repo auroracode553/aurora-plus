@@ -75,8 +75,8 @@ function toggle() {
   min-height: 28px;
   padding: 0;
   border: 0;
-  border-radius: var(--au-radius-small);
-  color: var(--au-color-text-regular);
+  border-radius: var(--au-radius-compact);
+  color: var(--au-color-text-default);
   background: transparent;
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
@@ -106,12 +106,12 @@ function toggle() {
   height: 20px;
   aspect-ratio: 9 / 5;
   flex: none;
-  border: 1px solid var(--au-material-border-strong);
-  border-radius: var(--au-radius-round);
-  background: var(--au-material-bg-subtle);
+  border: 1px solid var(--au-material-border-emphasis);
+  border-radius: var(--au-radius-pill);
+  background: var(--au-material-background-subtle);
   transition:
-    background var(--au-transition-duration) var(--au-transition-ease),
-    border-color var(--au-transition-duration) var(--au-transition-ease);
+    background var(--au-transition-duration) var(--au-transition-timing),
+    border-color var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-switch__thumb {
@@ -122,16 +122,16 @@ function toggle() {
   height: 16px;
   aspect-ratio: 1;
   margin-left: 2px;
-  border-radius: var(--au-radius-round);
-  background: var(--au-material-bg-strong);
+  border-radius: var(--au-radius-pill);
+  background: var(--au-material-background-elevated);
   transform: translateX(0);
   transition:
-    transform var(--au-transition-duration) var(--au-transition-ease),
-    background var(--au-transition-duration) var(--au-transition-ease);
+    transform var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-switch.is-checked .au-switch__track {
-  border-color: color-mix(in srgb, var(--au-color-primary) 72%, var(--au-material-border-strong));
+  border-color: color-mix(in srgb, var(--au-color-primary) 72%, var(--au-material-border-emphasis));
   background: var(--au-color-primary);
 }
 
@@ -180,7 +180,7 @@ function toggle() {
 }
 
 .au-switch:hover:not(:disabled) .au-switch__track {
-  border-color: color-mix(in srgb, var(--au-color-primary) 45%, var(--au-material-border-strong));
+  border-color: color-mix(in srgb, var(--au-color-primary) 45%, var(--au-material-border-emphasis));
 }
 
 .au-switch:active:not(:disabled) .au-switch__thumb {
@@ -202,7 +202,7 @@ function toggle() {
 @media (prefers-reduced-transparency: reduce) {
   .au-switch__track,
   .au-switch__thumb {
-    background: var(--au-color-bg-overlay);
+    background: var(--au-color-background-overlay);
   }
 
   .au-switch.is-checked .au-switch__track {
