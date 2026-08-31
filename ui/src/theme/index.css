@@ -4,96 +4,59 @@
 :root {
   color-scheme: light;
 
+  /* 品牌色与状态色。 */
   --au-color-primary: #3478f6;
   --au-color-success: #2f9e72;
   --au-color-warning: #d98a24;
   --au-color-danger: #df4c62;
   --au-color-info: #718096;
 
+  /* 文字颜色按信息重要度递减。 */
   --au-color-text-primary: #172033;
   --au-color-text-regular: #3e4a61;
   --au-color-text-secondary: #6d7890;
   --au-color-text-placeholder: #99a3b5;
   --au-color-text-disabled: #b5bdca;
 
+  /* 页面背景、浮层背景与交互反馈。 */
   --au-color-bg-soft: #edf1f8;
   --au-color-bg-overlay: #ffffff;
   --au-color-bg-hover: rgba(31, 44, 68, 0.07);
   --au-color-mask: rgba(18, 27, 45, 0.42);
 
+  /* 通用边框按分隔强度递减。 */
   --au-color-border: rgba(105, 123, 154, 0.3);
   --au-color-border-light: rgba(105, 123, 154, 0.2);
   --au-color-border-lighter: rgba(105, 123, 154, 0.13);
 
-  /* Solid material is the default; every component inherits these overridable tokens. */
-  --au-material-bg: #ffffff;
-  --au-material-bg-strong: #ffffff;
-  --au-material-bg-subtle: #f5f7fb;
-  --au-material-border: var(--au-color-border-light);
-  --au-material-border-strong: var(--au-color-border);
-  --au-material-blur: 0px;
-  --au-material-saturation: 100%;
-
-  /* Apple-style radius scale: compact inside elements, broader floating surfaces. */
-  --au-border-radius-small: 6px;
-  --au-border-radius-base: 8px;
-  --au-radius-small: var(--au-border-radius-small);
-  --au-radius-control: var(--au-border-radius-base);
+  /* 圆角只保留组件实际使用的四级尺寸。 */
+  --au-radius-small: 6px;
+  --au-radius-control: 8px;
   --au-radius-surface: 12px;
   --au-radius-overlay: 14px;
   --au-radius-round: 999px;
+
+  /* 字体使用系统字族，并维持紧凑控件字号。 */
   --au-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --au-font-size-small: 12px;
   --au-font-size-base: 14px;
   --au-font-size-large: 16px;
   --au-font-weight-medium: 520;
   --au-font-weight-semibold: 620;
+
+  /* 所有组件共用一套轻量、可中断的状态过渡。 */
   --au-transition-duration: 0.2s;
   --au-transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* 全局服务浮层层级。 */
   --au-z-index-message: 11000;
   --au-z-index-tooltip: 12000;
 }
 
-/* Soft adds more frost, softer contrast and less visual weight. */
-:root[data-au-material='soft'],
-[data-au-material='soft'] {
-  --au-material-bg: rgba(255, 255, 255, 0.72);
-  --au-material-bg-strong: rgba(255, 255, 255, 0.86);
-  --au-material-bg-subtle: rgba(255, 255, 255, 0.5);
-  --au-material-border: rgba(255, 255, 255, 0.76);
-  --au-material-border-strong: rgba(116, 137, 172, 0.22);
-  --au-material-blur: 16px;
-  --au-material-saturation: 128%;
-}
-
-/* Clear maximizes translucency and background color while preserving legibility. */
-:root[data-au-material='clear'],
-[data-au-material='clear'] {
-  --au-material-bg: rgba(255, 255, 255, 0.46);
-  --au-material-bg-strong: rgba(255, 255, 255, 0.64);
-  --au-material-bg-subtle: rgba(255, 255, 255, 0.28);
-  --au-material-border: rgba(255, 255, 255, 0.78);
-  --au-material-border-strong: rgba(105, 123, 154, 0.34);
-  --au-material-blur: 28px;
-  --au-material-saturation: 178%;
-}
-
-/* Solid is the default for dense interfaces and transparency fallbacks. */
-:root[data-au-material='solid'],
-[data-au-material='solid'] {
-  --au-material-bg: #ffffff;
-  --au-material-bg-strong: #ffffff;
-  --au-material-bg-subtle: #f5f7fb;
-  --au-material-border: var(--au-color-border-light);
-  --au-material-border-strong: var(--au-color-border);
-  --au-material-blur: 0px;
-  --au-material-saturation: 100%;
-}
-
-:root[data-au-theme='dark'],
 [data-au-theme='dark'] {
   color-scheme: dark;
 
+  /* 深色模式仅替换颜色语义，材质结构继续复用下方统一定义。 */
   --au-color-primary: #0a84ff;
   --au-color-success: #30d158;
   --au-color-warning: #ff9f0a;
@@ -105,7 +68,7 @@
   --au-color-text-placeholder: rgba(235, 235, 245, 0.3);
   --au-color-text-disabled: rgba(235, 235, 245, 0.2);
 
-  /* Neutral graphite surfaces retain separation without collapsing into pure black. */
+  /* 中性石墨表面避免深色界面坍缩成纯黑。 */
   --au-color-bg-soft: #202023;
   --au-color-bg-overlay: #2c2c30;
   --au-color-bg-hover: rgba(255, 255, 255, 0.08);
@@ -113,59 +76,60 @@
   --au-color-border: rgba(255, 255, 255, 0.18);
   --au-color-border-light: rgba(255, 255, 255, 0.12);
   --au-color-border-lighter: rgba(255, 255, 255, 0.075);
+}
 
-  /* The default remains solid, but its lifted face and light rim still read as glass. */
-  --au-material-bg: #242427;
-  --au-material-bg-strong: #2c2c30;
-  --au-material-bg-subtle: #202023;
-  --au-material-border: rgba(255, 255, 255, 0.14);
-  --au-material-border-strong: rgba(255, 255, 255, 0.2);
+/* 默认实色材质；局部 solid 容器也用它覆盖父级玻璃材质。 */
+:root,
+[data-au-theme],
+[data-au-material='solid'] {
+  --au-material-bg: var(--au-color-bg-overlay);
+  --au-material-bg-strong: var(--au-material-bg);
+  --au-material-bg-subtle: var(--au-color-bg-soft);
+  --au-material-border: var(--au-color-border-light);
+  --au-material-border-strong: var(--au-color-border);
   --au-material-blur: 0px;
   --au-material-saturation: 100%;
 }
 
-:root[data-au-theme='dark'][data-au-material='soft'],
-[data-au-theme='dark'][data-au-material='soft'],
-:root[data-au-theme='dark'] [data-au-material='soft'] {
-  --au-material-bg: rgba(42, 42, 47, 0.72);
-  --au-material-bg-strong: rgba(52, 52, 58, 0.82);
-  --au-material-bg-subtle: rgba(38, 38, 43, 0.54);
-  --au-material-border: rgba(255, 255, 255, 0.18);
-  --au-material-border-strong: rgba(255, 255, 255, 0.24);
+/* 两种玻璃档位共用同一套边缘，只调整表面透明度和模糊强度。 */
+[data-au-material='soft'],
+[data-au-material='clear'] {
+  --au-material-border: rgba(255, 255, 255, 0.78);
+  --au-material-border-strong: rgba(105, 123, 154, 0.28);
+}
+
+/* 柔和玻璃：同一套颜色语义，仅降低表面不透明度并增加模糊。 */
+[data-au-material='soft'] {
+  --au-material-bg: color-mix(in srgb, var(--au-color-bg-overlay) 72%, transparent);
+  --au-material-bg-strong: color-mix(in srgb, var(--au-color-bg-overlay) 82%, transparent);
+  --au-material-bg-subtle: color-mix(in srgb, var(--au-color-bg-overlay) 52%, transparent);
   --au-material-blur: 20px;
   --au-material-saturation: 140%;
 }
 
-:root[data-au-theme='dark'][data-au-material='clear'],
-[data-au-theme='dark'][data-au-material='clear'],
-:root[data-au-theme='dark'] [data-au-material='clear'] {
-  --au-material-bg: rgba(36, 36, 41, 0.46);
-  --au-material-bg-strong: rgba(48, 48, 54, 0.6);
-  --au-material-bg-subtle: rgba(32, 32, 36, 0.3);
-  --au-material-border: rgba(255, 255, 255, 0.22);
-  --au-material-border-strong: rgba(255, 255, 255, 0.28);
+/* 清透玻璃：继续降低不透明度，以更强模糊维持内容可读性。 */
+[data-au-material='clear'] {
+  --au-material-bg: color-mix(in srgb, var(--au-color-bg-overlay) 46%, transparent);
+  --au-material-bg-strong: color-mix(in srgb, var(--au-color-bg-overlay) 60%, transparent);
+  --au-material-bg-subtle: color-mix(in srgb, var(--au-color-bg-overlay) 30%, transparent);
   --au-material-blur: 32px;
   --au-material-saturation: 160%;
 }
 
-:root[data-au-theme='dark'][data-au-material='solid'],
-[data-au-theme='dark'][data-au-material='solid'],
-:root[data-au-theme='dark'] [data-au-material='solid'] {
-  --au-material-bg: #242427;
-  --au-material-bg-strong: #2c2c30;
-  --au-material-bg-subtle: #202023;
-  --au-material-border: rgba(255, 255, 255, 0.14);
-  --au-material-border-strong: rgba(255, 255, 255, 0.2);
-  --au-material-blur: 0px;
-  --au-material-saturation: 100%;
+/* 深色玻璃只加强边缘；:where 降低权重，确保无障碍规则可以覆盖。 */
+:where([data-au-theme='dark']):is([data-au-material='soft'], [data-au-material='clear']),
+:where([data-au-theme='dark']) :is([data-au-material='soft'], [data-au-material='clear']) {
+  --au-material-border: rgba(255, 255, 255, 0.2);
+  --au-material-border-strong: rgba(255, 255, 255, 0.26);
 }
 
-@media (prefers-reduced-transparency: reduce) {
+/* 无障碍回退共用实色表面，避免透明内容影响辨识。 */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   :root,
-  :root[data-au-material],
+  [data-au-theme],
   [data-au-material] {
     --au-material-bg: var(--au-color-bg-overlay);
-    --au-material-bg-strong: var(--au-color-bg-overlay);
+    --au-material-bg-strong: var(--au-material-bg);
     --au-material-bg-subtle: var(--au-color-bg-soft);
     --au-material-border: var(--au-color-border);
     --au-material-blur: 0px;
@@ -173,19 +137,16 @@
   }
 }
 
+/* 高对比模式只额外提高强边框，不重复定义材质表面。 */
 @media (prefers-contrast: more) {
   :root,
-  :root[data-au-material],
+  [data-au-theme],
   [data-au-material] {
-    --au-material-bg: var(--au-color-bg-overlay);
-    --au-material-bg-strong: var(--au-color-bg-overlay);
-    --au-material-bg-subtle: var(--au-color-bg-soft);
-    --au-material-border: var(--au-color-border);
     --au-material-border-strong: var(--au-color-text-secondary);
-    --au-material-blur: 0px;
   }
 }
 
+/* 减少动态效果时保留状态变化，但移除可感知的过渡时长。 */
 @media (prefers-reduced-motion: reduce) {
   :root {
     --au-transition-duration: 0.01ms;
