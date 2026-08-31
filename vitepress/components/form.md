@@ -11,8 +11,8 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 ## 基础用法
 
 <DemoBlock
-  title="字段校验"
-  description="字段变化与失焦可触发不同规则，提交时统一验证，重置恢复组件挂载时的初始值。"
+  title="基础表单校验"
+  description="名称和日期为必填项；失焦或选择日期时执行字段校验，点击保存执行整表校验，重置会清除校验状态。"
   :source="formBasicSource"
   default-expanded
 >

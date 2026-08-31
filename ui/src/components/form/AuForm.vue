@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import { computed, provide, ref, watch } from 'vue';
-import { FORM_CONTEXT_KEY } from './form-context.js';
+import { computed, provide, ref, unref, watch } from 'vue';
+import { getFieldValue, getRulesByPath, validateRules } from './form-validation.js';
 
 defineOptions({ inheritAttrs: false });
 
@@ -81,7 +81,11 @@ function normalizeProp(prop) {
 }
 
 async function validate(callback) {
-  const result = await validateFields(getFields());
+  const targetFields = getFields();
+  const ruleProps = Object.keys(props.rules || {});
+  const result = targetFields.length === 0 && ruleProps.length > 0
+    ? await validateModelRules(ruleProps)
+    : await validateFields(targetFields);
   callback?.(result.valid, result.errors);
   return result.valid;
 }
@@ -93,16 +97,36 @@ async function validateField(fieldProps, callback) {
 }
 
 async function validateFields(targetFields) {
-  const entries = await Promise.all(targetFields.map(async (field) => {
+  const results = await Promise.all(targetFields.map(async (field) => {
     const valid = await field.validate('');
-    return [normalizeProp(field.prop), valid ? '' : field.errorMessage.value];
+    return {
+      prop: normalizeProp(field.prop),
+      valid,
+      message: valid ? '' : unref(field.errorMessage) || '字段校验失败',
+    };
   }));
-  const errors = Object.fromEntries(entries.filter(([, message]) => message));
-  const valid = Object.keys(errors).length === 0;
+  const errors = Object.fromEntries(
+    results.filter((result) => !result.valid).map((result) => [result.prop, result.message]),
+  );
+  const valid = results.every((result) => result.valid);
   if (!valid && props.scrollToError) {
     scrollToField(Object.keys(errors)[0], props.scrollIntoViewOptions);
   }
   return { valid, errors };
+}
+
+async function validateModelRules(ruleProps) {
+  const entries = await Promise.all(ruleProps.map(async (prop) => {
+    const message = await validateRules(
+      getFieldValue(props.model, prop),
+      getRulesByPath(props.rules, prop),
+      props.model,
+    );
+    emit('validate', prop, !message, message);
+    return [prop, message];
+  }));
+  const errors = Object.fromEntries(entries.filter(([, message]) => message));
+  return { valid: Object.keys(errors).length === 0, errors };
 }
 
 function resetFields(fieldProps) {
@@ -124,7 +148,7 @@ function getField(prop) {
   return getFields(prop)[0];
 }
 
-provide(FORM_CONTEXT_KEY, {
+provide('aurora-ui.form-context', {
   model: computed(() => props.model),
   rules: computed(() => props.rules),
   labelPosition: computed(() => props.labelPosition),

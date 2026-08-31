@@ -69,13 +69,13 @@ import {
   inject,
   onBeforeUnmount,
   onMounted,
+  onUpdated,
   ref,
   useSlots,
   watch,
 } from 'vue';
 import { IconAlertCircle, IconCircleCheck, IconLoader2 } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
-import { FORM_CONTEXT_KEY } from './form-context.js';
 import {
   cloneFieldValue,
   getFieldValue,
@@ -117,7 +117,7 @@ const props = defineProps({
 });
 
 const slots = useSlots();
-const form = inject(FORM_CONTEXT_KEY, null);
+const form = inject('aurora-ui.form-context', null);
 const element = ref(null);
 const errorMessage = ref('');
 const validationState = ref('');
@@ -227,7 +227,14 @@ watch(
   { deep: true },
 );
 
-onMounted(() => form?.registerField(fieldContext));
+function ensureRegistered() {
+  form?.registerField(fieldContext);
+}
+
+// 重复注册只会覆盖同一 Map 项，可修复父表单热更新后字段表重建的情况。
+ensureRegistered();
+onMounted(ensureRegistered);
+onUpdated(ensureRegistered);
 onBeforeUnmount(() => form?.unregisterField(fieldId));
 
 defineExpose(fieldContext);
