@@ -13,10 +13,21 @@
         <span>日期时间</span>
         <AuDateTimePicker v-model="dateTime" :minute-step="5" :min-date="minimumDateTime" />
       </label>
+      <label class="date-picker-demo__range">
+        <span>日期范围</span>
+        <AuDatePicker
+          v-model="dateRange"
+          type="daterange"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :min-date="minimumDate"
+        />
+      </label>
     </div>
 
     <p>日期：{{ date || '未选择' }}</p>
     <p>日期时间：{{ dateTime || '未选择' }}</p>
+    <p>日期范围：{{ dateRange.length ? dateRange.join(' 至 ') : '未选择' }}</p>
   </div>
 </template>
 
@@ -26,6 +37,7 @@ import { AuDatePicker, AuDateTimePicker } from 'aurora-ui';
 
 const date = ref('2026-08-28');
 const dateTime = ref('2026-08-30 14:30:00');
+const dateRange = ref(['2026-08-18', '2026-08-26']);
 const minimumDate = '2026-08-01';
 const minimumDateTime = '2026-08-01 09:00:00';
 
@@ -52,6 +64,10 @@ function disableWeekends(dateValue) {
   gap: 6px;
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
+}
+
+.date-picker-demo__range {
+  grid-column: 1 / -1;
 }
 
 .date-picker-demo p {

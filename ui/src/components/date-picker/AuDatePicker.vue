@@ -1,5 +1,53 @@
 <template>
+  <AuDateRangePicker
+    v-if="type === 'daterange'"
+    ref="rangePickerRef"
+    v-bind="$attrs"
+    :model-value="Array.isArray(modelValue) ? modelValue : []"
+    :value-type="valueType"
+    :value-format="valueFormat"
+    :display-format="displayFormat"
+    :size="size"
+    :start-placeholder="startPlaceholder"
+    :end-placeholder="endPlaceholder"
+    :range-separator="rangeSeparator"
+    :disabled="disabled"
+    :readonly="readonly"
+    :editable="editable"
+    :clearable="clearable"
+    :invalid="invalid"
+    :locale="locale"
+    :first-day-of-week="firstDayOfWeek"
+    :min-date="minDate"
+    :max-date="maxDate"
+    :disabled-date="disabledDate"
+    :default-value="defaultValue"
+    :show-adjacent-dates="showAdjacentDates"
+    :show-today="showToday"
+    :unlink-panels="unlinkPanels"
+    :placement="placement"
+    :teleported="teleported"
+    :append-to="appendTo"
+    :z-index="zIndex"
+    :aria-label="ariaLabel === '选择日期' ? '选择日期范围' : ariaLabel"
+    :start-aria-label="startAriaLabel"
+    :end-aria-label="endAriaLabel"
+    @update:model-value="emit('update:modelValue', $event)"
+    @change="forwardChange"
+    @clear="emit('clear', $event)"
+    @focus="emit('focus', $event)"
+    @blur="emit('blur', $event)"
+    @visible-change="emit('visible-change', $event)"
+    @invalid-input="forwardInvalidInput"
+    @panel-change="emit('panel-change', $event)"
+    @calendar-change="emit('calendar-change', $event)"
+  >
+    <template v-if="$slots.footer" #footer="slotProps">
+      <slot name="footer" v-bind="slotProps"></slot>
+    </template>
+  </AuDateRangePicker>
   <AuPopover
+    v-else
     ref="popoverRef"
     v-model="visible"
     class="au-date-picker"
@@ -63,6 +111,7 @@
       :min-date="minDate"
       :max-date="maxDate"
       :disabled-date="disabledDate"
+      :default-date="Array.isArray(defaultValue) ? defaultValue[0] : defaultValue"
       :show-adjacent-dates="showAdjacentDates"
       :show-today="showToday"
       surface
@@ -79,6 +128,7 @@ import { IconCalendar } from '@tabler/icons-vue';
 import { AuInput } from '../input/index.js';
 import { AuPopover } from '../popover/index.js';
 import AuDatePickerPane from './AuDatePickerPane.vue';
+import AuDateRangePicker from './AuDateRangePicker.vue';
 import {
   cloneDate,
   emptyPickerValue,
@@ -91,7 +141,12 @@ import {
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
-  modelValue: { type: [Date, String, Number], default: '' },
+  modelValue: { type: [Date, String, Number, Array], default: '' },
+  type: {
+    type: String,
+    default: 'date',
+    validator: (value) => ['date', 'daterange'].includes(value),
+  },
   valueType: {
     type: String,
     default: 'auto',
@@ -105,6 +160,9 @@ const props = defineProps({
     validator: (value) => ['small', 'default', 'large'].includes(value),
   },
   placeholder: { type: String, default: '选择日期' },
+  startPlaceholder: { type: String, default: '开始日期' },
+  endPlaceholder: { type: String, default: '结束日期' },
+  rangeSeparator: { type: String, default: '至' },
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
   editable: { type: Boolean, default: true },
@@ -119,13 +177,17 @@ const props = defineProps({
   minDate: { type: [Date, String, Number], default: null },
   maxDate: { type: [Date, String, Number], default: null },
   disabledDate: { type: Function, default: null },
+  defaultValue: { type: [Array, Date, String, Number], default: null },
   showAdjacentDates: { type: Boolean, default: true },
   showToday: { type: Boolean, default: true },
+  unlinkPanels: { type: Boolean, default: false },
   placement: { type: String, default: 'bottom-start' },
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1200 },
   ariaLabel: { type: String, default: '选择日期' },
+  startAriaLabel: { type: String, default: '开始日期' },
+  endAriaLabel: { type: String, default: '结束日期' },
 });
 
 const emit = defineEmits([
@@ -137,9 +199,11 @@ const emit = defineEmits([
   'visible-change',
   'invalid-input',
   'panel-change',
+  'calendar-change',
 ]);
 const attrs = useAttrs();
 const popoverRef = ref(null);
+const rangePickerRef = ref(null);
 const inputRef = ref(null);
 const paneRef = ref(null);
 const visible = ref(false);
@@ -166,11 +230,19 @@ const minDateValue = computed(() => parseDateValue(props.minDate, props.valueFor
 const maxDateValue = computed(() => parseDateValue(props.maxDate, props.valueFormat));
 
 function open() {
+  if (props.type === 'daterange') {
+    rangePickerRef.value?.open();
+    return;
+  }
   if (props.disabled || props.readonly) return;
   popoverRef.value?.open();
 }
 
 function close(reason = 'api') {
+  if (props.type === 'daterange') {
+    rangePickerRef.value?.close(reason);
+    return;
+  }
   popoverRef.value?.close(reason);
 }
 
@@ -278,11 +350,21 @@ function resetInputText() {
 }
 
 function focus(options) {
-  inputRef.value?.focus(options);
+  if (props.type === 'daterange') rangePickerRef.value?.focus(options);
+  else inputRef.value?.focus(options);
 }
 
 function blur() {
-  inputRef.value?.blur();
+  if (props.type === 'daterange') rangePickerRef.value?.blur();
+  else inputRef.value?.blur();
+}
+
+function forwardChange(...args) {
+  emit('change', ...args);
+}
+
+function forwardInvalidInput(...args) {
+  emit('invalid-input', ...args);
 }
 
 watch(
@@ -295,7 +377,7 @@ watch(
 
 watch(visible, (value) => emit('visible-change', value));
 
-defineExpose({ focus, blur, open, close, inputRef, paneRef, popoverRef });
+defineExpose({ focus, blur, open, close, inputRef, paneRef, popoverRef, rangePickerRef });
 </script>
 
 <style scoped>

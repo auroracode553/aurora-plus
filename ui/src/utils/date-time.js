@@ -132,6 +132,41 @@ export function toPickerValue(date, valueType, format, currentValue) {
   return formatDate(date, format);
 }
 
+export function parseDateRange(value, format = 'YYYY-MM-DD') {
+  if (!Array.isArray(value)) return [null, null];
+  return [
+    parseDateValue(value[0], format),
+    parseDateValue(value[1], format),
+  ];
+}
+
+export function toPickerRange(dates, valueType, format, currentValue) {
+  if (!Array.isArray(dates) || !isValidDate(dates[0]) || !isValidDate(dates[1])) return [];
+  const currentRange = Array.isArray(currentValue) ? currentValue : [];
+  return dates.map((date, index) => toPickerValue(
+    date,
+    valueType,
+    format,
+    currentRange[index],
+  ));
+}
+
+export function orderDateRange(left, right) {
+  if (!isValidDate(left) || !isValidDate(right)) return [cloneDate(left), cloneDate(right)];
+  return left <= right
+    ? [cloneDate(left), cloneDate(right)]
+    : [cloneDate(right), cloneDate(left)];
+}
+
+export function isDateInRange(value, start, end) {
+  const day = startOfDay(value);
+  const startDay = startOfDay(start);
+  const endDay = startOfDay(end);
+  if (!day || !startDay || !endDay) return false;
+  const [lower, upper] = startDay <= endDay ? [startDay, endDay] : [endDay, startDay];
+  return day >= lower && day <= upper;
+}
+
 export function emptyPickerValue(valueType, currentValue) {
   return resolveValueType(currentValue, valueType) === 'string' ? '' : null;
 }

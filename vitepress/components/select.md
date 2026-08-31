@@ -22,6 +22,7 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 
 - 选项较少且互斥时使用 `AuSelect`；需要执行命令的操作集合使用 `AuDropdown`。
 - 通过默认插槽传入 `option` 或 `optgroup`；组件会将这些声明转换为统一风格的选项列表。
+- 需要根据最长选项自适应宽度时使用 `fit-content`，并通过 `max-width` 限制最大宽度；超过限制后才会省略文字。
 - 字段名称使用可见的 `label`，错误状态同时提供文字说明。
 - 键盘可使用方向键、`Home`、`End` 导航，使用 `Enter` 或空格确认，使用 `Escape` 关闭。
 
@@ -35,6 +36,8 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 | `size` | 尺寸 | `small / default / large` | `default` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `invalid` | 是否显示错误态 | `boolean` | `false` |
+| `fitContent` | 是否根据全部可见选项中的最长内容自适应宽度 | `boolean` | `false` |
+| `maxWidth` | 自适应模式的最大宽度，数字会转换为 px | `string / number` | `320` |
 | `teleported` | 是否将选项弹层传送到目标容器 | `boolean` | `true` |
 | `appendTo` | 选项弹层挂载目标 | `string / HTMLElement` | `'body'` |
 | `zIndex` | 选项弹层层级 | `number` | `1200` |

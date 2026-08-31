@@ -9,10 +9,11 @@
         'is-disabled': disabled,
         'is-invalid': invalid,
         'is-open': visible,
+        'is-fit-content': fitContent,
       },
       $attrs.class,
     ]"
-    :style="$attrs.style"
+    :style="rootStyle"
   >
     <button
       ref="selectRef"
@@ -36,6 +37,16 @@
       <span class="au-select__value">{{ selectedLabel }}</span>
       <AuIcon class="au-select__icon" :icon="IconChevronDown" aria-hidden="true" />
     </button>
+
+    <span v-if="fitContent" class="au-select__sizer" aria-hidden="true">
+      <span
+        v-for="(label, index) in contentSizeLabels"
+        :key="`${index}-${label}`"
+        class="au-select__sizer-label"
+      >
+        {{ label }}
+      </span>
+    </span>
 
     <input
       v-if="$attrs.name"
@@ -140,6 +151,8 @@ const props = defineProps({
   },
   disabled: { type: Boolean, default: false },
   invalid: { type: Boolean, default: false },
+  fitContent: { type: Boolean, default: false },
+  maxWidth: { type: [String, Number], default: 320 },
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1200 },
@@ -176,6 +189,10 @@ const flatOptions = computed(() => optionGroups.value.flatMap((group) => group.o
 const visibleOptionGroups = computed(() => optionGroups.value
   .map((group) => ({ ...group, options: group.options.filter((option) => !option.hidden) }))
   .filter((group) => group.options.length > 0));
+const contentSizeLabels = computed(() => visibleOptionGroups.value.flatMap((group) => [
+  ...(group.label ? [group.label] : []),
+  ...group.options.map((option) => option.label),
+]));
 const selectedOption = computed(() => flatOptions.value.find(
   (option) => isSameSelectValue(option.value, props.modelValue),
 ));
@@ -190,6 +207,11 @@ const activeDescendantId = computed(() => (
     : undefined
 ));
 const listboxAriaLabel = computed(() => attrs['aria-label'] || '选择选项');
+const rootStyle = computed(() => (
+  props.fitContent
+    ? [attrs.style, { maxWidth: toCssLength(props.maxWidth) }]
+    : attrs.style
+));
 const listboxStyle = computed(() => ({
   left: `${listboxPosition.value.x}px`,
   top: `${listboxPosition.value.y}px`,
@@ -197,6 +219,11 @@ const listboxStyle = computed(() => ({
   maxHeight: `${listboxMaxHeight.value}px`,
   zIndex: props.zIndex,
 }));
+
+function toCssLength(value) {
+  if (typeof value === 'number') return `${Math.max(value, 0)}px`;
+  return String(value || '').trim() || '320px';
+}
 
 /** 表单属性交给隐藏字段，其余未声明属性作用于可交互触发器。 */
 function getControlAttrs() {
@@ -521,6 +548,18 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   font-size: var(--au-font-size-base);
 }
 
+.au-select.is-fit-content {
+  display: inline-grid;
+  width: fit-content;
+  min-width: 80px;
+  max-width: 100%;
+}
+
+.au-select.is-fit-content > .au-select__control,
+.au-select.is-fit-content > .au-select__sizer {
+  grid-area: 1 / 1;
+}
+
 .au-select:hover:not(.is-disabled),
 .au-select.is-open:not(.is-disabled) {
   border-color: var(--au-material-border-strong);
@@ -587,6 +626,33 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* 由所有可见内容参与网格固有尺寸计算，并预留列表勾选标记的空间。 */
+.au-select__sizer {
+  display: grid;
+  grid-template-columns: max-content 1em;
+  padding: 0 20px 0 12px;
+  gap: 8px;
+  overflow: hidden;
+  visibility: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.au-select__sizer::after {
+  width: 1em;
+  content: '';
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.au-select__sizer-label {
+  min-width: 0;
+  overflow: hidden;
+  grid-column: 1;
+  grid-row: 1;
+  text-overflow: ellipsis;
 }
 
 .au-select__icon {

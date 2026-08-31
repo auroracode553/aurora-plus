@@ -117,12 +117,15 @@ export default defineConfig({
         items: [
           { text: 'Panel 通用面板', link: '/components/panel' },
           { text: 'Card 卡片', link: '/components/card' },
+          { text: 'ImagePreview 图片预览', link: '/components/image-preview' },
           { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' },
+          { text: 'VirtualTable 虚拟表格', link: '/components/virtual-table' },
         ],
       },
       {
         text: 'Navigation 导航',
         items: [
+          { text: 'Pagination 分页', link: '/components/pagination' },
           { text: 'Dropdown 下拉菜单', link: '/components/dropdown' },
           { text: 'Menu 导航菜单', link: '/components/menu' },
           { text: 'MenuBar 应用菜单栏', link: '/components/menu-bar' },
@@ -136,6 +139,7 @@ export default defineConfig({
         text: 'Feedback 反馈组件',
         items: [
           { text: 'Popover 弹出层', link: '/components/popover' },
+          { text: 'Popconfirm 气泡确认框', link: '/components/popconfirm' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
           { text: 'Dialog 对话框', link: '/components/dialog' },
           { text: 'Message 消息提示', link: '/components/message' },

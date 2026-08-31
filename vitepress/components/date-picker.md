@@ -12,7 +12,7 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 
 <DemoBlock
   title="日期与日期时间"
-  description="面板仅在点击输入控件或使用键盘打开时显示；日期选择即时提交，日期时间在点击确定后提交。"
+  description="日期即时提交，日期范围在选完起止日期后提交，日期时间在点击确定后提交。"
   :source="datePickerBasicSource"
   default-expanded
 >
@@ -27,6 +27,7 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 - `valueType="auto"` 会保留已有值的类型：`Date` 继续回传 `Date`，时间戳继续回传时间戳，其余情况回传字符串。也可显式指定 `string`、`date` 或 `timestamp`。
 - `valueFormat` 控制字符串模型格式，`displayFormat` 只控制输入框显示与手动输入格式。
 - `disabledDate(date)` 应返回布尔值；返回 `true` 的日期不可选择。
+- 使用 `type="daterange"` 时，模型为长度为 2 的数组；未完成第二次选择前仅触发 `calendar-change`，不会提交半成品模型。
 
 ## DatePicker API
 
@@ -34,12 +35,15 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `modelValue` | 当前日期 | `string / Date / number` | `''` |
+| `modelValue` | 当前日期；范围模式为二元数组 | `string / Date / number / array` | `''` |
+| `type` | 单日期或日期范围 | `date / daterange` | `date` |
 | `valueType` | 输出类型 | `auto / string / date / timestamp` | `auto` |
 | `valueFormat` | 字符串模型格式 | `string` | `YYYY-MM-DD` |
 | `displayFormat` | 输入框显示与解析格式 | `string` | `YYYY-MM-DD` |
 | `size` | 尺寸 | `small / default / large` | `default` |
 | `placeholder` | 占位文字 | `string` | `选择日期` |
+| `startPlaceholder` / `endPlaceholder` | 范围模式起止占位文字 | `string` | `开始日期 / 结束日期` |
+| `rangeSeparator` | 范围输入分隔文字 | `string` | `至` |
 | `disabled` / `readonly` | 禁用 / 只读 | `boolean` | `false` |
 | `editable` | 是否允许键盘输入 | `boolean` | `true` |
 | `clearable` | 是否允许清空；有值时清除按钮原位替换日期图标 | `boolean` | `true` |
@@ -48,8 +52,10 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | `firstDayOfWeek` | 每周起始日，`0` 为周日 | `number` | `1` |
 | `minDate` / `maxDate` | 日期边界 | `string / Date / number` | `null` |
 | `disabledDate` | 日期禁用函数 | `(date) => boolean` | `null` |
+| `defaultValue` | 无值时默认展示日期；范围可传数组 | `string / Date / number / array` | `null` |
 | `showAdjacentDates` | 是否显示相邻月份日期 | `boolean` | `true` |
 | `showToday` | 是否显示“今天”操作 | `boolean` | `true` |
+| `unlinkPanels` | 范围模式下两个面板是否独立切月 | `boolean` | `false` |
 | `placement` | 浮层方位 | `string` | `bottom-start` |
 | `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string \| Element / number` | `true / body / 1200` |
 | `ariaLabel` | 控件无障碍名称 | `string` | `选择日期` |
@@ -67,10 +73,13 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | `visible-change` | 浮层显隐变化 | `(visible)` |
 | `invalid-input` | 手动输入无法解析或不可用 | `(text, event)` |
 | `panel-change` | 浏览月份变化 | `(viewDate)` |
+| `calendar-change` | 范围选择草稿变化 | `([start, end])` |
 
 ### Exposes
 
 `focus(options?)`、`blur()`、`open()`、`close(reason?)`，以及 `inputRef`、`paneRef`、`popoverRef`。
+
+范围模式也可直接使用 `AuDateRangePicker`，其属性和事件与 `AuDatePicker type="daterange"` 相同，并额外暴露左右面板与两个输入框引用。
 
 ## DatePickerPane API
 

@@ -13,6 +13,7 @@
       <div class="au-date-picker-pane__heading" aria-live="polite">{{ monthLabel }}</div>
       <div class="au-date-picker-pane__navigation" aria-label="月份导航">
         <button
+          v-if="showPreviousMonth"
           class="au-date-picker-pane__nav au-focus-ring"
           type="button"
           aria-label="上个月"
@@ -21,6 +22,7 @@
           <AuIcon :icon="IconChevronLeft" />
         </button>
         <button
+          v-if="showNextMonth"
           class="au-date-picker-pane__nav au-focus-ring"
           type="button"
           aria-label="下个月"
@@ -50,7 +52,10 @@
           class="au-date-picker-pane__day au-focus-ring"
           :class="{
             'is-adjacent': !day.isCurrentMonth,
-            'is-selected': day.isSelected,
+            'is-selected': day.isSelected || isRangeEndpoint(day.date),
+            'is-range-start': isRangeStart(day.date),
+            'is-range-end': isRangeEnd(day.date),
+            'is-in-range': isInRange(day.date),
             'is-today': day.isToday,
           }"
           type="button"
@@ -59,9 +64,11 @@
           :disabled="isDisabled(day.date)"
           :tabindex="day.key === focusableDateKey ? 0 : -1"
           :aria-label="formatAccessibleDate(day.date)"
-          :aria-selected="day.isSelected ? 'true' : 'false'"
+          :aria-selected="day.isSelected || isRangeEndpoint(day.date) ? 'true' : 'false'"
           :aria-current="day.isToday ? 'date' : undefined"
           @focus="setActiveDate(day.date, false)"
+          @pointerenter="emit('hover', cloneDate(day.date))"
+          @pointerleave="emit('hover', null)"
           @click="selectDate(day.date, $event)"
           @keydown="handleDayKeydown($event, day.date)"
         >
@@ -100,6 +107,7 @@ import {
   getMonthLabel,
   getWeekdayLabels,
   isDayDisabled,
+  isDateInRange,
   isSameDay,
   parseDateValue,
   toPickerValue,
@@ -125,11 +133,17 @@ const props = defineProps({
   defaultDate: { type: [Date, String, Number], default: null },
   showAdjacentDates: { type: Boolean, default: true },
   showToday: { type: Boolean, default: true },
+  showPreviousMonth: { type: Boolean, default: true },
+  showNextMonth: { type: Boolean, default: true },
+  rangeStart: { type: [Date, String, Number], default: null },
+  rangeEnd: { type: [Date, String, Number], default: null },
+  hoverDate: { type: [Date, String, Number], default: null },
+  rangeSelecting: { type: Boolean, default: false },
   surface: { type: Boolean, default: true },
   ariaLabel: { type: String, default: '选择日期' },
 });
 
-const emit = defineEmits(['update:modelValue', 'change', 'select', 'panel-change']);
+const emit = defineEmits(['update:modelValue', 'change', 'select', 'panel-change', 'hover']);
 const paneRef = ref(null);
 const today = new Date();
 const initialDate = resolveInitialDate();
@@ -139,6 +153,11 @@ const viewDate = ref(new Date(initialDate.getFullYear(), initialDate.getMonth(),
 
 const minDateValue = computed(() => parseDateValue(props.minDate, props.valueFormat));
 const maxDateValue = computed(() => parseDateValue(props.maxDate, props.valueFormat));
+const rangeStartValue = computed(() => parseDateValue(props.rangeStart, props.valueFormat));
+const committedRangeEndValue = computed(() => parseDateValue(props.rangeEnd, props.valueFormat));
+const hoverDateValue = computed(() => parseDateValue(props.hoverDate, props.valueFormat));
+const displayRangeEndValue = computed(() => committedRangeEndValue.value
+  || (props.rangeSelecting ? hoverDateValue.value : null));
 const monthLabel = computed(() => getMonthLabel(viewDate.value, props.locale));
 const weekdayLabels = computed(() => getWeekdayLabels(props.locale, props.firstDayOfWeek));
 const calendarDays = computed(() => buildCalendarDays(
@@ -176,6 +195,31 @@ function formatAccessibleDate(date) {
     day: 'numeric',
     weekday: 'long',
   }).format(date);
+}
+
+function isRangeStart(date) {
+  const start = rangeStartValue.value;
+  const end = displayRangeEndValue.value;
+  if (!start) return false;
+  if (end && end < start) return isSameDay(date, end);
+  return isSameDay(date, start);
+}
+
+function isRangeEnd(date) {
+  const start = rangeStartValue.value;
+  const end = displayRangeEndValue.value;
+  if (!end) return false;
+  if (start && end < start) return isSameDay(date, start);
+  return isSameDay(date, end);
+}
+
+function isRangeEndpoint(date) {
+  return isRangeStart(date) || isRangeEnd(date);
+}
+
+function isInRange(date) {
+  return isDateInRange(date, rangeStartValue.value, displayRangeEndValue.value)
+    && !isRangeEndpoint(date);
 }
 
 function selectDate(date, sourceEvent = null) {
@@ -275,7 +319,8 @@ function focus() {
 function showDate(value) {
   const date = parseDateValue(value, props.valueFormat);
   if (!date) return;
-  setActiveDate(date);
+  activeDate.value = cloneDate(date);
+  viewDate.value = new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
 watch(
@@ -428,6 +473,18 @@ defineExpose({ focus, showDate, paneRef });
 .au-date-picker-pane__day.is-today:not(.is-selected) {
   color: var(--au-color-primary);
   font-weight: var(--au-font-weight-semibold);
+}
+
+.au-date-picker-pane__day.is-in-range {
+  border-radius: var(--au-radius-small);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
+}
+
+.au-date-picker-pane__day.is-range-start,
+.au-date-picker-pane__day.is-range-end {
+  color: #ffffff;
+  background: var(--au-color-primary);
 }
 
 .au-date-picker-pane__day.is-today:not(.is-selected)::after {

@@ -38,8 +38,20 @@ const props = defineProps({
   inline: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   showMessage: { type: Boolean, default: true },
+  inlineMessage: { type: Boolean, default: false },
+  statusIcon: { type: Boolean, default: false },
+  hideRequiredAsterisk: { type: Boolean, default: false },
+  requireAsteriskPosition: {
+    type: String,
+    default: 'left',
+    validator: (value) => ['left', 'right'].includes(value),
+  },
   validateOnRuleChange: { type: Boolean, default: true },
   scrollToError: { type: Boolean, default: false },
+  scrollIntoViewOptions: {
+    type: [Object, Boolean],
+    default: () => ({ block: 'center', behavior: 'smooth' }),
+  },
 });
 
 const emit = defineEmits(['validate', 'submit']);
@@ -56,8 +68,16 @@ function unregisterField(fieldId) {
 
 function getFields(fieldProps) {
   if (fieldProps == null) return [...fields.values()];
-  const requested = new Set(Array.isArray(fieldProps) ? fieldProps : [fieldProps]);
-  return [...fields.values()].filter((field) => requested.has(field.prop));
+  const registered = [...fields.values()];
+  const isRegisteredPath = Array.isArray(fieldProps)
+    && registered.some((field) => normalizeProp(field.prop) === normalizeProp(fieldProps));
+  const requestedValues = Array.isArray(fieldProps) && !isRegisteredPath ? fieldProps : [fieldProps];
+  const requested = new Set(requestedValues.map(normalizeProp));
+  return registered.filter((field) => requested.has(normalizeProp(field.prop)));
+}
+
+function normalizeProp(prop) {
+  return Array.isArray(prop) ? prop.join('.') : String(prop || '');
 }
 
 async function validate(callback) {
@@ -75,11 +95,13 @@ async function validateField(fieldProps, callback) {
 async function validateFields(targetFields) {
   const entries = await Promise.all(targetFields.map(async (field) => {
     const valid = await field.validate('');
-    return [field.prop, valid ? '' : field.errorMessage.value];
+    return [normalizeProp(field.prop), valid ? '' : field.errorMessage.value];
   }));
   const errors = Object.fromEntries(entries.filter(([, message]) => message));
   const valid = Object.keys(errors).length === 0;
-  if (!valid && props.scrollToError) scrollToField(Object.keys(errors)[0]);
+  if (!valid && props.scrollToError) {
+    scrollToField(Object.keys(errors)[0], props.scrollIntoViewOptions);
+  }
   return { valid, errors };
 }
 
@@ -92,7 +114,14 @@ function clearValidate(fieldProps) {
 }
 
 function scrollToField(prop, options = { block: 'center', behavior: 'smooth' }) {
-  getFields(prop)[0]?.element.value?.scrollIntoView?.(options);
+  const element = getFields(prop)[0]?.element.value;
+  if (!element?.scrollIntoView) return;
+  if (options === false) element.scrollIntoView();
+  else element.scrollIntoView(options);
+}
+
+function getField(prop) {
+  return getFields(prop)[0];
 }
 
 provide(FORM_CONTEXT_KEY, {
@@ -103,6 +132,10 @@ provide(FORM_CONTEXT_KEY, {
   size: computed(() => props.size),
   disabled: computed(() => props.disabled),
   showMessage: computed(() => props.showMessage),
+  inlineMessage: computed(() => props.inlineMessage),
+  statusIcon: computed(() => props.statusIcon),
+  hideRequiredAsterisk: computed(() => props.hideRequiredAsterisk),
+  requireAsteriskPosition: computed(() => props.requireAsteriskPosition),
   registerField,
   unregisterField,
   notifyValidate(prop, valid, message) {
@@ -118,7 +151,16 @@ watch(
   { deep: true },
 );
 
-defineExpose({ validate, validateField, resetFields, clearValidate, scrollToField, formRef });
+defineExpose({
+  validate,
+  validateField,
+  resetFields,
+  clearValidate,
+  scrollToField,
+  getField,
+  fields,
+  formRef,
+});
 </script>
 
 <style scoped>

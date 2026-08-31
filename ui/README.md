@@ -14,7 +14,7 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 | `AuTextarea` | 支持尺寸、字数限制和缩放方向的多行输入框 |
 | `AuSelect` | 带统一选项弹层、键盘导航、禁用态和错误态的选择框 |
 | `AuTreeSelect` | 支持嵌套数据、搜索、展开与仅叶节点模式的树形选择 |
-| `AuDatePickerPane`、`AuDatePicker` | 独立日历面板与日期输入选择器 |
+| `AuDatePickerPane`、`AuDatePicker`、`AuDateRangePicker` | 独立日历面板、日期输入与日期范围选择器 |
 | `AuTimePicker`、`AuDateTimePicker` | 带确认草稿、步长和边界控制的时间与日期时间选择器 |
 | `AuForm`、`AuFormItem` | 表单布局、字段路径、规则校验与状态展示 |
 | `AuSlider` | 支持小数步进、连续拖动、键盘控制和数值格式化的单值滑块 |
@@ -27,12 +27,16 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 | `AuMenuList`、`AuMenuListItem` | 苹果式分组菜单与设置行 |
 | `AuPanel` | 仅提供表面、尺寸、滚动和区域插槽的通用面板 |
 | `AuPopover` | 支持任意内容、自动翻转和视口避让的锚点浮层 |
+| `AuPopconfirm` | 锚定触发元素的轻量确认气泡 |
+| `AuPagination` | 页码折叠、条数切换和跳页导航 |
 | `AuTabs` | 紧凑的受控标签页导航 |
 | `AuCard` | 卡片容器 |
 | `AuIcon` | 图标尺寸、颜色与无障碍外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
 | `AuDialog` | 模态对话框 |
 | `AuVirtualList` | 固定行高虚拟列表 |
+| `AuVirtualTable` | 列配置、固定列、排序和固定行高虚拟表格 |
+| `AuImagePreview` | 多图切换、缩放、拖拽与旋转图片预览器 |
 | `AuTree` | 支持虚拟滚动、选中与折叠的树形导航 |
 | `AuContextMenu` | 配置式右键菜单 |
 | `AuFloatingToolbar` | 锚点浮动工具条 |
