@@ -1,10 +1,11 @@
 <template>
   <div
-    class="au-input au-component"
+    class="au-input au-component au-field-shell au-field-shell--single-line au-focus-halo"
     :class="[
       `is-${size}`,
       {
         'is-disabled': disabled,
+        'au-disabled': disabled,
         'is-invalid': invalid,
       },
       $attrs.class,
@@ -19,7 +20,7 @@
 
     <input
       ref="inputRef"
-      class="au-input__control"
+      class="au-input__control au-control-reset"
       v-bind="getInputAttrs()"
       :value="inputValue"
       :type="type"
@@ -42,7 +43,7 @@
       </span>
       <span
         v-if="hasSuffixContent && !shouldReplaceSuffix"
-        class="au-input__suffix-content"
+        class="au-input__suffix-content au-inline-center"
         :class="{ 'au-input__replaceable-suffix': replaceSuffixOnClear }"
       >
         <slot name="suffix">
@@ -51,7 +52,7 @@
       </span>
       <button
         v-if="shouldRenderClear"
-        class="au-input__clear au-focus-ring"
+        class="au-input__clear au-action-control au-focus-ring"
         :class="{
           'is-visible': canClear,
           'is-replacement': shouldReplaceSuffix,
@@ -193,71 +194,26 @@ defineExpose({ focus, blur, select, inputRef });
 
 <style scoped>
 .au-input {
-  display: inline-flex;
   align-items: center;
-  width: 100%;
-  min-width: 0;
-  height: 30px;
   padding: 0 10px;
   gap: 7px;
-  border: 0.5px solid var(--au-material-border-emphasis);
-  border-radius: var(--au-radius-control);
-  color: var(--au-color-text-default);
-  background: var(--au-material-background-subtle);
-  font-size: 13px;
-  transition:
-    border-color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing),
-    box-shadow var(--au-transition-duration) var(--au-transition-timing);
 }
 
 .au-input.is-small {
-  height: 26px;
   padding-inline: 8px;
   gap: 6px;
-  border-radius: var(--au-radius-compact);
-  font-size: var(--au-font-size-small);
 }
 
 .au-input.is-large {
-  height: 36px;
   padding-inline: 12px;
   gap: 8px;
-  border-radius: var(--au-radius-control);
-  font-size: var(--au-font-size-base);
-}
-
-.au-input:focus-within:not(.is-disabled) {
-  border-color: color-mix(in srgb, var(--au-color-primary) 45%, transparent);
-  background: var(--au-material-background-subtle);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 8%, transparent);
-}
-
-.au-input.is-invalid {
-  border-color: var(--au-color-danger);
-}
-
-.au-input.is-invalid:focus-within {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-danger) 10%, transparent);
-}
-
-.au-input.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
 }
 
 .au-input__control {
   width: 100%;
   min-width: 0;
   height: 100%;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   line-height: normal;
-  appearance: none;
 }
 
 .au-input__control:disabled {
@@ -301,9 +257,6 @@ defineExpose({ focus, blur, select, inputRef });
 }
 
 .au-input__suffix-content {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   min-width: 0;
   flex: 0 1 auto;
 }
@@ -316,27 +269,20 @@ defineExpose({ focus, blur, select, inputRef });
 }
 
 .au-input__clear {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 20px;
   min-width: 20px;
   height: 20px;
   flex: 0 0 20px;
-  margin: 0;
   padding: 0;
   overflow: visible;
-  border: 0;
   border-radius: var(--au-radius-pill);
-  color: var(--au-color-text-secondary);
-  background: transparent;
   font-size: 14px;
-  cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transition:
     color var(--au-transition-duration) var(--au-transition-timing),
     background var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing),
     opacity var(--au-transition-duration) var(--au-transition-timing);
 }
 
@@ -363,26 +309,7 @@ defineExpose({ focus, blur, select, inputRef });
   opacity: 1;
 }
 
-.au-input__clear:hover:not(:disabled) {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
-}
-
 .au-input__clear:disabled {
   cursor: default;
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-input,
-  .au-input:focus-within:not(.is-disabled) {
-    background: var(--au-color-background-overlay);
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-input {
-    border-width: 1px;
-    border-color: var(--au-color-border-default);
-  }
 }
 </style>

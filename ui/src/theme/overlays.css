@@ -1,0 +1,61 @@
+/* 弹出层共用的表面、视口约束和进入/离开动效。 */
+.au-overlay-surface {
+  border: 1px solid var(--au-material-border);
+  border-radius: var(--au-radius-overlay);
+  color: var(--au-color-text-primary);
+}
+
+.au-floating-viewport {
+  max-width: calc(100vw - 16px);
+  max-height: calc(100vh - 16px);
+}
+
+.au-picker-footer {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-top: 1px solid var(--au-material-border);
+}
+
+.au-float-enter-from,
+.au-float-leave-to {
+  opacity: 0;
+  transform: translateY(-3px) scale(0.985);
+}
+
+:is(.is-top, .is-top-start, .is-top-end).au-float-enter-from,
+:is(.is-top, .is-top-start, .is-top-end).au-float-leave-to {
+  transform: translateY(3px) scale(0.985);
+}
+
+:is(.is-left, .is-left-start, .is-left-end).au-float-enter-from,
+:is(.is-left, .is-left-start, .is-left-end).au-float-leave-to {
+  transform: translateX(3px) scale(0.985);
+}
+
+:is(.is-right, .is-right-start, .is-right-end).au-float-enter-from,
+:is(.is-right, .is-right-start, .is-right-end).au-float-leave-to {
+  transform: translateX(-3px) scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-float-enter-from,
+  .au-float-leave-to {
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-overlay-surface {
+    border-color: var(--au-color-text-secondary);
+  }
+}
+
+@media (forced-colors: active) {
+  .au-overlay-surface,
+  .au-forced-surface {
+    border-color: CanvasText !important;
+    color: CanvasText !important;
+    background: Canvas !important;
+  }
+}

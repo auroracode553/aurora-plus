@@ -1,5 +1,10 @@
 @import './shadows.css';
 @import './effects.css';
+@import './utilities.css';
+@import './controls.css';
+@import './surfaces.css';
+@import './overlays.css';
+@import './menus.css';
 
 :root {
   color-scheme: light;

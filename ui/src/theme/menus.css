@@ -1,0 +1,105 @@
+/* 下拉菜单、上下文菜单和菜单栏面板的共享结构。 */
+.au-menu-surface {
+  user-select: none;
+  outline: none;
+}
+
+.au-menu-panel {
+  width: max-content;
+  min-width: min(190px, calc(100vw - 16px));
+  max-width: calc(100vw - 16px);
+  padding: 5px;
+  font-size: 13px;
+  font-weight: var(--au-font-weight-medium);
+}
+
+.au-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-width: 0;
+  min-height: 32px;
+  border: 0;
+  border-radius: var(--au-radius-control);
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing);
+}
+
+.au-menu-item:hover:not(:disabled),
+.au-menu-item:focus-visible,
+.au-menu-item.is-active {
+  color: var(--au-color-text-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
+  outline: none;
+}
+
+.au-menu-item:active:not(:disabled) {
+  background: color-mix(in srgb, var(--au-color-primary) 15%, transparent);
+  transition-duration: 0s;
+}
+
+.au-menu-item.is-danger:not(:disabled) {
+  color: var(--au-color-danger);
+}
+
+.au-menu-item:disabled {
+  color: var(--au-color-text-disabled);
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.au-menu-shortcut {
+  margin-left: auto;
+  font-size: var(--au-font-size-small);
+  white-space: nowrap;
+}
+
+.au-menu-separator {
+  height: 1px;
+  margin: 5px 4px;
+  background: var(--au-material-border-emphasis);
+}
+
+.au-menu-empty {
+  padding: 7px 9px;
+  color: var(--au-color-text-secondary);
+  font-size: var(--au-font-size-small);
+}
+
+.au-menu-submenu-host {
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  .au-component.au-menu-panel.au-menu-submenu-mobile {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-top: 2px;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-menu-separator {
+    background: var(--au-color-text-secondary);
+  }
+}
+
+@media (forced-colors: active) {
+  .au-menu-item:hover:not(:disabled),
+  .au-menu-item:focus-visible,
+  .au-menu-item.is-active {
+    color: HighlightText;
+    background: Highlight;
+  }
+}

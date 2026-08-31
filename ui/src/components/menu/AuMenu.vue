@@ -1,7 +1,7 @@
 <template>
   <ul
     ref="menuRef"
-    class="au-menu au-component"
+    class="au-menu au-component au-list-reset"
     :class="[`is-${mode}`, { 'is-collapsed': collapse && mode === 'vertical', 'is-disabled': disabled }]"
     role="menu"
     :aria-label="ariaLabel"
@@ -188,13 +188,10 @@ defineExpose({ focus, menuRef });
 .au-menu {
   display: flex;
   min-width: 0;
-  margin: 0;
-  padding: 0;
   gap: 4px;
   color: var(--au-color-text-default);
   background: transparent;
   font-size: var(--au-font-size-base);
-  list-style: none;
 }
 
 .au-menu.is-vertical {

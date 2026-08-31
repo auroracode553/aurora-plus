@@ -1,7 +1,7 @@
 <template>
   <button
-    class="au-color-swatch au-component au-focus-ring"
-    :class="[`is-${size}`, { 'is-selected': selected, 'is-disabled': disabled }]"
+    class="au-color-swatch au-component au-control-reset au-focus-ring au-motion-reduce"
+    :class="[`is-${size}`, { 'is-selected': selected, 'is-disabled': disabled, 'au-disabled': disabled }]"
     type="button"
     :disabled="disabled"
     :aria-label="ariaLabel || undefined"
@@ -9,7 +9,7 @@
     :title="title || ariaLabel || undefined"
     @click="handleClick"
   >
-    <span class="au-color-swatch__color" :style="{ backgroundColor: color }" aria-hidden="true">
+    <span class="au-color-swatch__color au-grid-center" :style="{ backgroundColor: color }" aria-hidden="true">
       <AuIcon
         v-if="selected"
         class="au-color-swatch__check"
@@ -94,7 +94,6 @@ function clampChannel(value) {
   color: var(--au-color-text-primary);
   background: transparent;
   cursor: pointer;
-  appearance: none;
   transition:
     border-color var(--au-transition-duration) var(--au-transition-timing),
     background var(--au-transition-duration) var(--au-transition-timing),
@@ -124,14 +123,7 @@ function clampChannel(value) {
   transform: scale(0.95);
 }
 
-.au-color-swatch.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
-}
-
 .au-color-swatch__color {
-  display: grid;
-  place-items: center;
   width: auto;
   height: 22px;
   aspect-ratio: 1;
@@ -158,12 +150,6 @@ function clampChannel(value) {
   width: 100%;
   height: 100%;
   stroke-width: 2.5;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-color-swatch {
-    transition: none;
-  }
 }
 
 @media (prefers-contrast: more) {

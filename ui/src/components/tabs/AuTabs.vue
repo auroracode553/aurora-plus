@@ -10,7 +10,7 @@
     <button
       v-for="item in items"
       :key="resolveValue(item)"
-      class="au-tabs__tab au-focus-ring"
+      class="au-tabs__tab au-control-reset au-truncate au-focus-ring au-disabled-text"
       :class="{ 'is-active': isActive(item) }"
       type="button"
       role="tab"
@@ -100,21 +100,12 @@ function handleKeydown(event) {
 
 .au-tabs__tab {
   position: relative;
-  min-width: 0;
   max-width: 100%;
   min-height: 36px;
   padding: 0 10px;
-  overflow: hidden;
-  border: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
-  text-overflow: ellipsis;
-  white-space: nowrap;
   cursor: pointer;
-  appearance: none;
   transition: color var(--au-transition-duration) var(--au-transition-timing);
 }
 
@@ -161,20 +152,8 @@ function handleKeydown(event) {
   color: color-mix(in srgb, var(--au-color-primary) 78%, var(--au-color-text-primary));
 }
 
-.au-tabs__tab:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
-}
-
 .au-tabs__tab:focus-visible {
   outline-offset: -3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-tabs__tab,
-  .au-tabs__tab::after {
-    transition: none;
-  }
 }
 
 @media (prefers-contrast: more) {

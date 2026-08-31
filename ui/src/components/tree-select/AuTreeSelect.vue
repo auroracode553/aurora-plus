@@ -55,7 +55,7 @@
       />
     </template>
 
-    <section class="au-tree-select__popover au-component au-material-surface au-depth-overlay">
+    <section class="au-tree-select__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport">
       <AuTree
         ref="treeRef"
         class="au-tree-select__tree"
@@ -298,13 +298,8 @@ defineExpose({ focus, blur, open, close, inputRef, treeRef, popoverRef });
 .au-tree-select__popover {
   width: 100%;
   min-width: min(280px, calc(100vw - 16px));
-  max-width: calc(100vw - 16px);
   height: 240px;
-  max-height: calc(100vh - 16px);
   overflow: hidden;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
 }
 
 .au-tree-select__tree {
@@ -318,16 +313,4 @@ defineExpose({ focus, blur, open, close, inputRef, treeRef, popoverRef });
   }
 }
 
-@media (prefers-contrast: more) {
-  .au-tree-select__popover {
-    border-color: var(--au-color-text-secondary);
-  }
-}
-
-@media (forced-colors: active) {
-  .au-tree-select__popover {
-    border-color: CanvasText;
-    background: Canvas;
-  }
-}
 </style>

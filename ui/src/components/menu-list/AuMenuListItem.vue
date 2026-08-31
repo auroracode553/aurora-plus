@@ -1,6 +1,6 @@
 <template>
   <li
-    class="au-menu-list-item"
+    class="au-menu-list-item au-list-reset"
     :class="[
       `is-${density}`,
       {
@@ -17,7 +17,7 @@
   >
     <component
       :is="rowTag"
-      class="au-menu-list-item__row"
+      class="au-menu-list-item__row au-control-reset au-focus-ring au-forced-highlight au-motion-reduce au-motion-reduce-transform"
       v-bind="getRowAttrs()"
       :type="rowTag === 'button' ? 'button' : undefined"
       :href="rowTag === 'a' && !disabled ? href : undefined"
@@ -28,17 +28,17 @@
       :aria-current="selected ? ariaCurrent : undefined"
       @click="handleClick"
     >
-      <span v-if="$slots.leading || leadingIcon" class="au-menu-list-item__leading" aria-hidden="true">
+      <span v-if="$slots.leading || leadingIcon" class="au-menu-list-item__leading au-inline-center" aria-hidden="true">
         <slot name="leading" :disabled="disabled" :selected="selected" :tone="tone">
           <AuIcon :icon="leadingIcon" />
         </slot>
       </span>
 
       <span class="au-menu-list-item__content">
-        <span class="au-menu-list-item__title">
+        <span class="au-menu-list-item__title au-wrap-anywhere">
           <slot name="title"><slot>{{ title }}</slot></slot>
         </span>
-        <span v-if="$slots.description || description" class="au-menu-list-item__description">
+        <span v-if="$slots.description || description" class="au-menu-list-item__description au-wrap-anywhere">
           <slot name="description">{{ description }}</slot>
         </span>
       </span>
@@ -129,9 +129,6 @@ function handleClick(event) {
 .au-menu-list-item {
   position: relative;
   min-width: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .au-menu-list-item.has-divider:not(:last-child)::after {
@@ -155,16 +152,10 @@ function handleClick(event) {
   width: 100%;
   min-width: 0;
   min-height: 52px;
-  margin: 0;
   padding: 12px 16px;
   gap: 12px;
-  border: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   text-align: left;
   text-decoration: none;
-  appearance: none;
   transition:
     color var(--au-transition-duration) var(--au-transition-timing),
     background 100ms ease-out,
@@ -201,9 +192,6 @@ function handleClick(event) {
 }
 
 .au-menu-list-item__leading {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: auto;
   height: 30px;
   aspect-ratio: 1;
@@ -227,12 +215,6 @@ function handleClick(event) {
   flex-direction: column;
   justify-content: center;
   gap: 2px;
-}
-
-.au-menu-list-item__title,
-.au-menu-list-item__description {
-  min-width: 0;
-  overflow-wrap: anywhere;
 }
 
 .au-menu-list-item__title {
@@ -358,22 +340,11 @@ function handleClick(event) {
   font-size: var(--au-font-size-base);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-menu-list-item__row {
-    transition: none;
-    transform: none;
-  }
-}
-
 @media (forced-colors: active) {
   .au-menu-list-item.has-leading-tinted .au-menu-list-item__leading {
     border: 1px solid CanvasText;
     background: Canvas;
   }
 
-  .au-menu-list-item.is-interactive .au-menu-list-item__row:focus-visible {
-    color: HighlightText;
-    background: Highlight;
-  }
 }
 </style>

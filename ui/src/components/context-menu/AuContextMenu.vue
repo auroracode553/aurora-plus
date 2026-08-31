@@ -3,7 +3,7 @@
     <div
       v-if="visible"
       ref="menuRef"
-      class="au-context-menu au-component au-material-surface au-depth-overlay au-menu-surface"
+      class="au-context-menu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel"
       :style="menuStyle"
       role="menu"
       :aria-label="ariaLabel"
@@ -21,7 +21,7 @@
         >
           <AuTooltip v-for="item in section.items" :key="item.id" :content="item.label" placement="top">
             <button
-              class="au-context-menu__tool-button"
+              class="au-context-menu__tool-button au-grid-center au-disabled-text"
               :class="{ 'is-danger': item.danger }"
               type="button"
               role="menuitem"
@@ -47,8 +47,8 @@
             @click="selectItem(item)"
           >
             <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
-            <span class="au-context-menu__label">{{ item.label }}</span>
-            <span v-if="item.shortcut" class="au-context-menu__shortcut">{{ item.shortcut }}</span>
+            <span class="au-context-menu__label au-menu-label">{{ item.label }}</span>
+            <span v-if="item.shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ item.shortcut }}</span>
           </button>
         </template>
 
@@ -62,13 +62,13 @@
           @click="selectItem(resolveSectionItem(section))"
         >
           <AuIcon v-if="resolveSectionItem(section).icon" class="au-context-menu__item-icon" :icon="resolveSectionItem(section).icon" />
-          <span class="au-context-menu__label">{{ resolveSectionItem(section).label }}</span>
-          <span v-if="resolveSectionItem(section).shortcut" class="au-context-menu__shortcut">{{ resolveSectionItem(section).shortcut }}</span>
+          <span class="au-context-menu__label au-menu-label">{{ resolveSectionItem(section).label }}</span>
+          <span v-if="resolveSectionItem(section).shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ resolveSectionItem(section).shortcut }}</span>
         </button>
 
         <div
           v-else-if="section.type === 'submenu'"
-          class="au-context-menu__submenu-wrapper"
+          class="au-context-menu__submenu-wrapper au-menu-submenu-host"
           @mouseenter="showSubmenu(section.id)"
           @mouseleave="hideSubmenu"
         >
@@ -83,19 +83,19 @@
             @focus="showSubmenu(section.id)"
           >
             <AuIcon v-if="section.icon" class="au-context-menu__item-icon" :icon="section.icon" />
-            <span class="au-context-menu__label">{{ section.label }}</span>
+            <span class="au-context-menu__label au-menu-label">{{ section.label }}</span>
             <AuIcon class="au-context-menu__arrow" :icon="IconChevronRight" />
           </button>
 
           <div
             v-if="activeSubmenu === section.id"
-            class="au-context-submenu au-component au-material-surface au-depth-overlay au-menu-surface"
+            class="au-context-submenu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile"
             role="menu"
             @mouseenter="showSubmenu(section.id)"
             @mouseleave="hideSubmenu"
           >
             <template v-for="(item, itemIndex) in section.items" :key="item.id || itemIndex">
-              <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator"></div>
+              <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
               <button
                 v-else
                 class="au-context-menu__item au-menu-item"
@@ -106,14 +106,14 @@
                 @click="selectItem(item)"
               >
                 <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
-                <span class="au-context-menu__label">{{ item.label }}</span>
-                <span v-if="item.shortcut" class="au-context-menu__shortcut">{{ item.shortcut }}</span>
+                <span class="au-context-menu__label au-menu-label">{{ item.label }}</span>
+                <span v-if="item.shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ item.shortcut }}</span>
               </button>
             </template>
           </div>
         </div>
 
-        <div v-else-if="section.type === 'separator'" class="au-context-menu__separator"></div>
+        <div v-else-if="section.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
       </template>
     </div>
   </Teleport>
@@ -287,13 +287,6 @@ defineExpose({ close, menuRef, updatePosition });
 .au-context-menu,
 .au-context-submenu {
   position: fixed;
-  width: max-content;
-  min-width: min(190px, calc(100vw - 16px));
-  max-width: calc(100vw - 16px);
-  padding: 5px;
-  border-radius: var(--au-radius-overlay);
-  font-size: 13px;
-  font-weight: var(--au-font-weight-medium);
 }
 
 .au-context-menu__icon-row,
@@ -305,8 +298,6 @@ defineExpose({ close, menuRef, updatePosition });
 }
 
 .au-context-menu__tool-button {
-  display: grid;
-  place-items: center;
   width: 100%;
   height: 28px;
   padding: 0;
@@ -334,8 +325,6 @@ defineExpose({ close, menuRef, updatePosition });
 }
 
 .au-context-menu__tool-button:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
   opacity: 0.6;
 }
 
@@ -358,28 +347,10 @@ defineExpose({ close, menuRef, updatePosition });
   font-size: 14px;
 }
 
-.au-context-menu__label {
-  min-width: 0;
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.au-context-menu__item.has-submenu .au-context-menu__arrow,
-.au-context-menu__shortcut {
+.au-context-menu__item.has-submenu .au-context-menu__arrow {
   margin-left: auto;
   color: var(--au-color-text-secondary);
   font-size: 12px;
-}
-
-.au-context-menu__separator {
-  height: 1px;
-  margin: 5px 4px;
-  background: var(--au-material-border-emphasis);
-}
-
-.au-context-menu__submenu-wrapper {
-  position: relative;
 }
 
 .au-context-submenu {
@@ -387,17 +358,6 @@ defineExpose({ close, menuRef, updatePosition });
   top: -5px;
   left: calc(100% + 6px);
   min-width: min(200px, calc(100vw - 16px));
-}
-
-@media (max-width: 480px) {
-  .au-context-submenu {
-    position: static;
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    margin-top: 2px;
-    box-shadow: none;
-  }
 }
 
 </style>

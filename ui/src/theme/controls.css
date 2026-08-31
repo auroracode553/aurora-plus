@@ -1,0 +1,189 @@
+/* 表单外壳、选择控件与轻量操作按钮的共享状态。 */
+.au-disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.au-component.au-disabled:is(:disabled, .is-disabled, [aria-disabled='true']),
+.au-component .au-disabled:is(:disabled, .is-disabled, [aria-disabled='true']) {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.au-disabled-text:is(:disabled, .is-disabled, [aria-disabled='true']) {
+  color: var(--au-color-text-disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.au-component.au-hover-control:hover:where(:not(:disabled, .is-disabled, .is-selected)),
+.au-component .au-hover-control:hover:where(:not(:disabled, .is-disabled, .is-selected)),
+.au-component.au-hover-control:focus-visible:where(:not(.is-disabled, .is-selected)),
+.au-component .au-hover-control:focus-visible:where(:not(.is-disabled, .is-selected)),
+.au-action-control:hover:not(:disabled),
+.au-action-control:focus-visible:not(:disabled) {
+  color: var(--au-color-text-primary);
+  background: var(--au-color-background-hover);
+}
+
+.au-field-shell {
+  display: inline-flex;
+  width: 100%;
+  min-width: 0;
+  border: 0.5px solid var(--au-material-border-emphasis);
+  border-radius: var(--au-radius-control);
+  color: var(--au-color-text-default);
+  background: var(--au-material-background-subtle);
+  font-size: 13px;
+  transition:
+    border-color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    box-shadow var(--au-transition-duration) var(--au-transition-timing);
+}
+
+.au-field-shell.au-field-shell--single-line {
+  height: 30px;
+}
+
+.au-field-shell.is-small {
+  border-radius: var(--au-radius-compact);
+  font-size: var(--au-font-size-small);
+}
+
+.au-field-shell.au-field-shell--single-line.is-small {
+  height: 26px;
+}
+
+.au-field-shell.is-large {
+  border-radius: var(--au-radius-control);
+  font-size: var(--au-font-size-base);
+}
+
+.au-field-shell.au-field-shell--single-line.is-large {
+  height: 36px;
+}
+
+.au-focus-halo:focus-within:not(.is-disabled) {
+  border-color: color-mix(in srgb, var(--au-color-primary) 45%, transparent);
+  background: var(--au-material-background-subtle);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 8%, transparent);
+}
+
+.au-field-shell.is-invalid {
+  border-color: color-mix(in srgb, var(--au-color-danger) 60%, transparent);
+}
+
+.au-field-shell.is-invalid:focus-within {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-danger) 10%, transparent);
+}
+
+.au-choice-control {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 28px;
+  gap: 7px;
+  color: var(--au-color-text-default);
+  font-size: var(--au-font-size-base);
+  font-weight: var(--au-font-weight-medium);
+  line-height: 1.3;
+  cursor: pointer;
+  user-select: none;
+}
+
+.au-choice-control.is-small {
+  min-height: 24px;
+  gap: 6px;
+  font-size: var(--au-font-size-small);
+}
+
+.au-choice-control.is-large {
+  min-height: 32px;
+  gap: 8px;
+  font-size: var(--au-font-size-large);
+}
+
+.au-choice-label {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.au-action-control {
+  display: inline-grid;
+  place-items: center;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--au-radius-control);
+  color: var(--au-color-text-secondary);
+  background: transparent;
+  font: inherit;
+  font-size: var(--au-font-size-small);
+  font-weight: var(--au-font-weight-medium);
+  cursor: pointer;
+  appearance: none;
+  transition:
+    color var(--au-transition-duration) var(--au-transition-timing),
+    background var(--au-transition-duration) var(--au-transition-timing),
+    transform var(--au-transition-duration) var(--au-transition-timing);
+}
+
+.au-action-control:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.au-action-control.is-primary {
+  color: var(--au-color-primary);
+}
+
+.au-action-control:disabled {
+  color: var(--au-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.au-field-feedback {
+  color: var(--au-color-danger);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-field-shell,
+  .au-field-shell.au-focus-halo:focus-within:not(.is-disabled) {
+    background: var(--au-color-background-overlay);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-action-control {
+    transition: none;
+  }
+
+  .au-action-control:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-field-shell {
+    border-width: 1px;
+    border-color: var(--au-color-border-default);
+  }
+}
+
+@media (forced-colors: active) {
+  .au-disabled-text:is(:disabled, .is-disabled, [aria-disabled='true']) {
+    color: GrayText !important;
+  }
+
+  .au-field-shell {
+    border: 1px solid CanvasText;
+  }
+
+  .au-focus-halo:focus-within:not(.is-disabled) {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+}

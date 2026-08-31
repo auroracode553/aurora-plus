@@ -1,10 +1,10 @@
 <template>
   <li
-    class="au-menu-group au-component"
+    class="au-menu-group au-component au-list-reset"
     :class="[`is-${menuMode}`, { 'is-collapsed': collapsed, 'is-spaced': spaced }]"
     role="presentation"
   >
-    <span class="au-menu-group__label"><slot>{{ label }}</slot></span>
+    <span class="au-menu-group__label au-truncate"><slot>{{ label }}</slot></span>
   </li>
 </template>
 
@@ -26,13 +26,11 @@ const collapsed = computed(() => Boolean(menu?.collapsed.value));
 .au-menu-group {
   display: block;
   min-width: 0;
-  margin: 0;
   padding: 0 12px 8px;
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
   font-weight: var(--au-font-weight-semibold);
   line-height: 1.25;
-  list-style: none;
 }
 
 .au-menu-group.is-spaced {
@@ -46,8 +44,5 @@ const collapsed = computed(() => Boolean(menu?.collapsed.value));
 
 .au-menu-group__label {
   display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 </style>

@@ -398,11 +398,6 @@ defineExpose({ focus, blur, inputRef });
   white-space: nowrap;
 }
 
-.au-slider.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
-}
-
 .au-slider.is-disabled .au-slider__control {
   cursor: not-allowed;
 }

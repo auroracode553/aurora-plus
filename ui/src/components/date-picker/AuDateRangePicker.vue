@@ -21,7 +21,7 @@
     <template #trigger="{ triggerProps }">
       <div
         ref="triggerRef"
-        class="au-date-range-picker__trigger au-depth-control au-focus-ring"
+        class="au-date-range-picker__trigger au-depth-control au-focus-ring au-forced-surface au-motion-reduce"
         :class="[
           `is-${size}`,
           {
@@ -39,7 +39,7 @@
       >
         <input
           ref="startInputRef"
-          class="au-date-range-picker__input"
+          class="au-date-range-picker__input au-control-reset"
           type="text"
           :value="startText"
           :placeholder="startPlaceholder"
@@ -55,10 +55,10 @@
           @focus="handleInputFocus('start', $event)"
           @keydown="handleInputKeydown"
         />
-        <span class="au-date-range-picker__separator" aria-hidden="true">{{ rangeSeparator }}</span>
+        <span class="au-date-range-picker__separator au-meta-muted" aria-hidden="true">{{ rangeSeparator }}</span>
         <input
           ref="endInputRef"
-          class="au-date-range-picker__input"
+          class="au-date-range-picker__input au-control-reset"
           type="text"
           :value="endText"
           :placeholder="endPlaceholder"
@@ -76,7 +76,7 @@
         />
         <button
           v-if="clearable && hasValue && !disabled && !readonly"
-          class="au-date-range-picker__clear au-focus-ring"
+          class="au-date-range-picker__clear au-action-control au-focus-ring"
           type="button"
           aria-label="清空日期范围"
           @pointerdown.prevent
@@ -84,7 +84,7 @@
         >
           <AuIcon :icon="IconX" />
         </button>
-        <AuIcon v-else class="au-date-range-picker__calendar" :icon="IconCalendar" />
+        <AuIcon v-else class="au-date-range-picker__calendar au-meta-muted" :icon="IconCalendar" />
         <template v-if="fieldName">
           <input type="hidden" :name="`${fieldName}[0]`" :form="formId" :value="hiddenValues[0]" :disabled="disabled" />
           <input type="hidden" :name="`${fieldName}[1]`" :form="formId" :value="hiddenValues[1]" :disabled="disabled" />
@@ -92,7 +92,7 @@
       </div>
     </template>
 
-    <div class="au-date-range-picker__panel au-material-surface au-depth-overlay">
+    <div class="au-date-range-picker__panel au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
       <div class="au-date-range-picker__calendars">
         <AuDatePickerPane
           ref="leftPaneRef"
@@ -141,7 +141,7 @@
           @panel-change="handleRightPanelChange"
         />
       </div>
-      <div v-if="showToday || $slots.footer" class="au-date-range-picker__footer">
+      <div v-if="showToday || $slots.footer" class="au-date-range-picker__footer au-picker-footer">
         <slot name="footer" :select-today="selectToday" :clear="clear">
           <AuButton v-if="showToday" type="menu" size="small" @click="selectToday">今天</AuButton>
         </slot>
@@ -553,14 +553,8 @@ defineExpose({
   min-width: 0;
   width: 0;
   height: 100%;
-  padding: 0;
-  border: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   font-size: var(--au-font-size-base);
   text-align: center;
-  outline: none;
   flex: 1;
 }
 
@@ -568,39 +562,16 @@ defineExpose({
   color: var(--au-color-text-placeholder);
 }
 
-.au-date-range-picker__separator,
-.au-date-range-picker__calendar {
-  color: var(--au-color-text-secondary);
-  flex: none;
-}
-
 .au-date-range-picker__clear {
-  display: inline-grid;
-  place-items: center;
   width: 20px;
   height: 20px;
   padding: 0;
-  border: 0;
   border-radius: var(--au-radius-pill);
-  color: var(--au-color-text-secondary);
-  background: transparent;
-  cursor: pointer;
   flex: none;
-}
-
-.au-date-range-picker__clear:hover {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
 }
 
 .au-date-range-picker__panel {
   width: min(576px, calc(100vw - 16px));
-  max-height: calc(100vh - 16px);
-  overflow: auto;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
-  overscroll-behavior: contain;
 }
 
 .au-date-range-picker__calendars {
@@ -613,10 +584,8 @@ defineExpose({
 }
 
 .au-date-range-picker__footer {
-  display: flex;
   justify-content: flex-end;
   padding: 6px 10px;
-  border-top: 1px solid var(--au-material-border);
 }
 
 @media (max-width: 600px) {
@@ -634,26 +603,11 @@ defineExpose({
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-date-range-picker__trigger {
-    transition: none;
-  }
-}
-
 @media (prefers-contrast: more) {
   .au-date-range-picker__trigger,
-  .au-date-range-picker__panel,
   .au-date-range-picker__pane + .au-date-range-picker__pane {
     border-color: var(--au-color-text-secondary);
   }
 }
 
-@media (forced-colors: active) {
-  .au-date-range-picker__trigger,
-  .au-date-range-picker__panel {
-    border-color: CanvasText;
-    color: CanvasText;
-    background: Canvas;
-  }
-}
 </style>

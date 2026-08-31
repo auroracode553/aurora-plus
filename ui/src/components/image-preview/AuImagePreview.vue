@@ -4,7 +4,7 @@
       <section
         v-if="visible"
         ref="viewerRef"
-        class="au-image-preview au-component"
+        class="au-image-preview au-component au-overscroll-contain"
         :style="viewerStyle"
         role="dialog"
         aria-modal="true"
@@ -52,7 +52,7 @@
           </div>
         </div>
 
-        <div class="au-image-preview__close au-material-surface au-depth-overlay">
+        <div class="au-image-preview__close au-material-surface au-depth-overlay au-forced-canvas">
           <AuTooltip :content="closeLabel" placement="left">
             <AuButton
               type="menu"
@@ -66,7 +66,7 @@
         </div>
 
         <template v-if="hasMultiple">
-          <div class="au-image-preview__navigation is-previous au-material-surface au-depth-overlay">
+          <div class="au-image-preview__navigation is-previous au-material-surface au-depth-overlay au-forced-canvas">
             <AuTooltip :content="previousLabel" placement="right">
               <AuButton
                 type="menu"
@@ -78,7 +78,7 @@
               />
             </AuTooltip>
           </div>
-          <div class="au-image-preview__navigation is-next au-material-surface au-depth-overlay">
+          <div class="au-image-preview__navigation is-next au-material-surface au-depth-overlay au-forced-canvas">
             <AuTooltip :content="nextLabel" placement="left">
               <AuButton
                 type="menu"
@@ -94,7 +94,7 @@
 
         <div
           v-if="showProgress && normalizedImages.length"
-          class="au-image-preview__progress au-material-surface au-depth-overlay"
+          class="au-image-preview__progress au-material-surface au-depth-overlay au-forced-canvas"
           aria-live="polite"
         >
           <slot
@@ -109,7 +109,7 @@
 
         <div
           v-if="showToolbar"
-          class="au-image-preview__toolbar au-material-surface au-depth-overlay"
+          class="au-image-preview__toolbar au-material-surface au-depth-overlay au-forced-canvas"
           role="toolbar"
           :aria-label="toolbarLabel"
         >
@@ -594,7 +594,6 @@ defineExpose({
   background: transparent;
   outline: none;
   user-select: none;
-  overscroll-behavior: contain;
 }
 
 .au-image-preview__stage {
@@ -746,13 +745,4 @@ defineExpose({
   }
 }
 
-@media (forced-colors: active) {
-  .au-image-preview__close,
-  .au-image-preview__navigation,
-  .au-image-preview__progress,
-  .au-image-preview__toolbar {
-    color: CanvasText;
-    background: Canvas;
-  }
-}
 </style>

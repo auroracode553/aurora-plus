@@ -1,13 +1,13 @@
 <template>
   <li
-    class="au-menu-item au-component"
+    class="au-menu-item au-component au-list-reset"
     :class="[`is-${menuMode}`, { 'is-collapsed': collapsed }]"
     role="none"
   >
     <button
       ref="buttonRef"
-      class="au-menu-item__content au-focus-ring"
-      :class="{ 'is-active': active }"
+      class="au-menu-item__content au-control-reset au-focus-ring au-contrast-current"
+      :class="{ 'is-active': active, 'au-disabled': itemDisabled }"
       type="button"
       role="menuitem"
       data-au-menu-item
@@ -20,15 +20,18 @@
       v-bind="$attrs"
       @click="handleClick"
     >
-      <span v-if="$slots.icon || icon" class="au-menu-item__icon" aria-hidden="true">
+      <span v-if="$slots.icon || icon" class="au-menu-item__icon au-inline-center" aria-hidden="true">
         <slot name="icon" :active="active" :disabled="itemDisabled">
           <AuIcon :icon="icon" :color="iconColor" />
         </slot>
       </span>
-      <span class="au-menu-item__label"><slot>{{ label }}</slot></span>
-      <span v-if="hasMeta" class="au-menu-item__meta">
+      <span
+        class="au-menu-item__label au-flex-truncate"
+        :class="{ 'au-visually-hidden': collapsed }"
+      ><slot>{{ label }}</slot></span>
+      <span v-if="hasMeta" class="au-menu-item__meta au-inline-center au-meta-muted">
         <slot name="suffix" :active="active" :disabled="itemDisabled">
-          <span v-if="hasBadge" class="au-menu-item__badge">{{ badge }}</span>
+          <span v-if="hasBadge" class="au-menu-item__badge au-inline-center">{{ badge }}</span>
           <span v-if="indicator" class="au-menu-item__indicator" aria-hidden="true"></span>
         </slot>
       </span>
@@ -97,9 +100,6 @@ onBeforeUnmount(() => {
 .au-menu-item {
   display: block;
   min-width: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .au-menu-item.is-horizontal {
@@ -112,7 +112,6 @@ onBeforeUnmount(() => {
   align-items: center;
   width: 100%;
   min-height: 42px;
-  margin: 0;
   padding: 0 12px;
   gap: 11px;
   overflow: visible;
@@ -120,7 +119,6 @@ onBeforeUnmount(() => {
   border-radius: var(--au-radius-control);
   color: var(--au-color-text-secondary);
   background: transparent;
-  font: inherit;
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.35;
@@ -129,7 +127,6 @@ onBeforeUnmount(() => {
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  appearance: none;
   transition:
     transform 0.14s var(--au-transition-timing),
     color var(--au-transition-duration) var(--au-transition-timing),
@@ -171,15 +168,7 @@ onBeforeUnmount(() => {
   outline-offset: -2px;
 }
 
-.au-menu-item__content:disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
-}
-
 .au-menu-item__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: auto;
   height: 20px;
   aspect-ratio: 1;
@@ -195,27 +184,12 @@ onBeforeUnmount(() => {
   height: 1em;
 }
 
-.au-menu-item__label {
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .au-menu-item__meta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   gap: 6px;
-  flex: none;
-  color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
 }
 
 .au-menu-item__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   min-width: 28px;
   height: 20px;
   padding: 0 8px;
@@ -248,19 +222,6 @@ onBeforeUnmount(() => {
   padding-inline: 0;
 }
 
-.au-menu-item.is-collapsed .au-menu-item__label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .au-menu-item.is-collapsed .au-menu-item__meta {
   display: none;
 }
@@ -287,10 +248,4 @@ onBeforeUnmount(() => {
   transform: none;
 }
 
-@media (prefers-contrast: more) {
-  .au-menu-item__content.is-active {
-    outline: 1px solid currentColor;
-    outline-offset: -1px;
-  }
-}
 </style>

@@ -6,6 +6,7 @@
       `has-${padding}-padding`,
       {
         'has-border': bordered,
+        'au-surface-frame': bordered,
         'is-scrollable': scrollable,
         'au-depth-surface': depth === 'surface',
         'au-depth-overlay': depth === 'overlay',
@@ -19,7 +20,10 @@
     v-bind="$attrs"
   >
     <div v-if="$slots.header" class="au-panel__header"><slot name="header"></slot></div>
-    <div class="au-panel__body"><slot></slot></div>
+    <div
+      class="au-panel__body"
+      :class="{ 'au-scroll-region': scrollable, 'au-thin-scrollbar': scrollable }"
+    ><slot></slot></div>
     <div v-if="$slots.footer" class="au-panel__footer"><slot name="footer"></slot></div>
   </component>
 </template>
@@ -69,13 +73,8 @@ function formatSize(value) {
   max-width: 100%;
   flex-direction: column;
   overflow: hidden;
-  border: 0;
   border-radius: var(--au-radius-overlay);
   color: var(--au-color-text-primary);
-}
-
-.au-panel.has-border {
-  border: 1px solid var(--au-material-border);
 }
 
 .au-panel__header,
@@ -103,25 +102,9 @@ function formatSize(value) {
   gap: 0;
 }
 
-.au-panel.is-scrollable .au-panel__body {
-  min-height: 0;
-  overflow: auto;
-  overscroll-behavior: contain;
-}
-
-@media (prefers-contrast: more) {
-  .au-panel.has-border {
-    border-color: var(--au-color-text-secondary);
-  }
-}
-
 @media (forced-colors: active) {
   .au-panel {
     background: Canvas;
-  }
-
-  .au-panel.has-border {
-    border-color: CanvasText;
   }
 }
 </style>

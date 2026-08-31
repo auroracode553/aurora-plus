@@ -1,12 +1,13 @@
 <template>
   <span
     ref="rootRef"
-    class="au-select au-component"
+    class="au-select au-component au-field-shell au-field-shell--single-line au-focus-halo"
     :data-au-floating-owner="selectId"
     :class="[
       `is-${size}`,
       {
         'is-disabled': disabled,
+        'au-disabled': disabled,
         'is-invalid': invalid,
         'is-open': visible,
         'is-fit-content': fitContent,
@@ -17,7 +18,7 @@
   >
     <button
       ref="selectRef"
-      class="au-select__control"
+      class="au-select__control au-control-reset"
       v-bind="getControlAttrs()"
       type="button"
       role="combobox"
@@ -34,15 +35,15 @@
       @focus="emit('focus', $event)"
       @blur="handleControlBlur"
     >
-      <span class="au-select__value">{{ selectedLabel }}</span>
-      <AuIcon class="au-select__icon" :icon="IconChevronDown" aria-hidden="true" />
+      <span class="au-select__value au-flex-truncate">{{ selectedLabel }}</span>
+      <AuIcon class="au-select__icon au-motion-reduce-transform" :icon="IconChevronDown" aria-hidden="true" />
     </button>
 
     <span v-if="fitContent" class="au-select__sizer" aria-hidden="true">
       <span
         v-for="(label, index) in contentSizeLabels"
         :key="`${index}-${label}`"
-        class="au-select__sizer-label"
+        class="au-select__sizer-label au-truncate"
       >
         {{ label }}
       </span>
@@ -59,12 +60,12 @@
   </span>
 
   <Teleport :to="appendTo" :disabled="!teleported">
-    <Transition name="au-select-popover">
+    <Transition name="au-float">
       <div
         v-if="visible"
         :id="listboxId"
         ref="listboxRef"
-        class="au-select__listbox au-component au-material-surface au-depth-surface au-motion-popover au-menu-surface"
+        class="au-select__listbox au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar"
         :data-au-floating-owner="selectId"
         :class="[`is-${size}`, `is-${activePlacement}`]"
         :style="listboxStyle"
@@ -85,7 +86,7 @@
               v-for="option in group.options"
               :id="optionId(option.index)"
               :key="option.key"
-              class="au-select__option"
+              class="au-select__option au-forced-highlight au-disabled-text"
               :class="{
                 'is-selected': isOptionSelected(option),
                 'is-highlighted': highlightedIndex === option.index,
@@ -100,14 +101,14 @@
               @pointerenter="highlightOption(option)"
               @click="selectOption(option, $event)"
             >
-              <span class="au-select__option-label">{{ option.label }}</span>
-              <span class="au-select__option-marker" aria-hidden="true">
+              <span class="au-select__option-label au-flex-truncate">{{ option.label }}</span>
+              <span class="au-select__option-marker au-inline-center" aria-hidden="true">
                 <AuIcon v-if="isOptionSelected(option)" :icon="IconCheck" />
               </span>
             </div>
           </div>
         </template>
-        <div v-if="flatOptions.length === 0" class="au-select__empty">暂无选项</div>
+        <div v-if="flatOptions.length === 0" class="au-select__empty au-menu-empty">暂无选项</div>
       </div>
     </Transition>
   </Teleport>
@@ -520,32 +521,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 
 <style scoped>
 .au-select {
-  display: inline-flex;
   align-items: center;
-  width: 100%;
-  min-width: 0;
-  height: 30px;
-  border: 0.5px solid var(--au-material-border-emphasis);
-  border-radius: var(--au-radius-control);
-  color: var(--au-color-text-default);
-  background: var(--au-material-background-subtle);
-  font-size: 13px;
-  transition:
-    border-color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing),
-    box-shadow var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-select.is-small {
-  height: 26px;
-  border-radius: var(--au-radius-compact);
-  font-size: var(--au-font-size-small);
-}
-
-.au-select.is-large {
-  height: 36px;
-  border-radius: var(--au-radius-control);
-  font-size: var(--au-font-size-base);
 }
 
 .au-select.is-fit-content {
@@ -560,31 +536,6 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   grid-area: 1 / 1;
 }
 
-.au-select:hover:not(.is-disabled),
-.au-select.is-open:not(.is-disabled) {
-  border-color: var(--au-material-border-emphasis);
-  background: var(--au-material-background-subtle);
-}
-
-.au-select:focus-within:not(.is-disabled) {
-  border-color: color-mix(in srgb, var(--au-color-primary) 45%, transparent);
-  background: var(--au-material-background-subtle);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 8%, transparent);
-}
-
-.au-select.is-invalid {
-  border-color: color-mix(in srgb, var(--au-color-danger) 60%, transparent);
-}
-
-.au-select.is-invalid:focus-within {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-danger) 10%, transparent);
-}
-
-.au-select.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
 .au-select__control {
   display: flex;
   align-items: center;
@@ -593,14 +544,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   height: 100%;
   padding: 0 8px 0 10px;
   gap: 6px;
-  margin: 0;
-  border: 0;
-  outline: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   text-align: left;
-  appearance: none;
   cursor: pointer;
 }
 
@@ -618,14 +562,6 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 
 .au-select__control:disabled {
   cursor: not-allowed;
-}
-
-.au-select__value {
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 /* 由所有可见内容参与网格固有尺寸计算，并预留列表勾选标记的空间。 */
@@ -648,11 +584,8 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 }
 
 .au-select__sizer-label {
-  min-width: 0;
-  overflow: hidden;
   grid-column: 1;
   grid-row: 1;
-  text-overflow: ellipsis;
 }
 
 .au-select__icon {
@@ -672,10 +605,8 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   padding: 4px;
   overflow-x: hidden;
   overflow-y: auto;
-  border-radius: var(--au-radius-overlay);
   font-size: 13px;
   line-height: 1.3;
-  overscroll-behavior: contain;
   transform-origin: top left;
 }
 
@@ -734,23 +665,10 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 }
 
 .au-select__option.is-disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
   opacity: 0.62;
 }
 
-.au-select__option-label {
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .au-select__option-marker {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: auto;
   height: 16px;
   aspect-ratio: 1;
@@ -772,68 +690,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   font-weight: var(--au-font-weight-medium);
 }
 
-.au-select__empty {
-  padding: 7px 9px;
-  color: var(--au-color-text-secondary);
-  font-size: var(--au-font-size-small);
-}
-
-.au-select-popover-enter-from,
-.au-select-popover-leave-to {
-  opacity: 0;
-  transform: translateY(-3px) scale(0.985);
-}
-
-.au-select__listbox.is-top.au-select-popover-enter-from,
-.au-select__listbox.is-top.au-select-popover-leave-to {
-  transform: translateY(3px) scale(0.985);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-select,
-  .au-select:hover:not(.is-disabled),
-  .au-select.is-open:not(.is-disabled),
-  .au-select:focus-within:not(.is-disabled) {
-    background: var(--au-color-background-overlay);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-select__icon,
-  .au-select-popover-enter-from,
-  .au-select-popover-leave-to,
-  .au-select__listbox.is-top.au-select-popover-enter-from,
-  .au-select__listbox.is-top.au-select-popover-leave-to {
-    transform: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-select,
-  .au-select__listbox {
-    border-width: 1px;
-    border-color: var(--au-color-border-default);
-  }
-}
-
 @media (forced-colors: active) {
-  .au-select,
-  .au-select__listbox {
-    border: 1px solid CanvasText;
-  }
-
-  .au-select:focus-within:not(.is-disabled) {
-    outline: 2px solid Highlight;
-    outline-offset: 2px;
-    box-shadow: none;
-  }
-
-  .au-select__option.is-selected,
-  .au-select__option.is-highlighted {
-    color: HighlightText;
-    background: Highlight;
-  }
-
   .au-select__option-marker {
     color: currentColor;
   }

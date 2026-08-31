@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-switch au-component au-focus-ring"
+    class="au-switch au-component au-choice-control au-control-reset au-focus-ring"
     :class="[
       `is-${size}`,
       {
@@ -17,11 +17,11 @@
     @click="toggle"
   >
     <span class="au-switch__track" aria-hidden="true">
-      <span class="au-switch__thumb au-depth-control">
+      <span class="au-switch__thumb au-depth-control au-inline-center">
         <AuIcon v-if="loading" class="au-switch__loading au-spin" :icon="IconLoader2" />
       </span>
     </span>
-    <span v-if="hasLabel" class="au-switch__label au-wrap-anywhere">
+    <span v-if="hasLabel" class="au-switch__label au-choice-label au-wrap-anywhere">
       <slot>{{ checked ? activeText : inactiveText }}</slot>
     </span>
   </button>
@@ -67,35 +67,7 @@ function toggle() {
 .au-switch {
   --au-focus-ring-offset: 3px;
 
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
-  max-width: 100%;
-  gap: 7px;
-  min-height: 28px;
-  padding: 0;
-  border: 0;
   border-radius: var(--au-radius-compact);
-  color: var(--au-color-text-default);
-  background: transparent;
-  font-size: var(--au-font-size-base);
-  font-weight: var(--au-font-weight-medium);
-  line-height: 1.3;
-  cursor: pointer;
-  user-select: none;
-  appearance: none;
-}
-
-.au-switch.is-small {
-  gap: 6px;
-  min-height: 24px;
-  font-size: var(--au-font-size-small);
-}
-
-.au-switch.is-large {
-  gap: 8px;
-  min-height: 32px;
-  font-size: var(--au-font-size-large);
 }
 
 .au-switch__track {
@@ -115,9 +87,6 @@ function toggle() {
 }
 
 .au-switch__thumb {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: auto;
   height: 16px;
   aspect-ratio: 1;
@@ -174,8 +143,6 @@ function toggle() {
 }
 
 .au-switch__label {
-  min-width: 0;
-  flex: 1 1 auto;
   color: inherit;
 }
 

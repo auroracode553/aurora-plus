@@ -1,7 +1,7 @@
 <template>
   <span
     ref="triggerRef"
-    class="au-popover au-component"
+    class="au-popover au-component au-inline-trigger"
     :class="{ 'is-disabled': disabled }"
     :aria-haspopup="role"
     :aria-expanded="visible"
@@ -22,15 +22,21 @@
   </span>
 
   <Teleport :to="appendTo" :disabled="!teleported">
-    <Transition name="au-popover-fade" @after-enter="emit('opened')" @after-leave="emit('closed')">
+    <Transition name="au-float" @after-enter="emit('opened')" @after-leave="emit('closed')">
       <div
         v-if="visible"
         :id="popoverId"
         ref="contentRef"
-        class="au-popover__content au-component au-motion-popover"
+        class="au-popover__content au-component au-motion-popover au-floating-viewport"
         :class="[
           `is-${activePlacement}`,
-          { 'has-surface': surface, 'au-material-surface': surface, 'au-depth-overlay': surface },
+          {
+            'has-surface': surface,
+            'au-material-surface': surface,
+            'au-depth-overlay': surface,
+            'au-overlay-surface': surface,
+            'au-scroll-region': surface,
+          },
         ]"
         :style="contentStyle"
         :role="role"
@@ -307,21 +313,12 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, contentRef });
 </script>
 
 <style scoped>
-.au-popover {
-  display: inline-flex;
-  min-width: 0;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
 .au-popover.is-disabled {
   cursor: not-allowed;
 }
 
 .au-popover__content {
   position: fixed;
-  max-width: calc(100vw - 16px);
-  max-height: calc(100vh - 16px);
   color: var(--au-color-text-primary);
   outline: none;
   transform-origin: top center;
@@ -330,10 +327,6 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, contentRef });
 .au-popover__content.has-surface {
   min-width: min(180px, calc(100vw - 16px));
   padding: 12px;
-  overflow: auto;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-overlay);
-  overscroll-behavior: contain;
 }
 
 .au-popover__content.is-bottom-start {
@@ -384,58 +377,4 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, contentRef });
   transform-origin: left bottom;
 }
 
-.au-popover-fade-enter-from,
-.au-popover-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-4px) scale(0.985);
-}
-
-.au-popover__content.is-top-start.au-popover-fade-enter-from,
-.au-popover__content.is-top.au-popover-fade-enter-from,
-.au-popover__content.is-top-end.au-popover-fade-enter-from,
-.au-popover__content.is-top-start.au-popover-fade-leave-to,
-.au-popover__content.is-top.au-popover-fade-leave-to,
-.au-popover__content.is-top-end.au-popover-fade-leave-to {
-  transform: translateY(4px) scale(0.985);
-}
-
-.au-popover__content.is-left-start.au-popover-fade-enter-from,
-.au-popover__content.is-left.au-popover-fade-enter-from,
-.au-popover__content.is-left-end.au-popover-fade-enter-from,
-.au-popover__content.is-left-start.au-popover-fade-leave-to,
-.au-popover__content.is-left.au-popover-fade-leave-to,
-.au-popover__content.is-left-end.au-popover-fade-leave-to {
-  transform: translateX(4px) scale(0.985);
-}
-
-.au-popover__content.is-right-start.au-popover-fade-enter-from,
-.au-popover__content.is-right.au-popover-fade-enter-from,
-.au-popover__content.is-right-end.au-popover-fade-enter-from,
-.au-popover__content.is-right-start.au-popover-fade-leave-to,
-.au-popover__content.is-right.au-popover-fade-leave-to,
-.au-popover__content.is-right-end.au-popover-fade-leave-to {
-  transform: translateX(-4px) scale(0.985);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-popover-fade-enter-from,
-  .au-popover-fade-leave-to,
-  .au-popover__content[class*='is-'].au-popover-fade-enter-from,
-  .au-popover__content[class*='is-'].au-popover-fade-leave-to {
-    transform: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-popover__content.has-surface {
-    border-color: var(--au-color-text-secondary);
-  }
-}
-
-@media (forced-colors: active) {
-  .au-popover__content.has-surface {
-    border-color: CanvasText;
-    background: Canvas;
-  }
-}
 </style>

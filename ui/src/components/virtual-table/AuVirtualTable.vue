@@ -1,7 +1,7 @@
 <template>
   <div
     ref="scrollContainerRef"
-    class="au-virtual-table au-component"
+    class="au-virtual-table au-component au-surface-frame au-surface-frame--rounded au-scroll-region au-thin-scrollbar au-focus-ring au-focus-ring--tight"
     :class="{ 'has-border': border, 'is-striped': stripe, 'is-loading': loading }"
     :style="rootStyle"
     role="grid"
@@ -14,7 +14,7 @@
   >
     <div class="au-virtual-table__canvas" :style="canvasStyle">
       <div
-        class="au-virtual-table__header"
+        class="au-virtual-table__header au-forced-canvas"
         :style="headerStyle"
         role="row"
         aria-rowindex="1"
@@ -23,7 +23,7 @@
           v-for="(column, columnIndex) in resolvedColumns"
           :key="column.key"
           class="au-virtual-table__header-cell"
-          :class="getColumnClasses(column)"
+          :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
           :style="getColumnStyle(column)"
           role="columnheader"
           :aria-colindex="columnIndex + 1"
@@ -31,23 +31,23 @@
         >
           <button
             v-if="column.sortable"
-            class="au-virtual-table__sort-button au-focus-ring"
+            class="au-virtual-table__sort-button au-control-reset au-focus-ring"
             type="button"
             :style="{ justifyContent: getJustifyContent(column.align) }"
             @click="toggleSort(column)"
           >
             <slot :name="`header-${column.key}`" :column="column">
-              <span class="au-virtual-table__cell-text">{{ column.title ?? column.label ?? '' }}</span>
+              <span class="au-virtual-table__cell-text au-truncate">{{ column.title ?? column.label ?? '' }}</span>
             </slot>
-            <AuIcon class="au-virtual-table__sort-icon" :icon="getSortIcon(column)" />
+            <AuIcon class="au-virtual-table__sort-icon au-meta-muted" :icon="getSortIcon(column)" />
           </button>
           <slot v-else :name="`header-${column.key}`" :column="column">
-            <span class="au-virtual-table__cell-text">{{ column.title ?? column.label ?? '' }}</span>
+            <span class="au-virtual-table__cell-text au-truncate">{{ column.title ?? column.label ?? '' }}</span>
           </slot>
         </div>
       </div>
 
-      <div v-if="sortedRows.length === 0" class="au-virtual-table__empty" :style="emptyStyle">
+      <div v-if="sortedRows.length === 0" class="au-virtual-table__empty au-grid-center" :style="emptyStyle">
         <slot name="empty">{{ emptyText }}</slot>
       </div>
 
@@ -55,7 +55,7 @@
         <div
           v-for="entry in visibleRows"
           :key="resolveRowKey(entry)"
-          class="au-virtual-table__row"
+          class="au-virtual-table__row au-motion-reduce"
           :class="[
             resolveRowClass(entry),
             { 'is-striped-row': stripe && entry.visibleIndex % 2 === 1 },
@@ -70,7 +70,7 @@
             v-for="(column, columnIndex) in resolvedColumns"
             :key="column.key"
             class="au-virtual-table__cell"
-            :class="getColumnClasses(column)"
+            :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
             :style="getColumnStyle(column)"
             role="gridcell"
             :aria-colindex="columnIndex + 1"
@@ -83,7 +83,7 @@
               :value="getCellValue(entry.row, column)"
               :index="entry.sourceIndex"
             >
-              <span class="au-virtual-table__cell-text">
+              <span class="au-virtual-table__cell-text au-truncate">
                 {{ formatCell(entry.row, column, entry.sourceIndex) }}
               </span>
             </slot>
@@ -94,7 +94,7 @@
 
     <div
       v-if="loading"
-      class="au-virtual-table__loading au-material-surface au-depth-surface"
+      class="au-virtual-table__loading au-material-surface au-depth-surface au-forced-canvas"
       aria-live="polite"
     >
       <slot name="loading">
@@ -393,22 +393,10 @@ defineExpose({
   position: relative;
   min-width: 0;
   max-width: 100%;
-  min-height: 0;
-  overflow: auto;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-surface);
   color: var(--au-color-text-default);
   background: transparent;
   font-size: 13px;
-  scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
-  scrollbar-width: thin;
-  overscroll-behavior: contain;
   contain: strict;
-}
-
-.au-virtual-table:focus-visible {
-  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
-  outline-offset: 1px;
 }
 
 .au-virtual-table__canvas {
@@ -472,13 +460,6 @@ defineExpose({
   background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
 }
 
-.au-virtual-table__cell-text {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .au-virtual-table__sort-button {
   display: flex;
   align-items: center;
@@ -487,11 +468,7 @@ defineExpose({
   gap: 5px;
   margin: 0 -6px;
   padding: 0 6px;
-  border: 0;
   border-radius: var(--au-radius-compact);
-  color: inherit;
-  background: transparent;
-  font: inherit;
   cursor: pointer;
 }
 
@@ -500,16 +477,9 @@ defineExpose({
   background: var(--au-color-background-hover);
 }
 
-.au-virtual-table__sort-icon {
-  color: var(--au-color-text-secondary);
-  flex: none;
-}
-
 .au-virtual-table__empty {
   position: sticky;
   left: 0;
-  display: grid;
-  place-items: center;
   width: 100%;
   min-height: 96px;
   color: var(--au-color-text-secondary);
@@ -531,27 +501,11 @@ defineExpose({
   color: var(--au-color-text-primary);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-virtual-table__row {
-    transition: none;
-  }
-}
-
 @media (prefers-contrast: more) {
-  .au-virtual-table,
   .au-virtual-table__header-cell,
   .au-virtual-table__cell {
     border-color: var(--au-material-border-emphasis);
   }
 }
 
-@media (forced-colors: active) {
-  .au-virtual-table__header,
-  .au-virtual-table__header-cell.is-fixed,
-  .au-virtual-table__cell.is-fixed,
-  .au-virtual-table__loading {
-    color: CanvasText;
-    background: Canvas;
-  }
-}
 </style>

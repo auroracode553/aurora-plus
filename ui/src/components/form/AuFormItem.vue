@@ -45,7 +45,7 @@
         <div
           v-if="shouldShowMessage"
           :id="messageId"
-          class="au-form-item__message"
+          class="au-form-item__message au-field-feedback"
           role="alert"
           aria-live="polite"
         >
@@ -327,9 +327,6 @@ defineExpose(fieldContext);
 
 .au-form-item__message {
   padding: 4px 2px 0;
-  color: var(--au-color-danger);
-  font-size: 11px;
-  line-height: 1.35;
 }
 
 .au-form-item.is-small {

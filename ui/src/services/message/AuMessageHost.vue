@@ -14,7 +14,7 @@
       <span v-if="item.repeat > 1" class="au-message__repeat">×{{ item.repeat }}</span>
       <button
         v-if="item.showClose"
-        class="au-message__close au-focus-ring"
+        class="au-message__close au-action-control au-focus-ring"
         type="button"
         aria-label="关闭消息"
         @click="$emit('close', item.id)"
@@ -108,29 +108,13 @@ const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 }
 
 .au-message__close {
-  display: inline-grid;
-  place-items: center;
   width: auto;
   height: 20px;
   aspect-ratio: 1;
   margin: 0 0 0 2px;
   padding: 0;
-  border: 0;
-  color: var(--au-color-text-secondary);
-  background: transparent;
-  cursor: pointer;
   flex: none;
   border-radius: var(--au-radius-compact);
-  transition:
-    color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing),
-    border-color var(--au-transition-duration) var(--au-transition-timing),
-    transform var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-message__close:hover {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
 }
 
 .au-message__close:active {

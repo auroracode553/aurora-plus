@@ -1,7 +1,7 @@
 <template>
   <div
     ref="scrollContainerRef"
-    class="au-virtual-list au-component"
+    class="au-virtual-list au-component au-surface-frame au-surface-frame--rounded au-scroll-region au-thin-scrollbar au-focus-ring au-focus-ring--tight"
     :class="{ 'au-depth-surface': !plain, 'is-plain': plain, 'is-fill': fill }"
     @scroll.passive="handleScroll"
   >
@@ -149,22 +149,11 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   position: relative;
   min-width: 0;
   max-width: 100%;
-  min-height: 0;
   padding: 4px 6px;
-  overflow: auto;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-surface);
   /* Lists inherit the page surface instead of adding a tinted layer. */
   background: transparent;
-  scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
-  scrollbar-width: thin;
   scroll-padding-block: 4px;
   contain: strict;
-}
-
-.au-virtual-list:focus-visible {
-  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
-  outline-offset: 1px;
 }
 
 .au-virtual-list.is-plain {
@@ -183,27 +172,6 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   flex: 1;
 }
 
-.au-virtual-list::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-.au-virtual-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.au-virtual-list::-webkit-scrollbar-thumb {
-  border: 3px solid transparent;
-  border-radius: var(--au-radius-pill);
-  background: color-mix(in srgb, var(--au-color-text-secondary) 34%, transparent);
-  background-clip: padding-box;
-}
-
-.au-virtual-list::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--au-color-text-secondary) 52%, transparent);
-  background-clip: padding-box;
-}
-
 .au-virtual-list__spacer {
   position: relative;
   width: 100%;
@@ -215,9 +183,4 @@ defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
   will-change: transform;
 }
 
-@media (prefers-contrast: more) {
-  .au-virtual-list {
-    border-color: var(--au-material-border-emphasis);
-  }
-}
 </style>

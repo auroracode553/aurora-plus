@@ -1,7 +1,7 @@
 <template>
   <span
     ref="triggerRef"
-    class="au-tooltip__trigger"
+    class="au-tooltip__trigger au-inline-trigger"
     :aria-describedby="visible ? tooltipId : undefined"
     @mouseenter="show"
     @mouseleave="hide"
@@ -12,7 +12,7 @@
   </span>
 
   <Teleport :to="appendTo" :disabled="!teleported">
-    <Transition name="au-tooltip-fade">
+    <Transition name="au-float">
       <div
         v-if="visible && hasContent"
         :id="tooltipId"
@@ -201,13 +201,6 @@ defineExpose({ hide, show, updatePosition });
 </script>
 
 <style scoped>
-.au-tooltip__trigger {
-  display: inline-flex;
-  min-width: 0;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
 .au-tooltip__popper {
   position: fixed;
   z-index: var(--au-z-index-hint);
@@ -272,17 +265,6 @@ defineExpose({ hide, show, updatePosition });
   .au-tooltip__arrow {
     background: var(--au-color-background-overlay);
   }
-}
-
-.au-tooltip-fade-enter-from,
-.au-tooltip-fade-leave-to {
-  opacity: 0;
-  transform: translateY(4px) scale(0.98);
-}
-
-.au-tooltip__popper.is-bottom.au-tooltip-fade-enter-from,
-.au-tooltip__popper.is-bottom.au-tooltip-fade-leave-to {
-  transform: translateY(-4px) scale(0.98);
 }
 
 </style>

@@ -53,7 +53,7 @@
       />
     </template>
 
-    <section class="au-time-picker__popover au-component au-material-surface au-depth-overlay">
+    <section class="au-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport">
       <AuTimePickerPanel
         :model-value="draftDate"
         :hour-step="hourStep"
@@ -65,19 +65,19 @@
         :aria-label="ariaLabel"
         @update:model-value="updateDraftDate"
       />
-      <div v-if="draftInvalid" class="au-time-picker__status" role="status">
+      <div v-if="draftInvalid" class="au-time-picker__status au-field-feedback" role="status">
         该时间不可用
       </div>
-      <footer class="au-time-picker__footer">
-        <button class="au-time-picker__action au-focus-ring" type="button" @click="selectNow">
+      <footer class="au-time-picker__footer au-picker-footer">
+        <button class="au-time-picker__action au-action-control au-focus-ring" type="button" @click="selectNow">
           现在
         </button>
-        <span class="au-time-picker__spacer"></span>
-        <button class="au-time-picker__action au-focus-ring" type="button" @click="cancel">
+        <span class="au-time-picker__spacer au-flex-spacer"></span>
+        <button class="au-time-picker__action au-action-control au-focus-ring" type="button" @click="cancel">
           取消
         </button>
         <button
-          class="au-time-picker__action is-primary au-focus-ring"
+          class="au-time-picker__action au-action-control is-primary au-focus-ring"
           type="button"
           :disabled="draftInvalid"
           @click="confirm"
@@ -351,81 +351,15 @@ defineExpose({ focus, blur, open, close, inputRef, popoverRef });
 
 .au-time-picker__popover {
   width: 238px;
-  max-width: calc(100vw - 16px);
   padding: 12px;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
 }
 
 .au-time-picker__status {
   margin-top: 8px;
-  color: var(--au-color-danger);
-  font-size: 11px;
 }
 
 .au-time-picker__footer {
-  display: flex;
-  align-items: center;
-  gap: 2px;
   margin-top: 10px;
   padding-top: 8px;
-  border-top: 1px solid var(--au-material-border);
-}
-
-.au-time-picker__spacer {
-  flex: 1;
-}
-
-.au-time-picker__action {
-  min-width: 0;
-  height: 28px;
-  padding: 0 8px;
-  border: 0;
-  border-radius: var(--au-radius-control);
-  color: var(--au-color-text-secondary);
-  background: transparent;
-  font: inherit;
-  font-size: var(--au-font-size-small);
-  font-weight: var(--au-font-weight-medium);
-  cursor: pointer;
-  appearance: none;
-}
-
-.au-time-picker__action:hover:not(:disabled) {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
-}
-
-.au-time-picker__action.is-primary {
-  color: var(--au-color-primary);
-}
-
-.au-time-picker__action:active:not(:disabled) {
-  transform: scale(0.96);
-}
-
-.au-time-picker__action:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-time-picker__action:active:not(:disabled) {
-    transform: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-time-picker__popover {
-    border-color: var(--au-color-text-secondary);
-  }
-}
-
-@media (forced-colors: active) {
-  .au-time-picker__popover {
-    border-color: CanvasText;
-    background: Canvas;
-  }
 }
 </style>

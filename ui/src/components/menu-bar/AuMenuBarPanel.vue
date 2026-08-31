@@ -1,17 +1,17 @@
 <template>
   <div
-    class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-menu-surface"
+    class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel"
     :class="{ 'has-leading-column': hasLeadingColumn }"
     role="menu"
     @mousedown.prevent
     @keydown.esc.stop="emit('close')"
   >
     <template v-for="(item, index) in items" :key="resolveItemKey(item, index)">
-      <div v-if="item.type === 'separator'" class="au-menu-bar-panel__separator" role="separator"></div>
+      <div v-if="item.type === 'separator'" class="au-menu-bar-panel__separator au-menu-separator" role="separator"></div>
 
       <div
         v-else-if="item.children && item.children.length"
-        class="au-menu-bar-panel__submenu"
+        class="au-menu-bar-panel__submenu au-menu-submenu-host"
         @mouseenter="activeSubmenuKey = resolveItemKey(item, index)"
         @mouseleave="activeSubmenuKey = ''"
       >
@@ -28,19 +28,19 @@
         >
           <span
             v-if="hasLeadingColumn"
-            class="au-menu-bar-panel__leading"
+            class="au-menu-bar-panel__leading au-inline-center"
             aria-hidden="true"
           >
             <AuIcon v-if="item.icon" :icon="item.icon" />
           </span>
-          <span class="au-menu-bar-panel__label">{{ item.label }}</span>
-          <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut">{{ item.accelerator }}</span>
-          <AuIcon class="au-menu-bar-panel__arrow" :icon="IconChevronRight" />
+          <span class="au-menu-bar-panel__label au-menu-label">{{ item.label }}</span>
+          <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut au-menu-shortcut au-meta-muted">{{ item.accelerator }}</span>
+          <AuIcon class="au-menu-bar-panel__arrow au-inline-center" :icon="IconChevronRight" />
         </button>
 
         <AuMenuBarPanel
           v-if="activeSubmenuKey === resolveItemKey(item, index)"
-          class="au-menu-bar-panel__nested"
+          class="au-menu-bar-panel__nested au-menu-submenu-mobile"
           :items="item.children"
           @select="emit('select', $event)"
           @close="emit('close')"
@@ -59,14 +59,14 @@
       >
         <span
           v-if="hasLeadingColumn"
-          class="au-menu-bar-panel__leading"
+          class="au-menu-bar-panel__leading au-inline-center"
           :class="{ 'is-checkable': isCheckableItem(item) }"
           aria-hidden="true"
         >
           <AuIcon v-if="resolveLeadingIcon(item)" :icon="resolveLeadingIcon(item)" />
         </span>
-        <span class="au-menu-bar-panel__label">{{ item.label }}</span>
-        <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut">{{ item.accelerator }}</span>
+        <span class="au-menu-bar-panel__label au-menu-label">{{ item.label }}</span>
+        <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut au-menu-shortcut au-meta-muted">{{ item.accelerator }}</span>
       </button>
     </template>
   </div>
@@ -109,14 +109,6 @@ function resolveItemKey(item, index) {
   top: 100%;
   left: 0;
   z-index: 1;
-  width: max-content;
-  min-width: min(190px, calc(100vw - 16px));
-  max-width: calc(100vw - 16px);
-  padding: 5px;
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
-  font-size: 13px;
-  font-weight: var(--au-font-weight-medium);
 }
 
 .au-menu-bar-panel__item {
@@ -127,9 +119,6 @@ function resolveItemKey(item, index) {
 
 .au-menu-bar-panel__leading,
 .au-menu-bar-panel__arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: auto;
   height: 14px;
   aspect-ratio: 1;
@@ -147,28 +136,10 @@ function resolveItemKey(item, index) {
   height: 100%;
 }
 
-.au-menu-bar-panel__label {
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.au-menu-bar-panel__shortcut,
 .au-menu-bar-panel__arrow {
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
   white-space: nowrap;
-}
-
-.au-menu-bar-panel__separator {
-  height: 1px;
-  margin: 5px 4px;
-  background: var(--au-color-border-muted);
-}
-
-.au-menu-bar-panel__submenu {
-  position: relative;
 }
 
 .au-menu-bar-panel__nested {
@@ -176,20 +147,4 @@ function resolveItemKey(item, index) {
   left: calc(100% + 3px);
 }
 
-@media (max-width: 480px) {
-  .au-menu-bar-panel__nested {
-    position: static;
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    margin-top: 2px;
-    box-shadow: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-menu-bar-panel__separator {
-    background: var(--au-color-text-secondary);
-  }
-}
 </style>

@@ -6,6 +6,9 @@
       'has-surface': surface,
       'au-material-surface': surface,
       'au-depth-overlay': surface,
+      'au-overlay-surface': surface,
+      'au-floating-viewport': surface,
+      'au-scroll-region': surface,
     }"
     :aria-label="ariaLabel"
   >
@@ -14,7 +17,7 @@
       <div class="au-date-picker-pane__navigation" aria-label="月份导航">
         <button
           v-if="showPreviousMonth"
-          class="au-date-picker-pane__nav au-focus-ring"
+          class="au-date-picker-pane__nav au-action-control au-focus-ring"
           type="button"
           aria-label="上个月"
           @click="navigateMonth(-1)"
@@ -23,7 +26,7 @@
         </button>
         <button
           v-if="showNextMonth"
-          class="au-date-picker-pane__nav au-focus-ring"
+          class="au-date-picker-pane__nav au-action-control au-focus-ring"
           type="button"
           aria-label="下个月"
           @click="navigateMonth(1)"
@@ -34,7 +37,7 @@
     </header>
 
     <div class="au-date-picker-pane__weekdays" role="row" aria-hidden="true">
-      <span v-for="weekday in weekdayLabels" :key="weekday" role="columnheader">
+      <span v-for="weekday in weekdayLabels" :key="weekday" class="au-grid-center" role="columnheader">
         {{ weekday }}
       </span>
     </div>
@@ -49,7 +52,7 @@
         ></span>
         <button
           v-else
-          class="au-date-picker-pane__day au-focus-ring"
+          class="au-date-picker-pane__day au-control-reset au-grid-center au-focus-ring au-forced-highlight au-hover-control au-disabled-text au-motion-reduce"
           :class="{
             'is-adjacent': !day.isCurrentMonth,
             'is-selected': day.isSelected || isRangeEndpoint(day.date),
@@ -77,11 +80,11 @@
       </template>
     </div>
 
-    <footer v-if="showToday || $slots.footer" class="au-date-picker-pane__footer">
+    <footer v-if="showToday || $slots.footer" class="au-date-picker-pane__footer au-picker-footer">
       <slot name="footer" :today="selectToday">
         <button
           v-if="showToday"
-          class="au-date-picker-pane__today au-focus-ring"
+          class="au-date-picker-pane__today au-action-control au-focus-ring"
           type="button"
           :disabled="isDisabled(today)"
           @click="selectToday"
@@ -338,18 +341,8 @@ defineExpose({ focus, showDate, paneRef });
 <style scoped>
 .au-date-picker-pane {
   width: 278px;
-  max-width: calc(100vw - 16px);
   padding: 10px;
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
   user-select: none;
-}
-
-.au-date-picker-pane.has-surface {
-  max-height: calc(100vh - 16px);
-  overflow: auto;
-  border: 1px solid var(--au-material-border);
-  overscroll-behavior: contain;
 }
 
 .au-date-picker-pane__header {
@@ -373,34 +366,10 @@ defineExpose({ focus, showDate, paneRef });
   gap: 2px;
 }
 
-.au-date-picker-pane__nav,
-.au-date-picker-pane__today {
-  display: inline-grid;
-  place-items: center;
-  height: 28px;
-  padding: 0;
-  border: 0;
-  border-radius: var(--au-radius-control);
-  color: var(--au-color-text-secondary);
-  background: transparent;
-  font: inherit;
-  cursor: pointer;
-  appearance: none;
-  transition:
-    color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing),
-    transform var(--au-transition-duration) var(--au-transition-timing);
-}
-
 .au-date-picker-pane__nav {
   width: 28px;
+  padding: 0;
   font-size: 16px;
-}
-
-.au-date-picker-pane__nav:hover,
-.au-date-picker-pane__today:hover:not(:disabled) {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
 }
 
 .au-date-picker-pane__nav:active,
@@ -421,8 +390,6 @@ defineExpose({ focus, showDate, paneRef });
 }
 
 .au-date-picker-pane__weekdays span {
-  display: grid;
-  place-items: center;
   height: 24px;
   color: var(--au-color-text-secondary);
   font-size: 11px;
@@ -440,30 +407,17 @@ defineExpose({ focus, showDate, paneRef });
 
 .au-date-picker-pane__day {
   position: relative;
-  display: grid;
-  place-items: center;
   width: 32px;
   justify-self: center;
-  padding: 0;
-  border: 0;
   border-radius: var(--au-radius-pill);
   color: var(--au-color-text-default);
-  background: transparent;
-  font: inherit;
   font-size: 13px;
   font-variant-numeric: tabular-nums;
   cursor: pointer;
-  appearance: none;
   transition:
     color var(--au-transition-duration) var(--au-transition-timing),
     background var(--au-transition-duration) var(--au-transition-timing),
     transform var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-date-picker-pane__day:hover:not(:disabled),
-.au-date-picker-pane__day:focus-visible:not(.is-selected) {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
 }
 
 .au-date-picker-pane__day.is-adjacent {
@@ -504,19 +458,14 @@ defineExpose({ focus, showDate, paneRef });
 }
 
 .au-date-picker-pane__day:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
   opacity: 0.5;
 }
 
 .au-date-picker-pane__footer {
-  display: flex;
-  align-items: center;
   justify-content: flex-end;
   min-height: 34px;
   margin-top: 7px;
   padding: 7px 3px 0;
-  border-top: 1px solid var(--au-material-border);
 }
 
 .au-date-picker-pane__today {
@@ -526,39 +475,11 @@ defineExpose({ focus, showDate, paneRef });
   font-weight: var(--au-font-weight-medium);
 }
 
-.au-date-picker-pane__today:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-date-picker-pane__nav,
-  .au-date-picker-pane__today,
-  .au-date-picker-pane__day {
-    transition: none;
-  }
-}
-
 @media (prefers-contrast: more) {
-  .au-date-picker-pane.has-surface {
-    border-color: var(--au-color-text-secondary);
-  }
-
   .au-date-picker-pane__day.is-selected {
     outline: 1px solid currentColor;
     outline-offset: -3px;
   }
 }
 
-@media (forced-colors: active) {
-  .au-date-picker-pane.has-surface {
-    border-color: CanvasText;
-    background: Canvas;
-  }
-
-  .au-date-picker-pane__day.is-selected {
-    color: HighlightText;
-    background: Highlight;
-  }
-}
 </style>

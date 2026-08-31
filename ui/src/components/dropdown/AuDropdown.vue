@@ -1,8 +1,8 @@
 <template>
-  <div class="au-dropdown au-component" :class="{ 'is-disabled': disabled }" v-bind="$attrs">
+  <div class="au-dropdown au-component au-inline-trigger" :class="{ 'is-disabled': disabled }" v-bind="$attrs">
     <span
       ref="triggerRef"
-      class="au-dropdown__trigger"
+      class="au-dropdown__trigger au-inline-trigger"
       :aria-haspopup="'menu'"
       :aria-expanded="visible"
       :aria-controls="visible ? menuId : undefined"
@@ -18,12 +18,12 @@
     </span>
 
     <Teleport :to="appendTo" :disabled="!teleported">
-      <Transition name="au-dropdown-fade">
+      <Transition name="au-float">
         <div
           v-if="visible"
           ref="menuRef"
           :id="menuId"
-          class="au-dropdown__menu au-component au-material-surface au-depth-surface au-motion-popover au-menu-surface"
+          class="au-dropdown__menu au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar"
           :class="`is-${activePlacement}`"
           :style="menuStyle"
           role="menu"
@@ -36,7 +36,7 @@
             <template v-for="(item, index) in items" :key="resolveItemKey(item, index)">
               <div
                 v-if="isDivider(item)"
-                class="au-dropdown__divider"
+                class="au-dropdown__divider au-menu-separator"
                 role="separator"
               ></div>
               <button
@@ -50,12 +50,12 @@
                 :disabled="item.disabled || selecting"
                 @click="selectItem(item)"
               >
-                <AuIcon v-if="item.icon" class="au-dropdown__item-icon" :icon="item.icon" />
-                <span class="au-dropdown__item-label">{{ resolveItemLabel(item) }}</span>
-                <span v-if="item.shortcut" class="au-dropdown__shortcut">{{ item.shortcut }}</span>
+                <AuIcon v-if="item.icon" class="au-dropdown__item-icon au-meta-muted" :icon="item.icon" />
+                <span class="au-dropdown__item-label au-menu-label">{{ resolveItemLabel(item) }}</span>
+                <span v-if="item.shortcut" class="au-dropdown__shortcut au-menu-shortcut au-meta-muted">{{ item.shortcut }}</span>
               </button>
             </template>
-            <div v-if="items.length === 0" class="au-dropdown__empty">暂无选项</div>
+            <div v-if="items.length === 0" class="au-dropdown__empty au-menu-empty">暂无选项</div>
           </slot>
         </div>
       </Transition>
@@ -344,17 +344,6 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 <style scoped>
 .au-dropdown {
   position: relative;
-  display: inline-flex;
-  min-width: 0;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
-.au-dropdown__trigger {
-  display: inline-flex;
-  min-width: 0;
-  max-width: 100%;
-  vertical-align: middle;
 }
 
 .au-dropdown__menu {
@@ -369,7 +358,6 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1.3;
-  overscroll-behavior: contain;
   transform-origin: top left;
 }
 
@@ -397,26 +385,8 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
   padding: 0 9px;
 }
 
-.au-dropdown__item-icon,
-.au-dropdown__shortcut {
-  flex: none;
-  color: var(--au-color-text-secondary);
-}
-
 .au-dropdown__item-icon {
   font-size: 14px;
-}
-
-.au-dropdown__item-label {
-  min-width: 0;
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.au-dropdown__shortcut {
-  margin-left: auto;
-  font-size: var(--au-font-size-small);
 }
 
 .au-dropdown__item.is-danger:hover:not(:disabled),
@@ -424,42 +394,8 @@ defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
   background: color-mix(in srgb, var(--au-color-danger) 10%, transparent);
 }
 
-.au-dropdown__divider {
-  height: 1px;
-  margin: 4px 5px;
-  background: var(--au-material-border-emphasis);
-}
-
-.au-dropdown__empty {
-  padding: 7px 9px;
-  color: var(--au-color-text-secondary);
-  font-size: var(--au-font-size-small);
-}
-
-.au-dropdown-fade-enter-from,
-.au-dropdown-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-3px) scale(0.985);
-}
-
-.au-dropdown__menu.is-top-start.au-dropdown-fade-enter-from,
-.au-dropdown__menu.is-top.au-dropdown-fade-enter-from,
-.au-dropdown__menu.is-top-end.au-dropdown-fade-enter-from,
-.au-dropdown__menu.is-top-start.au-dropdown-fade-leave-to,
-.au-dropdown__menu.is-top.au-dropdown-fade-leave-to,
-.au-dropdown__menu.is-top-end.au-dropdown-fade-leave-to {
-  transform: translateY(3px) scale(0.985);
-}
-
 .au-dropdown.is-disabled {
   cursor: not-allowed;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-dropdown-fade-enter-from,
-  .au-dropdown-fade-leave-to {
-    transform: none;
-  }
 }
 
 </style>

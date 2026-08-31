@@ -1,6 +1,6 @@
 <template>
   <span
-    class="au-icon au-component"
+    class="au-icon au-component au-inline-center"
     :style="iconStyle"
     :aria-hidden="ariaLabel ? undefined : 'true'"
     :aria-label="ariaLabel || undefined"
@@ -45,9 +45,6 @@ const iconStyle = computed(() => {
 
 <style scoped>
 .au-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: auto;
   height: 1em;
   aspect-ratio: 1;

@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="au-menu-list au-component au-material-surface au-material-surface--base"
+    class="au-menu-list au-component au-list-reset au-material-surface au-material-surface--base au-surface-frame au-surface-frame--rounded"
     :class="[`is-${density}`, { 'au-depth-surface': elevated }]"
     role="list"
     :aria-label="ariaLabel || undefined"
@@ -34,18 +34,7 @@ provide(AU_MENU_LIST_CONTEXT_KEY, {
 .au-menu-list {
   width: 100%;
   min-width: 0;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-surface);
   color: var(--au-color-text-primary);
-  list-style: none;
-}
-
-@media (prefers-contrast: more) {
-  .au-menu-list {
-    border-color: var(--au-color-text-secondary);
-  }
 }
 </style>

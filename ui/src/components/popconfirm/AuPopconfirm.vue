@@ -33,7 +33,7 @@
             :color="iconColor || undefined"
           />
         </slot>
-        <div class="au-popconfirm__title">
+        <div class="au-popconfirm__title au-wrap-anywhere">
           <slot>{{ title }}</slot>
         </div>
       </div>
@@ -177,7 +177,6 @@ defineExpose({ open, close, popoverRef });
   color: var(--au-color-text-primary);
   font-size: 13px;
   line-height: 1.45;
-  overflow-wrap: anywhere;
 }
 
 .au-popconfirm__actions {

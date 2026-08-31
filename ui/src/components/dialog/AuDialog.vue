@@ -3,14 +3,14 @@
     <Transition name="au-dialog-fade" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave">
       <div
         v-if="visible"
-        class="au-dialog__overlay au-motion-popover"
+        class="au-dialog__overlay au-motion-popover au-overscroll-contain"
         :class="{ 'is-modal': modal }"
         :style="overlayStyle"
         @mousedown.self="handleOverlayClick"
       >
         <section
           ref="dialogRef"
-          class="au-dialog au-component au-material-surface au-depth-overlay au-motion-popover"
+          class="au-dialog au-component au-material-surface au-depth-overlay au-motion-popover au-overlay-surface"
           :style="dialogStyle"
           role="dialog"
           :aria-modal="modal ? 'true' : undefined"
@@ -20,7 +20,7 @@
         >
           <header v-if="hasHeader" class="au-dialog__header">
             <slot name="header" :close="close">
-              <h2 :id="titleId" class="au-dialog__title">{{ title }}</h2>
+              <h2 :id="titleId" class="au-dialog__title au-wrap-anywhere">{{ title }}</h2>
             </slot>
             <AuTooltip v-if="showClose" :content="closeLabel" :disabled="!closeLabel">
               <AuButton
@@ -34,7 +34,7 @@
             </AuTooltip>
           </header>
 
-          <div class="au-dialog__body"><slot :close="close"></slot></div>
+          <div class="au-dialog__body au-scroll-region au-thin-scrollbar"><slot :close="close"></slot></div>
 
           <footer v-if="$slots.footer" class="au-dialog__footer">
             <slot name="footer" :close="close"></slot>
@@ -197,7 +197,6 @@ defineExpose({ close, dialogRef });
   align-items: center;
   justify-content: center;
   padding: 16px;
-  overscroll-behavior: contain;
 }
 
 .au-dialog__overlay.is-modal {
@@ -215,9 +214,6 @@ defineExpose({ close, dialogRef });
   min-width: 0;
   max-width: calc(100vw - 32px);
   overflow: hidden;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
   outline: none;
   pointer-events: auto;
   transform-origin: center;
@@ -234,9 +230,7 @@ defineExpose({ close, dialogRef });
 }
 
 .au-dialog__title {
-  min-width: 0;
   margin: 0;
-  overflow-wrap: anywhere;
   color: var(--au-color-text-primary);
   font-size: 18px;
   font-weight: var(--au-font-weight-semibold);
@@ -251,10 +245,7 @@ defineExpose({ close, dialogRef });
 .au-dialog__body {
   flex: 1;
   min-width: 0;
-  min-height: 0;
   padding: 16px 18px;
-  overflow: auto;
-  overscroll-behavior: contain;
 }
 
 .au-dialog__footer {

@@ -1,6 +1,6 @@
 <template>
   <a
-    class="au-link au-component au-focus-ring"
+    class="au-link au-component au-inline-center au-focus-ring au-disabled-text"
     :class="linkClasses"
     v-bind="$attrs"
     :href="disabled || !href ? undefined : href"
@@ -11,7 +11,7 @@
     <slot name="icon">
       <AuIcon v-if="icon" class="au-link__icon" :icon="icon" />
     </slot>
-    <span v-if="$slots.default" class="au-link__inner"><slot></slot></span>
+    <span v-if="$slots.default" class="au-link__inner au-wrap-anywhere"><slot></slot></span>
   </a>
 </template>
 
@@ -62,9 +62,6 @@ function handleClick(event) {
 
 <style scoped>
 .au-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   min-width: 0;
   max-width: 100%;
   gap: 4px;
@@ -84,8 +81,6 @@ function handleClick(event) {
 .au-link__inner {
   display: inline-flex;
   align-items: center;
-  min-width: 0;
-  overflow-wrap: anywhere;
   text-decoration-color: currentcolor;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -146,11 +141,6 @@ function handleClick(event) {
   color: color-mix(in srgb, var(--au-color-info) 76%, var(--au-color-text-primary));
 }
 
-.au-link.is-disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
-}
-
 .au-link__icon {
   font-size: 1em;
 }
@@ -158,10 +148,6 @@ function handleClick(event) {
 @media (forced-colors: active) {
   .au-link {
     color: LinkText;
-  }
-
-  .au-link.is-disabled {
-    color: GrayText;
   }
 
   .au-link:focus-visible {

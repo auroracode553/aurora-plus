@@ -30,7 +30,7 @@
 
       <button
         v-else-if="item === 'prev'"
-        class="au-pagination__button au-focus-ring"
+        class="au-pagination__button au-control-reset au-focus-ring au-forced-highlight au-disabled-text"
         type="button"
         :disabled="disabled || innerCurrentPage <= 1"
         :aria-label="prevAriaLabel"
@@ -46,7 +46,7 @@
         <button
           v-for="pager in pagerItems"
           :key="pager"
-          class="au-pagination__button au-focus-ring"
+          class="au-pagination__button au-control-reset au-focus-ring au-forced-highlight au-disabled-text"
           :class="{
             'is-active': pager === innerCurrentPage,
             'is-more': typeof pager === 'string',
@@ -65,7 +65,7 @@
 
       <button
         v-else-if="item === 'next'"
-        class="au-pagination__button au-focus-ring"
+        class="au-pagination__button au-control-reset au-focus-ring au-forced-highlight au-disabled-text"
         type="button"
         :disabled="disabled || innerCurrentPage >= resolvedPageCount"
         :aria-label="nextAriaLabel"
@@ -81,7 +81,7 @@
         <span>{{ jumpText }}</span>
         <input
           v-model="jumpPage"
-          class="au-pagination__input au-focus-ring"
+          class="au-pagination__input au-control-reset au-focus-ring au-disabled-text"
           type="number"
           inputmode="numeric"
           min="1"
@@ -93,7 +93,7 @@
         />
       </label>
 
-      <span v-else-if="item === '->'" class="au-pagination__spacer"></span>
+      <span v-else-if="item === '->'" class="au-pagination__spacer au-flex-spacer"></span>
       <slot v-else-if="item === 'slot'"></slot>
     </template>
   </nav>
@@ -283,10 +283,6 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   height: 28px;
   border: 1px solid var(--au-material-border-emphasis);
   border-radius: var(--au-radius-compact);
-  color: inherit;
-  background: transparent;
-  font: inherit;
-  appearance: none;
   transition:
     color var(--au-transition-duration) var(--au-transition-timing),
     border-color var(--au-transition-duration) var(--au-transition-timing),
@@ -332,8 +328,6 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 
 .au-pagination__button:disabled,
 .au-pagination__input:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
   opacity: 0.7;
 }
 
@@ -358,7 +352,6 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   width: 48px;
   padding: 0 6px;
   text-align: center;
-  outline: none;
   -moz-appearance: textfield;
 }
 
@@ -370,7 +363,6 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 
 .au-pagination__spacer {
   min-width: 8px;
-  flex: 1;
 }
 
 .au-pagination.is-small .au-pagination__button,
@@ -400,23 +392,10 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   min-width: 32px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-pagination__button,
-  .au-pagination__input {
-    transition: none;
-  }
-}
-
 @media (prefers-contrast: more) {
   .au-pagination__button.is-active {
     border-color: currentColor;
   }
 }
 
-@media (forced-colors: active) {
-  .au-pagination__button.is-active {
-    color: HighlightText;
-    background: Highlight;
-  }
-}
 </style>

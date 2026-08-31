@@ -1,0 +1,20 @@
+/* 卡片、面板和数据容器共用的轻量边界。 */
+.au-surface-frame {
+  border: 1px solid var(--au-material-border);
+}
+
+.au-surface-frame.au-surface-frame--rounded {
+  border-radius: var(--au-radius-surface);
+}
+
+@media (prefers-contrast: more) {
+  .au-surface-frame {
+    border-color: var(--au-color-text-secondary);
+  }
+}
+
+@media (forced-colors: active) {
+  .au-surface-frame {
+    border-color: CanvasText;
+  }
+}

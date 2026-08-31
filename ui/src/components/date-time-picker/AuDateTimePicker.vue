@@ -53,7 +53,7 @@
       />
     </template>
 
-    <section class="au-date-time-picker__popover au-component au-material-surface au-depth-overlay">
+    <section class="au-date-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
       <AuDatePickerPane
         ref="datePaneRef"
         :model-value="draftDate"
@@ -84,21 +84,21 @@
           :z-index="zIndex + 1"
           @update:model-value="updateDraftDate"
         />
-        <div v-if="draftInvalid" class="au-date-time-picker__status" role="status">
+        <div v-if="draftInvalid" class="au-date-time-picker__status au-field-feedback" role="status">
           该日期时间不可用
         </div>
       </div>
 
-      <footer class="au-date-time-picker__footer">
-        <button class="au-date-time-picker__action au-focus-ring" type="button" @click="selectNow">
+      <footer class="au-date-time-picker__footer au-picker-footer">
+        <button class="au-date-time-picker__action au-action-control au-focus-ring" type="button" @click="selectNow">
           现在
         </button>
-        <span class="au-date-time-picker__spacer"></span>
-        <button class="au-date-time-picker__action au-focus-ring" type="button" @click="cancel">
+        <span class="au-date-time-picker__spacer au-flex-spacer"></span>
+        <button class="au-date-time-picker__action au-action-control au-focus-ring" type="button" @click="cancel">
           取消
         </button>
         <button
-          class="au-date-time-picker__action is-primary au-focus-ring"
+          class="au-date-time-picker__action au-action-control is-primary au-focus-ring"
           type="button"
           :disabled="draftInvalid"
           @click="confirm"
@@ -392,14 +392,8 @@ defineExpose({ focus, blur, open, close, inputRef, datePaneRef, popoverRef });
 
 .au-date-time-picker__popover {
   width: 300px;
-  max-width: calc(100vw - 16px);
-  max-height: calc(100vh - 16px);
   overflow-x: hidden;
   overflow-y: auto;
-  border: 1px solid var(--au-material-border);
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
-  overscroll-behavior: contain;
 }
 
 .au-date-time-picker__popover :deep(.au-date-picker-pane) {
@@ -420,71 +414,10 @@ defineExpose({ focus, blur, open, close, inputRef, datePaneRef, popoverRef });
 
 .au-date-time-picker__status {
   margin-top: 7px;
-  color: var(--au-color-danger);
-  font-size: 11px;
 }
 
 .au-date-time-picker__footer {
-  display: flex;
-  align-items: center;
-  gap: 2px;
   min-height: 38px;
   padding: 5px 9px;
-  border-top: 1px solid var(--au-material-border);
-}
-
-.au-date-time-picker__spacer {
-  flex: 1;
-}
-
-.au-date-time-picker__action {
-  height: 28px;
-  padding: 0 8px;
-  border: 0;
-  border-radius: var(--au-radius-control);
-  color: var(--au-color-text-secondary);
-  background: transparent;
-  font: inherit;
-  font-size: var(--au-font-size-small);
-  font-weight: var(--au-font-weight-medium);
-  cursor: pointer;
-  appearance: none;
-}
-
-.au-date-time-picker__action:hover:not(:disabled) {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
-}
-
-.au-date-time-picker__action.is-primary {
-  color: var(--au-color-primary);
-}
-
-.au-date-time-picker__action:active:not(:disabled) {
-  transform: scale(0.96);
-}
-
-.au-date-time-picker__action:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-date-time-picker__action:active:not(:disabled) {
-    transform: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-date-time-picker__popover {
-    border-color: var(--au-color-text-secondary);
-  }
-}
-
-@media (forced-colors: active) {
-  .au-date-time-picker__popover {
-    border-color: CanvasText;
-    background: Canvas;
-  }
 }
 </style>

@@ -20,7 +20,7 @@
 
     <template #default="{ item, index }">
       <div
-        class="au-tree__item"
+        class="au-tree__item au-hover-control au-disabled-text au-motion-reduce au-contrast-current"
         :class="{ 'is-selected': isSelected(item), 'is-disabled': isDisabled(item) }"
         role="treeitem"
         :aria-level="resolveDepth(item) + 1"
@@ -31,7 +31,7 @@
       >
         <button
           v-if="collapsible && item.hasChildren"
-          class="au-tree__toggle au-focus-ring"
+          class="au-tree__toggle au-control-reset au-grid-center au-focus-ring au-hover-control au-motion-reduce"
           :class="{ 'is-expanded': !item.isCollapsed }"
           type="button"
           :aria-label="item.isCollapsed ? `展开 ${resolveLabel(item)}` : `折叠 ${resolveLabel(item)}`"
@@ -43,7 +43,7 @@
         <span v-else-if="collapsible" class="au-tree__toggle-placeholder" aria-hidden="true"></span>
 
         <button
-          class="au-tree__label au-focus-ring"
+          class="au-tree__label au-control-reset au-focus-ring"
           type="button"
           :disabled="isDisabled(item)"
           :tabindex="!isDisabled(item) && (isSelected(item) || isInitialFocusable(item, index)) ? 0 : -1"
@@ -52,7 +52,7 @@
           @click="selectItem(item)"
           @keydown="handleItemKeydown($event, item, index)"
         >
-          <span>{{ resolveLabel(item) }}</span>
+          <span class="au-truncate">{{ resolveLabel(item) }}</span>
         </button>
       </div>
     </template>
@@ -220,11 +220,6 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
     background var(--au-transition-duration) var(--au-transition-timing);
 }
 
-.au-tree__item:hover {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
-}
-
 .au-tree__item.is-selected {
   color: var(--au-color-primary);
   background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
@@ -232,13 +227,10 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
 }
 
 .au-tree__item.is-disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
   opacity: 0.58;
 }
 
 .au-tree__item.is-disabled:hover {
-  color: var(--au-color-text-disabled);
   background: transparent;
 }
 
@@ -250,25 +242,13 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
 }
 
 .au-tree__toggle {
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border: 0;
   border-radius: var(--au-radius-compact);
   color: var(--au-color-text-secondary);
-  background: transparent;
   cursor: pointer;
-  appearance: none;
   transition:
     color var(--au-transition-duration) var(--au-transition-timing),
     background var(--au-transition-duration) var(--au-transition-timing),
     transform var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-tree__toggle:hover,
-.au-tree__toggle:focus-visible {
-  color: var(--au-color-text-primary);
-  background: var(--au-color-background-hover);
 }
 
 .au-tree__toggle.is-expanded {
@@ -286,43 +266,17 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
   min-width: 0;
   height: 100%;
   flex: 1;
-  padding: 0;
   overflow: hidden;
-  border: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   text-align: left;
   cursor: pointer;
-  appearance: none;
 }
 
 .au-tree__label:disabled {
   cursor: not-allowed;
 }
 
-.au-tree__label span {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .au-tree__label:focus-visible {
   outline-offset: -2px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-tree__item,
-  .au-tree__toggle {
-    transition: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-tree__item.is-selected {
-    outline: 1px solid currentColor;
-    outline-offset: -1px;
-  }
-}
 </style>

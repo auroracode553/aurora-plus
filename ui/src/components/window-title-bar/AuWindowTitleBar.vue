@@ -23,7 +23,7 @@
     </div>
 
     <div
-      class="au-window-title-bar__title"
+      class="au-window-title-bar__title au-truncate"
       :title="titleText || undefined"
       @dblclick="handleTitleDoubleClick"
     >
@@ -59,7 +59,8 @@
           :disabled="!showTooltips"
         >
           <button
-            class="au-window-title-bar__button au-focus-ring"
+            class="au-window-title-bar__button au-control-reset au-inline-center au-focus-ring au-motion-reduce"
+            :class="{ 'au-disabled': minimizeDisabled }"
             type="button"
             :aria-label="minimizeLabel"
             :disabled="minimizeDisabled"
@@ -79,7 +80,8 @@
           :disabled="!showTooltips"
         >
           <button
-            class="au-window-title-bar__button au-focus-ring"
+            class="au-window-title-bar__button au-control-reset au-inline-center au-focus-ring au-motion-reduce"
+            :class="{ 'au-disabled': maximizeDisabled }"
             type="button"
             :aria-label="maximizeButtonLabel"
             :aria-pressed="maximized ? 'true' : 'false'"
@@ -103,7 +105,8 @@
           :disabled="!showTooltips"
         >
           <button
-            class="au-window-title-bar__button is-close au-focus-ring"
+            class="au-window-title-bar__button is-close au-control-reset au-inline-center au-focus-ring au-motion-reduce"
+            :class="{ 'au-disabled': closeDisabled }"
             type="button"
             :aria-label="closeLabel"
             :disabled="closeDisabled"
@@ -243,16 +246,12 @@ function handleTitleDoubleClick(event) {
   display: flex;
   align-items: center;
   flex: 1;
-  min-width: 0;
   height: 100%;
   padding: 0 8px;
-  overflow: hidden;
   color: inherit;
   font-size: 13px;
   font-weight: 400;
   line-height: 1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   -webkit-app-region: drag;
   pointer-events: auto;
 }
@@ -280,20 +279,12 @@ function handleTitleDoubleClick(event) {
 }
 
 .au-window-title-bar__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 40px;
   height: 100%;
   padding: 0;
   margin: 0;
-  border: 0;
   border-radius: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   cursor: pointer;
-  appearance: none;
   transition:
     color var(--au-transition-duration) var(--au-transition-timing),
     background-color var(--au-transition-duration) var(--au-transition-timing),
@@ -309,11 +300,6 @@ function handleTitleDoubleClick(event) {
   background: #e81123;
 }
 
-.au-window-title-bar__button:disabled {
-  cursor: not-allowed;
-  opacity: 0.48;
-}
-
 .au-window-title-bar__button:focus-visible {
   outline-offset: -2px;
 }
@@ -324,9 +310,4 @@ function handleTitleDoubleClick(event) {
   aspect-ratio: 1;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-window-title-bar__button {
-    transition-duration: 0.01ms;
-  }
-}
 </style>

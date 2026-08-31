@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-button au-component au-depth-control au-focus-ring"
+    class="au-button au-component au-control-reset au-inline-center au-depth-control au-focus-ring"
     :class="buttonClasses"
     :type="nativeType"
     :disabled="disabled || loading"
@@ -16,7 +16,7 @@
     <slot v-else name="icon">
       <AuIcon v-if="icon" class="au-button__icon" :icon="icon" />
     </slot>
-    <span v-if="$slots.default" class="au-button__content"><slot></slot></span>
+    <span v-if="$slots.default" class="au-button__content au-truncate"><slot></slot></span>
   </button>
 </template>
 
@@ -109,14 +109,10 @@ function handleClick(event) {
   --au-focus-ring-offset: 3px;
 
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   min-width: 0;
   max-width: 100%;
   height: 32px;
   gap: 6px;
-  margin: 0;
   padding: 8px 15px;
   overflow: hidden;
   border: 1px solid var(--au-material-border-emphasis);
@@ -130,7 +126,6 @@ function handleClick(event) {
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  appearance: none;
   transform: translateZ(0);
   transition:
     background var(--au-transition-duration) var(--au-transition-timing),
@@ -187,9 +182,6 @@ function handleClick(event) {
 .au-button__content {
   position: relative;
   z-index: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .au-button__icon,

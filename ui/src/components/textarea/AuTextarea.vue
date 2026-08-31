@@ -1,11 +1,12 @@
 <template>
   <span
-    class="au-textarea au-component"
+    class="au-textarea au-component au-field-shell au-focus-halo"
     :class="[
       `is-${size}`,
       `is-resize-${resize}`,
       {
         'is-disabled': disabled,
+        'au-disabled': disabled,
         'is-invalid': invalid,
       },
       $attrs.class,
@@ -14,7 +15,7 @@
   >
     <textarea
       ref="textareaRef"
-      class="au-textarea__control"
+      class="au-textarea__control au-control-reset"
       v-bind="getTextareaAttrs()"
       :value="inputValue"
       :rows="rows"
@@ -100,43 +101,6 @@ defineExpose({ focus, blur, select, textareaRef });
 <style scoped>
 .au-textarea {
   position: relative;
-  display: inline-flex;
-  width: 100%;
-  min-width: 0;
-  border: 0.5px solid var(--au-material-border-emphasis);
-  border-radius: var(--au-radius-control);
-  color: var(--au-color-text-default);
-  background: var(--au-material-background-subtle);
-  font-size: 13px;
-  transition:
-    border-color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing),
-    box-shadow var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-textarea.is-small {
-  border-radius: var(--au-radius-compact);
-  font-size: var(--au-font-size-small);
-}
-
-.au-textarea.is-large {
-  border-radius: var(--au-radius-control);
-  font-size: var(--au-font-size-base);
-}
-
-.au-textarea:focus-within:not(.is-disabled) {
-  border-color: color-mix(in srgb, var(--au-color-primary) 45%, transparent);
-  background: var(--au-material-background-subtle);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 8%, transparent);
-}
-
-.au-textarea.is-invalid {
-  border-color: color-mix(in srgb, var(--au-color-danger) 60%, transparent);
-}
-
-.au-textarea.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
 }
 
 .au-textarea__control {
@@ -146,11 +110,6 @@ defineExpose({ focus, blur, select, textareaRef });
   max-width: 100%;
   min-height: 68px;
   padding: 8px 10px;
-  border: 0;
-  outline: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
   line-height: 1.5;
 }
 
@@ -193,9 +152,4 @@ defineExpose({ focus, blur, select, textareaRef });
   pointer-events: none;
 }
 
-@media (forced-colors: active) {
-  .au-textarea {
-    border: 1px solid CanvasText;
-  }
-}
 </style>

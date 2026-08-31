@@ -14,7 +14,7 @@
         class="au-menu-bar__root"
       >
         <button
-          class="au-menu-bar__trigger au-focus-ring"
+          class="au-menu-bar__trigger au-action-control au-truncate au-focus-ring"
           :class="{ 'is-open': openIndex === index }"
           type="button"
           role="menuitem"
@@ -185,29 +185,15 @@ defineExpose({ close: closeMenu, menuBarRef });
 }
 
 .au-menu-bar__trigger {
-  min-width: 0;
   max-width: 100%;
   height: 26px;
   padding: 0 clamp(4px, 2vw, 9px);
-  overflow: hidden;
-  border: 0;
   border-radius: var(--au-radius-compact);
   color: inherit;
-  background: transparent;
-  font: inherit;
   line-height: 1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  appearance: none;
   -webkit-app-region: no-drag;
-  transition:
-    color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing);
 }
 
-.au-menu-bar__trigger:hover:not(:disabled),
-.au-menu-bar__trigger:focus-visible,
 .au-menu-bar__trigger.is-open {
   color: var(--au-color-text-primary);
   background: var(--au-color-background-hover);
@@ -215,11 +201,6 @@ defineExpose({ close: closeMenu, menuBarRef });
 
 .au-menu-bar__trigger:active:not(:disabled) {
   background: color-mix(in srgb, var(--au-color-primary) 14%, transparent);
-}
-
-.au-menu-bar__trigger:disabled {
-  color: var(--au-color-text-disabled);
-  cursor: not-allowed;
 }
 
 .au-menu-bar__trigger:focus-visible {
@@ -232,9 +213,4 @@ defineExpose({ close: closeMenu, menuBarRef });
   -webkit-app-region: drag;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-menu-bar__trigger {
-    transition: none;
-  }
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <label
-    class="au-checkbox au-component"
+    class="au-checkbox au-component au-choice-control"
     :class="[
       `is-${size}`,
       {
@@ -23,10 +23,10 @@
       v-bind="$attrs"
       @change="handleChange"
     />
-    <span class="au-checkbox__box au-depth-control" aria-hidden="true">
+    <span class="au-checkbox__box au-depth-control au-inline-center" aria-hidden="true">
       <span class="au-checkbox__mark"></span>
     </span>
-    <span v-if="hasLabel" class="au-checkbox__label au-wrap-anywhere">
+    <span v-if="hasLabel" class="au-checkbox__label au-choice-label au-wrap-anywhere">
       <slot>{{ label }}</slot>
     </span>
   </label>
@@ -86,42 +86,7 @@ onMounted(syncIndeterminate);
 </script>
 
 <style scoped>
-.au-checkbox {
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
-  max-width: 100%;
-  gap: 7px;
-  min-height: 28px;
-  color: var(--au-color-text-default);
-  font-size: var(--au-font-size-base);
-  font-weight: var(--au-font-weight-medium);
-  line-height: 1.3;
-  cursor: pointer;
-  user-select: none;
-}
-
-.au-checkbox__label {
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.au-checkbox.is-small {
-  gap: 6px;
-  min-height: 24px;
-  font-size: var(--au-font-size-small);
-}
-
-.au-checkbox.is-large {
-  gap: 8px;
-  min-height: 32px;
-  font-size: var(--au-font-size-large);
-}
-
 .au-checkbox__box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: auto;
   height: 18px;
   aspect-ratio: 1;

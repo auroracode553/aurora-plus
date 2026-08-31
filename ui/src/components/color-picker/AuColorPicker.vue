@@ -1,7 +1,7 @@
 <template>
   <label
-    class="au-color-picker au-component"
-    :class="[`is-${size}`, { 'is-disabled': disabled }, $attrs.class]"
+    class="au-color-picker au-component au-focus-halo"
+    :class="[`is-${size}`, { 'is-disabled': disabled, 'au-disabled': disabled }, $attrs.class]"
     :style="$attrs.style"
   >
     <span class="au-color-picker__swatch" :style="{ backgroundColor: resolvedValue }"></span>
@@ -99,16 +99,6 @@ defineExpose({ focus, inputRef });
 .au-color-picker:hover:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 30%, var(--au-color-border-muted));
   background: var(--au-color-background-hover);
-}
-
-.au-color-picker:focus-within:not(.is-disabled) {
-  border-color: color-mix(in srgb, var(--au-color-primary) 45%, transparent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 8%, transparent);
-}
-
-.au-color-picker.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
 }
 
 .au-color-picker__swatch {
