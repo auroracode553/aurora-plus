@@ -27,6 +27,8 @@ vitepress/
 
 `ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；Tabler 图标通过本地 `aurora-ui` 包的运行时依赖与公共导出使用。源码模式只改变 Vite 的模块解析目标，不改变文档示例展示给使用者的导入方式。
 
+文档站使用 VitePress 2 预发布版及 Vite 8。Vite 8 仅支持 Sass 现代 API，因此 `.vitepress/config.js` 不再声明已移除的 `scss.api` 兼容选项。Vite 8 使用 Rolldown 和 Oxc，运行环境需满足 Node.js 20.19+ 或 22.12+；GitHub Pages 工作流使用 Node.js 24。
+
 图标目录的分类索引由 `icon-metadata-plugin.js` 在构建期读取 Aurora UI 实际依赖版本的 Tabler 官方元数据，并通过虚拟模块交给文档页面。分类数据不会打进 UI 库产物，也不需要在文档站重复维护图标版本。
 
 ## 联调流程
