@@ -78,7 +78,8 @@ const props = defineProps({
   confirmButtonLoading: { type: Boolean, default: false },
   confirmButtonDisabled: { type: Boolean, default: false },
   cancelButtonDisabled: { type: Boolean, default: false },
-  icon: { type: [Object, Function], default: IconAlertCircle },
+  // 函数组件必须由默认值工厂返回，避免 Vue 将图标本身当作工厂调用。
+  icon: { type: [Object, Function], default: () => IconAlertCircle },
   iconColor: { type: String, default: '' },
   hideIcon: { type: Boolean, default: false },
   width: { type: [String, Number], default: 220 },
