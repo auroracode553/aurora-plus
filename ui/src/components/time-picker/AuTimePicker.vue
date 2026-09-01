@@ -344,7 +344,7 @@ watch(visible, (value) => emit('visible-change', value));
 defineExpose({ focus, blur, open, close, inputRef, popoverRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-time-picker {
   width: 100%;
 }

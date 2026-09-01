@@ -103,7 +103,7 @@ function resolveItemKey(item, index) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-menu-bar-panel {
   position: absolute;
   top: 100%;

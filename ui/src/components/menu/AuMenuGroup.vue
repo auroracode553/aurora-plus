@@ -22,7 +22,7 @@ const menuMode = computed(() => menu?.mode.value || 'vertical');
 const collapsed = computed(() => Boolean(menu?.collapsed.value));
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-menu-group {
   display: block;
   min-width: 0;

@@ -1,4 +1,4 @@
-import './theme/index.css';
+import './theme/index.scss';
 
 import { AuButton } from './components/button/index.js';
 import { AuButtonGroup, AuButtonGroupItem } from './components/button-group/index.js';

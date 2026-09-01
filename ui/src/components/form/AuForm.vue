@@ -187,7 +187,7 @@ defineExpose({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-form {
   display: block;
   min-width: 0;

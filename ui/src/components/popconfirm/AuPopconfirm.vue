@@ -154,7 +154,7 @@ watch(
 defineExpose({ open, close, popoverRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-popconfirm__content {
   max-width: calc(100vw - 40px);
 }

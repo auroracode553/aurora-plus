@@ -81,7 +81,7 @@ function clampChannel(value) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-color-swatch {
   display: inline-grid;
   place-items: center;

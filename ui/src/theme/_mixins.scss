@@ -1,0 +1,8 @@
+// 控制组支持直接按钮、包装按钮和 Popover 触发按钮三种结构。
+@mixin control-group-buttons($state: '') {
+  .au-control-group.au-component > .au-button.au-component#{$state},
+  .au-control-group.au-component > .au-button-group-item > .au-button.au-component#{$state},
+  .au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component#{$state} {
+    @content;
+  }
+}

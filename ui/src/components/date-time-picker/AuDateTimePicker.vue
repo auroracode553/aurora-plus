@@ -385,7 +385,7 @@ watch(visible, (value) => emit('visible-change', value));
 defineExpose({ focus, blur, open, close, inputRef, datePaneRef, popoverRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-date-time-picker {
   width: 100%;
 }

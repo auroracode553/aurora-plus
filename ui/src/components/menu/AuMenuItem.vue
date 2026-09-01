@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-menu-item {
   display: block;
   min-width: 0;

@@ -174,7 +174,7 @@ function scrollToIndex(index, align = 'auto') {
 defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-tree {
   min-width: 0;
   max-width: 100%;

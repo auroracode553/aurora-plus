@@ -85,7 +85,7 @@ watch(() => props.indeterminate, syncIndeterminate);
 onMounted(syncIndeterminate);
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-checkbox__box {
   width: auto;
   height: 18px;

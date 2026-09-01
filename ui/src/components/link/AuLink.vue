@@ -60,7 +60,9 @@ function handleClick(event) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../theme/config';
+
 .au-link {
   min-width: 0;
   max-width: 100%;
@@ -91,54 +93,20 @@ function handleClick(event) {
   text-decoration-line: underline;
 }
 
-.au-link--primary {
-  color: var(--au-color-primary);
-}
+@each $tone, $color in config.$semantic-colors {
+  .au-link--#{$tone} {
+    color: $color;
 
-.au-link--success {
-  color: var(--au-color-success);
-}
-
-.au-link--warning {
-  color: var(--au-color-warning);
-}
-
-.au-link--danger {
-  color: var(--au-color-danger);
-}
-
-.au-link--info {
-  color: var(--au-color-info);
+    &:hover:not(.is-disabled),
+    &:active:not(.is-disabled) {
+      color: color-mix(in srgb, $color 76%, var(--au-color-text-primary));
+    }
+  }
 }
 
 .au-link--default:hover:not(.is-disabled),
 .au-link--default:active:not(.is-disabled) {
   color: var(--au-color-primary);
-}
-
-.au-link--primary:hover:not(.is-disabled),
-.au-link--primary:active:not(.is-disabled) {
-  color: color-mix(in srgb, var(--au-color-primary) 76%, var(--au-color-text-primary));
-}
-
-.au-link--success:hover:not(.is-disabled),
-.au-link--success:active:not(.is-disabled) {
-  color: color-mix(in srgb, var(--au-color-success) 76%, var(--au-color-text-primary));
-}
-
-.au-link--warning:hover:not(.is-disabled),
-.au-link--warning:active:not(.is-disabled) {
-  color: color-mix(in srgb, var(--au-color-warning) 76%, var(--au-color-text-primary));
-}
-
-.au-link--danger:hover:not(.is-disabled),
-.au-link--danger:active:not(.is-disabled) {
-  color: color-mix(in srgb, var(--au-color-danger) 76%, var(--au-color-text-primary));
-}
-
-.au-link--info:hover:not(.is-disabled),
-.au-link--info:active:not(.is-disabled) {
-  color: color-mix(in srgb, var(--au-color-info) 76%, var(--au-color-text-primary));
 }
 
 .au-link__icon {

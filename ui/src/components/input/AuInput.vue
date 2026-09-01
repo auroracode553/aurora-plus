@@ -192,7 +192,7 @@ function select() {
 defineExpose({ focus, blur, select, inputRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-input {
   align-items: center;
   padding: 0 10px;

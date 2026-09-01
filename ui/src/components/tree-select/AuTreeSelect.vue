@@ -282,7 +282,7 @@ watch(visible, (value) => emit('visible-change', value));
 defineExpose({ focus, blur, open, close, inputRef, treeRef, popoverRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-tree-select {
   width: 100%;
 }

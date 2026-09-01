@@ -1,0 +1,22 @@
+$semantic-colors: (
+  primary: var(--au-color-primary),
+  success: var(--au-color-success),
+  info: var(--au-color-info),
+  warning: var(--au-color-warning),
+  danger: var(--au-color-danger),
+);
+
+$button-active-blends: (
+  primary: #102f72,
+  success: #15573e,
+  info: #3d4657,
+  warning: #754815,
+  danger: #7e1e32,
+);
+
+$menu-tones: (
+  primary: var(--au-color-primary),
+  success: var(--au-color-success),
+  warning: var(--au-color-warning),
+  danger: var(--au-color-danger),
+);

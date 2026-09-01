@@ -22,7 +22,7 @@ vitepress/
 
 文档站保留 `"aurora-ui": "file:../ui"` 作为组件库依赖，示例始终使用公开入口 `import 'aurora-ui'`，不暴露组件库内部文件路径。Vite 根据环境切换公开入口的实际来源：
 
-- 默认开发模式将 `aurora-ui` 和 `aurora-ui/style.css` 映射到 `../ui/src`，组件源码修改后可直接更新实时示例。
+- 默认开发模式将 `aurora-ui` 和 `aurora-ui/style.css` 映射到 `../ui/src`，组件源码与 SCSS 主题修改后可直接更新实时示例。
 - 设置 `AURORA_UI_USE_DIST=true` 时不启用源码映射，由 UI 包自身的 `exports` 解析到 `ui/dist`，用于发布前验证和 GitHub Pages 构建。
 
 `ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；Tabler 图标通过本地 `aurora-ui` 包的运行时依赖与公共导出使用。源码模式只改变 Vite 的模块解析目标，不改变文档示例展示给使用者的导入方式。
@@ -67,6 +67,7 @@ GitHub Pages 流水线使用 dist 模式：先安装并构建 `ui`，然后以 `
 - VitePress `^1.6.4`
 - Vue `^3.5.40`
 - Shiki `^2.5.0`
+- Sass `^1.103.1`（编译源码模式下的 Aurora UI SCSS）
 
 依赖由使用者手动安装：
 

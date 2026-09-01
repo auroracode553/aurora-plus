@@ -30,7 +30,7 @@ provide(AU_MENU_LIST_CONTEXT_KEY, {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-menu-list {
   width: 100%;
   min-width: 0;

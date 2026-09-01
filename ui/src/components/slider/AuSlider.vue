@@ -274,7 +274,7 @@ watch(
 defineExpose({ focus, blur, inputRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-slider {
   display: inline-flex;
   align-items: center;

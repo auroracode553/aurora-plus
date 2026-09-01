@@ -81,7 +81,7 @@ function handleKeydown(event) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-tabs {
   display: flex;
   align-items: stretch;

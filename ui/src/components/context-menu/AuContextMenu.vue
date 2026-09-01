@@ -283,7 +283,7 @@ onBeforeUnmount(() => {
 defineExpose({ close, menuRef, updatePosition });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-context-menu,
 .au-context-submenu {
   position: fixed;

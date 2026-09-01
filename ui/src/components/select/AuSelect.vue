@@ -519,7 +519,7 @@ onBeforeUnmount(() => {
 defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-select {
   align-items: center;
 }

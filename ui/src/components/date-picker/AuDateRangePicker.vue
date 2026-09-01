@@ -504,7 +504,7 @@ defineExpose({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-date-range-picker {
   width: 100%;
 }

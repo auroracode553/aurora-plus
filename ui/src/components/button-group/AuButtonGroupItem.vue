@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .au-button-group-item {
   position: relative;
   display: flex;

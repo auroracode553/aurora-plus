@@ -212,7 +212,7 @@ onBeforeUnmount(() => {
 defineExpose({ hide, show, toolbarRef, updatePosition });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-floating-toolbar {
   position: fixed;
   display: inline-flex;

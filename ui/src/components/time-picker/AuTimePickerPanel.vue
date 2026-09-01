@@ -102,7 +102,7 @@ function updatePart(part, rawValue) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-time-picker-panel {
   display: flex;
   align-items: flex-end;

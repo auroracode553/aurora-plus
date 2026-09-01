@@ -40,7 +40,7 @@ defineEmits(['close', 'pause', 'resume']);
 const hostStyle = computed(() => ({ top: `${props.offset}px` }));
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-message-host {
   position: fixed;
   left: 50%;

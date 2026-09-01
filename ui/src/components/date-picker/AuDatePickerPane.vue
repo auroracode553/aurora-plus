@@ -338,7 +338,7 @@ watch(
 defineExpose({ focus, showDate, paneRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-date-picker-pane {
   width: 278px;
   padding: 10px;

@@ -240,7 +240,7 @@ onBeforeUnmount(() => form?.unregisterField(fieldId));
 defineExpose(fieldContext);
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-form-item {
   display: flex;
   align-items: flex-start;

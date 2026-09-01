@@ -42,7 +42,7 @@ defineProps({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-button-group {
   display: inline-flex;
   align-items: center;

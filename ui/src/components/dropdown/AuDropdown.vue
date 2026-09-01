@@ -341,7 +341,7 @@ onBeforeUnmount(() => {
 defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-dropdown {
   position: relative;
 }

@@ -147,7 +147,7 @@ onBeforeUnmount(() => {
 defineExpose({ close: closeMenu, menuBarRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-menu-bar {
   position: relative;
   z-index: 1800;

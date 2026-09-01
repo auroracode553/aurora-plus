@@ -184,7 +184,7 @@ provide(AU_MENU_CONTEXT_KEY, {
 defineExpose({ focus, menuRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-menu {
   display: flex;
   min-width: 0;

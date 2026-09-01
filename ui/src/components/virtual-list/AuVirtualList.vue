@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
 defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-virtual-list {
   position: relative;
   min-width: 0;

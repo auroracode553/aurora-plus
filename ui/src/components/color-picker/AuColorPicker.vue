@@ -68,7 +68,7 @@ function focus(options) {
 defineExpose({ focus, inputRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-color-picker {
   position: relative;
   display: inline-grid;

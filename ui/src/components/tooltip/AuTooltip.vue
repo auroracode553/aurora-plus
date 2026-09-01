@@ -200,7 +200,7 @@ onBeforeUnmount(() => {
 defineExpose({ hide, show, updatePosition });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-tooltip__popper {
   position: fixed;
   z-index: var(--au-z-index-hint);

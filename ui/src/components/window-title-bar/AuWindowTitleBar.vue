@@ -198,7 +198,7 @@ function handleTitleDoubleClick(event) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-window-title-bar {
   position: relative;
   z-index: 10001;

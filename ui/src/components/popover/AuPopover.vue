@@ -312,7 +312,7 @@ onBeforeUnmount(() => {
 defineExpose({ open, close, toggle, updatePosition, triggerRef, contentRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-popover.is-disabled {
   cursor: not-allowed;
 }

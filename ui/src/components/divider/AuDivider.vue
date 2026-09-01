@@ -17,7 +17,7 @@ defineProps({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-divider {
   flex: none;
   border: 0;

@@ -43,7 +43,7 @@ const iconStyle = computed(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-icon {
   width: auto;
   height: 1em;

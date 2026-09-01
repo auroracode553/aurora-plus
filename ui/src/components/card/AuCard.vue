@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .au-card {
   min-width: 0;
   max-width: 100%;

@@ -20,7 +20,7 @@ const auroraSourceAliases = useAuroraDist
       {
         find: /^aurora-ui\/style\.css$/,
         replacement: fileURLToPath(
-          new URL('../../ui/src/theme/index.css', import.meta.url),
+          new URL('../../ui/src/theme/index.scss', import.meta.url),
         ),
       },
     ];

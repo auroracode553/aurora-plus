@@ -125,7 +125,9 @@ function handleClick(event) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../theme/config';
+
 .au-menu-list-item {
   position: relative;
   min-width: 0;
@@ -260,66 +262,33 @@ function handleClick(event) {
   white-space: nowrap;
 }
 
-.au-menu-list-item.is-tone-primary .au-menu-list-item__title,
-.au-menu-list-item.is-tone-primary .au-menu-list-item__leading {
-  color: var(--au-color-primary);
-}
+@each $tone, $color in config.$menu-tones {
+  .au-menu-list-item.is-tone-#{$tone} {
+    :is(.au-menu-list-item__title, .au-menu-list-item__leading) {
+      color: $color;
+    }
 
-.au-menu-list-item.is-tone-success .au-menu-list-item__title,
-.au-menu-list-item.is-tone-success .au-menu-list-item__leading {
-  color: var(--au-color-success);
-}
+    @if $tone != primary {
+      &.has-leading-tinted .au-menu-list-item__leading {
+        background: color-mix(in srgb, $color 10%, transparent);
+      }
 
-.au-menu-list-item.is-tone-warning .au-menu-list-item__title,
-.au-menu-list-item.is-tone-warning .au-menu-list-item__leading {
-  color: var(--au-color-warning);
-}
+      &.is-interactive .au-menu-list-item__row {
+        &:hover,
+        &:focus-visible {
+          background: color-mix(in srgb, $color 8%, transparent);
+        }
 
-.au-menu-list-item.is-tone-danger .au-menu-list-item__title,
-.au-menu-list-item.is-tone-danger .au-menu-list-item__leading {
-  color: var(--au-color-danger);
-}
+        &:active {
+          background: color-mix(in srgb, $color 13%, transparent);
+        }
+      }
 
-.au-menu-list-item.is-tone-success.has-leading-tinted .au-menu-list-item__leading {
-  background: color-mix(in srgb, var(--au-color-success) 10%, transparent);
-}
-
-.au-menu-list-item.is-tone-warning.has-leading-tinted .au-menu-list-item__leading {
-  background: color-mix(in srgb, var(--au-color-warning) 10%, transparent);
-}
-
-.au-menu-list-item.is-tone-danger.has-leading-tinted .au-menu-list-item__leading {
-  background: color-mix(in srgb, var(--au-color-danger) 10%, transparent);
-}
-
-.au-menu-list-item.is-interactive.is-tone-success .au-menu-list-item__row:hover,
-.au-menu-list-item.is-interactive.is-tone-success .au-menu-list-item__row:focus-visible,
-.au-menu-list-item.is-tone-success.is-selected .au-menu-list-item__row {
-  background: color-mix(in srgb, var(--au-color-success) 8%, transparent);
-}
-
-.au-menu-list-item.is-interactive.is-tone-warning .au-menu-list-item__row:hover,
-.au-menu-list-item.is-interactive.is-tone-warning .au-menu-list-item__row:focus-visible,
-.au-menu-list-item.is-tone-warning.is-selected .au-menu-list-item__row {
-  background: color-mix(in srgb, var(--au-color-warning) 8%, transparent);
-}
-
-.au-menu-list-item.is-interactive.is-tone-danger .au-menu-list-item__row:hover,
-.au-menu-list-item.is-interactive.is-tone-danger .au-menu-list-item__row:focus-visible,
-.au-menu-list-item.is-tone-danger.is-selected .au-menu-list-item__row {
-  background: color-mix(in srgb, var(--au-color-danger) 8%, transparent);
-}
-
-.au-menu-list-item.is-interactive.is-tone-success .au-menu-list-item__row:active {
-  background: color-mix(in srgb, var(--au-color-success) 13%, transparent);
-}
-
-.au-menu-list-item.is-interactive.is-tone-warning .au-menu-list-item__row:active {
-  background: color-mix(in srgb, var(--au-color-warning) 13%, transparent);
-}
-
-.au-menu-list-item.is-interactive.is-tone-danger .au-menu-list-item__row:active {
-  background: color-mix(in srgb, var(--au-color-danger) 13%, transparent);
+      &.is-selected .au-menu-list-item__row {
+        background: color-mix(in srgb, $color 8%, transparent);
+      }
+    }
+  }
 }
 
 .au-menu-list-item.is-compact .au-menu-list-item__row {

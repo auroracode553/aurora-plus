@@ -583,7 +583,7 @@ defineExpose({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-image-preview {
   position: fixed;
   right: 0;

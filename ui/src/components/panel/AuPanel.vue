@@ -66,7 +66,7 @@ function formatSize(value) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-panel {
   display: flex;
   min-width: 0;

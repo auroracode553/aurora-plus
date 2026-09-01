@@ -98,7 +98,7 @@ function select() {
 defineExpose({ focus, blur, select, textareaRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-textarea {
   position: relative;
 }

@@ -63,7 +63,7 @@ async function handleAction(action) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-message-box__message {
   color: var(--au-color-text-default);
   font-size: var(--au-font-size-base);

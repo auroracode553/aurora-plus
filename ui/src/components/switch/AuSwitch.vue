@@ -63,7 +63,7 @@ function toggle() {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-switch {
   --au-focus-ring-offset: 3px;
 

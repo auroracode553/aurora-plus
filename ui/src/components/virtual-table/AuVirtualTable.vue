@@ -388,7 +388,7 @@ defineExpose({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-virtual-table {
   position: relative;
   min-width: 0;

@@ -189,7 +189,7 @@ onBeforeUnmount(deactivateDialog);
 defineExpose({ close, dialogRef });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-dialog__overlay {
   position: fixed;
   inset: 0;

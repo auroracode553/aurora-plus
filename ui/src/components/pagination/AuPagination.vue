@@ -261,7 +261,7 @@ watch(
 defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setCurrentPage });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .au-pagination {
   display: flex;
   align-items: center;
