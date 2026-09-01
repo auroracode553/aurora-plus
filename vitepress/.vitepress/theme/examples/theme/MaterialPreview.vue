@@ -12,16 +12,15 @@
         <span>{{ currentOption.description }}</span>
       </div>
 
-      <AuButtonGroup variant="segmented" aria-label="选择材质">
-        <AuButton
+      <AuButtonGroup variant="segmented" size="small" aria-label="选择材质">
+        <AuButtonGroupItem
           v-for="option in options"
           :key="option.value"
-          size="small"
           :aria-pressed="material === option.value"
           @click="selectMaterial(option.value)"
         >
           {{ option.label }}
-        </AuButton>
+        </AuButtonGroupItem>
       </AuButtonGroup>
     </div>
 
@@ -39,9 +38,9 @@
           <div class="material-preview__card-footer">
             <span>按钮组、卡片和文字会同步响应</span>
             <AuButtonGroup variant="floating" icon-only aria-label="面板操作">
-              <AuButton :icon="IconMinus" aria-label="收起面板" />
-              <AuButton :icon="IconLayoutSidebar" aria-label="切换视图" />
-              <AuButton :icon="IconCode" aria-label="查看源码" />
+              <AuButtonGroupItem :icon="IconMinus" aria-label="收起面板" />
+              <AuButtonGroupItem :icon="IconLayoutSidebar" aria-label="切换视图" />
+              <AuButtonGroupItem :icon="IconCode" aria-label="查看源码" />
             </AuButtonGroup>
           </div>
         </AuCard>
@@ -55,6 +54,7 @@ import { computed, onMounted } from 'vue';
 import {
   AuButton,
   AuButtonGroup,
+  AuButtonGroupItem,
   AuCard,
   IconCode,
   IconLayoutSidebar,

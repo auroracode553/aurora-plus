@@ -34,6 +34,7 @@ import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasi
 | `showAfter` | 显示延迟，单位 ms | `number` | `220` |
 | `hideAfter` | 隐藏延迟，单位 ms | `number` | `80` |
 | `disabled` | 是否禁用提示 | `boolean` | `false` |
+| `fillTrigger` | 触发区域是否填满父容器高度 | `boolean` | `false` |
 | `maxWidth` | 最大宽度；数字会转换为 px | `string / number` | `280` |
 | `teleported` | 是否传送到 `appendTo` | `boolean` | `true` |
 | `appendTo` | Teleport 目标 | `string / HTMLElement` | `body` |

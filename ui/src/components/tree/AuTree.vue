@@ -13,7 +13,7 @@
   >
     <template #empty>
       <div class="au-tree__empty" role="status">
-        <AuIcon :icon="IconFileText" />
+        <AuIcon class="au-tree__empty-icon" :icon="IconFileText" />
         <span>{{ emptyText }}</span>
       </div>
     </template>
@@ -38,7 +38,7 @@
           :aria-expanded="!item.isCollapsed"
           @click.stop="emit('toggle', item)"
         >
-          <AuIcon :icon="IconChevronRight" />
+          <AuIcon class="au-tree__toggle-icon" :icon="IconChevronRight" />
         </button>
         <span v-else-if="collapsible" class="au-tree__toggle-placeholder" aria-hidden="true"></span>
 
@@ -194,7 +194,7 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
   text-align: center;
 }
 
-.au-tree__empty :deep(svg) {
+.au-tree__empty-icon {
   width: auto;
   height: 26px;
   aspect-ratio: 1;
@@ -255,7 +255,7 @@ defineExpose({ scrollToIndex, scrollToTop, virtualListRef });
   transform: rotate(90deg);
 }
 
-.au-tree__toggle :deep(svg) {
+.au-tree__toggle-icon {
   width: 13px;
   height: 13px;
 }

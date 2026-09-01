@@ -31,7 +31,6 @@
         clearable-when-readonly
         replace-suffix-on-clear
         :invalid="invalid"
-        :suffix-icon="IconChevronDown"
         v-bind="inputAttrs"
         role="combobox"
         aria-haspopup="tree"
@@ -44,7 +43,15 @@
         @focus="handleFocus"
         @blur="emit('blur', $event)"
         @keydown="handleInputKeydown"
-      />
+      >
+        <template #suffix>
+          <AuIcon
+            class="au-tree-select__arrow au-motion-reduce-transform"
+            :class="{ 'is-expanded': visible }"
+            :icon="IconChevronDown"
+          />
+        </template>
+      </AuInput>
       <input
         v-if="$attrs.name"
         type="hidden"
@@ -79,6 +86,7 @@
 <script setup>
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
 import { IconChevronDown } from '@tabler/icons-vue';
+import { AuIcon } from '../icon/index.js';
 import { AuInput } from '../input/index.js';
 import { AuPopover } from '../popover/index.js';
 import { AuTree } from '../tree/index.js';
@@ -287,11 +295,11 @@ defineExpose({ focus, blur, open, close, inputRef, treeRef, popoverRef });
   width: 100%;
 }
 
-.au-tree-select :deep(.au-input__suffix > .au-icon) {
+.au-tree-select__arrow {
   transition: transform var(--au-transition-duration) var(--au-transition-timing);
 }
 
-.au-tree-select[aria-expanded='true'] :deep(.au-input__suffix > .au-icon) {
+.au-tree-select__arrow.is-expanded {
   transform: rotate(180deg);
 }
 
@@ -308,7 +316,7 @@ defineExpose({ focus, blur, open, close, inputRef, treeRef, popoverRef });
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .au-tree-select :deep(.au-input__suffix > .au-icon) {
+  .au-tree-select__arrow {
     transition: none;
   }
 }

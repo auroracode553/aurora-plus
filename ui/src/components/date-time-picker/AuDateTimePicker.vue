@@ -56,6 +56,7 @@
     <section class="au-date-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
       <AuDatePickerPane
         ref="datePaneRef"
+        class="au-date-time-picker__date-pane"
         :model-value="draftDate"
         value-type="date"
         :value-format="resolvedValueFormat"
@@ -396,7 +397,7 @@ defineExpose({ focus, blur, open, close, inputRef, datePaneRef, popoverRef });
   overflow-y: auto;
 }
 
-.au-date-time-picker__popover :deep(.au-date-picker-pane) {
+.au-date-time-picker__date-pane {
   width: 100%;
 }
 

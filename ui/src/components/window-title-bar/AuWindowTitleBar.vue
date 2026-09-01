@@ -57,6 +57,7 @@
           :placement="tooltipPlacement"
           :show-after="tooltipShowAfter"
           :disabled="!showTooltips"
+          fill-trigger
         >
           <button
             class="au-window-title-bar__button au-control-reset au-inline-center au-focus-ring au-motion-reduce"
@@ -67,7 +68,7 @@
             @click="requestMinimize"
           >
             <slot name="minimize-icon">
-              <AuIcon :icon="IconMinus" />
+              <AuIcon class="au-window-title-bar__button-icon" :icon="IconMinus" />
             </slot>
           </button>
         </AuTooltip>
@@ -78,6 +79,7 @@
           :placement="tooltipPlacement"
           :show-after="tooltipShowAfter"
           :disabled="!showTooltips"
+          fill-trigger
         >
           <button
             class="au-window-title-bar__button au-control-reset au-inline-center au-focus-ring au-motion-reduce"
@@ -89,10 +91,10 @@
             @click="requestToggleMaximize"
           >
             <slot v-if="maximized" name="restore-icon">
-              <AuIcon :icon="IconCopy" />
+              <AuIcon class="au-window-title-bar__button-icon" :icon="IconCopy" />
             </slot>
             <slot v-else name="maximize-icon">
-              <AuIcon :icon="IconSquare" />
+              <AuIcon class="au-window-title-bar__button-icon" :icon="IconSquare" />
             </slot>
           </button>
         </AuTooltip>
@@ -103,6 +105,7 @@
           :placement="tooltipPlacement"
           :show-after="tooltipShowAfter"
           :disabled="!showTooltips"
+          fill-trigger
         >
           <button
             class="au-window-title-bar__button is-close au-control-reset au-inline-center au-focus-ring au-motion-reduce"
@@ -113,7 +116,7 @@
             @click="requestClose"
           >
             <slot name="close-icon">
-              <AuIcon :icon="IconX" />
+              <AuIcon class="au-window-title-bar__button-icon" :icon="IconX" />
             </slot>
           </button>
         </AuTooltip>
@@ -274,10 +277,6 @@ function handleTitleDoubleClick(event) {
   order: -1;
 }
 
-.au-window-title-bar__controls :deep(.au-tooltip__trigger) {
-  height: 100%;
-}
-
 .au-window-title-bar__button {
   width: 40px;
   height: 100%;
@@ -304,7 +303,7 @@ function handleTitleDoubleClick(event) {
   outline-offset: -2px;
 }
 
-.au-window-title-bar__button :deep(.au-icon) {
+.au-window-title-bar__button-icon {
   width: auto;
   height: 12px;
   aspect-ratio: 1;

@@ -22,7 +22,7 @@
     >
       <span v-if="$slots.icon || icon" class="au-menu-item__icon au-inline-center" aria-hidden="true">
         <slot name="icon" :active="active" :disabled="itemDisabled">
-          <AuIcon :icon="icon" :color="iconColor" />
+          <AuIcon class="au-menu-item__graphic" :icon="icon" :color="iconColor" />
         </slot>
       </span>
       <span
@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
   transition: color var(--au-transition-duration) var(--au-transition-timing);
 }
 
-.au-menu-item__icon :deep(svg) {
+.au-menu-item__graphic {
   display: block;
   width: 1em;
   height: 1em;

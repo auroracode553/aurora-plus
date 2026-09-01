@@ -10,6 +10,7 @@
     <component
       :is="icon"
       v-if="icon"
+      class="au-icon__graphic"
       :color="color || undefined"
       :stroke-width="strokeWidth || undefined"
     />
@@ -58,7 +59,7 @@ const iconStyle = computed(() => {
   transition: color var(--au-transition-duration) var(--au-transition-timing), opacity var(--au-transition-duration) var(--au-transition-timing);
 }
 
-.au-icon :deep(svg) {
+.au-icon__graphic {
   display: block;
   width: 100%;
   height: 100%;

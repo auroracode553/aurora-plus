@@ -15,6 +15,7 @@
         class="au-color-swatch__check"
         :icon="IconCheck"
         :color="checkColor"
+        :stroke-width="2.5"
       />
     </span>
   </button>
@@ -143,13 +144,6 @@ function clampChannel(value) {
   width: auto;
   height: 14px;
   aspect-ratio: 1;
-}
-
-.au-color-swatch__check :deep(svg) {
-  display: block;
-  width: 100%;
-  height: 100%;
-  stroke-width: 2.5;
 }
 
 @media (prefers-contrast: more) {

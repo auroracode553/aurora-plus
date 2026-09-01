@@ -4,14 +4,11 @@
       <AuButtonGroupItem
         v-for="action in actions"
         :key="action.key"
+        :icon="action.icon"
+        :aria-pressed="selectedAction === action.key"
+        @click="selectedAction = action.key"
       >
-        <AuButton
-          :icon="action.icon"
-          :aria-pressed="selectedAction === action.key"
-          @click="selectedAction = action.key"
-        >
-          {{ action.label }}
-        </AuButton>
+        {{ action.label }}
       </AuButtonGroupItem>
     </AuButtonGroup>
   </div>
@@ -20,7 +17,6 @@
 <script setup>
 import { ref } from 'vue';
 import {
-  AuButton,
   AuButtonGroup,
   AuButtonGroupItem,
   IconAdjustmentsHorizontal,

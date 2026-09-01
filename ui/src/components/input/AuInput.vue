@@ -65,7 +65,7 @@
         @mousedown.prevent
         @click="clear"
       >
-        <AuIcon :icon="IconX" />
+        <AuIcon class="au-input__clear-icon" :icon="IconX" />
       </button>
     </span>
   </div>
@@ -286,7 +286,7 @@ defineExpose({ focus, blur, select, inputRef });
     opacity var(--au-transition-duration) var(--au-transition-timing);
 }
 
-.au-input__clear :deep(.au-icon) {
+.au-input__clear-icon {
   width: 14px;
   min-width: 14px;
   height: 14px;

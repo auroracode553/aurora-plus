@@ -5,7 +5,7 @@
       icon-only
       aria-label="面板操作"
     >
-      <AuButton
+      <AuButtonGroupItem
         v-for="action in panelActions"
         :key="action.label"
         :icon="action.icon"
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { AuButton, AuButtonGroup, IconCode, IconLayoutSidebar, IconMinus } from 'aurora-ui';
+import { AuButtonGroup, AuButtonGroupItem, IconCode, IconLayoutSidebar, IconMinus } from 'aurora-ui';
 
 const panelActions = [
   { label: '收起面板', icon: IconMinus },

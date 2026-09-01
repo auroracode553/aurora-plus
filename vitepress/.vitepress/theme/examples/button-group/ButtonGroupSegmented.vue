@@ -5,21 +5,21 @@
       <span>{{ selectedOpacity }}%</span>
     </div>
     <AuButtonGroup variant="segmented" aria-label="透明度">
-      <AuButton
+      <AuButtonGroupItem
         v-for="opacity in opacityOptions"
         :key="opacity"
         :aria-pressed="selectedOpacity === opacity"
         @click="selectedOpacity = opacity"
       >
         {{ opacity }}
-      </AuButton>
+      </AuButtonGroupItem>
     </AuButtonGroup>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuButtonGroup } from 'aurora-ui';
+import { AuButtonGroup, AuButtonGroupItem } from 'aurora-ui';
 
 const opacityOptions = [50, 60, 70, 80, 90, 100];
 const selectedOpacity = ref(100);

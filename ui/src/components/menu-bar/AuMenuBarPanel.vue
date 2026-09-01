@@ -31,7 +31,7 @@
             class="au-menu-bar-panel__leading au-inline-center"
             aria-hidden="true"
           >
-            <AuIcon v-if="item.icon" :icon="item.icon" />
+            <AuIcon v-if="item.icon" class="au-menu-bar-panel__icon" :icon="item.icon" />
           </span>
           <span class="au-menu-bar-panel__label au-menu-label">{{ item.label }}</span>
           <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut au-menu-shortcut au-meta-muted">{{ item.accelerator }}</span>
@@ -63,7 +63,7 @@
           :class="{ 'is-checkable': isCheckableItem(item) }"
           aria-hidden="true"
         >
-          <AuIcon v-if="resolveLeadingIcon(item)" :icon="resolveLeadingIcon(item)" />
+          <AuIcon v-if="resolveLeadingIcon(item)" class="au-menu-bar-panel__icon" :icon="resolveLeadingIcon(item)" />
         </span>
         <span class="au-menu-bar-panel__label au-menu-label">{{ item.label }}</span>
         <span v-if="item.accelerator" class="au-menu-bar-panel__shortcut au-menu-shortcut au-meta-muted">{{ item.accelerator }}</span>
@@ -130,10 +130,9 @@ function resolveItemKey(item, index) {
   color: var(--au-color-primary);
 }
 
-.au-menu-bar-panel__leading :deep(svg),
-.au-menu-bar-panel__arrow :deep(svg) {
-  width: 100%;
-  height: 100%;
+.au-menu-bar-panel__icon {
+  width: auto;
+  height: 14px;
 }
 
 .au-menu-bar-panel__arrow {

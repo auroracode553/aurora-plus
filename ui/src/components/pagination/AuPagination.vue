@@ -344,7 +344,7 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 }
 
 /* AuSelect 自带交互与浮层样式，这里只对齐分页控件的紧凑高度。 */
-.au-pagination :deep(.au-pagination__select.au-select) {
+.au-pagination__select {
   height: 28px;
 }
 
@@ -370,7 +370,7 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   height: 24px;
 }
 
-.au-pagination.is-small :deep(.au-pagination__select.au-select) {
+.au-pagination.is-small .au-pagination__select {
   height: 24px;
 }
 
@@ -384,7 +384,7 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   height: 32px;
 }
 
-.au-pagination.is-large :deep(.au-pagination__select.au-select) {
+.au-pagination.is-large .au-pagination__select {
   height: 32px;
 }
 

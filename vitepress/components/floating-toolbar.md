@@ -67,7 +67,7 @@ toolbarRect.value = { top, right, bottom, left, width, height };
 | --- | --- | --- |
 | `default` | `{ hide, placement }` | 工具条内容与当前实际方向 |
 
-默认插槽中直接使用 `AuButton`、`AuButtonGroup` 等公开组件组织操作，不依赖内部类名。
+默认插槽中可直接使用 `AuButton`，也可放入由 `AuButtonGroup` 与 `AuButtonGroupItem` 组成的完整控制组，不依赖内部类名。
 
 ### Exposes
 

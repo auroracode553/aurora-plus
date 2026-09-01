@@ -2,6 +2,7 @@
   <span
     ref="triggerRef"
     class="au-tooltip__trigger au-inline-trigger"
+    :class="{ 'is-fill': fillTrigger }"
     :aria-describedby="visible ? tooltipId : undefined"
     @mouseenter="show"
     @mouseleave="hide"
@@ -43,6 +44,7 @@ const props = defineProps({
   showAfter: { type: Number, default: 220 },
   hideAfter: { type: Number, default: 80 },
   disabled: { type: Boolean, default: false },
+  fillTrigger: { type: Boolean, default: false },
   maxWidth: { type: [String, Number], default: 280 },
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
@@ -201,6 +203,10 @@ defineExpose({ hide, show, updatePosition });
 </script>
 
 <style scoped lang="scss">
+.au-tooltip__trigger.is-fill {
+  height: 100%;
+}
+
 .au-tooltip__popper {
   position: fixed;
   z-index: var(--au-z-index-hint);

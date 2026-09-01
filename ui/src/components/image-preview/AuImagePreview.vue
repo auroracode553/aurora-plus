@@ -46,50 +46,43 @@
           </div>
           <div v-if="loadFailed" class="au-image-preview__error" role="status">
             <slot name="error" :image="currentImage" :index="activeIndex">
-              <AuIcon :icon="IconPhotoOff" />
+              <AuIcon class="au-image-preview__error-icon" :icon="IconPhotoOff" />
               <span>图片加载失败</span>
             </slot>
           </div>
         </div>
 
-        <div class="au-image-preview__close au-material-surface au-depth-overlay au-forced-canvas">
-          <AuTooltip :content="closeLabel" placement="left">
-            <AuButton
-              type="menu"
-              size="small"
-              :icon="IconX"
-              circle
-              :aria-label="closeLabel"
-              @click="close('close-button')"
-            />
-          </AuTooltip>
-        </div>
+        <AuButton
+          class="au-image-preview__close"
+          type="menu"
+          :icon="IconX"
+          circle
+          :title="closeLabel"
+          :aria-label="closeLabel"
+          @click="close('close-button')"
+        />
 
         <template v-if="hasMultiple">
-          <div class="au-image-preview__navigation is-previous au-material-surface au-depth-overlay au-forced-canvas">
-            <AuTooltip :content="previousLabel" placement="right">
-              <AuButton
-                type="menu"
-                :icon="IconChevronLeft"
-                circle
-                :disabled="!canShowPrevious"
-                :aria-label="previousLabel"
-                @click="showPrevious"
-              />
-            </AuTooltip>
-          </div>
-          <div class="au-image-preview__navigation is-next au-material-surface au-depth-overlay au-forced-canvas">
-            <AuTooltip :content="nextLabel" placement="left">
-              <AuButton
-                type="menu"
-                :icon="IconChevronRight"
-                circle
-                :disabled="!canShowNext"
-                :aria-label="nextLabel"
-                @click="showNext"
-              />
-            </AuTooltip>
-          </div>
+          <AuButton
+            class="au-image-preview__navigation is-previous"
+            type="menu"
+            :icon="IconChevronLeft"
+            circle
+            :disabled="!canShowPrevious"
+            :title="previousLabel"
+            :aria-label="previousLabel"
+            @click="showPrevious"
+          />
+          <AuButton
+            class="au-image-preview__navigation is-next"
+            type="menu"
+            :icon="IconChevronRight"
+            circle
+            :disabled="!canShowNext"
+            :title="nextLabel"
+            :aria-label="nextLabel"
+            @click="showNext"
+          />
         </template>
 
         <div
@@ -107,9 +100,13 @@
           </slot>
         </div>
 
-        <div
+        <AuButtonGroup
           v-if="showToolbar"
-          class="au-image-preview__toolbar au-material-surface au-depth-overlay au-forced-canvas"
+          class="au-image-preview__toolbar"
+          variant="floating"
+          size="large"
+          icon-only
+          inverse
           role="toolbar"
           :aria-label="toolbarLabel"
         >
@@ -123,23 +120,13 @@
             :scale="scale"
             :rotation="rotation"
           >
-            <AuTooltip content="缩小">
-              <AuButton type="menu" size="small" :icon="IconZoomOut" circle aria-label="缩小" @click="zoomOut" />
-            </AuTooltip>
-            <AuTooltip content="放大">
-              <AuButton type="menu" size="small" :icon="IconZoomIn" circle aria-label="放大" @click="zoomIn" />
-            </AuTooltip>
-            <AuTooltip content="还原">
-              <AuButton type="menu" size="small" :icon="IconArrowsMaximize" circle aria-label="还原" @click="resetTransform" />
-            </AuTooltip>
-            <AuTooltip content="逆时针旋转">
-              <AuButton type="menu" size="small" :icon="IconRotate2" circle aria-label="逆时针旋转" @click="rotateLeft" />
-            </AuTooltip>
-            <AuTooltip content="顺时针旋转">
-              <AuButton type="menu" size="small" :icon="IconRotateClockwise2" circle aria-label="顺时针旋转" @click="rotateRight" />
-            </AuTooltip>
+            <AuButtonGroupItem :icon="IconZoomOut" title="缩小" aria-label="缩小" @click="zoomOut" />
+            <AuButtonGroupItem :icon="IconZoomIn" title="放大" aria-label="放大" @click="zoomIn" />
+            <AuButtonGroupItem :icon="IconArrowsMaximize" title="还原" aria-label="还原" @click="resetTransform" />
+            <AuButtonGroupItem :icon="IconRotate2" title="逆时针旋转" aria-label="逆时针旋转" @click="rotateLeft" />
+            <AuButtonGroupItem :icon="IconRotateClockwise2" title="顺时针旋转" aria-label="顺时针旋转" @click="rotateRight" />
           </slot>
-        </div>
+        </AuButtonGroup>
       </section>
     </Transition>
   </Teleport>
@@ -168,8 +155,8 @@ import {
 } from '@tabler/icons-vue';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButton } from '../button/index.js';
+import { AuButtonGroup, AuButtonGroupItem } from '../button-group/index.js';
 import { AuIcon } from '../icon/index.js';
-import { AuTooltip } from '../tooltip/index.js';
 import {
   clampPreviewIndex,
   clampPreviewValue,
@@ -584,6 +571,11 @@ defineExpose({
 </script>
 
 <style scoped lang="scss">
+$preview-control-color: rgb(255 255 255 / 88%);
+$preview-control-background: rgb(48 49 51 / 72%);
+$preview-control-background-hover: rgb(48 49 51 / 88%);
+$preview-control-background-active: rgb(31 32 34 / 92%);
+
 .au-image-preview {
   position: fixed;
   right: 0;
@@ -591,7 +583,7 @@ defineExpose({
   left: 0;
   overflow: hidden;
   color: var(--au-color-text-primary);
-  background: transparent;
+  background: rgb(0 0 0 / 50%);
   outline: none;
   user-select: none;
 }
@@ -602,7 +594,7 @@ defineExpose({
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 64px 72px 76px;
+  padding: 64px 72px 88px;
   touch-action: none;
 }
 
@@ -639,34 +631,74 @@ defineExpose({
   pointer-events: none;
 }
 
-.au-image-preview__error :deep(.au-icon) {
+.au-image-preview__error-icon {
   font-size: 28px;
 }
 
-.au-image-preview__close,
-.au-image-preview__navigation,
-.au-image-preview__progress,
-.au-image-preview__toolbar {
+.au-image-preview__progress {
   position: absolute;
   z-index: 2;
   border: 1px solid var(--au-material-border);
   color: var(--au-color-text-primary);
 }
 
+.au-image-preview__close.au-button.au-button--menu,
+.au-image-preview__navigation.au-button.au-button--menu {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: $preview-control-color;
+  background: $preview-control-background;
+  box-shadow: none;
+  font-size: 22px;
+}
+
+.au-image-preview__close.au-button.au-button--menu:hover:not(.is-disabled),
+.au-image-preview__close.au-button.au-button--menu:focus-visible,
+.au-image-preview__navigation.au-button.au-button--menu:hover:not(.is-disabled),
+.au-image-preview__navigation.au-button.au-button--menu:focus-visible {
+  color: #ffffff;
+  background: $preview-control-background-hover;
+  box-shadow: none;
+}
+
+.au-image-preview__close.au-button.au-button--menu:active:not(.is-disabled),
+.au-image-preview__navigation.au-button.au-button--menu:active:not(.is-disabled) {
+  color: #ffffff;
+  background: $preview-control-background-active;
+  box-shadow: none;
+  transform: scale(0.96);
+}
+
+.au-image-preview__navigation.au-button.au-button--menu:active:not(.is-disabled) {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.au-image-preview__navigation.au-button.au-button--menu.is-disabled {
+  color: rgb(255 255 255 / 36%);
+  background: rgb(48 49 51 / 42%);
+}
+
 .au-image-preview__close {
   top: 16px;
   right: 16px;
-  display: flex;
-  padding: 2px;
-  border-radius: var(--au-radius-pill);
 }
 
 .au-image-preview__navigation {
   top: 50%;
-  display: flex;
-  padding: 2px;
-  border-radius: var(--au-radius-pill);
   transform: translateY(-50%);
+}
+
+.au-image-preview__navigation.au-button.au-button--menu {
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
 }
 
 .au-image-preview__navigation.is-previous {
@@ -678,7 +710,7 @@ defineExpose({
 }
 
 .au-image-preview__progress {
-  bottom: 58px;
+  bottom: 70px;
   left: 50%;
   min-width: 48px;
   padding: 3px 9px;
@@ -690,13 +722,11 @@ defineExpose({
 }
 
 .au-image-preview__toolbar {
+  position: absolute;
+  z-index: 2;
   bottom: 14px;
   left: 50%;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 2px;
-  border-radius: var(--au-radius-pill);
+  max-width: calc(100% - 32px);
   transform: translateX(-50%);
 }
 
@@ -712,7 +742,7 @@ defineExpose({
 
 @media (max-width: 720px) {
   .au-image-preview__stage {
-    padding: 56px 18px 76px;
+    padding: 56px 18px 88px;
   }
 
   .au-image-preview__navigation.is-previous {
@@ -736,12 +766,21 @@ defineExpose({
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .au-image-preview__close.au-button.au-button--menu,
+  .au-image-preview__navigation.au-button.au-button--menu {
+    background: rgb(48 49 51);
+  }
+}
+
 @media (prefers-contrast: more) {
-  .au-image-preview__close,
-  .au-image-preview__navigation,
-  .au-image-preview__progress,
-  .au-image-preview__toolbar {
+  .au-image-preview__progress {
     border-color: var(--au-color-text-secondary);
+  }
+
+  .au-image-preview__close.au-button.au-button--menu,
+  .au-image-preview__navigation.au-button.au-button--menu {
+    border: 1px solid currentColor;
   }
 }
 
