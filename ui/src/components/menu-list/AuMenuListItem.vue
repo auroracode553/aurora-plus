@@ -1,6 +1,6 @@
 <template>
   <li
-    class="au-menu-list-item au-list-reset"
+    class="au-menu-list-item"
     :class="[
       `is-${density}`,
       {
@@ -130,7 +130,12 @@ function handleClick(event) {
 
 .au-menu-list-item {
   position: relative;
+  display: block;
+  width: 100%;
   min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .au-menu-list-item.has-divider:not(:last-child)::after {
