@@ -18,7 +18,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuIcon, AuWindowTitleBar, IconSparkles } from 'aurora-ui';
+import { AuIcon, AuWindowTitleBar, IconSparkles } from 'aurora-plus';
 
 const maximized = ref(false);
 const lastAction = ref('等待窗口操作');

@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: Aurora UI
+  name: Aurora Plus
   text: Vue 3 通用组件库
   tagline: 轻量、低耦合、可组合的界面组件。
   actions:

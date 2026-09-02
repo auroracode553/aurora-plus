@@ -42,7 +42,7 @@ import {
   IconItalic,
   IconTrash,
   IconUnderline,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const toolbarActions = [
   { id: 'bold', label: '加粗', icon: IconBold },

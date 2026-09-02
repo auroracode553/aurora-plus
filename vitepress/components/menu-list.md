@@ -8,7 +8,7 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 
 `AuMenuList` 与 `AuMenuListItem` 用于苹果式分组菜单、设置入口和带尾部控件的配置行。它与导航选中的 `AuMenu`、大数据滚动的 `AuVirtualList` 职责不同。
 
-默认面板使用 Aurora UI 的材质、圆角与表面阴影，自动适配明暗主题、减少透明度和高对比度偏好。
+默认面板使用 Aurora Plus 的材质、圆角与表面阴影，自动适配明暗主题、减少透明度和高对比度偏好。
 
 ## 基础用法
 

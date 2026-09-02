@@ -6,7 +6,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 
 # Dropdown 下拉菜单
 
-用于将一组低频或次级操作收纳到触发器附近。菜单使用 Aurora UI 统一的 Apple 风格圆角材质，打开后会自动进行视口避让，并支持鼠标、键盘和点击外部关闭。
+用于将一组低频或次级操作收纳到触发器附近。菜单使用 Aurora Plus 统一的 Apple 风格圆角材质，打开后会自动进行视口避让，并支持鼠标、键盘和点击外部关闭。
 
 ## 基础用法
 

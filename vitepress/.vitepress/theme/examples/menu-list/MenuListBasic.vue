@@ -43,7 +43,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuMenuList, AuMenuListItem, AuSwitch, IconTrash } from 'aurora-ui';
+import { AuMenuList, AuMenuListItem, AuSwitch, IconTrash } from 'aurora-plus';
 
 const selectedItem = ref('');
 const autoplay = ref(true);

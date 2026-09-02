@@ -31,7 +31,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuSelect } from 'aurora-ui';
+import { AuSelect } from 'aurora-plus';
 
 const format = ref('markdown');
 const fontSize = ref('14');

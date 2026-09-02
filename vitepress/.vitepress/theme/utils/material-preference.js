@@ -4,9 +4,9 @@ import {
   getAuroraMaterial,
   isAuroraMaterial,
   setAuroraMaterial,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
-const MATERIAL_STORAGE_KEY = 'aurora-ui-docs-material';
+const MATERIAL_STORAGE_KEY = 'aurora-plus-docs-material';
 const material = ref(DEFAULT_AURORA_MATERIAL);
 
 export function initializeDocsMaterial() {

@@ -45,7 +45,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import { AuSlider } from 'aurora-ui';
+import { AuSlider } from 'aurora-plus';
 
 const factors = reactive([
   { label: '主力资金', value: 38 },

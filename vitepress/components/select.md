@@ -6,7 +6,7 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 
 # Select 选择器
 
-`AuSelect` 使用 Aurora UI 的紧凑列表弹层呈现选项，并统一尺寸、焦点、禁用态和错误态。选项仍通过熟悉的 `option` 与 `optgroup` 声明。
+`AuSelect` 使用 Aurora Plus 的紧凑列表弹层呈现选项，并统一尺寸、焦点、禁用态和错误态。选项仍通过熟悉的 `option` 与 `optgroup` 声明。
 
 ## 基础用法
 

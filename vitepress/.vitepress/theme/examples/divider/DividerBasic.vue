@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { AuDivider } from 'aurora-ui';
+import { AuDivider } from 'aurora-plus';
 </script>
 
 <style scoped>

@@ -41,7 +41,7 @@ import {
   AuForm,
   AuFormItem,
   AuInput,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const nameItemRef = ref(null);
 const dateItemRef = ref(null);

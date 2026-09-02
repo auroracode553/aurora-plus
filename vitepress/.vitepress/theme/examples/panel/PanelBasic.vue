@@ -43,7 +43,7 @@ import {
   AuPanel,
   IconAdjustmentsHorizontal,
   IconUsers,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const lastAction = ref('');
 </script>

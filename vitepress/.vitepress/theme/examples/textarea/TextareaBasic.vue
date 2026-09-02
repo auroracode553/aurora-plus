@@ -27,7 +27,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuTextarea } from 'aurora-ui';
+import { AuTextarea } from 'aurora-plus';
 
 const content = ref('这是一段可以继续编辑的说明。');
 </script>

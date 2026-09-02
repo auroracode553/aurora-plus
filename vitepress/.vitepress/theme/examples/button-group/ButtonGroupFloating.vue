@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { AuButtonGroup, AuButtonGroupItem, IconCode, IconLayoutSidebar, IconMinus } from 'aurora-ui';
+import { AuButtonGroup, AuButtonGroupItem, IconCode, IconLayoutSidebar, IconMinus } from 'aurora-plus';
 
 const panelActions = [
   { label: '收起面板', icon: IconMinus },

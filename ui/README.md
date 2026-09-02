@@ -1,6 +1,6 @@
-# Aurora UI
+# Aurora Plus
 
-Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完整安装、按需导入和命令式服务。
+Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API 使用 `Au` 前缀，支持完整安装、按需导入和命令式服务。
 
 ## 当前组件
 
@@ -54,26 +54,26 @@ Aurora UI 是 Vue 3 通用组件库，公共 API 使用 `Au` 前缀，支持完�
 ## 安装
 
 ```bash
-npm install aurora-ui
+npm install aurora-plus
 ```
 
 ## 完整安装
 
 ```js
 import { createApp } from 'vue';
-import AuroraUI from 'aurora-ui';
-import 'aurora-ui/style.css';
+import AuroraPlus from 'aurora-plus';
+import 'aurora-plus/style.css';
 import App from './App.vue';
 
-createApp(App).use(AuroraUI).mount('#app');
+createApp(App).use(AuroraPlus).mount('#app');
 ```
 
 ## 按需导入
 
 ```vue
 <script setup>
-import { AuButton, AuMessage } from 'aurora-ui';
-import 'aurora-ui/style.css';
+import { AuButton, AuMessage } from 'aurora-plus';
+import 'aurora-plus/style.css';
 
 function save() {
   AuMessage.success('保存成功');
@@ -87,11 +87,11 @@ function save() {
 
 ## 图标
 
-从 `aurora-ui` 导入图标组件，并传给 `AuIcon` 或其他接受图标的 Aurora 组件：
+从 `aurora-plus` 导入图标组件，并传给 `AuIcon` 或其他接受图标的 Aurora Plus 组件：
 
 ```vue
 <script setup>
-import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
+import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-plus';
 </script>
 
 <template>
@@ -105,7 +105,7 @@ import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-ui';
 使用 `setAuroraTheme` 在运行时切换亮色和暗色：
 
 ```js
-import { setAuroraTheme } from 'aurora-ui';
+import { setAuroraTheme } from 'aurora-plus';
 
 setAuroraTheme('dark');
 setAuroraTheme('light');
@@ -114,7 +114,7 @@ setAuroraTheme('light');
 使用 `setAuroraMaterial` 切换玻璃材质，默认 `solid`，可选 `soft`、`clear` 和 `solid`：
 
 ```js
-import { setAuroraMaterial } from 'aurora-ui';
+import { setAuroraMaterial } from 'aurora-plus';
 
 setAuroraMaterial('clear');
 setAuroraMaterial('solid');

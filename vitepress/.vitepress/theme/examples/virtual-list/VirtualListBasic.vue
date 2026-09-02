@@ -42,7 +42,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuButton, AuVirtualList } from 'aurora-ui';
+import { AuButton, AuVirtualList } from 'aurora-plus';
 
 const owners = ['设计团队', '前端团队', '编辑器团队', '质量团队'];
 const statuses = [

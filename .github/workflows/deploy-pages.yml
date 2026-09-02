@@ -35,11 +35,11 @@ jobs:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Install Aurora UI dependencies
+      - name: Install Aurora Plus dependencies
         working-directory: ui
         run: npm ci
 
-      - name: Build Aurora UI
+      - name: Build Aurora Plus
         working-directory: ui
         run: npm run build
 
@@ -50,8 +50,8 @@ jobs:
       - name: Build VitePress
         working-directory: vitepress
         env:
-          AURORA_UI_USE_DIST: 'true'
-          VITEPRESS_BASE: /aurora-ui/
+          AURORA_PLUS_USE_DIST: 'true'
+          VITEPRESS_BASE: /${{ github.event.repository.name }}/
         run: npm run build
 
       - name: Upload GitHub Pages artifact

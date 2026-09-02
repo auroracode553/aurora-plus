@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { AuButton, AuMessageBox } from 'aurora-ui';
+import { AuButton, AuMessageBox } from 'aurora-plus';
 
 const confirmActions = [
   {
@@ -23,7 +23,7 @@ const confirmActions = [
     label: '发布版本',
     buttonType: 'primary',
     title: '发布确认',
-    message: '确定发布 Aurora UI 0.2.0 吗？',
+    message: '确定发布 Aurora Plus 0.2.0 吗？',
     confirmButtonText: '立即发布',
     confirmButtonType: 'primary',
   },

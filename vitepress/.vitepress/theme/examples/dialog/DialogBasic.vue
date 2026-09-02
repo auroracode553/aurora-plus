@@ -28,7 +28,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import { AuButton, AuDialog } from 'aurora-ui';
+import { AuButton, AuDialog } from 'aurora-plus';
 
 const dialogVisible = ref(false);
 const draftProfile = reactive({

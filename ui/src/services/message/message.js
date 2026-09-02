@@ -22,7 +22,7 @@ function normalizeOptions(options) {
 }
 
 function ensureHost(offset) {
-  if (typeof document === 'undefined') throw new Error('[aurora-ui] AuMessage 只能在浏览器环境中调用。');
+  if (typeof document === 'undefined') throw new Error('[aurora-plus] AuMessage 只能在浏览器环境中调用。');
   if (destroyTimer) {
     clearTimeout(destroyTimer);
     destroyTimer = null;

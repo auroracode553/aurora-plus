@@ -148,7 +148,7 @@ function getField(prop) {
   return getFields(prop)[0];
 }
 
-provide('aurora-ui.form-context', {
+provide('aurora-plus.form-context', {
   model: computed(() => props.model),
   rules: computed(() => props.rules),
   labelPosition: computed(() => props.labelPosition),

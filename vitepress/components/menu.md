@@ -87,7 +87,7 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | --- | --- | --- | --- |
 | `index` | 菜单项唯一值 | `string / number` | 必填 |
 | `label` | 文本回退值，并为折叠模式提供无障碍名称 | `string` | `''` |
-| `icon` | Aurora UI 图标组件 | `Component` | `null` |
+| `icon` | Aurora Plus 图标组件 | `Component` | `null` |
 | `iconColor` | 图标颜色 | `string` | `''` |
 | `badge` | 尾部徽标文本 | `string / number` | `''` |
 | `indicator` | 是否显示尾部状态点 | `boolean` | `false` |

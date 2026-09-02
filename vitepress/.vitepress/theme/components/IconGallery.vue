@@ -42,7 +42,7 @@
     </div>
 
     <p id="au-icon-gallery-title" class="au-icon-gallery__hint">
-      点击图标复制组件名；在代码中直接从 <code>aurora-ui</code> 按需导入。
+      点击图标复制组件名；在代码中直接从 <code>aurora-plus</code> 按需导入。
     </p>
 
     <div v-if="visibleIcons.length" class="au-icon-gallery__grid">
@@ -72,8 +72,8 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue';
-import { AuButton, AuMessage, IconSearch, icons as tablerIcons } from 'aurora-ui';
-import iconMetadata from 'virtual:aurora-icon-metadata';
+import { AuButton, AuMessage, IconSearch, icons as tablerIcons } from 'aurora-plus';
+import iconMetadata from 'virtual:aurora-plus-icon-metadata';
 import { writeTextToClipboard } from '../utils/clipboard.js';
 
 const PAGE_SIZE = 1000;

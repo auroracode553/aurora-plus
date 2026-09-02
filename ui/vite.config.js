@@ -12,10 +12,10 @@ export default defineConfig({
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.js', import.meta.url)),
-      name: 'AuroraUI',
+      name: 'AuroraPlus',
       formats: ['es', 'umd'],
-      fileName: (format) => (format === 'es' ? 'aurora-ui.js' : 'aurora-ui.umd.cjs'),
-      cssFileName: 'aurora-ui',
+      fileName: (format) => (format === 'es' ? 'aurora-plus.js' : 'aurora-plus.umd.cjs'),
+      cssFileName: 'aurora-plus',
     },
     cssCodeSplit: false,
     rollupOptions: {

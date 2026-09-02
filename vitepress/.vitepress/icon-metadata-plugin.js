@@ -2,16 +2,16 @@ import { existsSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join, parse } from 'node:path';
 
-const VIRTUAL_MODULE_ID = 'virtual:aurora-icon-metadata';
-const RESOLVED_MODULE_ID = '\0aurora-docs:icon-metadata';
+const VIRTUAL_MODULE_ID = 'virtual:aurora-plus-icon-metadata';
+const RESOLVED_MODULE_ID = '\0aurora-plus-docs:icon-metadata';
 
 /**
- * 在文档构建阶段读取 Aurora UI 所依赖版本的 Tabler 官方分类元数据。
- * 元数据通过虚拟模块提供给图标目录，不进入 Aurora UI 的运行时产物。
+ * 在文档构建阶段读取 Aurora Plus 所依赖版本的 Tabler 官方分类元数据。
+ * 元数据通过虚拟模块提供给图标目录，不进入 Aurora Plus 的运行时产物。
  */
 export function iconMetadataPlugin() {
   return {
-    name: 'aurora-docs:icon-metadata',
+    name: 'aurora-plus-docs:icon-metadata',
 
     resolveId(id) {
       return id === VIRTUAL_MODULE_ID ? RESOLVED_MODULE_ID : null;
@@ -33,9 +33,9 @@ export function iconMetadataPlugin() {
 
 function resolveTablerMetadataPath() {
   const docsRequire = createRequire(import.meta.url);
-  const auroraPackagePath = docsRequire.resolve('aurora-ui/package.json');
-  const auroraRequire = createRequire(auroraPackagePath);
-  const iconsVuePackagePath = auroraRequire.resolve('@tabler/icons-vue/package.json');
+  const auroraPlusPackagePath = docsRequire.resolve('aurora-plus/package.json');
+  const auroraPlusRequire = createRequire(auroraPlusPackagePath);
+  const iconsVuePackagePath = auroraPlusRequire.resolve('@tabler/icons-vue/package.json');
 
   let currentDirectory = dirname(iconsVuePackagePath);
   const rootDirectory = parse(currentDirectory).root;
@@ -52,7 +52,7 @@ function resolveTablerMetadataPath() {
     currentDirectory = dirname(currentDirectory);
   }
 
-  throw new Error('无法读取 Aurora UI 所依赖的 Tabler Icons 分类元数据。');
+  throw new Error('无法读取 Aurora Plus 所依赖的 Tabler Icons 分类元数据。');
 }
 
 function createComponentMetadata(metadata) {

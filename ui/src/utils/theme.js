@@ -1,5 +1,5 @@
 /**
- * Aurora UI 的全局主题模式配置。
+ * Aurora Plus 的全局主题模式配置。
  * 主题通过根节点的 data-au-theme 继承到所有组件，也支持局部容器覆盖。
  */
 export const AURORA_THEMES = Object.freeze(['light', 'dark']);

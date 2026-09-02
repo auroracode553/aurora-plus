@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuSwitch } from 'aurora-ui';
+import { AuSwitch } from 'aurora-plus';
 
 const enabled = ref(true);
 const syncMode = ref('sync');

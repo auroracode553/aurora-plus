@@ -44,7 +44,7 @@ import {
   IconSparkles,
   IconStar,
   IconSettings,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const activeItem = ref('dashboard');
 </script>

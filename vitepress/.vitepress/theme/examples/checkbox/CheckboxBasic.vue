@@ -25,7 +25,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuCheckbox } from 'aurora-ui';
+import { AuCheckbox } from 'aurora-plus';
 
 const accepted = ref(false);
 const options = [

@@ -1,25 +1,34 @@
 {
-  "name": "aurora-ui",
+  "name": "aurora-plus",
   "version": "0.1.0",
-  "description": "Aurora Vue 3 UI component library",
+  "description": "Aurora Plus Vue 3 component library",
+  "homepage": "https://auroracode553.github.io/aurora-plus/",
+  "bugs": {
+    "url": "https://github.com/auroracode553/aurora-plus/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auroracode553/aurora-plus.git",
+    "directory": "ui"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build"
   },
-  "main": "./dist/aurora-ui.umd.cjs",
-  "module": "./dist/aurora-ui.js",
-  "style": "./dist/aurora-ui.css",
+  "main": "./dist/aurora-plus.umd.cjs",
+  "module": "./dist/aurora-plus.js",
+  "style": "./dist/aurora-plus.css",
   "files": [
     "dist",
     "README.md"
   ],
   "exports": {
     ".": {
-      "import": "./dist/aurora-ui.js",
-      "require": "./dist/aurora-ui.umd.cjs"
+      "import": "./dist/aurora-plus.js",
+      "require": "./dist/aurora-plus.umd.cjs"
     },
-    "./style.css": "./dist/aurora-ui.css",
+    "./style.css": "./dist/aurora-plus.css",
     "./package.json": "./package.json"
   },
   "sideEffects": [
@@ -27,6 +36,10 @@
     "**/*.scss",
     "**/*.vue"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "@tabler/icons-vue": "^3.46.0"
   },
@@ -41,6 +54,7 @@
   },
   "keywords": [
     "aurora",
+    "aurora-plus",
     "component-library",
     "ui",
     "vue",

@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuTreeSelect } from 'aurora-ui';
+import { AuTreeSelect } from 'aurora-plus';
 
 const selectedKey = ref('date-picker');
 const leafKey = ref(null);

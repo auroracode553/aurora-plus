@@ -29,7 +29,7 @@ import {
   IconBrandGit,
   IconCode,
   IconLayoutSidebar,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const activeAction = ref('sidebar');
 

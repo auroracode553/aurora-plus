@@ -21,7 +21,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuImagePreview } from 'aurora-ui';
+import { AuImagePreview } from 'aurora-plus';
 
 const visible = ref(false);
 const initialIndex = ref(0);

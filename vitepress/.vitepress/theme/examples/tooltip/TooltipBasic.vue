@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { AuButton, AuTooltip } from 'aurora-ui';
+import { AuButton, AuTooltip } from 'aurora-plus';
 
 const tooltipItems = [
   { placement: 'top', content: '显示在目标上方', showAfter: 100 },

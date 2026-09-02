@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuDatePicker, AuDateTimePicker } from 'aurora-ui';
+import { AuDatePicker, AuDateTimePicker } from 'aurora-plus';
 
 const date = ref('2026-08-28');
 const dateTime = ref('2026-08-30 14:30:00');

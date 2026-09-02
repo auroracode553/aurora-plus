@@ -1,15 +1,15 @@
-# 三个桌面项目的 Aurora UI 接入与组件缺口
+# 三个桌面项目的 Aurora Plus 接入与组件缺口
 
 更新日期：2026-08-29
 
 ## 1. 盘点范围
 
-本文用于 Aurora UI 后续迭代，不属于面向组件库使用者的 API 文档。盘点范围如下：
+本文用于 Aurora Plus 后续迭代，不属于面向组件库使用者的 API 文档。盘点范围如下：
 
 - `D:\my_project\electron-project\elctron_typora`
 - `D:\my_project\electron-project\electron-st`
 - `D:\my_project\electron-project\translate-pc`
-- `D:\my_project\front-sdk\aurora-ui\ui`
+- 本仓库的 `ui/` 目录
 
 盘点只读取源码，默认排除 `dist`、`dist-electron`、`node_modules`、`build_output` 和发布目录；未启动、编译或打包任何项目。
 
@@ -19,19 +19,15 @@
 
 | 项目 | Vue 入口 | 接入状态 | 已有直接用例 |
 | --- | --- | --- | --- |
-| `elctron_typora` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 公共按钮、输入框、Tooltip、Dialog、导航菜单、分组菜单列表、右键菜单、虚拟列表、浮动工具栏、复选框、Git 下拉菜单、窗口标题栏及反馈服务均已使用库组件 |
-| `electron-st` | `src/renderer/index.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 通用弹窗、提醒按钮、金价开关、短时周期按钮组及反馈服务均已使用库组件 |
-| `translate-pc` | `src/main.js` | 已加载 `aurora-ui/style.css`，并通过 `app.use(AuroraUI)` 完整注册 | 设置页使用 `AuCard`、`AuSwitch`、`AuButtonGroup`、`AuButton`，全局通知使用 `AuMessage` |
+| `elctron_typora` | `src/main.js` | 使用 `aurora-plus/style.css`，并通过 `app.use(AuroraPlus)` 完整注册 | 公共按钮、输入框、Tooltip、Dialog、导航菜单、分组菜单列表、右键菜单、虚拟列表、浮动工具栏、复选框、Git 下拉菜单、窗口标题栏及反馈服务均已使用库组件 |
+| `electron-st` | `src/renderer/index.js` | 使用 `aurora-plus/style.css`，并通过 `app.use(AuroraPlus)` 完整注册 | 通用弹窗、提醒按钮、金价开关、短时周期按钮组及反馈服务均已使用库组件 |
+| `translate-pc` | `src/main.js` | 使用 `aurora-plus/style.css`，并通过 `app.use(AuroraPlus)` 完整注册 | 设置页使用 `AuCard`、`AuSwitch`、`AuButtonGroup`、`AuButton`，全局通知使用 `AuMessage` |
 
-本机三个 `node_modules/aurora-ui` 均应指向：
-
-```text
-D:\my_project\front-sdk\aurora-ui\ui
-```
+本机三个 `node_modules/aurora-plus` 均应指向本仓库当前签出的 `ui/` 目录。
 
 `npm link` 是开发机状态，不会形成可提交的依赖声明。更换电脑、清理 `node_modules` 或执行会重建依赖树的 npm 操作后，需要由使用者重新链接。
 
-## 3. Aurora UI 当前已有能力
+## 3. Aurora Plus 当前已有能力
 
 | 分类 | 已实现组件或服务 |
 | --- | --- |
@@ -46,7 +42,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 
 ### 3.1 现有组件的实际落地覆盖
 
-| Aurora UI 能力 | `elctron_typora` | `electron-st` | `translate-pc` |
+| Aurora Plus 能力 | `elctron_typora` | `electron-st` | `translate-pc` |
 | --- | --- | --- | --- |
 | `AuButton` | `XButton` 公共适配器 | 弹窗和添加关注操作 | 设置保存、服务检测、分段选项 |
 | `AuButtonGroup` | — | 短时提醒周期 | 主题与字号 |
@@ -75,12 +71,12 @@ D:\my_project\front-sdk\aurora-ui\ui
 
 ### 4.1 elctron_typora
 
-| 项目内实现 | Aurora UI 对应能力 | 建议 |
+| 项目内实现 | Aurora Plus 对应能力 | 建议 |
 | --- | --- | --- |
 | `components/window/WindowTitleBar.vue` | `AuWindowTitleBar` | 已迁移；项目组件只保留 Electron IPC 适配 |
 | `commonComponents/XButton.vue` | `AuButton` | 已迁移为薄适配器，现有 `XButton` 调用均由 `AuButton` 渲染；`XCloseButton` 的专用交互暂时保留 |
 | `commonComponents/XTooltip.vue` | `AuTooltip` | 已迁移为薄适配器并保留原插槽与公开方法 |
-| `commonComponents/SvgIcon.vue` | `AuIcon` 与 Aurora UI 导出的 Tabler 图标 | 本地专用 SVG 可继续由业务适配器承载 |
+| `commonComponents/SvgIcon.vue` | `AuIcon` 与 Aurora Plus 导出的 Tabler 图标 | 本地专用 SVG 可继续由业务适配器承载 |
 | `commonComponents/BaseDialog.vue` | `AuDialog` | 已迁移为薄适配器，业务表单和原 footer 插槽保持不变 |
 | `preference/PreferenceDialog.vue` 左侧导航 | `AuMenu`、`AuMenuItem` | 已迁移；业务侧只保留菜单数据 |
 | `preference/PreferenceDialog.vue` 设置面板 | `AuMenuList`、`AuMenuListItem` | 已迁移；圆角、分隔线、材质与阴影由组件库统一提供 |
@@ -94,7 +90,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 
 ### 4.2 electron-st
 
-| 项目内实现 | Aurora UI 对应能力 | 建议 |
+| 项目内实现 | Aurora Plus 对应能力 | 建议 |
 | --- | --- | --- |
 | `shared/ui/BaseModal.vue` | `AuDialog` | 已迁移为业务薄外壳，并保留原 Tab 焦点循环和说明文本 |
 | `shared/ui/AppConfirmDialog.vue` | `AuMessageBox` | 已迁移并移除旧 Host；`tone: danger` 已映射为 `confirmButtonType: 'danger'` |
@@ -107,14 +103,14 @@ D:\my_project\front-sdk\aurora-ui\ui
 
 ### 4.3 translate-pc
 
-| 项目内实现 | Aurora UI 对应能力 | 建议 |
+| 项目内实现 | Aurora Plus 对应能力 | 建议 |
 | --- | --- | --- |
 | `components/ToastMessage.vue` | `AuMessage` | 已迁移并移除旧组件；`useToast` 保留为业务适配层 |
 | 设置页的 8 个布尔开关 | `AuSwitch` | 已迁移，标题和说明文案继续由设置页布局承载 |
 | 页面按钮和分段选项 | `AuButton`、`AuButtonGroup` | 设置页保存、两个检测按钮、主题和字号选项已迁移；高度定制的图标按钮继续保留业务样式 |
 | 设置页卡片 | `AuCard` | 四个设置分区已迁移，业务数据和内部布局继续留在项目内 |
 | 工作区、词典和历史卡片 | `AuCard` | 后续可按页面逐步迁移，不需要把业务结构放入 UI 库 |
-| `AppIcon.vue` | `AuIcon` 与 Aurora UI 导出的 Tabler 图标 | 专用品牌图形仍保留在应用侧 |
+| `AppIcon.vue` | `AuIcon` 与 Aurora Plus 导出的 Tabler 图标 | 专用品牌图形仍保留在应用侧 |
 
 ## 5. 尚未实现的通用组件
 
@@ -161,7 +157,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 | `AuPathInput` | 翻译模型目录、Python 路径、文件选择 | 基于 `AuInput`，只定义展示和选择事件，不内置 Electron IPC |
 | `AuKeyHint` | 菜单快捷键、操作提示 | 跨平台按键显示、组合键和无障碍文本 |
 
-## 6. 不建议放入 Aurora UI 的业务组件
+## 6. 不建议放入 Aurora Plus 的业务组件
 
 以下组件虽然当前只存在于单个项目，但包含明显业务、SDK 或 Electron IPC 逻辑，应继续留在应用侧：
 
@@ -170,7 +166,7 @@ D:\my_project\front-sdk\aurora-ui\ui
 - 翻译工作区、词典详情、翻译分段、在线/离线引擎配置；
 - Electron 窗口 IPC、自动更新业务流程、文件系统和剪贴板操作。
 
-Aurora UI 只提供这些业务组件内部可复用的按钮、表单、布局、浮层和反馈原语。
+Aurora Plus 只提供这些业务组件内部可复用的按钮、表单、布局、浮层和反馈原语。
 
 ## 7. 推荐实施顺序
 
@@ -180,4 +176,4 @@ Aurora UI 只提供这些业务组件内部可复用的按钮、表单、布局�
 4. 补齐状态、空态、加载和进度组件，统一异步反馈。
 5. 最后按真实复用需求实现 `AuSplitPane`、`AuImageViewer`、`AuTimeline` 等体量较大的桌面组件。
 
-每个新组件应继续遵守 Aurora UI 的紧凑尺寸、扁平表面、键盘焦点、主题变量、`prefers-reduced-motion`、`prefers-reduced-transparency` 和高对比度回退规则。
+每个新组件应继续遵守 Aurora Plus 的紧凑尺寸、扁平表面、键盘焦点、主题变量、`prefers-reduced-motion`、`prefers-reduced-transparency` 和高对比度回退规则。

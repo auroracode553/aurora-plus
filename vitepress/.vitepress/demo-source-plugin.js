@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { createHighlighter } from 'shiki';
 
 const DEMO_SOURCE_QUERY = 'demo-source';
-const VIRTUAL_MODULE_PREFIX = '\0aurora-docs:demo-source:';
+const VIRTUAL_MODULE_PREFIX = '\0aurora-plus-docs:demo-source:';
 const VIRTUAL_MODULE_SUFFIX = '.js';
 const CODE_THEMES = {
   light: 'github-light',
@@ -17,7 +17,7 @@ export function demoSourcePlugin() {
   let highlighterPromise = null;
 
   return {
-    name: 'aurora-docs:demo-source',
+    name: 'aurora-plus-docs:demo-source',
     enforce: 'pre',
 
     async resolveId(id, importer) {
@@ -46,7 +46,7 @@ export function demoSourcePlugin() {
         defaultColor: false,
         transformers: [
           {
-            name: 'aurora-docs:code-class',
+            name: 'aurora-plus-docs:code-class',
             pre(node) {
               this.addClassToHast(node, 'vp-code');
               delete node.properties.style;

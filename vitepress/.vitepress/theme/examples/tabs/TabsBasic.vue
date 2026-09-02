@@ -10,7 +10,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuTabs } from 'aurora-ui';
+import { AuTabs } from 'aurora-plus';
 
 const activeTab = ref('files');
 const tabs = [

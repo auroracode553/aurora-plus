@@ -24,7 +24,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuVirtualTable } from 'aurora-ui';
+import { AuButton, AuVirtualTable } from 'aurora-plus';
 
 const tableRef = ref(null);
 const rendered = ref({ start: 0, end: 0 });

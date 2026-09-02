@@ -23,7 +23,7 @@ import {
   IconBell,
   IconDots,
   IconLayoutSidebar,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const actions = [
   { key: 'window', label: '窗口', icon: IconLayoutSidebar },

@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { AuIcon, AuLink, IconCircleCheck, IconExternalLink } from 'aurora-ui';
+import { AuIcon, AuLink, IconCircleCheck, IconExternalLink } from 'aurora-plus';
 
 const linkTypes = [
   { type: 'default', label: '默认链接' },

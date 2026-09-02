@@ -30,7 +30,7 @@ import {
   IconStar,
   IconTrash,
   IconX,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const strokeWidth = ref(2);
 const iconItems = [

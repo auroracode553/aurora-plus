@@ -117,7 +117,7 @@ const props = defineProps({
 });
 
 const slots = useSlots();
-const form = inject('aurora-ui.form-context', null);
+const form = inject('aurora-plus.form-context', null);
 const element = ref(null);
 const errorMessage = ref('');
 const validationState = ref('');

@@ -33,7 +33,7 @@ function processQueue() {
   if (activeRequest || queue.length === 0) return;
   if (typeof document === 'undefined') {
     const request = queue.shift();
-    request.reject(new Error('[aurora-ui] AuMessageBox 只能在浏览器环境中调用。'));
+    request.reject(new Error('[aurora-plus] AuMessageBox 只能在浏览器环境中调用。'));
     processQueue();
     return;
   }

@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { AuCard } from 'aurora-ui';
+import { AuCard } from 'aurora-plus';
 </script>
 
 <style scoped>

@@ -24,7 +24,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuColorPicker, AuColorSwatch } from 'aurora-ui';
+import { AuColorPicker, AuColorSwatch } from 'aurora-plus';
 
 const color = ref('#3478f6');
 const presets = [

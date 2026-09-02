@@ -8,7 +8,7 @@ import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.v
 
 通过 `v-model` 控制的模态内容容器。组件负责遮罩、Escape、焦点进入与恢复、滚动锁和过渡事件；表单数据及提交逻辑由业务层维护。
 
-Dialog 面板统一读取全局或局部的 `soft`、`clear`、`solid` 材质设置，内部 Aurora UI 组件继承同一材质上下文。模态交互层保持完全透明，不改变对话框之外的页面亮度；面板自身使用背景模糊、细边框和通用浮层阴影表达层级。
+Dialog 面板统一读取全局或局部的 `soft`、`clear`、`solid` 材质设置，内部 Aurora Plus 组件继承同一材质上下文。模态交互层保持完全透明，不改变对话框之外的页面亮度；面板自身使用背景模糊、细边框和通用浮层阴影表达层级。
 
 系统启用“减少透明度”时，玻璃会自动切换为不透明表面并关闭背景模糊；高对比度模式还会增强边界和分隔线。
 

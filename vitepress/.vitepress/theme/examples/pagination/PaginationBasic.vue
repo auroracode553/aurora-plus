@@ -13,7 +13,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuPagination } from 'aurora-ui';
+import { AuPagination } from 'aurora-plus';
 
 const currentPage = ref(3);
 const pageSize = ref(20);

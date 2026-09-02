@@ -1,5 +1,5 @@
 /**
- * Aurora UI 的全局材质配置。
+ * Aurora Plus 的全局材质配置。
  * 材质通过根节点的 data-au-material 继承到所有组件，也支持局部容器覆盖。
  */
 export const AURORA_MATERIALS = Object.freeze(['soft', 'clear', 'solid']);

@@ -59,7 +59,7 @@ import {
   IconCode,
   IconLayoutSidebar,
   IconMinus,
-} from 'aurora-ui';
+} from 'aurora-plus';
 import {
   setDocsMaterial,
   syncDocsMaterial,

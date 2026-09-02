@@ -5,20 +5,20 @@ import { demoSourcePlugin } from './demo-source-plugin.js';
 import { iconMetadataPlugin } from './icon-metadata-plugin.js';
 
 const siteBase = env.VITEPRESS_BASE || '/';
-const useAuroraDist = env.AURORA_UI_USE_DIST === 'true';
+const useAuroraPlusDist = env.AURORA_PLUS_USE_DIST === 'true';
 const docsRoot = fileURLToPath(new URL('..', import.meta.url));
-const auroraRoot = fileURLToPath(new URL('../../ui', import.meta.url));
-const auroraSourceAliases = useAuroraDist
+const auroraPlusRoot = fileURLToPath(new URL('../../ui', import.meta.url));
+const auroraPlusSourceAliases = useAuroraPlusDist
   ? []
   : [
       {
-        find: /^aurora-ui$/,
+        find: /^aurora-plus$/,
         replacement: fileURLToPath(
           new URL('../../ui/src/index.js', import.meta.url),
         ),
       },
       {
-        find: /^aurora-ui\/style\.css$/,
+        find: /^aurora-plus\/style\.css$/,
         replacement: fileURLToPath(
           new URL('../../ui/src/theme/index.scss', import.meta.url),
         ),
@@ -28,7 +28,7 @@ const auroraSourceAliases = useAuroraDist
 export default defineConfig({
   base: siteBase,
   lang: 'zh-CN',
-  title: 'Aurora UI',
+  title: 'Aurora Plus',
   description: '从 Aurora Editor 抽离的 Vue 3 通用组件库',
   cleanUrls: true,
   lastUpdated: false,
@@ -38,24 +38,24 @@ export default defineConfig({
   vite: {
     plugins: [demoSourcePlugin(), iconMetadataPlugin()],
     resolve: {
-      alias: auroraSourceAliases,
+      alias: auroraPlusSourceAliases,
       dedupe: ['vue'],
     },
-    server: useAuroraDist
+    server: useAuroraPlusDist
       ? undefined
       : {
           fs: {
             // 源码位于文档根目录之外，需要显式允许开发服务器读取。
-            allow: [docsRoot, auroraRoot],
+            allow: [docsRoot, auroraPlusRoot],
           },
         },
     optimizeDeps: {
       // 避免源码别名被依赖预构建缓存，保留组件修改后的即时更新。
-      exclude: ['aurora-ui'],
+      exclude: ['aurora-plus'],
     },
   },
   themeConfig: {
-    siteTitle: 'Aurora UI',
+    siteTitle: 'Aurora Plus',
     outline: {
       level: [2, 3],
       label: '本页内容',
@@ -156,8 +156,8 @@ export default defineConfig({
     ],
     socialLinks: [],
     footer: {
-      message: 'Aurora UI · Vue 3 Component Library',
-      copyright: 'Released for the Aurora ecosystem',
+      message: 'Aurora Plus · Vue 3 Component Library',
+      copyright: 'Released for the Aurora Plus ecosystem',
     },
     search: {
       provider: 'local',

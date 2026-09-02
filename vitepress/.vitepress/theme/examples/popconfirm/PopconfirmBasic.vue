@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuPopconfirm } from 'aurora-ui';
+import { AuButton, AuPopconfirm } from 'aurora-plus';
 
 const result = ref('尚未操作');
 

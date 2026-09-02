@@ -21,7 +21,7 @@ import popconfirmBasicSource from '../.vitepress/theme/examples/popconfirm/Popco
 | `v-model` | 显示状态 | `false` |
 | `title` | 确认问题 | `确定执行此操作吗？` |
 | `confirmButtonText` / `cancelButtonText` | 按钮文字 | `确定 / 取消` |
-| `confirmButtonType` / `cancelButtonType` | Aurora Button 类型 | `primary / default` |
+| `confirmButtonType` / `cancelButtonType` | Aurora Plus Button 类型 | `primary / default` |
 | `confirmButtonLoading` | 确认按钮加载中 | `false` |
 | `confirmButtonDisabled` / `cancelButtonDisabled` | 按钮禁用 | `false` |
 | `icon` / `iconColor` / `hideIcon` | 图标组件、颜色与隐藏 | `IconAlertCircle / '' / false` |

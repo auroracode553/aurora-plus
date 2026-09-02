@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuTimePicker } from 'aurora-ui';
+import { AuTimePicker } from 'aurora-plus';
 
 const time = ref('09:30:00');
 const shortTime = ref('14:45');

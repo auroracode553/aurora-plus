@@ -21,7 +21,7 @@ import messageBasicSource from '../.vitepress/theme/examples/message/MessageBasi
 ## 调用方式
 
 ```js
-import { AuMessage } from 'aurora-ui';
+import { AuMessage } from 'aurora-plus';
 
 const handler = AuMessage.success('保存成功');
 handler.close();

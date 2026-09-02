@@ -59,7 +59,7 @@ import {
   IconAdjustmentsHorizontal,
   IconSettings,
   IconWindowMinimize,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const visible = ref(false);
 const startMinimized = ref(false);

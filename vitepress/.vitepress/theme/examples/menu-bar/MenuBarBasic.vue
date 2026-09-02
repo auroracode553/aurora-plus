@@ -9,7 +9,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuMenuBar } from 'aurora-ui';
+import { AuMenuBar } from 'aurora-plus';
 
 const lastAction = ref('');
 const items = ref([

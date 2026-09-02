@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuButtonGroup, AuButtonGroupItem } from 'aurora-ui';
+import { AuButtonGroup, AuButtonGroupItem } from 'aurora-plus';
 
 const opacityOptions = [50, 60, 70, 80, 90, 100];
 const selectedOpacity = ref(100);

@@ -24,7 +24,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 - 使用 `v-model` 管理值；组件始终通过字符串回传用户输入，与原生 input 行为一致。
 - 搜索框可设置 `type="search"`，需要组件内清除内容时增加 `clearable`。
 - `invalid` 只负责错误视觉与 `aria-invalid`，具体错误文字由表单布局通过 `aria-describedby` 关联。
-- `prefixIcon`、`suffixIcon` 接受 Aurora UI 图标组件；复杂内容使用同名插槽。
+- `prefixIcon`、`suffixIcon` 接受 Aurora Plus 图标组件；复杂内容使用同名插槽。
 - 中文、日文等输入法组合输入结束后才会更新 `v-model`，避免过滤列表在拼写过程中抖动。
 
 ## Input API

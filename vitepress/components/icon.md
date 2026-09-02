@@ -7,15 +7,15 @@ import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?dem
 
 # Icon 图标
 
-Aurora UI 提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。`AuIcon` 用于统一图标的尺寸、颜色和无障碍属性。
+Aurora Plus 提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。`AuIcon` 用于统一图标的尺寸、颜色和无障碍属性。
 
 ## 基础用法
 
-从 `aurora-ui` 导入需要的图标组件：
+从 `aurora-plus` 导入需要的图标组件：
 
 ```vue
 <script setup>
-import { IconHome, IconSearch } from 'aurora-ui';
+import { IconHome, IconSearch } from 'aurora-plus';
 </script>
 
 <template>
@@ -38,13 +38,13 @@ import { IconHome, IconSearch } from 'aurora-ui';
 
 <IconGallery />
 
-## 在 Aurora 组件中使用
+## 在 Aurora Plus 组件中使用
 
-接受图标的 Aurora 组件统一接收 Vue 图标组件本身，而不是字符串名称：
+接受图标的 Aurora Plus 组件统一接收 Vue 图标组件本身，而不是字符串名称：
 
 ```vue
 <script setup>
-import { AuButton, AuDropdown, IconDownload, IconSettings } from 'aurora-ui';
+import { AuButton, AuDropdown, IconDownload, IconSettings } from 'aurora-plus';
 
 const menuItems = [
   { id: 'download', label: '下载', icon: IconDownload },
@@ -66,7 +66,7 @@ const menuItems = [
 
 ```vue
 <script setup>
-import { AuIcon, IconHeart } from 'aurora-ui';
+import { AuIcon, IconHeart } from 'aurora-plus';
 </script>
 
 <template>

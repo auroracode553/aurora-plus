@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { AuButton, AuMessage } from 'aurora-ui';
+import { AuButton, AuMessage } from 'aurora-plus';
 
 const messageExamples = [
   {

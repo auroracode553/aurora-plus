@@ -26,7 +26,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { AuSwitch, AuTree } from 'aurora-ui';
+import { AuSwitch, AuTree } from 'aurora-plus';
 
 const selectedKey = ref('introduction');
 const collapsedKeys = ref(new Set());

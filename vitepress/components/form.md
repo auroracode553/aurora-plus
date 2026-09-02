@@ -6,7 +6,7 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 
 # Form 表单
 
-`AuForm` 管理字段模型、规则和整体验证，`AuFormItem` 负责标签、错误信息和字段级状态。它们不改变内部控件的值，适合组合 Aurora UI 控件或原生表单元素。
+`AuForm` 管理字段模型、规则和整体验证，`AuFormItem` 负责标签、错误信息和字段级状态。它们不改变内部控件的值，适合组合 Aurora Plus 控件或原生表单元素。
 
 ## 基础用法
 

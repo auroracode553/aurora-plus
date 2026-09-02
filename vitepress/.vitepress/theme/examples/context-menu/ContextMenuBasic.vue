@@ -28,7 +28,7 @@ import {
   IconMenu2,
   IconStar,
   IconTrash,
-} from 'aurora-ui';
+} from 'aurora-plus';
 
 const visible = ref(false);
 const position = ref({ x: 0, y: 0 });
