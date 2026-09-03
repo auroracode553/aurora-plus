@@ -34,6 +34,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuIcon` | 图标尺寸、颜色与无障碍外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
 | `AuDialog` | 模态对话框 |
+| `AuDrawer` | 支持四向打开、焦点管理与关闭守卫的抽屉面板 |
 | `AuVirtualList` | 固定行高虚拟列表 |
 | `AuVirtualTable` | 列配置、固定列、排序和固定行高虚拟表格 |
 | `AuImagePreview` | 多图切换、缩放、拖拽与旋转图片预览器 |
@@ -47,7 +48,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 ## 弹性布局
 
 - 表单、列表、面板和导航组件默认允许随父容器收缩，长文本会换行、截断或在横向导航内滚动，避免内容撑破布局。
-- Dialog、Popover、Dropdown、Tooltip、ContextMenu 和 FloatingToolbar 的可用宽度受视口约束；窄屏下的层级菜单会改为容器内展开。
+- Dialog、Drawer、Popover、Dropdown、Tooltip、ContextMenu 和 FloatingToolbar 的可用尺寸受视口约束；窄屏下的层级菜单会改为容器内展开。
 - Button、Link、Checkbox 和 Switch 保留内容驱动宽度，但不会超过父容器；可伸缩文本区域不会挤压图标、状态标记等结构元素。
 - 图标、颜色样本、开关轨道、圆形按钮和桌面窗口控制键需要保持形状，因此仍使用明确的结构尺寸。控件高度继续由 `size` 或组件变体控制，不随屏幕宽度自动放大。
 

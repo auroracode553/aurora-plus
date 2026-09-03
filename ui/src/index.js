@@ -9,6 +9,7 @@ import { AuContextMenu } from './components/context-menu/index.js';
 import { AuDatePicker, AuDatePickerPane, AuDateRangePicker } from './components/date-picker/index.js';
 import { AuDateTimePicker } from './components/date-time-picker/index.js';
 import { AuDialog } from './components/dialog/index.js';
+import { AuDrawer } from './components/drawer/index.js';
 import { AuDivider } from './components/divider/index.js';
 import { AuDropdown } from './components/dropdown/index.js';
 import { AuFloatingToolbar } from './components/floating-toolbar/index.js';
@@ -67,6 +68,7 @@ const components = [
   AuDateRangePicker,
   AuDateTimePicker,
   AuDialog,
+  AuDrawer,
   AuDivider,
   AuDropdown,
   AuFloatingToolbar,
@@ -128,6 +130,7 @@ export {
   AuDateRangePicker,
   AuDateTimePicker,
   AuDialog,
+  AuDrawer,
   AuDivider,
   AuDropdown,
   AuFloatingToolbar,
