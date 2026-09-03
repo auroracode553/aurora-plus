@@ -3,7 +3,7 @@
     <div class="au-doc-row">
       <AuButton @click="openRegionLoading">区域服务</AuButton>
       <AuButton type="primary" @click="openFullscreenLoading">全屏服务</AuButton>
-      <AuButton @click="AuLoadingService.closeAll()">关闭全部</AuButton>
+      <AuButton @click="AuLoading.service.closeAll()">关闭全部</AuButton>
     </div>
 
     <section ref="regionRef" class="loading-service-demo__region">
@@ -14,7 +14,7 @@
 
 <script setup>
 import { onBeforeUnmount, ref } from 'vue';
-import { AuButton, AuLoadingService } from 'aurora-plus';
+import { AuButton, AuLoading } from 'aurora-plus';
 
 const regionRef = ref(null);
 const timers = new Set();
@@ -32,7 +32,7 @@ function scheduleClose(instance, duration) {
 
 function openRegionLoading() {
   if (!regionRef.value) return;
-  const instance = AuLoadingService({
+  const instance = AuLoading.service({
     target: regionRef.value,
     fullscreen: false,
     text: '正在读取区域数据…',
@@ -42,7 +42,7 @@ function openRegionLoading() {
 }
 
 function openFullscreenLoading() {
-  const instance = AuLoadingService({
+  const instance = AuLoading.service({
     lock: true,
     text: '正在同步工作区…',
     background: 'color-mix(in srgb, var(--au-material-background) 82%, transparent)',

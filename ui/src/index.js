@@ -20,8 +20,6 @@ import { AuInput } from './components/input/index.js';
 import { AuLink } from './components/link/index.js';
 import {
   AuLoading,
-  AuLoadingDirective,
-  AuLoadingService,
   AuLoadingSpinner,
   vLoading,
 } from './components/loading/index.js';
@@ -118,10 +116,10 @@ export const AuroraPlus = {
     if (options.theme) setAuroraTheme(options.theme);
     if (options.material) setAuroraMaterial(options.material);
     components.forEach((component) => app.component(component.componentName, component));
-    app.directive('loading', AuLoadingDirective);
+    app.directive('loading', vLoading);
     app.config.globalProperties.$loading = Object.assign(
-      (loadingOptions) => AuLoadingService(loadingOptions, app._context),
-      { closeAll: AuLoadingService.closeAll },
+      (loadingOptions) => AuLoading.service(loadingOptions, app._context),
+      { closeAll: AuLoading.service.closeAll },
     );
     app.config.globalProperties.$message = AuMessage;
     app.config.globalProperties.$messageBox = AuMessageBox;
@@ -155,8 +153,6 @@ export {
   AuLink,
   AuLoading,
   AuLoadingSpinner,
-  AuLoadingDirective,
-  AuLoadingService,
   vLoading,
   AuMenu,
   AuMenuGroup,

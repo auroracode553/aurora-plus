@@ -1,1 +1,1 @@
-export { AuLoadingDirective, AuLoadingService } from './loading.js';
+export { AuLoadingDirective } from './loading.js';
