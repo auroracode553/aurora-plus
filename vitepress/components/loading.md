@@ -55,9 +55,9 @@ app.directive('loading', vLoading);
 </DemoBlock>
 
 ```js
-import { AuLoadingService } from 'aurora-plus';
+import { AuLoading } from 'aurora-plus';
 
-const loading = AuLoadingService({
+const loading = AuLoading.service({
   lock: true,
   text: '正在保存…',
 });
@@ -66,7 +66,7 @@ loading.setText('正在刷新列表…');
 loading.close();
 ```
 
-完整安装后，Options API 中也可以调用 `this.$loading(options)`。需要继承当前应用上下文时，可将 `appContext` 作为第二个参数传给 `AuLoadingService(options, appContext)`。
+完整安装后，Options API 中也可以调用 `this.$loading(options)`；该入口会继承当前应用上下文。
 
 ## AuLoading 组件
 
@@ -141,9 +141,8 @@ loading.close();
 
 | 方法或属性 | 说明 |
 | --- | --- |
-| `AuLoadingService(options, appContext?)` | 创建加载实例；无 target 时为全屏单例 |
-| `AuLoading.service(options, appContext?)` | 与 `AuLoadingService` 相同的快捷入口 |
-| `AuLoadingService.closeAll()` | 请求关闭全部服务实例；关闭守卫仍会执行 |
+| `AuLoading.service(options)` | 创建加载实例；无 target 时为全屏单例 |
+| `AuLoading.service.closeAll()` | 请求关闭全部服务实例；关闭守卫仍会执行 |
 | `instance.close()` | 请求关闭当前实例 |
 | `instance.setText(text)` | 更新加载文案 |
 | `instance.update(options)` | 更新文案、图标、颜色、背景、层级等视觉配置 |

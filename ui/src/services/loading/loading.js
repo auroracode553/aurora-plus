@@ -344,9 +344,10 @@ export const AuLoadingDirective = {
   },
 };
 
-export const AuLoadingService = Object.assign(createLoadingController, {
-  service: createLoadingController,
+const loadingService = Object.assign(createLoadingController, {
   closeAll() {
     [...controllers].forEach((controller) => controller.close());
   },
 });
+
+export default loadingService;
