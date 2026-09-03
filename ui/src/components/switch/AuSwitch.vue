@@ -18,7 +18,13 @@
   >
     <span class="au-switch__track" aria-hidden="true">
       <span class="au-switch__thumb au-depth-control au-inline-center">
-        <AuIcon v-if="loading" class="au-switch__loading au-spin" :icon="IconLoader2" />
+        <AuLoadingSpinner
+          v-if="loading"
+          class="au-switch__loading"
+          :size="size"
+          color="var(--au-color-text-secondary)"
+          compact
+        />
       </span>
     </span>
     <span v-if="hasLabel" class="au-switch__label au-choice-label au-wrap-anywhere">
@@ -29,8 +35,7 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
-import { IconLoader2 } from '@tabler/icons-vue';
-import { AuIcon } from '../icon/index.js';
+import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -133,13 +138,6 @@ function toggle() {
 
 .au-switch.is-large.is-checked .au-switch__thumb {
   transform: translateX(18px);
-}
-
-.au-switch__loading {
-  width: auto;
-  height: 0.7em;
-  aspect-ratio: 1;
-  color: var(--au-color-text-secondary);
 }
 
 .au-switch__label {

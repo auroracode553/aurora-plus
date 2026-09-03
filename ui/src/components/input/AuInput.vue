@@ -4,12 +4,13 @@
     :class="[
       `is-${size}`,
       {
-        'is-disabled': disabled,
-        'au-disabled': disabled,
+        'is-disabled': disabled || loading,
+        'au-disabled': disabled || loading,
         'is-invalid': invalid,
       },
       $attrs.class,
     ]"
+    :aria-busy="loading ? 'true' : undefined"
     :style="$attrs.style"
   >
     <span v-if="hasPrefix" class="au-input__affix au-input__prefix">
@@ -25,7 +26,7 @@
       :value="inputValue"
       :type="type"
       :placeholder="placeholder || undefined"
-      :disabled="disabled"
+      :disabled="disabled || loading"
       :readonly="readonly"
       :maxlength="maxlength ?? undefined"
       :aria-invalid="invalid ? 'true' : $attrs['aria-invalid']"
@@ -38,6 +39,7 @@
     />
 
     <span v-if="hasSuffix" class="au-input__affix au-input__suffix">
+      <AuLoadingSpinner v-if="loading" class="au-input__loading" :size="size" />
       <span v-if="showWordLimit && maxlength != null" class="au-input__count" aria-live="polite">
         {{ wordCount }}/{{ maxlength }}
       </span>
@@ -75,6 +77,7 @@
 import { computed, nextTick, ref, useAttrs, useSlots } from 'vue';
 import { IconX } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
+import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -88,6 +91,7 @@ const props = defineProps({
   },
   placeholder: { type: String, default: '' },
   disabled: { type: Boolean, default: false },
+  loading: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
   clearable: { type: Boolean, default: false },
   clearableWhenReadonly: { type: Boolean, default: false },
@@ -111,6 +115,7 @@ const canClear = computed(() => (
   props.clearable
   && inputValue.value.length > 0
   && !props.disabled
+  && !props.loading
   && (!props.readonly || props.clearableWhenReadonly)
 ));
 const hasSuffixContent = computed(() => Boolean(slots.suffix || props.suffixIcon));
@@ -122,7 +127,8 @@ const shouldRenderClear = computed(() => (
   && (!props.replaceSuffixOnClear || !hasSuffixContent.value || canClear.value)
 ));
 const hasSuffix = computed(() => Boolean(
-  hasSuffixContent.value
+  props.loading
+  || hasSuffixContent.value
   || props.clearable
   || (props.showWordLimit && props.maxlength != null),
 ));
@@ -254,6 +260,10 @@ defineExpose({ focus, blur, select, inputRef });
   font-size: var(--au-font-size-small);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.au-input__loading {
+  color: var(--au-color-primary);
 }
 
 .au-input__suffix-content {

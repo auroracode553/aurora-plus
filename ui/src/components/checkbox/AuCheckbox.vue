@@ -6,10 +6,11 @@
       {
         'is-checked': checked,
         'is-indeterminate': indeterminate,
-        'is-disabled': disabled,
-        'au-disabled': disabled,
+        'is-disabled': disabled || loading,
+        'au-disabled': disabled || loading,
       },
     ]"
+    :aria-busy="loading ? 'true' : undefined"
   >
     <input
       ref="inputRef"
@@ -18,13 +19,20 @@
       :name="name || undefined"
       :value="value"
       :checked="checked"
-      :disabled="disabled"
+      :disabled="disabled || loading"
       :aria-checked="indeterminate ? 'mixed' : checked"
       v-bind="$attrs"
       @change="handleChange"
     />
     <span class="au-checkbox__box au-depth-control au-inline-center" aria-hidden="true">
-      <span class="au-checkbox__mark"></span>
+      <AuLoadingSpinner
+        v-if="loading"
+        class="au-checkbox__loading"
+        :size="size"
+        :color="checked || indeterminate ? '#ffffff' : 'var(--au-color-primary)'"
+        compact
+      />
+      <span v-else class="au-checkbox__mark"></span>
     </span>
     <span v-if="hasLabel" class="au-checkbox__label au-choice-label au-wrap-anywhere">
       <slot>{{ label }}</slot>
@@ -34,6 +42,7 @@
 
 <script setup>
 import { computed, nextTick, onMounted, ref, useSlots, watch } from 'vue';
+import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -51,6 +60,7 @@ const props = defineProps({
     validator: (value) => ['small', 'default', 'large'].includes(value),
   },
   disabled: { type: Boolean, default: false },
+  loading: { type: Boolean, default: false },
 });
 
 const emit = defineEmits(['update:modelValue', 'change']);
@@ -68,7 +78,7 @@ function syncIndeterminate() {
 }
 
 function handleChange(event) {
-  if (props.disabled) return;
+  if (props.disabled || props.loading) return;
   const nextValue = getNextValue();
   emit('update:modelValue', nextValue);
   emit('change', nextValue, event);
@@ -118,6 +128,10 @@ onMounted(syncIndeterminate);
   opacity: 0;
   transform: translateY(-1px) rotate(45deg) scale(0.7);
   transition: opacity var(--au-transition-duration) var(--au-transition-timing), transform var(--au-transition-duration) var(--au-transition-timing);
+}
+
+.au-checkbox__loading {
+  color: currentColor;
 }
 
 .au-checkbox.is-checked .au-checkbox__box,

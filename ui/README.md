@@ -35,6 +35,9 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
 | `AuDialog` | 模态对话框 |
 | `AuDrawer` | 支持四向打开、焦点管理与关闭守卫的抽屉面板 |
+| `AuLoading`、`vLoading` | 组件与指令形式的区域或全屏加载层 |
+| `AuLoadingService` | 支持目标覆盖、全屏单例和关闭守卫的命令式加载服务 |
+| `AuLoadingSpinner` | 按钮、表单控件和数据组件复用的加载图标 |
 | `AuVirtualList` | 固定行高虚拟列表 |
 | `AuVirtualTable` | 列配置、固定列、排序和固定行高虚拟表格 |
 | `AuImagePreview` | 多图切换、缩放、拖拽与旋转图片预览器 |

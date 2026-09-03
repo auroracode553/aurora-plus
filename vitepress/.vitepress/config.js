@@ -143,6 +143,7 @@ export default defineConfig({
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
           { text: 'Dialog 对话框', link: '/components/dialog' },
           { text: 'Drawer 抽屉', link: '/components/drawer' },
+          { text: 'Loading 加载', link: '/components/loading' },
           { text: 'Message 消息提示', link: '/components/message' },
           { text: 'MessageBox 消息确认框', link: '/components/message-box' },
         ],

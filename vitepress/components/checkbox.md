@@ -22,6 +22,7 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
 
 - 单个设置使用布尔值模型；同组多选时让每个复选框传入不同的 `value`，并绑定到同一个数组。
 - 全选控件使用 `indeterminate` 告知用户当前处于部分选择状态，业务层负责计算全选和半选逻辑。
+- 异步提交期间使用 `loading`，它会替换选择标记、设置 `aria-busy` 并阻止重复切换。
 - 复选框文字应说明选择后影响的范围；只有图形时请透传 `aria-label`。
 - 不要用复选框代替需要立即生效的二元开关，后者使用 `AuSwitch` 更清晰。
 
@@ -40,6 +41,7 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
 | `indeterminate` | 是否显示半选状态 | `boolean` | `false` |
 | `size` | 控件尺寸 | `string` | `default` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
+| `loading` | 是否处于加载中；开启时不可切换 | `boolean` | `false` |
 
 `size` 可选 `small`、`default`、`large`。未声明的属性会透传到原生 `input`，例如 `id`、`aria-describedby` 和 `form`。
 

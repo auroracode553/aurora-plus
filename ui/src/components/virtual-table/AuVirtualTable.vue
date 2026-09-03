@@ -98,8 +98,7 @@
       aria-live="polite"
     >
       <slot name="loading">
-        <AuIcon class="au-spin" :icon="IconLoader2" />
-        <span>{{ loadingText }}</span>
+        <AuLoadingSpinner :text="loadingText" />
       </slot>
     </div>
   </div>
@@ -107,8 +106,9 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { IconArrowDown, IconArrowUp, IconArrowsSort, IconLoader2 } from '@tabler/icons-vue';
+import { IconArrowDown, IconArrowUp, IconArrowsSort } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
+import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 import {
   getValueByPath,
   resolveTableColumns,

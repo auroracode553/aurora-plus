@@ -11,7 +11,7 @@
     @click="handleClick"
   >
     <slot v-if="loading" name="loading">
-      <AuIcon class="au-button-group-item__loading-icon au-spin" :icon="IconLoader2" />
+      <AuLoadingSpinner class="au-button-group-item__loading-icon" :size="size" color="currentColor" />
     </slot>
     <slot v-else name="icon">
       <AuIcon v-if="icon" class="au-button-group-item__icon" :icon="icon" />
@@ -22,8 +22,8 @@
 
 <script setup>
 import { computed, useAttrs, useSlots } from 'vue';
-import { IconLoader2 } from '@tabler/icons-vue';
 import { AuIcon } from '../icon/index.js';
+import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 import { useButtonGroupContext } from './button-group-context.js';
 
 defineOptions({ inheritAttrs: false });

@@ -24,6 +24,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 - 使用 `v-model` 管理值；组件始终通过字符串回传用户输入，与原生 input 行为一致。
 - 搜索框可设置 `type="search"`，需要组件内清除内容时增加 `clearable`。
 - `invalid` 只负责错误视觉与 `aria-invalid`，具体错误文字由表单布局通过 `aria-describedby` 关联。
+- 异步读取或提交期间使用 `loading`，它会显示后缀加载图标、设置 `aria-busy` 并阻止编辑和清空。
 - `prefixIcon`、`suffixIcon` 接受 Aurora Plus 图标组件；复杂内容使用同名插槽。
 - 中文、日文等输入法组合输入结束后才会更新 `v-model`，避免过滤列表在拼写过程中抖动。
 
@@ -38,6 +39,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 | `size` | 尺寸，可选 `small / default / large` | `string` | `default` |
 | `placeholder` | 占位文字 | `string` | `''` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
+| `loading` | 是否处于加载中；开启时输入框不可编辑 | `boolean` | `false` |
 | `readonly` | 是否只读 | `boolean` | `false` |
 | `clearable` | 有内容时是否显示清除按钮 | `boolean` | `false` |
 | `clearableWhenReadonly` | 原生输入只读时是否仍允许独立的清空操作 | `boolean` | `false` |

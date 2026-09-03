@@ -18,6 +18,13 @@ import { AuIcon } from './components/icon/index.js';
 import { AuImagePreview } from './components/image-preview/index.js';
 import { AuInput } from './components/input/index.js';
 import { AuLink } from './components/link/index.js';
+import {
+  AuLoading,
+  AuLoadingDirective,
+  AuLoadingService,
+  AuLoadingSpinner,
+  vLoading,
+} from './components/loading/index.js';
 import { AuMenu, AuMenuGroup, AuMenuItem } from './components/menu/index.js';
 import { AuMenuBar } from './components/menu-bar/index.js';
 import { AuMenuList, AuMenuListItem } from './components/menu-list/index.js';
@@ -78,6 +85,7 @@ const components = [
   AuImagePreview,
   AuInput,
   AuLink,
+  AuLoading,
   AuMenu,
   AuMenuGroup,
   AuMenuItem,
@@ -110,6 +118,11 @@ export const AuroraPlus = {
     if (options.theme) setAuroraTheme(options.theme);
     if (options.material) setAuroraMaterial(options.material);
     components.forEach((component) => app.component(component.componentName, component));
+    app.directive('loading', AuLoadingDirective);
+    app.config.globalProperties.$loading = Object.assign(
+      (loadingOptions) => AuLoadingService(loadingOptions, app._context),
+      { closeAll: AuLoadingService.closeAll },
+    );
     app.config.globalProperties.$message = AuMessage;
     app.config.globalProperties.$messageBox = AuMessageBox;
     app.config.globalProperties.$confirm = AuMessageBox.confirm;
@@ -140,6 +153,11 @@ export {
   AuImagePreview,
   AuInput,
   AuLink,
+  AuLoading,
+  AuLoadingSpinner,
+  AuLoadingDirective,
+  AuLoadingService,
+  vLoading,
   AuMenu,
   AuMenuGroup,
   AuMenuItem,
