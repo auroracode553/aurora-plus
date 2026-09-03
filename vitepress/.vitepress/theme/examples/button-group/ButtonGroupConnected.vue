@@ -5,6 +5,7 @@
         v-for="action in actions"
         :key="action.key"
         :icon="action.icon"
+        :loading="action.loading"
         :aria-pressed="selectedAction === action.key"
         @click="selectedAction = action.key"
       >
@@ -28,7 +29,7 @@ import {
 const actions = [
   { key: 'window', label: '窗口', icon: IconLayoutSidebar },
   { key: 'preferences', label: '偏好', icon: IconAdjustmentsHorizontal },
-  { key: 'notifications', label: '提醒', icon: IconBell },
+  { key: 'notifications', label: '同步中', icon: IconBell, loading: true },
   { key: 'more', label: '更多', icon: IconDots },
 ];
 

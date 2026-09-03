@@ -12,7 +12,7 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
 
 <DemoBlock
   title="布尔值、数组与半选"
-  description="全选项通过 indeterminate 表示部分选中；选项组使用数组模型维护多个 value。"
+  description="展示布尔值、加载态、数组模型与 indeterminate 半选状态。"
   :source="checkboxBasicSource"
 >
   <CheckboxBasic />

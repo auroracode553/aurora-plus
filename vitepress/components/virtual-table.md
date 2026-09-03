@@ -10,7 +10,7 @@ import virtualTableBasicSource from '../.vitepress/theme/examples/virtual-table/
 
 ## 基础用法
 
-<DemoBlock title="10,000 行数据" description="滚动到任意位置时，DOM 中只保留当前可见行和 overscan 缓冲行。" :source="virtualTableBasicSource" default-expanded>
+<DemoBlock title="10,000 行数据" description="支持切换刷新加载态；滚动时 DOM 中只保留当前可见行和 overscan 缓冲行。" :source="virtualTableBasicSource" default-expanded>
   <VirtualTableBasic />
 </DemoBlock>
 

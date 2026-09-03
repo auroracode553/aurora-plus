@@ -10,6 +10,7 @@
     <AuInput v-model="account" placeholder="账号" :prefix-icon="IconUser" />
     <AuInput v-model="description" placeholder="最多输入 24 个字符" maxlength="24" show-word-limit />
     <AuInput model-value="不可编辑" readonly />
+    <AuInput model-value="正在读取账户信息" loading aria-label="正在读取账户信息" />
     <AuInput model-value="输入内容有误" invalid aria-describedby="input-error" />
     <span id="input-error" class="input-demo__error">请检查输入内容</span>
     <AuInput model-value="禁用状态" disabled />

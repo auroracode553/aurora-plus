@@ -2,6 +2,9 @@
   <div class="virtual-table-demo">
     <div class="virtual-table-demo__actions">
       <AuButton size="small" @click="tableRef?.scrollToRow(5000, 'center')">定位第 5,001 行</AuButton>
+      <AuButton size="small" :type="loading ? 'primary' : 'default'" @click="loading = !loading">
+        {{ loading ? '结束刷新' : '模拟刷新' }}
+      </AuButton>
       <span>当前渲染 {{ rendered.start + 1 }}–{{ rendered.end }} 行</span>
     </div>
     <AuVirtualTable
@@ -9,6 +12,8 @@
       :columns="columns"
       :data="rows"
       :height="360"
+      :loading="loading"
+      loading-text="正在刷新任务"
       stripe
       border
       @rows-rendered="rendered = $event"
@@ -27,6 +32,7 @@ import { ref } from 'vue';
 import { AuButton, AuVirtualTable } from 'aurora-plus';
 
 const tableRef = ref(null);
+const loading = ref(true);
 const rendered = ref({ start: 0, end: 0 });
 const columns = [
   { key: 'id', title: '编号', dataKey: 'id', width: 90, fixed: 'left', sortable: true },

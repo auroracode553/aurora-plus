@@ -18,7 +18,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 <DemoBlock
   title="Connected 连体按钮组"
-  description="当前项使用独立材质层，其他操作保持透明。"
+  description="当前项使用独立材质层，同时展示不可重复触发的加载操作项。"
   :source="buttonGroupConnectedSource"
 >
   <ButtonGroupConnected />

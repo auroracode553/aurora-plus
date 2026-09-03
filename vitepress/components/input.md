@@ -12,7 +12,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 
 <DemoBlock
   title="常用输入状态"
-  description="支持搜索、清空、前后缀、字数限制、只读、错误和禁用状态。"
+  description="支持搜索、清空、前后缀、字数限制、只读、加载、错误和禁用状态。"
   :source="inputBasicSource"
   default-expanded
 >

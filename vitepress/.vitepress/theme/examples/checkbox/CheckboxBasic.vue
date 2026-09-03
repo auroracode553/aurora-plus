@@ -1,6 +1,7 @@
 <template>
   <div class="checkbox-demo">
     <AuCheckbox v-model="accepted">我已阅读并同意服务条款</AuCheckbox>
+    <AuCheckbox :model-value="true" loading>正在保存选择</AuCheckbox>
 
     <AuCheckbox
       :model-value="allSelected"

@@ -1,8 +1,12 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import LoadingBasic from '../.vitepress/theme/examples/loading/LoadingBasic.vue';
+import LoadingComponent from '../.vitepress/theme/examples/loading/LoadingComponent.vue';
+import LoadingControlStates from '../.vitepress/theme/examples/loading/LoadingControlStates.vue';
 import LoadingService from '../.vitepress/theme/examples/loading/LoadingService.vue';
 import loadingBasicSource from '../.vitepress/theme/examples/loading/LoadingBasic.vue?demo-source';
+import loadingComponentSource from '../.vitepress/theme/examples/loading/LoadingComponent.vue?demo-source';
+import loadingControlStatesSource from '../.vitepress/theme/examples/loading/LoadingControlStates.vue?demo-source';
 import loadingServiceSource from '../.vitepress/theme/examples/loading/LoadingService.vue?demo-source';
 </script>
 
@@ -68,11 +72,25 @@ loading.close();
 
 组件用默认插槽包裹内容，通过 `loading` 控制区域加载；设置 `fullscreen` 后加载层会传送到 `body`，默认插槽仍保留原位置。
 
-```vue
-<AuLoading :loading="loading" text="加载中…" :delay="120">
-  <ProjectList :items="items" />
-</AuLoading>
-```
+<DemoBlock
+  title="组件容器与独立 Spinner"
+  description="切换容器加载层，并对比小型、默认和大型加载图标。"
+  :source="loadingComponentSource"
+>
+  <LoadingComponent />
+</DemoBlock>
+
+## 组件内加载状态
+
+按钮、按钮组操作项、输入框、复选框、开关和虚拟表格复用同一个加载图标，并在加载期间阻止重复操作。
+
+<DemoBlock
+  title="控件与数据组件加载态"
+  description="集中展示所有已接入统一 Loading 的组件。"
+  :source="loadingControlStatesSource"
+>
+  <LoadingControlStates />
+</DemoBlock>
 
 ## Options / Attributes
 
