@@ -124,7 +124,7 @@
 
 <script setup>
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
-import { IconCalendar } from '@tabler/icons-vue';
+import { IconCalendar } from '../../icons/internal.js';
 import { AuInput } from '../input/index.js';
 import { AuPopover } from '../popover/index.js';
 import AuDatePickerPane from './AuDatePickerPane.vue';

@@ -56,10 +56,12 @@ import {
   AuPanel,
   AuPopover,
   AuSwitch,
+} from 'aurora-plus';
+import {
   IconAdjustmentsHorizontal,
   IconSettings,
   IconWindowMinimize,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 
 const visible = ref(false);
 const startMinimized = ref(false);

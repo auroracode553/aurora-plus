@@ -17,14 +17,13 @@
 
 <script setup>
 import { ref } from 'vue';
+import { AuButtonGroup, AuButtonGroupItem } from 'aurora-plus';
 import {
-  AuButtonGroup,
-  AuButtonGroupItem,
   IconAdjustmentsHorizontal,
   IconBell,
   IconDots,
   IconLayoutSidebar,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 
 const actions = [
   { key: 'window', label: '窗口', icon: IconLayoutSidebar },

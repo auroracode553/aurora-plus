@@ -72,7 +72,8 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue';
-import { AuButton, AuMessage, IconSearch, icons as tablerIcons } from 'aurora-plus';
+import { AuButton, AuMessage } from 'aurora-plus';
+import { IconSearch, icons as tablerIcons } from 'aurora-plus/icons';
 import iconMetadata from 'virtual:aurora-plus-icon-metadata';
 import { writeTextToClipboard } from '../utils/clipboard.js';
 

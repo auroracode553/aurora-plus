@@ -47,7 +47,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
-import { IconX } from '@tabler/icons-vue';
+import { IconX } from '../../icons/internal.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButton } from '../button/index.js';
 import { AuTooltip } from '../tooltip/index.js';

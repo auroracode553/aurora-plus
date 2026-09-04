@@ -152,7 +152,7 @@
 
 <script setup>
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
-import { IconCalendar, IconX } from '@tabler/icons-vue';
+import { IconCalendar, IconX } from '../../icons/internal.js';
 import { AuButton } from '../button/index.js';
 import { AuIcon } from '../icon/index.js';
 import { AuPopover } from '../popover/index.js';

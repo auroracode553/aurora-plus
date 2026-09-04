@@ -127,7 +127,7 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
-import { IconCopy, IconMinus, IconSquare, IconX } from '@tabler/icons-vue';
+import { IconCopy, IconMinus, IconSquare, IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 

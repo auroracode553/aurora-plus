@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { IconLoader2 } from '@tabler/icons-vue';
+import { IconLoader2 } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 
 defineProps({

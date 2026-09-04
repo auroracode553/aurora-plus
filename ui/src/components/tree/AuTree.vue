@@ -61,7 +61,7 @@
 
 <script setup>
 import { nextTick, ref } from 'vue';
-import { IconChevronRight, IconFileText } from '@tabler/icons-vue';
+import { IconChevronRight, IconFileText } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import { AuVirtualList } from '../virtual-list/index.js';
 

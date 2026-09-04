@@ -75,7 +75,7 @@
 
 <script setup>
 import { computed, nextTick, ref, useAttrs, useSlots } from 'vue';
-import { IconX } from '@tabler/icons-vue';
+import { IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 

@@ -14,8 +14,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import { AuIcon } from 'aurora-plus';
 import {
-  AuIcon,
   IconBell,
   IconBrandGithub,
   IconCheck,
@@ -30,7 +30,7 @@ import {
   IconStar,
   IconTrash,
   IconX,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 
 const strokeWidth = ref(2);
 const iconItems = [

@@ -106,7 +106,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { IconArrowDown, IconArrowUp, IconArrowsSort } from '@tabler/icons-vue';
+import { IconArrowDown, IconArrowUp, IconArrowsSort } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 import {
