@@ -16,17 +16,22 @@
     "dev": "vite build --watch",
     "build": "vite build"
   },
-  "main": "./dist/aurora-plus.umd.cjs",
+  "main": "./dist/aurora-plus.cjs",
   "module": "./dist/aurora-plus.js",
   "style": "./dist/aurora-plus.css",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "exports": {
     ".": {
       "import": "./dist/aurora-plus.js",
-      "require": "./dist/aurora-plus.umd.cjs"
+      "require": "./dist/aurora-plus.cjs"
+    },
+    "./icons": {
+      "import": "./dist/icons.js",
+      "require": "./dist/icons.cjs"
     },
     "./style.css": "./dist/aurora-plus.css",
     "./package.json": "./package.json"
@@ -40,13 +45,11 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {
-    "@tabler/icons-vue": "^3.46.0"
-  },
   "peerDependencies": {
     "vue": ">=3.3.0"
   },
   "devDependencies": {
+    "@tabler/icons-vue": "3.46.0",
     "@vitejs/plugin-vue": "^6.0.7",
     "sass": "^1.103.1",
     "vite": "^8.2.2",

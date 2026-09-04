@@ -98,7 +98,7 @@
 
 <script setup>
 import { computed, nextTick, ref, watch } from 'vue';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-vue';
+import { IconChevronLeft, IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import {
   addDays,

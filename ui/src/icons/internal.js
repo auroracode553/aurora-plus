@@ -1,0 +1,25 @@
+// UI 内部只引用实际使用的图标文件，避免完整图标入口进入 UI 主入口。
+export { default as IconAlertCircle } from '@tabler/icons-vue/dist/esm/icons/IconAlertCircle.mjs';
+export { default as IconArrowDown } from '@tabler/icons-vue/dist/esm/icons/IconArrowDown.mjs';
+export { default as IconArrowsMaximize } from '@tabler/icons-vue/dist/esm/icons/IconArrowsMaximize.mjs';
+export { default as IconArrowsSort } from '@tabler/icons-vue/dist/esm/icons/IconArrowsSort.mjs';
+export { default as IconArrowUp } from '@tabler/icons-vue/dist/esm/icons/IconArrowUp.mjs';
+export { default as IconCalendar } from '@tabler/icons-vue/dist/esm/icons/IconCalendar.mjs';
+export { default as IconCalendarTime } from '@tabler/icons-vue/dist/esm/icons/IconCalendarTime.mjs';
+export { default as IconCheck } from '@tabler/icons-vue/dist/esm/icons/IconCheck.mjs';
+export { default as IconChevronDown } from '@tabler/icons-vue/dist/esm/icons/IconChevronDown.mjs';
+export { default as IconChevronLeft } from '@tabler/icons-vue/dist/esm/icons/IconChevronLeft.mjs';
+export { default as IconChevronRight } from '@tabler/icons-vue/dist/esm/icons/IconChevronRight.mjs';
+export { default as IconCircleCheck } from '@tabler/icons-vue/dist/esm/icons/IconCircleCheck.mjs';
+export { default as IconClock } from '@tabler/icons-vue/dist/esm/icons/IconClock.mjs';
+export { default as IconCopy } from '@tabler/icons-vue/dist/esm/icons/IconCopy.mjs';
+export { default as IconFileText } from '@tabler/icons-vue/dist/esm/icons/IconFileText.mjs';
+export { default as IconLoader2 } from '@tabler/icons-vue/dist/esm/icons/IconLoader2.mjs';
+export { default as IconMinus } from '@tabler/icons-vue/dist/esm/icons/IconMinus.mjs';
+export { default as IconPhotoOff } from '@tabler/icons-vue/dist/esm/icons/IconPhotoOff.mjs';
+export { default as IconRotate2 } from '@tabler/icons-vue/dist/esm/icons/IconRotate2.mjs';
+export { default as IconRotateClockwise2 } from '@tabler/icons-vue/dist/esm/icons/IconRotateClockwise2.mjs';
+export { default as IconSquare } from '@tabler/icons-vue/dist/esm/icons/IconSquare.mjs';
+export { default as IconX } from '@tabler/icons-vue/dist/esm/icons/IconX.mjs';
+export { default as IconZoomIn } from '@tabler/icons-vue/dist/esm/icons/IconZoomIn.mjs';
+export { default as IconZoomOut } from '@tabler/icons-vue/dist/esm/icons/IconZoomOut.mjs';

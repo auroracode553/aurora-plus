@@ -40,7 +40,8 @@ function save() {
 
 ```vue
 <script setup>
-import { AuButton, IconBold } from 'aurora-plus';
+import { AuButton } from 'aurora-plus';
+import { IconBold } from 'aurora-plus/icons';
 </script>
 
 <template>
@@ -48,4 +49,4 @@ import { AuButton, IconBold } from 'aurora-plus';
 </template>
 ```
 
-图标按需从 `aurora-plus` 导入，完整用法和 `AuIcon` API 见 [Icon 图标](/components/icon)。
+图标按需从 `aurora-plus/icons` 导入，图标实现已包含在 Aurora Plus 的发布产物中，无需安装其他图标包。完整用法和 `AuIcon` API 见 [Icon 图标](/components/icon)。

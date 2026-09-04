@@ -12,6 +12,12 @@ const auroraPlusSourceAliases = useAuroraPlusDist
   ? []
   : [
       {
+        find: /^aurora-plus\/icons$/,
+        replacement: fileURLToPath(
+          new URL('../../ui/src/icons.js', import.meta.url),
+        ),
+      },
+      {
         find: /^aurora-plus$/,
         replacement: fileURLToPath(
           new URL('../../ui/src/index.js', import.meta.url),
@@ -51,7 +57,7 @@ export default defineConfig({
         },
     optimizeDeps: {
       // 避免源码别名被依赖预构建缓存，保留组件修改后的即时更新。
-      exclude: ['aurora-plus'],
+      exclude: ['aurora-plus', 'aurora-plus/icons'],
     },
   },
   themeConfig: {

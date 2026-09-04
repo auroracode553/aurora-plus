@@ -10,7 +10,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuDropdown, IconCopy, IconLayoutSidebar, IconMenu2 } from 'aurora-plus';
+import { AuButton, AuDropdown } from 'aurora-plus';
+import { IconCopy, IconLayoutSidebar, IconMenu2 } from 'aurora-plus/icons';
 
 const visible = ref(false);
 const items = [

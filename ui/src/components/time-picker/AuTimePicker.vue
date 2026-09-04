@@ -91,7 +91,7 @@
 
 <script setup>
 import { computed, ref, useAttrs, watch } from 'vue';
-import { IconClock } from '@tabler/icons-vue';
+import { IconClock } from '../../icons/internal.js';
 import { AuInput } from '../input/index.js';
 import { AuPopover } from '../popover/index.js';
 import AuTimePickerPanel from './AuTimePickerPanel.vue';

@@ -5,7 +5,7 @@
 ## 先看结论
 
 - 在仓库的 `ui` 目录执行组件库的构建、包检查和 `npm publish`。
-- 发布前必须执行 `npm run build`。当前包的 JavaScript、CSS 和 CommonJS 入口全部指向 `dist/`，而 `npm publish` 不会根据现有脚本自动运行 `npm run build`。
+- 发布前必须执行 `npm run build`。当前包的 UI、图标、CSS 和 CommonJS 入口全部指向 `dist/`，而 `npm publish` 不会根据现有脚本自动运行 `npm run build`。
 - 不要在仓库根目录或 `vitepress` 目录执行 `npm publish`。根目录没有待发布包的 `package.json`，`vitepress` 是独立的文档站包。
 - 当前 npm 包名是 `aurora-plus`，版本是 `0.1.0`。截至 2026-09-02，npm 公共仓库查询该包名返回 `E404 Not Found`；名称在正式发布前仍可能被其他账号注册。
 
@@ -17,17 +17,19 @@
 | --- | --- | --- |
 | `name` | `aurora-plus` | npm 包名 |
 | `version` | `0.1.0` | 待发布版本 |
-| `main` | `./dist/aurora-plus.umd.cjs` | CommonJS/UMD 入口 |
+| `main` | `./dist/aurora-plus.cjs` | UI 的 CommonJS 入口 |
 | `module` | `./dist/aurora-plus.js` | ES Module 入口 |
 | `style` | `./dist/aurora-plus.css` | 样式入口 |
-| `files` | `dist`、`README.md` | 实际进入 npm 包的文件 |
+| `exports["./icons"]` | `./dist/icons.js` / `./dist/icons.cjs` | 独立图标入口，分别供 ES Module 与 CommonJS 使用 |
+| `files` | `dist`、`README.md`、`THIRD_PARTY_NOTICES.md` | 实际进入 npm 包的文件及内联图标的第三方许可证声明 |
 | `peerDependencies` | `vue >=3.3.0` | 由使用者项目提供 Vue |
+| `devDependencies` 中的 `@tabler/icons-vue` | `3.46.0` | 仅供构建使用；图标实现会内联到发布产物，不成为使用者的安装依赖 |
 | `repository` | `github.com/auroracode553/aurora-plus` | npm 包页面关联的源码仓库 |
 | `homepage` | Aurora Plus GitHub Pages | npm 包页面的使用文档入口 |
 | `bugs` | GitHub Issues | 问题反馈入口 |
 | `publishConfig` | npm 官方仓库、公开访问 | 固定发布目标和访问级别 |
 
-构建命令会根据 `ui/vite.config.js` 生成上述三个 `dist` 入口文件。由于发布清单只包含 `dist` 和 `README.md`，如果不先构建，发布包可能缺少入口文件；如果 `dist` 是旧产物，则可能发布旧代码。
+构建命令会根据 `ui/vite.config.js` 生成 UI 与图标两组 JavaScript 入口及样式文件。Tabler 图标实现会内联到这些产物，使用者只需安装 `aurora-plus`；Vue 仍作为 peer dependency 由使用者项目提供。多入口使用 ES Module 与 CommonJS 格式，不再生成 UMD 文件。由于发布清单只包含 `dist`、`README.md` 和 `THIRD_PARTY_NOTICES.md`，如果不先构建，发布包可能缺少入口文件；如果 `dist` 是旧产物，则可能发布旧代码。
 
 ## 第一步：再次确认包名和账号
 
@@ -80,8 +82,10 @@ npm run build
 
 ```text
 ui/dist/aurora-plus.js
-ui/dist/aurora-plus.umd.cjs
+ui/dist/aurora-plus.cjs
 ui/dist/aurora-plus.css
+ui/dist/icons.js
+ui/dist/icons.cjs
 ```
 
 本项目当前没有 `prepublishOnly` 或 `prepare` 自动构建脚本，因此不能依赖 `npm publish` 帮你完成这一步。
@@ -97,8 +101,9 @@ npm pack --dry-run
 检查输出时重点确认：
 
 - 包名和版本正确。
-- 三个 `dist` 入口文件均在清单中。
+- 五个 `dist` 入口文件均在清单中。
 - `README.md` 在清单中。
+- `THIRD_PARTY_NOTICES.md` 在清单中。
 - 没有包含源码密钥、私有配置或其他不应公开的文件。
 
 还可以让 npm 只模拟发布流程：
@@ -127,6 +132,7 @@ npm view aurora-plus name version dist-tags --json
 
 ```js
 import AuroraPlus from 'aurora-plus';
+import { IconSearch } from 'aurora-plus/icons';
 import 'aurora-plus/style.css';
 ```
 

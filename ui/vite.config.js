@@ -2,6 +2,11 @@ import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
 
+const libraryEntries = {
+  'aurora-plus': fileURLToPath(new URL('./src/index.js', import.meta.url)),
+  icons: fileURLToPath(new URL('./src/icons.js', import.meta.url)),
+};
+
 export default defineConfig({
   plugins: [vue()],
   resolve: {
@@ -11,21 +16,19 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: fileURLToPath(new URL('./src/index.js', import.meta.url)),
-      name: 'AuroraPlus',
-      formats: ['es', 'umd'],
-      fileName: (format) => (format === 'es' ? 'aurora-plus.js' : 'aurora-plus.umd.cjs'),
+      entry: libraryEntries,
+      formats: ['es', 'cjs'],
+      fileName: (format, entryName) => (
+        format === 'es' ? `${entryName}.js` : `${entryName}.cjs`
+      ),
       cssFileName: 'aurora-plus',
     },
     cssCodeSplit: false,
     rollupOptions: {
-      external: ['vue', '@tabler/icons-vue'],
+      // Vue 由业务项目提供；Tabler 图标则内联到 Aurora Plus 的发布产物。
+      external: ['vue'],
       output: {
         exports: 'named',
-        globals: {
-          vue: 'Vue',
-          '@tabler/icons-vue': 'TablerIconsVue',
-        },
       },
     },
   },

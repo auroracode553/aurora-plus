@@ -152,7 +152,7 @@ import {
   IconX,
   IconZoomIn,
   IconZoomOut,
-} from '@tabler/icons-vue';
+} from '../../icons/internal.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButton } from '../button/index.js';
 import { AuButtonGroup, AuButtonGroupItem } from '../button-group/index.js';

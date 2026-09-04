@@ -56,10 +56,12 @@ import {
   AuButtonGroup,
   AuButtonGroupItem,
   AuCard,
+} from 'aurora-plus';
+import {
   IconCode,
   IconLayoutSidebar,
   IconMinus,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 import {
   setDocsMaterial,
   syncDocsMaterial,

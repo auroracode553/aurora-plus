@@ -121,7 +121,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { IconChevronRight } from '@tabler/icons-vue';
+import { IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 

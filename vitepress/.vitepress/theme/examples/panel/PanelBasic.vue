@@ -37,13 +37,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import {
-  AuMenuList,
-  AuMenuListItem,
-  AuPanel,
-  IconAdjustmentsHorizontal,
-  IconUsers,
-} from 'aurora-plus';
+import { AuMenuList, AuMenuListItem, AuPanel } from 'aurora-plus';
+import { IconAdjustmentsHorizontal, IconUsers } from 'aurora-plus/icons';
 
 const lastAction = ref('');
 </script>

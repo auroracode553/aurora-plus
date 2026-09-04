@@ -74,7 +74,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { IconCheck, IconChevronRight } from '@tabler/icons-vue';
+import { IconCheck, IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 
 defineOptions({ name: 'AuMenuBarPanel' });

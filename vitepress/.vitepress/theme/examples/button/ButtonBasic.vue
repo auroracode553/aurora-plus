@@ -32,7 +32,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, IconX } from 'aurora-plus';
+import { AuButton } from 'aurora-plus';
+import { IconX } from 'aurora-plus/icons';
 
 const buttonTypes = [
   { type: 'default', label: '默认按钮' },

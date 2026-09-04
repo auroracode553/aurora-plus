@@ -6,7 +6,7 @@ const VIRTUAL_MODULE_ID = 'virtual:aurora-plus-icon-metadata';
 const RESOLVED_MODULE_ID = '\0aurora-plus-docs:icon-metadata';
 
 /**
- * 在文档构建阶段读取 Aurora Plus 所依赖版本的 Tabler 官方分类元数据。
+ * 在文档构建阶段读取 Aurora Plus 构建所用版本的 Tabler 官方分类元数据。
  * 元数据通过虚拟模块提供给图标目录，不进入 Aurora Plus 的运行时产物。
  */
 export function iconMetadataPlugin() {
@@ -52,7 +52,7 @@ function resolveTablerMetadataPath() {
     currentDirectory = dirname(currentDirectory);
   }
 
-  throw new Error('无法读取 Aurora Plus 所依赖的 Tabler Icons 分类元数据。');
+  throw new Error('无法读取 Aurora Plus 构建所用的 Tabler Icons 分类元数据。');
 }
 
 function createComponentMetadata(metadata) {
