@@ -27,7 +27,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { IconX } from '@tabler/icons-vue';
+import { IconX } from '../../icons/internal.js';
 import { AuIcon } from '../../components/icon/index.js';
 
 const props = defineProps({

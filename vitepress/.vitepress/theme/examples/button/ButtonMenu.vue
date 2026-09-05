@@ -22,14 +22,13 @@
 
 <script setup>
 import { ref } from 'vue';
+import { AuButton, AuDivider } from 'aurora-plus';
 import {
-  AuButton,
-  AuDivider,
   IconArrowUp,
   IconBrandGit,
   IconCode,
   IconLayoutSidebar,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 
 const activeAction = ref('sidebar');
 

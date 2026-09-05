@@ -124,7 +124,7 @@ import {
   useSlots,
   watch,
 } from 'vue';
-import { IconCheck, IconChevronDown } from '@tabler/icons-vue';
+import { IconCheck, IconChevronDown } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import {
   findAdjacentEnabledOption,

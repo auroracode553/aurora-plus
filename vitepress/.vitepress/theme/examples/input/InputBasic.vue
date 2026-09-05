@@ -21,7 +21,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuInput, IconSearch, IconUser } from 'aurora-plus';
+import { AuInput } from 'aurora-plus';
+import { IconSearch, IconUser } from 'aurora-plus/icons';
 
 const keyword = ref('');
 const account = ref('');

@@ -65,7 +65,8 @@
 
 <script setup>
 import { computed, onBeforeUnmount, ref } from 'vue';
-import { AuMessage, IconChevronUp, IconCode, IconCopy } from 'aurora-plus';
+import { AuMessage } from 'aurora-plus';
+import { IconChevronUp, IconCode, IconCopy } from 'aurora-plus/icons';
 import { writeTextToClipboard } from '../utils/clipboard.js';
 
 let demoSeed = 0;

@@ -28,10 +28,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import { AuMenu, AuMenuGroup, AuMenuItem } from 'aurora-plus';
 import {
-  AuMenu,
-  AuMenuGroup,
-  AuMenuItem,
   IconAdjustmentsHorizontal,
   IconBolt,
   IconCalendar,
@@ -44,7 +42,7 @@ import {
   IconSparkles,
   IconStar,
   IconSettings,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 
 const activeItem = ref('dashboard');
 </script>

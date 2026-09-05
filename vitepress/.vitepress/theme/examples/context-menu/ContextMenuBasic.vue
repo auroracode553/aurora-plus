@@ -24,11 +24,13 @@ import {
   AuIcon,
   AuMessage,
   AuMessageBox,
+} from 'aurora-plus';
+import {
   IconCopy,
   IconMenu2,
   IconStar,
   IconTrash,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 
 const visible = ref(false);
 const position = ref({ x: 0, y: 0 });

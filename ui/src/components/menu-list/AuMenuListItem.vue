@@ -61,7 +61,7 @@
 
 <script setup>
 import { computed, inject, useAttrs } from 'vue';
-import { IconChevronRight } from '@tabler/icons-vue';
+import { IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import { AU_MENU_LIST_CONTEXT_KEY } from './menu-list-context.js';
 

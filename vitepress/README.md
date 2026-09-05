@@ -22,14 +22,14 @@ vitepress/
 
 文档站保留 `"aurora-plus": "file:../ui"` 作为组件库依赖，示例始终使用公开入口 `import 'aurora-plus'`，不暴露组件库内部文件路径。Vite 根据环境切换公开入口的实际来源：
 
-- 默认开发模式将 `aurora-plus` 和 `aurora-plus/style.css` 映射到 `../ui/src`，组件源码与 SCSS 主题修改后可直接更新实时示例。
+- 默认开发模式将 `aurora-plus`、`aurora-plus/icons` 和 `aurora-plus/style.css` 映射到 `../ui/src`，组件源码、图标入口与 SCSS 主题修改后可直接更新实时示例。
 - 设置 `AURORA_PLUS_USE_DIST=true` 时不启用源码映射，由 UI 包自身的 `exports` 解析到 `ui/dist`，用于发布前验证和 GitHub Pages 构建。
 
-`ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；Tabler 图标通过本地 `aurora-plus` 包的运行时依赖与公共导出使用。源码模式只改变 Vite 的模块解析目标，不改变文档示例展示给使用者的导入方式。
+`ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；图标示例通过本地 `aurora-plus/icons` 公共入口使用，Tabler 只保留为 UI 包的构建期依赖。源码模式只改变 Vite 的模块解析目标，不改变文档示例展示给使用者的导入方式。
 
 文档站使用 VitePress 2 预发布版及 Vite 8。Vite 8 仅支持 Sass 现代 API，因此 `.vitepress/config.js` 不再声明已移除的 `scss.api` 兼容选项。Vite 8 使用 Rolldown 和 Oxc，运行环境需满足 Node.js 20.19+ 或 22.12+；GitHub Pages 工作流使用 Node.js 24。
 
-图标目录的分类索引由 `icon-metadata-plugin.js` 在构建期读取 Aurora Plus 实际依赖版本的 Tabler 官方元数据，并通过虚拟模块交给文档页面。分类数据不会打进 UI 库产物，也不需要在文档站重复维护图标版本。
+图标目录的分类索引由 `icon-metadata-plugin.js` 在构建期读取 Aurora Plus 构建所用版本的 Tabler 官方元数据，并通过虚拟模块交给文档页面。分类数据不会打进 UI 库产物，也不需要在文档站重复维护图标版本。
 
 ## 联调流程
 

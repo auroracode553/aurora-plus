@@ -90,11 +90,12 @@ function save() {
 
 ## 图标
 
-从 `aurora-plus` 导入图标组件，并传给 `AuIcon` 或其他接受图标的 Aurora Plus 组件：
+从独立的 `aurora-plus/icons` 入口按需导入图标组件，并传给 `AuIcon` 或其他接受图标的 Aurora Plus 组件。图标实现已包含在 Aurora Plus 的发布产物中，只需安装 `aurora-plus`：
 
 ```vue
 <script setup>
-import { AuButton, AuIcon, IconBold, IconHeart } from 'aurora-plus';
+import { AuButton, AuIcon } from 'aurora-plus';
+import { IconBold, IconHeart } from 'aurora-plus/icons';
 </script>
 
 <template>

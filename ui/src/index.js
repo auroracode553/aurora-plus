@@ -190,7 +190,4 @@ export {
   setAuroraTheme,
 };
 
-// Aurora Plus 统一暴露 Tabler 图标，业务侧无需直接依赖图标包的导入路径。
-export * from '@tabler/icons-vue';
-
 export default AuroraPlus;

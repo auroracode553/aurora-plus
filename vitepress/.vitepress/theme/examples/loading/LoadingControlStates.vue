@@ -36,9 +36,8 @@ import {
   AuInput,
   AuSwitch,
   AuVirtualTable,
-  IconRefresh,
-  IconSettings,
 } from 'aurora-plus';
+import { IconRefresh, IconSettings } from 'aurora-plus/icons';
 
 const columns = [
   { key: 'name', title: '任务', dataKey: 'name', flexGrow: 1, minWidth: 150 },

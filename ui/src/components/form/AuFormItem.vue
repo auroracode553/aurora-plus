@@ -74,7 +74,7 @@ import {
   useSlots,
   watch,
 } from 'vue';
-import { IconAlertCircle, IconCircleCheck, IconLoader2 } from '@tabler/icons-vue';
+import { IconAlertCircle, IconCircleCheck, IconLoader2 } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import {
   cloneFieldValue,

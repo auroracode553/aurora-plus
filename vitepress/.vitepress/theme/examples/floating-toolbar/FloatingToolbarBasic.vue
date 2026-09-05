@@ -34,15 +34,13 @@
 
 <script setup>
 import { ref } from 'vue';
+import { AuButton, AuFloatingToolbar, AuMessage } from 'aurora-plus';
 import {
-  AuButton,
-  AuFloatingToolbar,
-  AuMessage,
   IconBold,
   IconItalic,
   IconTrash,
   IconUnderline,
-} from 'aurora-plus';
+} from 'aurora-plus/icons';
 
 const toolbarActions = [
   { id: 'bold', label: '加粗', icon: IconBold },
