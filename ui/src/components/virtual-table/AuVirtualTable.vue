@@ -184,15 +184,24 @@ const rootStyle = computed(() => ({
   width: formatSize(props.width),
   height: formatSize(props.height),
 }));
+const contentHeight = computed(() => (
+  props.headerHeight + sortedRows.value.length * props.rowHeight
+));
 const canvasStyle = computed(() => ({
   width: `${Math.max(tableWidth.value, viewportWidth.value)}px`,
-  height: `${props.headerHeight + sortedRows.value.length * props.rowHeight}px`,
+  // Short and empty tables still fill the viewport without creating phantom overflow.
+  height: `${Math.max(contentHeight.value, viewportHeight.value)}px`,
 }));
 const headerStyle = computed(() => ({
   height: `${props.headerHeight}px`,
   gridTemplateColumns: gridTemplateColumns.value,
 }));
-const emptyStyle = computed(() => ({ top: `${props.headerHeight}px` }));
+const emptyStyle = computed(() => ({
+  top: `${props.headerHeight}px`,
+  left: `${scrollLeft.value}px`,
+  width: `${viewportWidth.value}px`,
+  height: `${Math.max(viewportHeight.value - props.headerHeight, 0)}px`,
+}));
 
 function formatSize(value) {
   return typeof value === 'number' ? `${value}px` : value;
@@ -478,10 +487,9 @@ defineExpose({
 }
 
 .au-virtual-table__empty {
-  position: sticky;
-  left: 0;
-  width: 100%;
-  min-height: 96px;
+  /* Empty content must not enlarge the explicitly sized virtual canvas. */
+  position: absolute;
+  min-height: 0;
   color: var(--au-color-text-secondary);
 }
 
