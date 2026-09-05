@@ -1,7 +1,6 @@
 <template>
   <div
-    ref="scrollContainerRef"
-    class="au-virtual-table au-component au-surface-frame au-surface-frame--rounded au-scroll-region au-thin-scrollbar au-focus-ring au-focus-ring--tight"
+    class="au-virtual-table au-component au-surface-frame au-surface-frame--rounded"
     :class="{ 'has-border': border, 'is-striped': stripe, 'is-loading': loading }"
     :style="rootStyle"
     role="grid"
@@ -9,10 +8,14 @@
     :aria-rowcount="sortedRows.length + 1"
     :aria-colcount="resolvedColumns.length"
     :aria-busy="loading ? 'true' : undefined"
-    tabindex="0"
-    @scroll.passive="handleScroll"
   >
-    <div class="au-virtual-table__canvas" :style="canvasStyle">
+    <div
+      ref="headerViewportRef"
+      class="au-virtual-table__header-viewport"
+      :style="headerViewportStyle"
+      role="rowgroup"
+      @scroll.passive="handleHeaderScroll"
+    >
       <div
         class="au-virtual-table__header au-forced-canvas"
         :style="headerStyle"
@@ -46,55 +49,66 @@
           </slot>
         </div>
       </div>
+    </div>
 
-      <div v-if="sortedRows.length === 0" class="au-virtual-table__empty au-grid-center" :style="emptyStyle">
-        <slot name="empty">{{ emptyText }}</slot>
-      </div>
-
-      <template v-else>
-        <div
-          v-for="entry in visibleRows"
-          :key="resolveRowKey(entry)"
-          class="au-virtual-table__row au-motion-reduce"
-          :class="[
-            resolveRowClass(entry),
-            { 'is-striped-row': stripe && entry.visibleIndex % 2 === 1 },
-          ]"
-          :style="getRowStyle(entry.visibleIndex)"
-          role="row"
-          :aria-rowindex="entry.visibleIndex + 2"
-          @click="emit('row-click', entry.row, entry.sourceIndex, $event)"
-          @dblclick="emit('row-dblclick', entry.row, entry.sourceIndex, $event)"
-        >
-          <div
-            v-for="(column, columnIndex) in resolvedColumns"
-            :key="column.key"
-            class="au-virtual-table__cell"
-            :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
-            :style="getColumnStyle(column)"
-            role="gridcell"
-            :aria-colindex="columnIndex + 1"
-            @click="emit('cell-click', entry.row, column, entry.sourceIndex, $event)"
-          >
-            <slot
-              :name="`cell-${column.key}`"
-              :row="entry.row"
-              :column="column"
-              :value="getCellValue(entry.row, column)"
-              :index="entry.sourceIndex"
-            >
-              <span class="au-virtual-table__cell-text au-truncate">
-                {{ formatCell(entry.row, column, entry.sourceIndex) }}
-              </span>
-            </slot>
-          </div>
+    <div
+      ref="scrollContainerRef"
+      class="au-virtual-table__body au-scroll-region au-thin-scrollbar au-focus-ring"
+      role="rowgroup"
+      tabindex="0"
+      @scroll.passive="handleScroll"
+    >
+      <div class="au-virtual-table__canvas" :style="canvasStyle">
+        <div v-if="sortedRows.length === 0" class="au-virtual-table__empty au-grid-center" :style="emptyStyle">
+          <slot name="empty">{{ emptyText }}</slot>
         </div>
-      </template>
+
+        <template v-else>
+          <div
+            v-for="entry in visibleRows"
+            :key="resolveRowKey(entry)"
+            class="au-virtual-table__row au-motion-reduce"
+            :class="[
+              resolveRowClass(entry),
+              { 'is-striped-row': stripe && entry.visibleIndex % 2 === 1 },
+            ]"
+            :style="getRowStyle(entry.visibleIndex)"
+            role="row"
+            :aria-rowindex="entry.visibleIndex + 2"
+            @click="emit('row-click', entry.row, entry.sourceIndex, $event)"
+            @dblclick="emit('row-dblclick', entry.row, entry.sourceIndex, $event)"
+          >
+            <div
+              v-for="(column, columnIndex) in resolvedColumns"
+              :key="column.key"
+              class="au-virtual-table__cell"
+              :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
+              :style="getColumnStyle(column)"
+              role="gridcell"
+              :aria-colindex="columnIndex + 1"
+              @click="emit('cell-click', entry.row, column, entry.sourceIndex, $event)"
+            >
+              <slot
+                :name="`cell-${column.key}`"
+                :row="entry.row"
+                :column="column"
+                :value="getCellValue(entry.row, column)"
+                :index="entry.sourceIndex"
+              >
+                <span class="au-virtual-table__cell-text au-truncate">
+                  {{ formatCell(entry.row, column, entry.sourceIndex) }}
+                </span>
+              </slot>
+            </div>
+          </div>
+        </template>
+      </div>
     </div>
 
     <div
       v-if="loading"
       class="au-virtual-table__loading au-material-surface au-depth-surface au-forced-canvas"
+      :style="loadingStyle"
       aria-live="polite"
     >
       <slot name="loading">
@@ -146,11 +160,13 @@ const emit = defineEmits([
   'cell-click',
 ]);
 
+const headerViewportRef = ref(null);
 const scrollContainerRef = ref(null);
 const scrollTop = ref(0);
 const scrollLeft = ref(0);
 const viewportWidth = ref(0);
 const viewportHeight = ref(0);
+const horizontalScrollbarHeight = ref(0);
 const innerSort = ref(normalizeSort(props.sortBy || props.defaultSort));
 let resizeObserver = null;
 let listeningWindowResize = false;
@@ -160,6 +176,7 @@ const tableWidth = computed(() => resolvedColumns.value.reduce(
   (sum, column) => sum + column.resolvedWidth,
   0,
 ));
+const canvasWidth = computed(() => Math.max(tableWidth.value, viewportWidth.value));
 const gridTemplateColumns = computed(() => resolvedColumns.value
   .map((column) => `${column.resolvedWidth}px`)
   .join(' '));
@@ -168,11 +185,12 @@ const sortedRows = computed(() => {
   return sortTableRows(props.data, resolvedColumns.value, innerSort.value);
 });
 const visibleRange = computed(() => {
-  const bodyScrollTop = Math.max(scrollTop.value - props.headerHeight, 0);
-  const visibleHeight = Math.max(viewportHeight.value - props.headerHeight, props.rowHeight);
+  // Scroll offsets and viewport measurements now belong to the body only.
+  const bodyScrollTop = Math.max(scrollTop.value, 0);
+  const visibleHeight = Math.max(viewportHeight.value, props.rowHeight);
   const start = Math.max(Math.floor(bodyScrollTop / props.rowHeight) - props.overscan, 0);
-  const count = Math.ceil(visibleHeight / props.rowHeight) + props.overscan * 2;
-  return { start, end: Math.min(start + count, sortedRows.value.length) };
+  const end = Math.ceil((bodyScrollTop + visibleHeight) / props.rowHeight) + props.overscan;
+  return { start, end: Math.min(end, sortedRows.value.length) };
 });
 const visibleRows = computed(() => sortedRows.value
   .slice(visibleRange.value.start, visibleRange.value.end)
@@ -185,22 +203,32 @@ const rootStyle = computed(() => ({
   height: formatSize(props.height),
 }));
 const contentHeight = computed(() => (
-  props.headerHeight + sortedRows.value.length * props.rowHeight
+  sortedRows.value.length * props.rowHeight
 ));
 const canvasStyle = computed(() => ({
-  width: `${Math.max(tableWidth.value, viewportWidth.value)}px`,
-  // Short and empty tables still fill the viewport without creating phantom overflow.
-  height: `${Math.max(contentHeight.value, viewportHeight.value)}px`,
+  width: `${canvasWidth.value}px`,
+  // CSS fills short tables without feeding rounded viewport heights back into layout.
+  height: `${contentHeight.value}px`,
+}));
+const headerViewportStyle = computed(() => ({
+  height: `${props.headerHeight}px`,
+  // Match the body's usable width, excluding its native vertical scrollbar.
+  width: viewportWidth.value > 0 ? `${viewportWidth.value}px` : '100%',
 }));
 const headerStyle = computed(() => ({
   height: `${props.headerHeight}px`,
+  width: `${canvasWidth.value}px`,
   gridTemplateColumns: gridTemplateColumns.value,
 }));
 const emptyStyle = computed(() => ({
-  top: `${props.headerHeight}px`,
+  top: 0,
   left: `${scrollLeft.value}px`,
   width: `${viewportWidth.value}px`,
-  height: `${Math.max(viewportHeight.value - props.headerHeight, 0)}px`,
+  height: '100%',
+}));
+const loadingStyle = computed(() => ({
+  left: `${viewportWidth.value / 2}px`,
+  bottom: `${horizontalScrollbarHeight.value + 8}px`,
 }));
 
 function formatSize(value) {
@@ -227,7 +255,7 @@ function getRowStyle(index) {
   return {
     height: `${props.rowHeight}px`,
     gridTemplateColumns: gridTemplateColumns.value,
-    transform: `translateY(${props.headerHeight + index * props.rowHeight}px)`,
+    transform: `translateY(${index * props.rowHeight}px)`,
   };
 }
 
@@ -292,6 +320,7 @@ function toggleSort(column) {
 function handleScroll(event) {
   scrollTop.value = event.currentTarget.scrollTop;
   scrollLeft.value = event.currentTarget.scrollLeft;
+  syncHeaderScroll();
   emit('scroll', {
     scrollTop: scrollTop.value,
     scrollLeft: scrollLeft.value,
@@ -299,18 +328,38 @@ function handleScroll(event) {
   });
 }
 
+function syncHeaderScroll() {
+  const header = headerViewportRef.value;
+  if (header && header.scrollLeft !== scrollLeft.value) {
+    header.scrollLeft = scrollLeft.value;
+  }
+}
+
+function handleHeaderScroll(event) {
+  const body = scrollContainerRef.value;
+  const headerScrollLeft = event.currentTarget.scrollLeft;
+  // Keyboard focus on an offscreen header must also reveal its body column.
+  // Ignore mirrored scroll events so they cannot interrupt smooth body scrolling.
+  if (body && headerScrollLeft !== scrollLeft.value) {
+    body.scrollLeft = headerScrollLeft;
+  }
+}
+
 function updateViewport() {
   const element = scrollContainerRef.value;
   if (!element) return;
   viewportWidth.value = element.clientWidth;
   viewportHeight.value = element.clientHeight;
+  horizontalScrollbarHeight.value = element.offsetHeight - element.clientHeight;
   syncScrollBounds();
+  scrollTop.value = element.scrollTop;
+  scrollLeft.value = element.scrollLeft;
 }
 
 function syncScrollBounds() {
   const element = scrollContainerRef.value;
   if (!element) return;
-  const maxTop = Math.max(props.headerHeight + sortedRows.value.length * props.rowHeight - viewportHeight.value, 0);
+  const maxTop = Math.max(contentHeight.value - viewportHeight.value, 0);
   if (element.scrollTop > maxTop) scrollTo({ scrollTop: maxTop });
 }
 
@@ -345,18 +394,18 @@ function scrollToLeft(scrollLeftValue = 0) {
 
 function scrollToRow(index, align = 'auto') {
   const safeIndex = Math.max(0, Math.min(Math.trunc(index), Math.max(sortedRows.value.length - 1, 0)));
-  const rowTop = props.headerHeight + safeIndex * props.rowHeight;
+  const rowTop = safeIndex * props.rowHeight;
   const rowBottom = rowTop + props.rowHeight;
-  const viewportTop = scrollTop.value + props.headerHeight;
+  const viewportTop = scrollTop.value;
   const viewportBottom = scrollTop.value + viewportHeight.value;
-  let target = rowTop - props.headerHeight;
+  let target = rowTop;
   if (align === 'center') {
-    const bodyHeight = Math.max(viewportHeight.value - props.headerHeight, props.rowHeight);
-    target = rowTop - props.headerHeight - (bodyHeight - props.rowHeight) / 2;
+    const bodyHeight = Math.max(viewportHeight.value, props.rowHeight);
+    target = rowTop - (bodyHeight - props.rowHeight) / 2;
   } else if (align === 'end') target = rowBottom - viewportHeight.value;
   else if (align === 'auto') {
     if (rowTop >= viewportTop && rowBottom <= viewportBottom) return;
-    target = rowTop < viewportTop ? rowTop - props.headerHeight : rowBottom - viewportHeight.value;
+    target = rowTop < viewportTop ? rowTop : rowBottom - viewportHeight.value;
   }
   scrollToTop(target);
 }
@@ -370,8 +419,15 @@ watch(
 );
 
 watch(
-  () => [props.data.length, props.rowHeight, props.headerHeight],
-  syncScrollBounds,
+  () => [props.data.length, props.rowHeight, props.headerHeight, props.width, props.height, tableWidth.value],
+  updateViewport,
+  { flush: 'post' },
+);
+
+watch(
+  [viewportWidth, canvasWidth, scrollLeft],
+  syncHeaderScroll,
+  { flush: 'post' },
 );
 
 watch(
@@ -400,17 +456,58 @@ defineExpose({
 <style scoped lang="scss">
 .au-virtual-table {
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   max-width: 100%;
+  overflow: hidden;
   color: var(--au-color-text-default);
   background: transparent;
   font-size: 13px;
   contain: strict;
 }
 
+.au-virtual-table__header-viewport {
+  flex: none;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.au-virtual-table__body {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.au-virtual-table__body:focus-visible {
+  outline-offset: calc(-1 * var(--au-focus-ring-width));
+}
+
+.au-virtual-table__body::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.au-virtual-table__body::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@media (hover: hover) {
+  /* Keep scrollbar geometry stable so hovering never changes column widths. */
+  .au-virtual-table:not(:hover) .au-virtual-table__body {
+    scrollbar-color: transparent transparent;
+  }
+
+  .au-virtual-table:not(:hover) .au-virtual-table__body::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+}
+
 .au-virtual-table__canvas {
   position: relative;
   min-width: 100%;
+  min-height: 100%;
 }
 
 .au-virtual-table__header,
@@ -420,8 +517,7 @@ defineExpose({
 }
 
 .au-virtual-table__header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 4;
   color: var(--au-color-text-primary);
   background: var(--au-material-background-elevated);
@@ -490,19 +586,19 @@ defineExpose({
   /* Empty content must not enlarge the explicitly sized virtual canvas. */
   position: absolute;
   min-height: 0;
+  overflow: hidden;
   color: var(--au-color-text-secondary);
 }
 
 .au-virtual-table__loading {
-  position: sticky;
-  left: 0;
-  bottom: 8px;
+  // Loading is an overlay and must not enlarge the body's scrollable content.
+  position: absolute;
   z-index: 5;
   display: flex;
   align-items: center;
   width: max-content;
   gap: 6px;
-  margin: -38px auto 8px;
+  transform: translateX(-50%);
   padding: 6px 10px;
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-pill);
@@ -513,6 +609,17 @@ defineExpose({
   .au-virtual-table__header-cell,
   .au-virtual-table__cell {
     border-color: var(--au-material-border-emphasis);
+  }
+}
+
+@media (forced-colors: active) and (hover: hover) {
+  /* Forced colors replaces transparent scrollbar colors with system colors. */
+  .au-virtual-table:not(:hover) .au-virtual-table__body {
+    scrollbar-width: none;
+  }
+
+  .au-virtual-table:not(:hover) .au-virtual-table__body::-webkit-scrollbar {
+    display: none;
   }
 }
 

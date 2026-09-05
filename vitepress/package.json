@@ -5,9 +5,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev . --host 127.0.0.1 --port 5174",
+    "dev": "vitepress dev . --host 127.0.0.1 --port 8888",
     "build": "vitepress build .",
-    "preview": "vitepress preview . --host 127.0.0.1 --port 4174"
+    "preview": "vitepress preview . --host 127.0.0.1 --port 8888"
   },
   "dependencies": {
     "aurora-plus": "file:../ui"
