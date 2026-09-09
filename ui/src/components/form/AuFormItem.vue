@@ -11,6 +11,7 @@
         'is-success': resolvedState === 'success',
         'is-validating': resolvedState === 'validating',
         'is-inline-message': resolvedInlineMessage,
+        'has-message-space': messageEnabled && !resolvedInlineMessage,
         'is-asterisk-right': resolvedAsteriskPosition === 'right',
         'is-asterisk-hidden': form?.hideRequiredAsterisk.value,
       },
@@ -145,11 +146,8 @@ const mergedRules = computed(() => [
 const isRequired = computed(() => props.required || mergedRules.value.some((rule) => rule.required));
 const resolvedState = computed(() => props.validateStatus || (props.error ? 'error' : validationState.value));
 const resolvedMessage = computed(() => props.error || errorMessage.value);
-const shouldShowMessage = computed(() => Boolean(
-  resolvedMessage.value
-  && props.showMessage
-  && (form?.showMessage.value ?? true),
-));
+const messageEnabled = computed(() => props.showMessage && (form?.showMessage.value ?? true));
+const shouldShowMessage = computed(() => Boolean(resolvedMessage.value && messageEnabled.value));
 const resolvedInlineMessage = computed(() => props.inlineMessage ?? form?.inlineMessage.value ?? false);
 const resolvedStatusIcon = computed(() => Boolean(
   (props.statusIcon ?? form?.statusIcon.value)
@@ -229,6 +227,11 @@ defineExpose(fieldContext);
   display: block;
 }
 
+.au-form-item.has-message-space {
+  // 始终预留一行提示空间，校验和清空时不改变表单项间距。
+  padding-bottom: 20px;
+}
+
 .au-form-item__label {
   display: inline-flex;
   align-items: center;
@@ -281,12 +284,6 @@ defineExpose(fieldContext);
   gap: 8px;
 }
 
-.au-form-item.is-inline-message .au-form-item__message {
-  position: static;
-  padding-top: 0;
-  flex: none;
-}
-
 .au-form-item__status-icon {
   position: absolute;
   top: 8px;
@@ -308,6 +305,13 @@ defineExpose(fieldContext);
   top: 100%;
   left: 0;
   padding: 4px 2px 0;
+  overflow-wrap: anywhere;
+}
+
+.au-form-item.is-inline-message .au-form-item__message {
+  position: static;
+  padding-top: 0;
+  flex: none;
 }
 
 .au-form-item.is-small {
