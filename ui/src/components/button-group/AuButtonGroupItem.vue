@@ -21,12 +21,13 @@
 </template>
 
 <script setup>
-import { computed, useAttrs, useSlots } from 'vue';
+import { computed, inject, useAttrs, useSlots } from 'vue';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
-import { useButtonGroupContext } from './button-group-context.js';
 
 defineOptions({ inheritAttrs: false });
+
+const BUTTON_GROUP_CONTEXT = Symbol.for('aurora-plus.button-group-context');
 
 const props = defineProps({
   type: {
@@ -49,7 +50,7 @@ const props = defineProps({
 const emit = defineEmits(['click']);
 const attrs = useAttrs();
 const slots = useSlots();
-const group = useButtonGroupContext();
+const group = inject(BUTTON_GROUP_CONTEXT, null);
 
 const variant = computed(() => group?.variant.value || 'connected');
 const orientation = computed(() => group?.orientation.value || 'horizontal');
@@ -97,7 +98,6 @@ function handleClick(event) {
 
 <style scoped lang="scss">
 @use '../../theme/config';
-@use './button-group-config' as group-config;
 
 .au-button-group-item {
   --au-focus-ring-offset: 0;
@@ -203,18 +203,18 @@ function handleClick(event) {
 }
 
 .au-button-group-item.is-inverse {
-  color: group-config.$inverse-color;
+  color: rgb(255 255 255 / 88%);
 }
 
 .au-button-group-item.is-inverse:hover:not(.is-disabled),
 .au-button-group-item.is-inverse:focus-visible {
   color: #ffffff;
-  background: group-config.$inverse-background-hover;
+  background: rgb(48 49 51 / 88%);
 }
 
 .au-button-group-item.is-inverse:active:not(.is-disabled) {
   color: #ffffff;
-  background: group-config.$inverse-background-active;
+  background: rgb(31 32 34 / 92%);
 }
 
 .au-button-group-item.is-inverse.is-selected {

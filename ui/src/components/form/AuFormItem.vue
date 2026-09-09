@@ -19,7 +19,6 @@
     :aria-invalid="resolvedState === 'error' ? 'true' : undefined"
     :aria-labelledby="hasLabel ? labelId : undefined"
     :aria-describedby="shouldShowMessage ? messageId : undefined"
-    @focusout.capture="handleFocusout"
   >
     <label
       v-if="hasLabel"
@@ -63,16 +62,19 @@
   </div>
 </template>
 
+<script>
+let formItemSeed = 0;
+</script>
+
 <script setup>
 import {
   computed,
   inject,
   onBeforeUnmount,
   onMounted,
-  onUpdated,
+  provide,
   ref,
   useSlots,
-  watch,
 } from 'vue';
 import { IconAlertCircle, IconCircleCheck, IconLoader2 } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
@@ -85,7 +87,8 @@ import {
   validateRules,
 } from './form-validation.js';
 
-let formItemSeed = 0;
+const FORM_CONTEXT_KEY = Symbol.for('aurora-plus.form-context');
+const FORM_ITEM_CONTEXT_KEY = Symbol.for('aurora-plus.form-item-context');
 
 const props = defineProps({
   label: { type: String, default: '' },
@@ -108,7 +111,6 @@ const props = defineProps({
   showMessage: { type: Boolean, default: true },
   inlineMessage: { type: Boolean, default: undefined },
   statusIcon: { type: Boolean, default: undefined },
-  validateEvent: { type: Boolean, default: true },
   size: {
     type: String,
     default: '',
@@ -117,7 +119,7 @@ const props = defineProps({
 });
 
 const slots = useSlots();
-const form = inject('aurora-plus.form-context', null);
+const form = inject(FORM_CONTEXT_KEY, null);
 const element = ref(null);
 const errorMessage = ref('');
 const validationState = ref('');
@@ -125,7 +127,6 @@ const fieldId = `au-form-item-${++formItemSeed}`;
 const labelId = `${fieldId}-label`;
 const messageId = `${fieldId}-message`;
 const initialValue = cloneFieldValue(fieldValue());
-let resetting = false;
 let validationSequence = 0;
 
 const hasLabel = computed(() => Boolean(props.label || slots.label));
@@ -194,18 +195,8 @@ function clearValidate() {
 
 function resetField() {
   if (!form || !props.prop) return;
-  resetting = true;
   setFieldValue(form.model.value, props.prop, initialValue);
   clearValidate();
-  Promise.resolve().then(() => {
-    resetting = false;
-  });
-}
-
-function handleFocusout(event) {
-  if (element.value?.contains(event.relatedTarget)) return;
-  if (!props.validateEvent) return;
-  validate('blur');
 }
 
 const fieldContext = {
@@ -219,23 +210,9 @@ const fieldContext = {
   clearValidate,
 };
 
-watch(
-  () => fieldValue(),
-  () => {
-    if (!resetting && props.validateEvent) validate('change');
-  },
-  { deep: true },
-);
-
-function ensureRegistered() {
-  form?.registerField(fieldContext);
-}
-
-// 重复注册只会覆盖同一 Map 项，可修复父表单热更新后字段表重建的情况。
-ensureRegistered();
-onMounted(ensureRegistered);
-onUpdated(ensureRegistered);
-onBeforeUnmount(() => form?.unregisterField(fieldId));
+provide(FORM_ITEM_CONTEXT_KEY, fieldContext);
+onMounted(() => form?.registerField(fieldContext));
+onBeforeUnmount(() => form?.unregisterField(fieldContext));
 
 defineExpose(fieldContext);
 </script>
@@ -305,6 +282,7 @@ defineExpose(fieldContext);
 }
 
 .au-form-item.is-inline-message .au-form-item__message {
+  position: static;
   padding-top: 0;
   flex: none;
 }
@@ -326,6 +304,9 @@ defineExpose(fieldContext);
 }
 
 .au-form-item__message {
+  position: absolute;
+  top: 100%;
+  left: 0;
   padding: 4px 2px 0;
 }
 

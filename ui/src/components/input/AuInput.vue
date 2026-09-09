@@ -6,7 +6,7 @@
       {
         'is-disabled': disabled || loading,
         'au-disabled': disabled || loading,
-        'is-invalid': invalid,
+        'is-invalid': resolvedInvalid,
       },
       $attrs.class,
     ]"
@@ -29,7 +29,7 @@
       :disabled="disabled || loading"
       :readonly="readonly"
       :maxlength="maxlength ?? undefined"
-      :aria-invalid="invalid ? 'true' : $attrs['aria-invalid']"
+      :aria-invalid="resolvedInvalid ? 'true' : $attrs['aria-invalid']"
       @input="handleInput"
       @change="handleChange"
       @focus="handleFocus"
@@ -74,12 +74,14 @@
 </template>
 
 <script setup>
-import { computed, nextTick, ref, useAttrs, useSlots } from 'vue';
+import { computed, inject, nextTick, ref, useAttrs, useSlots } from 'vue';
 import { IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
 defineOptions({ inheritAttrs: false });
+
+const FORM_ITEM_CONTEXT_KEY = Symbol.for('aurora-plus.form-item-context');
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: '' },
@@ -101,6 +103,7 @@ const props = defineProps({
   maxlength: { type: [Number, String], default: null },
   showWordLimit: { type: Boolean, default: false },
   invalid: { type: Boolean, default: false },
+  validateEvent: { type: Boolean, default: true },
 });
 
 const emit = defineEmits(['update:modelValue', 'input', 'change', 'clear', 'focus', 'blur']);
@@ -108,6 +111,7 @@ const attrs = useAttrs();
 const slots = useSlots();
 const inputRef = ref(null);
 const isComposing = ref(false);
+const formItem = inject(FORM_ITEM_CONTEXT_KEY, null);
 
 const inputValue = computed(() => (props.modelValue == null ? '' : String(props.modelValue)));
 const hasPrefix = computed(() => Boolean(slots.prefix || props.prefixIcon));
@@ -133,6 +137,9 @@ const hasSuffix = computed(() => Boolean(
   || (props.showWordLimit && props.maxlength != null),
 ));
 const wordCount = computed(() => Array.from(inputValue.value).length);
+const resolvedInvalid = computed(() => (
+  props.invalid || formItem?.validationState?.value === 'error'
+));
 
 /** class/style 作用于组件外壳，其余原生属性与监听器透传给 input。 */
 function getInputAttrs() {
@@ -141,10 +148,21 @@ function getInputAttrs() {
   );
 }
 
+async function notifyFormItem(trigger) {
+  if (!props.validateEvent || !formItem?.validate) return;
+  try {
+    await nextTick();
+    await formItem.validate(trigger);
+  } catch {
+    // 表单错误由 FormItem 展示，输入控件不向事件调用方泄漏校验异常。
+  }
+}
+
 function commitInput(event) {
   const value = event.target.value;
   emit('update:modelValue', value);
   emit('input', value, event);
+  notifyFormItem('change');
 }
 
 function handleInput(event) {
@@ -162,6 +180,7 @@ function handleFocus(event) {
 
 function handleBlur(event) {
   emit('blur', event);
+  notifyFormItem('blur');
 }
 
 function handleCompositionStart() {
@@ -180,6 +199,7 @@ async function clear() {
   emit('input', '', null);
   emit('clear');
   await nextTick();
+  await notifyFormItem('change');
   focus();
 }
 

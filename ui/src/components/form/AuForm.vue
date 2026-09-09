@@ -21,6 +21,8 @@ import { getFieldValue, getRulesByPath, validateRules } from './form-validation.
 
 defineOptions({ inheritAttrs: false });
 
+const FORM_CONTEXT_KEY = Symbol.for('aurora-plus.form-context');
+
 const props = defineProps({
   model: { type: Object, default: () => ({}) },
   rules: { type: Object, default: () => ({}) },
@@ -56,19 +58,20 @@ const props = defineProps({
 
 const emit = defineEmits(['validate', 'submit']);
 const formRef = ref(null);
-const fields = new Map();
+const fields = [];
 
 function registerField(field) {
-  if (field?.fieldId) fields.set(field.fieldId, field);
+  if (field && !fields.includes(field)) fields.push(field);
 }
 
-function unregisterField(fieldId) {
-  fields.delete(fieldId);
+function unregisterField(field) {
+  const index = fields.indexOf(field);
+  if (index >= 0) fields.splice(index, 1);
 }
 
 function getFields(fieldProps) {
-  if (fieldProps == null) return [...fields.values()];
-  const registered = [...fields.values()];
+  if (fieldProps == null) return [...fields];
+  const registered = [...fields];
   const isRegisteredPath = Array.isArray(fieldProps)
     && registered.some((field) => normalizeProp(field.prop) === normalizeProp(fieldProps));
   const requestedValues = Array.isArray(fieldProps) && !isRegisteredPath ? fieldProps : [fieldProps];
@@ -148,7 +151,7 @@ function getField(prop) {
   return getFields(prop)[0];
 }
 
-provide('aurora-plus.form-context', {
+provide(FORM_CONTEXT_KEY, {
   model: computed(() => props.model),
   rules: computed(() => props.rules),
   labelPosition: computed(() => props.labelPosition),

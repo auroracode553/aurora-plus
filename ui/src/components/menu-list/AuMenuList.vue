@@ -11,7 +11,8 @@
 
 <script setup>
 import { computed, provide } from 'vue';
-import { AU_MENU_LIST_CONTEXT_KEY } from './menu-list-context.js';
+
+const AU_MENU_LIST_CONTEXT_KEY = Symbol.for('aurora-plus.menu-list-context');
 
 const props = defineProps({
   density: {

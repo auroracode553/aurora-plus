@@ -1,10 +1,67 @@
-@use './shadows';
 @use './effects';
 @use './utilities';
 @use './controls';
-@use './surfaces';
 @use './overlays';
 @use './menus';
+
+:root,
+[data-au-theme] {
+  /* 通用深度：四周轮廓、上沿环境光、接触阴影和下沿景深。 */
+  --au-shadow-control:
+    0 0 0 0.5px color-mix(in srgb, var(--au-color-mask) 14%, transparent),
+    0 -1px 2px color-mix(in srgb, var(--au-color-mask) 10%, transparent),
+    0 1px 2px color-mix(in srgb, var(--au-color-mask) 16%, transparent),
+    0 3px 7px color-mix(in srgb, var(--au-color-mask) 7%, transparent);
+  --au-shadow-surface:
+    0 0 0 0.5px color-mix(in srgb, var(--au-color-mask) 16%, transparent),
+    0 -3px 8px color-mix(in srgb, var(--au-color-mask) 12%, transparent),
+    0 2px 6px color-mix(in srgb, var(--au-color-mask) 16%, transparent),
+    0 10px 24px color-mix(in srgb, var(--au-color-mask) 9%, transparent);
+  --au-shadow-overlay:
+    0 0 0 0.5px color-mix(in srgb, var(--au-color-mask) 20%, transparent),
+    0 -5px 14px color-mix(in srgb, var(--au-color-mask) 14%, transparent),
+    0 4px 10px color-mix(in srgb, var(--au-color-mask) 22%, transparent),
+    0 18px 40px color-mix(in srgb, var(--au-color-mask) 16%, transparent);
+}
+
+[data-au-theme='dark'] {
+  --au-shadow-edge: rgba(255, 255, 255, 0.1);
+  --au-shadow-contact: rgba(0, 0, 0, 0.38);
+  --au-shadow-ambient: rgba(0, 0, 0, 0.22);
+  --au-shadow-control:
+    0 0 0 0.5px var(--au-shadow-edge),
+    0 1px 2px var(--au-shadow-contact),
+    0 3px 8px var(--au-shadow-ambient);
+  --au-shadow-surface:
+    0 0 0 0.5px var(--au-shadow-edge),
+    0 2px 6px var(--au-shadow-contact),
+    0 10px 24px var(--au-shadow-ambient);
+  --au-shadow-overlay:
+    0 0 0 0.5px var(--au-shadow-edge),
+    0 4px 10px var(--au-shadow-contact),
+    0 18px 40px var(--au-shadow-ambient);
+}
+
+/* 卡片、面板和数据容器共用的轻量边界。 */
+.au-surface-frame {
+  border: 1px solid var(--au-material-border);
+}
+
+.au-surface-frame.au-surface-frame--rounded {
+  border-radius: var(--au-radius-surface);
+}
+
+@media (prefers-contrast: more) {
+  .au-surface-frame {
+    border-color: var(--au-color-text-secondary);
+  }
+}
+
+@media (forced-colors: active) {
+  .au-surface-frame {
+    border-color: CanvasText;
+  }
+}
 
 :root {
   color-scheme: light;

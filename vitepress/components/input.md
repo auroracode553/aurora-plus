@@ -23,7 +23,8 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 
 - 使用 `v-model` 管理值；组件始终通过字符串回传用户输入，与原生 input 行为一致。
 - 搜索框可设置 `type="search"`，需要组件内清除内容时增加 `clearable`。
-- `invalid` 只负责错误视觉与 `aria-invalid`，具体错误文字由表单布局通过 `aria-describedby` 关联。
+- `invalid` 可手动设置错误视觉；位于 `AuFormItem` 内时也会自动继承字段错误状态。
+- 位于 `AuFormItem` 内时，输入和失焦默认触发对应规则校验；仅提交时校验可设置 `:validate-event="false"`。
 - 异步读取或提交期间使用 `loading`，它会显示后缀加载图标、设置 `aria-busy` 并阻止编辑和清空。
 - `prefixIcon`、`suffixIcon` 接受 Aurora Plus 图标组件；复杂内容使用同名插槽。
 - 中文、日文等输入法组合输入结束后才会更新 `v-model`，避免过滤列表在拼写过程中抖动。
@@ -48,7 +49,8 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 | `suffixIcon` | 后缀图标组件 | `Component` | `null` |
 | `maxlength` | 原生最大字符数 | `number / string` | `null` |
 | `showWordLimit` | 设置 maxlength 后是否显示字数 | `boolean` | `false` |
-| `invalid` | 是否显示错误状态并设置 `aria-invalid` | `boolean` | `false` |
+| `invalid` | 是否手动显示错误状态；FormItem 的错误状态会自动合并 | `boolean` | `false` |
+| `validateEvent` | 是否在输入和失焦时通知所属 FormItem 校验 | `boolean` | `true` |
 
 `class` 与 `style` 作用于组件外壳，其余未声明属性和原生监听器会传递给内部 input，例如 `name`、`autocomplete`、`spellcheck`、`aria-*` 和 `@keydown`。
 

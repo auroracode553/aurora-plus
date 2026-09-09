@@ -6,7 +6,7 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 
 # Form 表单
 
-`AuForm` 管理字段模型、规则和整体验证，`AuFormItem` 负责标签、错误信息和字段级状态。它们不改变内部控件的值，适合组合 Aurora Plus 控件或原生表单元素。
+`AuForm` 管理字段模型、规则和整体验证，`AuFormItem` 负责标签、错误信息和字段级状态。字段控件负责在用户输入或失焦时通知 FormItem；调用 `validate()` 则始终执行整表校验。
 
 ## 基础用法
 
@@ -45,7 +45,7 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 | `scrollToError` | 整体验证失败时滚动到首个错误 | `boolean` | `false` |
 | `scrollIntoViewOptions` | 自动滚动参数；`false` 使用浏览器默认值 | `object / false` | `{ block: 'center', behavior: 'smooth' }` |
 
-`size`、`disabled`、`invalid`、`error` 和 `fieldId` 通过 FormItem 默认插槽参数提供，避免表单直接修改子组件内部属性。需要同步控件错误外观时可将 `invalid` 绑定给输入控件。
+`size`、`disabled`、`invalid`、`error` 和 `fieldId` 通过 FormItem 默认插槽参数提供。Aurora Plus 表单控件会自动读取所属 FormItem 的错误状态，自定义控件也可以使用这些插槽参数完成适配。
 
 ## Form Events 与 Exposes
 
@@ -59,7 +59,7 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 | `clearValidate(props?)` | 清除字段校验状态 |
 | `scrollToField(prop, options?)` | 滚动到字段 |
 | `getField(prop)` | 获取已注册字段上下文 |
-| `fields` | 已注册字段 Map |
+| `fields` | 已注册字段上下文数组 |
 
 字段路径支持 `profile.name` 和 `items[0].title`。
 
@@ -77,7 +77,8 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 | `validateStatus` | 外部状态 | `error / success / validating` | `''` |
 | `showMessage` | 是否显示该字段错误 | `boolean` | `true` |
 | `inlineMessage` / `statusIcon` | 覆盖表单的行内错误 / 状态图标设置 | `boolean` | — |
-| `validateEvent` | 是否响应模型 change 与控件 blur 自动校验 | `boolean` | `true` |
 | `size` | 覆盖表单尺寸 | `small / default / large` | `''` |
 
 插槽包括 `default`、`label` 和 `error`。组件暴露 `validate(trigger?)`、`resetField()`、`clearValidate()`、`errorMessage` 与 `element`。
+
+`AuInput` 的 `validateEvent` 默认为 `true`，会在输入和失焦时按规则的 `trigger` 校验。只希望提交时校验时，在 `AuInput` 上设置 `:validate-event="false"`，提交时调用 Form 的 `validate()`。

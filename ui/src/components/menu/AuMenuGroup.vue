@@ -10,7 +10,8 @@
 
 <script setup>
 import { computed, inject } from 'vue';
-import { AU_MENU_CONTEXT_KEY } from './menu-context.js';
+
+const AU_MENU_CONTEXT_KEY = Symbol.for('aurora-plus.menu-context');
 
 const props = defineProps({
   label: { type: String, default: '' },

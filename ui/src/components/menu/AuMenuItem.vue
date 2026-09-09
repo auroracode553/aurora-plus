@@ -42,9 +42,10 @@
 <script setup>
 import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, ref, useSlots } from 'vue';
 import { AuIcon } from '../icon/index.js';
-import { AU_MENU_CONTEXT_KEY } from './menu-context.js';
 
 defineOptions({ inheritAttrs: false });
+
+const AU_MENU_CONTEXT_KEY = Symbol.for('aurora-plus.menu-context');
 
 const props = defineProps({
   index: { type: [String, Number], required: true },

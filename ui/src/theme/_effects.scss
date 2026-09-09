@@ -1,5 +1,13 @@
 @use './config';
-@use './mixins';
+
+// 控制组支持直接按钮、包装按钮和 Popover 触发按钮三种结构。
+@mixin control-group-buttons($state: '') {
+  .au-control-group.au-component > .au-button.au-component#{$state},
+  .au-control-group.au-component > .au-button-group-item > .au-button.au-component#{$state},
+  .au-control-group.au-component > .au-button-group-item > .au-popover > .au-button.au-component#{$state} {
+    @content;
+  }
+}
 
 :root,
 [data-au-theme] {
@@ -64,7 +72,7 @@
  * 控制组中的按钮共用统一外观：容器表达玻璃材质，按钮只表达交互状态。
  * 三种选择器分别覆盖直接按钮、ButtonGroupItem 按钮和 Popover 触发按钮。
  */
-@include mixins.control-group-buttons {
+@include control-group-buttons {
   position: relative;
   min-width: 0;
   height: 28px;
@@ -76,47 +84,47 @@
   transform: none;
 }
 
-@include mixins.control-group-buttons(':is(.is-icon-only, .is-circle)') {
+@include control-group-buttons(':is(.is-icon-only, .is-circle)') {
   width: auto;
   aspect-ratio: 1;
   padding: 0;
 }
 
-@include mixins.control-group-buttons(':hover:not(.is-disabled)') {
+@include control-group-buttons(':hover:not(.is-disabled)') {
   border-color: transparent;
   color: var(--au-color-text-primary);
   background: color-mix(in srgb, currentColor 7%, transparent);
   box-shadow: none;
 }
 
-@include mixins.control-group-buttons(':active:not(.is-disabled)') {
+@include control-group-buttons(':active:not(.is-disabled)') {
   border-color: transparent;
   background: color-mix(in srgb, currentColor 11%, transparent);
   box-shadow: none;
   transform: scale(0.97);
 }
 
-@include mixins.control-group-buttons(":is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true'])") {
+@include control-group-buttons(":is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true'])") {
   z-index: 1;
   color: var(--au-color-text-primary);
   background: var(--au-material-background-elevated);
   box-shadow: var(--au-shadow-control);
 }
 
-@include mixins.control-group-buttons(':focus-visible') {
+@include control-group-buttons(':focus-visible') {
   z-index: 2;
   box-shadow: none;
   outline-offset: -1px;
 }
 
-@include mixins.control-group-buttons('.is-disabled') {
+@include control-group-buttons('.is-disabled') {
   color: var(--au-color-text-disabled);
   background: transparent;
 }
 
 /* 语义按钮在透明控制组中只保留文字或图标颜色，不重复绘制实色按钮表面。 */
 @each $tone, $color in config.$semantic-colors {
-  @include mixins.control-group-buttons('.au-button--#{$tone}:not(.is-disabled)') {
+  @include control-group-buttons('.au-button--#{$tone}:not(.is-disabled)') {
     color: $color;
   }
 }
@@ -162,7 +170,7 @@
     transition: opacity 0.01ms linear;
   }
 
-  @include mixins.control-group-buttons(':active:not(.is-disabled)') {
+  @include control-group-buttons(':active:not(.is-disabled)') {
     transform: none;
   }
 
@@ -172,20 +180,20 @@
 }
 
 @media (prefers-contrast: more) {
-  @include mixins.control-group-buttons(":is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled)") {
+  @include control-group-buttons(":is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled)") {
     outline: 1px solid currentColor;
     outline-offset: -1px;
   }
 }
 
 @media (forced-colors: active) {
-  @include mixins.control-group-buttons {
+  @include control-group-buttons {
     border: 1px solid ButtonText;
     color: ButtonText;
     background: Canvas;
   }
 
-  @include mixins.control-group-buttons(":is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled)") {
+  @include control-group-buttons(":is(.is-selected, [aria-pressed='true'], [aria-current='true'], [aria-expanded='true']):not(.is-disabled)") {
     color: HighlightText;
     background: Highlight;
   }

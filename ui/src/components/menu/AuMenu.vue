@@ -17,9 +17,10 @@
 
 <script setup>
 import { computed, provide, shallowReactive, ref } from 'vue';
-import { AU_MENU_CONTEXT_KEY } from './menu-context.js';
 
 defineOptions({ inheritAttrs: false });
+
+const AU_MENU_CONTEXT_KEY = Symbol.for('aurora-plus.menu-context');
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: '' },

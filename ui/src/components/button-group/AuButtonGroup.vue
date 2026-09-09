@@ -24,7 +24,8 @@
 
 <script setup>
 import { computed, provide } from 'vue';
-import { BUTTON_GROUP_CONTEXT } from './button-group-context.js';
+
+const BUTTON_GROUP_CONTEXT = Symbol.for('aurora-plus.button-group-context');
 
 const props = defineProps({
   variant: {
@@ -62,8 +63,6 @@ provide(BUTTON_GROUP_CONTEXT, {
 </script>
 
 <style scoped lang="scss">
-@use './button-group-config' as group-config;
-
 .au-button-group {
   display: inline-flex;
   align-items: center;
@@ -108,9 +107,9 @@ provide(BUTTON_GROUP_CONTEXT, {
 }
 
 .au-button-group.is-inverse {
-  border-color: group-config.$inverse-border;
-  color: group-config.$inverse-color;
-  background: group-config.$inverse-background;
+  border-color: rgb(255 255 255 / 12%);
+  color: rgb(255 255 255 / 88%);
+  background: rgb(48 49 51 / 72%);
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -119,7 +118,7 @@ provide(BUTTON_GROUP_CONTEXT, {
   }
 
   .au-button-group.is-inverse {
-    background: group-config.$inverse-background-solid;
+    background: rgb(48 49 51);
   }
 }
 
