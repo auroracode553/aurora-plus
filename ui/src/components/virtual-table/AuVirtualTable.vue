@@ -477,6 +477,8 @@ defineExpose({
   position: relative;
   flex: 1;
   min-width: 0;
+  /* 纵向到达边界后可继续滚动外层容器，横向滚动仅作用于表格。 */
+  overscroll-behavior: contain auto;
 }
 
 .au-virtual-table__body:focus-visible {

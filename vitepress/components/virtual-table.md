@@ -14,6 +14,12 @@ import virtualTableBasicSource from '../.vitepress/theme/examples/virtual-table/
   <VirtualTableBasic />
 </DemoBlock>
 
+## 滚动行为
+
+表体使用原生滚动。纵向有未展示的行时优先滚动表格；到达顶部或底部后，允许滚动继续传递给外层可滚动容器或页面。空表格或内容不足一屏时，纵向滑动也可带动外层页面。
+
+横向滚动保留在表格内部，用于查看超出可见区域的列。该行为默认适用于触摸滑动、触控板和鼠标滚轮；嵌入抽屉、对话框或其他限制滚动传递的容器时，外层容器的滚动规则仍然生效。
+
 ## Column 配置
 
 | 字段 | 说明 |
