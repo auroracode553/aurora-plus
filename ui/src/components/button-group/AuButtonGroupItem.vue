@@ -83,7 +83,6 @@ const itemClasses = computed(() => [
     'is-icon-only': isIconOnly.value,
     'is-selected': isSelected.value,
     'is-disabled': props.disabled || props.loading,
-    'au-disabled': props.disabled || props.loading,
   },
 ]);
 
@@ -104,12 +103,16 @@ function handleClick(event) {
 
   position: relative;
   min-width: 0;
-  height: 28px;
+  /* 保留 28px 的默认尺寸下限，横向填满内侧高度，纵向可均匀伸展。 */
+  min-height: 28px;
+  height: auto;
+  align-self: stretch;
+  flex: 0 0 auto;
   gap: 4px;
   padding: 0 8px;
   border: 0;
   border-radius: var(--au-radius-compact);
-  color: var(--au-color-text-default);
+  color: var(--au-color-text-primary);
   background: transparent;
   box-shadow: none;
   font-size: 13px;
@@ -118,29 +121,43 @@ function handleClick(event) {
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  transform: translateZ(0);
   transition:
     background var(--au-transition-duration) var(--au-transition-timing),
     color var(--au-transition-duration) var(--au-transition-timing),
-    transform var(--au-transition-duration) var(--au-transition-timing);
+    outline-color var(--au-transition-duration) var(--au-transition-timing);
 }
 
-.au-button-group-item:hover:not(.is-disabled),
+.au-button-group-item:hover:not(.is-disabled, .is-selected),
 .au-button-group-item:focus-visible {
   color: var(--au-color-text-primary);
-  background: color-mix(in srgb, currentColor 7%, transparent);
+  background: var(--au-color-background-hover);
 }
 
 .au-button-group-item:active:not(.is-disabled) {
   background: color-mix(in srgb, currentColor 11%, transparent);
-  transform: scale(0.97);
 }
 
 .au-button-group-item.is-selected {
   z-index: 1;
-  color: var(--au-color-text-primary);
-  background: var(--au-material-background-elevated);
-  box-shadow: var(--au-shadow-control);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, currentColor 5%, var(--au-material-background-elevated));
+  outline: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  outline-offset: -1px;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--au-color-mask) 10%, transparent);
+}
+
+.au-button-group-item.is-selected:hover:not(.is-disabled) {
+  background: color-mix(in srgb, currentColor 9%, var(--au-material-background-elevated));
+}
+
+.au-button-group-item.is-selected:active:not(.is-disabled) {
+  background: color-mix(in srgb, currentColor 12%, var(--au-material-background-elevated));
+}
+
+.au-button-group-item:focus-visible {
+  z-index: 2;
+  outline: 2px solid var(--au-focus-ring-color);
+  outline-offset: -2px;
 }
 
 .au-button-group-item.is-disabled {
@@ -148,16 +165,22 @@ function handleClick(event) {
   background: transparent;
   box-shadow: none;
   cursor: not-allowed;
+  opacity: 1;
+}
+
+.au-button-group-item.is-disabled.is-selected {
+  background: var(--au-color-background-hover);
+  outline-color: var(--au-color-border-muted);
 }
 
 .au-button-group-item.is-small {
-  height: 24px;
+  min-height: 24px;
   padding: 0 7px;
   font-size: var(--au-font-size-small);
 }
 
 .au-button-group-item.is-large {
-  height: 40px;
+  min-height: 40px;
   padding: 0 14px;
   font-size: var(--au-font-size-large);
 }
@@ -189,17 +212,21 @@ function handleClick(event) {
   justify-content: flex-start;
 }
 
-/* 面板边框与 2px 内边距合计 3px，按钮使用对应的同心内圆角。 */
-.au-button-group-item.is-floating {
-  border-radius: 9px;
+.au-button-group-item.is-vertical {
+  flex: 1 0 auto;
 }
 
-.au-button-group-item.is-floating.is-small {
+/* 面板边框与 2px 内边距合计 3px，按钮使用对应的同心内圆角。 */
+.au-button-group-item:is(.is-connected, .is-floating) {
+  border-radius: 6px;
+}
+
+.au-button-group-item:is(.is-connected, .is-floating).is-small {
   border-radius: 5px;
 }
 
-.au-button-group-item.is-floating.is-large {
-  border-radius: 11px;
+.au-button-group-item:is(.is-connected, .is-floating).is-large {
+  border-radius: 9px;
 }
 
 .au-button-group-item.is-inverse {
@@ -209,12 +236,12 @@ function handleClick(event) {
 .au-button-group-item.is-inverse:hover:not(.is-disabled),
 .au-button-group-item.is-inverse:focus-visible {
   color: #ffffff;
-  background: rgb(48 49 51 / 88%);
+  background: rgb(255 255 255 / 9%);
 }
 
 .au-button-group-item.is-inverse:active:not(.is-disabled) {
   color: #ffffff;
-  background: rgb(31 32 34 / 92%);
+  background: rgb(255 255 255 / 18%);
 }
 
 .au-button-group-item.is-inverse.is-selected {
@@ -223,9 +250,22 @@ function handleClick(event) {
   box-shadow: none;
 }
 
+.au-button-group-item.is-inverse.is-selected:hover:not(.is-disabled) {
+  background: rgb(255 255 255 / 19%);
+}
+
+.au-button-group-item.is-inverse.is-selected:active:not(.is-disabled) {
+  background: rgb(255 255 255 / 24%);
+}
+
 .au-button-group-item.is-inverse.is-disabled {
   color: rgb(255 255 255 / 36%);
   background: transparent;
+}
+
+.au-button-group-item.is-inverse.is-disabled.is-selected {
+  background: rgb(255 255 255 / 6%);
+  outline-color: rgb(255 255 255 / 12%);
 }
 
 .au-button-group-item__content,
@@ -242,8 +282,15 @@ function handleClick(event) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .au-button-group-item:active:not(.is-disabled) {
-    transform: none;
+  .au-button-group-item {
+    transition: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .au-button-group-item.is-selected:not(.is-inverse, .is-disabled),
+  .au-button-group-item.is-selected:not(.is-inverse, .is-disabled):is(:hover, :active, :focus-visible) {
+    background: color-mix(in srgb, currentColor 5%, var(--au-color-background-overlay));
   }
 }
 
@@ -252,18 +299,47 @@ function handleClick(event) {
     outline: 1px solid currentColor;
     outline-offset: -1px;
   }
+
+  .au-button-group-item.is-selected:focus-visible,
+  .au-button-group-item:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -2px;
+  }
 }
 
 @media (forced-colors: active) {
-  .au-button-group-item {
+  .au-button-group-item.au-component,
+  .au-button-group-item.au-component:hover:not(.is-disabled),
+  .au-button-group-item.au-component:active:not(.is-disabled) {
     border: 1px solid ButtonText;
     color: ButtonText;
     background: Canvas;
+    box-shadow: none;
   }
 
-  .au-button-group-item.is-selected:not(.is-disabled) {
+  .au-button-group-item.au-component.is-selected:not(.is-disabled),
+  .au-button-group-item.au-component.is-selected:hover:not(.is-disabled),
+  .au-button-group-item.au-component.is-selected:active:not(.is-disabled) {
     color: HighlightText;
     background: Highlight;
+    outline-color: Highlight;
+  }
+
+  .au-button-group-item.au-component.is-disabled,
+  .au-button-group-item.au-component.is-disabled.is-selected {
+    color: GrayText;
+    background: Canvas;
+    border-color: GrayText;
+    outline-color: GrayText;
+  }
+
+  .au-button-group-item.au-component:focus-visible {
+    outline: 2px solid ButtonText;
+    outline-offset: -2px;
+  }
+
+  .au-button-group-item.au-component.is-selected:focus-visible {
+    outline-color: HighlightText;
   }
 }
 </style>

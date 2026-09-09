@@ -14,7 +14,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 ## 连体按钮组
 
-`variant="connected"` 使用统一的半透明材质容器承载多个操作，适合顶部菜单、窗口工具和视图切换。当前项通过 `aria-pressed="true"`、`aria-current="true"`、`aria-expanded="true"` 或 `is-active` 类获得独立材质层。
+`variant="connected"` 使用统一的半透明材质容器承载多个操作，适合顶部菜单、窗口工具和视图切换。当前项通过 `selected`、`aria-pressed="true"`、`aria-current="true"` 或 `aria-expanded="true"` 获得独立材质层与轻微强调色。
 
 <DemoBlock
   title="Connected 连体按钮组"
@@ -51,6 +51,8 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 </DemoBlock>
 
 ## 外观选择
+
+悬停、按下与选中表面覆盖操作项的完整高度，容器始终保留 2px 内边距。默认操作项高 28px，小号 24px，大号 40px；显式设置更高的容器时，直接子操作项随内侧空间拉伸。按下反馈只改变颜色，不缩小按钮表面。
 
 | 外观 | 适用场景 | 视觉关系 | 常见内容 |
 | --- | --- | --- | --- |
