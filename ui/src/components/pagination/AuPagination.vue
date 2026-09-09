@@ -30,7 +30,7 @@
 
       <button
         v-else-if="item === 'prev'"
-        class="au-pagination__button au-control-reset au-focus-ring au-forced-highlight au-disabled-text"
+        class="au-pagination__button au-control-reset au-focus-ring"
         type="button"
         :disabled="disabled || innerCurrentPage <= 1"
         :aria-label="prevAriaLabel"
@@ -46,7 +46,7 @@
         <button
           v-for="pager in pagerItems"
           :key="pager"
-          class="au-pagination__button au-control-reset au-focus-ring au-forced-highlight au-disabled-text"
+          class="au-pagination__button au-control-reset au-focus-ring"
           :class="{
             'is-active': pager === innerCurrentPage,
             'is-more': typeof pager === 'string',
@@ -65,7 +65,7 @@
 
       <button
         v-else-if="item === 'next'"
-        class="au-pagination__button au-control-reset au-focus-ring au-forced-highlight au-disabled-text"
+        class="au-pagination__button au-control-reset au-focus-ring"
         type="button"
         :disabled="disabled || innerCurrentPage >= resolvedPageCount"
         :aria-label="nextAriaLabel"
@@ -81,7 +81,7 @@
         <span>{{ jumpText }}</span>
         <input
           v-model="jumpPage"
-          class="au-pagination__input au-control-reset au-focus-ring au-disabled-text"
+          class="au-pagination__input au-control-reset"
           type="number"
           inputmode="numeric"
           min="1"
@@ -320,6 +320,8 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 </script>
 
 <style scoped lang="scss">
+@use '../../theme/glass-controls' as glass;
+
 .au-pagination {
   display: flex;
   align-items: center;
@@ -339,7 +341,7 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 .au-pagination__button,
 .au-pagination__input {
   height: 28px;
-  border: 1px solid var(--au-material-border-emphasis);
+  border: 1px solid color-mix(in srgb, var(--au-color-text-primary) 16%, transparent);
   border-radius: var(--au-radius-compact);
   transition:
     color var(--au-transition-duration) var(--au-transition-timing),
@@ -356,11 +358,17 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   cursor: pointer;
 }
 
-.au-pagination__button:hover:not(:disabled),
-.au-pagination__input:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--au-color-primary) 50%, transparent);
-  color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 7%, transparent);
+/* background 只决定普通页码的表面，不覆盖当前页、悬停或禁用状态。 */
+.au-pagination:where(.has-background) .au-pagination__button {
+  @include glass.surface;
+}
+
+@media (hover: hover) {
+  .au-pagination .au-pagination__button:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--au-color-text-primary) 26%, transparent);
+    color: var(--au-color-text-primary);
+    background: var(--au-material-background-elevated);
+  }
 }
 
 .au-pagination__button:active:not(:disabled) {
@@ -368,25 +376,36 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   transition-duration: 0s;
 }
 
-.au-pagination__button.is-active {
-  border-color: color-mix(in srgb, var(--au-color-primary) 55%, transparent);
+.au-pagination .au-pagination__button.is-active {
+  border-color: color-mix(in srgb, var(--au-color-primary) 42%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
+  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-material-background));
   font-weight: var(--au-font-weight-semibold);
 }
 
-.au-pagination__button.is-more {
+.au-pagination .au-pagination__button.is-active:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--au-color-primary) 55%, transparent);
+  color: var(--au-color-primary);
+  background: color-mix(in srgb, var(--au-color-primary) 10%, var(--au-material-background));
+}
+
+.au-pagination .au-pagination__button:focus-visible {
+  border-color: var(--au-color-primary);
+  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 24%, transparent);
+  outline-offset: 1px;
+}
+
+.au-pagination .au-pagination__button.is-more {
   color: var(--au-color-text-secondary);
   letter-spacing: 1px;
 }
 
-.au-pagination.has-background .au-pagination__button {
-  background: var(--au-material-background-subtle);
-}
-
-.au-pagination__button:disabled,
-.au-pagination__input:disabled {
-  opacity: 0.7;
+.au-pagination .au-pagination__button:disabled {
+  border-color: color-mix(in srgb, var(--au-color-text-primary) 9%, transparent);
+  color: var(--au-color-text-disabled);
+  cursor: not-allowed;
+  opacity: 1;
+  box-shadow: none;
 }
 
 .au-pagination__sizes,
@@ -411,6 +430,7 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
   padding: 0 6px;
   text-align: center;
   -moz-appearance: textfield;
+  @include glass.field;
 }
 
 .au-pagination__input::-webkit-inner-spin-button,
@@ -451,8 +471,84 @@ defineExpose({ currentPage: innerCurrentPage, pageCount: resolvedPageCount, setC
 }
 
 @media (prefers-contrast: more) {
-  .au-pagination__button.is-active {
+  .au-pagination .au-pagination__button,
+  .au-pagination .au-pagination__button:hover:not(:disabled) {
+    border-color: var(--au-color-text-secondary);
+  }
+
+  .au-pagination .au-pagination__button.is-active,
+  .au-pagination .au-pagination__button.is-active:hover:not(:disabled) {
+    border-color: var(--au-color-primary);
+  }
+
+  .au-pagination .au-pagination__button:disabled {
+    color: var(--au-color-text-secondary);
     border-color: currentColor;
+  }
+
+  .au-pagination .au-pagination__button:focus-visible {
+    outline-color: var(--au-color-primary);
+  }
+}
+
+// 为原有有背景分页和当前页补齐实色回退，普通无背景页码保持透明。
+@mixin solid-buttons {
+  .au-pagination:where(.has-background) .au-pagination__button,
+  .au-pagination .au-pagination__button:hover:not(:disabled) {
+    @include glass.solid-surface;
+  }
+
+  .au-pagination .au-pagination__button.is-active,
+  .au-pagination .au-pagination__button.is-active:hover:not(:disabled) {
+    @include glass.solid-surface;
+    background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-color-background-overlay));
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @include solid-buttons;
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  @include solid-buttons;
+}
+
+@media (forced-colors: active) {
+  .au-pagination .au-pagination__button,
+  .au-pagination .au-pagination__button:hover:not(:disabled) {
+    color: ButtonText;
+    background: Canvas;
+    border-color: ButtonText;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .au-pagination .au-pagination__button.is-active,
+  .au-pagination .au-pagination__button.is-active:hover:not(:disabled) {
+    color: HighlightText;
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  .au-pagination .au-pagination__button:disabled {
+    color: GrayText;
+    background: Canvas;
+    border-color: GrayText;
+  }
+
+  .au-pagination .au-pagination__button:focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-pagination__button {
+    transition: none;
+  }
+
+  .au-pagination__button:active:not(:disabled) {
+    transform: none;
   }
 }
 

@@ -220,17 +220,14 @@ defineExpose({ focus, blur, select, inputRef });
 </script>
 
 <style scoped lang="scss">
+@use '../../theme/glass-controls' as glass;
+
 .au-input.au-field-shell {
   align-items: center;
   padding: 0 10px;
   gap: 7px;
   /* 使用全局材质表面，避免共享表单的蓝灰底色；solid 仍遵循主题设置。 */
-  border-color: color-mix(in srgb, var(--au-color-text-primary) 16%, transparent);
-  color: var(--au-color-text-primary);
-  background: var(--au-material-background);
-  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
-  box-shadow: 0 1px 2px color-mix(in srgb, var(--au-color-mask) 9%, transparent);
+  @include glass.surface;
 }
 
 @media (hover: hover) {
@@ -241,10 +238,7 @@ defineExpose({ focus, blur, select, inputRef });
 }
 
 .au-input.au-field-shell:focus-within:not(.is-disabled) {
-  border-color: var(--au-color-primary);
-  background: var(--au-material-background-elevated);
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 24%, transparent);
-  outline-offset: 1px;
+  @include glass.focus;
 }
 
 .au-input.au-field-shell.is-readonly {

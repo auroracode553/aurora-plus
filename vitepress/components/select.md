@@ -8,6 +8,8 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 
 `AuSelect` 使用 Aurora Plus 的紧凑列表弹层呈现选项，并统一尺寸、焦点、禁用态和错误态。选项仍通过熟悉的 `option` 与 `optgroup` 声明。
 
+选择框与 Input 使用一致的轻透表面和细边框，展开或聚焦时显示轮廓。选项通过轻微状态色与勾选标记区分，材质跟随全局 `soft / clear / solid` 设置及明暗主题。
+
 ## 基础用法
 
 <DemoBlock

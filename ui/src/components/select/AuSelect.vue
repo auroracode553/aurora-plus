@@ -1,13 +1,12 @@
 <template>
   <span
     ref="rootRef"
-    class="au-select au-component au-field-shell au-field-shell--single-line au-focus-halo"
+    class="au-select au-component au-field-shell au-field-shell--single-line"
     :data-au-floating-owner="selectId"
     :class="[
       `is-${size}`,
       {
         'is-disabled': disabled,
-        'au-disabled': disabled,
         'is-invalid': invalid,
         'is-open': visible,
         'is-fit-content': fitContent,
@@ -86,7 +85,7 @@
               v-for="option in group.options"
               :id="optionId(option.index)"
               :key="option.key"
-              class="au-select__option au-forced-highlight au-disabled-text"
+              class="au-select__option au-disabled-text"
               :class="{
                 'is-selected': isOptionSelected(option),
                 'is-highlighted': highlightedIndex === option.index,
@@ -624,8 +623,11 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 </script>
 
 <style scoped lang="scss">
-.au-select {
+@use '../../theme/glass-controls' as glass;
+
+.au-select.au-field-shell {
   align-items: center;
+  @include glass.field;
 }
 
 .au-select.is-fit-content {
@@ -648,6 +650,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   height: 100%;
   padding: 0 8px 0 10px;
   gap: 6px;
+  border-radius: inherit;
   text-align: left;
   cursor: pointer;
 }
@@ -661,11 +664,17 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 }
 
 .au-select__control:active:not(:disabled) {
-  background: color-mix(in srgb, var(--au-color-primary) 5%, transparent);
+  background: var(--au-color-background-hover);
 }
 
 .au-select__control:disabled {
+  color: inherit;
+  opacity: 1;
   cursor: not-allowed;
+}
+
+.au-select.is-disabled .au-select__icon {
+  color: inherit;
 }
 
 /* 由所有可见内容参与网格固有尺寸计算，并预留列表勾选标记的空间。 */
@@ -712,6 +721,11 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   font-size: 13px;
   line-height: 1.3;
   transform-origin: top left;
+  /* 弹层只保留轻量边缘和景深，选项本身不重复铺设玻璃层。 */
+  border-color: color-mix(in srgb, var(--au-color-text-primary) 12%, transparent);
+  box-shadow:
+    0 2px 4px color-mix(in srgb, var(--au-color-mask) 12%, transparent),
+    0 8px 20px color-mix(in srgb, var(--au-color-mask) 12%, transparent);
 }
 
 .au-select__listbox.is-top {
@@ -726,7 +740,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   padding: 5px 7px 5px 9px;
   gap: 8px;
   border-radius: var(--au-radius-control);
-  color: var(--au-color-text-default);
+  color: var(--au-color-text-primary);
   cursor: pointer;
   user-select: none;
   transition:
@@ -755,21 +769,25 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 
 .au-select__option.is-selected {
   color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 9%, transparent);
+  background: color-mix(in srgb, var(--au-color-primary) 6%, transparent);
 }
 
-.au-select__option.is-highlighted {
+.au-select__option.is-highlighted:not(.is-disabled) {
   color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 14%, transparent);
+  background: var(--au-color-background-hover);
 }
 
 .au-select__option:active:not(.is-disabled) {
-  background: color-mix(in srgb, var(--au-color-primary) 18%, transparent);
+  background: color-mix(in srgb, var(--au-color-text-primary) 11%, transparent);
   transition-duration: 0s;
 }
 
 .au-select__option.is-disabled {
-  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+.au-select__option.is-disabled .au-select__option-marker {
+  color: inherit;
 }
 
 .au-select__option-marker {
@@ -784,7 +802,7 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
 .au-select__group + .au-select__group {
   margin-top: 3px;
   padding-top: 3px;
-  border-top: 1px solid var(--au-material-border-emphasis);
+  border-top: 1px solid var(--au-color-border-muted);
 }
 
 .au-select__group-label {
@@ -794,9 +812,53 @@ defineExpose({ focus, blur, open, close, toggle, selectRef, listboxRef });
   font-weight: var(--au-font-weight-medium);
 }
 
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .au-select__listbox {
+    @include glass.solid-surface;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-select__listbox {
+    border-color: var(--au-color-text-secondary);
+  }
+
+  .au-select__option.is-highlighted:not(.is-disabled) {
+    outline: 1px solid currentColor;
+    outline-offset: -1px;
+  }
+
+  .au-select__option.is-disabled {
+    color: var(--au-color-text-secondary) !important;
+  }
+}
+
 @media (forced-colors: active) {
+  .au-select__listbox {
+    box-shadow: none;
+  }
+
+  .au-select__icon,
   .au-select__option-marker {
     color: currentColor;
+  }
+
+  .au-select__option:is(.is-selected, .is-highlighted):not(.is-disabled) {
+    color: HighlightText;
+    background: Highlight;
+  }
+
+  .au-select__option.is-disabled {
+    color: GrayText !important;
+    background: Canvas;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-select__icon,
+  .au-select__option,
+  .au-select__listbox {
+    transition: none;
   }
 }
 </style>

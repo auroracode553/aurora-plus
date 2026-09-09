@@ -8,6 +8,8 @@ import paginationBasicSource from '../.vitepress/theme/examples/pagination/Pagin
 
 `AuPagination` 用于切换分段数据，支持页码折叠、每页条数、跳页与自定义布局。当前页和每页条数均可独立使用 `v-model`。
 
+每页条数选择框和跳页输入框沿用 Input 的轻透材质与焦点轮廓。开启 `background` 后页码按钮使用相同材质，当前页保留轻量主题色强调；表面跟随全局材质与明暗主题。
+
 ## 基础用法
 
 <DemoBlock title="完整分页" description="布局中的箭头分隔符会把后续控件推到容器右侧。" :source="paginationBasicSource" default-expanded>
