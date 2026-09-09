@@ -1,11 +1,12 @@
 <template>
   <div
-    class="au-input au-component au-field-shell au-field-shell--single-line au-focus-halo"
+    class="au-input au-component au-field-shell au-field-shell--single-line"
     :class="[
       `is-${size}`,
       {
         'is-disabled': disabled || loading,
-        'au-disabled': disabled || loading,
+        'is-loading': loading,
+        'is-readonly': readonly,
         'is-invalid': resolvedInvalid,
       },
       $attrs.class,
@@ -219,10 +220,67 @@ defineExpose({ focus, blur, select, inputRef });
 </script>
 
 <style scoped lang="scss">
-.au-input {
+.au-input.au-field-shell {
   align-items: center;
   padding: 0 10px;
   gap: 7px;
+  /* 使用全局材质表面，避免共享表单的蓝灰底色；solid 仍遵循主题设置。 */
+  border-color: color-mix(in srgb, var(--au-color-text-primary) 16%, transparent);
+  color: var(--au-color-text-primary);
+  background: var(--au-material-background);
+  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--au-color-mask) 9%, transparent);
+}
+
+@media (hover: hover) {
+  .au-input.au-field-shell:hover:not(.is-disabled, .is-readonly, .is-invalid) {
+    border-color: color-mix(in srgb, var(--au-color-text-primary) 26%, transparent);
+    background: var(--au-material-background-elevated);
+  }
+}
+
+.au-input.au-field-shell:focus-within:not(.is-disabled) {
+  border-color: var(--au-color-primary);
+  background: var(--au-material-background-elevated);
+  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 24%, transparent);
+  outline-offset: 1px;
+}
+
+.au-input.au-field-shell.is-readonly {
+  color: var(--au-color-text-default);
+  box-shadow: none;
+}
+
+.au-input.au-field-shell.is-invalid {
+  border-color: color-mix(in srgb, var(--au-color-danger) 78%, transparent);
+}
+
+.au-input.au-field-shell.is-invalid:focus-within {
+  outline-color: color-mix(in srgb, var(--au-color-danger) 28%, transparent);
+  box-shadow: none;
+}
+
+/* 禁用通过文字和边界表达，保留玻璃表面与加载指示器的可读性。 */
+.au-input.au-field-shell.is-disabled {
+  border-color: color-mix(in srgb, var(--au-color-text-primary) 9%, transparent);
+  color: var(--au-color-text-disabled);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.au-input.au-field-shell.is-loading {
+  color: var(--au-color-text-secondary);
+  cursor: progress;
+}
+
+.au-input.is-loading .au-input__control {
+  cursor: progress;
+}
+
+.au-input.is-disabled .au-input__affix,
+.au-input.is-disabled .au-input__count {
+  color: inherit;
 }
 
 .au-input.is-small {
@@ -243,6 +301,9 @@ defineExpose({ focus, blur, select, inputRef });
 }
 
 .au-input__control:disabled {
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+  opacity: 1;
   cursor: not-allowed;
 }
 
@@ -251,8 +312,12 @@ defineExpose({ focus, blur, select, inputRef });
 }
 
 .au-input__control::placeholder {
-  color: var(--au-color-text-placeholder);
+  color: var(--au-color-text-secondary);
   opacity: 1;
+}
+
+.au-input.is-disabled .au-input__control::placeholder {
+  color: inherit;
 }
 
 .au-input__control::-webkit-search-cancel-button,
@@ -341,5 +406,93 @@ defineExpose({ focus, blur, select, inputRef });
 
 .au-input__clear:disabled {
   cursor: default;
+}
+
+/* 无模糊支持及无障碍偏好使用实色表面，焦点轮廓独立于阴影。 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .au-input.au-field-shell,
+  .au-input.au-field-shell:hover:not(.is-disabled, .is-readonly, .is-invalid),
+  .au-input.au-field-shell:focus-within:not(.is-disabled) {
+    background: var(--au-color-background-overlay);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .au-input.au-field-shell,
+  .au-input.au-field-shell:hover:not(.is-disabled, .is-readonly, .is-invalid),
+  .au-input.au-field-shell:focus-within:not(.is-disabled) {
+    background: var(--au-color-background-overlay);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-input.au-field-shell,
+  .au-input.au-field-shell:hover:not(.is-disabled, .is-readonly, .is-invalid) {
+    border-width: 1px;
+    border-color: var(--au-color-text-secondary);
+  }
+
+  .au-input.au-field-shell.is-disabled {
+    color: var(--au-color-text-secondary);
+    border-color: currentColor;
+  }
+
+  .au-input.au-field-shell:focus-within:not(.is-disabled) {
+    outline-color: var(--au-color-primary);
+  }
+
+  .au-input.au-field-shell.is-invalid {
+    border-color: var(--au-color-danger);
+  }
+
+  .au-input.au-field-shell.is-invalid:focus-within {
+    outline-color: var(--au-color-danger);
+  }
+}
+
+@media (forced-colors: active) {
+  .au-input.au-field-shell,
+  .au-input.au-field-shell:hover:not(.is-disabled, .is-readonly, .is-invalid),
+  .au-input.au-field-shell:focus-within:not(.is-disabled) {
+    color: CanvasText;
+    background: Canvas;
+    border: 1px solid CanvasText;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .au-input.au-field-shell.is-disabled {
+    color: GrayText;
+    border-color: GrayText;
+  }
+
+  .au-input.au-field-shell.is-invalid {
+    border-style: dashed;
+  }
+
+  .au-input.au-field-shell:focus-within:not(.is-disabled) {
+    outline: 2px solid Highlight;
+  }
+
+  .au-input__control::placeholder,
+  .au-input__affix,
+  .au-input__count,
+  .au-input__loading {
+    color: inherit;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-input.au-field-shell,
+  .au-input__clear {
+    transition: none;
+  }
+
+  .au-input__clear:active:not(:disabled) {
+    transform: none;
+  }
 }
 </style>

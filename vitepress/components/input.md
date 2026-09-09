@@ -8,6 +8,8 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 
 `AuInput` 用于搜索、路径、账号和普通单行文本输入。组件保留原生 input 的行为，并统一尺寸、焦点、错误态与主题适配。
 
+输入框采用轻量玻璃表面、细边框与聚焦轮廓，跟随全局 `soft / clear / solid` 材质及明暗主题。减少透明度或提高对比度时使用实色表面，减少动态效果时关闭状态过渡。
+
 ## 基础用法
 
 <DemoBlock
