@@ -344,22 +344,4 @@ watch(visible, (value) => emit('visible-change', value));
 defineExpose({ focus, blur, open, close, inputRef, popoverRef });
 </script>
 
-<style scoped lang="scss">
-.au-time-picker {
-  width: 100%;
-}
-
-.au-time-picker__popover {
-  width: 238px;
-  padding: 12px;
-}
-
-.au-time-picker__status {
-  margin-top: 8px;
-}
-
-.au-time-picker__footer {
-  margin-top: 10px;
-  padding-top: 8px;
-}
-</style>
+<style scoped lang="scss" src="./AuTimePicker.scss"></style>

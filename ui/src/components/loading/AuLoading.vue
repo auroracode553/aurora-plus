@@ -71,13 +71,4 @@ const rootRef = ref(null);
 defineExpose({ rootRef });
 </script>
 
-<style scoped lang="scss">
-.au-loading-host {
-  min-width: 0;
-  max-width: 100%;
-}
-
-.au-loading-host.is-positioned {
-  position: relative;
-}
-</style>
+<style scoped lang="scss" src="./AuLoading.scss"></style>

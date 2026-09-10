@@ -1,0 +1,13 @@
+/* 组件边界内的盒模型与字体；不包含任何具体控件的选择器。 */
+.au-component,
+.au-component::before,
+.au-component::after,
+.au-component *,
+.au-component *::before,
+.au-component *::after {
+  box-sizing: border-box;
+}
+
+.au-component {
+  font-family: var(--au-font-family);
+}

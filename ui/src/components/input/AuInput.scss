@@ -1,0 +1,166 @@
+@use '../../theme/mixins/motion';
+@use '../../theme/mixins/fields';
+
+.au-input {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0 10px;
+  gap: 7px;
+  border: 0.5px solid transparent;
+  border-radius: var(--au-radius-control);
+  font-size: 13px;
+  @include fields.field;
+}
+
+.au-input.is-loading {
+  color: var(--au-color-text-secondary);
+  cursor: progress;
+}
+.au-input.is-loading .au-input__control {
+  cursor: progress;
+}
+
+.au-input.is-disabled .au-input__affix,
+.au-input.is-disabled .au-input__count {
+  color: inherit;
+}
+
+.au-input.is-small {
+  height: 26px;
+  border-radius: var(--au-radius-compact);
+  font-size: var(--au-font-size-small);
+  padding-inline: 8px;
+  gap: 6px;
+}
+
+.au-input.is-large {
+  height: 36px;
+  font-size: var(--au-font-size-base);
+  padding-inline: 12px;
+  gap: 8px;
+}
+
+.au-input__control {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  line-height: normal;
+}
+
+.au-input__control:disabled {
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.au-input__control:read-only {
+  cursor: default;
+}
+
+.au-input__control::placeholder {
+  color: var(--au-color-text-secondary);
+  opacity: 1;
+}
+
+.au-input.is-disabled .au-input__control::placeholder {
+  color: inherit;
+}
+
+.au-input__control::-webkit-search-cancel-button,
+.au-input__control::-webkit-search-decoration {
+  display: none;
+  appearance: none;
+}
+
+.au-input__affix {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 50%;
+  gap: 5px;
+  /* 中间输入区负责收缩，避免图标与清除按钮被 affix 的裁剪区域截断。 */
+  flex: 0 0 auto;
+  overflow: hidden;
+  color: var(--au-color-text-secondary);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.au-input__count {
+  color: var(--au-color-text-secondary);
+  font-size: var(--au-font-size-small);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.au-input__loading {
+  color: var(--au-color-primary);
+}
+
+.au-input__suffix-content {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.au-input__replaceable-suffix {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.au-input__clear {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  padding: 0;
+  overflow: visible;
+  border-radius: var(--au-radius-pill);
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  @include motion.transition(color, background, transform, opacity);
+}
+
+.au-input__clear-icon {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  overflow: visible;
+  contain: none;
+}
+
+.au-input__clear.is-visible {
+  pointer-events: auto;
+}
+
+.au-input__clear.is-replacement {
+  opacity: 1;
+}
+
+.au-input:hover .au-input__clear.is-visible,
+.au-input:focus-within .au-input__clear.is-visible,
+.au-input__clear:focus-visible {
+  opacity: 1;
+}
+
+.au-input__clear:disabled {
+  cursor: default;
+}
+
+@media (forced-colors: active) {
+  .au-input__control::placeholder,
+  .au-input__affix,
+  .au-input__count,
+  .au-input__loading { color: inherit; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-input__clear:active:not(:disabled) { transform: none; }
+}

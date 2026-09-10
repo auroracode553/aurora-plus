@@ -1,0 +1,63 @@
+.au-popover.is-disabled {
+  cursor: not-allowed;
+}
+
+.au-popover__content {
+  position: fixed;
+  color: var(--au-color-text-primary);
+  outline: none;
+  transform-origin: top center;
+}
+
+.au-popover__content.has-surface {
+  min-width: min(180px, calc(100vw - 16px));
+  padding: 12px;
+}
+
+.au-popover__content.is-bottom-start {
+  transform-origin: top left;
+}
+
+.au-popover__content.is-bottom {
+  transform-origin: top center;
+}
+
+.au-popover__content.is-bottom-end {
+  transform-origin: top right;
+}
+
+.au-popover__content.is-top-start {
+  transform-origin: bottom left;
+}
+
+.au-popover__content.is-top {
+  transform-origin: bottom center;
+}
+
+.au-popover__content.is-top-end {
+  transform-origin: bottom right;
+}
+
+.au-popover__content.is-left-start {
+  transform-origin: right top;
+}
+
+.au-popover__content.is-left {
+  transform-origin: right center;
+}
+
+.au-popover__content.is-left-end {
+  transform-origin: right bottom;
+}
+
+.au-popover__content.is-right-start {
+  transform-origin: left top;
+}
+
+.au-popover__content.is-right {
+  transform-origin: left center;
+}
+
+.au-popover__content.is-right-end {
+  transform-origin: left bottom;
+}

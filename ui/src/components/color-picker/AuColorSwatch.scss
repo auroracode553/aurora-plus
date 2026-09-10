@@ -1,0 +1,72 @@
+@use '../../theme/mixins/motion';
+@use '../../theme/mixins/interaction';
+
+.au-color-swatch {
+  display: inline-grid;
+  place-items: center;
+  width: auto;
+  height: 32px;
+  aspect-ratio: 1;
+  padding: 3px;
+  border: 1px solid transparent;
+  border-radius: var(--au-radius-pill);
+  color: var(--au-color-text-primary);
+  background: transparent;
+  cursor: pointer;
+  @include motion.transition(border-color, background, transform);
+}
+
+.au-color-swatch.is-small {
+  height: 28px;
+}
+
+.au-color-swatch.is-large {
+  height: 40px;
+  padding: 4px;
+}
+
+.au-color-swatch:hover:not(.is-disabled),
+.au-color-swatch:focus-visible {
+  background: var(--au-color-background-hover);
+}
+
+.au-color-swatch.is-selected {
+  border-color: var(--au-color-primary);
+  @include interaction.selected;
+}
+
+.au-color-swatch:active:not(.is-disabled) {
+  @include motion.press(scale(0.95));
+}
+
+.au-color-swatch__color {
+  width: auto;
+  height: 22px;
+  aspect-ratio: 1;
+  border: 1px solid var(--au-color-border-subtle);
+  border-radius: var(--au-radius-pill);
+}
+
+.au-color-swatch.is-small .au-color-swatch__color {
+  height: 18px;
+}
+
+.au-color-swatch.is-large .au-color-swatch__color {
+  height: 30px;
+}
+
+.au-color-swatch__check {
+  width: auto;
+  height: 14px;
+  aspect-ratio: 1;
+}
+
+@media (prefers-contrast: more) {
+  .au-color-swatch {
+    border-color: var(--au-color-border-default);
+  }
+
+  .au-color-swatch.is-selected {
+    border-width: 2px;
+  }
+}

@@ -1,0 +1,58 @@
+@use '../../theme/mixins/fields';
+
+.au-color-picker {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: auto;
+  height: 32px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0.5px solid var(--au-color-border-muted);
+  border-radius: var(--au-radius-pill);
+  cursor: pointer;
+  @include fields.field;
+}
+
+.au-color-picker.is-small {
+  height: 28px;
+}
+
+.au-color-picker.is-large {
+  height: 40px;
+}
+
+.au-color-picker__swatch {
+  width: auto;
+  height: 18px;
+  aspect-ratio: 1;
+  border: 0.5px solid var(--au-color-border-muted);
+  border-radius: var(--au-radius-pill);
+  pointer-events: none;
+}
+
+.au-color-picker.is-small .au-color-picker__swatch {
+  height: 16px;
+}
+
+.au-color-picker.is-large .au-color-picker__swatch {
+  height: 22px;
+}
+
+.au-color-picker__control {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+@media (forced-colors: active) {
+  .au-color-picker {
+    border: 1px solid ButtonText;
+  }
+}

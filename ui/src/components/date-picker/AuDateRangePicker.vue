@@ -21,7 +21,7 @@
     <template #trigger="{ triggerProps }">
       <div
         ref="triggerRef"
-        class="au-date-range-picker__trigger au-depth-control au-focus-ring au-forced-surface au-motion-reduce"
+        class="au-date-range-picker__trigger"
         :class="[
           `is-${size}`,
           {
@@ -504,110 +504,4 @@ defineExpose({
 });
 </script>
 
-<style scoped lang="scss">
-.au-date-range-picker {
-  width: 100%;
-}
-
-.au-date-range-picker__trigger {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-width: 0;
-  height: 32px;
-  gap: 6px;
-  padding: 0 9px;
-  border: 1px solid var(--au-material-border-emphasis);
-  border-radius: var(--au-radius-control);
-  color: var(--au-color-text-default);
-  background: var(--au-material-background);
-  transition:
-    border-color var(--au-transition-duration) var(--au-transition-timing),
-    box-shadow var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-date-range-picker__trigger:hover:not(.is-disabled),
-.au-date-range-picker__trigger.is-focused {
-  border-color: color-mix(in srgb, var(--au-color-primary) 55%, transparent);
-}
-
-.au-date-range-picker__trigger.is-invalid {
-  border-color: var(--au-color-danger);
-}
-
-.au-date-range-picker__trigger.is-disabled {
-  color: var(--au-color-text-disabled);
-  background: var(--au-material-background-subtle);
-  cursor: not-allowed;
-}
-
-.au-date-range-picker__trigger.is-small {
-  height: 28px;
-}
-
-.au-date-range-picker__trigger.is-large {
-  height: 40px;
-}
-
-.au-date-range-picker__input {
-  min-width: 0;
-  width: 0;
-  height: 100%;
-  font-size: var(--au-font-size-base);
-  text-align: center;
-  flex: 1;
-}
-
-.au-date-range-picker__input::placeholder {
-  color: var(--au-color-text-placeholder);
-}
-
-.au-date-range-picker__clear {
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  border-radius: var(--au-radius-pill);
-  flex: none;
-}
-
-.au-date-range-picker__panel {
-  width: min(576px, calc(100vw - 16px));
-}
-
-.au-date-range-picker__calendars {
-  display: flex;
-  align-items: flex-start;
-}
-
-.au-date-range-picker__pane + .au-date-range-picker__pane {
-  border-left: 1px solid var(--au-material-border);
-}
-
-.au-date-range-picker__footer {
-  justify-content: flex-end;
-  padding: 6px 10px;
-}
-
-@media (max-width: 600px) {
-  .au-date-range-picker__panel {
-    width: min(294px, calc(100vw - 16px));
-  }
-
-  .au-date-range-picker__calendars {
-    flex-direction: column;
-  }
-
-  .au-date-range-picker__pane + .au-date-range-picker__pane {
-    border-top: 1px solid var(--au-material-border);
-    border-left: 0;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-date-range-picker__trigger,
-  .au-date-range-picker__pane + .au-date-range-picker__pane {
-    border-color: var(--au-color-text-secondary);
-  }
-}
-
-</style>
+<style scoped lang="scss" src="./AuDateRangePicker.scss"></style>

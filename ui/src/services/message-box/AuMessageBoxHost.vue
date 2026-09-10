@@ -63,13 +63,4 @@ async function handleAction(action) {
 }
 </script>
 
-<style scoped lang="scss">
-.au-message-box__message {
-  color: var(--au-color-text-default);
-  font-size: var(--au-font-size-base);
-  font-weight: 450;
-  line-height: 1.65;
-  letter-spacing: 0.002em;
-  white-space: pre-wrap;
-}
-</style>
+<style scoped lang="scss" src="./AuMessageBoxHost.scss"></style>

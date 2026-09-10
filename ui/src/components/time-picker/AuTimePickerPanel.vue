@@ -102,34 +102,4 @@ function updatePart(part, rawValue) {
 }
 </script>
 
-<style scoped lang="scss">
-.au-time-picker-panel {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 5px;
-  width: 100%;
-  min-width: 0;
-}
-
-.au-time-picker-panel__field {
-  display: grid;
-  min-width: 0;
-  flex: 1;
-  gap: 5px;
-}
-
-.au-time-picker-panel__field label {
-  padding-left: 3px;
-  color: var(--au-color-text-secondary);
-  font-size: 11px;
-  font-weight: var(--au-font-weight-medium);
-}
-
-.au-time-picker-panel__separator {
-  padding-bottom: 5px;
-  color: var(--au-color-text-secondary);
-  font-size: var(--au-font-size-base);
-  font-weight: var(--au-font-weight-semibold);
-}
-</style>
+<style scoped lang="scss" src="./AuTimePickerPanel.scss"></style>

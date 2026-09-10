@@ -31,16 +31,4 @@ provide(AU_MENU_LIST_CONTEXT_KEY, {
 });
 </script>
 
-<style scoped lang="scss">
-/* 在组件边界内重置语义列表，避免宿主页面的 ul 样式缩进交互行。 */
-.au-menu-list {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  list-style: none;
-  color: var(--au-color-text-primary);
-}
-</style>
+<style scoped lang="scss" src="./AuMenuList.scss"></style>

@@ -1,0 +1,211 @@
+@use '../../theme/mixins/motion';
+@use '../../theme/mixins/surfaces';
+
+.au-image-preview {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  color: var(--au-color-text-primary);
+  background: rgb(0 0 0 / 50%);
+  outline: none;
+  user-select: none;
+}
+
+.au-image-preview__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 72px 88px;
+  touch-action: none;
+}
+
+.au-image-preview__stage.is-draggable {
+  cursor: grab;
+}
+
+.au-image-preview__stage.is-interacting {
+  cursor: grabbing;
+}
+
+.au-image-preview__image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  transform-origin: center;
+  will-change: transform;
+  -webkit-user-drag: none;
+}
+
+.au-image-preview__empty,
+.au-image-preview__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--au-color-text-secondary);
+}
+
+.au-image-preview__error {
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.au-image-preview__error-icon {
+  font-size: 28px;
+}
+
+.au-image-preview__progress {
+  position: absolute;
+  z-index: 2;
+  border: 1px solid var(--au-material-border);
+  color: var(--au-color-text-primary);
+}
+
+.au-image-preview__close,
+.au-image-preview__navigation {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  @include surfaces.inverse;
+  box-shadow: none;
+  font-size: 22px;
+  cursor: pointer;
+  @include motion.transition(color, background, transform);
+}
+
+.au-image-preview__close:hover:not(:disabled),
+.au-image-preview__close:focus-visible,
+.au-image-preview__navigation:hover:not(:disabled),
+.au-image-preview__navigation:focus-visible {
+  @include surfaces.inverse-hover($standalone: true);
+  box-shadow: none;
+}
+
+.au-image-preview__close:active:not(:disabled),
+.au-image-preview__navigation:active:not(:disabled) {
+  @include surfaces.inverse-pressed($standalone: true);
+  box-shadow: none;
+  @include motion.press(scale(0.96));
+}
+
+.au-image-preview__navigation:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.au-image-preview__navigation:disabled {
+  color: rgb(255 255 255 / 36%);
+  background: rgb(48 49 51 / 42%);
+  cursor: not-allowed;
+}
+
+.au-image-preview__close {
+  top: 16px;
+  right: 16px;
+}
+
+.au-image-preview__navigation {
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
+}
+
+.au-image-preview__navigation.is-previous {
+  left: 16px;
+}
+
+.au-image-preview__navigation.is-next {
+  right: 16px;
+}
+
+.au-image-preview__progress {
+  bottom: 70px;
+  left: 50%;
+  min-width: 48px;
+  padding: 3px 9px;
+  border-radius: var(--au-radius-pill);
+  font-size: var(--au-font-size-small);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.au-image-preview__toolbar {
+  position: absolute;
+  z-index: 2;
+  bottom: 14px;
+  left: 50%;
+  max-width: calc(100% - 32px);
+  transform: translateX(-50%);
+}
+
+.au-image-preview-fade-enter-active,
+.au-image-preview-fade-leave-active {
+  @include motion.transition(opacity);
+}
+
+.au-image-preview-fade-enter-from,
+.au-image-preview-fade-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 720px) {
+  .au-image-preview__stage {
+    padding: 56px 18px 88px;
+  }
+
+  .au-image-preview__navigation.is-previous {
+    left: 8px;
+  }
+
+  .au-image-preview__navigation.is-next {
+    right: 8px;
+  }
+
+  .au-image-preview__close {
+    top: 8px;
+    right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-image-preview-fade-enter-active,
+  .au-image-preview-fade-leave-active {
+    transition: none;
+  }
+
+  .au-image-preview__navigation:active:not(:disabled) {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-image-preview__close,
+  .au-image-preview__navigation {
+    background: rgb(48 49 51);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-image-preview__progress {
+    border-color: var(--au-color-text-secondary);
+  }
+
+  .au-image-preview__close,
+  .au-image-preview__navigation {
+    border: 1px solid currentColor;
+  }
+}

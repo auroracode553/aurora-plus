@@ -38,7 +38,7 @@
           <button
             v-for="item in section.items"
             :key="item.id"
-            class="au-context-menu__item au-menu-item"
+            class="au-context-menu__item au-menu-action"
             :class="{ 'is-danger': item.danger }"
             type="button"
             role="menuitem"
@@ -54,7 +54,7 @@
 
         <button
           v-else-if="section.type === 'button' || section.type === 'item'"
-          class="au-context-menu__item au-menu-item"
+          class="au-context-menu__item au-menu-action"
           :class="{ 'is-danger': resolveSectionItem(section).danger }"
           type="button"
           role="menuitem"
@@ -73,7 +73,7 @@
           @mouseleave="hideSubmenu"
         >
           <button
-            class="au-context-menu__item au-menu-item has-submenu"
+            class="au-context-menu__item au-menu-action has-submenu"
             :class="{ 'is-active': activeSubmenu === section.id }"
             type="button"
             role="menuitem"
@@ -98,7 +98,7 @@
               <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
               <button
                 v-else
-                class="au-context-menu__item au-menu-item"
+                class="au-context-menu__item au-menu-action"
                 :class="{ 'is-danger': item.danger }"
                 type="button"
                 role="menuitem"
@@ -283,81 +283,4 @@ onBeforeUnmount(() => {
 defineExpose({ close, menuRef, updatePosition });
 </script>
 
-<style scoped lang="scss">
-.au-context-menu,
-.au-context-submenu {
-  position: fixed;
-}
-
-.au-context-menu__icon-row,
-.au-context-menu__icon-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 4px;
-  padding: 2px 8px 8px;
-}
-
-.au-context-menu__tool-button {
-  width: 100%;
-  height: 28px;
-  padding: 0;
-  border: 1px solid var(--au-material-border-emphasis);
-  border-radius: var(--au-radius-compact);
-  color: var(--au-color-text-primary);
-  background: var(--au-material-background-subtle);
-  cursor: pointer;
-  transition:
-    color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing),
-    border-color var(--au-transition-duration) var(--au-transition-timing),
-    transform var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-context-menu__tool-button:hover:not(:disabled),
-.au-context-menu__tool-button:focus-visible {
-  border-color: color-mix(in srgb, var(--au-color-primary) 55%, var(--au-material-border-emphasis));
-  background: color-mix(in srgb, var(--au-color-primary) 12%, var(--au-material-background-subtle));
-  outline: none;
-}
-
-.au-context-menu__tool-button:active:not(:disabled) {
-  transform: scale(0.94);
-}
-
-.au-context-menu__tool-button:disabled {
-  opacity: 0.6;
-}
-
-.au-context-menu__tool-button.is-danger:not(:disabled) {
-  color: var(--au-color-danger);
-}
-
-.au-context-menu__tool-icon {
-  font-size: 16px;
-}
-
-.au-context-menu__item {
-  height: 32px;
-  padding: 0 13px;
-}
-
-.au-context-menu__item-icon,
-.au-context-menu__arrow {
-  flex: none;
-  font-size: 14px;
-}
-
-.au-context-menu__item.has-submenu .au-context-menu__arrow {
-  margin-left: auto;
-  color: var(--au-color-text-secondary);
-  font-size: 12px;
-}
-
-.au-context-submenu {
-  position: absolute;
-  top: -5px;
-  left: calc(100% + 6px);
-  min-width: min(200px, calc(100vw - 16px));
-}
-
-</style>
+<style scoped lang="scss" src="./AuContextMenu.scss"></style>

@@ -375,35 +375,4 @@ watch(visible, (value) => emit('visible-change', value));
 defineExpose({ focus, blur, open, close, inputRef, treeRef, popoverRef });
 </script>
 
-<style scoped lang="scss">
-.au-tree-select {
-  width: 100%;
-}
-
-.au-tree-select__arrow {
-  transition: transform var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-tree-select__arrow.is-expanded {
-  transform: rotate(180deg);
-}
-
-.au-tree-select__popover {
-  width: 100%;
-  min-width: min(280px, calc(100vw - 16px));
-  height: 240px;
-  overflow: hidden;
-}
-
-.au-tree-select__tree {
-  width: 100%;
-  height: 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-tree-select__arrow {
-    transition: none;
-  }
-}
-
-</style>
+<style scoped lang="scss" src="./AuTreeSelect.scss"></style>

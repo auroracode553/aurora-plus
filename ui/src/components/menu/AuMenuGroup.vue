@@ -23,27 +23,4 @@ const menuMode = computed(() => menu?.mode.value || 'vertical');
 const collapsed = computed(() => Boolean(menu?.collapsed.value));
 </script>
 
-<style scoped lang="scss">
-.au-menu-group {
-  display: block;
-  min-width: 0;
-  padding: 0 12px 8px;
-  color: var(--au-color-text-secondary);
-  font-size: var(--au-font-size-small);
-  font-weight: var(--au-font-weight-semibold);
-  line-height: 1.25;
-}
-
-.au-menu-group.is-spaced {
-  margin-top: 20px;
-}
-
-.au-menu-group.is-horizontal,
-.au-menu-group.is-collapsed {
-  display: none;
-}
-
-.au-menu-group__label {
-  display: block;
-}
-</style>
+<style scoped lang="scss" src="./AuMenuGroup.scss"></style>

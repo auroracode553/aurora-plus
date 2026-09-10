@@ -1,0 +1,68 @@
+.au-floating-toolbar {
+  position: fixed;
+  display: inline-flex;
+  align-items: center;
+  max-width: calc(100vw - 16px);
+  gap: 2px;
+  min-height: 34px;
+  padding: 2px;
+  border: 1px solid var(--au-material-border);
+  border-radius: var(--au-radius-surface);
+  color: var(--au-color-text-default);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  user-select: none;
+}
+
+.au-floating-toolbar__arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.au-floating-toolbar.is-top .au-floating-toolbar__arrow--border {
+  bottom: -6px;
+  border-top: 6px solid var(--au-material-border-emphasis);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+}
+
+.au-floating-toolbar.is-top .au-floating-toolbar__arrow--surface {
+  bottom: -5px;
+  border-top: 5px solid var(--au-material-background-elevated);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--border {
+  top: -6px;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid var(--au-material-border-emphasis);
+  border-left: 6px solid transparent;
+}
+
+.au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--surface {
+  top: -5px;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--au-material-background-elevated);
+  border-left: 5px solid transparent;
+}
+
+.au-floating-toolbar-fade-enter-from,
+.au-floating-toolbar-fade-leave-to {
+  opacity: 0;
+  transform: translateY(3px) scale(0.98);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-floating-toolbar.is-top .au-floating-toolbar__arrow--surface {
+    border-top-color: var(--au-color-background-overlay);
+  }
+
+  .au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--surface {
+    border-bottom-color: var(--au-color-background-overlay);
+  }
+}

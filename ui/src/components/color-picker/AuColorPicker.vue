@@ -1,7 +1,7 @@
 <template>
   <label
-    class="au-color-picker au-component au-focus-halo"
-    :class="[`is-${size}`, { 'is-disabled': disabled, 'au-disabled': disabled }, $attrs.class]"
+    class="au-color-picker au-component"
+    :class="[`is-${size}`, { 'is-disabled': disabled }, $attrs.class]"
     :style="$attrs.style"
   >
     <span class="au-color-picker__swatch" :style="{ backgroundColor: resolvedValue }"></span>
@@ -68,70 +68,4 @@ function focus(options) {
 defineExpose({ focus, inputRef });
 </script>
 
-<style scoped lang="scss">
-.au-color-picker {
-  position: relative;
-  display: inline-grid;
-  place-items: center;
-  flex: none;
-  width: auto;
-  height: 32px;
-  aspect-ratio: 1;
-  padding: 0;
-  border: 0.5px solid var(--au-color-border-muted);
-  border-radius: var(--au-radius-pill);
-  background: var(--au-material-background-subtle);
-  cursor: pointer;
-  transition:
-    border-color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing),
-    box-shadow var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-color-picker.is-small {
-  height: 28px;
-}
-
-.au-color-picker.is-large {
-  height: 40px;
-}
-
-.au-color-picker:hover:not(.is-disabled) {
-  border-color: color-mix(in srgb, var(--au-color-primary) 30%, var(--au-color-border-muted));
-  background: var(--au-color-background-hover);
-}
-
-.au-color-picker__swatch {
-  width: auto;
-  height: 18px;
-  aspect-ratio: 1;
-  border: 0.5px solid var(--au-color-border-muted);
-  border-radius: var(--au-radius-pill);
-  pointer-events: none;
-}
-
-.au-color-picker.is-small .au-color-picker__swatch {
-  height: 16px;
-}
-
-.au-color-picker.is-large .au-color-picker__swatch {
-  height: 22px;
-}
-
-.au-color-picker__control {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  opacity: 0;
-  cursor: inherit;
-}
-
-@media (forced-colors: active) {
-  .au-color-picker {
-    border: 1px solid ButtonText;
-  }
-}
-</style>
+<style scoped lang="scss" src="./AuColorPicker.scss"></style>

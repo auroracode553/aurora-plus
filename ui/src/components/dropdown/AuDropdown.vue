@@ -42,7 +42,7 @@
               <button
                 v-else
                 :id="itemId(index)"
-                class="au-dropdown__item au-menu-item"
+                class="au-dropdown__item au-menu-action"
                 :class="{ 'is-danger': item.danger, 'is-active': item.active }"
                 type="button"
                 role="menuitem"
@@ -341,61 +341,4 @@ onBeforeUnmount(() => {
 defineExpose({ open, close, toggle, updatePosition, triggerRef, menuRef });
 </script>
 
-<style scoped lang="scss">
-.au-dropdown {
-  position: relative;
-}
-
-.au-dropdown__menu {
-  position: fixed;
-  width: max-content;
-  min-width: min(180px, calc(100vw - 16px));
-  max-width: calc(100vw - 16px);
-  max-height: min(320px, calc(100vh - 16px));
-  padding: 5px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  font-size: var(--au-font-size-base);
-  font-weight: var(--au-font-weight-medium);
-  line-height: 1.3;
-  transform-origin: top left;
-}
-
-.au-dropdown__menu.is-bottom {
-  transform-origin: top center;
-}
-
-.au-dropdown__menu.is-bottom-end {
-  transform-origin: top right;
-}
-
-.au-dropdown__menu.is-top-start {
-  transform-origin: bottom left;
-}
-
-.au-dropdown__menu.is-top {
-  transform-origin: bottom center;
-}
-
-.au-dropdown__menu.is-top-end {
-  transform-origin: bottom right;
-}
-
-.au-dropdown__item {
-  padding: 0 9px;
-}
-
-.au-dropdown__item-icon {
-  font-size: 14px;
-}
-
-.au-dropdown__item.is-danger:hover:not(:disabled),
-.au-dropdown__item.is-danger:focus-visible {
-  background: color-mix(in srgb, var(--au-color-danger) 10%, transparent);
-}
-
-.au-dropdown.is-disabled {
-  cursor: not-allowed;
-}
-
-</style>
+<style scoped lang="scss" src="./AuDropdown.scss"></style>

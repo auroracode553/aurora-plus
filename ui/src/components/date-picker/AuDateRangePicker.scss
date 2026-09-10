@@ -1,0 +1,86 @@
+@use '../../theme/mixins/fields';
+
+.au-date-range-picker {
+  width: 100%;
+}
+
+.au-date-range-picker__trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid var(--au-material-border-emphasis);
+  border-radius: var(--au-radius-control);
+  @include fields.field;
+}
+
+.au-date-range-picker__trigger.is-small {
+  height: 28px;
+}
+
+.au-date-range-picker__trigger.is-large {
+  height: 40px;
+}
+
+.au-date-range-picker__input {
+  min-width: 0;
+  width: 0;
+  height: 100%;
+  font-size: var(--au-font-size-base);
+  text-align: center;
+  flex: 1;
+}
+
+.au-date-range-picker__input::placeholder {
+  color: var(--au-color-text-placeholder);
+}
+
+.au-date-range-picker__clear {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: var(--au-radius-pill);
+  flex: none;
+}
+
+.au-date-range-picker__panel {
+  width: min(576px, calc(100vw - 16px));
+}
+
+.au-date-range-picker__calendars {
+  display: flex;
+  align-items: flex-start;
+}
+
+.au-date-range-picker__pane + .au-date-range-picker__pane {
+  border-left: 1px solid var(--au-material-border);
+}
+
+.au-date-range-picker__footer {
+  justify-content: flex-end;
+  padding: 6px 10px;
+}
+
+@media (max-width: 600px) {
+  .au-date-range-picker__panel {
+    width: min(294px, calc(100vw - 16px));
+  }
+
+  .au-date-range-picker__calendars {
+    flex-direction: column;
+  }
+
+  .au-date-range-picker__pane + .au-date-range-picker__pane {
+    border-top: 1px solid var(--au-material-border);
+    border-left: 0;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-date-range-picker__pane + .au-date-range-picker__pane {
+    border-color: var(--au-color-text-secondary);
+  }
+}

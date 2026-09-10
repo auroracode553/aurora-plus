@@ -1,12 +1,12 @@
 <template>
   <span
-    class="au-textarea au-component au-field-shell au-focus-halo"
+    class="au-textarea au-component"
     :class="[
       `is-${size}`,
       `is-resize-${resize}`,
       {
         'is-disabled': disabled,
-        'au-disabled': disabled,
+        'is-readonly': readonly,
         'is-invalid': invalid,
       },
       $attrs.class,
@@ -98,58 +98,4 @@ function select() {
 defineExpose({ focus, blur, select, textareaRef });
 </script>
 
-<style scoped lang="scss">
-.au-textarea {
-  position: relative;
-}
-
-.au-textarea__control {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  min-height: 68px;
-  padding: 8px 10px;
-  line-height: 1.5;
-}
-
-.au-textarea.is-small .au-textarea__control {
-  min-height: 58px;
-  padding: 7px 8px;
-}
-
-.au-textarea.is-large .au-textarea__control {
-  min-height: 82px;
-  padding: 10px 12px;
-}
-
-.au-textarea.is-resize-none .au-textarea__control {
-  resize: none;
-}
-
-.au-textarea.is-resize-both .au-textarea__control {
-  resize: both;
-}
-
-.au-textarea.is-resize-horizontal .au-textarea__control {
-  resize: horizontal;
-}
-
-.au-textarea.is-resize-vertical .au-textarea__control {
-  resize: vertical;
-}
-
-.au-textarea__control:disabled {
-  cursor: not-allowed;
-}
-
-.au-textarea__count {
-  position: absolute;
-  right: 8px;
-  bottom: 6px;
-  color: var(--au-color-text-placeholder);
-  font-size: var(--au-font-size-small);
-  pointer-events: none;
-}
-
-</style>
+<style scoped lang="scss" src="./AuTextarea.scss"></style>

@@ -2,7 +2,6 @@
   <AuPanel width="368px" depth="overlay" aria-label="工作区选项">
     <template #header>
       <div class="panel-demo__header">
-        <span class="panel-demo__eyebrow">WORKSPACE</span>
         <h3>工作区设置</h3>
         <p>界面、通知与成员偏好</p>
       </div>
@@ -49,12 +48,7 @@ const lastAction = ref('');
   gap: 5px;
 }
 
-.panel-demo__eyebrow {
-  color: var(--au-color-primary);
-  font-size: var(--au-font-size-small);
-  font-weight: var(--au-font-weight-semibold);
-  letter-spacing: 0.09em;
-}
+
 
 .panel-demo__header h3,
 .panel-demo__header p {

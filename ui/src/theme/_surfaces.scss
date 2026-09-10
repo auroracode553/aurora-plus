@@ -1,0 +1,61 @@
+@use './mixins/surfaces';
+
+:root,
+[data-au-theme] {
+  // 小控件、面板和模态面板使用同一组低对比景深。
+  --au-shadow-control: 0 1px 2px color-mix(in srgb, var(--au-color-mask) 9%, transparent);
+  --au-shadow-surface:
+    0 2px 4px color-mix(in srgb, var(--au-color-mask) 12%, transparent),
+    0 8px 20px color-mix(in srgb, var(--au-color-mask) 12%, transparent);
+  --au-shadow-overlay:
+    0 2px 6px color-mix(in srgb, var(--au-color-mask) 16%, transparent),
+    0 12px 28px color-mix(in srgb, var(--au-color-mask) 16%, transparent);
+}
+
+.au-material-surface,
+.au-material-blur {
+  @include surfaces.blur;
+}
+
+.au-material-surface {
+  background: var(--au-material-background-elevated);
+}
+
+.au-material-surface--base {
+  background: var(--au-material-background);
+}
+
+.au-depth-control { box-shadow: var(--au-shadow-control); }
+.au-depth-surface { box-shadow: var(--au-shadow-surface); }
+.au-depth-overlay { box-shadow: var(--au-shadow-overlay); }
+
+.au-surface-frame {
+  border: 1px solid var(--au-material-border);
+}
+
+.au-surface-frame--rounded {
+  border-radius: var(--au-radius-surface);
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .au-material-surface { @include surfaces.solid-surface; }
+  .au-material-blur {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .au-material-surface { @include surfaces.solid-surface; }
+}
+
+@media (prefers-contrast: more) {
+  .au-surface-frame { border-color: var(--au-color-text-secondary); }
+}
+
+@media (forced-colors: active) {
+  .au-surface-frame { border-color: CanvasText; }
+  .au-depth-control,
+  .au-depth-surface,
+  .au-depth-overlay { box-shadow: none; }
+}

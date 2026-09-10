@@ -1,0 +1,76 @@
+:root {
+  color-scheme: light;
+
+  /* 品牌色与状态色。 */
+  --au-color-primary: #3478f6;
+  --au-color-success: #2f9e72;
+  --au-color-warning: #d98a24;
+  --au-color-danger: #df4c62;
+  --au-color-info: #718096;
+
+  /* 文字颜色按信息重要度递减。 */
+  --au-color-text-primary: #172033;
+  --au-color-text-default: #3e4a61;
+  --au-color-text-secondary: #6d7890;
+  --au-color-text-placeholder: #99a3b5;
+  --au-color-text-disabled: #b5bdca;
+
+  /* 页面背景、浮层背景与交互反馈。 */
+  --au-color-background-subtle: #edf1f8;
+  --au-color-background-overlay: #ffffff;
+  --au-color-background-hover: rgba(31, 44, 68, 0.07);
+  --au-color-mask: rgba(18, 27, 45, 0.42);
+
+  /* 通用边框按分隔强度递减。 */
+  --au-color-border-default: color-mix(in srgb, var(--au-color-text-primary) 16%, transparent);
+  --au-color-border-subtle: color-mix(in srgb, var(--au-color-text-primary) 12%, transparent);
+  --au-color-border-muted: color-mix(in srgb, var(--au-color-text-primary) 9%, transparent);
+
+  /* 圆角只保留组件实际使用的四级尺寸。 */
+  --au-radius-compact: 6px;
+  --au-radius-control: 8px;
+  --au-radius-surface: 12px;
+  --au-radius-overlay: 14px;
+  --au-radius-pill: 999px;
+
+  /* 字体使用系统字族，并维持紧凑控件字号。 */
+  --au-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --au-font-size-small: 12px;
+  --au-font-size-base: 14px;
+  --au-font-size-large: 16px;
+  --au-font-weight-medium: 520;
+  --au-font-weight-semibold: 620;
+
+  /* 所有组件共用一套轻量、可中断的状态过渡。 */
+  --au-transition-duration: 0.2s;
+  --au-transition-timing: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* 全局服务浮层层级。 */
+  --au-z-index-notification: 11000;
+  --au-z-index-hint: 12000;
+}
+
+[data-au-theme='dark'] {
+  color-scheme: dark;
+
+  /* 深色模式仅替换颜色语义，材质结构继续复用下方统一定义。 */
+  --au-color-primary: #0a84ff;
+  --au-color-success: #30d158;
+  --au-color-warning: #ff9f0a;
+  --au-color-danger: #ff453a;
+  --au-color-info: #98989d;
+  --au-color-text-primary: #f5f5f7;
+  --au-color-text-default: rgba(235, 235, 245, 0.82);
+  --au-color-text-secondary: rgba(235, 235, 245, 0.6);
+  --au-color-text-placeholder: rgba(235, 235, 245, 0.3);
+  --au-color-text-disabled: rgba(235, 235, 245, 0.2);
+
+  /* 中性石墨表面避免深色界面坍缩成纯黑。 */
+  --au-color-background-subtle: #202023;
+  --au-color-background-overlay: #2c2c30;
+  --au-color-background-hover: rgba(255, 255, 255, 0.08);
+  --au-color-mask: rgba(0, 0, 0, 0.52);
+  --au-color-border-default: rgba(255, 255, 255, 0.18);
+  --au-color-border-subtle: rgba(255, 255, 255, 0.12);
+  --au-color-border-muted: rgba(255, 255, 255, 0.075);
+}

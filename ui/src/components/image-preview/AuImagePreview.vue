@@ -52,37 +52,37 @@
           </div>
         </div>
 
-        <AuButton
-          class="au-image-preview__close"
-          type="menu"
-          :icon="IconX"
-          circle
+        <button
+          class="au-image-preview__close au-control-reset au-inline-center au-focus-ring"
+          type="button"
           :title="closeLabel"
           :aria-label="closeLabel"
           @click="close('close-button')"
-        />
+        >
+          <AuIcon :icon="IconX" />
+        </button>
 
         <template v-if="hasMultiple">
-          <AuButton
-            class="au-image-preview__navigation is-previous"
-            type="menu"
-            :icon="IconChevronLeft"
-            circle
+          <button
+            class="au-image-preview__navigation is-previous au-control-reset au-inline-center au-focus-ring"
+            type="button"
             :disabled="!canShowPrevious"
             :title="previousLabel"
             :aria-label="previousLabel"
             @click="showPrevious"
-          />
-          <AuButton
-            class="au-image-preview__navigation is-next"
-            type="menu"
-            :icon="IconChevronRight"
-            circle
+          >
+            <AuIcon :icon="IconChevronLeft" />
+          </button>
+          <button
+            class="au-image-preview__navigation is-next au-control-reset au-inline-center au-focus-ring"
+            type="button"
             :disabled="!canShowNext"
             :title="nextLabel"
             :aria-label="nextLabel"
             @click="showNext"
-          />
+          >
+            <AuIcon :icon="IconChevronRight" />
+          </button>
         </template>
 
         <div
@@ -100,33 +100,33 @@
           </slot>
         </div>
 
-        <AuButtonGroup
-          v-if="showToolbar"
-          class="au-image-preview__toolbar"
-          variant="floating"
-          size="large"
-          icon-only
-          inverse
-          role="toolbar"
-          :aria-label="toolbarLabel"
-        >
-          <slot
-            name="toolbar"
-            :zoom-in="zoomIn"
-            :zoom-out="zoomOut"
-            :reset="resetTransform"
-            :rotate-left="rotateLeft"
-            :rotate-right="rotateRight"
-            :scale="scale"
-            :rotation="rotation"
+        <div v-if="showToolbar" class="au-image-preview__toolbar">
+          <AuButtonGroup
+            variant="floating"
+            size="large"
+            icon-only
+            inverse
+            role="toolbar"
+            :aria-label="toolbarLabel"
           >
-            <AuButtonGroupItem :icon="IconZoomOut" title="缩小" aria-label="缩小" @click="zoomOut" />
-            <AuButtonGroupItem :icon="IconZoomIn" title="放大" aria-label="放大" @click="zoomIn" />
-            <AuButtonGroupItem :icon="IconArrowsMaximize" title="还原" aria-label="还原" @click="resetTransform" />
-            <AuButtonGroupItem :icon="IconRotate2" title="逆时针旋转" aria-label="逆时针旋转" @click="rotateLeft" />
-            <AuButtonGroupItem :icon="IconRotateClockwise2" title="顺时针旋转" aria-label="顺时针旋转" @click="rotateRight" />
-          </slot>
-        </AuButtonGroup>
+            <slot
+              name="toolbar"
+              :zoom-in="zoomIn"
+              :zoom-out="zoomOut"
+              :reset="resetTransform"
+              :rotate-left="rotateLeft"
+              :rotate-right="rotateRight"
+              :scale="scale"
+              :rotation="rotation"
+            >
+              <AuButtonGroupItem :icon="IconZoomOut" title="缩小" aria-label="缩小" @click="zoomOut" />
+              <AuButtonGroupItem :icon="IconZoomIn" title="放大" aria-label="放大" @click="zoomIn" />
+              <AuButtonGroupItem :icon="IconArrowsMaximize" title="还原" aria-label="还原" @click="resetTransform" />
+              <AuButtonGroupItem :icon="IconRotate2" title="逆时针旋转" aria-label="逆时针旋转" @click="rotateLeft" />
+              <AuButtonGroupItem :icon="IconRotateClockwise2" title="顺时针旋转" aria-label="顺时针旋转" @click="rotateRight" />
+            </slot>
+          </AuButtonGroup>
+        </div>
       </section>
     </Transition>
   </Teleport>
@@ -154,7 +154,6 @@ import {
   IconZoomOut,
 } from '../../icons/internal.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
-import { AuButton } from '../button/index.js';
 import { AuButtonGroup, AuButtonGroupItem } from '../button-group/index.js';
 import { AuIcon } from '../icon/index.js';
 
@@ -599,218 +598,4 @@ defineExpose({
 });
 </script>
 
-<style scoped lang="scss">
-$preview-control-color: rgb(255 255 255 / 88%);
-$preview-control-background: rgb(48 49 51 / 72%);
-$preview-control-background-hover: rgb(48 49 51 / 88%);
-$preview-control-background-active: rgb(31 32 34 / 92%);
-
-.au-image-preview {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  color: var(--au-color-text-primary);
-  background: rgb(0 0 0 / 50%);
-  outline: none;
-  user-select: none;
-}
-
-.au-image-preview__stage {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 64px 72px 88px;
-  touch-action: none;
-}
-
-.au-image-preview__stage.is-draggable {
-  cursor: grab;
-}
-
-.au-image-preview__stage.is-interacting {
-  cursor: grabbing;
-}
-
-.au-image-preview__image {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  transform-origin: center;
-  will-change: transform;
-  -webkit-user-drag: none;
-}
-
-.au-image-preview__empty,
-.au-image-preview__error {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: var(--au-color-text-secondary);
-}
-
-.au-image-preview__error {
-  position: absolute;
-  inset: 0;
-  flex-direction: column;
-  pointer-events: none;
-}
-
-.au-image-preview__error-icon {
-  font-size: 28px;
-}
-
-.au-image-preview__progress {
-  position: absolute;
-  z-index: 2;
-  border: 1px solid var(--au-material-border);
-  color: var(--au-color-text-primary);
-}
-
-.au-image-preview__close.au-button.au-button--menu,
-.au-image-preview__navigation.au-button.au-button--menu {
-  position: absolute;
-  z-index: 2;
-  display: inline-flex;
-  min-width: 40px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  color: $preview-control-color;
-  background: $preview-control-background;
-  box-shadow: none;
-  font-size: 22px;
-}
-
-.au-image-preview__close.au-button.au-button--menu:hover:not(.is-disabled),
-.au-image-preview__close.au-button.au-button--menu:focus-visible,
-.au-image-preview__navigation.au-button.au-button--menu:hover:not(.is-disabled),
-.au-image-preview__navigation.au-button.au-button--menu:focus-visible {
-  color: #ffffff;
-  background: $preview-control-background-hover;
-  box-shadow: none;
-}
-
-.au-image-preview__close.au-button.au-button--menu:active:not(.is-disabled),
-.au-image-preview__navigation.au-button.au-button--menu:active:not(.is-disabled) {
-  color: #ffffff;
-  background: $preview-control-background-active;
-  box-shadow: none;
-  transform: scale(0.96);
-}
-
-.au-image-preview__navigation.au-button.au-button--menu:active:not(.is-disabled) {
-  transform: translateY(-50%) scale(0.96);
-}
-
-.au-image-preview__navigation.au-button.au-button--menu.is-disabled {
-  color: rgb(255 255 255 / 36%);
-  background: rgb(48 49 51 / 42%);
-}
-
-.au-image-preview__close {
-  top: 16px;
-  right: 16px;
-}
-
-.au-image-preview__navigation {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.au-image-preview__navigation.au-button.au-button--menu {
-  min-width: 44px;
-  width: 44px;
-  height: 44px;
-}
-
-.au-image-preview__navigation.is-previous {
-  left: 16px;
-}
-
-.au-image-preview__navigation.is-next {
-  right: 16px;
-}
-
-.au-image-preview__progress {
-  bottom: 70px;
-  left: 50%;
-  min-width: 48px;
-  padding: 3px 9px;
-  border-radius: var(--au-radius-pill);
-  font-size: var(--au-font-size-small);
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-  transform: translateX(-50%);
-}
-
-.au-image-preview__toolbar {
-  position: absolute;
-  z-index: 2;
-  bottom: 14px;
-  left: 50%;
-  max-width: calc(100% - 32px);
-  transform: translateX(-50%);
-}
-
-.au-image-preview-fade-enter-active,
-.au-image-preview-fade-leave-active {
-  transition: opacity var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-image-preview-fade-enter-from,
-.au-image-preview-fade-leave-to {
-  opacity: 0;
-}
-
-@media (max-width: 720px) {
-  .au-image-preview__stage {
-    padding: 56px 18px 88px;
-  }
-
-  .au-image-preview__navigation.is-previous {
-    left: 8px;
-  }
-
-  .au-image-preview__navigation.is-next {
-    right: 8px;
-  }
-
-  .au-image-preview__close {
-    top: 8px;
-    right: 8px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-image-preview-fade-enter-active,
-  .au-image-preview-fade-leave-active {
-    transition: none;
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-image-preview__close.au-button.au-button--menu,
-  .au-image-preview__navigation.au-button.au-button--menu {
-    background: rgb(48 49 51);
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-image-preview__progress {
-    border-color: var(--au-color-text-secondary);
-  }
-
-  .au-image-preview__close.au-button.au-button--menu,
-  .au-image-preview__navigation.au-button.au-button--menu {
-    border: 1px solid currentColor;
-  }
-}
-
-</style>
+<style scoped lang="scss" src="./AuImagePreview.scss"></style>

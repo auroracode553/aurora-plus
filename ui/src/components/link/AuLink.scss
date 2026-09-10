@@ -1,0 +1,62 @@
+@use '../../theme/mixins/motion';
+@use '../../theme/config';
+
+.au-link {
+  min-width: 0;
+  max-width: 100%;
+  gap: 4px;
+  padding: 0;
+  color: var(--au-color-text-default);
+  background: transparent;
+  font-size: var(--au-font-size-base);
+  font-weight: var(--au-font-weight-medium);
+  line-height: 1.35;
+  text-decoration: none;
+  vertical-align: middle;
+  white-space: normal;
+  cursor: pointer;
+  @include motion.transition(color);
+}
+
+.au-link__inner {
+  display: inline-flex;
+  align-items: center;
+  text-decoration-color: currentcolor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.au-link.is-underline-always .au-link__inner,
+.au-link.is-underline-hover:not(.is-disabled):hover .au-link__inner {
+  text-decoration-line: underline;
+}
+
+@each $tone, $color in config.$semantic-colors {
+  .au-link--#{$tone} {
+    color: $color;
+
+    &:hover:not(.is-disabled),
+    &:active:not(.is-disabled) {
+      color: color-mix(in srgb, $color 76%, var(--au-color-text-primary));
+    }
+  }
+}
+
+.au-link--default:hover:not(.is-disabled),
+.au-link--default:active:not(.is-disabled) {
+  color: var(--au-color-primary);
+}
+
+.au-link__icon {
+  font-size: 1em;
+}
+
+@media (forced-colors: active) {
+  .au-link {
+    color: LinkText;
+  }
+
+  .au-link:focus-visible {
+    outline-color: Highlight;
+  }
+}

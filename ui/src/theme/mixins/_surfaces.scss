@@ -1,0 +1,50 @@
+// 仅输出声明；由调用方选择自己的元素，不匹配其他组件。
+@mixin blur {
+  backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+  -webkit-backdrop-filter: blur(var(--au-material-blur)) saturate(var(--au-material-saturation));
+}
+
+@mixin solid-surface {
+  background: var(--au-color-background-overlay);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+@mixin surface {
+  border-color: var(--au-color-border-default);
+  color: var(--au-color-text-primary);
+  background: var(--au-material-background);
+  box-shadow: var(--au-shadow-control);
+  @include blur;
+}
+
+@mixin selected($color: currentColor) {
+  background: color-mix(in srgb, $color 5%, var(--au-material-background-elevated));
+  outline: 1px solid color-mix(in srgb, $color 16%, transparent);
+  outline-offset: -1px;
+  box-shadow: var(--au-shadow-control);
+}
+
+// 反色材质只由显式 inverse 外观或图片预览操作选择。
+@mixin inverse {
+  color: rgb(255 255 255 / 88%);
+  background: rgb(48 49 51 / 72%);
+}
+
+@mixin inverse-hover($standalone: false) {
+  color: #ffffff;
+  @if $standalone {
+    background: rgb(48 49 51 / 88%);
+  } @else {
+    background: rgb(255 255 255 / 9%);
+  }
+}
+
+@mixin inverse-pressed($standalone: false) {
+  color: #ffffff;
+  @if $standalone {
+    background: rgb(31 32 34 / 92%);
+  } @else {
+    background: rgb(255 255 255 / 18%);
+  }
+}

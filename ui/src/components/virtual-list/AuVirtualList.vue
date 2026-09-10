@@ -144,43 +144,4 @@ onBeforeUnmount(() => {
 defineExpose({ scrollContainerRef, scrollToIndex, scrollToTop });
 </script>
 
-<style scoped lang="scss">
-.au-virtual-list {
-  position: relative;
-  min-width: 0;
-  max-width: 100%;
-  padding: 4px 6px;
-  /* Lists inherit the page surface instead of adding a tinted layer. */
-  background: transparent;
-  scroll-padding-block: 4px;
-  contain: strict;
-}
-
-.au-virtual-list.is-plain {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  contain: content;
-}
-
-.au-virtual-list.is-fill {
-  width: 100%;
-  min-width: 0;
-  height: 100%;
-  min-height: 0;
-  flex: 1;
-}
-
-.au-virtual-list__spacer {
-  position: relative;
-  width: 100%;
-}
-
-.au-virtual-list__content {
-  position: absolute;
-  inset: 0 0 auto;
-  will-change: transform;
-}
-
-</style>
+<style scoped lang="scss" src="./AuVirtualList.scss"></style>

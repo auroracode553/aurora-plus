@@ -16,7 +16,7 @@
         @mouseleave="activeSubmenuKey = ''"
       >
         <button
-          class="au-menu-bar-panel__item au-menu-item"
+          class="au-menu-bar-panel__item au-menu-action"
           :class="{ 'is-active': activeSubmenuKey === resolveItemKey(item, index) }"
           type="button"
           role="menuitem"
@@ -49,7 +49,7 @@
 
       <button
         v-else
-        class="au-menu-bar-panel__item au-menu-item"
+        class="au-menu-bar-panel__item au-menu-action"
         type="button"
         :role="isCheckableItem(item) ? 'menuitemcheckbox' : 'menuitem'"
         :aria-checked="isCheckableItem(item) ? Boolean(item.checked) : undefined"
@@ -103,47 +103,4 @@ function resolveItemKey(item, index) {
 }
 </script>
 
-<style scoped lang="scss">
-.au-menu-bar-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1;
-}
-
-.au-menu-bar-panel__item {
-  min-height: 28px;
-  padding: 0 8px;
-  border-radius: var(--au-radius-control);
-}
-
-.au-menu-bar-panel__leading,
-.au-menu-bar-panel__arrow {
-  width: auto;
-  height: 14px;
-  aspect-ratio: 1;
-  flex: none;
-  color: var(--au-color-text-secondary);
-}
-
-.au-menu-bar-panel__leading.is-checkable {
-  color: var(--au-color-primary);
-}
-
-.au-menu-bar-panel__icon {
-  width: auto;
-  height: 14px;
-}
-
-.au-menu-bar-panel__arrow {
-  color: var(--au-color-text-secondary);
-  font-size: var(--au-font-size-small);
-  white-space: nowrap;
-}
-
-.au-menu-bar-panel__nested {
-  top: -5px;
-  left: calc(100% + 3px);
-}
-
-</style>
+<style scoped lang="scss" src="./AuMenuBarPanel.scss"></style>

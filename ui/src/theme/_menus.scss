@@ -1,7 +1,14 @@
+@use './mixins/interaction';
+@use './mixins/motion';
+
 /* 下拉菜单、上下文菜单和菜单栏面板的共享结构。 */
 .au-menu-surface {
   user-select: none;
   outline: none;
+}
+
+.au-menu-action:focus-visible {
+  @include interaction.focus(-2px);
 }
 
 .au-menu-panel {
@@ -13,7 +20,7 @@
   font-weight: var(--au-font-weight-medium);
 }
 
-.au-menu-item {
+.au-menu-action {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -28,29 +35,25 @@
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
-  transition:
-    color var(--au-transition-duration) var(--au-transition-timing),
-    background var(--au-transition-duration) var(--au-transition-timing);
+  @include motion.transition(color, background);
 }
 
-.au-menu-item:hover:not(:disabled),
-.au-menu-item:focus-visible,
-.au-menu-item.is-active {
-  color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 10%, transparent);
-  outline: none;
+.au-menu-action:hover:not(:disabled),
+.au-menu-action:focus-visible,
+.au-menu-action.is-active {
+  @include interaction.hover;
 }
 
-.au-menu-item:active:not(:disabled) {
-  background: color-mix(in srgb, var(--au-color-primary) 15%, transparent);
+.au-menu-action:active:not(:disabled) {
+  @include interaction.pressed;
   transition-duration: 0s;
 }
 
-.au-menu-item.is-danger:not(:disabled) {
+.au-menu-action.is-danger:not(:disabled) {
   color: var(--au-color-danger);
 }
 
-.au-menu-item:disabled {
+.au-menu-action:disabled {
   color: var(--au-color-text-disabled);
   cursor: not-allowed;
   opacity: 0.58;
@@ -96,9 +99,9 @@
 }
 
 @media (forced-colors: active) {
-  .au-menu-item:hover:not(:disabled),
-  .au-menu-item:focus-visible,
-  .au-menu-item.is-active {
+  .au-menu-action:hover:not(:disabled),
+  .au-menu-action:focus-visible,
+  .au-menu-action.is-active {
     color: HighlightText;
     background: Highlight;
   }

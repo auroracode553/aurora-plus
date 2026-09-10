@@ -1,0 +1,24 @@
+// 状态配方不含选择器、尺寸和布局；各组件显式选择适用状态。
+@mixin hover {
+  color: var(--au-color-text-primary);
+  background: var(--au-color-background-hover);
+}
+
+@mixin selected($color: var(--au-color-primary), $background: transparent, $text: $color) {
+  color: $text;
+  background: color-mix(in srgb, $color 8%, $background);
+}
+
+@mixin pressed {
+  background: color-mix(in srgb, currentColor 11%, transparent);
+}
+
+@mixin disabled {
+  color: var(--au-color-text-disabled);
+  cursor: not-allowed;
+}
+
+@mixin focus($offset: var(--au-focus-ring-offset)) {
+  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
+  outline-offset: $offset;
+}

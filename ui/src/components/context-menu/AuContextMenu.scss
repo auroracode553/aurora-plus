@@ -1,0 +1,77 @@
+@use '../../theme/mixins/motion';
+@use '../../theme/mixins/surfaces';
+@use '../../theme/mixins/interaction';
+
+.au-context-menu,
+.au-context-submenu {
+  position: fixed;
+}
+
+.au-context-menu__icon-row,
+.au-context-menu__icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 2px 8px 8px;
+}
+
+.au-context-menu__tool-button {
+  width: 100%;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--au-material-border-emphasis);
+  border-radius: var(--au-radius-compact);
+  @include surfaces.surface;
+  cursor: pointer;
+  @include motion.transition(color, background, border-color, transform);
+}
+
+.au-context-menu__tool-button:hover:not(:disabled),
+.au-context-menu__tool-button:focus-visible {
+  border-color: var(--au-color-primary);
+  @include interaction.hover;
+}
+
+.au-context-menu__tool-button:focus-visible {
+  @include interaction.focus(-2px);
+}
+
+.au-context-menu__tool-button:active:not(:disabled) {
+  @include motion.press(scale(0.94));
+}
+
+.au-context-menu__tool-button:disabled {
+  opacity: 0.6;
+}
+
+.au-context-menu__tool-button.is-danger:not(:disabled) {
+  color: var(--au-color-danger);
+}
+
+.au-context-menu__tool-icon {
+  font-size: 16px;
+}
+
+.au-context-menu__item {
+  height: 32px;
+  padding: 0 13px;
+}
+
+.au-context-menu__item-icon,
+.au-context-menu__arrow {
+  flex: none;
+  font-size: 14px;
+}
+
+.au-context-menu__item.has-submenu .au-context-menu__arrow {
+  margin-left: auto;
+  color: var(--au-color-text-secondary);
+  font-size: 12px;
+}
+
+.au-context-submenu {
+  position: absolute;
+  top: -5px;
+  left: calc(100% + 6px);
+  min-width: min(200px, calc(100vw - 16px));
+}

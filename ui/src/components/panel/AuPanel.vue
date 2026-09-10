@@ -66,45 +66,4 @@ function formatSize(value) {
 }
 </script>
 
-<style scoped lang="scss">
-.au-panel {
-  display: flex;
-  min-width: 0;
-  max-width: 100%;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: var(--au-radius-overlay);
-  color: var(--au-color-text-primary);
-}
-
-.au-panel__header,
-.au-panel__body,
-.au-panel__footer {
-  min-width: 0;
-}
-
-.au-panel.has-compact-padding {
-  padding: 12px;
-  gap: 12px;
-}
-
-.au-panel.has-default-padding {
-  padding: 16px;
-  gap: 16px;
-}
-
-.au-panel.has-comfortable-padding {
-  padding: 20px;
-  gap: 20px;
-}
-
-.au-panel.has-none-padding {
-  gap: 0;
-}
-
-@media (forced-colors: active) {
-  .au-panel {
-    background: Canvas;
-  }
-}
-</style>
+<style scoped lang="scss" src="./AuPanel.scss"></style>

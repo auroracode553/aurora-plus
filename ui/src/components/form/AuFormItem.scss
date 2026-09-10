@@ -1,0 +1,127 @@
+@use '../../theme/mixins/motion';
+
+.au-form-item {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+  margin-bottom: 16px;
+}
+
+.au-form-item.is-label-top {
+  display: block;
+}
+
+.au-form-item.has-message-space {
+  // 始终预留一行提示空间，校验和清空时不改变表单项间距。
+  padding-bottom: 20px;
+}
+
+.au-form-item__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 30px;
+  padding-right: 10px;
+  flex: 0 0 auto;
+  color: var(--au-color-text-default);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.au-form-item.is-label-left .au-form-item__label {
+  justify-content: flex-start;
+}
+
+.au-form-item.is-label-top .au-form-item__label {
+  justify-content: flex-start;
+  min-height: 0;
+  margin-bottom: 6px;
+  padding-right: 0;
+}
+
+.au-form-item.is-required > .au-form-item__label::before {
+  margin-right: 4px;
+  color: var(--au-color-danger);
+  content: '*';
+}
+
+.au-form-item.is-required.is-asterisk-hidden > .au-form-item__label::before,
+.au-form-item.is-required.is-asterisk-right > .au-form-item__label::before {
+  display: none;
+}
+
+.au-form-item.is-required.is-asterisk-right:not(.is-asterisk-hidden) > .au-form-item__label::after {
+  margin-left: 4px;
+  color: var(--au-color-danger);
+  content: '*';
+}
+
+.au-form-item__content {
+  position: relative;
+  min-width: 0;
+  flex: 1;
+}
+
+.au-form-item.is-inline-message .au-form-item__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.au-form-item__status-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--au-color-text-secondary);
+  pointer-events: none;
+}
+
+.au-form-item__status-icon.is-error {
+  color: var(--au-color-danger);
+}
+
+.au-form-item__status-icon.is-success {
+  color: var(--au-color-success);
+}
+
+.au-form-item__message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 4px 2px 0;
+  overflow-wrap: anywhere;
+}
+
+.au-form-item.is-inline-message .au-form-item__message {
+  position: static;
+  padding-top: 0;
+  flex: none;
+}
+
+.au-form-item.is-small {
+  margin-bottom: 13px;
+}
+
+.au-form-item.is-small .au-form-item__label {
+  min-height: 26px;
+  font-size: var(--au-font-size-small);
+}
+
+.au-form-item.is-large {
+  margin-bottom: 18px;
+}
+
+.au-form-item.is-large .au-form-item__label {
+  min-height: 36px;
+  font-size: var(--au-font-size-base);
+}
+
+.au-form-item-message-enter-active,
+.au-form-item-message-leave-active {
+  @include motion.transition(opacity);
+}
+
+.au-form-item-message-enter-from,
+.au-form-item-message-leave-to {
+  opacity: 0;
+}

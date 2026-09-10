@@ -1,0 +1,41 @@
+.au-menu-bar-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+
+.au-menu-bar-panel__item {
+  min-height: 28px;
+  padding: 0 8px;
+  border-radius: var(--au-radius-control);
+}
+
+.au-menu-bar-panel__leading,
+.au-menu-bar-panel__arrow {
+  width: auto;
+  height: 14px;
+  aspect-ratio: 1;
+  flex: none;
+  color: var(--au-color-text-secondary);
+}
+
+.au-menu-bar-panel__leading.is-checkable {
+  color: var(--au-color-primary);
+}
+
+.au-menu-bar-panel__icon {
+  width: auto;
+  height: 14px;
+}
+
+.au-menu-bar-panel__arrow {
+  color: var(--au-color-text-secondary);
+  font-size: var(--au-font-size-small);
+  white-space: nowrap;
+}
+
+.au-menu-bar-panel__nested {
+  top: -5px;
+  left: calc(100% + 3px);
+}

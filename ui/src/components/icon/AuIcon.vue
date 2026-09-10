@@ -44,29 +44,4 @@ const iconStyle = computed(() => {
 });
 </script>
 
-<style scoped lang="scss">
-.au-icon {
-  width: auto;
-  height: 1em;
-  aspect-ratio: 1;
-  color: inherit;
-  line-height: 1;
-  vertical-align: middle;
-  flex: none;
-  overflow: hidden;
-  font-variant-numeric: tabular-nums;
-  contain: paint;
-  transition: color var(--au-transition-duration) var(--au-transition-timing), opacity var(--au-transition-duration) var(--au-transition-timing);
-}
-
-.au-icon__graphic {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.au-icon[aria-label] {
-  vertical-align: -0.125em;
-}
-</style>
+<style scoped lang="scss" src="./AuIcon.scss"></style>

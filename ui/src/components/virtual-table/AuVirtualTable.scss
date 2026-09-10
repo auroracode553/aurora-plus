@@ -1,0 +1,172 @@
+@use '../../theme/mixins/motion';
+
+.au-virtual-table {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--au-color-text-default);
+  background: transparent;
+  font-size: 13px;
+  contain: strict;
+}
+
+.au-virtual-table__header-viewport {
+  flex: none;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.au-virtual-table__body {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  /* 纵向到达边界后可继续滚动外层容器，横向滚动仅作用于表格。 */
+  overscroll-behavior: contain auto;
+}
+
+.au-virtual-table__body:focus-visible {
+  outline-offset: calc(-1 * var(--au-focus-ring-width));
+}
+
+.au-virtual-table__body::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.au-virtual-table__body::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@media (hover: hover) {
+  /* Keep scrollbar geometry stable so hovering never changes column widths. */
+  .au-virtual-table:not(:hover) .au-virtual-table__body {
+    scrollbar-color: transparent transparent;
+  }
+
+  .au-virtual-table:not(:hover) .au-virtual-table__body::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+}
+
+.au-virtual-table__canvas {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.au-virtual-table__header,
+.au-virtual-table__row {
+  display: grid;
+  width: 100%;
+}
+
+.au-virtual-table__header {
+  position: relative;
+  z-index: 4;
+  color: var(--au-color-text-primary);
+  background: var(--au-material-background-elevated);
+  font-weight: var(--au-font-weight-semibold);
+}
+
+.au-virtual-table__row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include motion.transition(background);
+}
+
+.au-virtual-table__row:hover {
+  background: var(--au-color-background-hover);
+}
+
+.au-virtual-table__row.is-striped-row {
+  background: color-mix(in srgb, var(--au-color-text-primary) 2.5%, transparent);
+}
+
+.au-virtual-table__header-cell,
+.au-virtual-table__cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  padding: 0 10px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--au-material-border);
+}
+
+.au-virtual-table.has-border .au-virtual-table__header-cell,
+.au-virtual-table.has-border .au-virtual-table__cell {
+  border-right: 1px solid var(--au-material-border);
+}
+
+.au-virtual-table__header-cell.is-fixed,
+.au-virtual-table__cell.is-fixed {
+  position: sticky;
+  background: var(--au-material-background-elevated);
+}
+
+.au-virtual-table__row:hover .au-virtual-table__cell.is-fixed {
+  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
+}
+
+.au-virtual-table__sort-button {
+  display: flex;
+  align-items: center;
+  width: calc(100% + 12px);
+  height: calc(100% - 4px);
+  gap: 5px;
+  margin: 0 -6px;
+  padding: 0 6px;
+  border-radius: var(--au-radius-compact);
+  cursor: pointer;
+}
+
+.au-virtual-table__sort-button:hover {
+  color: var(--au-color-primary);
+  background: var(--au-color-background-hover);
+}
+
+.au-virtual-table__empty {
+  /* Empty content must not enlarge the explicitly sized virtual canvas. */
+  position: absolute;
+  min-height: 0;
+  overflow: hidden;
+  color: var(--au-color-text-secondary);
+}
+
+.au-virtual-table__loading {
+  // Loading is an overlay and must not enlarge the body's scrollable content.
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 6px;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border: 1px solid var(--au-material-border);
+  border-radius: var(--au-radius-pill);
+  color: var(--au-color-text-primary);
+}
+
+@media (prefers-contrast: more) {
+  .au-virtual-table__header-cell,
+  .au-virtual-table__cell {
+    border-color: var(--au-material-border-emphasis);
+  }
+}
+
+@media (forced-colors: active) and (hover: hover) {
+  /* Forced colors replaces transparent scrollbar colors with system colors. */
+  .au-virtual-table:not(:hover) .au-virtual-table__body {
+    scrollbar-width: none;
+  }
+
+  .au-virtual-table:not(:hover) .au-virtual-table__body::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -185,38 +185,4 @@ provide(AU_MENU_CONTEXT_KEY, {
 defineExpose({ focus, menuRef });
 </script>
 
-<style scoped lang="scss">
-.au-menu {
-  display: flex;
-  min-width: 0;
-  gap: 4px;
-  color: var(--au-color-text-default);
-  background: transparent;
-  font-size: var(--au-font-size-base);
-}
-
-.au-menu.is-vertical {
-  width: 100%;
-  padding-left: 14px;
-  flex-direction: column;
-}
-
-.au-menu.is-horizontal {
-  width: max-content;
-  max-width: 100%;
-  flex-direction: row;
-  gap: 4px;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.au-menu.is-collapsed.is-vertical {
-  width: 48px;
-  padding-left: 0;
-  align-items: center;
-}
-
-.au-menu.is-disabled {
-  cursor: not-allowed;
-}
-</style>
+<style scoped lang="scss" src="./AuMenu.scss"></style>

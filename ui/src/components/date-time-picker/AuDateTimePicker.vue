@@ -386,39 +386,4 @@ watch(visible, (value) => emit('visible-change', value));
 defineExpose({ focus, blur, open, close, inputRef, datePaneRef, popoverRef });
 </script>
 
-<style scoped lang="scss">
-.au-date-time-picker {
-  width: 100%;
-}
-
-.au-date-time-picker__popover {
-  width: 300px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.au-date-time-picker__date-pane {
-  width: 100%;
-}
-
-.au-date-time-picker__time-section {
-  padding: 10px 12px;
-  border-top: 1px solid var(--au-material-border);
-}
-
-.au-date-time-picker__time-heading {
-  margin-bottom: 7px;
-  color: var(--au-color-text-primary);
-  font-size: var(--au-font-size-small);
-  font-weight: var(--au-font-weight-semibold);
-}
-
-.au-date-time-picker__status {
-  margin-top: 7px;
-}
-
-.au-date-time-picker__footer {
-  min-height: 38px;
-  padding: 5px 9px;
-}
-</style>
+<style scoped lang="scss" src="./AuDateTimePicker.scss"></style>

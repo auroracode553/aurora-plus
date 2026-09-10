@@ -1,0 +1,60 @@
+/* 默认实色材质；局部 solid 容器也用它覆盖父级玻璃材质。 */
+:root,
+[data-au-theme],
+[data-au-material='solid'] {
+  --au-material-background: var(--au-color-background-overlay);
+  --au-material-background-elevated: var(--au-material-background);
+  --au-material-background-subtle: var(--au-color-background-subtle);
+  --au-material-border: var(--au-color-border-subtle);
+  --au-material-border-emphasis: var(--au-color-border-default);
+  --au-material-blur: 0px;
+  --au-material-saturation: 100%;
+}
+
+/* 两种玻璃档位共用同一套边缘，只调整表面透明度和模糊强度。 */
+[data-au-material='soft'],
+[data-au-material='clear'] {
+  --au-material-border: var(--au-color-border-subtle);
+  --au-material-border-emphasis: var(--au-color-border-default);
+}
+
+/* 柔和玻璃：同一套颜色语义，仅降低表面不透明度并增加模糊。 */
+[data-au-material='soft'] {
+  --au-material-background: color-mix(in srgb, var(--au-color-background-overlay) 72%, transparent);
+  --au-material-background-elevated: color-mix(in srgb, var(--au-color-background-overlay) 82%, transparent);
+  --au-material-background-subtle: color-mix(in srgb, var(--au-color-background-overlay) 52%, transparent);
+  --au-material-blur: 20px;
+  --au-material-saturation: 140%;
+}
+
+/* 清透玻璃：继续降低不透明度，以更强模糊维持内容可读性。 */
+[data-au-material='clear'] {
+  --au-material-background: color-mix(in srgb, var(--au-color-background-overlay) 46%, transparent);
+  --au-material-background-elevated: color-mix(in srgb, var(--au-color-background-overlay) 60%, transparent);
+  --au-material-background-subtle: color-mix(in srgb, var(--au-color-background-overlay) 30%, transparent);
+  --au-material-blur: 32px;
+  --au-material-saturation: 160%;
+}
+
+/* 无障碍回退共用实色表面，避免透明内容影响辨识。 */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  :root,
+  [data-au-theme],
+  [data-au-material] {
+    --au-material-background: var(--au-color-background-overlay);
+    --au-material-background-elevated: var(--au-material-background);
+    --au-material-background-subtle: var(--au-color-background-subtle);
+    --au-material-border: var(--au-color-border-default);
+    --au-material-blur: 0px;
+    --au-material-saturation: 100%;
+  }
+}
+
+/* 高对比模式只额外提高强边框，不重复定义材质表面。 */
+@media (prefers-contrast: more) {
+  :root,
+  [data-au-theme],
+  [data-au-material] {
+    --au-material-border-emphasis: var(--au-color-text-secondary);
+  }
+}

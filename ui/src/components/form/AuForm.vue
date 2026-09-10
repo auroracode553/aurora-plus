@@ -190,20 +190,4 @@ defineExpose({
 });
 </script>
 
-<style scoped lang="scss">
-.au-form {
-  display: block;
-  min-width: 0;
-}
-
-.au-form.is-inline {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 12px 16px;
-}
-
-.au-form.is-disabled {
-  cursor: not-allowed;
-}
-</style>
+<style scoped lang="scss" src="./AuForm.scss"></style>

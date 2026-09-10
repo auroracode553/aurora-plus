@@ -155,41 +155,4 @@ watch(
 defineExpose({ open, close, popoverRef });
 </script>
 
-<style scoped lang="scss">
-.au-popconfirm__content {
-  max-width: calc(100vw - 40px);
-}
-
-.au-popconfirm__message {
-  display: flex;
-  align-items: flex-start;
-  min-width: 0;
-  gap: 8px;
-}
-
-.au-popconfirm__icon {
-  margin-top: 1px;
-  color: var(--au-color-warning);
-  font-size: 17px;
-}
-
-.au-popconfirm__title {
-  min-width: 0;
-  color: var(--au-color-text-primary);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.au-popconfirm__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 6px;
-  margin-top: 12px;
-}
-
-@media (prefers-contrast: more) {
-  .au-popconfirm__icon {
-    color: var(--au-color-text-primary);
-  }
-}
-</style>
+<style scoped lang="scss" src="./AuPopconfirm.scss"></style>
