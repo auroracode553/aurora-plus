@@ -32,6 +32,7 @@ import { AuPopconfirm } from './components/popconfirm/index.js';
 import { AuPopover } from './components/popover/index.js';
 import { AuSelect } from './components/select/index.js';
 import { AuSlider } from './components/slider/index.js';
+import { AuSkeleton, AuSkeletonItem } from './components/skeleton/index.js';
 import { AuSwitch } from './components/switch/index.js';
 import { AuTabs } from './components/tabs/index.js';
 import { AuTextarea } from './components/textarea/index.js';
@@ -96,6 +97,8 @@ const components = [
   AuPopover,
   AuSelect,
   AuSlider,
+  AuSkeleton,
+  AuSkeletonItem,
   AuSwitch,
   AuTabs,
   AuTextarea,
@@ -168,6 +171,8 @@ export {
   AuMessageBox,
   AuSelect,
   AuSlider,
+  AuSkeleton,
+  AuSkeletonItem,
   AuSwitch,
   AuTabs,
   AuTextarea,

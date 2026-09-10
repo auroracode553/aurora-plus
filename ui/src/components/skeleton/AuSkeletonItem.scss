@@ -1,0 +1,71 @@
+.au-skeleton-item {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  height: 14px;
+  vertical-align: middle;
+  border-radius: 4px;
+  background: var(--au-color-border-muted);
+  color: var(--au-color-text-placeholder);
+
+  &.is-p { height: 16px; }
+  &.is-h1 { height: 28px; }
+  &.is-h2 { height: 24px; }
+  &.is-h3 { height: 20px; }
+  &.is-caption { height: 12px; }
+  &.is-button { width: 80px; height: 32px; border-radius: 8px; }
+  &.is-circle { width: 32px; height: 32px; border-radius: 50%; }
+  &.is-rect { height: 80px; border-radius: 6px; }
+  &.is-image { height: 120px; border-radius: 6px; }
+
+  &.is-animated { animation: au-skeleton-pulse 1.8s ease-in-out infinite; }
+
+  svg {
+    width: 32px;
+    height: 32px;
+    max-width: 60%;
+    max-height: 60%;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+/* 仅改变平面填充色，不引入扫光、渐变或反射层。 */
+@keyframes au-skeleton-pulse {
+  0%, 100% { background-color: var(--au-color-border-muted); }
+  50% { background-color: var(--au-color-border-default); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-skeleton-item.is-animated { animation: none; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .au-skeleton-item {
+    &.is-animated { animation: none; }
+    background: var(--au-color-background-subtle);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .au-skeleton-item {
+    &.is-animated { animation: none; }
+    outline: 1px solid var(--au-color-text-secondary);
+    outline-offset: -1px;
+  }
+}
+
+@media (forced-colors: active) {
+  .au-skeleton-item {
+    &.is-animated { animation: none; }
+    background: Canvas;
+    color: GrayText;
+    outline: 1px solid GrayText;
+    outline-offset: -1px;
+  }
+}
