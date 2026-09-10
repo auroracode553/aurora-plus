@@ -8,7 +8,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 
 `AuInput` 用于搜索、路径、账号和普通单行文本输入。组件保留原生 input 的行为，并统一尺寸、焦点、错误态与主题适配。
 
-输入框采用轻量玻璃表面、细边框与聚焦轮廓，跟随全局 `soft / clear / solid` 材质及明暗主题。减少透明度或提高对比度时使用实色表面，减少动态效果时关闭状态过渡。
+输入框采用轻量玻璃表面与细边框，聚焦时通过边框颜色反馈状态，跟随全局 `soft / clear / solid` 材质及明暗主题。
 
 ## 基础用法
 
@@ -27,7 +27,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 - 搜索框可设置 `type="search"`，需要组件内清除内容时增加 `clearable`。
 - `invalid` 可手动设置错误视觉；位于 `AuFormItem` 内时也会自动继承字段错误状态。
 - 位于 `AuFormItem` 内时，输入和失焦默认触发对应规则校验；仅提交时校验可设置 `:validate-event="false"`。
-- 异步读取或提交期间使用 `loading`，它会显示后缀加载图标、设置 `aria-busy` 并阻止编辑和清空。
+- 异步读取或提交期间使用 `loading`，它会显示后缀加载图标 并阻止编辑和清空。
 - `prefixIcon`、`suffixIcon` 接受 Aurora Plus 图标组件；复杂内容使用同名插槽。
 - 中文、日文等输入法组合输入结束后才会更新 `v-model`，避免过滤列表在拼写过程中抖动。
 
@@ -54,7 +54,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 | `invalid` | 是否手动显示错误状态；FormItem 的错误状态会自动合并 | `boolean` | `false` |
 | `validateEvent` | 是否在输入和失焦时通知所属 FormItem 校验 | `boolean` | `true` |
 
-`class` 与 `style` 作用于组件外壳，其余未声明属性和原生监听器会传递给内部 input，例如 `name`、`autocomplete`、`spellcheck`、`aria-*` 和 `@keydown`。
+`class` 与 `style` 作用于组件外壳，其余未声明属性和原生监听器会传递给内部 input，例如 `name`、`autocomplete`、`spellcheck` 和 `@keydown`。
 
 ### Events
 

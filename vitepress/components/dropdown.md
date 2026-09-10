@@ -38,7 +38,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 
 - 菜单项应使用明确的动词和对象；同一层级避免放入过多低频操作。
 - 需要二元开关或多选状态时使用 `AuSwitch` / `AuCheckbox`，不要把菜单项当作持久状态控件。
-- 触发器应提供可见文字；纯图标触发器需要 `aria-label` 和 `title`。
+- 触发器应提供可见文字；纯图标触发器可设置 `title`。
 - 破坏性操作设置 `danger`，并在 `beforeSelect` 中完成确认或权限判断。
 
 ## Dropdown API
@@ -59,7 +59,6 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `itemKey` | 自定义菜单项 key 解析函数 | `function` | `null` |
 | `teleported` | 是否 Teleport 到 `appendTo` | `boolean` | `true` |
 | `appendTo` | Teleport 目标 | `string / element` | `body` |
-| `ariaLabel` | 菜单无障碍名称 | `string` | `下拉菜单` |
 | `zIndex` | 菜单层级 | `number` | `1200` |
 
 `placement` 可选 `top-start`、`top`、`top-end`、`bottom-start`、`bottom`、`bottom-end`；`top` 与 `bottom` 居中对齐，带 `start` / `end` 后缀时按对应边缘对齐。未声明的属性会透传到根元素。

@@ -6,9 +6,6 @@
         ref="viewerRef"
         class="au-image-preview au-component au-overscroll-contain"
         :style="viewerStyle"
-        role="dialog"
-        aria-modal="true"
-        :aria-label="ariaLabel"
         tabindex="-1"
         @keydown="handleKeydown"
         @wheel.prevent="handleWheel"
@@ -44,7 +41,7 @@
           <div v-else class="au-image-preview__empty">
             <slot name="empty">暂无可预览图片</slot>
           </div>
-          <div v-if="loadFailed" class="au-image-preview__error" role="status">
+          <div v-if="loadFailed" class="au-image-preview__error">
             <slot name="error" :image="currentImage" :index="activeIndex">
               <AuIcon class="au-image-preview__error-icon" :icon="IconPhotoOff" />
               <span>图片加载失败</span>
@@ -53,10 +50,9 @@
         </div>
 
         <button
-          class="au-image-preview__close au-control-reset au-inline-center au-focus-ring"
+          class="au-image-preview__close au-control-reset au-inline-center"
           type="button"
           :title="closeLabel"
-          :aria-label="closeLabel"
           @click="close('close-button')"
         >
           <AuIcon :icon="IconX" />
@@ -64,21 +60,19 @@
 
         <template v-if="hasMultiple">
           <button
-            class="au-image-preview__navigation is-previous au-control-reset au-inline-center au-focus-ring"
+            class="au-image-preview__navigation is-previous au-control-reset au-inline-center"
             type="button"
             :disabled="!canShowPrevious"
             :title="previousLabel"
-            :aria-label="previousLabel"
             @click="showPrevious"
           >
             <AuIcon :icon="IconChevronLeft" />
           </button>
           <button
-            class="au-image-preview__navigation is-next au-control-reset au-inline-center au-focus-ring"
+            class="au-image-preview__navigation is-next au-control-reset au-inline-center"
             type="button"
             :disabled="!canShowNext"
             :title="nextLabel"
-            :aria-label="nextLabel"
             @click="showNext"
           >
             <AuIcon :icon="IconChevronRight" />
@@ -87,8 +81,7 @@
 
         <div
           v-if="showProgress && normalizedImages.length"
-          class="au-image-preview__progress au-material-surface au-depth-overlay au-forced-canvas"
-          aria-live="polite"
+          class="au-image-preview__progress au-material-surface au-depth-overlay"
         >
           <slot
             name="progress"
@@ -106,8 +99,6 @@
             size="large"
             icon-only
             inverse
-            role="toolbar"
-            :aria-label="toolbarLabel"
           >
             <slot
               name="toolbar"
@@ -119,11 +110,11 @@
               :scale="scale"
               :rotation="rotation"
             >
-              <AuButtonGroupItem :icon="IconZoomOut" title="缩小" aria-label="缩小" @click="zoomOut" />
-              <AuButtonGroupItem :icon="IconZoomIn" title="放大" aria-label="放大" @click="zoomIn" />
-              <AuButtonGroupItem :icon="IconArrowsMaximize" title="还原" aria-label="还原" @click="resetTransform" />
-              <AuButtonGroupItem :icon="IconRotate2" title="逆时针旋转" aria-label="逆时针旋转" @click="rotateLeft" />
-              <AuButtonGroupItem :icon="IconRotateClockwise2" title="顺时针旋转" aria-label="顺时针旋转" @click="rotateRight" />
+              <AuButtonGroupItem :icon="IconZoomOut" title="缩小" @click="zoomOut" />
+              <AuButtonGroupItem :icon="IconZoomIn" title="放大" @click="zoomIn" />
+              <AuButtonGroupItem :icon="IconArrowsMaximize" title="还原" @click="resetTransform" />
+              <AuButtonGroupItem :icon="IconRotate2" title="逆时针旋转" @click="rotateLeft" />
+              <AuButtonGroupItem :icon="IconRotateClockwise2" title="顺时针旋转" @click="rotateRight" />
             </slot>
           </AuButtonGroup>
         </div>
@@ -192,13 +183,6 @@ function normalizeRotation(value) {
   return ((rotation % 360) + 360) % 360;
 }
 
-const FOCUSABLE_SELECTOR = [
-  'button:not(:disabled)',
-  'a[href]',
-  'input:not(:disabled)',
-  '[tabindex]:not([tabindex="-1"])',
-].join(',');
-
 const props = defineProps({
   modelValue: { type: Boolean, default: true },
   images: { type: Array, default: () => [] },
@@ -225,8 +209,6 @@ const props = defineProps({
   appendTo: { type: [String, Object], default: 'body' },
   topOffset: { type: [String, Number], default: 0 },
   zIndex: { type: Number, default: 10000 },
-  ariaLabel: { type: String, default: '图片预览' },
-  toolbarLabel: { type: String, default: '图片预览工具栏' },
   closeLabel: { type: String, default: '关闭预览' },
   previousLabel: { type: String, default: '上一张图片' },
   nextLabel: { type: String, default: '下一张图片' },
@@ -469,10 +451,6 @@ function getPointerDistance() {
 
 function handleKeydown(event) {
   const target = event.target;
-  if (event.key === 'Tab') {
-    trapFocus(event);
-    return;
-  }
   if (target?.matches?.('input, textarea, select, [contenteditable="true"]')) return;
   const handlers = {
     Escape: props.closeOnPressEscape ? () => close('escape') : null,
@@ -489,27 +467,6 @@ function handleKeydown(event) {
   event.preventDefault();
   event.stopPropagation();
   handler();
-}
-
-function trapFocus(event) {
-  const focusable = [...(viewerRef.value?.querySelectorAll(FOCUSABLE_SELECTOR) || [])];
-  if (!focusable.length) {
-    event.preventDefault();
-    viewerRef.value?.focus?.({ preventScroll: true });
-    return;
-  }
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-  if (!focusable.includes(document.activeElement)) {
-    event.preventDefault();
-    (event.shiftKey ? last : first).focus();
-  } else if (event.shiftKey && document.activeElement === first) {
-    event.preventDefault();
-    last.focus();
-  } else if (!event.shiftKey && document.activeElement === last) {
-    event.preventDefault();
-    first.focus();
-  }
 }
 
 async function activateViewer() {

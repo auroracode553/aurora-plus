@@ -11,7 +11,6 @@
       },
       $attrs.class,
     ]"
-    :aria-busy="loading ? 'true' : undefined"
     :style="$attrs.style"
   >
     <span v-if="hasPrefix" class="au-input__affix au-input__prefix">
@@ -30,7 +29,6 @@
       :disabled="disabled || loading"
       :readonly="readonly"
       :maxlength="maxlength ?? undefined"
-      :aria-invalid="resolvedInvalid ? 'true' : $attrs['aria-invalid']"
       @input="handleInput"
       @change="handleChange"
       @focus="handleFocus"
@@ -41,7 +39,7 @@
 
     <span v-if="hasSuffix" class="au-input__affix au-input__suffix">
       <AuLoadingSpinner v-if="loading" class="au-input__loading" :size="size" />
-      <span v-if="showWordLimit && maxlength != null" class="au-input__count" aria-live="polite">
+      <span v-if="showWordLimit && maxlength != null" class="au-input__count">
         {{ wordCount }}/{{ maxlength }}
       </span>
       <span
@@ -55,7 +53,7 @@
       </span>
       <button
         v-if="shouldRenderClear"
-        class="au-input__clear au-action-control au-focus-ring"
+        class="au-input__clear au-action-control"
         :class="{
           'is-visible': canClear,
           'is-replacement': shouldReplaceSuffix,
@@ -63,8 +61,6 @@
         type="button"
         :disabled="!canClear"
         :tabindex="canClear ? 0 : -1"
-        :aria-hidden="canClear ? undefined : 'true'"
-        aria-label="清空输入"
         @mousedown.prevent
         @click="clear"
       >
@@ -145,7 +141,7 @@ const resolvedInvalid = computed(() => (
 /** class/style 作用于组件外壳，其余原生属性与监听器透传给 input。 */
 function getInputAttrs() {
   return Object.fromEntries(
-    Object.entries(attrs).filter(([name]) => !['class', 'style', 'aria-invalid'].includes(name)),
+    Object.entries(attrs).filter(([name]) => !['class', 'style'].includes(name)),
   );
 }
 

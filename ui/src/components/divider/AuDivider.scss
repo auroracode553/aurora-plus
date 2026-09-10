@@ -19,15 +19,3 @@
   margin: 0 5px;
   vertical-align: middle;
 }
-
-@media (prefers-contrast: more) {
-  .au-divider {
-    background: currentColor;
-  }
-}
-
-@media (forced-colors: active) {
-  .au-divider {
-    background: CanvasText;
-  }
-}

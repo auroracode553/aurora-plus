@@ -3,24 +3,16 @@
     class="au-virtual-table au-component au-surface-frame au-surface-frame--rounded"
     :class="{ 'has-border': border, 'is-striped': stripe, 'is-loading': loading }"
     :style="rootStyle"
-    role="grid"
-    :aria-label="ariaLabel"
-    :aria-rowcount="sortedRows.length + 1"
-    :aria-colcount="resolvedColumns.length"
-    :aria-busy="loading ? 'true' : undefined"
   >
     <div
       ref="headerViewportRef"
       class="au-virtual-table__header-viewport"
       :style="headerViewportStyle"
-      role="rowgroup"
       @scroll.passive="handleHeaderScroll"
     >
       <div
-        class="au-virtual-table__header au-forced-canvas"
+        class="au-virtual-table__header"
         :style="headerStyle"
-        role="row"
-        aria-rowindex="1"
       >
         <div
           v-for="(column, columnIndex) in resolvedColumns"
@@ -28,13 +20,10 @@
           class="au-virtual-table__header-cell"
           :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
           :style="getColumnStyle(column)"
-          role="columnheader"
-          :aria-colindex="columnIndex + 1"
-          :aria-sort="getAriaSort(column)"
         >
           <button
             v-if="column.sortable"
-            class="au-virtual-table__sort-button au-control-reset au-focus-ring"
+            class="au-virtual-table__sort-button au-control-reset"
             type="button"
             :style="{ justifyContent: getJustifyContent(column.align) }"
             @click="toggleSort(column)"
@@ -53,8 +42,7 @@
 
     <div
       ref="scrollContainerRef"
-      class="au-virtual-table__body au-scroll-region au-thin-scrollbar au-focus-ring"
-      role="rowgroup"
+      class="au-virtual-table__body au-scroll-region au-thin-scrollbar"
       tabindex="0"
       @scroll.passive="handleScroll"
     >
@@ -67,14 +55,12 @@
           <div
             v-for="entry in visibleRows"
             :key="resolveRowKey(entry)"
-            class="au-virtual-table__row au-motion-reduce"
+            class="au-virtual-table__row"
             :class="[
               resolveRowClass(entry),
               { 'is-striped-row': stripe && entry.visibleIndex % 2 === 1 },
             ]"
             :style="getRowStyle(entry.visibleIndex)"
-            role="row"
-            :aria-rowindex="entry.visibleIndex + 2"
             @click="emit('row-click', entry.row, entry.sourceIndex, $event)"
             @dblclick="emit('row-dblclick', entry.row, entry.sourceIndex, $event)"
           >
@@ -84,8 +70,6 @@
               class="au-virtual-table__cell"
               :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
               :style="getColumnStyle(column)"
-              role="gridcell"
-              :aria-colindex="columnIndex + 1"
               @click="emit('cell-click', entry.row, column, entry.sourceIndex, $event)"
             >
               <slot
@@ -107,9 +91,8 @@
 
     <div
       v-if="loading"
-      class="au-virtual-table__loading au-material-surface au-depth-surface au-forced-canvas"
+      class="au-virtual-table__loading au-material-surface au-depth-surface"
       :style="loadingStyle"
-      aria-live="polite"
     >
       <slot name="loading">
         <AuLoadingSpinner :text="loadingText" />
@@ -245,7 +228,6 @@ const props = defineProps({
   loading: { type: Boolean, default: false },
   loadingText: { type: String, default: '加载中' },
   emptyText: { type: String, default: '暂无数据' },
-  ariaLabel: { type: String, default: '虚拟表格' },
 });
 
 const emit = defineEmits([
@@ -391,11 +373,6 @@ function resolveRowClass(entry) {
     rowIndex: entry.sourceIndex,
   });
   return props.rowClass;
-}
-
-function getAriaSort(column) {
-  if (!column.sortable || innerSort.value.key !== column.key) return undefined;
-  return innerSort.value.order || 'none';
 }
 
 function getSortIcon(column) {

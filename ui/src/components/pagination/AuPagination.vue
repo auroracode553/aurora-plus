@@ -3,8 +3,6 @@
     v-if="!hidden"
     class="au-pagination au-component"
     :class="[`is-${size}`, { 'is-disabled': disabled, 'has-background': background }]"
-    :aria-label="ariaLabel"
-    :aria-disabled="disabled ? 'true' : undefined"
   >
     <template v-for="(item, index) in layoutItems" :key="`${item}-${index}`">
       <span v-if="item === 'total'" class="au-pagination__total">
@@ -18,7 +16,6 @@
           :disabled="disabled"
           fit-content
           :max-width="160"
-          aria-label="每页条数"
           @update:model-value="handlePageSizeChange"
         >
           <option v-for="option in normalizedPageSizes" :key="option" :value="option">
@@ -29,10 +26,9 @@
 
       <button
         v-else-if="item === 'prev'"
-        class="au-pagination__button au-control-reset au-focus-ring"
+        class="au-pagination__button au-control-reset"
         type="button"
         :disabled="disabled || innerCurrentPage <= 1"
-        :aria-label="prevAriaLabel"
         @click="movePage(-1, 'prev')"
       >
         <slot name="prev" :disabled="innerCurrentPage <= 1">
@@ -45,29 +41,26 @@
         <button
           v-for="pager in pagerItems"
           :key="pager"
-          class="au-pagination__button au-control-reset au-focus-ring"
+          class="au-pagination__button au-control-reset"
           :class="{
             'is-active': pager === innerCurrentPage,
             'is-more': typeof pager === 'string',
           }"
           type="button"
           :disabled="disabled"
-          :aria-current="pager === innerCurrentPage ? 'page' : undefined"
-          :aria-label="getPagerAriaLabel(pager)"
           @click="handlePagerClick(pager)"
         >
-          <span v-if="pager === 'prev-more'" aria-hidden="true">•••</span>
-          <span v-else-if="pager === 'next-more'" aria-hidden="true">•••</span>
+          <span v-if="pager === 'prev-more'">•••</span>
+          <span v-else-if="pager === 'next-more'">•••</span>
           <span v-else>{{ pager }}</span>
         </button>
       </div>
 
       <button
         v-else-if="item === 'next'"
-        class="au-pagination__button au-control-reset au-focus-ring"
+        class="au-pagination__button au-control-reset"
         type="button"
         :disabled="disabled || innerCurrentPage >= resolvedPageCount"
-        :aria-label="nextAriaLabel"
         @click="movePage(1, 'next')"
       >
         <slot name="next" :disabled="innerCurrentPage >= resolvedPageCount">
@@ -86,7 +79,6 @@
           min="1"
           :max="Math.max(resolvedPageCount, 1)"
           :disabled="disabled"
-          aria-label="跳转页码"
           @keydown.enter.prevent="commitJump"
           @change="commitJump"
         />
@@ -190,12 +182,9 @@ const props = defineProps({
   hideOnSinglePage: { type: Boolean, default: false },
   prevText: { type: String, default: '' },
   nextText: { type: String, default: '' },
-  prevAriaLabel: { type: String, default: '上一页' },
-  nextAriaLabel: { type: String, default: '下一页' },
   jumpText: { type: String, default: '前往' },
   totalFormatter: { type: Function, default: null },
   pageSizeFormatter: { type: Function, default: null },
-  ariaLabel: { type: String, default: '分页导航' },
 });
 
 const emit = defineEmits([
@@ -295,12 +284,6 @@ function formatTotal(total) {
 
 function formatPageSize(size) {
   return props.pageSizeFormatter ? props.pageSizeFormatter(size) : `${size} 条/页`;
-}
-
-function getPagerAriaLabel(pager) {
-  if (pager === 'prev-more') return '向前跳转更多页';
-  if (pager === 'next-more') return '向后跳转更多页';
-  return `第 ${pager} 页`;
 }
 
 watch(

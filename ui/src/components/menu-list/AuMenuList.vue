@@ -2,8 +2,6 @@
   <ul
     class="au-menu-list au-component au-material-surface au-material-surface--base au-surface-frame au-surface-frame--rounded"
     :class="[`is-${density}`, { 'au-depth-surface': elevated }]"
-    role="list"
-    :aria-label="ariaLabel || undefined"
   >
     <slot></slot>
   </ul>
@@ -22,7 +20,6 @@ const props = defineProps({
   },
   divided: { type: Boolean, default: true },
   elevated: { type: Boolean, default: true },
-  ariaLabel: { type: String, default: '' },
 });
 
 provide(AU_MENU_LIST_CONTEXT_KEY, {

@@ -32,7 +32,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuTabs` | 紧凑的受控标签页导航 |
 | `AuCard` | 卡片容器 |
 | `AuSkeleton`、`AuSkeletonItem` | 支持自定义占位模板、重复数量、呼吸动画和延迟显隐的骨架屏 |
-| `AuIcon` | 图标尺寸、颜色与无障碍外壳 |
+| `AuIcon` | 图标尺寸、颜色与对齐外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
 | `AuDialog` | 模态对话框 |
 | `AuDrawer` | 支持四向打开、焦点管理与关闭守卫的抽屉面板 |
@@ -101,7 +101,7 @@ import { IconBold, IconHeart } from 'aurora-plus/icons';
 
 <template>
   <AuButton :icon="IconBold">加粗</AuButton>
-  <AuIcon :icon="IconHeart" size="24" color="#df4c62" aria-label="收藏" />
+  <AuIcon :icon="IconHeart" size="24" color="#df4c62" />
 </template>
 ```
 

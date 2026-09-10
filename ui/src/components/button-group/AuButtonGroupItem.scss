@@ -4,7 +4,6 @@
 @use '../../theme/mixins/surfaces';
 
 .au-button-group-item {
-  --au-focus-ring-offset: 0;
 
   position: relative;
   min-width: 0;
@@ -29,8 +28,7 @@
   @include motion.transition(background, color, outline-color);
 }
 
-.au-button-group-item:hover:not(.is-disabled, .is-selected),
-.au-button-group-item:focus-visible {
+.au-button-group-item:hover:not(.is-disabled, .is-selected) {
   @include interaction.hover;
 }
 
@@ -50,12 +48,6 @@
 
 .au-button-group-item.is-selected:active:not(.is-disabled) {
   background: color-mix(in srgb, currentColor 12%, var(--au-material-background-elevated));
-}
-
-.au-button-group-item:focus-visible {
-  z-index: 2;
-  outline: 2px solid var(--au-focus-ring-color);
-  outline-offset: -2px;
 }
 
 .au-button-group-item.is-disabled {
@@ -131,8 +123,7 @@
   color: rgb(255 255 255 / 88%);
 }
 
-.au-button-group-item.is-inverse:hover:not(.is-disabled),
-.au-button-group-item.is-inverse:focus-visible {
+.au-button-group-item.is-inverse:hover:not(.is-disabled) {
   @include surfaces.inverse-hover;
 }
 
@@ -179,56 +170,7 @@
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .au-button-group-item.is-selected:not(.is-inverse, .is-disabled),
-  .au-button-group-item.is-selected:not(.is-inverse, .is-disabled):is(:hover, :active, :focus-visible) {
+  .au-button-group-item.is-selected:not(.is-inverse, .is-disabled):is(:hover, :active) {
     background: color-mix(in srgb, currentColor 5%, var(--au-color-background-overlay));
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-button-group-item.is-selected:not(.is-disabled) {
-    outline: 1px solid currentColor;
-    outline-offset: -1px;
-  }
-
-  .au-button-group-item.is-selected:focus-visible,
-  .au-button-group-item:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: -2px;
-  }
-}
-
-@media (forced-colors: active) {
-  .au-button-group-item.au-component,
-  .au-button-group-item.au-component:hover:not(.is-disabled),
-  .au-button-group-item.au-component:active:not(.is-disabled) {
-    border: 1px solid ButtonText;
-    color: ButtonText;
-    background: Canvas;
-    box-shadow: none;
-  }
-
-  .au-button-group-item.au-component.is-selected:not(.is-disabled),
-  .au-button-group-item.au-component.is-selected:hover:not(.is-disabled),
-  .au-button-group-item.au-component.is-selected:active:not(.is-disabled) {
-    color: HighlightText;
-    background: Highlight;
-    outline-color: Highlight;
-  }
-
-  .au-button-group-item.au-component.is-disabled,
-  .au-button-group-item.au-component.is-disabled.is-selected {
-    color: GrayText;
-    background: Canvas;
-    border-color: GrayText;
-    outline-color: GrayText;
-  }
-
-  .au-button-group-item.au-component:focus-visible {
-    outline: 2px solid ButtonText;
-    outline-offset: -2px;
-  }
-
-  .au-button-group-item.au-component.is-selected:focus-visible {
-    outline-color: HighlightText;
   }
 }

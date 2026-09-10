@@ -26,14 +26,9 @@
   @include motion.transition(color, background, border-color, transform);
 }
 
-.au-context-menu__tool-button:hover:not(:disabled),
-.au-context-menu__tool-button:focus-visible {
+.au-context-menu__tool-button:hover:not(:disabled) {
   border-color: var(--au-color-primary);
   @include interaction.hover;
-}
-
-.au-context-menu__tool-button:focus-visible {
-  @include interaction.focus(-2px);
 }
 
 .au-context-menu__tool-button:active:not(:disabled) {

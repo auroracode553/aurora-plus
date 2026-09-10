@@ -2,7 +2,6 @@
 @use '../../theme/mixins/surfaces';
 
 .au-switch {
-  --au-focus-ring-offset: 3px;
 
   border-radius: var(--au-radius-compact);
 }
@@ -90,15 +89,4 @@
 
 .au-switch.is-large.is-checked:active:not(:disabled) .au-switch__thumb {
   transform: translateX(18px) scale(0.94);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-switch__track,
-  .au-switch__thumb {
-    background: var(--au-color-background-overlay);
-  }
-
-  .au-switch.is-checked .au-switch__track {
-    background: var(--au-color-primary);
-  }
 }

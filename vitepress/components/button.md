@@ -32,8 +32,7 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
 
 - 一个操作区域通常只保留一个 `primary` 按钮，避免多个主操作争夺注意力。
 - 异步提交期间使用 `loading`。加载状态会同时禁用按钮，防止重复提交。
-- 只有图标的按钮应提供 `aria-label`，让读屏软件能够说明按钮用途。
-- 关闭入口直接使用 `<AuButton :icon="IconX" circle aria-label="关闭" />`，其中 `IconX` 从 `aurora-plus` 导入。
+- 关闭入口直接使用 `<AuButton :icon="IconX" circle />`，其中 `IconX` 从 `aurora-plus` 导入。
 - 表单内若不希望触发表单提交，保留默认的 `native-type="button"`。
 
 ## Button API
@@ -44,7 +43,7 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
 | --- | --- | --- | --- | --- |
 | `type` | 视觉类型 | `string` | `default / primary / success / info / warning / danger / menu` | `default` |
 | `size` | 按钮尺寸 | `string` | `small / default / large` | `default` |
-| `selected` | 是否选中；设置后同步输出 `aria-pressed` | `boolean` | — | `undefined` |
+| `selected` | 是否选中 | `boolean` | — | `undefined` |
 | `selectedColor` | `menu` 类型的选中颜色，背景由组件自动生成 | `string` | 十六进制、`rgb()`、`rgba()` 等颜色值 | `''` |
 | `nativeType` | 原生 `button` 的 `type` | `string` | `button / submit / reset` | `button` |
 | `icon` | 图标组件 | `Component` | — | `null` |
@@ -54,7 +53,7 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
 | `disabled` | 是否禁用 | `boolean` | — | `false` |
 | `loading` | 是否显示加载状态；开启时按钮不可点击 | `boolean` | — | `false` |
 
-未被组件声明的属性（例如 `aria-label`、`autofocus`、`form`）会透传到原生 `<button>`。
+未被组件声明的属性（例如 `autofocus`、`form`）会透传到原生 `<button>`。
 
 ### Events
 

@@ -9,4 +9,3 @@ export const vLoading = AuLoadingDirective;
 
 // 与 Element Plus 一致，通过组件命名空间提供命令式服务。
 AuLoading.service = loadingService;
-

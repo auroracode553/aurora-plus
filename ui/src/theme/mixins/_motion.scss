@@ -1,6 +1,6 @@
 @use 'sass:list';
 
-// 组件只声明需要过渡的属性，时长、曲线和减少动态效果共用一套规则。
+// 组件只声明需要过渡的属性，时长与曲线共用一套规则。
 @mixin transition($properties...) {
   $transitions: ();
   @each $property in $properties {
@@ -12,16 +12,10 @@
   }
   transition: $transitions;
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 }
 
 @mixin press($transform: scale(0.96)) {
   transform: $transform;
   transition-duration: 0s;
 
-  @media (prefers-reduced-motion: reduce) {
-    transform: none;
-  }
 }

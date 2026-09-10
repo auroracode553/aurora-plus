@@ -92,11 +92,11 @@
 
 | 项目内实现 | Aurora Plus 对应能力 | 建议 |
 | --- | --- | --- |
-| `shared/ui/BaseModal.vue` | `AuDialog` | 已迁移为业务薄外壳，并保留原 Tab 焦点循环和说明文本 |
+| `shared/ui/BaseModal.vue` | `AuDialog` | 已迁移为业务薄外壳，并保留说明文本 |
 | `shared/ui/AppConfirmDialog.vue` | `AuMessageBox` | 已迁移并移除旧 Host；`tone: danger` 已映射为 `confirmButtonType: 'danger'` |
 | `shared/ui/AppToastViewport.vue` | `AuMessage` | 已迁移并移除旧 Viewport；`feedbackService.js` 保留为业务薄封装 |
 | 弹窗按钮、添加关注按钮 | `AuButton` | 已迁移；列表内部的无样式原生按钮按业务交互继续保留 |
-| 短时提醒周期 | `AuButtonGroup`、`AuButton` | 已迁移为带 `aria-pressed` 的分段按钮组 |
+| 短时提醒周期 | `AuButtonGroup`、`AuButton` | 已迁移为带 `selected` 的分段按钮组 |
 | 金价提醒布尔选项 | `AuSwitch` | 四个即时开关已迁移 |
 | 应用控制中心弹层与操作项 | `AuPopover`、`AuPanel`、`AuMenuList`、`AuMenuListItem` | UI 库只提供锚点行为、插槽面板和通用菜单项；标题、状态、分区及 Electron 动作继续由应用插槽渲染 |
 | 信息卡片和模块卡片 | `AuCard` | 只迁移通用容器，不把行情业务结构放入 UI 库 |
@@ -141,8 +141,8 @@
 | `AuTabs`、`AuTabPane` | 偏好设置分区、工作区视图切换、详情分区 | 受控选中、延迟内容、键盘导航和溢出处理 |
 | `AuTree`、`AuTreeItem` | Markdown 大纲、目录树 | 展开、选择、键盘导航、自定义节点、虚拟化扩展点 |
 | `AuTable` | 股票提醒表格及后续通用数据列表 | 列配置、插槽、空状态、固定表头、横向滚动；排序与虚拟化后续增加 |
-| `AuToolbar` | 应用控制条、编辑器/图片/音频/白板常驻工具条 | 分组、分隔、紧凑图标按钮、`aria-pressed`、横向溢出；与 `AuFloatingToolbar` 共享按钮规范 |
-| `AuTag`、`AuBadge`、`AuStatus` | 引擎状态、股票涨跌、Git 文件状态、版本和提醒状态 | 语义色、圆点/文本、可关闭 Tag、无障碍文本 |
+| `AuToolbar` | 应用控制条、编辑器/图片/音频/白板常驻工具条 | 分组、分隔、紧凑图标按钮、`selected`、横向溢出；与 `AuFloatingToolbar` 共享按钮规范 |
+| `AuTag`、`AuBadge`、`AuStatus` | 引擎状态、股票涨跌、Git 文件状态、版本和提醒状态 | 语义色、圆点/文本、可关闭 Tag |
 | `AuProgress`、`AuLoading` | 更新下载、导出、异步检测、录音和行情加载 | 确定/不确定进度、紧凑 Spinner、可访问状态文本 |
 | `AuEmpty`、`AuAlert` | 空股票列表、无历史、服务错误、设置说明 | 图标/标题/描述/操作插槽，以及 info/success/warning/error 语义 |
 
@@ -155,7 +155,7 @@
 | `AuImageViewer` | 图片预览 | 缩放、旋转、上一张/下一张、键盘操作、工具条插槽 |
 | `AuTimeline` | 文件历史、Git 历史、翻译历史 | 时间节点、状态、操作插槽和长列表扩展点 |
 | `AuPathInput` | 翻译模型目录、Python 路径、文件选择 | 基于 `AuInput`，只定义展示和选择事件，不内置 Electron IPC |
-| `AuKeyHint` | 菜单快捷键、操作提示 | 跨平台按键显示、组合键和无障碍文本 |
+| `AuKeyHint` | 菜单快捷键、操作提示 | 跨平台按键显示、组合键 |
 
 ## 6. 不建议放入 Aurora Plus 的业务组件
 
@@ -176,4 +176,4 @@ Aurora Plus 只提供这些业务组件内部可复用的按钮、表单、布�
 4. 补齐状态、空态、加载和进度组件，统一异步反馈。
 5. 最后按真实复用需求实现 `AuSplitPane`、`AuImageViewer`、`AuTimeline` 等体量较大的桌面组件。
 
-每个新组件应继续遵守 Aurora Plus 的紧凑尺寸、扁平表面、键盘焦点、主题变量、`prefers-reduced-motion`、`prefers-reduced-transparency` 和高对比度回退规则。
+每个新组件应继续遵守 Aurora Plus 的紧凑尺寸、扁平表面、键盘焦点、主题变量规则。

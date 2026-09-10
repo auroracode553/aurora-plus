@@ -20,14 +20,6 @@
       class="au-select__control au-control-reset"
       v-bind="getControlAttrs()"
       type="button"
-      role="combobox"
-      aria-haspopup="listbox"
-      :aria-controls="listboxId"
-      :aria-expanded="visible ? 'true' : 'false'"
-      :aria-activedescendant="activeDescendantId"
-      :aria-disabled="disabled ? 'true' : undefined"
-      :aria-invalid="invalid ? 'true' : $attrs['aria-invalid']"
-      :aria-required="ariaRequired"
       :disabled="disabled"
       @click="toggle"
       @keydown="handleControlKeydown"
@@ -35,10 +27,10 @@
       @blur="handleControlBlur"
     >
       <span class="au-select__value au-flex-truncate">{{ selectedLabel }}</span>
-      <AuIcon class="au-select__icon au-motion-reduce-transform" :icon="IconChevronDown" aria-hidden="true" />
+      <AuIcon class="au-select__icon" :icon="IconChevronDown" />
     </button>
 
-    <span v-if="fitContent" class="au-select__sizer" aria-hidden="true">
+    <span v-if="fitContent" class="au-select__sizer">
       <span
         v-for="(label, index) in contentSizeLabels"
         :key="`${index}-${label}`"
@@ -62,28 +54,22 @@
     <Transition name="au-float">
       <div
         v-if="visible"
-        :id="listboxId"
         ref="listboxRef"
         class="au-select__listbox au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar"
         :data-au-floating-owner="selectId"
         :class="[`is-${size}`, `is-${activePlacement}`]"
         :style="listboxStyle"
-        role="listbox"
-        :aria-label="listboxAriaLabel"
         @pointerdown.stop
       >
         <template v-for="group in visibleOptionGroups" :key="group.key">
           <div
             class="au-select__group"
-            :role="group.label ? 'group' : 'presentation'"
-            :aria-label="group.label || undefined"
           >
-            <div v-if="group.label" class="au-select__group-label" aria-hidden="true">
+            <div v-if="group.label" class="au-select__group-label">
               {{ group.label }}
             </div>
             <div
               v-for="option in group.options"
-              :id="optionId(option.index)"
               :key="option.key"
               class="au-select__option au-disabled-text"
               :class="{
@@ -92,16 +78,13 @@
                 'is-disabled': option.disabled,
               }"
               :data-option-index="option.index"
-              role="option"
-              :aria-selected="isOptionSelected(option) ? 'true' : 'false'"
-              :aria-disabled="option.disabled ? 'true' : undefined"
               :title="option.title"
               @pointerdown.prevent="highlightOption(option)"
               @pointerenter="highlightOption(option)"
               @click="selectOption(option, $event)"
             >
               <span class="au-select__option-label au-flex-truncate">{{ option.label }}</span>
-              <span class="au-select__option-marker au-inline-center" aria-hidden="true">
+              <span class="au-select__option-marker au-inline-center">
                 <AuIcon v-if="isOptionSelected(option)" :icon="IconCheck" />
               </span>
             </div>
@@ -275,7 +258,6 @@ const listboxPosition = ref({ x: 0, y: 0 });
 const listboxWidth = ref(0);
 const listboxMaxHeight = ref(MAX_LISTBOX_HEIGHT);
 const selectId = `${SELECT_ID_PREFIX}${++selectSeed}`;
-const listboxId = `${selectId}-listbox`;
 
 let updateFrame = null;
 let typeaheadTimer = null;
@@ -302,15 +284,6 @@ const selectedOption = computed(() => flatOptions.value.find(
 ));
 const selectedLabel = computed(() => selectedOption.value?.label || '');
 const formValue = computed(() => toSelectValue(props.modelValue));
-const ariaRequired = computed(() => (
-  attrs.required !== false && attrs.required != null ? 'true' : undefined
-));
-const activeDescendantId = computed(() => (
-  visible.value && highlightedIndex.value >= 0
-    ? optionId(highlightedIndex.value)
-    : undefined
-));
-const listboxAriaLabel = computed(() => attrs['aria-label'] || '选择选项');
 const rootStyle = computed(() => (
   props.fitContent
     ? [attrs.style, { maxWidth: toCssLength(props.maxWidth) }]
@@ -339,7 +312,6 @@ function getControlAttrs() {
     'required',
     'multiple',
     'autocomplete',
-    'aria-invalid',
   ];
   return Object.fromEntries(
     Object.entries(attrs).filter(([name]) => !formAttributeNames.includes(name)),
@@ -348,10 +320,6 @@ function getControlAttrs() {
 
 function isOptionSelected(option) {
   return isSameSelectValue(option.value, props.modelValue);
-}
-
-function optionId(index) {
-  return `${selectId}-option-${index}`;
 }
 
 function findInitialHighlight(direction = 1) {

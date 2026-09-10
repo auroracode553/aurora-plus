@@ -7,7 +7,7 @@ import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?dem
 
 # Icon 图标
 
-Aurora Plus 通过独立的 `aurora-plus/icons` 入口提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。图标实现已包含在 Aurora Plus 的发布产物中，只需安装 `aurora-plus`。`AuIcon` 用于统一图标的尺寸、颜色和无障碍属性。
+Aurora Plus 通过独立的 `aurora-plus/icons` 入口提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。图标实现已包含在 Aurora Plus 的发布产物中，只需安装 `aurora-plus`。`AuIcon` 用于统一图标的尺寸、颜色和对齐方式。
 
 ## 基础用法
 
@@ -63,7 +63,7 @@ const menuItems = [
 
 ## AuIcon API
 
-`AuIcon` 适合需要统一对齐、尺寸或无障碍属性的场景：
+`AuIcon` 适合需要统一对齐、尺寸或颜色的场景：
 
 ```vue
 <script setup>
@@ -77,7 +77,6 @@ import { IconHeart } from 'aurora-plus/icons';
     size="28"
     color="#e5484d"
     :stroke-width="1.5"
-    aria-label="收藏"
   />
 </template>
 ```
@@ -90,9 +89,8 @@ import { IconHeart } from 'aurora-plus/icons';
 | `color` | 图标颜色 | `string` | `''` |
 | `size` | 根节点宽高及字号；数字会转换为 px | `string / number` | `''` |
 | `strokeWidth` | 图标描边宽度 | `number` | `2` |
-| `ariaLabel` | 图标的无障碍名称；为空时设置 `aria-hidden="true"` | `string` | `''` |
 
-其他 HTML 属性会透传到 `.au-icon` 根节点。装饰性图标保持默认的隐藏语义；表达操作含义时请提供 `aria-label`，或在按钮上提供可见文本。
+其他 HTML 属性会透传到 `.au-icon` 根节点。
 
 ## 图标变体与查找
 

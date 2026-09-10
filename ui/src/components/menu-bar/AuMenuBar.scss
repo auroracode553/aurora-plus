@@ -54,10 +54,6 @@
   background: color-mix(in srgb, var(--au-color-primary) 14%, transparent);
 }
 
-.au-menu-bar__trigger:focus-visible {
-  outline-offset: -2px;
-}
-
 .au-menu-bar__drag-fill {
   height: 100%;
   flex: 1;

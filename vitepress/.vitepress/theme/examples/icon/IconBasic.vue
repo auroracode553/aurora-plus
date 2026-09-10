@@ -6,7 +6,7 @@
     </div>
 
     <div class="icon-demo__item icon-demo__item--filled">
-      <IconHeartFilled :size="28" color="#e5484d" aria-hidden="true" />
+      <IconHeartFilled :size="28" color="#e5484d" />
       <code>IconHeartFilled</code>
     </div>
   </div>

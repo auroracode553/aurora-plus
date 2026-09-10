@@ -1,8 +1,8 @@
 <template>
   <div class="dropdown-demo">
-    <AuDropdown v-model="visible" :items="items" aria-label="项目操作">
+    <AuDropdown v-model="visible" :items="items">
       <template #trigger>
-        <AuButton :icon="IconMenu2" :aria-expanded="visible">项目操作</AuButton>
+        <AuButton :icon="IconMenu2" :selected="visible">项目操作</AuButton>
       </template>
     </AuDropdown>
   </div>

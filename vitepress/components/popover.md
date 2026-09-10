@@ -21,7 +21,6 @@ import popoverBasicSource from '../.vitepress/theme/examples/popover/PopoverBasi
 
 ## 使用建议
 
-- 触发按钮绑定 `trigger` 插槽提供的 `triggerProps`，同步 `aria-expanded` 与目标面板关系。
 - 默认浮层自带材质表面；内容使用 `AuPanel`、`AuCard` 等表面组件时，设置 `:surface="false"`，避免重复材质层。
 - 键盘在触发器上按 `ArrowDown` 会打开浮层并聚焦第一个可操作元素；Escape 关闭并把焦点还给触发器。
 - `manual` 模式不从触发器自动打开，适合由 `v-model` 或公开方法统一控制；已打开时仍保留点击外部和 Escape 关闭。
@@ -44,10 +43,6 @@ import popoverBasicSource from '../.vitepress/theme/examples/popover/PopoverBasi
 | `surface` | 是否提供默认材质、边框和内边距 | `boolean` | `true` |
 | `teleported` | 是否传送到 `appendTo` | `boolean` | `true` |
 | `appendTo` | Teleport 目标 | `string / Element` | `body` |
-| `role` | 浮层语义角色 | `string` | `dialog` |
-| `ariaLabel` | 浮层无障碍名称 | `string` | `''` |
-| `ariaLabelledby` | 标题元素 ID | `string` | `''` |
-| `ariaDescribedby` | 说明元素 ID | `string` | `''` |
 | `zIndex` | 浮层层级 | `number` | `1200` |
 
 ### Events
@@ -63,7 +58,7 @@ import popoverBasicSource from '../.vitepress/theme/examples/popover/PopoverBasi
 
 | 插槽名 | 作用域参数 | 说明 |
 | --- | --- | --- |
-| `trigger` | `{ open, close, toggle, expanded, triggerProps }` | 触发元素 |
+| `trigger` | `{ open, close, toggle, expanded }` | 触发元素 |
 | `default` | `{ open, close, toggle, updatePosition }` | 浮层内容 |
 
 ### Exposes

@@ -56,13 +56,3 @@
   opacity: 0;
   transform: translateY(3px) scale(0.98);
 }
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-floating-toolbar.is-top .au-floating-toolbar__arrow--surface {
-    border-top-color: var(--au-color-background-overlay);
-  }
-
-  .au-floating-toolbar.is-bottom .au-floating-toolbar__arrow--surface {
-    border-bottom-color: var(--au-color-background-overlay);
-  }
-}

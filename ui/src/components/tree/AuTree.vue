@@ -8,11 +8,9 @@
     :key-field="itemKey"
     plain
     fill
-    role="tree"
-    :aria-label="ariaLabel"
   >
     <template #empty>
-      <div class="au-tree__empty" role="status">
+      <div class="au-tree__empty">
         <AuIcon class="au-tree__empty-icon" :icon="IconFileText" />
         <span>{{ emptyText }}</span>
       </div>
@@ -20,30 +18,23 @@
 
     <template #default="{ item, index }">
       <div
-        class="au-tree__item au-hover-control au-disabled-text au-motion-reduce au-contrast-current"
+        class="au-tree__item au-hover-control au-disabled-text"
         :class="{ 'is-selected': isSelected(item), 'is-disabled': isDisabled(item) }"
-        role="treeitem"
-        :aria-level="resolveDepth(item) + 1"
-        :aria-selected="isSelected(item)"
-        :aria-disabled="isDisabled(item) ? 'true' : undefined"
-        :aria-expanded="collapsible && item.hasChildren ? !item.isCollapsed : undefined"
         :style="{ paddingLeft: `${baseIndent + resolveDepth(item) * indent}px` }"
       >
         <button
           v-if="collapsible && item.hasChildren"
-          class="au-tree__toggle au-control-reset au-grid-center au-focus-ring au-hover-control au-motion-reduce"
+          class="au-tree__toggle au-control-reset au-grid-center au-hover-control"
           :class="{ 'is-expanded': !item.isCollapsed }"
           type="button"
-          :aria-label="item.isCollapsed ? `展开 ${resolveLabel(item)}` : `折叠 ${resolveLabel(item)}`"
-          :aria-expanded="!item.isCollapsed"
           @click.stop="emit('toggle', item)"
         >
           <AuIcon class="au-tree__toggle-icon" :icon="IconChevronRight" />
         </button>
-        <span v-else-if="collapsible" class="au-tree__toggle-placeholder" aria-hidden="true"></span>
+        <span v-else-if="collapsible" class="au-tree__toggle-placeholder"></span>
 
         <button
-          class="au-tree__label au-control-reset au-focus-ring"
+          class="au-tree__label au-control-reset"
           type="button"
           :disabled="isDisabled(item)"
           :tabindex="!isDisabled(item) && (isSelected(item) || isInitialFocusable(item, index)) ? 0 : -1"
@@ -77,7 +68,6 @@ const props = defineProps({
   indent: { type: Number, default: 16, validator: (value) => value >= 0 },
   collapsible: { type: Boolean, default: false },
   emptyText: { type: String, default: '暂无数据' },
-  ariaLabel: { type: String, default: '树形导航' },
 });
 
 const emit = defineEmits(['select', 'toggle']);

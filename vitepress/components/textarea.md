@@ -22,7 +22,7 @@ import textareaBasicSource from '../.vitepress/theme/examples/textarea/TextareaB
 
 - 简短单行内容使用 `AuInput`，备注、说明和提交信息使用 `AuTextarea`。
 - 需要固定布局时设置 `resize="none"`；允许用户扩展内容区域时保留默认的垂直缩放。
-- 错误状态使用 `invalid`，并通过 `aria-describedby` 关联可见的错误说明。
+- 错误状态使用 `invalid`，并提供可见的错误说明。
 
 ## Textarea API
 

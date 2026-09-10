@@ -110,7 +110,6 @@ loading.close();
 | `background` | 加载层背景 CSS 值 | `string` | 当前材质半透明表面 |
 | `customClass` | 加载层自定义类名 | `string / array / object` | `''` |
 | `zIndex` | 加载层层级 | `number` | `1000` |
-| `ariaLabel` | 加载状态的无障碍名称 | `string` | `加载中` |
 | `delay` | 延迟显示时间，单位 ms | `number` | `0` |
 | `beforeClose` | 服务关闭前调用；返回 false 可阻止关闭 | `() => boolean / void` | — |
 | `closed` | 服务关闭过渡和 DOM 清理完成后调用 | `() => void` | — |
@@ -129,7 +128,6 @@ loading.close();
 | `au-loading-background` | 加载层背景 |
 | `au-loading-custom-class` | 自定义类名 |
 | `au-loading-color` | 加载图标颜色 |
-| `au-loading-aria-label` | 无障碍名称 |
 
 从 Element Plus 迁移时，同名的 `element-loading-*` 属性仍可使用；新代码建议统一采用 `au-loading-*`。
 
@@ -158,7 +156,6 @@ loading.close();
 | `closed` | 加载层离开过渡完成后触发 |
 | `rootRef` | 组件内容根元素引用 |
 
-组件和服务均设置 `role="status"`、`aria-live="polite"`，目标组件同步 `aria-busy`。系统启用减少动态、减少透明度、高对比度或强制色彩时会自动采用对应回退。
 
 ## AuLoadingSpinner
 

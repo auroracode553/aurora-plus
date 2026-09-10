@@ -45,7 +45,6 @@
 }
 
 .au-menu-list-item.is-interactive .au-menu-list-item__row:hover,
-.au-menu-list-item.is-interactive .au-menu-list-item__row:focus-visible,
 .au-menu-list-item.is-selected .au-menu-list-item__row {
   background: color-mix(in srgb, var(--au-color-primary) 7%, transparent);
 }
@@ -53,12 +52,6 @@
 .au-menu-list-item.is-interactive .au-menu-list-item__row:active {
   background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
   @include motion.press(scale(0.99));
-}
-
-.au-menu-list-item__row:focus-visible {
-  z-index: 3;
-  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
-  outline-offset: -3px;
 }
 
 .au-menu-list-item.is-disabled {
@@ -149,8 +142,7 @@
       }
 
       &.is-interactive .au-menu-list-item__row {
-        &:hover,
-        &:focus-visible {
+        &:hover {
           background: color-mix(in srgb, $color 8%, transparent);
         }
 
@@ -182,12 +174,4 @@
 
 .au-menu-list-item.is-relaxed .au-menu-list-item__description {
   font-size: var(--au-font-size-base);
-}
-
-@media (forced-colors: active) {
-  .au-menu-list-item.has-leading-tinted .au-menu-list-item__leading {
-    border: 1px solid CanvasText;
-    background: Canvas;
-  }
-
 }

@@ -3,9 +3,6 @@
     ref="menuRef"
     class="au-menu au-component au-list-reset"
     :class="[`is-${mode}`, { 'is-collapsed': collapse && mode === 'vertical', 'is-disabled': disabled }]"
-    role="menu"
-    :aria-label="ariaLabel"
-    :aria-orientation="mode"
     v-bind="$attrs"
     @focusin="handleFocusin"
     @focusout="handleFocusout"
@@ -32,7 +29,6 @@ const props = defineProps({
   collapse: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   loop: { type: Boolean, default: true },
-  ariaLabel: { type: String, default: '导航菜单' },
 });
 
 const emit = defineEmits(['update:modelValue', 'select', 'change']);

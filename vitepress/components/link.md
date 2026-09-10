@@ -38,7 +38,7 @@ import linkBasicSource from '../.vitepress/theme/examples/link/LinkBasic.vue?dem
 | `target` | 原生链接目标 | `string` | `_self / _blank / _parent / _top` 或其他合法目标 | `_self` |
 | `icon` | 链接前置图标组件 | `Component` | — | `null` |
 
-未被组件声明的属性（例如 `rel`、`download`、`hreflang`、`aria-label`）会透传到原生 `<a>`。
+未被组件声明的属性（例如 `rel`、`download`、`hreflang`）会透传到原生 `<a>`。
 
 ### Events
 

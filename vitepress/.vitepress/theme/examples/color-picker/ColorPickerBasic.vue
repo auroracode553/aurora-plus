@@ -2,10 +2,10 @@
   <div class="color-picker-demo">
     <span class="color-picker-demo__label">系统取色</span>
     <div class="color-picker-demo__row">
-      <AuColorPicker v-model="color" size="small" aria-label="小号颜色选择器" />
-      <AuColorPicker v-model="color" aria-label="默认颜色选择器" />
-      <AuColorPicker v-model="color" size="large" aria-label="大号颜色选择器" />
-      <AuColorPicker model-value="#a8b0bd" disabled aria-label="禁用颜色选择器" />
+      <AuColorPicker v-model="color" size="small" />
+      <AuColorPicker v-model="color" />
+      <AuColorPicker v-model="color" size="large" />
+      <AuColorPicker model-value="#a8b0bd" disabled />
     </div>
     <span class="color-picker-demo__label">预设颜色</span>
     <div class="color-picker-demo__row">
@@ -14,7 +14,6 @@
         :key="preset.color"
         :color="preset.color"
         :selected="color === preset.color"
-        :aria-label="preset.label"
         @select="color = $event"
       />
     </div>

@@ -48,7 +48,9 @@ GitHub Pages 流水线使用 dist 模式：先安装并构建 `ui`，然后以 `
 
 ## 示例机制
 
-骨架屏页面 `components/skeleton.md` 复用现有 DemoBlock 机制，示例位于 `.vitepress/theme/examples/skeleton/`，分别覆盖形状与动画、自定义重复模板和延迟显隐。手动验收时检查快速请求不出现占位、连续点击不会被旧计时器覆盖、离开页面后计时器清理，以及明暗主题和系统无障碍偏好下的表现。
+组件与示例统一通过业务属性表达状态，按钮选中使用 `selected`。文档演示组件不再维护读屏专用节点、ARIA 属性或系统无障碍偏好样式；原生输入、菜单操作、复制代码和展开示例功能保持独立。
+
+骨架屏页面 `components/skeleton.md` 复用现有 DemoBlock 机制，示例位于 `.vitepress/theme/examples/skeleton/`，分别覆盖形状与动画、自定义重复模板和延迟显隐。手动验收时检查快速请求不出现占位、连续点击不会被旧计时器覆盖、离开页面后计时器清理，以及明暗主题下的表现。
 
 示例文件位于 `.vitepress/theme/examples/`。同一个 `.vue` 文件同时用于实时预览和完整源码展示：
 

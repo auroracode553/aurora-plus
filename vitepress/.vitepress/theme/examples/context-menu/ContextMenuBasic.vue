@@ -39,7 +39,6 @@ const menuSections = [
   {
     id: 'quick-actions',
     type: 'icon-row',
-    ariaLabel: '快捷操作',
     items: [
       { id: 'copy-link', label: '复制链接', icon: IconCopy },
       { id: 'favorite', label: '收藏项目', icon: IconStar },

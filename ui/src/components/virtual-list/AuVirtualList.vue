@@ -1,7 +1,7 @@
 <template>
   <div
     ref="scrollContainerRef"
-    class="au-virtual-list au-component au-surface-frame au-surface-frame--rounded au-scroll-region au-thin-scrollbar au-focus-ring au-focus-ring--tight"
+    class="au-virtual-list au-component au-surface-frame au-surface-frame--rounded au-scroll-region au-thin-scrollbar"
     :class="{ 'au-depth-surface': !plain, 'is-plain': plain, 'is-fill': fill }"
     @scroll.passive="handleScroll"
   >

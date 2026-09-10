@@ -14,7 +14,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 ## 连体按钮组
 
-`variant="connected"` 使用统一的半透明材质容器承载多个操作，适合顶部菜单、窗口工具和视图切换。当前项通过 `selected`、`aria-pressed="true"`、`aria-current="true"` 或 `aria-expanded="true"` 获得独立材质层与轻微强调色。
+`variant="connected"` 使用统一的半透明材质容器承载多个操作，适合顶部菜单、窗口工具和视图切换。当前项通过 `:selected="true"` 获得独立材质层与轻微强调色。
 
 <DemoBlock
   title="Connected 连体按钮组"
@@ -28,7 +28,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 ## 分段选择
 
-`variant="segmented"` 将直接子按钮均分为紧凑选项，适合透明度、显示密度等少量互斥值。当前值使用 `aria-pressed="true"` 表达，容器默认占满可用宽度。
+`variant="segmented"` 将直接子按钮均分为紧凑选项，适合透明度、显示密度等少量互斥值。当前值使用 `:selected="true"` 表达，容器默认占满可用宽度。
 
 <DemoBlock
   title="Segmented 分段选择"
@@ -65,8 +65,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 ## 使用建议
 
 - 按钮组用于直接执行的并列操作，不应替代点击后展开选项的 Menu。
-- 表示互斥选中状态时，为当前按钮设置 `aria-pressed="true"`；仅执行一次动作的按钮不需要持久选中状态。
-- 没有可见文字时，为按钮组提供 `aria-label`，并为每个图标按钮单独提供 `aria-label`。
+- 表示互斥选中状态时，为当前按钮设置 `:selected="true"`；仅执行一次动作的按钮不需要持久选中状态。
 - `icon-only` 只应用于纯图标按钮；包含文字的按钮应保留默认尺寸。
 - 原先放在控制组中的普通 `AuButton` 应替换为 `AuButtonGroupItem`，两种组件的样式与职责互不覆盖。
 
@@ -79,12 +78,10 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 | `variant` | 外观类型 | `string` | `connected / segmented / floating` | `connected` |
 | `orientation` | 按钮排列方向 | `string` | `horizontal / vertical` | `horizontal` |
 | `size` | 控制组尺寸 | `string` | `small / default / large` | `default` |
-| `role` | 根元素的无障碍角色 | `string` | `group / toolbar` | `group` |
 | `iconOnly` | 是否将直接子按钮统一为方形图标按钮 | `boolean` | — | `false` |
 | `inverse` | 使用适合灰色遮罩等深色背景的反色材质 | `boolean` | — | `false` |
-| `ariaLabel` | 按钮组的无障碍名称 | `string` | — | `''` |
 
-未声明的原生属性会透传到根元素。每个按钮保留原生键盘与焦点行为；`toolbar` 会同时输出与排列方向一致的 `aria-orientation`。
+未声明的原生属性会透传到根元素。每个按钮保留原生键盘与焦点行为。
 
 ### Slots
 

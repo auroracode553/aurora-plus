@@ -34,7 +34,6 @@ import tabsBasicSource from '../.vitepress/theme/examples/tabs/TabsBasic.vue?dem
 | `items` | 标签数组，支持 `value`、`label`、`title`、`disabled` | `Array` | `[]` |
 | `valueKey` | 标签值字段名 | `string` | `value` |
 | `fill` | 标签等宽填满容器 | `boolean` | `false` |
-| `ariaLabel` | 标签组无障碍名称 | `string` | `标签页` |
 
 ### Events
 

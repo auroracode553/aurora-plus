@@ -19,22 +19,13 @@
           class="au-drawer au-component au-material-surface au-depth-overlay au-overlay-surface"
           :class="['is-' + direction]"
           :style="drawerStyle"
-          role="dialog"
-          :aria-modal="modal ? 'true' : undefined"
-          :aria-label="
-            ariaLabel ||
-            $attrs['aria-label'] ||
-            ((!ariaLabelledby && !$attrs['aria-labelledby'] && !titleLabelId) ? '抽屉' : undefined)
-          "
-          :aria-labelledby="ariaLabelledby || $attrs['aria-labelledby'] || titleLabelId"
-          :aria-describedby="ariaDescribedby || $attrs['aria-describedby'] || undefined"
           tabindex="-1"
           @mousedown.stop
         >
           <template v-if="!destroyOnClose || contentRendered">
             <header v-if="hasHeader" class="au-drawer__header">
               <slot name="header" :close="close">
-                <h2 v-if="title" :id="titleId" class="au-drawer__title au-wrap-anywhere">{{ title }}</h2>
+                <h2 v-if="title" class="au-drawer__title au-wrap-anywhere">{{ title }}</h2>
               </slot>
               <AuTooltip v-if="showClose" :content="closeLabel" :disabled="!closeLabel">
                 <AuButton
@@ -43,7 +34,6 @@
                   :icon="IconX"
                   circle
                   :disabled="closingPending"
-                  :aria-label="closeLabel || '关闭抽屉'"
                   @click="close('close-button')"
                 />
               </AuTooltip>
@@ -72,18 +62,6 @@ import { AuTooltip } from '../tooltip/index.js';
 
 defineOptions({ inheritAttrs: false });
 
-const FOCUSABLE_SELECTOR = [
-  'button:not(:disabled)',
-  'a[href]',
-  'input:not(:disabled)',
-  'select:not(:disabled)',
-  'textarea:not(:disabled)',
-  '[contenteditable="true"]',
-  '[tabindex]:not([tabindex="-1"])',
-].join(',');
-
-let drawerSeed = 0;
-
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
   title: { type: String, default: '' },
@@ -104,9 +82,6 @@ const props = defineProps({
   closeLabel: { type: String, default: '关闭抽屉' },
   destroyOnClose: { type: Boolean, default: false },
   beforeClose: { type: Function, default: null },
-  ariaLabel: { type: String, default: '' },
-  ariaLabelledby: { type: String, default: '' },
-  ariaDescribedby: { type: String, default: '' },
   zIndex: { type: Number, default: 10000 },
 });
 
@@ -124,7 +99,6 @@ const visible = ref(Boolean(props.modelValue));
 const rendered = ref(Boolean(props.modelValue));
 const contentRendered = ref(Boolean(props.modelValue));
 const closingPending = ref(false);
-const titleId = 'au-drawer-title-' + ++drawerSeed;
 
 let scrollLocked = false;
 let previouslyFocusedElement = null;
@@ -132,9 +106,6 @@ let closeRequestId = 0;
 
 const hasHeader = computed(() => {
   return props.withHeader && Boolean(props.title || slots.header || props.showClose);
-});
-const titleLabelId = computed(() => {
-  return hasHeader.value && props.title && !slots.header ? titleId : undefined;
 });
 const overlayStyle = computed(() => ({ zIndex: props.zIndex }));
 const drawerStyle = computed(() => {
@@ -221,30 +192,6 @@ function handleKeydown(event) {
     event.stopPropagation();
     close('escape');
     return;
-  }
-  if (event.key === 'Tab') trapFocus(event);
-}
-
-function trapFocus(event) {
-  const drawer = drawerRef.value;
-  if (!drawer) return;
-  const focusable = [...drawer.querySelectorAll(FOCUSABLE_SELECTOR)].filter((element) => {
-    return element.getClientRects().length > 0 && !element.hasAttribute('disabled');
-  });
-  if (focusable.length === 0) {
-    event.preventDefault();
-    drawer.focus({ preventScroll: true });
-    return;
-  }
-
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-  if (event.shiftKey && (document.activeElement === first || document.activeElement === drawer)) {
-    event.preventDefault();
-    last.focus({ preventScroll: true });
-  } else if (!event.shiftKey && document.activeElement === last) {
-    event.preventDefault();
-    first.focus({ preventScroll: true });
   }
 }
 

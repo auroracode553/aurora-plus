@@ -6,7 +6,7 @@ import windowTitleBarBasicSource from '../.vitepress/theme/examples/window-title
 
 # WindowTitleBar 窗口标题栏
 
-用于 Electron、Tauri 等无边框桌面窗口。组件只负责标题栏布局、拖拽区域、窗口控制按钮和无障碍状态，不直接调用任何宿主 API；应用通过事件连接自己的窗口控制能力。
+用于 Electron、Tauri 等无边框桌面窗口。组件只负责标题栏布局、拖拽区域、窗口控制按钮，不直接调用任何宿主 API；应用通过事件连接自己的窗口控制能力。
 
 ## 基础用法
 
@@ -45,10 +45,10 @@ import windowTitleBarBasicSource from '../.vitepress/theme/examples/window-title
 | `showTooltips` | 是否显示控制按钮提示 | `boolean` | `true` |
 | `tooltipPlacement` | 控制按钮提示方向 | `string` | `bottom` |
 | `tooltipShowAfter` | 控制按钮提示延迟，单位 ms | `number` | `220` |
-| `minimizeLabel` | 最小化按钮提示和无障碍名称 | `string` | `最小化` |
-| `maximizeLabel` | 最大化按钮提示和无障碍名称 | `string` | `最大化` |
-| `restoreLabel` | 还原按钮提示和无障碍名称 | `string` | `还原` |
-| `closeLabel` | 关闭按钮提示和无障碍名称 | `string` | `关闭` |
+| `minimizeLabel` | 最小化按钮提示 | `string` | `最小化` |
+| `maximizeLabel` | 最大化按钮提示 | `string` | `最大化` |
+| `restoreLabel` | 还原按钮提示 | `string` | `还原` |
+| `closeLabel` | 关闭按钮提示 | `string` | `关闭` |
 
 ### Events
 

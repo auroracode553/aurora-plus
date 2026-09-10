@@ -2,8 +2,6 @@
   <span
     class="au-divider au-component"
     :class="`is-${orientation}`"
-    role="separator"
-    :aria-orientation="orientation"
   ></span>
 </template>
 

@@ -60,10 +60,9 @@
           fill-trigger
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center au-focus-ring au-motion-reduce"
+            class="au-window-title-bar__button au-control-reset au-inline-center"
             :class="{ 'au-disabled': minimizeDisabled }"
             type="button"
-            :aria-label="minimizeLabel"
             :disabled="minimizeDisabled"
             @click="requestMinimize"
           >
@@ -82,11 +81,9 @@
           fill-trigger
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center au-focus-ring au-motion-reduce"
+            class="au-window-title-bar__button au-control-reset au-inline-center"
             :class="{ 'au-disabled': maximizeDisabled }"
             type="button"
-            :aria-label="maximizeButtonLabel"
-            :aria-pressed="maximized ? 'true' : 'false'"
             :disabled="maximizeDisabled"
             @click="requestToggleMaximize"
           >
@@ -108,10 +105,9 @@
           fill-trigger
         >
           <button
-            class="au-window-title-bar__button is-close au-control-reset au-inline-center au-focus-ring au-motion-reduce"
+            class="au-window-title-bar__button is-close au-control-reset au-inline-center"
             :class="{ 'au-disabled': closeDisabled }"
             type="button"
-            :aria-label="closeLabel"
             :disabled="closeDisabled"
             @click="requestClose"
           >

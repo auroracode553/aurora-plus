@@ -115,12 +115,6 @@ function scrollToMiddle() {
   outline: none;
 }
 
-.virtual-list-demo__controls input:focus-visible {
-  border-color: color-mix(in srgb, var(--au-color-primary) 58%, var(--au-color-border));
-  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 22%, transparent);
-  outline-offset: 1px;
-}
-
 .virtual-list-demo__controls span {
   margin-left: auto;
   color: var(--au-color-text-secondary);
@@ -222,10 +216,4 @@ function scrollToMiddle() {
   place-items: center;
 }
 
-@media (prefers-contrast: more) {
-  .virtual-list-demo__status {
-    outline: 1px solid currentColor;
-    outline-offset: -1px;
-  }
-}
 </style>

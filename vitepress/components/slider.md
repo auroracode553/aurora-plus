@@ -22,9 +22,8 @@ import sliderBasicSource from '../.vitepress/theme/examples/slider/SliderBasic.v
 ## 使用建议
 
 - 使用 `v-model` 接收数值；拖动和键盘调整都会回传 `number`。
-- 为没有可见 `<label>` 的滑块设置准确的 `aria-label`，例如“主力资金权重”，不要只写“滑块”。
 - 当前值、单位和两端说明属于业务语义，优先放在滑块外部；紧凑行内布局可使用 `showValue`。
-- `formatValue` 同时格式化 `showValue` 的内容和无障碍值文本，适合百分比、温度或带单位数值。
+- `formatValue` 格式化 `showValue` 的内容，适合百分比、温度或带单位数值。
 - 单次选择两个端点属于区间选择场景，不应把两个 `AuSlider` 叠放在同一轨道上。
 
 ## Slider API
@@ -40,11 +39,11 @@ import sliderBasicSource from '../.vitepress/theme/examples/slider/SliderBasic.v
 | `size` | 尺寸，可选 `small / default / large` | `string` | `default` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `showValue` | 是否在轨道右侧显示格式化后的当前值 | `boolean` | `false` |
-| `formatValue` | 格式化显示值与 `aria-valuetext` | `(value: number) => string` | `null` |
+| `formatValue` | 格式化显示值 | `(value: number) => string` | `null` |
 
 当前值会限制在 `min` 与 `max` 之间，并以 `min` 为基准吸附到最近的 `step`。当 `min` 大于 `max` 时组件按数值大小重新确定范围；无效或非正数 `step` 回退为 `1`。
 
-`class` 与 `style` 作用于组件外壳，其余未声明属性和原生监听器传递给内部 `input[type="range"]`，包括 `id`、`name`、`aria-*` 和键盘监听器。
+`class` 与 `style` 作用于组件外壳，其余未声明属性和原生监听器传递给内部 `input[type="range"]`，包括 `id`、`name` 和键盘监听器。
 
 ### Events
 
@@ -70,4 +69,4 @@ import sliderBasicSource from '../.vitepress/theme/examples/slider/SliderBasic.v
 | `blur()` | 移除焦点 |
 | `inputRef` | 内部原生 `input[type="range"]` 元素引用 |
 
-组件支持点击轨道、指针拖动、触控拖动以及原生方向键、Home、End、Page Up 和 Page Down 操作。拖动使用 Pointer Capture，指针离开轨道后仍可连续调整；焦点轮廓、高对比度和 RTL 方向均会自动适配。
+组件支持点击轨道、指针拖动、触控拖动以及原生方向键、Home、End、Page Up 和 Page Down 操作。拖动使用 Pointer Capture，指针离开轨道后仍可连续调整，并自动适配 RTL 方向。

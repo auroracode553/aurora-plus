@@ -27,10 +27,6 @@
   overscroll-behavior: contain auto;
 }
 
-.au-virtual-table__body:focus-visible {
-  outline-offset: calc(-1 * var(--au-focus-ring-width));
-}
-
 .au-virtual-table__body::-webkit-scrollbar-button {
   display: none;
   width: 0;
@@ -151,22 +147,4 @@
   border: 1px solid var(--au-material-border);
   border-radius: var(--au-radius-pill);
   color: var(--au-color-text-primary);
-}
-
-@media (prefers-contrast: more) {
-  .au-virtual-table__header-cell,
-  .au-virtual-table__cell {
-    border-color: var(--au-material-border-emphasis);
-  }
-}
-
-@media (forced-colors: active) and (hover: hover) {
-  /* Forced colors replaces transparent scrollbar colors with system colors. */
-  .au-virtual-table:not(:hover) .au-virtual-table__body {
-    scrollbar-width: none;
-  }
-
-  .au-virtual-table:not(:hover) .au-virtual-table__body::-webkit-scrollbar {
-    display: none;
-  }
 }

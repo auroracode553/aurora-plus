@@ -50,13 +50,3 @@
 .au-link__icon {
   font-size: 1em;
 }
-
-@media (forced-colors: active) {
-  .au-link {
-    color: LinkText;
-  }
-
-  .au-link:focus-visible {
-    outline-color: Highlight;
-  }
-}

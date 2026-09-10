@@ -5,7 +5,6 @@
         v-model="collapsible"
         active-text="开启折叠"
         inactive-text="关闭折叠"
-        aria-label="切换树形导航折叠模式"
       />
     </div>
     <div class="tree-demo__tree">
@@ -15,7 +14,6 @@
         item-key="id"
         label-key="title"
         :collapsible="collapsible"
-        aria-label="文档目录"
         @select="selectedKey = $event.id"
         @toggle="toggleItem"
       />

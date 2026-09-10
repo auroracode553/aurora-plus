@@ -207,39 +207,3 @@
     @include surfaces.solid-surface;
   }
 }
-
-@media (prefers-contrast: more) {
-  .au-select__listbox {
-    border-color: var(--au-color-text-secondary);
-  }
-
-  .au-select__option.is-highlighted:not(.is-disabled) {
-    outline: 1px solid currentColor;
-    outline-offset: -1px;
-  }
-
-  .au-select__option.is-disabled {
-    color: var(--au-color-text-secondary) !important;
-  }
-}
-
-@media (forced-colors: active) {
-  .au-select__listbox {
-    box-shadow: none;
-  }
-
-  .au-select__icon,
-  .au-select__option-marker {
-    color: currentColor;
-  }
-
-  .au-select__option:is(.is-selected, .is-highlighted):not(.is-disabled) {
-    color: HighlightText;
-    background: Highlight;
-  }
-
-  .au-select__option.is-disabled {
-    color: GrayText !important;
-    background: Canvas;
-  }
-}

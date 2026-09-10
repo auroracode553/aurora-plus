@@ -79,10 +79,3 @@
 .au-dialog-fade-leave-to .au-dialog {
   transform: translateY(-8px) scale(0.985);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .au-dialog-fade-enter-from .au-dialog,
-  .au-dialog-fade-leave-to .au-dialog {
-    transform: none;
-  }
-}

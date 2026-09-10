@@ -5,7 +5,6 @@
 @mixin focus {
   border-color: var(--au-color-primary);
   background: var(--au-material-background-elevated);
-  @include interaction.focus(1px);
 }
 
 // 可用于组件外壳或原生输入；同时识别 class 与原生 disabled 状态。
@@ -53,58 +52,5 @@
     @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
       @include surfaces.solid-surface;
     }
-
-    @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-      @include surfaces.solid-surface;
-    }
-
-    @media (prefers-contrast: more) {
-      border-width: 1px;
-      border-color: var(--au-color-text-secondary);
-    }
-
-    @media (forced-colors: active) {
-      @include surfaces.solid-surface;
-      border: 1px solid CanvasText;
-      color: CanvasText;
-      background: Canvas;
-      box-shadow: none;
-    }
   }
-
-  @media (prefers-contrast: more) {
-    &:is(.is-disabled, :disabled) {
-      border-color: var(--au-color-text-secondary);
-      color: var(--au-color-text-secondary);
-    }
-
-    &:is(:focus-within, .is-open):not(.is-disabled, :disabled) {
-      outline-color: var(--au-color-primary);
-    }
-
-    &.is-invalid,
-    &.is-invalid:is(:focus-within, .is-open):not(.is-disabled, :disabled) {
-      border-color: var(--au-color-danger);
-      outline-color: var(--au-color-danger);
-    }
-  }
-
-  @media (forced-colors: active) {
-    &:is(.is-disabled, :disabled) {
-      color: GrayText;
-      border-color: GrayText;
-    }
-
-    &.is-invalid,
-    &.is-invalid:is(:focus-within, .is-open):not(.is-disabled, :disabled) {
-      border-style: dashed;
-      border-color: CanvasText;
-      outline-color: Highlight;
-    }
-
-    &:is(:focus-within, .is-open):not(.is-disabled, :disabled) {
-      outline: 2px solid Highlight;
-    }
-  }
-
 }

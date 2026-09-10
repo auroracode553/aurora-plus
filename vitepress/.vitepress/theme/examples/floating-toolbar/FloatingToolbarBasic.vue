@@ -16,7 +16,6 @@
         size="small"
         circle
         :title="action.label"
-        :aria-label="action.label"
         @click="runAction(action)"
       />
       <AuButton
@@ -25,7 +24,6 @@
         size="small"
         circle
         title="删除"
-        aria-label="删除"
         @click="runAction(deleteAction)"
       />
     </AuFloatingToolbar>

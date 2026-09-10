@@ -2,9 +2,6 @@
   <span
     class="au-icon au-component au-inline-center"
     :style="iconStyle"
-    :aria-hidden="ariaLabel ? undefined : 'true'"
-    :aria-label="ariaLabel || undefined"
-    role="img"
     v-bind="$attrs"
   >
     <component
@@ -28,7 +25,6 @@ const props = defineProps({
   color: { type: String, default: '' },
   size: { type: [String, Number], default: '' },
   strokeWidth: { type: Number, default: 2 },
-  ariaLabel: { type: String, default: '' },
 });
 
 const iconStyle = computed(() => {

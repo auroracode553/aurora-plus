@@ -14,7 +14,7 @@
       <AuButton type="primary" plain>朴素按钮</AuButton>
       <AuButton type="success" round>圆角按钮</AuButton>
       <AuButton :icon="IconX">带图标</AuButton>
-      <AuButton :icon="IconX" circle aria-label="关闭" />
+      <AuButton :icon="IconX" circle />
       <AuButton disabled>禁用按钮</AuButton>
       <AuButton type="primary" :loading="saving" @click="saving = !saving">
         {{ saving ? '处理中' : '开始处理' }}

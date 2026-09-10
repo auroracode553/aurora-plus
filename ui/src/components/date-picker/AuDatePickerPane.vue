@@ -10,25 +10,22 @@
       'au-floating-viewport': surface,
       'au-scroll-region': surface,
     }"
-    :aria-label="ariaLabel"
   >
     <header class="au-date-picker-pane__header">
-      <div class="au-date-picker-pane__heading" aria-live="polite">{{ monthLabel }}</div>
-      <div class="au-date-picker-pane__navigation" aria-label="月份导航">
+      <div class="au-date-picker-pane__heading">{{ monthLabel }}</div>
+      <div class="au-date-picker-pane__navigation">
         <button
           v-if="showPreviousMonth"
-          class="au-date-picker-pane__nav au-action-control au-focus-ring"
+          class="au-date-picker-pane__nav au-action-control"
           type="button"
-          aria-label="上个月"
           @click="navigateMonth(-1)"
         >
           <AuIcon :icon="IconChevronLeft" />
         </button>
         <button
           v-if="showNextMonth"
-          class="au-date-picker-pane__nav au-action-control au-focus-ring"
+          class="au-date-picker-pane__nav au-action-control"
           type="button"
-          aria-label="下个月"
           @click="navigateMonth(1)"
         >
           <AuIcon :icon="IconChevronRight" />
@@ -36,23 +33,21 @@
       </div>
     </header>
 
-    <div class="au-date-picker-pane__weekdays" role="row" aria-hidden="true">
-      <span v-for="weekday in weekdayLabels" :key="weekday" class="au-grid-center" role="columnheader">
+    <div class="au-date-picker-pane__weekdays">
+      <span v-for="weekday in weekdayLabels" :key="weekday" class="au-grid-center">
         {{ weekday }}
       </span>
     </div>
 
-    <div class="au-date-picker-pane__grid" role="grid" :aria-label="monthLabel">
+    <div class="au-date-picker-pane__grid">
       <template v-for="day in calendarDays" :key="day.key">
         <span
           v-if="!showAdjacentDates && !day.isCurrentMonth"
           class="au-date-picker-pane__day-placeholder"
-          role="gridcell"
-          aria-hidden="true"
         ></span>
         <button
           v-else
-          class="au-date-picker-pane__day au-control-reset au-grid-center au-focus-ring au-forced-highlight au-hover-control au-disabled-text au-motion-reduce"
+          class="au-date-picker-pane__day au-control-reset au-grid-center au-hover-control au-disabled-text"
           :class="{
             'is-adjacent': !day.isCurrentMonth,
             'is-selected': day.isSelected || isRangeEndpoint(day.date),
@@ -62,13 +57,9 @@
             'is-today': day.isToday,
           }"
           type="button"
-          role="gridcell"
           :data-date-key="day.key"
           :disabled="isDisabled(day.date)"
           :tabindex="day.key === focusableDateKey ? 0 : -1"
-          :aria-label="formatAccessibleDate(day.date)"
-          :aria-selected="day.isSelected || isRangeEndpoint(day.date) ? 'true' : 'false'"
-          :aria-current="day.isToday ? 'date' : undefined"
           @focus="setActiveDate(day.date, false)"
           @pointerenter="emit('hover', cloneDate(day.date))"
           @pointerleave="emit('hover', null)"
@@ -84,7 +75,7 @@
       <slot name="footer" :today="selectToday">
         <button
           v-if="showToday"
-          class="au-date-picker-pane__today au-action-control au-focus-ring"
+          class="au-date-picker-pane__today au-action-control"
           type="button"
           :disabled="isDisabled(today)"
           @click="selectToday"
@@ -143,7 +134,6 @@ const props = defineProps({
   hoverDate: { type: [Date, String, Number], default: null },
   rangeSelecting: { type: Boolean, default: false },
   surface: { type: Boolean, default: true },
-  ariaLabel: { type: String, default: '选择日期' },
 });
 
 const emit = defineEmits(['update:modelValue', 'change', 'select', 'panel-change', 'hover']);
@@ -189,15 +179,6 @@ function isDisabled(date) {
     maxDate: maxDateValue.value,
     disabledDate: props.disabledDate,
   });
-}
-
-function formatAccessibleDate(date) {
-  return new Intl.DateTimeFormat(props.locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'long',
-  }).format(date);
 }
 
 function isRangeStart(date) {

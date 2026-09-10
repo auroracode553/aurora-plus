@@ -1,12 +1,10 @@
 <template>
   <button
-    class="au-button-group-item au-component au-control-reset au-inline-center au-focus-ring"
+    class="au-button-group-item au-component au-control-reset au-inline-center"
     :class="itemClasses"
     :type="nativeType"
     :disabled="disabled || loading"
     v-bind="$attrs"
-    :aria-busy="loading ? 'true' : undefined"
-    :aria-pressed="resolvedAriaPressed"
     :style="itemStyle"
     @click="handleClick"
   >
@@ -21,7 +19,7 @@
 </template>
 
 <script setup>
-import { computed, inject, useAttrs, useSlots } from 'vue';
+import { computed, inject, useSlots } from 'vue';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
@@ -48,7 +46,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['click']);
-const attrs = useAttrs();
 const slots = useSlots();
 const group = inject(BUTTON_GROUP_CONTEXT, null);
 
@@ -56,15 +53,8 @@ const variant = computed(() => group?.variant.value || 'connected');
 const orientation = computed(() => group?.orientation.value || 'horizontal');
 const size = computed(() => group?.size.value || 'default');
 const inverse = computed(() => Boolean(group?.inverse.value));
-const resolvedAriaPressed = computed(() => {
-  if (props.selected === undefined) return attrs['aria-pressed'];
-  return props.selected ? 'true' : 'false';
-});
-const isSelected = computed(() => [
-  resolvedAriaPressed.value,
-  attrs['aria-current'],
-  attrs['aria-expanded'],
-].some(isAriaTrue));
+const isSelected = computed(() => Boolean(props.selected));
+
 const isIconOnly = computed(() => Boolean(
   group?.iconOnly.value || (!slots.default && (props.icon || slots.icon || props.loading)),
 ));
@@ -85,10 +75,6 @@ const itemClasses = computed(() => [
     'is-disabled': props.disabled || props.loading,
   },
 ]);
-
-function isAriaTrue(value) {
-  return value === true || value === 'true';
-}
 
 function handleClick(event) {
   if (!props.disabled && !props.loading) emit('click', event);

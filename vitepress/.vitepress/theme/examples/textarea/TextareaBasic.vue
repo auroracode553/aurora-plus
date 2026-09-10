@@ -15,7 +15,6 @@
         rows="2"
         invalid
         resize="none"
-        aria-describedby="textarea-demo-error"
       />
       <AuTextarea model-value="禁用状态" rows="2" disabled resize="none" />
     </div>

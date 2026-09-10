@@ -1,5 +1,5 @@
 <template>
-  <AuPanel width="368px" depth="overlay" aria-label="工作区选项">
+  <AuPanel width="368px" depth="overlay">
     <template #header>
       <div class="panel-demo__header">
         <h3>工作区设置</h3>
@@ -7,7 +7,7 @@
       </div>
     </template>
 
-    <AuMenuList :divided="false" :elevated="false" aria-label="工作区设置菜单">
+    <AuMenuList :divided="false" :elevated="false">
       <AuMenuListItem
         title="界面偏好"
         description="调整主题与内容密度"
@@ -47,8 +47,6 @@ const lastAction = ref('');
   display: grid;
   gap: 5px;
 }
-
-
 
 .panel-demo__header h3,
 .panel-demo__header p {

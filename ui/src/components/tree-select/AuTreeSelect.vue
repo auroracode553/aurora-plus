@@ -14,12 +14,10 @@
     :teleported="teleported"
     :append-to="appendTo"
     :z-index="zIndex"
-    role="dialog"
-    :aria-label="ariaLabel"
     @click="handleTriggerClick"
     @close="handlePopoverClose"
   >
-    <template #trigger="{ triggerProps }">
+    <template #trigger>
       <AuInput
         ref="inputRef"
         :model-value="inputText"
@@ -32,12 +30,6 @@
         replace-suffix-on-clear
         :invalid="invalid"
         v-bind="inputAttrs"
-        role="combobox"
-        aria-haspopup="tree"
-        :aria-expanded="triggerProps['aria-expanded']"
-        :aria-controls="triggerProps['aria-controls']"
-        :aria-autocomplete="filterable ? 'list' : undefined"
-        :aria-label="ariaLabel"
         @update:model-value="handleInput"
         @clear="handleClear"
         @focus="handleFocus"
@@ -46,7 +38,7 @@
       >
         <template #suffix>
           <AuIcon
-            class="au-tree-select__arrow au-motion-reduce-transform"
+            class="au-tree-select__arrow"
             :class="{ 'is-expanded': visible }"
             :icon="IconChevronDown"
           />
@@ -75,7 +67,6 @@
         :overscan="overscan"
         collapsible
         :empty-text="query ? noMatchText : emptyText"
-        :aria-label="ariaLabel"
         @select="selectNode"
         @toggle="toggleNode"
       />
@@ -214,7 +205,6 @@ const props = defineProps({
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1200 },
-  ariaLabel: { type: String, default: '树形选择' },
 });
 
 const emit = defineEmits([

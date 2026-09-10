@@ -17,18 +17,16 @@
   >
     <component
       :is="rowTag"
-      class="au-menu-list-item__row au-control-reset au-focus-ring au-forced-highlight au-motion-reduce au-motion-reduce-transform"
+      class="au-menu-list-item__row au-control-reset"
       v-bind="getRowAttrs()"
       :type="rowTag === 'button' ? 'button' : undefined"
       :href="rowTag === 'a' && !disabled ? href : undefined"
       :target="rowTag === 'a' ? target || undefined : undefined"
       :rel="rowTag === 'a' ? rel || undefined : undefined"
       :disabled="rowTag === 'button' ? disabled : undefined"
-      :aria-disabled="disabled ? 'true' : undefined"
-      :aria-current="selected ? ariaCurrent : undefined"
       @click="handleClick"
     >
-      <span v-if="$slots.leading || leadingIcon" class="au-menu-list-item__leading au-inline-center" aria-hidden="true">
+      <span v-if="$slots.leading || leadingIcon" class="au-menu-list-item__leading au-inline-center">
         <slot name="leading" :disabled="disabled" :selected="selected" :tone="tone">
           <AuIcon :icon="leadingIcon" />
         </slot>
@@ -93,7 +91,6 @@ const props = defineProps({
   rel: { type: String, default: '' },
   disabled: { type: Boolean, default: false },
   selected: { type: Boolean, default: false },
-  ariaCurrent: { type: String, default: 'page' },
   shortcut: { type: String, default: '' },
 });
 

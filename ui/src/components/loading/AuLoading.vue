@@ -3,7 +3,6 @@
     ref="rootRef"
     class="au-loading-host au-component"
     :class="{ 'is-positioned': !fullscreen }"
-    :aria-busy="loading ? 'true' : undefined"
     v-bind="$attrs"
   >
     <slot></slot>
@@ -22,7 +21,6 @@
         :background="background"
         :custom-class="customClass"
         :z-index="zIndex"
-        :aria-label="ariaLabel"
         :delay="delay"
         @opened="emit('opened')"
         @closed="emit('closed')"
@@ -60,7 +58,6 @@ const props = defineProps({
   background: { type: String, default: '' },
   customClass: { type: [String, Array, Object], default: '' },
   zIndex: { type: Number, default: 1000 },
-  ariaLabel: { type: String, default: '加载中' },
   /** 延迟显示，避免极短请求造成闪烁。 */
   delay: { type: Number, default: 0, validator: (value) => value >= 0 },
 });

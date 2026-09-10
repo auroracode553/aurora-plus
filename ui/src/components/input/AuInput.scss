@@ -145,22 +145,10 @@
 }
 
 .au-input:hover .au-input__clear.is-visible,
-.au-input:focus-within .au-input__clear.is-visible,
-.au-input__clear:focus-visible {
+.au-input:focus-within .au-input__clear.is-visible {
   opacity: 1;
 }
 
 .au-input__clear:disabled {
   cursor: default;
-}
-
-@media (forced-colors: active) {
-  .au-input__control::placeholder,
-  .au-input__affix,
-  .au-input__count,
-  .au-input__loading { color: inherit; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .au-input__clear:active:not(:disabled) { transform: none; }
 }

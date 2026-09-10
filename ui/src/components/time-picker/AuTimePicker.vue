@@ -13,12 +13,10 @@
     :teleported="teleported"
     :append-to="appendTo"
     :z-index="zIndex"
-    role="dialog"
-    :aria-label="ariaLabel"
     @click="handleTriggerClick"
     @close="handlePopoverClose"
   >
-    <template #trigger="{ triggerProps }">
+    <template #trigger>
       <AuInput
         ref="inputRef"
         :model-value="inputText"
@@ -32,11 +30,6 @@
         :invalid="invalid || inputInvalid"
         :suffix-icon="IconClock"
         v-bind="inputAttrs"
-        role="combobox"
-        aria-haspopup="dialog"
-        :aria-expanded="triggerProps['aria-expanded']"
-        :aria-controls="triggerProps['aria-controls']"
-        :aria-label="ariaLabel"
         @update:model-value="handleInput"
         @clear="clear"
         @focus="handleFocus"
@@ -62,22 +55,21 @@
         :show-seconds="showSeconds"
         :append-to="appendTo"
         :z-index="zIndex + 1"
-        :aria-label="ariaLabel"
         @update:model-value="updateDraftDate"
       />
-      <div v-if="draftInvalid" class="au-time-picker__status au-field-feedback" role="status">
+      <div v-if="draftInvalid" class="au-time-picker__status au-field-feedback">
         该时间不可用
       </div>
       <footer class="au-time-picker__footer au-picker-footer">
-        <button class="au-time-picker__action au-action-control au-focus-ring" type="button" @click="selectNow">
+        <button class="au-time-picker__action au-action-control" type="button" @click="selectNow">
           现在
         </button>
         <span class="au-time-picker__spacer au-flex-spacer"></span>
-        <button class="au-time-picker__action au-action-control au-focus-ring" type="button" @click="cancel">
+        <button class="au-time-picker__action au-action-control" type="button" @click="cancel">
           取消
         </button>
         <button
-          class="au-time-picker__action au-action-control is-primary au-focus-ring"
+          class="au-time-picker__action au-action-control is-primary"
           type="button"
           :disabled="draftInvalid"
           @click="confirm"
@@ -138,7 +130,6 @@ const props = defineProps({
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1200 },
-  ariaLabel: { type: String, default: '选择时间' },
 });
 
 const emit = defineEmits([

@@ -59,7 +59,7 @@ const confirmed = await AuMessageBox.confirm({
 | `confirmButtonType` | 确定按钮的 `AuButton` 类型 | `AuButtonType` | `primary` |
 | `showCancelButton` | 是否显示取消按钮 | `boolean` | `true` |
 | `showClose` | 是否显示右上角关闭按钮 | `boolean` | `true` |
-| `closeLabel` | 关闭按钮的无障碍名称与提示 | `string` | `关闭` |
+| `closeLabel` | 关闭按钮提示 | `string` | `关闭` |
 | `closeOnClickModal` | 是否允许点击遮罩关闭 | `boolean` | `false` |
 | `closeOnPressEscape` | 是否允许按 Escape 关闭 | `boolean` | `true` |
 | `beforeClose` | 关闭前守卫 | `(action, options) => boolean \| Promise<boolean>` | — |

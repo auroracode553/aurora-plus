@@ -12,7 +12,6 @@
       type="color"
       :value="resolvedValue"
       :disabled="disabled"
-      :aria-label="ariaLabel || undefined"
       @input="handleInput"
       @change="handleChange"
       @focus="emit('focus', $event)"
@@ -35,7 +34,6 @@ const props = defineProps({
     validator: (value) => ['small', 'default', 'large'].includes(value),
   },
   disabled: { type: Boolean, default: false },
-  ariaLabel: { type: String, default: '选择颜色' },
 });
 
 const emit = defineEmits(['update:modelValue', 'input', 'change', 'focus', 'blur']);
@@ -47,7 +45,7 @@ const resolvedValue = computed(() => (
 
 function getInputAttrs() {
   return Object.fromEntries(
-    Object.entries(attrs).filter(([name]) => !['class', 'style', 'aria-label'].includes(name)),
+    Object.entries(attrs).filter(([name]) => !['class', 'style'].includes(name)),
   );
 }
 

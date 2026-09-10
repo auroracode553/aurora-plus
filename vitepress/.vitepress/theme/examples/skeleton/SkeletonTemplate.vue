@@ -1,7 +1,7 @@
 <template>
   <div class="skeleton-template-demo">
     <div class="au-doc-row">
-      <AuButton :aria-pressed="loading" @click="loading = !loading">{{ loading ? '显示内容' : '显示骨架屏' }}</AuButton>
+      <AuButton :selected="loading" @click="loading = !loading">{{ loading ? '显示内容' : '显示骨架屏' }}</AuButton>
     </div>
     <AuSkeleton :loading="loading" :count="members.length" animated>
       <template #template="{ index }">
@@ -16,7 +16,7 @@
       <template #default>
         <div class="skeleton-template-demo__list">
           <div v-for="member in members" :key="member.name" class="skeleton-template-demo__row">
-            <span class="skeleton-template-demo__avatar" aria-hidden="true">{{ member.name.slice(0, 1) }}</span>
+            <span class="skeleton-template-demo__avatar">{{ member.name.slice(0, 1) }}</span>
             <div class="skeleton-template-demo__details">
               <span class="skeleton-template-demo__name">{{ member.name }}</span>
               <span class="skeleton-template-demo__description">{{ member.description }}</span>
@@ -35,7 +35,7 @@ import { AuButton, AuSkeleton, AuSkeletonItem } from 'aurora-plus';
 const loading = ref(true);
 const members = [
   { name: '林晓', description: '负责组件交互设计' },
-  { name: '陈远', description: '负责主题与无障碍体验' },
+  { name: '陈远', description: '负责主题与交互体验' },
   { name: '苏宁', description: '负责使用指南与示例' },
 ];
 </script>

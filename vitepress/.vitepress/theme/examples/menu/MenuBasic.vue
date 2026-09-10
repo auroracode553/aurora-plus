@@ -2,7 +2,7 @@
   <div class="menu-demo">
     <div class="menu-demo__box">
       <div class="menu-demo__menu">
-        <AuMenu v-model="activeItem" aria-label="主导航">
+        <AuMenu v-model="activeItem">
           <AuMenuGroup label="分析工作台" />
           <AuMenuItem index="dashboard" label="总览" :icon="IconLayoutDashboard">总览</AuMenuItem>
           <AuMenuItem index="daily-review" label="每日复盘" :icon="IconCalendar">每日复盘</AuMenuItem>

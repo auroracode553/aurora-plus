@@ -78,9 +78,3 @@
     border-left: 0;
   }
 }
-
-@media (prefers-contrast: more) {
-  .au-date-range-picker__pane + .au-date-range-picker__pane {
-    border-color: var(--au-color-text-secondary);
-  }
-}

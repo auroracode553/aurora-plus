@@ -3,7 +3,6 @@ import LoadingOverlay from '../../components/loading/AuLoadingOverlay.vue';
 
 const controllers = new Set();
 const positionedTargets = new WeakMap();
-const busyTargets = new WeakMap();
 let fullscreenController = null;
 
 function resolveTarget(target) {
@@ -47,7 +46,6 @@ function normalizeOptions(options = {}) {
     background: source.background == null ? '' : String(source.background),
     customClass: source.customClass || '',
     zIndex: Number.isFinite(Number(source.zIndex)) ? Number(source.zIndex) : 1000,
-    ariaLabel: source.ariaLabel == null ? '加载中' : String(source.ariaLabel),
     delay: Math.max(Number(source.delay) || 0, 0),
     beforeClose: typeof source.beforeClose === 'function' ? source.beforeClose : null,
     closed: typeof source.closed === 'function' ? source.closed : null,
@@ -75,28 +73,6 @@ function acquireTargetPosition(target) {
     if (state.count > 0) return;
     if (state.changed) target.style.position = state.previousPosition;
     positionedTargets.delete(target);
-  };
-}
-
-function acquireTargetBusy(target) {
-  let state = busyTargets.get(target);
-  if (!state) {
-    state = {
-      count: 0,
-      hadAttribute: target.hasAttribute('aria-busy'),
-      previousValue: target.getAttribute('aria-busy'),
-    };
-    target.setAttribute('aria-busy', 'true');
-    busyTargets.set(target, state);
-  }
-  state.count += 1;
-
-  return () => {
-    state.count -= 1;
-    if (state.count > 0) return;
-    if (state.hadAttribute) target.setAttribute('aria-busy', state.previousValue ?? '');
-    else target.removeAttribute('aria-busy');
-    busyTargets.delete(target);
   };
 }
 
@@ -168,7 +144,6 @@ function toOverlayProps(options, onClosed) {
     background: options.background,
     customClass: options.customClass,
     zIndex: options.zIndex,
-    ariaLabel: options.ariaLabel,
     delay: options.delay,
     onClosed,
   };
@@ -181,7 +156,6 @@ function createLoadingController(options = {}, appContext = null) {
   }
 
   const { host, cleanupLayout } = createHost(normalized);
-  const cleanupBusy = acquireTargetBusy(normalized.target);
   let current = normalized;
   let closing = false;
   let closed = false;
@@ -198,7 +172,6 @@ function createLoadingController(options = {}, appContext = null) {
     closed = true;
     render(null, host);
     cleanupLayout();
-    cleanupBusy();
     host.remove();
     controllers.delete(controller);
     if (fullscreenController === controller) fullscreenController = null;
@@ -274,7 +247,6 @@ function readDirectiveAttributes(element) {
     background: ['au-loading-background', 'element-loading-background'],
     customClass: ['au-loading-custom-class', 'element-loading-custom-class'],
     color: ['au-loading-color'],
-    ariaLabel: ['au-loading-aria-label'],
   };
 
   Object.entries(mappings).forEach(([key, names]) => {

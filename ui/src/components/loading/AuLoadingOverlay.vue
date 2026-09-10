@@ -7,12 +7,9 @@
   >
     <div
       v-if="displayLoading"
-      class="au-loading au-component au-forced-canvas"
+      class="au-loading au-component"
       :class="[{ 'is-fullscreen': fullscreen }, customClass]"
       :style="overlayStyle"
-      role="status"
-      aria-live="polite"
-      :aria-label="resolvedAriaLabel"
     >
       <div class="au-loading__content" :class="`is-${size}`">
         <slot name="spinner" :size="size">
@@ -62,7 +59,6 @@ const props = defineProps({
   background: { type: String, default: '' },
   customClass: { type: [String, Array, Object], default: '' },
   zIndex: { type: Number, default: 1000 },
-  ariaLabel: { type: String, default: '加载中' },
   delay: { type: Number, default: 0, validator: (value) => value >= 0 },
 });
 
@@ -91,9 +87,6 @@ const hasText = computed(() => {
   if (Array.isArray(props.text)) return props.text.length > 0;
   return props.text !== '' && props.text != null;
 });
-const resolvedAriaLabel = computed(() => (
-  props.ariaLabel || (typeof props.text === 'string' ? props.text : '') || '加载中'
-));
 const overlayStyle = computed(() => ({
   background: props.background || undefined,
   color: props.color || undefined,

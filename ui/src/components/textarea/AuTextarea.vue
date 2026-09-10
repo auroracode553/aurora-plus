@@ -23,13 +23,12 @@
       :disabled="disabled"
       :readonly="readonly"
       :maxlength="maxlength ?? undefined"
-      :aria-invalid="invalid ? 'true' : $attrs['aria-invalid']"
       @input="handleInput"
       @change="handleChange"
       @focus="emit('focus', $event)"
       @blur="emit('blur', $event)"
     ></textarea>
-    <span v-if="showWordLimit && maxlength != null" class="au-textarea__count" aria-live="polite">
+    <span v-if="showWordLimit && maxlength != null" class="au-textarea__count">
       {{ wordCount }}/{{ maxlength }}
     </span>
   </span>
@@ -69,7 +68,7 @@ const wordCount = computed(() => Array.from(inputValue.value).length);
 
 function getTextareaAttrs() {
   return Object.fromEntries(
-    Object.entries(attrs).filter(([name]) => !['class', 'style', 'aria-invalid'].includes(name)),
+    Object.entries(attrs).filter(([name]) => !['class', 'style'].includes(name)),
   );
 }
 

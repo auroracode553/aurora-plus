@@ -13,12 +13,10 @@
     :teleported="teleported"
     :append-to="appendTo"
     :z-index="zIndex"
-    role="dialog"
-    :aria-label="ariaLabel"
     @click="handleTriggerClick"
     @close="handlePopoverClose"
   >
-    <template #trigger="{ triggerProps }">
+    <template #trigger>
       <div
         ref="triggerRef"
         class="au-date-range-picker__trigger"
@@ -32,9 +30,6 @@
           },
         ]"
         v-bind="triggerAttrs"
-        role="group"
-        :aria-label="ariaLabel"
-        :aria-disabled="disabled ? 'true' : undefined"
         @focusout="handleFocusout"
       >
         <input
@@ -45,17 +40,11 @@
           :placeholder="startPlaceholder"
           :disabled="disabled"
           :readonly="readonly || !editable"
-          role="combobox"
-          aria-haspopup="dialog"
-          :aria-expanded="triggerProps['aria-expanded']"
-          :aria-controls="triggerProps['aria-controls']"
-          :aria-label="startAriaLabel"
-          :aria-invalid="invalid || inputInvalid ? 'true' : undefined"
           @input="handleInput('start', $event)"
           @focus="handleInputFocus('start', $event)"
           @keydown="handleInputKeydown"
         />
-        <span class="au-date-range-picker__separator au-meta-muted" aria-hidden="true">{{ rangeSeparator }}</span>
+        <span class="au-date-range-picker__separator au-meta-muted">{{ rangeSeparator }}</span>
         <input
           ref="endInputRef"
           class="au-date-range-picker__input au-control-reset"
@@ -64,21 +53,14 @@
           :placeholder="endPlaceholder"
           :disabled="disabled"
           :readonly="readonly || !editable"
-          role="combobox"
-          aria-haspopup="dialog"
-          :aria-expanded="triggerProps['aria-expanded']"
-          :aria-controls="triggerProps['aria-controls']"
-          :aria-label="endAriaLabel"
-          :aria-invalid="invalid || inputInvalid ? 'true' : undefined"
           @input="handleInput('end', $event)"
           @focus="handleInputFocus('end', $event)"
           @keydown="handleInputKeydown"
         />
         <button
           v-if="clearable && hasValue && !disabled && !readonly"
-          class="au-date-range-picker__clear au-action-control au-focus-ring"
+          class="au-date-range-picker__clear au-action-control"
           type="button"
-          aria-label="清空日期范围"
           @pointerdown.prevent
           @click.stop="clear"
         >
@@ -112,7 +94,6 @@
           :range-end="draftEnd"
           :hover-date="hoverDate"
           :range-selecting="selectingEnd"
-          :aria-label="`${ariaLabel}，起始月份`"
           @select="handleDateSelect"
           @hover="hoverDate = $event"
           @panel-change="handleLeftPanelChange"
@@ -135,7 +116,6 @@
           :range-end="draftEnd"
           :hover-date="hoverDate"
           :range-selecting="selectingEnd"
-          :aria-label="`${ariaLabel}，结束月份`"
           @select="handleDateSelect"
           @hover="hoverDate = $event"
           @panel-change="handleRightPanelChange"
@@ -210,9 +190,6 @@ const props = defineProps({
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1200 },
-  ariaLabel: { type: String, default: '选择日期范围' },
-  startAriaLabel: { type: String, default: '开始日期' },
-  endAriaLabel: { type: String, default: '结束日期' },
 });
 
 const emit = defineEmits([

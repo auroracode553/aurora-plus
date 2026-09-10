@@ -3,10 +3,6 @@
     <span
       ref="triggerRef"
       class="au-dropdown__trigger au-inline-trigger"
-      :aria-haspopup="'menu'"
-      :aria-expanded="visible"
-      :aria-controls="visible ? menuId : undefined"
-      :aria-disabled="disabled ? 'true' : undefined"
       @click="handleTriggerClick"
       @keydown="handleTriggerKeydown"
     >
@@ -22,12 +18,9 @@
         <div
           v-if="visible"
           ref="menuRef"
-          :id="menuId"
           class="au-dropdown__menu au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar"
           :class="`is-${activePlacement}`"
           :style="menuStyle"
-          role="menu"
-          :aria-label="ariaLabel"
           tabindex="-1"
           @pointerdown.stop
           @keydown="handleMenuKeydown"
@@ -37,7 +30,6 @@
               <div
                 v-if="isDivider(item)"
                 class="au-dropdown__divider au-menu-separator"
-                role="separator"
               ></div>
               <button
                 v-else
@@ -45,8 +37,6 @@
                 class="au-dropdown__item au-menu-action"
                 :class="{ 'is-danger': item.danger, 'is-active': item.active }"
                 type="button"
-                role="menuitem"
-                :aria-current="item.active ? 'true' : undefined"
                 :disabled="item.disabled || selecting"
                 @click="selectItem(item)"
               >
@@ -91,7 +81,6 @@ const props = defineProps({
   itemKey: { type: Function, default: null },
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
-  ariaLabel: { type: String, default: '下拉菜单' },
   zIndex: { type: Number, default: 1200 },
 });
 
@@ -104,7 +93,6 @@ const activePlacement = ref(props.placement);
 const triggerWidth = ref(0);
 const menuPosition = ref({ x: 0, y: 0 });
 const dropdownId = `${DROPDOWN_ID_PREFIX}${++dropdownSeed}`;
-const menuId = `${dropdownId}-menu`;
 let updateFrame = null;
 
 const menuStyle = computed(() => ({
@@ -171,7 +159,7 @@ function handleTriggerKeydown(event) {
 }
 
 function isInteractiveTarget(target) {
-  return Boolean(target?.matches?.('button, a, input, select, textarea, [role="button"]'));
+  return Boolean(target?.matches?.('button, a, input, select, textarea'));
 }
 
 function handleMenuKeydown(event) {

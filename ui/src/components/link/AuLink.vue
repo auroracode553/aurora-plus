@@ -1,11 +1,10 @@
 <template>
   <a
-    class="au-link au-component au-inline-center au-focus-ring au-disabled-text"
+    class="au-link au-component au-inline-center au-disabled-text"
     :class="linkClasses"
     v-bind="$attrs"
     :href="disabled || !href ? undefined : href"
     :target="disabled || !href ? undefined : target"
-    :aria-disabled="disabled ? 'true' : undefined"
     @click="handleClick"
   >
     <slot name="icon">

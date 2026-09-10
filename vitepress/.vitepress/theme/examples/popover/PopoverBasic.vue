@@ -4,14 +4,13 @@
       v-model="visible"
       placement="bottom-end"
       :surface="false"
-      aria-label="快速设置"
     >
-      <template #trigger="{ triggerProps }">
-        <AuButton v-bind="triggerProps" :icon="IconAdjustmentsHorizontal">应用控制</AuButton>
+      <template #trigger>
+        <AuButton :icon="IconAdjustmentsHorizontal">应用控制</AuButton>
       </template>
 
       <template #default="{ close }">
-        <AuPanel width="320px" depth="overlay" aria-label="快速设置">
+        <AuPanel width="320px" depth="overlay">
           <template #header>
             <div class="popover-demo__heading">
               <strong>快速设置</strong>
@@ -19,7 +18,7 @@
             </div>
           </template>
 
-          <AuMenuList :elevated="false" aria-label="快速设置菜单">
+          <AuMenuList :elevated="false">
             <AuMenuListItem
               title="启动时最小化"
               description="应用启动后保持在后台"
@@ -27,7 +26,7 @@
               leading-variant="tinted"
             >
               <template #trailing>
-                <AuSwitch v-model="startMinimized" aria-label="启动时最小化" />
+                <AuSwitch v-model="startMinimized" />
               </template>
             </AuMenuListItem>
             <AuMenuListItem

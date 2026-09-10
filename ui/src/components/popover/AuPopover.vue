@@ -3,10 +3,6 @@
     ref="triggerRef"
     class="au-popover au-component au-inline-trigger"
     :class="{ 'is-disabled': disabled }"
-    :aria-haspopup="role"
-    :aria-expanded="visible"
-    :aria-controls="visible ? popoverId : undefined"
-    :aria-disabled="disabled ? 'true' : undefined"
     v-bind="$attrs"
     @click="handleTriggerClick"
     @keydown="handleTriggerKeydown"
@@ -17,7 +13,6 @@
       :close="close"
       :toggle="toggle"
       :expanded="visible"
-      :trigger-props="triggerProps"
     ></slot>
   </span>
 
@@ -25,7 +20,6 @@
     <Transition name="au-float" @after-enter="emit('opened')" @after-leave="emit('closed')">
       <div
         v-if="visible"
-        :id="popoverId"
         ref="contentRef"
         class="au-popover__content au-component au-motion-popover au-floating-viewport"
         :class="[
@@ -39,10 +33,6 @@
           },
         ]"
         :style="contentStyle"
-        :role="role"
-        :aria-label="ariaLabel || undefined"
-        :aria-labelledby="ariaLabelledby || undefined"
-        :aria-describedby="ariaDescribedby || undefined"
         tabindex="-1"
         @pointerdown.stop
         @click="handleContentClick"
@@ -193,7 +183,6 @@ const FOCUSABLE_SELECTOR = [
   'textarea:not(:disabled)',
   '[tabindex]:not([tabindex="-1"])',
 ].join(',');
-let popoverSeed = 0;
 
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
@@ -221,10 +210,6 @@ const props = defineProps({
   surface: { type: Boolean, default: true },
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
-  role: { type: String, default: 'dialog' },
-  ariaLabel: { type: String, default: '' },
-  ariaLabelledby: { type: String, default: '' },
-  ariaDescribedby: { type: String, default: '' },
   zIndex: { type: Number, default: 1200 },
 });
 
@@ -235,15 +220,8 @@ const visible = ref(Boolean(props.modelValue));
 const activePlacement = ref(props.placement);
 const triggerWidth = ref(0);
 const contentPosition = ref({ x: 0, y: 0 });
-const popoverId = `au-popover-${++popoverSeed}`;
 let updateFrame = null;
 let resizeObserver = null;
-
-const triggerProps = computed(() => ({
-  'aria-haspopup': props.role,
-  'aria-expanded': String(visible.value),
-  'aria-controls': visible.value ? popoverId : undefined,
-}));
 
 const contentStyle = computed(() => ({
   left: `${contentPosition.value.x}px`,

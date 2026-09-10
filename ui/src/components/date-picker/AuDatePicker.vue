@@ -29,9 +29,6 @@
     :teleported="teleported"
     :append-to="appendTo"
     :z-index="zIndex"
-    :aria-label="ariaLabel === '选择日期' ? '选择日期范围' : ariaLabel"
-    :start-aria-label="startAriaLabel"
-    :end-aria-label="endAriaLabel"
     @update:model-value="emit('update:modelValue', $event)"
     @change="forwardChange"
     @clear="emit('clear', $event)"
@@ -61,12 +58,10 @@
     :teleported="teleported"
     :append-to="appendTo"
     :z-index="zIndex"
-    role="dialog"
-    :aria-label="ariaLabel"
     @click="handleTriggerClick"
     @close="handlePopoverClose"
   >
-    <template #trigger="{ triggerProps }">
+    <template #trigger>
       <AuInput
         ref="inputRef"
         :model-value="inputText"
@@ -80,11 +75,6 @@
         :invalid="invalid || inputInvalid"
         :suffix-icon="IconCalendar"
         v-bind="inputAttrs"
-        role="combobox"
-        aria-haspopup="dialog"
-        :aria-expanded="triggerProps['aria-expanded']"
-        :aria-controls="triggerProps['aria-controls']"
-        :aria-label="ariaLabel"
         @update:model-value="handleInput"
         @clear="clear"
         @focus="handleFocus"
@@ -115,7 +105,6 @@
       :show-adjacent-dates="showAdjacentDates"
       :show-today="showToday"
       surface
-      :aria-label="ariaLabel"
       @select="handleDateSelect"
       @panel-change="emit('panel-change', $event)"
     />
@@ -185,9 +174,6 @@ const props = defineProps({
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1200 },
-  ariaLabel: { type: String, default: '选择日期' },
-  startAriaLabel: { type: String, default: '开始日期' },
-  endAriaLabel: { type: String, default: '结束日期' },
 });
 
 const emit = defineEmits([

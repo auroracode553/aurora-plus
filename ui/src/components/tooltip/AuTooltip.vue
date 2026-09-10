@@ -3,7 +3,6 @@
     ref="triggerRef"
     class="au-tooltip__trigger au-inline-trigger"
     :class="{ 'is-fill': fillTrigger }"
-    :aria-describedby="visible ? tooltipId : undefined"
     @mouseenter="show"
     @mouseleave="hide"
     @focusin="show"
@@ -16,12 +15,10 @@
     <Transition name="au-float">
       <div
         v-if="visible && hasContent"
-        :id="tooltipId"
         ref="tooltipRef"
         class="au-tooltip__popper au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere"
         :class="`is-${activePlacement}`"
         :style="popperStyle"
-        role="tooltip"
       >
         <span class="au-tooltip__content"><slot name="content">{{ tooltipText }}</slot></span>
         <span class="au-tooltip__arrow" :style="arrowStyle"></span>
@@ -35,7 +32,6 @@ import { computed, nextTick, onBeforeUnmount, ref, useSlots } from 'vue';
 
 const VIEWPORT_GAP = 8;
 const ARROW_SAFE_GAP = 10;
-let tooltipSeed = 0;
 
 const props = defineProps({
   content: { type: [String, Number], default: '' },
@@ -57,7 +53,6 @@ const visible = ref(false);
 const activePlacement = ref('top');
 const popperPosition = ref({ x: 0, y: 0 });
 const arrowPosition = ref({});
-const tooltipId = `au-tooltip-${++tooltipSeed}`;
 
 let showTimer = null;
 let hideTimer = null;

@@ -7,7 +7,6 @@
       `is-${size}`,
       { 'is-inline': inline, 'is-disabled': disabled },
     ]"
-    :aria-disabled="disabled ? 'true' : undefined"
     v-bind="$attrs"
     @submit="emit('submit', $event)"
   >

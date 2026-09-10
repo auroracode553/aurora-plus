@@ -18,27 +18,23 @@
           <button
             type="button"
             class="au-doc-demo__icon-action"
-            :aria-label="copied ? '已复制代码' : '复制代码'"
             :title="copied ? '已复制' : '复制代码'"
             @click="copySource"
           >
-            <IconCopy aria-hidden="true" />
+            <IconCopy />
           </button>
           <button
             type="button"
             class="au-doc-demo__icon-action"
-            :aria-label="expanded ? '隐藏源代码' : '显示源代码'"
             :title="expanded ? '隐藏源代码' : '显示源代码'"
-            :aria-expanded="expanded"
-            :aria-controls="sourceId"
             @click="expanded = !expanded"
           >
-            <IconCode aria-hidden="true" />
+            <IconCode />
           </button>
         </div>
       </div>
 
-      <div v-show="expanded" :id="sourceId" class="au-doc-demo__code-wrap">
+      <div v-show="expanded" class="au-doc-demo__code-wrap">
         <!-- highlightedSource 仅来自构建阶段对仓库内示例源码的 Shiki 转换。 -->
         <div
           v-if="highlightedSource"
@@ -52,11 +48,9 @@
         v-if="expanded"
         type="button"
         class="au-doc-demo__toggle"
-        :aria-expanded="expanded"
-        :aria-controls="sourceId"
         @click="expanded = false"
       >
-        <IconChevronUp :size="15" aria-hidden="true" />
+        <IconChevronUp :size="15" />
         隐藏源代码
       </button>
     </div>
@@ -69,8 +63,6 @@ import { AuMessage } from 'aurora-plus';
 import { IconChevronUp, IconCode, IconCopy } from 'aurora-plus/icons';
 import { writeTextToClipboard } from '../utils/clipboard.js';
 
-let demoSeed = 0;
-
 const props = defineProps({
   title: { type: String, default: '' },
   description: { type: String, default: '' },
@@ -81,7 +73,6 @@ const props = defineProps({
 
 const expanded = ref(props.defaultExpanded);
 const copied = ref(false);
-const sourceId = `au-doc-demo-source-${++demoSeed}`;
 const normalizedSource = computed(() => {
   const source = typeof props.source === 'string' ? props.source : props.source?.source;
   return String(source || '').trim();

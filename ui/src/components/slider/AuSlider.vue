@@ -31,14 +31,13 @@
         :max="rangeMax"
         :step="normalizedStep"
         :disabled="disabled"
-        :aria-valuetext="ariaValueText"
         @input="handleNativeInput"
         @change="handleNativeChange"
         @focus="emit('focus', $event)"
         @blur="emit('blur', $event)"
       />
 
-      <span ref="trackRef" class="au-slider__track" aria-hidden="true">
+      <span ref="trackRef" class="au-slider__track">
         <span class="au-slider__fill" :style="{ inlineSize: `${percentage}%` }"></span>
         <span
           class="au-slider__thumb"
@@ -119,10 +118,6 @@ const formattedValue = computed(() => {
   const value = props.formatValue?.(currentValue.value) ?? currentValue.value;
   return String(value);
 });
-const ariaValueText = computed(() => (
-  attrs['aria-valuetext']
-  ?? (props.formatValue ? formattedValue.value : undefined)
-));
 const hasValue = computed(() => props.showValue || Boolean(slots.value));
 
 function toFiniteNumber(value, fallback) {
@@ -164,7 +159,6 @@ function getInputAttrs() {
     Object.entries(attrs).filter(([name]) => ![
       'class',
       'style',
-      'aria-valuetext',
     ].includes(name)),
   );
 }

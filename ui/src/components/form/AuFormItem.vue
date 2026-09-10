@@ -16,14 +16,9 @@
         'is-asterisk-hidden': form?.hideRequiredAsterisk.value,
       },
     ]"
-    role="group"
-    :aria-invalid="resolvedState === 'error' ? 'true' : undefined"
-    :aria-labelledby="hasLabel ? labelId : undefined"
-    :aria-describedby="shouldShowMessage ? messageId : undefined"
   >
     <label
       v-if="hasLabel"
-      :id="labelId"
       class="au-form-item__label"
       :style="labelStyle"
       :for="labelFor || undefined"
@@ -44,10 +39,7 @@
       <Transition name="au-form-item-message">
         <div
           v-if="shouldShowMessage"
-          :id="messageId"
           class="au-form-item__message au-field-feedback"
-          role="alert"
-          aria-live="polite"
         >
           <slot name="error" :error="resolvedMessage">{{ resolvedMessage }}</slot>
         </div>
@@ -57,7 +49,6 @@
         class="au-form-item__status-icon"
         :class="[`is-${resolvedState}`, { 'au-spin': resolvedState === 'validating' }]"
         :icon="statusIconComponent"
-        aria-hidden="true"
       />
     </div>
   </div>
@@ -125,8 +116,6 @@ const element = ref(null);
 const errorMessage = ref('');
 const validationState = ref('');
 const fieldId = `au-form-item-${++formItemSeed}`;
-const labelId = `${fieldId}-label`;
-const messageId = `${fieldId}-message`;
 const initialValue = cloneFieldValue(fieldValue());
 let validationSequence = 0;
 

@@ -2,12 +2,11 @@
   <div
     class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel"
     :class="{ 'has-leading-column': hasLeadingColumn }"
-    role="menu"
     @mousedown.prevent
     @keydown.esc.stop="emit('close')"
   >
     <template v-for="(item, index) in items" :key="resolveItemKey(item, index)">
-      <div v-if="item.type === 'separator'" class="au-menu-bar-panel__separator au-menu-separator" role="separator"></div>
+      <div v-if="item.type === 'separator'" class="au-menu-bar-panel__separator au-menu-separator"></div>
 
       <div
         v-else-if="item.children && item.children.length"
@@ -19,17 +18,13 @@
           class="au-menu-bar-panel__item au-menu-action"
           :class="{ 'is-active': activeSubmenuKey === resolveItemKey(item, index) }"
           type="button"
-          role="menuitem"
           :disabled="item.disabled"
-          aria-haspopup="menu"
-          :aria-expanded="activeSubmenuKey === resolveItemKey(item, index)"
           @focus="activeSubmenuKey = resolveItemKey(item, index)"
           @keydown.right.prevent="activeSubmenuKey = resolveItemKey(item, index)"
         >
           <span
             v-if="hasLeadingColumn"
             class="au-menu-bar-panel__leading au-inline-center"
-            aria-hidden="true"
           >
             <AuIcon v-if="item.icon" class="au-menu-bar-panel__icon" :icon="item.icon" />
           </span>
@@ -51,8 +46,6 @@
         v-else
         class="au-menu-bar-panel__item au-menu-action"
         type="button"
-        :role="isCheckableItem(item) ? 'menuitemcheckbox' : 'menuitem'"
-        :aria-checked="isCheckableItem(item) ? Boolean(item.checked) : undefined"
         :disabled="item.disabled"
         @mouseenter="activeSubmenuKey = ''"
         @click="emit('select', item)"
@@ -61,7 +54,6 @@
           v-if="hasLeadingColumn"
           class="au-menu-bar-panel__leading au-inline-center"
           :class="{ 'is-checkable': isCheckableItem(item) }"
-          aria-hidden="true"
         >
           <AuIcon v-if="resolveLeadingIcon(item)" class="au-menu-bar-panel__icon" :icon="resolveLeadingIcon(item)" />
         </span>

@@ -4,11 +4,11 @@
       <strong>透明度</strong>
       <span>{{ selectedOpacity }}%</span>
     </div>
-    <AuButtonGroup variant="segmented" aria-label="透明度">
+    <AuButtonGroup variant="segmented">
       <AuButtonGroupItem
         v-for="opacity in opacityOptions"
         :key="opacity"
-        :aria-pressed="selectedOpacity === opacity"
+        :selected="selectedOpacity === opacity"
         @click="selectedOpacity = opacity"
       >
         {{ opacity }}

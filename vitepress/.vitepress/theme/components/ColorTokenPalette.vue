@@ -4,7 +4,6 @@
       v-for="group in colorGroups"
       :key="group.id"
       class="color-token-palette__group"
-      :aria-labelledby="`color-token-group-${group.id}`"
     >
       <header class="color-token-palette__heading">
         <h2 :id="`color-token-group-${group.id}`">{{ group.title }}</h2>
@@ -13,7 +12,7 @@
 
       <ul class="color-token-palette__grid">
         <li v-for="token in group.tokens" :key="token.name" class="color-token-palette__item">
-          <span class="color-token-palette__swatch" aria-hidden="true">
+          <span class="color-token-palette__swatch">
             <span :style="{ backgroundColor: `var(${token.name})` }"></span>
           </span>
 

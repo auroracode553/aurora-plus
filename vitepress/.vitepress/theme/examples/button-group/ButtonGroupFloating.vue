@@ -3,13 +3,11 @@
     <AuButtonGroup
       variant="floating"
       icon-only
-      aria-label="面板操作"
     >
       <AuButtonGroupItem
         v-for="action in panelActions"
         :key="action.label"
         :icon="action.icon"
-        :aria-label="action.label"
         :title="action.label"
       />
     </AuButtonGroup>

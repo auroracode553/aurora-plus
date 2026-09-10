@@ -26,7 +26,7 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 - 菜单适合放在持续可见的侧栏或设置区域中，当前项会显示浅色选中面和左侧激活条。
 - 分组标题使用 `AuMenuGroup`，需要更大的段落间距时设置 `spaced`。
 - 纵向菜单使用 `ArrowUp`、`ArrowDown`，横向菜单使用 `ArrowLeft`、`ArrowRight`；`Home`、`End` 定位首尾项，Enter 和 Space 选择当前项。
-- 折叠菜单应为每个菜单项提供 `label`，组件会将它保留为无障碍名称与鼠标提示。
+- 折叠菜单应为每个菜单项提供 `label`，组件会将它保留为鼠标提示。
 
 ## AuMenu API
 
@@ -39,9 +39,8 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | `collapse` | 纵向菜单是否折叠为仅图标模式 | `boolean` | `false` |
 | `disabled` | 是否禁用整个菜单 | `boolean` | `false` |
 | `loop` | 方向键到达边界后是否循环 | `boolean` | `true` |
-| `ariaLabel` | 菜单的无障碍名称 | `string` | `导航菜单` |
 
-未声明的属性会透传至根 `ul[role="menu"]`。
+未声明的属性会透传至根 `ul`。
 
 ### Events
 
@@ -86,14 +85,13 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | `index` | 菜单项唯一值 | `string / number` | 必填 |
-| `label` | 文本回退值，并为折叠模式提供无障碍名称 | `string` | `''` |
+| `label` | 文本回退值，并为折叠模式提供鼠标提示 | `string` | `''` |
 | `icon` | Aurora Plus 图标组件 | `Component` | `null` |
 | `iconColor` | 图标颜色 | `string` | `''` |
 | `badge` | 尾部徽标文本 | `string / number` | `''` |
 | `indicator` | 是否显示尾部状态点 | `boolean` | `false` |
 | `disabled` | 是否禁用当前项 | `boolean` | `false` |
 | `title` | 原生鼠标提示；折叠时默认回退为 `label` | `string` | `''` |
-| `ariaCurrent` | 选中项的 `aria-current` 值 | `string` | `page` |
 
 ### Slots
 

@@ -1,15 +1,13 @@
 <template>
   <button
-    class="au-color-swatch au-component au-control-reset au-focus-ring au-motion-reduce"
+    class="au-color-swatch au-component au-control-reset"
     :class="[`is-${size}`, { 'is-selected': selected, 'is-disabled': disabled, 'au-disabled': disabled }]"
     type="button"
     :disabled="disabled"
-    :aria-label="ariaLabel || undefined"
-    :aria-pressed="selected"
-    :title="title || ariaLabel || undefined"
+    :title="title || '选择颜色'"
     @click="handleClick"
   >
-    <span class="au-color-swatch__color au-grid-center" :style="{ backgroundColor: color }" aria-hidden="true">
+    <span class="au-color-swatch__color au-grid-center" :style="{ backgroundColor: color }">
       <AuIcon
         v-if="selected"
         class="au-color-swatch__check"
@@ -35,7 +33,6 @@ const props = defineProps({
     validator: (value) => ['small', 'default', 'large'].includes(value),
   },
   disabled: { type: Boolean, default: false },
-  ariaLabel: { type: String, default: '选择颜色' },
   title: { type: String, default: '' },
 });
 

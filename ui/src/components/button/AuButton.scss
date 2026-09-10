@@ -4,7 +4,6 @@
 @use '../../theme/config';
 
 .au-button {
-  --au-focus-ring-offset: 3px;
 
   position: relative;
   min-width: 0;
@@ -115,7 +114,6 @@
 }
 
 .au-button.au-button--menu {
-  --au-focus-ring-offset: 0;
 
   min-width: 26px;
   height: 26px;
@@ -160,8 +158,7 @@
     border-radius: var(--au-radius-compact);
   }
 
-  &:hover:not(.is-disabled),
-  &:focus-visible {
+  &:hover:not(.is-disabled) {
     color: var(--au-color-text-primary);
     background: color-mix(in srgb, currentColor 7%, transparent);
     box-shadow: none;
@@ -181,8 +178,7 @@
     background: color-mix(in srgb, currentColor 13%, transparent);
     box-shadow: none;
 
-    &:hover:not(.is-disabled),
-    &:focus-visible {
+    &:hover:not(.is-disabled) {
       background: color-mix(in srgb, currentColor 16%, transparent);
     }
 
@@ -203,28 +199,4 @@
     box-shadow: none;
   }
 
-  &:focus-visible {
-    outline-offset: -2px;
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-button.au-button--menu.is-selected {
-    background: color-mix(in srgb, currentColor 13%, var(--au-color-background-overlay));
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-button.au-button--menu.is-selected {
-    border-color: currentColor;
-    background: transparent;
-  }
-}
-
-@media (forced-colors: active) {
-  .au-button.au-button--menu.is-selected {
-    border-color: Highlight;
-    color: HighlightText;
-    background: Highlight;
-  }
 }

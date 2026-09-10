@@ -3,7 +3,7 @@
     <button
       v-for="(image, index) in images"
       :key="image.title"
-      class="image-preview-demo__thumbnail au-focus-ring"
+      class="image-preview-demo__thumbnail"
       type="button"
       @click="showPreview(index)"
     >

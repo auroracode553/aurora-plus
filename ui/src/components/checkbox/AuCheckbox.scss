@@ -1,6 +1,15 @@
 @use '../../theme/mixins/motion';
 @use '../../theme/mixins/surfaces';
 
+// 保留原生输入承接选择和表单提交，由自定义方框展示状态。
+.au-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
 .au-checkbox__box {
   width: auto;
   height: 18px;
@@ -61,22 +70,6 @@
   border-color: color-mix(in srgb, var(--au-color-primary) 48%, var(--au-material-border-emphasis));
 }
 
-.au-checkbox__input:focus-visible + .au-checkbox__box {
-  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
-  outline-offset: 3px;
-}
-
 .au-checkbox:active:not(.is-disabled) .au-checkbox__box {
   @include motion.press(scale(0.94));
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-checkbox__box {
-    background: var(--au-color-background-overlay);
-  }
-
-  .au-checkbox.is-checked .au-checkbox__box,
-  .au-checkbox.is-indeterminate .au-checkbox__box {
-    background: var(--au-color-primary);
-  }
 }

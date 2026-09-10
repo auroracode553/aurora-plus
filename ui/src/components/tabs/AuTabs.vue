@@ -3,19 +3,15 @@
     ref="tabsRef"
     class="au-tabs au-component"
     :class="{ 'is-fill': fill }"
-    role="tablist"
-    :aria-label="ariaLabel"
     @keydown="handleKeydown"
   >
     <button
       v-for="item in items"
       :key="resolveValue(item)"
-      class="au-tabs__tab au-control-reset au-truncate au-focus-ring au-disabled-text"
+      class="au-tabs__tab au-control-reset au-truncate au-disabled-text"
       :class="{ 'is-active': isActive(item) }"
       type="button"
-      role="tab"
       :disabled="item.disabled"
-      :aria-selected="isActive(item)"
       :tabindex="isActive(item) ? 0 : -1"
       :title="item.title || undefined"
       @click="selectItem(item)"
@@ -33,7 +29,6 @@ const props = defineProps({
   items: { type: Array, default: () => [] },
   valueKey: { type: String, default: 'value' },
   fill: { type: Boolean, default: false },
-  ariaLabel: { type: String, default: '标签页' },
 });
 
 const emit = defineEmits(['update:modelValue', 'change', 'select']);
@@ -59,7 +54,7 @@ function selectItem(item) {
 
 function getEnabledTabs() {
   if (!tabsRef.value) return [];
-  return Array.from(tabsRef.value.querySelectorAll('[role="tab"]:not(:disabled)'));
+  return Array.from(tabsRef.value.querySelectorAll('.au-tabs__tab:not(:disabled)'));
 }
 
 function handleKeydown(event) {

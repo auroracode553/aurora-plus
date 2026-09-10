@@ -6,7 +6,7 @@ import colorPickerBasicSource from '../.vitepress/theme/examples/color-picker/Co
 
 # ColorPicker 颜色选择器
 
-`AuColorPicker` 使用系统取色面板；`AuColorSwatch` 用于从固定的预设颜色中选择。两者提供一致的紧凑尺寸和焦点反馈。
+`AuColorPicker` 使用系统取色面板；`AuColorSwatch` 用于从固定的预设颜色中选择。两者提供一致的紧凑尺寸。
 
 ## 基础用法
 
@@ -21,7 +21,6 @@ import colorPickerBasicSource from '../.vitepress/theme/examples/color-picker/Co
 ## 使用建议
 
 - `modelValue` 使用完整的六位十六进制颜色，例如 `#3478f6`。
-- 每个颜色控件都应提供描述用途的 `aria-label`，不要只写“选择颜色”。
 - 禁用状态用于展示不可修改的颜色；需要展示颜色值时在控件旁提供文本。
 
 固定色板使用 `AuColorSwatch`，不要用空内容按钮或在业务页面重新绘制颜色项。
@@ -36,7 +35,6 @@ import colorPickerBasicSource from '../.vitepress/theme/examples/color-picker/Co
 | `fallback` | 当前值不是六位十六进制颜色时的显示值 | `string` | `#ffffff` |
 | `size` | 尺寸 | `small / default / large` | `default` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
-| `ariaLabel` | 无障碍名称 | `string` | `选择颜色` |
 
 ### Events
 
@@ -65,7 +63,6 @@ import colorPickerBasicSource from '../.vitepress/theme/examples/color-picker/Co
 | `selected` | 是否显示选中环和勾选标识 | `boolean` | `false` |
 | `size` | 尺寸 | `small / default / large` | `default` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
-| `ariaLabel` | 无障碍名称，同时作为默认原生提示 | `string` | `选择颜色` |
 | `title` | 自定义原生提示文字 | `string` | `''` |
 
 ### Events

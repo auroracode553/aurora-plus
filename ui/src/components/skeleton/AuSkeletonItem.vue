@@ -3,9 +3,8 @@
     class="au-skeleton-item au-component"
     :class="[`is-${variant}`, { 'is-animated': isAnimated }]"
     :style="{ width: toDimension(width), height: toDimension(height) }"
-    aria-hidden="true"
   >
-    <svg v-if="variant === 'image'" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+    <svg v-if="variant === 'image'" viewBox="0 0 32 32" fill="none">
       <rect x="5" y="6" width="22" height="20" rx="2" />
       <circle cx="12" cy="12" r="2" />
       <path d="m6 23 7-7 5 5 3-3 6 6" />

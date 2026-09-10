@@ -44,7 +44,6 @@ import treeBasicSource from '../.vitepress/theme/examples/tree/TreeBasic.vue?dem
 | `indent` | 每层缩进距离 | `number` | `16` |
 | `collapsible` | 是否启用折叠模式；开启后显示节点折叠控件 | `boolean` | `false` |
 | `emptyText` | 空状态文本 | `string` | `暂无数据` |
-| `ariaLabel` | 树导航无障碍名称 | `string` | `树形导航` |
 
 ## Events
 

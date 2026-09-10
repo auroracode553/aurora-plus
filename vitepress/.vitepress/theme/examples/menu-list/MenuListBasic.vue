@@ -1,6 +1,6 @@
 <template>
   <div class="menu-list-demo">
-    <AuMenuList aria-label="视频工具">
+    <AuMenuList>
       <AuMenuListItem
         v-for="item in menuItems"
         :key="item.id"
@@ -13,20 +13,20 @@
     </AuMenuList>
     <p class="menu-list-demo__result">当前选择：{{ selectedItem || '尚未选择' }}</p>
 
-    <AuMenuList aria-label="播放设置">
+    <AuMenuList>
       <AuMenuListItem title="自动播放" description="打开视频后立即开始播放">
         <template #trailing>
-          <AuSwitch v-model="autoplay" aria-label="自动播放" />
+          <AuSwitch v-model="autoplay" />
         </template>
       </AuMenuListItem>
       <AuMenuListItem title="循环播放" description="播放结束后从头继续">
         <template #trailing>
-          <AuSwitch v-model="loopPlayback" aria-label="循环播放" />
+          <AuSwitch v-model="loopPlayback" />
         </template>
       </AuMenuListItem>
     </AuMenuList>
 
-    <AuMenuList :divided="false" aria-label="单项操作">
+    <AuMenuList :divided="false">
       <AuMenuListItem
         title="清除最近记录"
         description="移除当前设备保存的历史记录"

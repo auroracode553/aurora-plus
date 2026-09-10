@@ -51,7 +51,7 @@ import virtualTableBasicSource from '../.vitepress/theme/examples/virtual-table/
 | `remoteSort` | 只发出排序事件，不在组件内重排数据 | `false` |
 | `stripe` / `border` | 斑马纹 / 单元格分隔线 | `false` |
 | `loading` / `loadingText` | 加载状态与文字 | `false / 加载中` |
-| `emptyText` / `ariaLabel` | 空数据文字 / 表格名称 | `暂无数据 / 虚拟表格` |
+| `emptyText` | 空数据文字 | `暂无数据` |
 
 ## Slots、Events 与 Exposes
 

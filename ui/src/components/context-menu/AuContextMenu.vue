@@ -5,8 +5,6 @@
       ref="menuRef"
       class="au-context-menu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel"
       :style="menuStyle"
-      role="menu"
-      :aria-label="ariaLabel"
       tabindex="-1"
       @contextmenu.prevent
       @mousedown.stop
@@ -16,17 +14,13 @@
         <div
           v-if="section.type === 'icon-row' || section.type === 'icon-grid'"
           :class="section.type === 'icon-row' ? 'au-context-menu__icon-row' : 'au-context-menu__icon-grid'"
-          role="group"
-          :aria-label="section.ariaLabel"
         >
           <AuTooltip v-for="item in section.items" :key="item.id" :content="item.label" placement="top">
             <button
               class="au-context-menu__tool-button au-grid-center au-disabled-text"
               :class="{ 'is-danger': item.danger }"
               type="button"
-              role="menuitem"
               :disabled="item.disabled || selecting"
-              :aria-label="item.label"
               @click="selectItem(item)"
             >
               <AuIcon class="au-context-menu__tool-icon" :icon="item.icon" :color="iconColor" />
@@ -41,7 +35,6 @@
             class="au-context-menu__item au-menu-action"
             :class="{ 'is-danger': item.danger }"
             type="button"
-            role="menuitem"
             :title="item.title"
             :disabled="item.disabled || selecting"
             @click="selectItem(item)"
@@ -57,7 +50,6 @@
           class="au-context-menu__item au-menu-action"
           :class="{ 'is-danger': resolveSectionItem(section).danger }"
           type="button"
-          role="menuitem"
           :disabled="resolveSectionItem(section).disabled || selecting"
           @click="selectItem(resolveSectionItem(section))"
         >
@@ -76,9 +68,6 @@
             class="au-context-menu__item au-menu-action has-submenu"
             :class="{ 'is-active': activeSubmenu === section.id }"
             type="button"
-            role="menuitem"
-            aria-haspopup="menu"
-            :aria-expanded="activeSubmenu === section.id"
             :disabled="section.disabled"
             @focus="showSubmenu(section.id)"
           >
@@ -90,7 +79,6 @@
           <div
             v-if="activeSubmenu === section.id"
             class="au-context-submenu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile"
-            role="menu"
             @mouseenter="showSubmenu(section.id)"
             @mouseleave="hideSubmenu"
           >
@@ -101,7 +89,6 @@
                 class="au-context-menu__item au-menu-action"
                 :class="{ 'is-danger': item.danger }"
                 type="button"
-                role="menuitem"
                 :disabled="item.disabled || selecting"
                 @click="selectItem(item)"
               >
@@ -132,7 +119,6 @@ const props = defineProps({
   items: { type: Array, default: () => [] },
   position: { type: Object, default: () => ({ x: 0, y: 0 }) },
   iconColor: { type: String, default: '' },
-  ariaLabel: { type: String, default: '上下文菜单' },
   beforeSelect: { type: Function, default: null },
   hideOnSelect: { type: Boolean, default: true },
   closeOnClickOutside: { type: Boolean, default: true },

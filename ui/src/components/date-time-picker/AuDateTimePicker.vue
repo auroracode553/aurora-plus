@@ -13,12 +13,10 @@
     :teleported="teleported"
     :append-to="appendTo"
     :z-index="zIndex"
-    role="dialog"
-    :aria-label="ariaLabel"
     @click="handleTriggerClick"
     @close="handlePopoverClose"
   >
-    <template #trigger="{ triggerProps }">
+    <template #trigger>
       <AuInput
         ref="inputRef"
         :model-value="inputText"
@@ -32,11 +30,6 @@
         :invalid="invalid || inputInvalid"
         :suffix-icon="IconCalendarTime"
         v-bind="inputAttrs"
-        role="combobox"
-        aria-haspopup="dialog"
-        :aria-expanded="triggerProps['aria-expanded']"
-        :aria-controls="triggerProps['aria-controls']"
-        :aria-label="ariaLabel"
         @update:model-value="handleInput"
         @clear="clear"
         @focus="handleFocus"
@@ -68,7 +61,6 @@
         :show-adjacent-dates="showAdjacentDates"
         :show-today="false"
         :surface="false"
-        aria-label="选择日期"
         @select="handleDraftDateSelect"
         @panel-change="emit('panel-change', $event)"
       />
@@ -85,21 +77,21 @@
           :z-index="zIndex + 1"
           @update:model-value="updateDraftDate"
         />
-        <div v-if="draftInvalid" class="au-date-time-picker__status au-field-feedback" role="status">
+        <div v-if="draftInvalid" class="au-date-time-picker__status au-field-feedback">
           该日期时间不可用
         </div>
       </div>
 
       <footer class="au-date-time-picker__footer au-picker-footer">
-        <button class="au-date-time-picker__action au-action-control au-focus-ring" type="button" @click="selectNow">
+        <button class="au-date-time-picker__action au-action-control" type="button" @click="selectNow">
           现在
         </button>
         <span class="au-date-time-picker__spacer au-flex-spacer"></span>
-        <button class="au-date-time-picker__action au-action-control au-focus-ring" type="button" @click="cancel">
+        <button class="au-date-time-picker__action au-action-control" type="button" @click="cancel">
           取消
         </button>
         <button
-          class="au-date-time-picker__action au-action-control is-primary au-focus-ring"
+          class="au-date-time-picker__action au-action-control is-primary"
           type="button"
           :disabled="draftInvalid"
           @click="confirm"
@@ -171,7 +163,6 @@ const props = defineProps({
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1200 },
-  ariaLabel: { type: String, default: '选择日期和时间' },
 });
 
 const emit = defineEmits([

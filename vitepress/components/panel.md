@@ -39,10 +39,6 @@ import panelBasicSource from '../.vitepress/theme/examples/panel/PanelBasic.vue?
 | `scrollable` | 主体区域是否独立滚动 | `boolean` | `false` |
 | `width` | 面板宽度，数字自动转为 px | `string / number` | `''` |
 | `maxHeight` | 最大高度，数字自动转为 px | `string / number` | `''` |
-| `role` | 可选的无障碍角色 | `string` | `''` |
-| `ariaLabel` | 面板无障碍名称 | `string` | `''` |
-| `ariaLabelledby` | 标题元素 ID | `string` | `''` |
-| `ariaDescribedby` | 说明元素 ID | `string` | `''` |
 
 ### Slots
 

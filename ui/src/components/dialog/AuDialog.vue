@@ -12,15 +12,12 @@
           ref="dialogRef"
           class="au-dialog au-component au-material-surface au-depth-overlay au-motion-popover au-overlay-surface"
           :style="dialogStyle"
-          role="dialog"
-          :aria-modal="modal ? 'true' : undefined"
-          :aria-labelledby="hasHeader ? titleId : undefined"
           tabindex="-1"
           @mousedown.stop
         >
           <header v-if="hasHeader" class="au-dialog__header">
             <slot name="header" :close="close">
-              <h2 :id="titleId" class="au-dialog__title au-wrap-anywhere">{{ title }}</h2>
+              <h2 class="au-dialog__title au-wrap-anywhere">{{ title }}</h2>
             </slot>
             <AuTooltip v-if="showClose" :content="closeLabel" :disabled="!closeLabel">
               <AuButton
@@ -28,7 +25,6 @@
                 size="small"
                 :icon="IconX"
                 circle
-                :aria-label="closeLabel || '关闭'"
                 @click="close('close-button')"
               />
             </AuTooltip>
@@ -52,8 +48,6 @@ import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButton } from '../button/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 
-let dialogSeed = 0;
-
 const props = defineProps({
   modelValue: { type: Boolean, default: true },
   title: { type: String, default: '' },
@@ -76,7 +70,6 @@ const emit = defineEmits(['update:modelValue', 'open', 'opened', 'close', 'close
 const slots = useSlots();
 const dialogRef = ref(null);
 const visible = ref(props.modelValue);
-const titleId = `au-dialog-title-${++dialogSeed}`;
 
 let scrollLocked = false;
 let previouslyFocusedElement = null;

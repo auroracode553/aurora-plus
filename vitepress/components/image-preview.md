@@ -31,7 +31,7 @@ import imagePreviewBasicSource from '../.vitepress/theme/examples/image-preview/
 | `showToolbar` / `showProgress` | 工具条 / 图片序号 | `true` |
 | `teleported` / `appendTo` | 是否传送及目标 | `true / body` |
 | `topOffset` | 顶部保留空间，桌面自定义标题栏可传 `40` | `0` |
-| `zIndex` / `ariaLabel` | 层级 / 无障碍名称 | `10000 / 图片预览` |
+| `zIndex` | 层级 | `10000` |
 
 ## Events、Slots 与 Exposes
 

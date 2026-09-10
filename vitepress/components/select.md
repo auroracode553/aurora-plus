@@ -44,7 +44,7 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 | `appendTo` | 选项弹层挂载目标 | `string / HTMLElement` | `'body'` |
 | `zIndex` | 选项弹层层级 | `number` | `1200` |
 
-未声明的 `id`、`title`、`tabindex`、`aria-*`、`data-*` 和监听器会作用于选择触发器。传入 `name` 与 `form` 时，当前值会通过隐藏字段参与表单提交；`required` 会映射为 `aria-required`。
+未声明的 `id`、`title`、`tabindex`、`data-*` 和监听器会作用于选择触发器。传入 `name` 与 `form` 时，当前值会通过隐藏字段参与表单提交。
 
 ### Events
 

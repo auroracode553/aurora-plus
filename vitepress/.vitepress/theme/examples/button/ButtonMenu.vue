@@ -5,13 +5,11 @@
       type="menu"
       :selected="activeAction === action.value"
       :selected-color="action.color"
-      :aria-label="action.label"
       @click="activeAction = action.value"
     />
     <AuDivider
       v-if="index < actions.length - 1"
       orientation="vertical"
-      aria-hidden="true"
     />
   </template>
 

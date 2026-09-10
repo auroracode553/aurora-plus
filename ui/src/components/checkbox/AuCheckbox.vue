@@ -10,21 +10,19 @@
         'au-disabled': disabled || loading,
       },
     ]"
-    :aria-busy="loading ? 'true' : undefined"
   >
     <input
       ref="inputRef"
-      class="au-checkbox__input au-visually-hidden"
+      class="au-checkbox__input"
       type="checkbox"
       :name="name || undefined"
       :value="value"
       :checked="checked"
       :disabled="disabled || loading"
-      :aria-checked="indeterminate ? 'mixed' : checked"
       v-bind="$attrs"
       @change="handleChange"
     />
-    <span class="au-checkbox__box au-depth-control au-inline-center" aria-hidden="true">
+    <span class="au-checkbox__box au-depth-control au-inline-center">
       <AuLoadingSpinner
         v-if="loading"
         class="au-checkbox__loading"

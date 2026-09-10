@@ -34,14 +34,12 @@
   @include motion.transition(transform, color, background, border-color);
 }
 
-.au-menu-item__content:hover:not(:disabled),
-.au-menu-item__content:focus-visible {
+.au-menu-item__content:hover:not(:disabled) {
   @include interaction.hover;
 }
 
 .au-menu-item__content.is-active,
-.au-menu-item__content.is-active:hover,
-.au-menu-item__content.is-active:focus-visible {
+.au-menu-item__content.is-active:hover {
   border-color: color-mix(in srgb, var(--au-color-primary) 24%, transparent);
   @include interaction.selected;
 }
@@ -60,10 +58,6 @@
 
 .au-menu-item__content:active:not(:disabled) {
   @include motion.press(scale(0.98));
-}
-
-.au-menu-item__content:focus-visible {
-  outline-offset: -2px;
 }
 
 .au-menu-item__icon {

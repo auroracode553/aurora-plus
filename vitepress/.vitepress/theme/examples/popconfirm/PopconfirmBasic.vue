@@ -5,7 +5,7 @@
         <AuButton type="danger" plain>删除记录</AuButton>
       </template>
     </AuPopconfirm>
-    <span aria-live="polite">{{ result }}</span>
+    <span>{{ result }}</span>
   </div>
 </template>
 

@@ -8,7 +8,7 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 
 `AuMenuList` 与 `AuMenuListItem` 用于苹果式分组菜单、设置入口和带尾部控件的配置行。它与导航选中的 `AuMenu`、大数据滚动的 `AuVirtualList` 职责不同。
 
-默认面板使用 Aurora Plus 的材质、圆角与表面阴影，自动适配明暗主题、减少透明度和高对比度偏好。
+默认面板使用 Aurora Plus 的材质、圆角与表面阴影，自动适配明暗主题。
 
 ## 基础用法
 
@@ -40,7 +40,6 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 | `density` | 行密度，可选 `compact / default / relaxed` | `string` | `default` |
 | `divided` | 是否显示内缩分隔线 | `boolean` | `true` |
 | `elevated` | 是否显示表面阴影 | `boolean` | `true` |
-| `ariaLabel` | 列表无障碍名称 | `string` | `''` |
 
 ### Slots
 
@@ -66,7 +65,6 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 | `rel` | 链接 rel | `string` | `''` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `selected` | 是否显示选中状态 | `boolean` | `false` |
-| `ariaCurrent` | 选中项的 `aria-current` 值 | `string` | `page` |
 | `shortcut` | 尾部快捷键文本 | `string` | `''` |
 
 ### Events

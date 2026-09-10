@@ -25,8 +25,7 @@
   padding: 4px;
 }
 
-.au-color-swatch:hover:not(.is-disabled),
-.au-color-swatch:focus-visible {
+.au-color-swatch:hover:not(.is-disabled) {
   background: var(--au-color-background-hover);
 }
 
@@ -59,14 +58,4 @@
   width: auto;
   height: 14px;
   aspect-ratio: 1;
-}
-
-@media (prefers-contrast: more) {
-  .au-color-swatch {
-    border-color: var(--au-color-border-default);
-  }
-
-  .au-color-swatch.is-selected {
-    border-width: 2px;
-  }
 }

@@ -7,10 +7,6 @@
   outline: none;
 }
 
-.au-menu-action:focus-visible {
-  @include interaction.focus(-2px);
-}
-
 .au-menu-panel {
   width: max-content;
   min-width: min(190px, calc(100vw - 16px));
@@ -39,7 +35,6 @@
 }
 
 .au-menu-action:hover:not(:disabled),
-.au-menu-action:focus-visible,
 .au-menu-action.is-active {
   @include interaction.hover;
 }
@@ -89,20 +84,5 @@
     max-width: 100%;
     margin-top: 2px;
     box-shadow: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-menu-separator {
-    background: var(--au-color-text-secondary);
-  }
-}
-
-@media (forced-colors: active) {
-  .au-menu-action:hover:not(:disabled),
-  .au-menu-action:focus-visible,
-  .au-menu-action.is-active {
-    color: HighlightText;
-    background: Highlight;
   }
 }

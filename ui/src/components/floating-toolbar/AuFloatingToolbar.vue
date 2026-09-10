@@ -7,20 +7,16 @@
         class="au-floating-toolbar au-component au-material-surface au-depth-overlay au-motion-popover"
         :class="`is-${activePlacement}`"
         :style="toolbarStyle"
-        role="toolbar"
-        :aria-label="ariaLabel"
         @pointerdown.stop
         @click.stop
       >
         <span
           class="au-floating-toolbar__arrow au-floating-toolbar__arrow--border"
           :style="{ left: `${arrowLeft}px` }"
-          aria-hidden="true"
         ></span>
         <span
           class="au-floating-toolbar__arrow au-floating-toolbar__arrow--surface"
           :style="{ left: `${arrowLeft}px` }"
-          aria-hidden="true"
         ></span>
         <slot :hide="hide" :placement="activePlacement"></slot>
       </div>
@@ -43,7 +39,6 @@ const props = defineProps({
   keepVisibleSelector: { type: String, default: '' },
   refreshTarget: { type: [String, Object], default: '' },
   refreshSelector: { type: String, default: '' },
-  ariaLabel: { type: String, default: '工具条' },
   gap: { type: Number, default: 6 },
   viewportPadding: { type: Number, default: 8 },
   teleported: { type: Boolean, default: true },

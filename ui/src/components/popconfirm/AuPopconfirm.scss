@@ -28,9 +28,3 @@
   gap: 6px;
   margin-top: 12px;
 }
-
-@media (prefers-contrast: more) {
-  .au-popconfirm__icon {
-    color: var(--au-color-text-primary);
-  }
-}

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-switch au-component au-choice-control au-control-reset au-focus-ring"
+    class="au-switch au-component au-choice-control au-control-reset"
     :class="[
       `is-${size}`,
       {
@@ -9,14 +9,11 @@
       },
     ]"
     type="button"
-    role="switch"
-    :aria-checked="checked"
-    :aria-disabled="disabled || loading ? 'true' : undefined"
     :disabled="disabled || loading"
     v-bind="$attrs"
     @click="toggle"
   >
-    <span class="au-switch__track" aria-hidden="true">
+    <span class="au-switch__track">
       <span class="au-switch__thumb au-depth-control au-inline-center">
         <AuLoadingSpinner
           v-if="loading"

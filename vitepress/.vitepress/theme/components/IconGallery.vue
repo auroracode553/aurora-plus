@@ -1,9 +1,8 @@
 <template>
-  <section class="au-icon-gallery" aria-labelledby="au-icon-gallery-title">
+  <section class="au-icon-gallery">
     <div class="au-icon-gallery__toolbar">
       <label class="au-icon-gallery__search">
-        <IconSearch aria-hidden="true" />
-        <span class="visually-hidden">搜索图标</span>
+        <IconSearch />
         <input
           v-model.trim="query"
           type="search"
@@ -11,12 +10,12 @@
           autocomplete="off"
         />
       </label>
-      <span class="au-icon-gallery__count" aria-live="polite">
+      <span class="au-icon-gallery__count">
         {{ filteredIcons.length }} 个图标
       </span>
     </div>
 
-    <div class="au-icon-gallery__filters" aria-label="图标筛选">
+    <div class="au-icon-gallery__filters">
       <label class="au-icon-gallery__filter">
         <span>分类</span>
         <select v-model="selectedCategory">
@@ -52,10 +51,9 @@
         class="au-icon-gallery__item"
         type="button"
         :title="`复制 ${item.name}`"
-        :aria-label="`复制图标组件名 ${item.name}`"
         @click="copyIconName(item.name)"
       >
-        <component :is="item.component" :size="24" :stroke-width="1.8" aria-hidden="true" />
+        <component :is="item.component" :size="24" :stroke-width="1.8" />
         <code>{{ item.name }}</code>
       </button>
     </div>
@@ -271,11 +269,6 @@ async function copyIconName(name) {
   cursor: pointer;
 }
 
-.au-icon-gallery__filter select:focus-visible {
-  border-color: var(--vp-c-brand-1);
-  outline: 2px solid color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
-}
-
 .au-icon-gallery__filter option {
   color: var(--vp-c-text-1);
   background: var(--vp-c-bg);
@@ -315,13 +308,6 @@ async function copyIconName(name) {
   background: var(--vp-c-default-soft);
 }
 
-.au-icon-gallery__item:focus-visible {
-  position: relative;
-  z-index: 1;
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: -2px;
-}
-
 .au-icon-gallery__item code {
   display: block;
   max-width: 100%;
@@ -343,18 +329,6 @@ async function copyIconName(name) {
   display: flex;
   justify-content: center;
   margin-top: 16px;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 @media (max-width: 640px) {
@@ -386,9 +360,4 @@ async function copyIconName(name) {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .au-icon-gallery__item {
-    transition-duration: 0.01ms;
-  }
-}
 </style>

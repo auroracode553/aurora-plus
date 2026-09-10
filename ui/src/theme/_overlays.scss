@@ -37,25 +37,3 @@
 :is(.is-right, .is-right-start, .is-right-end).au-float-leave-to {
   transform: translateX(-3px) scale(0.985);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .au-float-enter-from,
-  .au-float-leave-to {
-    transform: none;
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-overlay-surface {
-    border-color: var(--au-color-text-secondary);
-  }
-}
-
-@media (forced-colors: active) {
-  .au-overlay-surface,
-  .au-forced-surface {
-    border-color: CanvasText !important;
-    color: CanvasText !important;
-    background: Canvas !important;
-  }
-}

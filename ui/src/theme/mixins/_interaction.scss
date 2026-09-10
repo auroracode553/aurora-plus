@@ -17,8 +17,3 @@
   color: var(--au-color-text-disabled);
   cursor: not-allowed;
 }
-
-@mixin focus($offset: var(--au-focus-ring-offset)) {
-  outline: var(--au-focus-ring-width) solid var(--au-focus-ring-color);
-  outline-offset: $offset;
-}

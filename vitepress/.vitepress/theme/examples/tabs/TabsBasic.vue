@@ -1,7 +1,7 @@
 <template>
   <div class="tabs-demo">
-    <AuTabs v-model="activeTab" :items="tabs" fill aria-label="项目内容" />
-    <div class="tabs-demo__panel" role="tabpanel">
+    <AuTabs v-model="activeTab" :items="tabs" fill />
+    <div class="tabs-demo__panel">
       <strong>{{ activeContent.title }}</strong>
       <span>{{ activeContent.description }}</span>
     </div>

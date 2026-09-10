@@ -1,7 +1,7 @@
 <template>
   <div class="menu-bar-demo">
     <div class="menu-bar-demo__stage">
-      <AuMenuBar :items="items" aria-label="文档应用菜单" @select="handleSelect" />
+      <AuMenuBar :items="items" @select="handleSelect" />
     </div>
     <p class="menu-bar-demo__result">最近执行：{{ lastAction || '尚未选择命令' }}</p>
   </div>

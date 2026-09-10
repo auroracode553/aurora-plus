@@ -23,7 +23,6 @@ import switchBasicSource from '../.vitepress/theme/examples/switch/SwitchBasic.v
 - 开关表示立即生效的二元设置；需要确认后再执行的操作应使用 `AuCheckbox` 或按钮。
 - `activeValue` 和 `inactiveValue` 可以映射为字符串、数字等业务值。
 - 请求进行中使用 `loading`，它会同时阻止重复切换；不可操作时使用 `disabled`。
-- 只有图形没有文字时，请通过透传的 `aria-label` 为开关提供名称。
 
 ## Switch API
 
@@ -40,7 +39,7 @@ import switchBasicSource from '../.vitepress/theme/examples/switch/SwitchBasic.v
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `loading` | 是否处于切换中 | `boolean` | `false` |
 
-`size` 可选 `small`、`default`、`large`。未声明的原生属性会透传到按钮，例如 `aria-label`、`name` 和 `id`。
+`size` 可选 `small`、`default`、`large`。未声明的原生属性会透传到按钮，例如 `name` 和 `id`。
 
 ### Events
 
@@ -55,4 +54,4 @@ import switchBasicSource from '../.vitepress/theme/examples/switch/SwitchBasic.v
 | --- | --- |
 | `default` | 自定义状态文字；存在时优先于 `activeText` / `inactiveText` |
 
-组件渲染为原生 `button[role="switch"]`，键盘 Enter 和 Space 均可切换，并同步 `aria-checked`。
+组件渲染为原生 `button`，键盘 Enter 和 Space 均可切换。

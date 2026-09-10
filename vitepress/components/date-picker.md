@@ -58,7 +58,6 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | `unlinkPanels` | 范围模式下两个面板是否独立切月 | `boolean` | `false` |
 | `placement` | 浮层方位 | `string` | `bottom-start` |
 | `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string \| Element / number` | `true / body / 1200` |
-| `ariaLabel` | 控件无障碍名称 | `string` | `选择日期` |
 
 `class` 和 `style` 作用于组件外壳；`name` 会生成隐藏表单字段，其他原生属性传给可编辑输入框。
 
@@ -83,7 +82,7 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 
 ## DatePickerPane API
 
-面板支持 `modelValue`、`valueType`、`valueFormat`、`locale`、`firstDayOfWeek`、`minDate`、`maxDate`、`disabledDate`、`showAdjacentDates` 和 `ariaLabel`，并额外提供：
+面板支持 `modelValue`、`valueType`、`valueFormat`、`locale`、`firstDayOfWeek`、`minDate`、`maxDate`、`disabledDate`、`showAdjacentDates`，并额外提供：
 
 | 属性 | 说明 | 默认值 |
 | --- | --- | --- |

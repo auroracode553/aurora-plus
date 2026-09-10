@@ -40,7 +40,6 @@ import timePickerBasicSource from '../.vitepress/theme/examples/time-picker/Time
 | `invalid` | 外部错误状态 | `boolean` | `false` |
 | `placement` | 浮层方位 | `string` | `bottom-start` |
 | `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string \| Element / number` | `true / body / 1200` |
-| `ariaLabel` | 控件无障碍名称 | `string` | `选择时间` |
 
 默认完整格式为 `HH:mm:ss`，隐藏秒后为 `HH:mm`。字符串模型使用本地时间语义；传入 `Date` 时会保留其日期部分并更新时间部分。
 

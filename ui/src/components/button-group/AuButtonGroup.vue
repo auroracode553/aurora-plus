@@ -11,9 +11,6 @@
         'au-material-blur': variant === 'segmented',
       },
     ]"
-    :role="role"
-    :aria-label="ariaLabel || undefined"
-    :aria-orientation="role === 'toolbar' ? orientation : undefined"
   >
     <slot></slot>
   </div>
@@ -40,14 +37,8 @@ const props = defineProps({
     default: 'default',
     validator: (value) => ['small', 'default', 'large'].includes(value),
   },
-  role: {
-    type: String,
-    default: 'group',
-    validator: (value) => ['group', 'toolbar'].includes(value),
-  },
   iconOnly: { type: Boolean, default: false },
   inverse: { type: Boolean, default: false },
-  ariaLabel: { type: String, default: '' },
 });
 
 provide(BUTTON_GROUP_CONTEXT, {

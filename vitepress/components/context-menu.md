@@ -31,8 +31,8 @@ import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/Co
 | --- | --- | --- |
 | `button` / `item` | `item`，也兼容直接写在 section 上 | 单个菜单项 |
 | `button-group` / `group` | `items` | 纵向普通菜单项组 |
-| `icon-row` | `items`、`ariaLabel` | 单行图标按钮 |
-| `icon-grid` | `items`、`ariaLabel` | 图标网格 |
+| `icon-row` | `items` | 单行图标按钮 |
+| `icon-grid` | `items` | 图标网格 |
 | `submenu` | `id`、`label`、`items` | 二级菜单；内部 item 可用 `kind: 'separator'` |
 | `separator` | — | 分隔线 |
 
@@ -60,7 +60,6 @@ import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/Co
 | `items` | 菜单 Section 数据 | `AuContextMenuSection[]` | `[]` |
 | `position` | 视口坐标 | `{ x: number, y: number }` | `{ x: 0, y: 0 }` |
 | `iconColor` | 图标行统一颜色 | `string` | `''` |
-| `ariaLabel` | 菜单无障碍名称 | `string` | `上下文菜单` |
 | `beforeSelect` | 选择前守卫；返回 `false` 取消动作 | `(item) => boolean \| Promise<boolean>` | — |
 | `hideOnSelect` | 成功选择后是否关闭 | `boolean` | `true` |
 | `closeOnClickOutside` | 点击外部是否关闭 | `boolean` | `true` |

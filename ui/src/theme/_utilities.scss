@@ -97,36 +97,3 @@
   min-width: 0;
   overflow-wrap: anywhere;
 }
-
-.au-visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-@media (prefers-contrast: more) {
-  .au-contrast-current:is(.is-active, .is-selected) {
-    outline: 1px solid currentColor;
-    outline-offset: -1px;
-  }
-}
-
-@media (forced-colors: active) {
-  .au-forced-canvas {
-    color: CanvasText !important;
-    background: Canvas !important;
-  }
-
-  .au-forced-highlight:focus-visible,
-  .au-forced-highlight:is(.is-active, .is-highlighted, .is-selected) {
-    color: HighlightText !important;
-    background: Highlight !important;
-  }
-}

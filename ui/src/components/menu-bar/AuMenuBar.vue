@@ -3,24 +3,20 @@
     ref="menuBarRef"
     class="au-menu-bar au-component"
     :class="{ 'is-draggable': draggable }"
-    :aria-label="ariaLabel"
     @contextmenu.prevent
     @keydown="handleKeydown"
   >
-    <div class="au-menu-bar__roots" role="menubar">
+    <div class="au-menu-bar__roots">
       <div
         v-for="(item, index) in items"
         :key="item.id || item.label || index"
         class="au-menu-bar__root"
       >
         <button
-          class="au-menu-bar__trigger au-action-control au-truncate au-focus-ring"
+          class="au-menu-bar__trigger au-action-control au-truncate"
           :class="{ 'is-open': openIndex === index }"
           type="button"
-          role="menuitem"
-          aria-haspopup="menu"
           :disabled="item.disabled"
-          :aria-expanded="openIndex === index"
           :tabindex="index === focusableIndex ? 0 : -1"
           @click="toggleMenu(index)"
           @mouseenter="switchMenu(index)"
@@ -36,7 +32,7 @@
         />
       </div>
     </div>
-    <div v-if="draggable" class="au-menu-bar__drag-fill" aria-hidden="true"></div>
+    <div v-if="draggable" class="au-menu-bar__drag-fill"></div>
   </nav>
 </template>
 
@@ -47,7 +43,6 @@ import AuMenuBarPanel from './AuMenuBarPanel.vue';
 const props = defineProps({
   items: { type: Array, default: () => [] },
   draggable: { type: Boolean, default: false },
-  ariaLabel: { type: String, default: '应用菜单' },
 });
 
 const emit = defineEmits(['select', 'open', 'close']);
@@ -93,7 +88,7 @@ function getRootButtons() {
 
 async function focusPanelFirstItem() {
   await nextTick();
-  const firstItem = menuBarRef.value?.querySelector('.au-menu-bar-panel [role^="menuitem"]:not(:disabled)');
+  const firstItem = menuBarRef.value?.querySelector('.au-menu-bar-panel .au-menu-bar-panel__item:not(:disabled)');
   if (firstItem) firstItem.focus();
 }
 

@@ -13,10 +13,6 @@
       },
     ]"
     :style="panelStyle"
-    :role="role || undefined"
-    :aria-label="ariaLabel || undefined"
-    :aria-labelledby="ariaLabelledby || undefined"
-    :aria-describedby="ariaDescribedby || undefined"
     v-bind="$attrs"
   >
     <div v-if="$slots.header" class="au-panel__header"><slot name="header"></slot></div>
@@ -49,10 +45,6 @@ const props = defineProps({
   scrollable: { type: Boolean, default: false },
   width: { type: [String, Number], default: '' },
   maxHeight: { type: [String, Number], default: '' },
-  role: { type: String, default: '' },
-  ariaLabel: { type: String, default: '' },
-  ariaLabelledby: { type: String, default: '' },
-  ariaDescribedby: { type: String, default: '' },
 });
 
 const panelStyle = computed(() => ({

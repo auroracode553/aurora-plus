@@ -1,6 +1,6 @@
 <template>
   <section class="material-preview">
-    <div class="material-preview__backdrop" aria-hidden="true">
+    <div class="material-preview__backdrop">
       <span class="material-preview__swatch is-blue"></span>
       <span class="material-preview__swatch is-lilac"></span>
       <span class="material-preview__swatch is-sand"></span>
@@ -12,11 +12,11 @@
         <span>{{ currentOption.description }}</span>
       </div>
 
-      <AuButtonGroup variant="segmented" size="small" aria-label="选择材质">
+      <AuButtonGroup variant="segmented" size="small">
         <AuButtonGroupItem
           v-for="option in options"
           :key="option.value"
-          :aria-pressed="material === option.value"
+          :selected="material === option.value"
           @click="selectMaterial(option.value)"
         >
           {{ option.label }}
@@ -37,10 +37,10 @@
 
           <div class="material-preview__card-footer">
             <span>按钮组、卡片和文字会同步响应</span>
-            <AuButtonGroup variant="floating" icon-only aria-label="面板操作">
-              <AuButtonGroupItem :icon="IconMinus" aria-label="收起面板" />
-              <AuButtonGroupItem :icon="IconLayoutSidebar" aria-label="切换视图" />
-              <AuButtonGroupItem :icon="IconCode" aria-label="查看源码" />
+            <AuButtonGroup variant="floating" icon-only>
+              <AuButtonGroupItem :icon="IconMinus" />
+              <AuButtonGroupItem :icon="IconLayoutSidebar" />
+              <AuButtonGroupItem :icon="IconCode" />
             </AuButtonGroup>
           </div>
         </AuCard>

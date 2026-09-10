@@ -45,8 +45,7 @@
   font-size: 14px;
 }
 
-.au-dropdown__item.is-danger:hover:not(:disabled),
-.au-dropdown__item.is-danger:focus-visible {
+.au-dropdown__item.is-danger:hover:not(:disabled) {
   background: color-mix(in srgb, var(--au-color-danger) 10%, transparent);
 }
 

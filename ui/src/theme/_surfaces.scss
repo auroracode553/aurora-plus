@@ -37,25 +37,6 @@
   border-radius: var(--au-radius-surface);
 }
 
-@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  .au-material-surface { @include surfaces.solid-surface; }
-  .au-material-blur {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
-
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .au-material-surface { @include surfaces.solid-surface; }
-}
-
-@media (prefers-contrast: more) {
-  .au-surface-frame { border-color: var(--au-color-text-secondary); }
-}
-
-@media (forced-colors: active) {
-  .au-surface-frame { border-color: CanvasText; }
-  .au-depth-control,
-  .au-depth-surface,
-  .au-depth-overlay { box-shadow: none; }
 }

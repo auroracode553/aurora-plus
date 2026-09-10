@@ -12,7 +12,6 @@
     <section
       v-loading="loadingOptions"
       class="loading-basic-demo__region"
-      aria-label="同步任务列表"
     >
       <div v-for="task in tasks" :key="task.name" class="loading-basic-demo__row">
         <span>{{ task.name }}</span>

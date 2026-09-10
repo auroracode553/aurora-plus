@@ -1,10 +1,7 @@
 <template>
-  <div class="au-skeleton au-component" :aria-busy="loading || visible ? 'true' : 'false'">
-    <span class="au-skeleton__status" role="status" aria-live="polite" aria-atomic="true">
-      {{ loading || visible ? ariaLabel : '' }}
-    </span>
+  <div class="au-skeleton au-component">
     <template v-if="visible">
-      <div v-for="index in safeCount" :key="index" class="au-skeleton__group" aria-hidden="true" inert>
+      <div v-for="index in safeCount" :key="index" class="au-skeleton__group">
         <slot name="template" :index="index - 1">
           <div class="au-skeleton__paragraph">
             <AuSkeletonItem variant="p" width="33%" />
@@ -34,7 +31,6 @@ const props = defineProps({
   rows: { type: Number, default: 3, validator: (value) => Number.isInteger(value) && value >= 0 },
   count: { type: Number, default: 1, validator: (value) => Number.isInteger(value) && value >= 1 },
   throttle: { type: [Number, Object], default: 0 },
-  ariaLabel: { type: String, default: '加载中' },
 });
 
 const safeRows = computed(() => Number.isFinite(props.rows) ? Math.max(0, Math.floor(props.rows)) : 3);

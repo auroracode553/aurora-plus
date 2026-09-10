@@ -183,12 +183,6 @@ html:not(.dark) .au-doc-demo__highlighted .vp-code span {
   color: var(--shiki-dark, inherit);
 }
 
-.au-doc-demo__icon-action:focus-visible,
-.au-doc-demo__toggle:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: -2px;
-}
-
 .au-doc-row {
   display: flex;
   align-items: center;

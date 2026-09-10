@@ -2,37 +2,32 @@
   <li
     class="au-menu-item au-component au-list-reset"
     :class="[`is-${menuMode}`, { 'is-collapsed': collapsed }]"
-    role="none"
   >
     <button
       ref="buttonRef"
-      class="au-menu-item__content au-control-reset au-focus-ring au-contrast-current"
+      class="au-menu-item__content au-control-reset"
       :class="{ 'is-active': active, 'au-disabled': itemDisabled }"
       type="button"
-      role="menuitem"
       data-au-menu-item
       :disabled="itemDisabled"
       :tabindex="tabIndex"
-      :aria-current="active ? ariaCurrent : undefined"
-      :aria-disabled="itemDisabled ? 'true' : undefined"
-      :aria-label="collapsed && label ? label : undefined"
       :title="resolvedTitle"
       v-bind="$attrs"
       @click="handleClick"
     >
-      <span v-if="$slots.icon || icon" class="au-menu-item__icon au-inline-center" aria-hidden="true">
+      <span v-if="$slots.icon || icon" class="au-menu-item__icon au-inline-center">
         <slot name="icon" :active="active" :disabled="itemDisabled">
           <AuIcon class="au-menu-item__graphic" :icon="icon" :color="iconColor" />
         </slot>
       </span>
       <span
         class="au-menu-item__label au-flex-truncate"
-        :class="{ 'au-visually-hidden': collapsed }"
+        v-show="!collapsed"
       ><slot>{{ label }}</slot></span>
       <span v-if="hasMeta" class="au-menu-item__meta au-inline-center au-meta-muted">
         <slot name="suffix" :active="active" :disabled="itemDisabled">
           <span v-if="hasBadge" class="au-menu-item__badge au-inline-center">{{ badge }}</span>
-          <span v-if="indicator" class="au-menu-item__indicator" aria-hidden="true"></span>
+          <span v-if="indicator" class="au-menu-item__indicator"></span>
         </slot>
       </span>
     </button>
@@ -56,7 +51,6 @@ const props = defineProps({
   indicator: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   title: { type: String, default: '' },
-  ariaCurrent: { type: String, default: 'page' },
 });
 
 const menu = inject(AU_MENU_CONTEXT_KEY, null);

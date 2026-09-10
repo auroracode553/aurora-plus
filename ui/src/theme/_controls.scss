@@ -7,16 +7,14 @@
   opacity: 0.48;
 }
 
-.au-disabled-text:is(:disabled, .is-disabled, [aria-disabled='true']) {
+.au-disabled-text:is(:disabled, .is-disabled) {
   // 原生和语义控件均可主动选择禁用文字回退。
   color: var(--au-color-text-disabled) !important;
   cursor: not-allowed !important;
 }
 
 .au-hover-control:hover:where(:not(:disabled, .is-disabled, .is-selected)),
-.au-hover-control:focus-visible:where(:not(:disabled, .is-disabled, .is-selected)),
-.au-action-control:hover:not(:disabled),
-.au-action-control:focus-visible:not(:disabled) {
+.au-action-control:hover:not(:disabled) {
   @include interaction.hover;
 }
 
@@ -86,10 +84,4 @@
   color: var(--au-color-danger);
   font-size: 11px;
   line-height: 1.35;
-}
-
-@media (forced-colors: active) {
-  .au-disabled-text:is(:disabled, .is-disabled, [aria-disabled='true']) {
-    color: GrayText !important;
-  }
 }

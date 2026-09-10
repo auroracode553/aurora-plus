@@ -49,8 +49,7 @@
   @include motion.transition(opacity, transform);
 }
 
-.au-tabs__tab:hover:not(:disabled),
-.au-tabs__tab:focus-visible {
+.au-tabs__tab:hover:not(:disabled) {
   color: var(--au-color-text-primary);
 }
 
@@ -66,14 +65,4 @@
 
 .au-tabs__tab:active:not(:disabled) {
   color: color-mix(in srgb, var(--au-color-primary) 78%, var(--au-color-text-primary));
-}
-
-.au-tabs__tab:focus-visible {
-  outline-offset: -3px;
-}
-
-@media (prefers-contrast: more) {
-  .au-tabs__tab.is-active::after {
-    height: 3px;
-  }
 }

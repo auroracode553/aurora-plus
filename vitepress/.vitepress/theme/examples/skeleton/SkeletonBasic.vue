@@ -1,7 +1,7 @@
 <template>
   <div class="skeleton-basic-demo">
     <div class="au-doc-row">
-      <AuButton :aria-pressed="animated" @click="animated = !animated">{{ animated ? '关闭动画' : '开启动画' }}</AuButton>
+      <AuButton :selected="animated" @click="animated = !animated">{{ animated ? '关闭动画' : '开启动画' }}</AuButton>
     </div>
     <AuSkeleton :rows="3" :animated="animated" />
     <div class="skeleton-basic-demo__variants">

@@ -1,12 +1,12 @@
 <template>
   <div class="button-group-connected-demo">
-    <AuButtonGroup variant="connected" aria-label="工作台工具">
+    <AuButtonGroup variant="connected">
       <AuButtonGroupItem
         v-for="action in actions"
         :key="action.key"
         :icon="action.icon"
         :loading="action.loading"
-        :aria-pressed="selectedAction === action.key"
+        :selected="selectedAction === action.key"
         @click="selectedAction = action.key"
       >
         {{ action.label }}

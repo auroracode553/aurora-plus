@@ -46,7 +46,6 @@ toolbarRect.value = { top, right, bottom, left, width, height };
 | `refreshSelector` | `refreshTarget` 的字符串兼容属性 | `string` | `''` |
 | `keepVisibleTarget` | 点击该元素内部时不关闭 | `string / HTMLElement` | `''` |
 | `keepVisibleSelector` | `keepVisibleTarget` 的字符串兼容属性 | `string` | `''` |
-| `ariaLabel` | 工具条无障碍名称 | `string` | `工具条` |
 | `teleported` | 是否传送到 `appendTo` | `boolean` | `true` |
 | `appendTo` | Teleport 目标 | `string / HTMLElement` | `body` |
 | `zIndex` | 工具条层级 | `number` | `9000` |

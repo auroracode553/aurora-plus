@@ -7,7 +7,7 @@
     </div>
 
     <AuLoading :loading="loading" text="正在载入项目…">
-      <section class="loading-component-demo__content" aria-label="最近项目">
+      <section class="loading-component-demo__content">
         <div v-for="project in projects" :key="project.name" class="loading-component-demo__row">
           <span>{{ project.name }}</span>
           <span>{{ project.updatedAt }}</span>
@@ -15,7 +15,7 @@
       </section>
     </AuLoading>
 
-    <div class="loading-component-demo__spinners" aria-label="加载图标尺寸">
+    <div class="loading-component-demo__spinners">
       <AuLoadingSpinner size="small" text="小型" />
       <AuLoadingSpinner text="默认" />
       <AuLoadingSpinner size="large" text="大型" />

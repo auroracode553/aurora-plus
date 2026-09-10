@@ -11,7 +11,6 @@
           :min="0"
           :max="100"
           :step="1"
-          :aria-label="`${factor.label}权重`"
         />
         <small>拖动调整当前因子权重</small>
       </label>
@@ -27,7 +26,6 @@
         :min="0"
         :max="1"
         :step="0.05"
-        aria-label="分析创造性"
       />
       <span class="slider-demo__range-labels">
         <span>更稳定</span>
@@ -35,10 +33,10 @@
       </span>
     </label>
 
-    <div class="slider-demo__states" aria-label="滑块尺寸和状态示例">
-      <AuSlider v-model="compactValue" size="small" show-value aria-label="小号滑块" />
-      <AuSlider v-model="defaultValue" :format-value="formatPercent" show-value aria-label="默认滑块" />
-      <AuSlider :model-value="68" size="large" disabled show-value aria-label="禁用滑块" />
+    <div class="slider-demo__states">
+      <AuSlider v-model="compactValue" size="small" show-value />
+      <AuSlider v-model="defaultValue" :format-value="formatPercent" show-value />
+      <AuSlider :model-value="68" size="large" disabled show-value />
     </div>
   </div>
 </template>

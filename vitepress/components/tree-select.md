@@ -40,7 +40,6 @@ import treeSelectBasicSource from '../.vitepress/theme/examples/tree-select/Tree
 | `itemHeight` / `overscan` | 虚拟列表行高 / 预渲染数 | `number` | `28 / 8` |
 | `placement` | 浮层方位 | `string` | `bottom-start` |
 | `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string \| Element / number` | `true / body / 1200` |
-| `ariaLabel` | 树与输入框无障碍名称 | `string` | `树形选择` |
 
 ## Events
 

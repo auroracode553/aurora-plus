@@ -132,10 +132,3 @@
   font-size: var(--au-font-size-small);
   font-weight: var(--au-font-weight-medium);
 }
-
-@media (prefers-contrast: more) {
-  .au-date-picker-pane__day.is-selected {
-    outline: 1px solid currentColor;
-    outline-offset: -3px;
-  }
-}

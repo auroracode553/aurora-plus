@@ -1,5 +1,5 @@
 <template>
-  <section class="au-time-picker-panel au-component" :aria-label="ariaLabel">
+  <section class="au-time-picker-panel au-component">
     <div class="au-time-picker-panel__field">
       <label :for="`${panelId}-hour`">时</label>
       <AuSelect
@@ -9,13 +9,12 @@
         :teleported="teleported"
         :append-to="appendTo"
         :z-index="zIndex"
-        aria-label="小时"
         @update:model-value="updatePart('hour', $event)"
       >
         <option v-for="hour in hours" :key="hour" :value="pad(hour)">{{ pad(hour) }}</option>
       </AuSelect>
     </div>
-    <span class="au-time-picker-panel__separator" aria-hidden="true">:</span>
+    <span class="au-time-picker-panel__separator">:</span>
     <div class="au-time-picker-panel__field">
       <label :for="`${panelId}-minute`">分</label>
       <AuSelect
@@ -25,7 +24,6 @@
         :teleported="teleported"
         :append-to="appendTo"
         :z-index="zIndex"
-        aria-label="分钟"
         @update:model-value="updatePart('minute', $event)"
       >
         <option v-for="minute in minutes" :key="minute" :value="pad(minute)">
@@ -34,7 +32,7 @@
       </AuSelect>
     </div>
     <template v-if="showSeconds">
-      <span class="au-time-picker-panel__separator" aria-hidden="true">:</span>
+      <span class="au-time-picker-panel__separator">:</span>
       <div class="au-time-picker-panel__field">
         <label :for="`${panelId}-second`">秒</label>
         <AuSelect
@@ -44,7 +42,6 @@
           :teleported="teleported"
           :append-to="appendTo"
           :z-index="zIndex"
-          aria-label="秒"
           @update:model-value="updatePart('second', $event)"
         >
           <option v-for="second in seconds" :key="second" :value="pad(second)">
@@ -72,7 +69,6 @@ const props = defineProps({
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1201 },
-  ariaLabel: { type: String, default: '选择时间' },
 });
 
 const emit = defineEmits(['update:modelValue', 'change']);

@@ -2,7 +2,6 @@
   <li
     class="au-menu-group au-component au-list-reset"
     :class="[`is-${menuMode}`, { 'is-collapsed': collapsed, 'is-spaced': spaced }]"
-    role="presentation"
   >
     <span class="au-menu-group__label au-truncate"><slot>{{ label }}</slot></span>
   </li>

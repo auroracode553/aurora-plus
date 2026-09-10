@@ -40,32 +40,3 @@
   0%, 100% { background-color: var(--au-color-border-muted); }
   50% { background-color: var(--au-color-border-default); }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .au-skeleton-item.is-animated { animation: none; }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .au-skeleton-item {
-    &.is-animated { animation: none; }
-    background: var(--au-color-background-subtle);
-  }
-}
-
-@media (prefers-contrast: more) {
-  .au-skeleton-item {
-    &.is-animated { animation: none; }
-    outline: 1px solid var(--au-color-text-secondary);
-    outline-offset: -1px;
-  }
-}
-
-@media (forced-colors: active) {
-  .au-skeleton-item {
-    &.is-animated { animation: none; }
-    background: Canvas;
-    color: GrayText;
-    outline: 1px solid GrayText;
-    outline-offset: -1px;
-  }
-}

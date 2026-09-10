@@ -11,14 +11,12 @@
         :viewBox="svgViewBox"
         fill="none"
         stroke="currentColor"
-        aria-hidden="true"
         v-html="svg"
       ></svg>
       <AuIcon
         v-else
         class="au-loading-spinner__icon au-spin"
         :icon="spinner || IconLoader2"
-        aria-hidden="true"
       />
     </slot>
     <span v-if="text" class="au-loading-spinner__text au-wrap-anywhere">{{ text }}</span>

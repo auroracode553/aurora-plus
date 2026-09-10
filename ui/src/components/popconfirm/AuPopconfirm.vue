@@ -12,8 +12,6 @@
     :teleported="teleported"
     :append-to="appendTo"
     :z-index="zIndex"
-    role="alertdialog"
-    :aria-label="ariaLabel || title"
     @open="emit('open')"
     @opened="emit('opened')"
     @close="handleClose"
@@ -96,7 +94,6 @@ const props = defineProps({
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
   zIndex: { type: Number, default: 1300 },
-  ariaLabel: { type: String, default: '' },
 });
 
 const emit = defineEmits([

@@ -27,7 +27,7 @@
       </div>
     </AuFormItem>
 
-    <p v-if="result" class="form-demo__result" role="status" aria-live="polite">
+    <p v-if="result" class="form-demo__result">
       {{ result }}
     </p>
   </AuForm>

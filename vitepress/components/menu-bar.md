@@ -49,7 +49,6 @@ import menuBarBasicSource from '../.vitepress/theme/examples/menu-bar/MenuBarBas
 | --- | --- | --- | --- |
 | `items` | 根菜单及 `children` 命令项 | `Array` | `[]` |
 | `draggable` | 将根菜单后的空白区域设为窗口拖拽区 | `boolean` | `false` |
-| `ariaLabel` | 菜单栏无障碍名称 | `string` | `应用菜单` |
 
 ### Events
 
