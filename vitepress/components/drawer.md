@@ -6,7 +6,7 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 
 # Drawer 抽屉
 
-从视口边缘滑出的内容容器，适合设置面板、详情面板和分步编辑。组件提供四向打开、响应式尺寸、透明模态交互层、滚动锁、Escape 关闭、焦点管理和关闭前守卫。
+从视口边缘滑出的内容容器，适合设置面板、详情面板和分步编辑。组件提供四向打开、响应式尺寸、视口安全区、透明模态交互层、滚动锁、Escape 关闭、焦点管理和关闭前守卫。
 
 抽屉面板继承全局或局部的 `soft`、`clear`、`solid` 材质设置。模态交互层保持透明，不改变抽屉之外页面的亮度；面板使用通用浮层阴影与细边框表达层级。
 
@@ -34,6 +34,7 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 | `lockScroll` | 显示期间是否锁定页面滚动 | `boolean` | `true` |
 | `teleported` | 是否 Teleport 到 `appendTo` | `boolean` | `true` |
 | `appendTo` | Teleport 目标节点或选择器 | `string / object` | `body` |
+| `viewportPadding` | 抽屉交互层的视口内边距；支持 CSS `padding` 简写，数字转换为 px | `string / number` | `0` |
 | `closeOnClickModal` | 点击模态交互层是否关闭 | `boolean` | `true` |
 | `closeOnPressEscape` | 按 Escape 是否关闭 | `boolean` | `true` |
 | `showClose` | 是否显示标题栏关闭按钮 | `boolean` | `true` |
@@ -44,6 +45,17 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 | `zIndex` | 模态层级 | `number` | `10000` |
 
 `beforeClose` 使用回调风格时调用 `done()` 允许关闭；调用 `done(false)` 或返回 `false` 会保留抽屉。Promise 解析为 `false` 也会阻止关闭。守卫执行期间关闭按钮会暂时禁用，重复关闭请求会被忽略。
+
+在移动端 WebView 中，可将宿主提供的四边安全区传给 `viewportPadding`。属性支持 CSS 变量，因此宿主更新变量后不需要重新挂载抽屉：
+
+```vue
+<AuDrawer
+  v-model="open"
+  viewport-padding="var(--safe-top, 0px) var(--safe-right, 0px) var(--safe-bottom, 0px) var(--safe-left, 0px)"
+>
+  抽屉内容
+</AuDrawer>
+```
 
 ### Events
 

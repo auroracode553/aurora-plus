@@ -75,6 +75,7 @@ const props = defineProps({
   lockScroll: { type: Boolean, default: true },
   teleported: { type: Boolean, default: true },
   appendTo: { type: [String, Object], default: 'body' },
+  viewportPadding: { type: [String, Number], default: 0 },
   closeOnClickModal: { type: Boolean, default: true },
   closeOnPressEscape: { type: Boolean, default: true },
   showClose: { type: Boolean, default: true },
@@ -107,13 +108,16 @@ let closeRequestId = 0;
 const hasHeader = computed(() => {
   return props.withHeader && Boolean(props.title || slots.header || props.showClose);
 });
-const overlayStyle = computed(() => ({ zIndex: props.zIndex }));
+const overlayStyle = computed(() => ({
+  zIndex: props.zIndex,
+  padding: formatSize(props.viewportPadding),
+}));
 const drawerStyle = computed(() => {
   const size = formatSize(props.size);
   const horizontal = props.direction === 'ltr' || props.direction === 'rtl';
   return horizontal
-    ? { width: size, height: '100%', maxWidth: 'calc(100vw - 16px)' }
-    : { width: '100%', height: size, maxHeight: 'calc(100vh - 16px)' };
+    ? { width: size, height: '100%', maxWidth: 'calc(100% - 16px)' }
+    : { width: '100%', height: size, maxHeight: 'calc(100% - 16px)' };
 });
 
 function formatSize(value) {
