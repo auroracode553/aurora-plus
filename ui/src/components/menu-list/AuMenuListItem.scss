@@ -159,8 +159,19 @@
 }
 
 .au-menu-list-item.is-compact .au-menu-list-item__row {
-  min-height: 44px;
-  padding-block: 10px;
+  min-height: 36px;
+  padding: 6px 12px;
+  gap: 8px;
+}
+
+.au-menu-list-item.is-compact .au-menu-list-item__leading {
+  height: 24px;
+  font-size: 16px;
+}
+
+.au-menu-list-item.is-compact.has-leading-tinted .au-menu-list-item__leading {
+  height: 26px;
+  font-size: 15px;
 }
 
 .au-menu-list-item.is-relaxed .au-menu-list-item__row {
