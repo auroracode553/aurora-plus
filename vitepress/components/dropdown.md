@@ -52,6 +52,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `placement` | 菜单相对触发器的位置 | `string` | `bottom-start` |
 | `offset` | 菜单与触发器的间距 | `number` | `6` |
 | `matchTriggerWidth` | 是否使用触发器宽度作为最小宽度 | `boolean` | `false` |
+| `maxHeight` | 菜单最大高度（px）；设为 `0` 时取消固定上限，按内容展开，超出视口时才滚动 | `number` | `320` |
 | `disabled` | 是否禁用打开 | `boolean` | `false` |
 | `closeOnSelect` | 选择后是否关闭 | `boolean` | `true` |
 | `closeOnClickOutside` | 点击外部是否关闭 | `boolean` | `true` |

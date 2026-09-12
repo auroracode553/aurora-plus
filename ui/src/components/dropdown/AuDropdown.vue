@@ -74,6 +74,8 @@ const props = defineProps({
   },
   offset: { type: Number, default: 6 },
   matchTriggerWidth: { type: Boolean, default: false },
+  // 0 取消固定高度上限，仍保留视口边界，避免菜单超出屏幕后无法操作。
+  maxHeight: { type: Number, default: 320, validator: (value) => Number.isFinite(value) && value >= 0 },
   disabled: { type: Boolean, default: false },
   closeOnSelect: { type: Boolean, default: true },
   closeOnClickOutside: { type: Boolean, default: true },
@@ -99,6 +101,9 @@ const menuStyle = computed(() => ({
   left: `${menuPosition.value.x}px`,
   top: `${menuPosition.value.y}px`,
   zIndex: props.zIndex,
+  maxHeight: props.maxHeight > 0
+    ? `min(${props.maxHeight}px, calc(100dvh - ${VIEWPORT_GAP * 2}px))`
+    : `calc(100dvh - ${VIEWPORT_GAP * 2}px)`,
   ...(props.matchTriggerWidth && triggerWidth.value > 0 ? { minWidth: `${triggerWidth.value}px` } : {}),
 }));
 
@@ -303,7 +308,7 @@ watch(
 );
 
 watch(
-  () => [props.placement, props.items],
+  () => [props.placement, props.items, props.maxHeight],
   () => nextTick(updatePosition),
   { deep: true },
 );
