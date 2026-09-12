@@ -30,6 +30,7 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 | `title` | 默认标题 | `string` | `` |
 | `direction` | 打开方向：`ltr` 左侧、`rtl` 右侧、`ttb` 顶部、`btt` 底部 | `string` | `rtl` |
 | `size` | 水平方向为宽度，垂直方向为高度；数字转换为 px | `string / number` | `min(420px, calc(100vw - 16px))` |
+| `fullWidth` | 左右侧抽屉铺满可用宽度，覆盖 `size` 与默认侧边留白，并移除圆角；上下抽屉不受影响 | `boolean` | `false` |
 | `modal` | 是否启用透明模态交互层 | `boolean` | `true` |
 | `lockScroll` | 显示期间是否锁定页面滚动 | `boolean` | `true` |
 | `teleported` | 是否 Teleport 到 `appendTo` | `boolean` | `true` |
@@ -47,6 +48,8 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 `beforeClose` 使用回调风格时调用 `done()` 允许关闭；调用 `done(false)` 或返回 `false` 会保留抽屉。Promise 解析为 `false` 也会阻止关闭。守卫执行期间关闭按钮会暂时禁用，重复关闭请求会被忽略。
 
 在移动端 WebView 中，可将宿主提供的四边安全区传给 `viewportPadding`。属性支持 CSS 变量，因此宿主更新变量后不需要重新挂载抽屉：
+
+移动端左右侧抽屉可同时启用 `fullWidth`，铺满扣除 `viewportPadding` 后的可用宽度；通过响应式状态切换此属性即可在桌面端恢复 `size` 指定的尺寸。
 
 ```vue
 <AuDrawer

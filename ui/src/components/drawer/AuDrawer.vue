@@ -17,7 +17,7 @@
           ref="drawerRef"
           v-bind="$attrs"
           class="au-drawer au-component au-material-surface au-depth-overlay au-overlay-surface"
-          :class="['is-' + direction]"
+          :class="['is-' + direction, { 'is-full-width': fullWidth && (direction === 'ltr' || direction === 'rtl') }]"
           :style="drawerStyle"
           tabindex="-1"
           @mousedown.stop
@@ -71,6 +71,7 @@ const props = defineProps({
     validator: (value) => ['ltr', 'rtl', 'ttb', 'btt'].includes(value),
   },
   size: { type: [String, Number], default: 'min(420px, calc(100vw - 16px))' },
+  fullWidth: { type: Boolean, default: false },
   modal: { type: Boolean, default: true },
   lockScroll: { type: Boolean, default: true },
   teleported: { type: Boolean, default: true },
@@ -116,7 +117,7 @@ const drawerStyle = computed(() => {
   const size = formatSize(props.size);
   const horizontal = props.direction === 'ltr' || props.direction === 'rtl';
   return horizontal
-    ? { width: size, height: '100%', maxWidth: 'calc(100% - 16px)' }
+    ? { width: props.fullWidth ? '100%' : size, height: '100%', maxWidth: props.fullWidth ? '100%' : 'calc(100% - 16px)' }
     : { width: '100%', height: size, maxHeight: 'calc(100% - 16px)' };
 });
 

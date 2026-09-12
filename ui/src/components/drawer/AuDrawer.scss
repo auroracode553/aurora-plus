@@ -45,6 +45,11 @@
   border-radius: var(--au-radius-overlay) var(--au-radius-overlay) 0 0;
 }
 
+// 全宽侧向抽屉贴合可用区域边缘，不保留浮层圆角产生的空隙。
+.au-drawer.is-full-width {
+  border-radius: 0;
+}
+
 .au-drawer__header {
   display: flex;
   align-items: center;
