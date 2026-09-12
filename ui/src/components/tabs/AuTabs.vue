@@ -8,7 +8,7 @@
     <button
       v-for="item in items"
       :key="resolveValue(item)"
-      class="au-tabs__tab au-control-reset au-truncate au-disabled-text"
+      class="au-tabs__tab au-control-reset au-disabled-text"
       :class="{ 'is-active': isActive(item) }"
       type="button"
       :disabled="item.disabled"
@@ -16,7 +16,9 @@
       :title="item.title || undefined"
       @click="selectItem(item)"
     >
-      {{ item.label }}
+      <span class="au-tabs__label">
+        <span class="au-truncate">{{ item.label }}</span>
+      </span>
     </button>
   </div>
 </template>

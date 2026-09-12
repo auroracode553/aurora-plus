@@ -8,6 +8,8 @@ import tabsBasicSource from '../.vitepress/theme/examples/tabs/TabsBasic.vue?dem
 
 `AuTabs` 用于同一内容区域内的并列视图切换。组件自带紧凑下划线样式和键盘方向键导航，业务侧无需覆盖视觉样式。
 
+选中下划线与标签文字等宽。启用 `fill` 后，按钮等分容器宽度、文字居中，下划线仍跟随文字长度，不随按钮拉长。
+
 ## 基础用法
 
 <DemoBlock
@@ -33,7 +35,7 @@ import tabsBasicSource from '../.vitepress/theme/examples/tabs/TabsBasic.vue?dem
 | `modelValue` | 当前标签值 | `string \| number` | `''` |
 | `items` | 标签数组，支持 `value`、`label`、`title`、`disabled` | `Array` | `[]` |
 | `valueKey` | 标签值字段名 | `string` | `value` |
-| `fill` | 标签等宽填满容器 | `boolean` | `false` |
+| `fill` | 标签按钮等宽填满容器，文字居中，下划线保持文字宽度 | `boolean` | `false` |
 
 ### Events
 

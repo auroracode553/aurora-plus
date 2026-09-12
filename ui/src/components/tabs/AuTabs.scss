@@ -17,7 +17,10 @@
 }
 
 .au-tabs__tab {
-  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-width: 0;
   max-width: 100%;
   min-height: 36px;
   padding: 0 10px;
@@ -35,12 +38,21 @@
   flex: 1 1 0;
 }
 
-.au-tabs__tab::after {
+// 横线以文字容器为定位基准，fill 只分配按钮宽度，不拉伸文字和横线。
+.au-tabs__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.au-tabs__label::after {
   content: '';
   position: absolute;
-  right: 28%;
+  right: 0;
   bottom: -1px;
-  left: 28%;
+  left: 0;
   height: 2px;
   border-radius: var(--au-radius-pill);
   background: var(--au-color-primary);
@@ -58,7 +70,7 @@
   font-weight: var(--au-font-weight-semibold);
 }
 
-.au-tabs__tab.is-active::after {
+.au-tabs__tab.is-active .au-tabs__label::after {
   opacity: 1;
   transform: scaleX(1);
 }
