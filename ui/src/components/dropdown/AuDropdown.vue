@@ -55,6 +55,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useOverlayLayer } from '../../utils/overlay-layer.js';
 import { AuButton } from '../button/index.js';
 import { AuIcon } from '../icon/index.js';
 
@@ -97,10 +98,11 @@ const menuPosition = ref({ x: 0, y: 0 });
 const dropdownId = `${DROPDOWN_ID_PREFIX}${++dropdownSeed}`;
 let updateFrame = null;
 
+const overlayLayer = useOverlayLayer(() => props.zIndex);
 const menuStyle = computed(() => ({
   left: `${menuPosition.value.x}px`,
   top: `${menuPosition.value.y}px`,
-  zIndex: props.zIndex,
+  zIndex: overlayLayer.value,
   maxHeight: props.maxHeight > 0
     ? `min(${props.maxHeight}px, calc(100dvh - ${VIEWPORT_GAP * 2}px))`
     : `calc(100dvh - ${VIEWPORT_GAP * 2}px)`,

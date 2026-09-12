@@ -43,6 +43,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
+import { useOverlayLayer } from '../../utils/overlay-layer.js';
 import { IconX } from '../../icons/internal.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButton } from '../button/index.js';
@@ -75,7 +76,8 @@ let scrollLocked = false;
 let previouslyFocusedElement = null;
 
 const hasHeader = computed(() => Boolean(props.title || slots.header || props.showClose));
-const overlayStyle = computed(() => ({ zIndex: props.zIndex }));
+const overlayLayer = useOverlayLayer(() => props.zIndex);
+const overlayStyle = computed(() => ({ zIndex: overlayLayer.value }));
 const dialogStyle = computed(() => ({
   width: formatSize(props.width),
   height: formatSize(props.height),

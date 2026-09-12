@@ -29,6 +29,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, ref, useSlots } from 'vue';
+import { useOverlayLayer } from '../../utils/overlay-layer.js';
 
 const VIEWPORT_GAP = 8;
 const ARROW_SAFE_GAP = 10;
@@ -62,7 +63,9 @@ let eventsBound = false;
 const tooltipText = computed(() => String(props.content ?? '').trim());
 const hasContent = computed(() => Boolean(tooltipText.value || slots.content));
 const maxWidthValue = computed(() => (typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth));
+const overlayLayer = useOverlayLayer(() => 'var(--au-z-index-hint)');
 const popperStyle = computed(() => ({
+  zIndex: overlayLayer.value,
   left: `${popperPosition.value.x}px`,
   top: `${popperPosition.value.y}px`,
   maxWidth: `min(${maxWidthValue.value}, calc(100vw - ${VIEWPORT_GAP * 2}px))`,

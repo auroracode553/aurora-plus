@@ -43,7 +43,7 @@ import popoverBasicSource from '../.vitepress/theme/examples/popover/PopoverBasi
 | `surface` | 是否提供默认材质、边框和内边距 | `boolean` | `true` |
 | `teleported` | 是否传送到 `appendTo` | `boolean` | `true` |
 | `appendTo` | Teleport 目标 | `string / Element` | `body` |
-| `zIndex` | 浮层层级 | `number` | `1200` |
+| `zIndex` | 基础层级；嵌套时实际层级至少比父浮层高 1 | `number` | `1200` |
 
 ### Events
 

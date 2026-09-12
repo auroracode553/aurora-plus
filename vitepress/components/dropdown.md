@@ -60,7 +60,7 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `itemKey` | 自定义菜单项 key 解析函数 | `function` | `null` |
 | `teleported` | 是否 Teleport 到 `appendTo` | `boolean` | `true` |
 | `appendTo` | Teleport 目标 | `string / element` | `body` |
-| `zIndex` | 菜单层级 | `number` | `1200` |
+| `zIndex` | 基础层级；嵌套时实际层级至少比父浮层高 1 | `number` | `1200` |
 
 `placement` 可选 `top-start`、`top`、`top-end`、`bottom-start`、`bottom`、`bottom-end`；`top` 与 `bottom` 居中对齐，带 `start` / `end` 后缀时按对应边缘对齐。未声明的属性会透传到根元素。
 

@@ -43,7 +43,7 @@ Dialog 面板统一读取全局或局部的 `soft`、`clear`、`solid` 材质设
 | `closeOnPressEscape` | 按 Escape 是否关闭 | `boolean` | `true` |
 | `showClose` | 是否显示右上角关闭按钮 | `boolean` | `true` |
 | `closeLabel` | 关闭按钮提示 | `string` | `关闭` |
-| `zIndex` | 遮罩层级 | `number` | `10000` |
+| `zIndex` | 基础层级；嵌套时实际层级至少比父浮层高 1，内部浮层自动继承 | `number` | `10000` |
 
 ### Events
 

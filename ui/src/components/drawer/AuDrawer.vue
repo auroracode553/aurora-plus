@@ -57,6 +57,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { IconX } from '../../icons/internal.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
+import { useOverlayLayer } from '../../utils/overlay-layer.js';
 import { AuButton } from '../button/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 
@@ -96,6 +97,7 @@ const emit = defineEmits([
   'before-close-error',
 ]);
 const slots = useSlots();
+const overlayLayer = useOverlayLayer(() => props.zIndex);
 const drawerRef = ref(null);
 const visible = ref(Boolean(props.modelValue));
 const rendered = ref(Boolean(props.modelValue));
@@ -110,7 +112,7 @@ const hasHeader = computed(() => {
   return props.withHeader && Boolean(props.title || slots.header || props.showClose);
 });
 const overlayStyle = computed(() => ({
-  zIndex: props.zIndex,
+  zIndex: overlayLayer.value,
   padding: formatSize(props.viewportPadding),
 }));
 const drawerStyle = computed(() => {

@@ -51,6 +51,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useOverlayLayer } from '../../utils/overlay-layer.js';
 
 const BASE_PLACEMENTS = ['top', 'right', 'bottom', 'left'];
 const ALIGNMENTS = ['start', 'center', 'end'];
@@ -223,10 +224,11 @@ const contentPosition = ref({ x: 0, y: 0 });
 let updateFrame = null;
 let resizeObserver = null;
 
+const overlayLayer = useOverlayLayer(() => props.zIndex);
 const contentStyle = computed(() => ({
   left: `${contentPosition.value.x}px`,
   top: `${contentPosition.value.y}px`,
-  zIndex: props.zIndex,
+  zIndex: overlayLayer.value,
   ...(props.matchTriggerWidth && triggerWidth.value > 0
     ? { minWidth: `${triggerWidth.value}px` }
     : {}),

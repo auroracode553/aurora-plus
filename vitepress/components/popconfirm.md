@@ -8,6 +8,8 @@ import popconfirmBasicSource from '../.vitepress/theme/examples/popconfirm/Popco
 
 `AuPopconfirm` 在操作触发点附近进行轻量确认，适合删除、覆盖等需要防误触但不需要完整对话框的动作。
 
+在 Drawer、Dialog、Popover 或 Dropdown 内使用时，确认框自动位于所属浮层之上，即使挂载到 `body` 也无需手动设置层级。
+
 ## 基础用法
 
 <DemoBlock title="危险操作确认" description="确认与取消后自动关闭，并把焦点还给触发按钮。" :source="popconfirmBasicSource" default-expanded>

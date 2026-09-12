@@ -43,7 +43,7 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 | `closeLabel` | 关闭按钮提示 | `string` | `关闭抽屉` |
 | `destroyOnClose` | 关闭过渡完成后是否销毁内容 | `boolean` | `false` |
 | `beforeClose` | 关闭前守卫；接收 `done`，也支持返回布尔值或 Promise | `(done) => void \| boolean \| Promise<boolean>` | — |
-| `zIndex` | 模态层级 | `number` | `10000` |
+| `zIndex` | 基础层级；嵌套时实际层级至少比父浮层高 1，内部浮层自动继承 | `number` | `10000` |
 
 `beforeClose` 使用回调风格时调用 `done()` 允许关闭；调用 `done(false)` 或返回 `false` 会保留抽屉。Promise 解析为 `false` 也会阻止关闭。守卫执行期间关闭按钮会暂时禁用，重复关闭请求会被忽略。
 
