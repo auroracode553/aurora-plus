@@ -1,7 +1,8 @@
 <template>
   <div
+    ref="rootRef"
     class="au-virtual-table au-component au-surface-frame au-surface-frame--rounded"
-    :class="{ 'has-border': border, 'is-striped': stripe, 'is-loading': loading }"
+    :class="{ 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight }"
     :style="rootStyle"
   >
     <div
@@ -215,6 +216,7 @@ const props = defineProps({
   data: { type: Array, default: () => [] },
   width: { type: [String, Number], default: '100%' },
   height: { type: [String, Number], default: 400 },
+  autoHeight: { type: Boolean, default: false },
   rowHeight: { type: Number, default: 40, validator: (value) => value > 0 },
   headerHeight: { type: Number, default: 36, validator: (value) => value > 0 },
   overscan: { type: Number, default: 6, validator: (value) => value >= 0 },
@@ -242,11 +244,13 @@ const emit = defineEmits([
 
 const headerViewportRef = ref(null);
 const scrollContainerRef = ref(null);
+const rootRef = ref(null);
 const scrollTop = ref(0);
 const scrollLeft = ref(0);
 const viewportWidth = ref(0);
 const viewportHeight = ref(0);
 const horizontalScrollbarHeight = ref(0);
+const frameBorderHeight = ref(0);
 const innerSort = ref(normalizeSort(props.sortBy || props.defaultSort));
 let resizeObserver = null;
 let listeningWindowResize = false;
@@ -278,13 +282,15 @@ const visibleRows = computed(() => sortedRows.value
     ...entry,
     visibleIndex: visibleRange.value.start + localIndex,
   })));
-const rootStyle = computed(() => ({
-  width: formatSize(props.width),
-  height: formatSize(props.height),
-}));
 const contentHeight = computed(() => (
   sortedRows.value.length * props.rowHeight
 ));
+const rootStyle = computed(() => ({
+  width: formatSize(props.width),
+  height: formatSize(props.autoHeight
+    ? props.headerHeight + contentHeight.value + horizontalScrollbarHeight.value + frameBorderHeight.value
+    : props.height),
+}));
 const canvasStyle = computed(() => ({
   width: `${canvasWidth.value}px`,
   // CSS fills short tables without feeding rounded viewport heights back into layout.
@@ -423,6 +429,8 @@ function handleHeaderScroll(event) {
 function updateViewport() {
   const element = scrollContainerRef.value;
   if (!element) return;
+  const rootElement = rootRef.value;
+  frameBorderHeight.value = rootElement ? rootElement.offsetHeight - rootElement.clientHeight : 0;
   viewportWidth.value = element.clientWidth;
   viewportHeight.value = element.clientHeight;
   horizontalScrollbarHeight.value = element.offsetHeight - element.clientHeight;
@@ -494,7 +502,7 @@ watch(
 );
 
 watch(
-  () => [props.data.length, props.rowHeight, props.headerHeight, props.width, props.height, tableWidth.value],
+  () => [props.data.length, props.rowHeight, props.headerHeight, props.width, props.height, props.autoHeight, tableWidth.value],
   updateViewport,
   { flush: 'post' },
 );

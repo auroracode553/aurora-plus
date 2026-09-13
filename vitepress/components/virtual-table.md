@@ -1,7 +1,9 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import VirtualTableBasic from '../.vitepress/theme/examples/virtual-table/VirtualTableBasic.vue';
+import VirtualTableAutoHeight from '../.vitepress/theme/examples/virtual-table/VirtualTableAutoHeight.vue';
 import virtualTableBasicSource from '../.vitepress/theme/examples/virtual-table/VirtualTableBasic.vue?demo-source';
+import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-table/VirtualTableAutoHeight.vue?demo-source';
 </script>
 
 # VirtualTable 虚拟表格
@@ -19,6 +21,16 @@ import virtualTableBasicSource from '../.vitepress/theme/examples/virtual-table/
 表体使用原生滚动。纵向有未展示的行时优先滚动表格；到达顶部或底部后，允许滚动继续传递给外层可滚动容器或页面。空表格或内容不足一屏时，纵向滑动也可带动外层页面。
 
 横向滚动保留在表格内部，用于查看超出可见区域的列。该行为默认适用于触摸滑动、触控板和鼠标滚轮；嵌入抽屉、对话框或其他限制滚动传递的容器时，外层容器的滚动规则仍然生效。
+
+### 自动展开全部行
+
+数据量较少且需要由外层页面统一负责纵向滚动时，可启用 `auto-height`。组件会根据表头高度、数据行数、固定行高、外框和横向滚动条自动计算总高度，展开全部行并关闭表体纵向滚动；列宽超出容器时仍可横向滚动。启用后 `height` 不参与高度计算。
+
+<DemoBlock title="自动展开全部行" description="表格高度随数据行数展开，不产生纵向滚动；列宽超出容器时仅保留横向滚动。" :source="virtualTableAutoHeightSource" default-expanded>
+  <VirtualTableAutoHeight />
+</DemoBlock>
+
+大数据列表仍应使用固定 `height`，以保留视口虚拟化带来的渲染性能优势。
 
 ## Column 配置
 
@@ -42,6 +54,7 @@ import virtualTableBasicSource from '../.vitepress/theme/examples/virtual-table/
 | --- | --- | --- |
 | `columns` / `data` | 列配置 / 完整行数据 | `[] / []` |
 | `width` / `height` | 表格外部尺寸 | `100% / 400` |
+| `autoHeight` | 按表头和全部数据行自动展开高度，仅保留横向滚动；启用时忽略 `height` | `false` |
 | `rowHeight` / `headerHeight` | 固定行高 / 表头高度 | `40 / 36` |
 | `overscan` | 视口上下额外渲染行数 | `6` |
 | `rowKey` | key 字段路径或函数 | `id` |

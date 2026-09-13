@@ -27,6 +27,10 @@
   overscroll-behavior: contain auto;
 }
 
+.au-virtual-table.is-auto-height .au-virtual-table__body {
+  overflow-y: hidden;
+}
+
 .au-virtual-table__body::-webkit-scrollbar-button {
   display: none;
   width: 0;
