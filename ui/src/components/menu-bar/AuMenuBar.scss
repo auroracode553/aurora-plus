@@ -59,3 +59,8 @@
   flex: 1;
   -webkit-app-region: drag;
 }
+
+/* 菜单展开期间放开拖拽区，让空白处的点击能派发到渲染进程并关闭菜单 */
+.au-menu-bar__drag-fill.is-menu-open {
+  -webkit-app-region: no-drag;
+}

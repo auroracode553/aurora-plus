@@ -32,7 +32,11 @@
         />
       </div>
     </div>
-    <div v-if="draggable" class="au-menu-bar__drag-fill"></div>
+    <div
+      v-if="draggable"
+      class="au-menu-bar__drag-fill"
+      :class="{ 'is-menu-open': openIndex !== -1 }"
+    ></div>
   </nav>
 </template>
 
@@ -128,7 +132,15 @@ function handleKeydown(event) {
 }
 
 function handleOutsidePointer(event) {
-  if (!menuBarRef.value?.contains(event.target)) closeMenu();
+  const target = event.target;
+  const root = menuBarRef.value;
+  // 菜单栏自身横跨整行，不能用整条 nav 作为命中范围，
+  // 只有触发按钮和菜单面板算内部区域，其余空白（含拖拽区）都应关闭菜单。
+  if (!root || !(target instanceof Element) || !root.contains(target)) {
+    closeMenu();
+    return;
+  }
+  if (!target.closest('.au-menu-bar__trigger') && !target.closest('.au-menu-bar-panel')) closeMenu();
 }
 
 onMounted(() => {
