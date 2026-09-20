@@ -44,18 +44,6 @@
   @include interaction.selected;
 }
 
-.au-menu-item__content.is-active::before {
-  position: absolute;
-  top: 50%;
-  left: -14px;
-  width: 3px;
-  height: 24px;
-  border-radius: 0 var(--au-radius-compact) var(--au-radius-compact) 0;
-  background: var(--au-color-primary);
-  content: "";
-  transform: translateY(-50%);
-}
-
 .au-menu-item__content:active:not(:disabled) {
   @include motion.press(scale(0.98));
 }
@@ -116,10 +104,6 @@
 
 .au-menu-item.is-collapsed .au-menu-item__meta {
   display: none;
-}
-
-.au-menu-item.is-collapsed .au-menu-item__content.is-active::before {
-  left: -4px;
 }
 
 .au-menu-item.is-horizontal .au-menu-item__content {
