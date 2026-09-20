@@ -16,7 +16,6 @@ import treeBasicSource from '../.vitepress/theme/examples/tree/TreeBasic.vue?dem
   title="文档导航"
   description="包含三级节点；切换折叠模式后，可使用折叠按钮和左右方向键展开、收起各级分组。"
   :source="treeBasicSource"
-  default-expanded
 >
   <TreeBasic />
 </DemoBlock>

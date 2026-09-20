@@ -12,7 +12,7 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 
 ## 基础用法
 
-<DemoBlock title="10,000 行数据" description="支持切换刷新加载态；滚动时 DOM 中只保留当前可见行和 overscan 缓冲行。" :source="virtualTableBasicSource" default-expanded>
+<DemoBlock title="10,000 行数据" description="支持切换刷新加载态；滚动时 DOM 中只保留当前可见行和 overscan 缓冲行。" :source="virtualTableBasicSource">
   <VirtualTableBasic />
 </DemoBlock>
 
@@ -26,7 +26,7 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 
 数据量较少且需要由外层页面统一负责纵向滚动时，可启用 `auto-height`。组件会根据表头高度、数据行数、固定行高、外框和横向滚动条自动计算总高度，展开全部行并关闭表体纵向滚动；列宽超出容器时仍可横向滚动。启用后 `height` 不参与高度计算。
 
-<DemoBlock title="自动展开全部行" description="表格高度随数据行数展开，不产生纵向滚动；列宽超出容器时仅保留横向滚动。" :source="virtualTableAutoHeightSource" default-expanded>
+<DemoBlock title="自动展开全部行" description="表格高度随数据行数展开，不产生纵向滚动；列宽超出容器时仅保留横向滚动。" :source="virtualTableAutoHeightSource">
   <VirtualTableAutoHeight />
 </DemoBlock>
 

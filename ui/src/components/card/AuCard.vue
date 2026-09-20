@@ -3,7 +3,7 @@
     :is="tag"
     class="au-card au-component au-material-surface au-material-surface--base"
     :class="[
-      variantClass,
+      typeClass,
       `has-${padding}-padding`,
     ]"
     v-bind="$attrs"
@@ -19,10 +19,10 @@ defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
   tag: { type: [String, Object, Function], default: 'div' },
-  variant: {
+  type: {
     type: String,
-    default: 'outlined',
-    validator: (value) => ['outlined', 'flat', 'elevated'].includes(value),
+    default: 'default',
+    validator: (value) => ['default', 'flat', 'elevated', 'subtle'].includes(value),
   },
   padding: {
     type: String,
@@ -31,9 +31,9 @@ const props = defineProps({
   },
 });
 
-// 默认 outlined 即基础样式，无需额外变体 class。
-const variantClass = computed(() =>
-  props.variant === 'outlined' ? '' : `au-card--${props.variant}`,
+// 默认 default 即基础样式，无需额外类型 class。
+const typeClass = computed(() =>
+  props.type === 'default' ? '' : `au-card--${props.type}`,
 );
 </script>
 

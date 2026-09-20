@@ -14,7 +14,6 @@ import panelBasicSource from '../.vitepress/theme/examples/panel/PanelBasic.vue?
   title="完全由插槽渲染的面板"
   description="标题、说明、操作和反馈均由使用者提供，Panel 不解析任何业务字段。"
   :source="panelBasicSource"
-  default-expanded
 >
   <PanelBasic />
 </DemoBlock>

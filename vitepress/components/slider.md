@@ -14,7 +14,6 @@ import sliderBasicSource from '../.vitepress/theme/examples/slider/SliderBasic.v
   title="权重与参数调节"
   description="复用同一个滑块处理整数百分比和小数步进；标题、当前值与两端说明由业务布局自由组合。"
   :source="sliderBasicSource"
-  default-expanded
 >
   <SliderBasic />
 </DemoBlock>

@@ -16,7 +16,6 @@ import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/Co
   title="配置式菜单"
   description="在演示区点击右键；删除动作会先进入 beforeSelect 注入的确认流程。"
   :source="contextMenuBasicSource"
-  default-expanded
 >
   <ContextMenuBasic />
 </DemoBlock>

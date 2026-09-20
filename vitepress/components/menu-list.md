@@ -16,7 +16,6 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
   title="分组菜单与设置行"
   description="同一组件既可承载分组菜单，也可只声明一个 MenuListItem 作为独立操作入口。"
   :source="menuListBasicSource"
-  default-expanded
 >
   <MenuListBasic />
 </DemoBlock>

@@ -14,7 +14,6 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
   title="日期与日期时间"
   description="日期即时提交，日期范围在选完起止日期后提交，日期时间在点击确定后提交。"
   :source="datePickerBasicSource"
-  default-expanded
 >
   <DatePickerBasic />
 </DemoBlock>

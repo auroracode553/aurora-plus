@@ -8,7 +8,7 @@ import cardVariantsSource from '../.vitepress/theme/examples/card/CardVariants.v
 
 # Card 卡片
 
-`AuCard` 是内容容器组件，提供材质表面、圆角、可选边框/阴影和内边距。默认 `outlined` 变体用细边框配轻阴影勾勒轮廓，卡片在浅色背景上边界清晰；`flat` 提供无边框无阴影的极简表面。
+`AuCard` 是内容容器组件，提供材质表面、圆角、可选边框/阴影和内边距。通过 `type` 切换卡片外观，类似按钮的类型封装。
 
 ## 基础用法
 
@@ -20,19 +20,20 @@ import cardVariantsSource from '../.vitepress/theme/examples/card/CardVariants.v
   <CardBasic />
 </DemoBlock>
 
-## 变体
+## 类型
 
 <DemoBlock
-  title="三种表面层级"
-  description="outlined 为默认细边框 + 轻阴影；flat 无边框无阴影；elevated 用更明显的阴影浮起。"
+  title="四种卡片类型"
+  description="default 为白卡细边框 + 轻阴影；flat 纯白无边框；elevated 浮起；subtle 浅灰面。"
   :source="cardVariantsSource"
 >
   <CardVariants />
 </DemoBlock>
 
-- `outlined`（默认）：细边框 + 轻阴影，轮廓清晰，适合日常卡片、列表与看板场景。
-- `flat`：无边框、无阴影的极简表面，适合已经有明确容器边界或需要完全平面的场景。
-- `elevated`：细边框 + 更明显的阴影，让卡片从背景中浮起，适合可拖拽或悬浮的场景。
+- `default`（默认）：白卡 + 细边框 + 轻阴影，轮廓清晰，适合日常卡片与看板。
+- `flat`：纯白表面，无边框无阴影，适合已有明确容器边界的场景。
+- `elevated`：细边框 + 更明显的阴影，让卡片从背景中浮起。
+- `subtle`：浅灰表面，无边框无阴影，适合次级信息分组与内容分区。
 
 ## 设计边界
 
@@ -49,7 +50,7 @@ import cardVariantsSource from '../.vitepress/theme/examples/card/CardVariants.v
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | `tag` | 根元素或动态组件 | `string / Component` | `div` |
-| `variant` | 表面层级，可选 `outlined / flat / elevated` | `string` | `outlined` |
+| `type` | 卡片类型，可选 `default / flat / elevated / subtle` | `string` | `default` |
 | `padding` | 内容留白，可选 `none / compact / default / comfortable` | `string` | `default` |
 
 ### Slots

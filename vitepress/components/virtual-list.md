@@ -16,7 +16,6 @@ import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/Vi
   title="1,000 条项目数据"
   description="输入关键词筛选，或通过组件实例定位到列表中间；DOM 仅保留当前范围和缓冲项。"
   :source="virtualListBasicSource"
-  default-expanded
 >
   <VirtualListBasic />
 </DemoBlock>

@@ -14,7 +14,6 @@ import popoverBasicSource from '../.vitepress/theme/examples/popover/PopoverBasi
   title="锚定操作面板"
   description="Popover 负责交互与定位，Panel 和其中的所有内容均由使用者组合。"
   :source="popoverBasicSource"
-  default-expanded
 >
   <PopoverBasic />
 </DemoBlock>

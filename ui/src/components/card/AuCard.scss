@@ -1,4 +1,4 @@
-/* 卡片默认（outlined）：细边框 + 轻阴影，轮廓清晰但不厚重。圆角与材质背景跟随全局语义变量。 */
+/* 卡片默认（default）：细边框 + 轻阴影，轮廓清晰但不厚重。圆角与材质背景跟随全局语义变量。 */
 .au-card {
   display: flex;
   min-width: 0;
@@ -10,7 +10,7 @@
   color: var(--au-color-text-primary);
 }
 
-/* 变体：flat 为无边框无阴影的极简表面；elevated 用更明显的阴影浮起。 */
+/* 类型：flat 为纯白无边框无阴影；elevated 用更明显的阴影浮起；subtle 为浅灰面。 */
 .au-card--flat {
   border-color: transparent;
   box-shadow: none;
@@ -18,6 +18,12 @@
 
 .au-card--elevated {
   box-shadow: var(--au-shadow-surface);
+}
+
+.au-card--subtle {
+  border-color: transparent;
+  background: var(--au-material-background-subtle);
+  box-shadow: none;
 }
 
 .au-card.has-none-padding {

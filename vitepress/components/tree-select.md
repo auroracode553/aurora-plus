@@ -14,7 +14,6 @@ import treeSelectBasicSource from '../.vitepress/theme/examples/tree-select/Tree
   title="搜索与叶节点选择"
   description="搜索时保留匹配节点的祖先路径；仅叶节点模式仍允许通过父节点的展开按钮浏览层级。"
   :source="treeSelectBasicSource"
-  default-expanded
 >
   <TreeSelectBasic />
 </DemoBlock>

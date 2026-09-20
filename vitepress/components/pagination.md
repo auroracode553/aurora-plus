@@ -12,7 +12,7 @@ import paginationBasicSource from '../.vitepress/theme/examples/pagination/Pagin
 
 ## 基础用法
 
-<DemoBlock title="完整分页" description="布局中的箭头分隔符会把后续控件推到容器右侧。" :source="paginationBasicSource" default-expanded>
+<DemoBlock title="完整分页" description="布局中的箭头分隔符会把后续控件推到容器右侧。" :source="paginationBasicSource">
   <PaginationBasic />
 </DemoBlock>
 

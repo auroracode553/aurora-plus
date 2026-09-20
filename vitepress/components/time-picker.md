@@ -16,7 +16,6 @@ import timePickerBasicSource from '../.vitepress/theme/examples/time-picker/Time
   title="时间边界与步长"
   description="可限制可用时间范围，并分别控制小时、分钟和秒的选项步长。"
   :source="timePickerBasicSource"
-  default-expanded
 >
   <TimePickerBasic />
 </DemoBlock>

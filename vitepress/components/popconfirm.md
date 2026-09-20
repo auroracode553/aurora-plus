@@ -12,7 +12,7 @@ import popconfirmBasicSource from '../.vitepress/theme/examples/popconfirm/Popco
 
 ## 基础用法
 
-<DemoBlock title="危险操作确认" description="确认与取消后自动关闭，并把焦点还给触发按钮。" :source="popconfirmBasicSource" default-expanded>
+<DemoBlock title="危险操作确认" description="确认与取消后自动关闭，并把焦点还给触发按钮。" :source="popconfirmBasicSource">
   <PopconfirmBasic />
 </DemoBlock>
 

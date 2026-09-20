@@ -14,7 +14,6 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
   title="基础表单校验"
   description="名称和日期为必填项；失焦或选择日期时执行字段校验，点击保存执行整表校验，重置会清除校验状态。"
   :source="formBasicSource"
-  default-expanded
 >
   <FormBasic />
 </DemoBlock>

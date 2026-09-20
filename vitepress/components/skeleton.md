@@ -16,7 +16,7 @@ import throttleSource from '../.vitepress/theme/examples/skeleton/SkeletonThrott
 
 默认显示一行宽度为 33% 的标题占位，以及三行段落占位，最后一行宽度为 61%。`rows` 只计算段落行数；设为 `0` 时保留标题行。`animated` 默认关闭，开启后使用轻微呼吸动画。
 
-<DemoBlock title="行数、动画与形状" :source="basicSource" default-expanded>
+<DemoBlock title="行数、动画与形状" :source="basicSource">
   <SkeletonBasic />
 </DemoBlock>
 

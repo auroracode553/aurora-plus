@@ -18,7 +18,6 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
   title="侧栏导航"
   description="支持分组、选中、图标、徽标、状态点和完整键盘导航。"
   :source="menuBasicSource"
-  default-expanded
 >
   <MenuBasic />
 </DemoBlock>
@@ -31,7 +30,6 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
   title="图标侧边栏"
   description="窄栏纵向排布，底部插槽固定通知与账户入口。"
   :source="menuRailSource"
-  default-expanded
 >
   <MenuRail />
 </DemoBlock>

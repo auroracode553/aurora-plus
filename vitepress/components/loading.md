@@ -22,7 +22,6 @@ import loadingServiceSource from '../.vitepress/theme/examples/loading/LoadingSe
   title="区域加载与自定义图标"
   description="加载层继承页面表面；自定义 SVG 只改变进度图标，不改变目标区域尺寸。"
   :source="loadingBasicSource"
-  default-expanded
 >
   <LoadingBasic />
 </DemoBlock>

@@ -1,19 +1,24 @@
 <template>
   <div class="card-demo">
     <div class="card-demo__group">
-      <AuCard variant="outlined">
-        <h3>outlined</h3>
-        <p>默认变体：细边框 + 轻阴影，在浅色背景上轮廓清晰。</p>
+      <AuCard type="default">
+        <h3>default</h3>
+        <p>白卡 + 细边框 + 轻阴影，轮廓清晰。</p>
       </AuCard>
 
-      <AuCard variant="flat">
+      <AuCard type="flat">
         <h3>flat</h3>
-        <p>无边框无阴影的极简表面，适合已有明确边界的容器。</p>
+        <p>纯白表面，无边框无阴影。</p>
       </AuCard>
 
-      <AuCard variant="elevated">
+      <AuCard type="elevated">
         <h3>elevated</h3>
-        <p>细边框配更明显的阴影，让卡片从页面背景中浮起。</p>
+        <p>细边框配更明显的阴影，从背景中浮起。</p>
+      </AuCard>
+
+      <AuCard type="subtle">
+        <h3>subtle</h3>
+        <p>浅灰表面，无边框无阴影，适合次级分组。</p>
       </AuCard>
     </div>
   </div>

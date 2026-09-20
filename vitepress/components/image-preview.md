@@ -10,7 +10,7 @@ import imagePreviewBasicSource from '../.vitepress/theme/examples/image-preview/
 
 ## 基础用法
 
-<DemoBlock title="多图预览" description="点击缩略图打开；方向键切图，+ / - 缩放，0 还原，Escape 关闭。" :source="imagePreviewBasicSource" default-expanded>
+<DemoBlock title="多图预览" description="点击缩略图打开；方向键切图，+ / - 缩放，0 还原，Escape 关闭。" :source="imagePreviewBasicSource">
   <ImagePreviewBasic />
 </DemoBlock>
 
