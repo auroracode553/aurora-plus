@@ -51,7 +51,7 @@ function saveProfile() {
 
 .dialog-demo__form label {
   gap: 7px;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   font-size: 13px;
 }
 
@@ -59,8 +59,8 @@ function saveProfile() {
 .dialog-demo__form textarea {
   width: 100%;
   padding: 9px 11px;
-  border: 1px solid var(--au-color-border);
-  border-radius: var(--au-border-radius-base);
+  border: 1px solid var(--au-color-border-default);
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-primary);
   background: transparent;
   outline: none;

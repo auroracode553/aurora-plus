@@ -66,7 +66,7 @@ const formatPercent = (value) => `${value}%`;
 .slider-demo__factor-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(150px, 1fr));
-  border: 1px solid var(--au-color-border-lighter);
+  border: 1px solid var(--au-color-border-muted);
   border-radius: var(--au-radius-control);
 }
 
@@ -78,7 +78,7 @@ const formatPercent = (value) => `${value}%`;
 }
 
 .slider-demo__factor + .slider-demo__factor {
-  border-inline-start: 1px solid var(--au-color-border-lighter);
+  border-inline-start: 1px solid var(--au-color-border-muted);
 }
 
 .slider-demo__heading,
@@ -124,7 +124,7 @@ const formatPercent = (value) => `${value}%`;
   }
 
   .slider-demo__factor + .slider-demo__factor {
-    border-block-start: 1px solid var(--au-color-border-lighter);
+    border-block-start: 1px solid var(--au-color-border-muted);
     border-inline-start: 0;
   }
 }

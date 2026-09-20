@@ -107,10 +107,10 @@ function handleCancel(item) {
   align-items: center;
   justify-content: center;
   min-height: 220px;
-  border: 1px dashed var(--au-color-border);
+  border: 1px dashed var(--au-color-border-default);
   border-radius: 10px;
   color: var(--au-color-text-secondary);
-  background: var(--au-color-bg-soft);
+  background: var(--au-color-background-subtle);
   flex-direction: column;
   gap: 9px;
   user-select: none;

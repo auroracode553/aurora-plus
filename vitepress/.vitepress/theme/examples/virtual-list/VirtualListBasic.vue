@@ -89,7 +89,7 @@ function scrollToMiddle() {
 .virtual-list-demo {
   height: 330px;
   overflow: hidden;
-  border: 1px solid var(--au-color-border-lighter);
+  border: 1px solid var(--au-color-border-muted);
   border-radius: 8px;
   background: transparent;
 }
@@ -106,8 +106,8 @@ function scrollToMiddle() {
   min-width: 210px;
   height: 28px;
   padding: 0 9px;
-  border: 1px solid var(--au-color-border);
-  border-radius: var(--au-border-radius-base);
+  border: 1px solid var(--au-color-border-default);
+  border-radius: var(--au-radius-control);
   color: var(--au-color-text-primary);
   background: transparent;
   font: inherit;
@@ -127,8 +127,8 @@ function scrollToMiddle() {
   align-items: center;
   height: 36px;
   padding: 0 10px;
-  border-bottom: 1px solid var(--au-color-border-lighter);
-  color: var(--au-color-text-regular);
+  border-bottom: 1px solid var(--au-color-border-muted);
+  color: var(--au-color-text-default);
   font-size: 13px;
 }
 
@@ -176,7 +176,7 @@ function scrollToMiddle() {
   bottom: 2px;
   left: 0;
   width: 1px;
-  background: var(--au-color-border-light);
+  background: var(--au-color-border-subtle);
   content: '';
 }
 

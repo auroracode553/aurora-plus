@@ -101,7 +101,7 @@ function toggleItem(item) {
 .tree-demo__tree {
   height: 252px;
   overflow: hidden;
-  border: 1px solid var(--au-color-border-lighter);
+  border: 1px solid var(--au-color-border-muted);
   border-radius: 8px;
 }
 

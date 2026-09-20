@@ -47,7 +47,7 @@ const colorGroups = [
     description: '用稳定的语义层级组织标题、正文、说明和不可用信息。',
     tokens: [
       { name: '--au-color-text-primary', label: 'Primary 主要文字', description: '标题与需要强调的正文' },
-      { name: '--au-color-text-regular', label: 'Regular 常规文字', description: '默认正文与控件文字' },
+      { name: '--au-color-text-default', label: 'Regular 常规文字', description: '默认正文与控件文字' },
       { name: '--au-color-text-secondary', label: 'Secondary 次要文字', description: '说明、辅助状态与次级信息' },
       { name: '--au-color-text-placeholder', label: 'Placeholder 占位文字', description: '输入提示和弱提示信息' },
       { name: '--au-color-text-disabled', label: 'Disabled 禁用文字', description: '不可操作或不可用状态' },
@@ -58,9 +58,9 @@ const colorGroups = [
     title: '背景与遮罩',
     description: '用于页面自有内容的弱背景、浮层底色、悬停反馈和模态遮罩。',
     tokens: [
-      { name: '--au-color-bg-soft', label: 'Soft 柔和背景', description: '弱分区与低对比内容背景' },
-      { name: '--au-color-bg-overlay', label: 'Overlay 浮层背景', description: '不透明浮层和高对比表面' },
-      { name: '--au-color-bg-hover', label: 'Hover 悬停背景', description: '轻量悬停与选择反馈' },
+      { name: '--au-color-background-subtle', label: 'Soft 柔和背景', description: '弱分区与低对比内容背景' },
+      { name: '--au-color-background-overlay', label: 'Overlay 浮层背景', description: '不透明浮层和高对比表面' },
+      { name: '--au-color-background-hover', label: 'Hover 悬停背景', description: '轻量悬停与选择反馈' },
       { name: '--au-color-mask', label: 'Mask 遮罩', description: '需要遮罩语义时的透明颜色' },
     ],
   },
@@ -69,9 +69,9 @@ const colorGroups = [
     title: '边框层级',
     description: '按信息层级选择常规、轻量和更轻量的分隔颜色。',
     tokens: [
-      { name: '--au-color-border', label: 'Border 常规边框', description: '需要明确轮廓的边界' },
-      { name: '--au-color-border-light', label: 'Border Light 轻边框', description: '控件与内容区域的柔和边界' },
-      { name: '--au-color-border-lighter', label: 'Border Lighter 更轻边框', description: '列表分隔与低对比轮廓' },
+      { name: '--au-color-border-default', label: 'Border 常规边框', description: '需要明确轮廓的边界' },
+      { name: '--au-color-border-subtle', label: 'Border Light 轻边框', description: '控件与内容区域的柔和边界' },
+      { name: '--au-color-border-muted', label: 'Border Lighter 更轻边框', description: '列表分隔与低对比轮廓' },
     ],
   },
 ];
@@ -119,7 +119,7 @@ const colorGroups = [
   min-width: 0;
   min-height: 86px;
   padding: 10px;
-  border: 1px solid var(--au-color-border-lighter);
+  border: 1px solid var(--au-color-border-muted);
   border-radius: var(--au-radius-control);
   background: transparent;
   gap: 12px;
@@ -130,9 +130,9 @@ const colorGroups = [
   display: block;
   min-height: 64px;
   overflow: hidden;
-  border: 1px solid var(--au-color-border-light);
-  border-radius: var(--au-radius-small);
-  background: var(--au-color-bg-soft);
+  border: 1px solid var(--au-color-border-subtle);
+  border-radius: var(--au-radius-control);
+  background: var(--au-color-background-subtle);
 }
 
 .color-token-palette__swatch > span {

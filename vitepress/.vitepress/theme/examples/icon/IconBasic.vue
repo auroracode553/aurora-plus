@@ -62,7 +62,7 @@ const iconItems = [
   align-items: center;
   justify-content: center;
   min-height: 82px;
-  border: 1px solid var(--au-color-border-lighter);
+  border: 1px solid var(--au-color-border-muted);
   border-radius: 8px;
   color: var(--au-color-text-secondary);
   flex-direction: column;

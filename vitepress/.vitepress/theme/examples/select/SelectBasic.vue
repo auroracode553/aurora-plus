@@ -59,7 +59,7 @@ const formatLabel = computed(() => formatLabels[format.value]);
 
 .select-demo__result {
   margin: 0;
-  color: var(--au-color-text-regular);
+  color: var(--au-color-text-default);
   font-size: var(--au-font-size-small);
 }
 </style>

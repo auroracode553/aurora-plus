@@ -33,8 +33,8 @@ function toggleMaximize() {
 <style scoped>
 .window-title-bar-demo {
   overflow: hidden;
-  border: 1px solid var(--au-color-border-light);
-  border-radius: var(--au-border-radius-base);
+  border: 1px solid var(--au-color-border-subtle);
+  border-radius: var(--au-radius-surface);
   isolation: isolate;
 }
 

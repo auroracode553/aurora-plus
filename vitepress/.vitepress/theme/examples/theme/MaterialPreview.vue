@@ -187,7 +187,7 @@ function selectMaterial(value) {
 .material-preview__card-footer {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid var(--au-material-border-strong);
+  border-top: 1px solid var(--au-material-border-emphasis);
 }
 
 @media (max-width: 640px) {
