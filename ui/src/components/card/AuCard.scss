@@ -22,8 +22,8 @@
 
 .au-card--subtle {
   border-color: transparent;
-  /* 极淡灰白：20% 浅灰材质 + 纯白表面，精确贴合参考图的内层浅色卡。 */
-  background: color-mix(in srgb, var(--au-color-background-subtle) 20%, var(--au-material-background));
+  /* 极淡灰白：30% 浅灰材质 + 纯白表面，比纯白稍灰，贴合参考图的内层浅色卡。 */
+  background: color-mix(in srgb, var(--au-color-background-subtle) 30%, var(--au-material-background));
   box-shadow: none;
 }
 
