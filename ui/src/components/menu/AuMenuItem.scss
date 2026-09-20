@@ -4,6 +4,8 @@
 .au-menu-item {
   display: block;
   min-width: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .au-menu-item.is-horizontal {
@@ -122,4 +124,50 @@
   height: 2px;
   border-radius: var(--au-radius-pill);
   transform: none;
+}
+
+/* rail：窄图标侧边栏，图标在上、文字在下。 */
+.au-menu-item.is-rail .au-menu-item__content {
+  width: 48px;
+  min-height: 46px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 4px 2px;
+}
+
+.au-menu-item.is-rail .au-menu-item__label {
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* rail 下徽标退化为图标右上角的计数点，状态点缩小对齐同一角落。 */
+.au-menu-item.is-rail .au-menu-item__meta {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  flex-direction: column;
+  gap: 0;
+}
+
+.au-menu-item.is-rail .au-menu-item__badge {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border: 2px solid var(--au-color-background-overlay);
+  border-radius: var(--au-radius-pill);
+  background: var(--au-color-danger);
+  color: #ffffff;
+  font-size: 10px;
+}
+
+.au-menu-item.is-rail .au-menu-item__content.is-active .au-menu-item__badge {
+  color: #ffffff;
+  background: var(--au-color-danger);
+}
+
+.au-menu-item.is-rail .au-menu-item__indicator {
+  width: 6px;
+  height: 6px;
 }

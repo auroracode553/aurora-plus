@@ -1,7 +1,10 @@
 .au-menu {
   display: flex;
   min-width: 0;
+  margin: 0;
+  padding: 0;
   gap: 4px;
+  list-style: none;
   color: var(--au-color-text-default);
   background: transparent;
   font-size: var(--au-font-size-base);
@@ -25,6 +28,31 @@
   width: 48px;
   padding-left: 0;
   align-items: center;
+}
+
+/* rail：窄图标侧边栏，图标在上、文字在下，支持底部固定插槽。 */
+.au-menu.is-rail {
+  width: 56px;
+  height: 100%;
+  padding: 8px 0 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.au-menu.is-rail.is-collapsed {
+  width: 48px;
+}
+
+.au-menu__rail-spacer {
+  flex: 1;
+}
+
+.au-menu__rail-bottom {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
 .au-menu.is-disabled {

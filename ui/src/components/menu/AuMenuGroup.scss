@@ -1,6 +1,7 @@
 .au-menu-group {
   display: block;
   min-width: 0;
+  margin: 0;
   padding: 0 12px 8px;
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);
@@ -15,6 +16,18 @@
 .au-menu-group.is-horizontal,
 .au-menu-group.is-collapsed {
   display: none;
+}
+
+/* rail：标题无空间展示，spaced 分组退化为段落间距。 */
+.au-menu-group.is-rail {
+  display: none;
+}
+
+.au-menu-group.is-rail.is-spaced {
+  display: block;
+  height: 8px;
+  margin: 0;
+  padding: 0;
 }
 
 .au-menu-group__label {

@@ -2,6 +2,8 @@
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import MenuBasic from '../.vitepress/theme/examples/menu/MenuBasic.vue';
 import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?demo-source';
+import MenuRail from '../.vitepress/theme/examples/menu/MenuRail.vue';
+import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-source';
 </script>
 
 # Menu 导航菜单
@@ -21,12 +23,26 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
   <MenuBasic />
 </DemoBlock>
 
+## 图标侧边栏
+
+`mode="rail"` 将菜单渲染为窄图标侧边栏：图标在上、文字在下，适合高频导航放置于应用边缘。徽标会退化为图标右上角的计数点；`#bottom` 插槽可固定通知、账户等底部入口，菜单容器需要设置高度才能让底部区域贴底。
+
+<DemoBlock
+  title="图标侧边栏"
+  description="窄栏纵向排布，底部插槽固定通知与账户入口。"
+  :source="menuRailSource"
+  default-expanded
+>
+  <MenuRail />
+</DemoBlock>
+
 ## 使用建议
 
 - 菜单适合放在持续可见的侧栏或设置区域中，当前项会显示浅色选中面和左侧激活条。
 - 分组标题使用 `AuMenuGroup`，需要更大的段落间距时设置 `spaced`。
 - 纵向菜单使用 `ArrowUp`、`ArrowDown`，横向菜单使用 `ArrowLeft`、`ArrowRight`；`Home`、`End` 定位首尾项，Enter 和 Space 选择当前项。
-- 折叠菜单应为每个菜单项提供 `label`，组件会将它保留为鼠标提示。
+- `mode="rail"` 适合应用边缘的高频导航：保持 56px 窄栏，分组标题不展示，`spaced` 分组退化为段落间距；为菜单容器设置高度后，`#bottom` 插槽会贴底固定。
+- 折叠菜单应为每个菜单项提供 `label`，组件会将它保留为鼠标提示；rail 模式同样支持 `collapse` 折叠为纯图标。
 
 ## AuMenu API
 
@@ -35,7 +51,7 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | `modelValue` | 当前菜单项的 `index` | `string / number` | `''` |
-| `mode` | 排列方向，可选 `vertical / horizontal` | `string` | `vertical` |
+| `mode` | 排列方向，可选 `vertical / horizontal / rail` | `string` | `vertical` |
 | `collapse` | 纵向菜单是否折叠为仅图标模式 | `boolean` | `false` |
 | `disabled` | 是否禁用整个菜单 | `boolean` | `false` |
 | `loop` | 方向键到达边界后是否循环 | `boolean` | `true` |
@@ -55,6 +71,7 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 放置 `AuMenuItem` |
+| `bottom` | 仅 `rail` 模式下渲染；底部固定内容，不参与键盘导航与选中 |
 
 ### Exposes
 
@@ -88,7 +105,7 @@ import menuBasicSource from '../.vitepress/theme/examples/menu/MenuBasic.vue?dem
 | `label` | 文本回退值，并为折叠模式提供鼠标提示 | `string` | `''` |
 | `icon` | Aurora Plus 图标组件 | `Component` | `null` |
 | `iconColor` | 图标颜色 | `string` | `''` |
-| `badge` | 尾部徽标文本 | `string / number` | `''` |
+| `badge` | 尾部徽标文本；`rail` 模式下退化为右上角计数点 | `string / number` | `''` |
 | `indicator` | 是否显示尾部状态点 | `boolean` | `false` |
 | `disabled` | 是否禁用当前项 | `boolean` | `false` |
 | `title` | 原生鼠标提示；折叠时默认回退为 `label` | `string` | `''` |

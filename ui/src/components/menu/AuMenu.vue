@@ -2,13 +2,17 @@
   <ul
     ref="menuRef"
     class="au-menu au-component au-list-reset"
-    :class="[`is-${mode}`, { 'is-collapsed': collapse && mode === 'vertical', 'is-disabled': disabled }]"
+    :class="[`is-${mode}`, { 'is-collapsed': collapsed, 'is-disabled': disabled }]"
     v-bind="$attrs"
     @focusin="handleFocusin"
     @focusout="handleFocusout"
     @keydown="handleKeydown"
   >
     <slot></slot>
+    <li v-if="$slots.bottom && mode === 'rail'" class="au-menu__rail-spacer"></li>
+    <li v-if="$slots.bottom && mode === 'rail'" class="au-menu__rail-bottom">
+      <slot name="bottom" />
+    </li>
   </ul>
 </template>
 
@@ -24,7 +28,7 @@ const props = defineProps({
   mode: {
     type: String,
     default: 'vertical',
-    validator: (value) => ['vertical', 'horizontal'].includes(value),
+    validator: (value) => ['vertical', 'horizontal', 'rail'].includes(value),
   },
   collapse: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
@@ -35,6 +39,11 @@ const emit = defineEmits(['update:modelValue', 'select', 'change']);
 const menuRef = ref(null);
 const itemStates = shallowReactive([]);
 const focusedUid = ref(null);
+
+// rail 与 vertical 同为纵向排列，可共享折叠为纯图标的能力。
+const collapsed = computed(() => (
+  props.collapse && ['vertical', 'rail'].includes(props.mode)
+));
 
 function registerItem(state) {
   if (itemStates.some((item) => item.uid === state.uid)) return;
@@ -112,7 +121,7 @@ function handleFocusout(event) {
 }
 
 function resolveKeyboardDirection(key) {
-  if (props.mode === 'vertical') {
+  if (props.mode === 'vertical' || props.mode === 'rail') {
     if (key === 'ArrowDown') return 1;
     if (key === 'ArrowUp') return -1;
     return 0;
@@ -169,7 +178,7 @@ function focus(index = props.modelValue) {
 
 provide(AU_MENU_CONTEXT_KEY, {
   mode: computed(() => props.mode),
-  collapsed: computed(() => props.collapse && props.mode === 'vertical'),
+  collapsed,
   disabled: computed(() => props.disabled),
   registerItem,
   unregisterItem,
