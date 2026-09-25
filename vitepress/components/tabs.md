@@ -13,8 +13,8 @@ import tabsBasicSource from '../.vitepress/theme/examples/tabs/TabsBasic.vue?dem
 ## 基础用法
 
 <DemoBlock
-  title="等宽标签页"
-  description="切换标签会更新对应内容；支持禁用项以及方向键、Home、End 键导航。"
+  title="基础标签页"
+  description="标签按内容宽度紧凑排列；切换标签会更新对应内容，支持禁用项以及方向键、Home、End 键导航。启用 fill 可让标签等分容器宽度。"
   :source="tabsBasicSource"
 >
   <TabsBasic />
