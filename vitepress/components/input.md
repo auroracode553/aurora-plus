@@ -6,7 +6,7 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 
 # Input 输入框
 
-`AuInput` 用于搜索、路径、账号和普通单行文本输入。组件保留原生 input 的行为，并统一尺寸、焦点、错误态与主题适配。
+`AuInput` 通过 `type` 统一提供普通输入、搜索、密码和 `textarea` 多行输入。组件保留原生控件行为，并统一尺寸、焦点、错误态与主题适配。
 
 输入框采用轻量玻璃表面与细边框，聚焦时通过边框颜色反馈状态，跟随全局 `soft / clear / solid` 材质及明暗主题。
 
@@ -24,6 +24,8 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 
 - 使用 `v-model` 管理值；组件始终通过字符串回传用户输入，与原生 input 行为一致。
 - 搜索框可设置 `type="search"`，需要组件内清除内容时增加 `clearable`。
+- 密码框可设置 `type="password"`，增加 `show-password-toggle` 提供显示/隐藏切换。
+- 多行输入使用 `type="textarea"`，通过 `rows` 设置初始行数；不再使用独立的 Textarea 组件。
 - `invalid` 可手动设置错误视觉；位于 `AuFormItem` 内时也会自动继承字段错误状态。
 - 位于 `AuFormItem` 内时，输入和失焦默认触发对应规则校验；仅提交时校验可设置 `:validate-event="false"`。
 - 异步读取或提交期间使用 `loading`，它会显示后缀加载图标 并阻止编辑和清空。
@@ -37,18 +39,21 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | `modelValue` | 当前输入值 | `string / number` | `''` |
-| `type` | 原生 input 类型 | `string` | `text` |
+| `type` | 输入形态；`textarea` 渲染多行控件，其余值作为原生 input 类型 | `string` | `text` |
 | `size` | 尺寸，可选 `small / default / large` | `string` | `default` |
 | `placeholder` | 占位文字 | `string` | `''` |
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `loading` | 是否处于加载中；开启时输入框不可编辑 | `boolean` | `false` |
 | `readonly` | 是否只读 | `boolean` | `false` |
 | `clearable` | 有内容时是否显示清除按钮 | `boolean` | `false` |
+| `showPasswordToggle` | `type="password"` 时是否显示显示/隐藏切换 | `boolean` | `false` |
 | `clearableWhenReadonly` | 原生输入只读时是否仍允许独立的清空操作 | `boolean` | `false` |
 | `replaceSuffixOnClear` | 有内容且可清空时，是否用清除按钮替换后缀内容 | `boolean` | `false` |
 | `prefixIcon` | 前缀图标组件 | `Component` | `null` |
 | `suffixIcon` | 后缀图标组件 | `Component` | `null` |
 | `maxlength` | 原生最大字符数 | `number / string` | `null` |
+| `rows` | `textarea` 的初始行数 | `number / string` | `3` |
+| `resize` | `textarea` 缩放方向：`none / both / horizontal / vertical` | `string` | `vertical` |
 | `showWordLimit` | 设置 maxlength 后是否显示字数 | `boolean` | `false` |
 | `invalid` | 是否手动显示错误状态；FormItem 的错误状态会自动合并 | `boolean` | `false` |
 | `validateEvent` | 是否在输入和失焦时通知所属 FormItem 校验 | `boolean` | `true` |

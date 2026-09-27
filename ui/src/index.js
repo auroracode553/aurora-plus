@@ -35,7 +35,6 @@ import { AuSlider } from './components/slider/index.js';
 import { AuSkeleton, AuSkeletonItem } from './components/skeleton/index.js';
 import { AuSwitch } from './components/switch/index.js';
 import { AuTabs } from './components/tabs/index.js';
-import { AuTextarea } from './components/textarea/index.js';
 import { AuTimePicker } from './components/time-picker/index.js';
 import { AuTooltip } from './components/tooltip/index.js';
 import { AuTree } from './components/tree/index.js';
@@ -101,7 +100,6 @@ const components = [
   AuSkeletonItem,
   AuSwitch,
   AuTabs,
-  AuTextarea,
   AuTimePicker,
   AuTooltip,
   AuTree,
@@ -175,7 +173,6 @@ export {
   AuSkeletonItem,
   AuSwitch,
   AuTabs,
-  AuTextarea,
   AuTimePicker,
   AuTooltip,
   AuTree,

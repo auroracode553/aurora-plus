@@ -126,7 +126,7 @@
 
 | 建议组件 | 主要需求来源 | 首版范围 |
 | --- | --- | --- |
-| `AuTextarea` | Markdown 链接/源码输入、翻译原文等多行内容 | `v-model`、自动高度、字数限制、禁用/只读、错误态 |
+| `AuInput type="textarea"` | Markdown 链接/源码输入、翻译原文等多行内容 | `v-model`、行数/缩放、字数限制、禁用/只读、错误态 |
 | `AuSelect`、`AuOption` | 主题、翻译引擎、服务商、语言域和应用设置 | 单选、禁用项、键盘导航、视口避让、受控展开；后续再增加多选 |
 | `AuInputNumber` | 表格行列、提醒阈值、请求超时等数值输入 | 最小/最大值、步进、精度、键盘增减、单位后缀 |
 | `AuRadio`、`AuRadioGroup` | `electron-st` 的类型选择，`translate-pc` 的主题和字号选择 | `v-model`、禁用、横向/纵向布局、完整键盘行为 |
@@ -170,7 +170,7 @@ Aurora Plus 只提供这些业务组件内部可复用的按钮、表单、布�
 
 ## 7. 推荐实施顺序
 
-1. 基于已有 `AuInput`，继续完成 `AuTextarea`、`AuSelect`、`AuInputNumber`、`AuRadioGroup` 和 `AuFormItem`，覆盖三个项目最集中的重复样式。
+1. 基于已有 `AuInput` 的 `type="textarea"` 形态，继续完成 `AuSelect`、`AuInputNumber`、`AuRadioGroup` 和 `AuFormItem`，覆盖三个项目最集中的重复样式。
 2. 基于已完成的 `AuPopover` 组合 `AuCombobox`，再迁移股票搜索、文件搜索和历史搜索。
 3. 完成 `AuMenuBar`、`AuTabs`、`AuTree` 和 `AuToolbar`，处理桌面工作台的导航与密集操作区。
 4. 补齐状态、空态、加载和进度组件，统一异步反馈。

@@ -3,6 +3,7 @@
     class="au-input au-component"
     :class="[
       `is-${size}`,
+      { 'is-textarea': type === 'textarea', [`is-resize-${resize}`]: type === 'textarea' },
       {
         'is-disabled': disabled || loading,
         'is-loading': loading,
@@ -19,12 +20,32 @@
       </slot>
     </span>
 
+    <textarea
+      v-if="type === 'textarea'"
+      ref="inputRef"
+      class="au-input__control au-input__textarea au-control-reset"
+      v-bind="getInputAttrs()"
+      :value="inputValue"
+      :rows="rows"
+      :placeholder="placeholder || undefined"
+      :disabled="disabled || loading"
+      :readonly="readonly"
+      :maxlength="maxlength ?? undefined"
+      @input="handleInput"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      @compositionstart="handleCompositionStart"
+      @compositionend="handleCompositionEnd"
+    ></textarea>
+
     <input
+      v-else
       ref="inputRef"
       class="au-input__control au-control-reset"
       v-bind="getInputAttrs()"
       :value="inputValue"
-      :type="type"
+      :type="resolvedInputType"
       :placeholder="placeholder || undefined"
       :disabled="disabled || loading"
       :readonly="readonly"
@@ -42,6 +63,21 @@
       <span v-if="showWordLimit && maxlength != null" class="au-input__count">
         {{ wordCount }}/{{ maxlength }}
       </span>
+      <button
+        v-if="showPasswordToggle && type === 'password'"
+        class="au-input__password-toggle au-action-control"
+        type="button"
+        :aria-label="passwordVisible ? '隐藏密码' : '显示密码'"
+        :title="passwordVisible ? '隐藏密码' : '显示密码'"
+        @mousedown.prevent
+        @click="passwordVisible = !passwordVisible"
+      >
+        <AuIcon
+          :icon="passwordVisible ? IconEyeOff : IconEye"
+          :size="18"
+          aria-hidden="true"
+        />
+      </button>
       <span
         v-if="hasSuffixContent && !shouldReplaceSuffix"
         class="au-input__suffix-content au-inline-center"
@@ -72,7 +108,7 @@
 
 <script setup>
 import { computed, inject, nextTick, ref, useAttrs, useSlots } from 'vue';
-import { IconX } from '../../icons/internal.js';
+import { IconEye, IconEyeOff, IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
@@ -98,6 +134,13 @@ const props = defineProps({
   prefixIcon: { type: [Object, Function], default: null },
   suffixIcon: { type: [Object, Function], default: null },
   maxlength: { type: [Number, String], default: null },
+  rows: { type: [Number, String], default: 3 },
+  showPasswordToggle: { type: Boolean, default: false },
+  resize: {
+    type: String,
+    default: 'vertical',
+    validator: (value) => ['none', 'both', 'horizontal', 'vertical'].includes(value),
+  },
   showWordLimit: { type: Boolean, default: false },
   invalid: { type: Boolean, default: false },
   validateEvent: { type: Boolean, default: true },
@@ -108,6 +151,7 @@ const attrs = useAttrs();
 const slots = useSlots();
 const inputRef = ref(null);
 const isComposing = ref(false);
+const passwordVisible = ref(false);
 const formItem = inject(FORM_ITEM_CONTEXT_KEY, null);
 
 const inputValue = computed(() => (props.modelValue == null ? '' : String(props.modelValue)));
@@ -131,7 +175,11 @@ const hasSuffix = computed(() => Boolean(
   props.loading
   || hasSuffixContent.value
   || props.clearable
-  || (props.showWordLimit && props.maxlength != null),
+  || (props.showWordLimit && props.maxlength != null)
+  || (props.showPasswordToggle && props.type === 'password'),
+));
+const resolvedInputType = computed(() => (
+  props.type === 'password' && props.showPasswordToggle && passwordVisible.value ? 'text' : props.type
 ));
 const wordCount = computed(() => Array.from(inputValue.value).length);
 const resolvedInvalid = computed(() => (

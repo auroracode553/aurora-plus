@@ -10,8 +10,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuButtonGroup`、`AuButtonGroupItem` | 控制组容器与专用操作项 |
 | `AuDivider` | 横向与纵向内容分割线 |
 | `AuLink` | 支持语义类型、下划线策略、禁用态与图标的文字链接 |
-| `AuInput` | 支持清空、前后缀和错误态的单行输入框 |
-| `AuTextarea` | 支持尺寸、字数限制和缩放方向的多行输入框 |
+| `AuInput` | 通过 `type` 支持单行、密码和 `textarea` 多行输入，支持清空、前后缀和错误态 |
 | `AuSelect` | 带统一选项弹层、键盘导航、禁用态和错误态的选择框 |
 | `AuTreeSelect` | 支持嵌套数据、搜索、展开与仅叶节点模式的树形选择 |
 | `AuDatePickerPane`、`AuDatePicker`、`AuDateRangePicker` | 独立日历面板、日期输入与日期范围选择器 |

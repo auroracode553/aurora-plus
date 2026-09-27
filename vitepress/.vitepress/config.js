@@ -106,7 +106,6 @@ export default defineConfig({
         text: 'Form 表单组件',
         items: [
           { text: 'Input 输入框', link: '/components/input' },
-          { text: 'Textarea 多行输入框', link: '/components/textarea' },
           { text: 'Select 选择器', link: '/components/select' },
           { text: 'TreeSelect 树形选择', link: '/components/tree-select' },
           { text: 'DatePicker 日期选择器', link: '/components/date-picker' },
