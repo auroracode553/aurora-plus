@@ -9,7 +9,6 @@
     </div>
     <AuVirtualTable
       ref="tableRef"
-      :columns="columns"
       :data="rows"
       :height="360"
       :loading="loading"
@@ -18,29 +17,24 @@
       border
       @rows-rendered="rendered = $event"
     >
-      <template #cell-status="{ value }">
-        <span class="virtual-table-demo__status" :class="{ 'is-active': value === '进行中' }">
-          {{ value }}
-        </span>
-      </template>
+      <AuTableColumn prop="id" label="编号" :width="90" fixed sortable />
+      <AuTableColumn prop="name" label="名称" :width="180" :flex-grow="1" />
+      <AuTableColumn prop="owner" label="负责人" :width="130" sortable />
+      <AuTableColumn prop="status" label="状态" :width="110" align="center">
+        <template #default="{ value }"><span class="virtual-table-demo__status" :class="{ 'is-active': value === '进行中' }">{{ value }}</span></template>
+      </AuTableColumn>
+      <AuTableColumn prop="updatedAt" label="更新时间" :width="160" />
     </AuVirtualTable>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuVirtualTable } from 'aurora-plus';
+import { AuButton, AuTableColumn, AuVirtualTable } from 'aurora-plus';
 
 const tableRef = ref(null);
 const loading = ref(true);
 const rendered = ref({ start: 0, end: 0 });
-const columns = [
-  { key: 'id', title: '编号', dataKey: 'id', width: 90, fixed: 'left', sortable: true },
-  { key: 'name', title: '名称', dataKey: 'name', width: 180, flexGrow: 1 },
-  { key: 'owner', title: '负责人', dataKey: 'owner', width: 130, sortable: true },
-  { key: 'status', title: '状态', dataKey: 'status', width: 110, align: 'center' },
-  { key: 'updatedAt', title: '更新时间', dataKey: 'updatedAt', width: 160 },
-];
 const rows = Array.from({ length: 10000 }, (_, index) => ({
   id: index + 1,
   name: `Aurora 任务 ${index + 1}`,

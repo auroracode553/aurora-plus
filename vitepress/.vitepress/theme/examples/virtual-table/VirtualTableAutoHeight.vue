@@ -1,27 +1,24 @@
 <template>
   <AuVirtualTable
-    :columns="columns"
     :data="rows"
     auto-height
     :row-height="48"
     :header-height="36"
     row-key="id"
     border
-  />
+  >
+    <AuTableColumn prop="id" label="编号" :width="90" fixed />
+    <AuTableColumn prop="name" label="名称" :width="220" />
+    <AuTableColumn prop="owner" label="负责人" :width="160" />
+    <AuTableColumn prop="status" label="状态" :width="150" />
+    <AuTableColumn prop="progress" label="进度" :width="150" />
+    <AuTableColumn prop="updatedAt" label="更新时间" :width="220" />
+    <AuTableColumn prop="note" label="备注" :width="280" />
+  </AuVirtualTable>
 </template>
 
 <script setup>
-import { AuVirtualTable } from 'aurora-plus';
-
-const columns = [
-  { key: 'id', title: '编号', dataKey: 'id', width: 90, fixed: 'left' },
-  { key: 'name', title: '名称', dataKey: 'name', width: 220 },
-  { key: 'owner', title: '负责人', dataKey: 'owner', width: 160 },
-  { key: 'status', title: '状态', dataKey: 'status', width: 150 },
-  { key: 'progress', title: '进度', dataKey: 'progress', width: 150 },
-  { key: 'updatedAt', title: '更新时间', dataKey: 'updatedAt', width: 220 },
-  { key: 'note', title: '备注', dataKey: 'note', width: 280 },
-];
+import { AuTableColumn, AuVirtualTable } from 'aurora-plus';
 
 const rows = [
   { id: 1, name: '设计规范整理', owner: '林晨', status: '已完成', progress: '100%', updatedAt: '2026-09-10 09:30', note: '已同步最新组件规范' },

@@ -125,6 +125,7 @@ export default defineConfig({
           { text: 'Skeleton 骨架屏', link: '/components/skeleton' },
           { text: 'ImagePreview 图片预览', link: '/components/image-preview' },
           { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' },
+          { text: 'Table 表格', link: '/components/table' },
           { text: 'VirtualTable 虚拟表格', link: '/components/virtual-table' },
         ],
       },

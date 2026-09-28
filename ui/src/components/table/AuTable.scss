@@ -1,0 +1,129 @@
+@use '../../theme/mixins/motion';
+
+.au-table {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--au-color-text-default);
+  background: transparent;
+  font-size: 13px;
+}
+
+.au-table__scroll {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain auto;
+}
+
+.au-table.is-auto-height .au-table__scroll {
+  overflow-y: hidden;
+}
+
+.au-table__content {
+  position: relative;
+  min-width: 100%;
+}
+
+.au-table__header,
+.au-table__row {
+  display: grid;
+  width: 100%;
+}
+
+.au-table__header {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  color: var(--au-color-text-primary);
+  background: var(--au-material-background-elevated);
+  font-weight: var(--au-font-weight-semibold);
+}
+
+.au-table__row {
+  @include motion.transition(background);
+}
+
+.au-table__row:hover {
+  background: var(--au-color-background-hover);
+}
+
+.au-table__row.is-striped-row {
+  background: color-mix(in srgb, var(--au-color-text-primary) 2.5%, transparent);
+}
+
+.au-table__header-cell,
+.au-table__cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--au-material-border);
+}
+
+.au-table__cell {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.au-table__cell-text {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.au-table.has-border .au-table__header-cell,
+.au-table.has-border .au-table__cell {
+  border-right: 1px solid var(--au-material-border);
+}
+
+.au-table__header-cell.is-fixed,
+.au-table__cell.is-fixed {
+  position: sticky;
+  background: var(--au-material-background-elevated);
+}
+
+.au-table__row:hover .au-table__cell.is-fixed {
+  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
+}
+
+.au-table__sort-button {
+  display: flex;
+  align-items: center;
+  width: calc(100% + 12px);
+  height: calc(100% - 4px);
+  gap: 5px;
+  margin: 0 -6px;
+  padding: 0 6px;
+  border-radius: var(--au-radius-compact);
+  cursor: pointer;
+}
+
+.au-table__sort-button:hover {
+  color: var(--au-color-primary);
+  background: var(--au-color-background-hover);
+}
+
+.au-table__empty {
+  padding: 20px 10px;
+  color: var(--au-color-text-secondary);
+}
+
+.au-table__loading {
+  position: absolute;
+  z-index: 5;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--au-material-border);
+  border-radius: var(--au-radius-pill);
+  color: var(--au-color-text-primary);
+}

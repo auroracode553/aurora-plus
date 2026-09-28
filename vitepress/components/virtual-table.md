@@ -8,7 +8,7 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 
 # VirtualTable 虚拟表格
 
-`AuVirtualTable` 面向固定行高的大数据表格，只渲染视口和缓冲区中的行。列通过 JavaScript 对象配置，支持弹性宽度、左右固定、排序、格式化与具名插槽。
+`AuVirtualTable` 面向固定行高的大数据表格，只渲染视口和缓冲区中的行。使用 `AuTableColumn` 声明列，支持弹性宽度、左右固定、排序、格式化与列插槽。
 
 ## 基础用法
 
@@ -32,13 +32,12 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 
 大数据列表仍应使用固定 `height`，以保留视口虚拟化带来的渲染性能优势。
 
-## Column 配置
+## AuTableColumn 配置
 
 | 字段 | 说明 |
 | --- | --- |
-| `key` | 列唯一标识，也是具名插槽后缀 |
-| `dataKey` | 行对象字段路径，支持 `profile.name` |
-| `title` / `label` | 表头文字 |
+| `prop` | 行对象字段路径，支持 `profile.name`；没有字段的操作列可省略 |
+| `label` | 表头文字 |
 | `width` / `minWidth` / `maxWidth` | 列宽边界，单位 px |
 | `flexGrow` | 容器有剩余空间时的扩展比例 |
 | `align` | `left / center / right` |
@@ -46,13 +45,13 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 | `sortable` | 开启列排序 |
 | `sortMethod(leftRow, rightRow, column)` | 自定义本地比较函数 |
 | `formatter(row, column, value, index)` | 文本格式化函数 |
-| `class` | 列单元格类名 |
+| `columnClass` | 列单元格类名 |
 
 ## Attributes
 
 | 属性 | 说明 | 默认值 |
 | --- | --- | --- |
-| `columns` / `data` | 列配置 / 完整行数据 | `[] / []` |
+| `data` | 完整行数据 | `[]` |
 | `width` / `height` | 表格外部尺寸 | `100% / 400` |
 | `autoHeight` | 按表头和全部数据行自动展开高度，仅保留横向滚动；启用时忽略 `height` | `false` |
 | `rowHeight` / `headerHeight` | 固定行高 / 表头高度 | `40 / 36` |
@@ -68,8 +67,8 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 
 ## Slots、Events 与 Exposes
 
-列 `key` 为 `name` 时，可使用 `#header-name="{ column }"` 和 `#cell-name="{ row, column, value, index }"`。另有 `empty` 与 `loading` 插槽。
+在 `AuTableColumn` 上使用 `#header="{ column }"` 和 `#default="{ row, column, value, index }"` 定制列内容。表格另有 `empty` 与 `loading` 插槽。
 
 事件包括 `sort-change`、`scroll`、`rows-rendered({ start, end })`、`row-click`、`row-dblclick` 和 `cell-click`。组件暴露 `scrollTo(options)`、`scrollToTop(value?)`、`scrollToLeft(value?)`、`scrollToRow(index, align?)` 与 `scrollContainerRef`。
 
-行高必须与 `rowHeight` 一致；需要动态行高或合并单元格时应使用普通表格组件。
+行高必须与 `rowHeight` 一致；需要内容自适应行高时使用 [Table 表格](/components/table)。
