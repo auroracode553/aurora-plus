@@ -2,12 +2,17 @@
   <div
     ref="rootRef"
     class="au-table au-component"
-    :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow }"
+    :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow, 'au-hover-scrollbars': showScroll }"
     :style="{ width: formatSize(width), height: autoHeight ? 'auto' : formatSize(height) }"
   >
-    <div ref="scrollContainerRef" class="au-table__scroll au-scroll-region au-thin-scrollbar" @scroll.passive="handleScroll">
-      <div class="au-table__content" :style="{ width: `${contentWidth}px` }">
-        <div class="au-table__header" :style="{ height: `${headerHeight}px`, gridTemplateColumns }">
+    <div class="au-table__header-shell" :style="{ height: `${headerHeight}px` }">
+      <div
+        ref="headerViewportRef"
+        class="au-table__header-viewport"
+        :style="{ width: viewportWidth ? `${viewportWidth}px` : '100%' }"
+        @scroll.passive="handleHeaderScroll"
+      >
+        <div class="au-table__header" :style="{ width: `${contentWidth}px`, gridTemplateColumns }">
           <div
             v-for="column in resolvedColumns"
             :key="column.key"
@@ -40,7 +45,10 @@
             <span v-else>{{ column.title }}</span>
           </div>
         </div>
-
+      </div>
+    </div>
+    <div ref="scrollContainerRef" class="au-table__scroll au-scroll-region au-thin-scrollbar au-table-scrollbar" :class="{ 'au-scrollbar-hidden': !showScroll }" @scroll.passive="handleScroll">
+      <div class="au-table__content" :style="{ width: `${contentWidth}px` }">
         <div v-if="sortedRows.length === 0" class="au-table__empty"><slot name="empty">{{ emptyText }}</slot></div>
         <div
           v-for="(entry, index) in sortedRows"
@@ -104,6 +112,7 @@ const props = defineProps({
   remoteSort: { type: Boolean, default: false },
   stripe: { type: Boolean, default: false },
   border: { type: Boolean, default: false },
+  showScroll: { type: Boolean, default: false },
   highlightCurrentRow: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   loadingText: { type: String, default: '加载中' },
@@ -116,6 +125,7 @@ const emit = defineEmits([
 ]);
 
 const rootRef = ref(null);
+const headerViewportRef = ref(null);
 const scrollContainerRef = ref(null);
 const viewportWidth = ref(0);
 const innerSort = ref(normalizeSort(props.sortBy || props.defaultSort));
@@ -205,6 +215,7 @@ function toggleAllSelection(column = resolvedColumns.value.find((item) => item.t
 }
 
 function handleScroll(event) {
+  syncHeaderScroll();
   emit('scroll', {
     scrollTop: event.currentTarget.scrollTop,
     scrollLeft: event.currentTarget.scrollLeft,
@@ -212,8 +223,22 @@ function handleScroll(event) {
   });
 }
 
+function syncHeaderScroll() {
+  const header = headerViewportRef.value;
+  const body = scrollContainerRef.value;
+  if (header && body && header.scrollLeft !== body.scrollLeft) header.scrollLeft = body.scrollLeft;
+}
+
+function handleHeaderScroll(event) {
+  const body = scrollContainerRef.value;
+  if (body && event.currentTarget.scrollLeft !== body.scrollLeft) {
+    body.scrollLeft = event.currentTarget.scrollLeft;
+  }
+}
+
 function updateViewport() {
   viewportWidth.value = scrollContainerRef.value?.clientWidth || 0;
+  syncHeaderScroll();
 }
 
 function scrollTo(options = {}) {

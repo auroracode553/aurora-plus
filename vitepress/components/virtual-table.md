@@ -10,11 +10,13 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 
 `AuVirtualTable` 面向固定行高的大数据表格，只渲染视口和缓冲区中的行。使用 `AuTableColumn` 声明列，支持弹性宽度、左右固定、排序、格式化与列插槽。
 
+`show-scroll` 默认为 `false`，始终隐藏横向和纵向滚动条，但仍可滚动内容；设置为 `true` 后，桌面端鼠标悬浮表格时显示滚动条，触屏设备由系统在滚动时显示。纵向滚动条只位于表体。
+
 默认没有外框和竖向分隔线；设置 `border` 后显示网格边框。选择列、索引列和当前行高亮的用法与 [Table 表格](/components/table) 一致。
 
 ## 基础用法
 
-<DemoBlock title="10,000 行数据" description="支持切换刷新加载态；滚动时 DOM 中只保留当前可见行和 overscan 缓冲行。" :source="virtualTableBasicSource">
+<DemoBlock title="10,000 行数据" description="可切换刷新加载态和滚动条显示；滚动时 DOM 中只保留当前可见行和 overscan 缓冲行。" :source="virtualTableBasicSource">
   <VirtualTableBasic />
 </DemoBlock>
 
@@ -66,6 +68,7 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 | `defaultSort` | 初始排序 | `{ key: '', order: '' }` |
 | `remoteSort` | 只发出排序事件，不在组件内重排数据 | `false` |
 | `stripe` / `border` | 斑马纹 / 外框与竖向分隔线 | `false` |
+| `showScroll` | 启用横向与纵向滚动条的悬浮显示，不影响滚动能力 | `false` |
 | `highlightCurrentRow` | 点击行时高亮当前行 | `false` |
 | `loading` / `loadingText` | 加载状态与文字 | `false / 加载中` |
 | `emptyText` | 空数据文字 | `暂无数据` |

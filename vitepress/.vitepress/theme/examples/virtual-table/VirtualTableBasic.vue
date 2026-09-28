@@ -5,6 +5,9 @@
       <AuButton size="small" :type="loading ? 'primary' : 'default'" @click="loading = !loading">
         {{ loading ? '结束刷新' : '模拟刷新' }}
       </AuButton>
+      <AuButton size="small" :type="showScroll ? 'primary' : 'default'" @click="showScroll = !showScroll">
+        {{ showScroll ? '始终隐藏滚动条' : '悬浮显示滚动条' }}
+      </AuButton>
       <span>当前渲染 {{ rendered.start + 1 }}–{{ rendered.end }} 行</span>
       <span>已选 {{ selectedRows.length }} 行</span>
     </div>
@@ -13,6 +16,7 @@
       :data="rows"
       :height="360"
       :loading="loading"
+      :show-scroll="showScroll"
       loading-text="正在刷新任务"
       stripe
       highlight-current-row
@@ -37,6 +41,7 @@ import { AuButton, AuTableColumn, AuVirtualTable } from 'aurora-plus';
 
 const tableRef = ref(null);
 const loading = ref(true);
+const showScroll = ref(false);
 const rendered = ref({ start: 0, end: 0 });
 const selectedRows = ref([]);
 const rows = Array.from({ length: 10000 }, (_, index) => ({

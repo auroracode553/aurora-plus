@@ -2,7 +2,7 @@
   <div
     ref="rootRef"
     class="au-virtual-table au-component"
-    :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow }"
+    :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow, 'au-hover-scrollbars': showScroll }"
     :style="rootStyle"
   >
     <div
@@ -51,7 +51,8 @@
 
     <div
       ref="scrollContainerRef"
-      class="au-virtual-table__body au-scroll-region au-thin-scrollbar"
+      class="au-virtual-table__body au-scroll-region au-thin-scrollbar au-table-scrollbar"
+      :class="{ 'au-scrollbar-hidden': !showScroll }"
       tabindex="0"
       @scroll.passive="handleScroll"
     >
@@ -136,6 +137,7 @@ const props = defineProps({
   remoteSort: { type: Boolean, default: false },
   stripe: { type: Boolean, default: false },
   border: { type: Boolean, default: false },
+  showScroll: { type: Boolean, default: false },
   highlightCurrentRow: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   loadingText: { type: String, default: '加载中' },

@@ -25,6 +25,21 @@
   overflow-x: auto;
 }
 
+.au-table__header-shell {
+  position: relative;
+  z-index: 4;
+  flex: none;
+  min-width: 0;
+  border-bottom: 1px solid var(--au-material-border);
+  background: var(--au-material-background-elevated);
+}
+
+.au-table__header-viewport {
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 .au-table.is-auto-height .au-table__scroll {
   overflow-y: hidden;
 }
@@ -41,11 +56,8 @@
 }
 
 .au-table__header {
-  position: sticky;
-  top: 0;
-  z-index: 4;
+  height: 100%;
   color: var(--au-color-text-primary);
-  background: var(--au-material-background-elevated);
   font-weight: var(--au-font-weight-semibold);
 }
 
@@ -73,6 +85,10 @@
   min-width: 0;
   padding: 0 10px;
   border-bottom: 1px solid var(--au-material-border);
+}
+
+.au-table__header-cell {
+  border-bottom: 0;
 }
 
 .au-table__cell {

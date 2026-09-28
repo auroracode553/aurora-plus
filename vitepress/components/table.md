@@ -1,7 +1,9 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import TableBasic from '../.vitepress/theme/examples/table/TableBasic.vue';
+import TableScroll from '../.vitepress/theme/examples/table/TableScroll.vue';
 import tableBasicSource from '../.vitepress/theme/examples/table/TableBasic.vue?demo-source';
+import tableScrollSource from '../.vitepress/theme/examples/table/TableScroll.vue?demo-source';
 </script>
 
 # Table 表格
@@ -16,7 +18,15 @@ import tableBasicSource from '../.vitepress/theme/examples/table/TableBasic.vue?
   <TableBasic />
 </DemoBlock>
 
-表格默认高 `400px`，表头保留在滚动区域顶部。设置 `auto-height` 可让表格随所有行自然展开，由外层页面负责纵向滚动。列宽超出表格宽度时，表格内部横向滚动。
+表格默认高 `400px`，表头固定在表体上方。设置 `auto-height` 可让表格随所有行自然展开，由外层页面负责纵向滚动。列宽超出表格宽度时，表格内部横向滚动。
+
+## 滚动条显示
+
+`show-scroll` 默认为 `false`，始终隐藏横向和纵向滚动条，但不禁用滚动。设置为 `true` 后，桌面端鼠标悬浮表格时显示滚动条，触屏设备由系统在滚动时显示；鼠标离开不会改变列宽。横向滚动条仅在列宽超出容器时出现，纵向滚动条仅在内容超过固定高度时出现。纵向滚动条只位于表体，不延伸到表头。
+
+<DemoBlock title="滚动条显示与隐藏" description="启用后将鼠标移入表格查看滚动条；滚轮、触控板与按钮始终可以滚动内容。" :source="tableScrollSource">
+  <TableScroll />
+</DemoBlock>
 
 列通过 `AuTableColumn` 声明。`prop` 指向行数据字段，`label` 是表头文字，`width` 设置列宽；未设置 `width` 时使用默认列宽。列上的 `#default="{ row, value, index }"` 可定制单元格，`#header="{ column }"` 可定制表头。`AuTable` 与 `AuVirtualTable` 共用这套列 API；非虚拟表格无需提供 `rowHeight` 或 `overscan`。
 
