@@ -6,6 +6,7 @@
         {{ loading ? '结束刷新' : '模拟刷新' }}
       </AuButton>
       <span>当前渲染 {{ rendered.start + 1 }}–{{ rendered.end }} 行</span>
+      <span>已选 {{ selectedRows.length }} 行</span>
     </div>
     <AuVirtualTable
       ref="tableRef"
@@ -14,9 +15,11 @@
       :loading="loading"
       loading-text="正在刷新任务"
       stripe
-      border
+      highlight-current-row
       @rows-rendered="rendered = $event"
+      @selection-change="selectedRows = $event"
     >
+      <AuTableColumn type="selection" :width="48" fixed />
       <AuTableColumn prop="id" label="编号" :width="90" fixed sortable />
       <AuTableColumn prop="name" label="名称" :width="180" :flex-grow="1" />
       <AuTableColumn prop="owner" label="负责人" :width="130" sortable />
@@ -35,6 +38,7 @@ import { AuButton, AuTableColumn, AuVirtualTable } from 'aurora-plus';
 const tableRef = ref(null);
 const loading = ref(true);
 const rendered = ref({ start: 0, end: 0 });
+const selectedRows = ref([]);
 const rows = Array.from({ length: 10000 }, (_, index) => ({
   id: index + 1,
   name: `Aurora 任务 ${index + 1}`,

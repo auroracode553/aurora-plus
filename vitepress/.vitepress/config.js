@@ -120,6 +120,7 @@ export default defineConfig({
       {
         text: 'Data 数据展示',
         items: [
+          { text: 'Badge 徽章', link: '/components/badge' },
           { text: 'Panel 通用面板', link: '/components/panel' },
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'Skeleton 骨架屏', link: '/components/skeleton' },

@@ -13,9 +13,10 @@ function getColumnKey(column, index) {
 
 export function resolveTableColumns(columns, viewportWidth = 0) {
   const normalized = columns.map((column, index) => {
-    const minWidth = toPositiveNumber(column.minWidth, 60);
+    const isUtilityColumn = column.type === 'selection' || column.type === 'index';
+    const minWidth = toPositiveNumber(column.minWidth, isUtilityColumn ? 44 : 60);
     const maxWidth = toPositiveNumber(column.maxWidth, Number.POSITIVE_INFINITY);
-    const baseWidth = clamp(toPositiveNumber(column.width, 120), minWidth, maxWidth);
+    const baseWidth = clamp(toPositiveNumber(column.width, isUtilityColumn ? 48 : 120), minWidth, maxWidth);
     return {
       ...column,
       key: getColumnKey(column, index),
@@ -24,7 +25,7 @@ export function resolveTableColumns(columns, viewportWidth = 0) {
       minWidth,
       maxWidth,
       flexGrow: Math.max(Number(column.flexGrow) || 0, 0),
-      align: ['left', 'center', 'right'].includes(column.align) ? column.align : 'left',
+      align: isUtilityColumn ? 'center' : (['left', 'center', 'right'].includes(column.align) ? column.align : 'left'),
     };
   });
 

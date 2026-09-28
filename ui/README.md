@@ -6,6 +6,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 
 | 导出 | 用途 |
 | --- | --- |
+| `AuBadge` | 数字、文字和状态点徽章 |
 | `AuButton` | 多类型、多尺寸、加载态按钮 |
 | `AuButtonGroup`、`AuButtonGroupItem` | 控制组容器与专用操作项 |
 | `AuDivider` | 横向与纵向内容分割线 |
@@ -38,8 +39,8 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuLoading`、`vLoading` | 组件、指令及 `AuLoading.service(options)` 命令式加载服务 |
 | `AuLoadingSpinner` | 按钮、表单控件和数据组件复用的加载图标 |
 | `AuVirtualList` | 固定行高虚拟列表 |
-| `AuTable`、`AuTableColumn` | 声明式列配置、内容自适应行高、固定列与排序 |
-| `AuVirtualTable` | 共用 `AuTableColumn` 声明列的固定行高虚拟表格 |
+| `AuTable`、`AuTableColumn` | 默认无外框，支持声明式列、内容自适应行高、固定列、排序、行选择与索引列 |
+| `AuVirtualTable` | 共用列与选择 API 的固定行高虚拟表格，默认无外框 |
 | `AuImagePreview` | 多图切换、缩放、拖拽与旋转图片预览器 |
 | `AuTree` | 支持虚拟滚动、选中与折叠的树形导航 |
 | `AuContextMenu` | 配置式右键菜单 |

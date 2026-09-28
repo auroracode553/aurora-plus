@@ -10,6 +10,8 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 
 `AuVirtualTable` 面向固定行高的大数据表格，只渲染视口和缓冲区中的行。使用 `AuTableColumn` 声明列，支持弹性宽度、左右固定、排序、格式化与列插槽。
 
+默认没有外框和竖向分隔线；设置 `border` 后显示网格边框。选择列、索引列和当前行高亮的用法与 [Table 表格](/components/table) 一致。
+
 ## 基础用法
 
 <DemoBlock title="10,000 行数据" description="支持切换刷新加载态；滚动时 DOM 中只保留当前可见行和 overscan 缓冲行。" :source="virtualTableBasicSource">
@@ -37,6 +39,8 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 | 字段 | 说明 |
 | --- | --- |
 | `prop` | 行对象字段路径，支持 `profile.name`；没有字段的操作列可省略 |
+| `type` | `default / selection / index`；多选列支持表头全选，索引列按当前排序显示行号 |
+| `selectable(row, index)` | 用于 `selection` 列，返回 `false` 时禁选该行 |
 | `label` | 表头文字 |
 | `width` / `minWidth` / `maxWidth` | 列宽边界，单位 px |
 | `flexGrow` | 容器有剩余空间时的扩展比例 |
@@ -61,7 +65,8 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 | `sortBy` / `v-model:sort-by` | `{ key, order }`，order 为 `ascending / descending / ''` | — |
 | `defaultSort` | 初始排序 | `{ key: '', order: '' }` |
 | `remoteSort` | 只发出排序事件，不在组件内重排数据 | `false` |
-| `stripe` / `border` | 斑马纹 / 单元格分隔线 | `false` |
+| `stripe` / `border` | 斑马纹 / 外框与竖向分隔线 | `false` |
+| `highlightCurrentRow` | 点击行时高亮当前行 | `false` |
 | `loading` / `loadingText` | 加载状态与文字 | `false / 加载中` |
 | `emptyText` | 空数据文字 | `暂无数据` |
 
@@ -70,5 +75,7 @@ import virtualTableAutoHeightSource from '../.vitepress/theme/examples/virtual-t
 在 `AuTableColumn` 上使用 `#header="{ column }"` 和 `#default="{ row, column, value, index }"` 定制列内容。表格另有 `empty` 与 `loading` 插槽。
 
 事件包括 `sort-change`、`scroll`、`rows-rendered({ start, end })`、`row-click`、`row-dblclick` 和 `cell-click`。组件暴露 `scrollTo(options)`、`scrollToTop(value?)`、`scrollToLeft(value?)`、`scrollToRow(index, align?)` 与 `scrollContainerRef`。
+
+选择列触发 `select(selection, row)`、`select-all(selection)`、`selection-change(selection)`；当前行变化触发 `current-change(currentRow, previousRow)`。组件实例提供 `selection`、`currentRow`、`toggleRowSelection(row, selected?)`、`toggleAllSelection()`、`clearSelection()` 和 `setCurrentRow(row)`。选择状态按 `row-key` 跟踪，数据替换时自动移除已不存在的行。
 
 行高必须与 `rowHeight` 一致；需要内容自适应行高时使用 [Table 表格](/components/table)。

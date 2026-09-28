@@ -1,5 +1,6 @@
 import './theme/index.scss';
 
+import { AuBadge } from './components/badge/index.js';
 import { AuButton } from './components/button/index.js';
 import { AuButtonGroup, AuButtonGroupItem } from './components/button-group/index.js';
 import { AuCard } from './components/card/index.js';
@@ -61,6 +62,7 @@ import {
 } from './utils/theme.js';
 
 const components = [
+  AuBadge,
   AuButton,
   AuButtonGroup,
   AuButtonGroupItem,
@@ -132,6 +134,7 @@ export const AuroraPlus = {
 };
 
 export {
+  AuBadge,
   AuButton,
   AuButtonGroup,
   AuButtonGroupItem,

@@ -1,8 +1,8 @@
 <template>
   <div
     ref="rootRef"
-    class="au-table au-component au-surface-frame au-surface-frame--rounded"
-    :class="{ 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight }"
+    class="au-table au-component"
+    :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow }"
     :style="{ width: formatSize(width), height: autoHeight ? 'auto' : formatSize(height) }"
   >
     <div ref="scrollContainerRef" class="au-table__scroll au-scroll-region au-thin-scrollbar" @scroll.passive="handleScroll">
@@ -15,8 +15,18 @@
             :class="getColumnClasses(column)"
             :style="getColumnStyle(column)"
           >
+            <AuCheckbox
+              v-if="column.type === 'selection'"
+              class="au-table__checkbox"
+              :model-value="selectionStates.get(column.key).checked"
+              :indeterminate="selectionStates.get(column.key).indeterminate"
+              :disabled="selectionStates.get(column.key).disabled"
+              @click.stop
+              @change="toggleAllSelection(column)"
+            />
+            <span v-else-if="column.type === 'index'">{{ column.title }}</span>
             <button
-              v-if="column.sortable"
+              v-else-if="column.sortable"
               type="button"
               class="au-table__sort-button au-control-reset"
               :style="{ justifyContent: getJustifyContent(column.align) }"
@@ -36,10 +46,10 @@
           v-for="(entry, index) in sortedRows"
           :key="resolveRowKey(entry)"
           class="au-table__row"
-          :class="[resolveRowClass(entry), { 'is-striped-row': stripe && index % 2 === 1 }]"
+          :class="[resolveRowClass(entry), { 'is-striped-row': stripe && index % 2 === 1, 'is-current-row': highlightCurrentRow && isCurrent(entry.row, entry.sourceIndex) }]"
           :style="{ gridTemplateColumns }"
           :data-table-row-index="index"
-          @click="emit('row-click', entry.row, entry.sourceIndex, $event)"
+          @click="handleRowClick(entry, $event)"
           @dblclick="emit('row-dblclick', entry.row, entry.sourceIndex, $event)"
         >
           <div
@@ -48,9 +58,17 @@
             class="au-table__cell"
             :class="getColumnClasses(column)"
             :style="getColumnStyle(column)"
-            @click="emit('cell-click', entry.row, column, entry.sourceIndex, $event)"
+            @click="handleCellClick(entry, column, $event)"
           >
-            <TableSlot v-if="column.renderCell" :render="column.renderCell" :context="{ row: entry.row, column, value: getValueByPath(entry.row, column.dataKey), index: entry.sourceIndex }" />
+            <AuCheckbox
+              v-if="column.type === 'selection'"
+              class="au-table__checkbox"
+              :model-value="isSelected(entry.row, entry.sourceIndex)"
+              :disabled="!isSelectable(column, entry.row, entry.sourceIndex)"
+              @change="toggleRowSelection(entry.row, undefined, column)"
+            />
+            <span v-else-if="column.type === 'index'">{{ index + 1 }}</span>
+            <TableSlot v-else-if="column.renderCell" :render="column.renderCell" :context="{ row: entry.row, column, value: getValueByPath(entry.row, column.dataKey), index: entry.sourceIndex }" />
             <span v-else class="au-table__cell-text">{{ formatCell(entry.row, column, entry.sourceIndex) }}</span>
           </div>
         </div>
@@ -66,9 +84,11 @@
 import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { IconArrowDown, IconArrowUp, IconArrowsSort } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
+import { AuCheckbox } from '../checkbox/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 import { TableSlot } from '../../utils/TableSlot.js';
 import { useTableColumns } from '../../utils/tableColumns.js';
+import { useTableSelection } from '../../utils/tableSelection.js';
 import { formatSize, getValueByPath, normalizeSort, resolveTableColumns, sortTableRows } from '../../utils/tableModel.js';
 
 const props = defineProps({
@@ -84,6 +104,7 @@ const props = defineProps({
   remoteSort: { type: Boolean, default: false },
   stripe: { type: Boolean, default: false },
   border: { type: Boolean, default: false },
+  highlightCurrentRow: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   loadingText: { type: String, default: '加载中' },
   emptyText: { type: String, default: '暂无数据' },
@@ -91,6 +112,7 @@ const props = defineProps({
 const emit = defineEmits([
   'update:sortBy', 'sort-change', 'scroll', 'rows-rendered',
   'row-click', 'row-dblclick', 'cell-click',
+  'select', 'select-all', 'selection-change', 'current-change',
 ]);
 
 const rootRef = ref(null);
@@ -98,11 +120,20 @@ const scrollContainerRef = ref(null);
 const viewportWidth = ref(0);
 const innerSort = ref(normalizeSort(props.sortBy || props.defaultSort));
 const declaredColumns = useTableColumns(useSlots());
+const {
+  selection, currentRow, isSelected, isSelectable, selectionStatus, isCurrent,
+  toggleRowSelection, toggleAllSelection: toggleAllRows, clearSelection, setCurrentRow,
+} = useTableSelection(props, emit);
 let resizeObserver = null;
 let listeningWindowResize = false;
 
 const resolvedColumns = computed(() => resolveTableColumns(declaredColumns.value, viewportWidth.value));
+const selectionStates = computed(() => new Map(resolvedColumns.value
+  .filter((column) => column.type === 'selection')
+  .map((column) => [column.key, selectionStatus(column)])));
 const tableWidth = computed(() => resolvedColumns.value.reduce((sum, column) => sum + column.resolvedWidth, 0));
+// 列宽未超出视口时，不让取整造成的亚像素误差触发横向滚动条。
+const hasHorizontalOverflow = computed(() => viewportWidth.value > 0 && tableWidth.value > viewportWidth.value);
 const contentWidth = computed(() => Math.max(tableWidth.value, viewportWidth.value));
 const gridTemplateColumns = computed(() => resolvedColumns.value.map((column) => `${column.resolvedWidth}px`).join(' '));
 const sortedRows = computed(() => props.remoteSort
@@ -116,7 +147,7 @@ function formatCell(row, column, index) {
 }
 
 function getColumnClasses(column) {
-  return [`is-align-${column.align}`, column.class, { 'is-fixed': Boolean(column.fixedSide) }];
+  return [`is-align-${column.align}`, column.class, { 'is-fixed': Boolean(column.fixedSide), 'is-utility': column.type === 'selection' || column.type === 'index' }];
 }
 
 function getColumnStyle(column) {
@@ -157,6 +188,20 @@ function toggleSort(column) {
   emit('update:sortBy', nextSort);
   emit('sort-change', { ...nextSort, column });
   scrollToTop();
+}
+
+function handleRowClick(entry, event) {
+  if (props.highlightCurrentRow) setCurrentRow(entry.row);
+  emit('row-click', entry.row, entry.sourceIndex, event);
+}
+
+function handleCellClick(entry, column, event) {
+  if (column.type === 'selection') event.stopPropagation();
+  emit('cell-click', entry.row, column, entry.sourceIndex, event);
+}
+
+function toggleAllSelection(column = resolvedColumns.value.find((item) => item.type === 'selection')) {
+  if (column) toggleAllRows(column);
 }
 
 function handleScroll(event) {
@@ -227,7 +272,10 @@ onBeforeUnmount(() => {
   if (listeningWindowResize) window.removeEventListener('resize', updateViewport);
 });
 
-defineExpose({ scrollContainerRef, scrollTo, scrollToTop, scrollToLeft, scrollToRow, getRowFromEvent });
+defineExpose({
+  scrollContainerRef, scrollTo, scrollToTop, scrollToLeft, scrollToRow, getRowFromEvent,
+  selection, currentRow, toggleRowSelection, toggleAllSelection, clearSelection, setCurrentRow,
+});
 </script>
 
 <style scoped lang="scss" src="./AuTable.scss"></style>

@@ -16,8 +16,13 @@
   flex: 1;
   min-width: 0;
   min-height: 0;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   overscroll-behavior: contain auto;
+}
+
+.au-table.has-horizontal-overflow .au-table__scroll {
+  overflow-x: auto;
 }
 
 .au-table.is-auto-height .au-table__scroll {
@@ -56,6 +61,11 @@
   background: color-mix(in srgb, var(--au-color-text-primary) 2.5%, transparent);
 }
 
+.au-table__row.is-current-row,
+.au-table__row.is-current-row:hover {
+  background: color-mix(in srgb, var(--au-color-primary) 11%, transparent);
+}
+
 .au-table__header-cell,
 .au-table__cell {
   display: flex;
@@ -76,6 +86,15 @@
   overflow-wrap: anywhere;
 }
 
+.au-table__header-cell.is-utility,
+.au-table__cell.is-utility {
+  justify-content: center;
+}
+
+.au-table__checkbox {
+  flex: none;
+}
+
 .au-table.has-border .au-table__header-cell,
 .au-table.has-border .au-table__cell {
   border-right: 1px solid var(--au-material-border);
@@ -89,6 +108,10 @@
 
 .au-table__row:hover .au-table__cell.is-fixed {
   background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
+}
+
+.au-table__row.is-current-row .au-table__cell.is-fixed {
+  background: color-mix(in srgb, var(--au-color-primary) 11%, var(--au-material-background-elevated));
 }
 
 .au-table__sort-button {

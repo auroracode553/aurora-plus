@@ -16,6 +16,7 @@ function collectColumns(nodes, output) {
     const slot = node.children && !Array.isArray(node.children) ? node.children : {};
     output.push({
       key: node.key ?? (prop || `column-${output.length}`),
+      type: readColumnProp(props, 'type') || 'default',
       dataKey: prop,
       title: readColumnProp(props, 'label') ?? '',
       width: readColumnProp(props, 'width'),
@@ -25,6 +26,7 @@ function collectColumns(nodes, output) {
       align: readColumnProp(props, 'align'),
       fixed: readColumnProp(props, 'fixed') === '' ? true : readColumnProp(props, 'fixed'),
       sortable: readColumnProp(props, 'sortable') === '' || readColumnProp(props, 'sortable') === true,
+      selectable: readColumnProp(props, 'selectable'),
       sortMethod: readColumnProp(props, 'sortMethod', 'sort-method'),
       formatter: readColumnProp(props, 'formatter'),
       class: readColumnProp(props, 'columnClass', 'column-class'),

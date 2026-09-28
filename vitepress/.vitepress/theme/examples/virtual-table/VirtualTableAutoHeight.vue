@@ -5,7 +5,6 @@
     :row-height="48"
     :header-height="36"
     row-key="id"
-    border
   >
     <AuTableColumn prop="id" label="编号" :width="90" fixed />
     <AuTableColumn prop="name" label="名称" :width="220" />
