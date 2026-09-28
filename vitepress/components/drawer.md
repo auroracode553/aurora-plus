@@ -6,15 +6,12 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 
 # Drawer 抽屉
 
-从视口边缘滑出的内容容器，适合设置面板、详情面板和分步编辑。组件提供四向打开、响应式尺寸、视口安全区、透明模态交互层、滚动锁、Escape 关闭、焦点管理和关闭前守卫。
-
-抽屉面板继承全局或局部的 `soft`、`clear`、`solid` 材质设置。模态交互层保持透明，不改变抽屉之外页面的亮度；面板使用通用浮层阴影与细边框表达层级。
+从视口边缘滑出的内容容器，适合设置面板、详情面板和分步编辑。
 
 ## 基础用法
 
 <DemoBlock
   title="编辑项目设置"
-  description="抽屉内容由默认插槽承载，底部操作使用 footer 插槽。"
   :source="drawerBasicSource"
 >
   <DrawerBasic />
@@ -26,7 +23,7 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `modelValue / v-model` | 是否显示 | `boolean` | `false` |
+| `modelValue` / `v-model` | 是否显示 | `boolean` | `false` |
 | `title` | 默认标题 | `string` | `` |
 | `direction` | 打开方向：`ltr` 左侧、`rtl` 右侧、`ttb` 顶部、`btt` 底部 | `string` | `rtl` |
 | `size` | 水平方向为宽度，垂直方向为高度；数字转换为 px | `string / number` | `min(420px, calc(100vw - 16px))` |
@@ -44,12 +41,6 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 | `destroyOnClose` | 关闭过渡完成后是否销毁内容 | `boolean` | `false` |
 | `beforeClose` | 关闭前守卫；接收 `done`，也支持返回布尔值或 Promise | `(done) => void \| boolean \| Promise<boolean>` | — |
 | `zIndex` | 基础层级；嵌套时实际层级至少比父浮层高 1，内部浮层自动继承 | `number` | `10000` |
-
-`beforeClose` 使用回调风格时调用 `done()` 允许关闭；调用 `done(false)` 或返回 `false` 会保留抽屉。Promise 解析为 `false` 也会阻止关闭。守卫执行期间关闭按钮会暂时禁用，重复关闭请求会被忽略。
-
-在移动端 WebView 中，可将宿主提供的四边安全区传给 `viewportPadding`。属性支持 CSS 变量，因此宿主更新变量后不需要重新挂载抽屉：
-
-移动端左右侧抽屉可同时启用 `fullWidth`，铺满扣除 `viewportPadding` 后的可用宽度；通过响应式状态切换此属性即可在桌面端恢复 `size` 指定的尺寸。
 
 ```vue
 <AuDrawer
@@ -70,8 +61,6 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 | `close` | 组件内部触发关闭时调用 | `(reason: DrawerCloseReason)` |
 | `closed` | 关闭过渡结束后触发 | — |
 | `before-close-error` | `beforeClose` 抛出异常或 Promise reject | `(error: unknown)` |
-
-`DrawerCloseReason` 为 `api`、`overlay`、`escape` 或 `close-button`。父组件直接把 `v-model` 改为 `false` 时不会额外触发 `close`。
 
 ### Slots
 

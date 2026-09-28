@@ -6,21 +6,16 @@ import windowTitleBarBasicSource from '../.vitepress/theme/examples/window-title
 
 # WindowTitleBar 窗口标题栏
 
-用于 Electron、Tauri 等无边框桌面窗口。组件只负责标题栏布局、拖拽区域、窗口控制按钮，不直接调用任何宿主 API；应用通过事件连接自己的窗口控制能力。
+用于 Electron、Tauri 等无边框桌面窗口。
 
 ## 基础用法
 
 <DemoBlock
   title="受控窗口状态"
-  description="最大化状态由应用持有，标题栏只发送操作请求。浏览器中的示例仅演示交互状态。"
   :source="windowTitleBarBasicSource"
 >
   <WindowTitleBarBasic />
 </DemoBlock>
-
-## 宿主接入
-
-将宿主返回的真实窗口状态传给 `maximized`。收到 `minimize`、`toggle-maximize` 或 `close` 事件后，再调用 Electron、Tauri 或其他桌面容器提供的窗口 API。这样标题栏不会依赖特定 IPC 通道，也不会在内部复制宿主状态。
 
 ## WindowTitleBar API
 

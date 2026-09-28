@@ -6,31 +6,16 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 
 # Input 输入框
 
-`AuInput` 通过 `type` 统一提供普通输入、搜索、密码和 `textarea` 多行输入。组件保留原生控件行为，并统一尺寸、焦点、错误态与主题适配。
-
-输入框采用轻量玻璃表面与细边框，聚焦时通过边框颜色反馈状态，跟随全局 `soft / clear / solid` 材质及明暗主题。
+`AuInput` 通过 `type` 统一提供普通输入、搜索、密码和 `textarea` 多行输入。
 
 ## 基础用法
 
 <DemoBlock
   title="常用输入状态"
-  description="支持搜索、清空、前后缀、字数限制、只读、加载、错误和禁用状态。"
   :source="inputBasicSource"
 >
   <InputBasic />
 </DemoBlock>
-
-## 使用建议
-
-- 使用 `v-model` 管理值；组件始终通过字符串回传用户输入，与原生 input 行为一致。
-- 搜索框可设置 `type="search"`，需要组件内清除内容时增加 `clearable`。
-- 密码框可设置 `type="password"`，增加 `show-password-toggle` 提供显示/隐藏切换。
-- 多行输入使用 `type="textarea"`，通过 `rows` 设置初始行数；不再使用独立的 Textarea 组件。
-- `invalid` 可手动设置错误视觉；位于 `AuFormItem` 内时也会自动继承字段错误状态。
-- 位于 `AuFormItem` 内时，输入和失焦默认触发对应规则校验；仅提交时校验可设置 `:validate-event="false"`。
-- 异步读取或提交期间使用 `loading`，它会显示后缀加载图标 并阻止编辑和清空。
-- `prefixIcon`、`suffixIcon` 接受 Aurora Plus 图标组件；复杂内容使用同名插槽。
-- 中文、日文等输入法组合输入结束后才会更新 `v-model`，避免过滤列表在拼写过程中抖动。
 
 ## Input API
 
@@ -57,8 +42,6 @@ import inputBasicSource from '../.vitepress/theme/examples/input/InputBasic.vue?
 | `showWordLimit` | 设置 maxlength 后是否显示字数 | `boolean` | `false` |
 | `invalid` | 是否手动显示错误状态；FormItem 的错误状态会自动合并 | `boolean` | `false` |
 | `validateEvent` | 是否在输入和失焦时通知所属 FormItem 校验 | `boolean` | `true` |
-
-`class` 与 `style` 作用于组件外壳，其余未声明属性和原生监听器会传递给内部 input，例如 `name`、`autocomplete`、`spellcheck` 和 `@keydown`。
 
 ### Events
 

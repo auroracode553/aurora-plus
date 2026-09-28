@@ -6,15 +6,12 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 
 # Dropdown 下拉菜单
 
-用于将一组低频或次级操作收纳到触发器附近。菜单使用 Aurora Plus 统一的 Apple 风格圆角材质，打开后会自动进行视口避让，并支持鼠标、键盘和点击外部关闭。
+用于将一组低频或次级操作收纳到触发器附近。
 
 ## 基础用法
 
-`items` 是菜单项数组，触发器通过 `trigger` 插槽传入任意按钮或链接。菜单选择后会触发 `select`，默认关闭菜单。
-
 <DemoBlock
   title="项目操作"
-  description="圆角菜单项使用轻量状态色，支持图标、快捷键提示、分隔线、禁用项和危险操作。"
   :source="dropdownBasicSource"
 >
   <DropdownBasic />
@@ -33,13 +30,6 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `danger` | 是否使用危险色 | `boolean` |
 | `command` | `command` 事件的回传值 | `unknown` |
 | `type` / `divider` | `type="divider"` 或 `divider=true` 渲染分隔线 | — |
-
-## 使用建议
-
-- 菜单项应使用明确的动词和对象；同一层级避免放入过多低频操作。
-- 需要二元开关或多选状态时使用 `AuSwitch` / `AuCheckbox`，不要把菜单项当作持久状态控件。
-- 触发器应提供可见文字；纯图标触发器可设置 `title`。
-- 破坏性操作设置 `danger`，并在 `beforeSelect` 中完成确认或权限判断。
 
 ## Dropdown API
 
@@ -62,8 +52,6 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `appendTo` | Teleport 目标 | `string / element` | `body` |
 | `zIndex` | 基础层级；嵌套时实际层级至少比父浮层高 1 | `number` | `1200` |
 
-`placement` 可选 `top-start`、`top`、`top-end`、`bottom-start`、`bottom`、`bottom-end`；`top` 与 `bottom` 居中对齐，带 `start` / `end` 后缀时按对应边缘对齐。未声明的属性会透传到根元素。
-
 ### Events
 
 | 事件名 | 说明 | 参数 |
@@ -82,5 +70,3 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 | `trigger` | 触发菜单的按钮或链接 |
 | `default` | 未提供 `trigger` 时作为触发器内容 |
 | `menu` | 自定义菜单内容；可接收 `close` 和 `select` 作用域方法 |
-
-打开菜单后，`ArrowUp`、`ArrowDown`、`Home`、`End` 在可用菜单项间移动，Escape 关闭并恢复触发器焦点。

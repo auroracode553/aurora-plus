@@ -12,15 +12,12 @@ import badgeBasicSource from '../.vitepress/theme/examples/badge/BadgeBasic.vue?
 
 <DemoBlock
   title="方形与圆形主体"
-  description="相同的右上角角标可用于方形和圆形主体。"
   :source="badgeBasicSource"
 >
   <BadgeBasic />
 </DemoBlock>
 
 ## 自定义内容
-
-`content` 插槽可替换标记内容，并接收原始 `value`：
 
 ```vue
 <AuBadge :value="3" type="primary">

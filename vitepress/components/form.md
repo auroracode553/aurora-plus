@@ -6,23 +6,16 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 
 # Form 表单
 
-`AuForm` 管理字段模型、规则和整体验证，`AuFormItem` 负责标签、错误信息和字段级状态。字段控件负责在用户输入或失焦时通知 FormItem；调用 `validate()` 则始终执行整表校验。
+`AuForm` 管理字段模型、规则和整体验证，`AuFormItem` 负责标签、错误信息和字段级状态。
 
 ## 基础用法
 
 <DemoBlock
   title="基础表单校验"
-  description="名称和日期为必填项；失焦或选择日期时执行字段校验，点击保存执行整表校验，重置会清除校验状态。"
   :source="formBasicSource"
 >
   <FormBasic />
 </DemoBlock>
-
-## 校验规则
-
-规则支持 `required`、`whitespace`、`type`、`enum`、`pattern`、`len`、`min`、`max`、`transform`、`defaultField`、`fields`、`message` 和 `trigger`。`trigger` 可为 `change`、`blur` 或数组；未设置时所有验证入口都会执行。`validator(rule, value, callback, model, options)` 与 `asyncValidator` 可以同步返回、返回 Promise，或调用 callback。
-
-`type` 支持 `string`、`number`、`integer`、`boolean`、`array`、`object`、`date`、`email`、`url`、`regexp`、`method` 和 `hex`。字符串与数组的 `min` / `max` 表示长度，数字则比较数值。
 
 ## Form Attributes
 
@@ -44,8 +37,6 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 | `scrollToError` | 整体验证失败时滚动到首个错误 | `boolean` | `false` |
 | `scrollIntoViewOptions` | 自动滚动参数；`false` 使用浏览器默认值 | `object / false` | `{ block: 'center', behavior: 'smooth' }` |
 
-`size`、`disabled`、`invalid`、`error` 和 `fieldId` 通过 FormItem 默认插槽参数提供。Aurora Plus 表单控件会自动读取所属 FormItem 的错误状态，自定义控件也可以使用这些插槽参数完成适配。
-
 ## Form Events 与 Exposes
 
 | 名称 | 说明 |
@@ -59,8 +50,6 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 | `scrollToField(prop, options?)` | 滚动到字段 |
 | `getField(prop)` | 获取已注册字段上下文 |
 | `fields` | 已注册字段上下文数组 |
-
-字段路径支持 `profile.name` 和 `items[0].title`。
 
 ## FormItem Attributes
 
@@ -78,6 +67,30 @@ import formBasicSource from '../.vitepress/theme/examples/form/FormBasic.vue?dem
 | `inlineMessage` / `statusIcon` | 覆盖表单的行内错误 / 状态图标设置 | `boolean` | — |
 | `size` | 覆盖表单尺寸 | `small / default / large` | `''` |
 
-插槽包括 `default`、`label` 和 `error`。组件暴露 `validate(trigger?)`、`resetField()`、`clearValidate()`、`errorMessage` 与 `element`。
+## FormItem Slots
 
-`AuInput` 的 `validateEvent` 默认为 `true`，会在输入和失焦时按规则的 `trigger` 校验。只希望提交时校验时，在 `AuInput` 上设置 `:validate-event="false"`，提交时调用 Form 的 `validate()`。
+| 插槽 | 参数 | 说明 |
+| --- | --- | --- |
+| `default` | `{ fieldId, validate, clearValidate, disabled, size, invalid, error, validateStatus }` | 字段控件 |
+| `label` | `{ label }` | 自定义标签 |
+| `error` | `{ error }` | 自定义错误内容 |
+
+## FormItem Exposes
+
+| 名称 | 说明 |
+| --- | --- |
+| `validate(trigger?)` | 验证当前字段 |
+| `resetField()` | 恢复字段初始值 |
+| `clearValidate()` | 清除验证状态 |
+| `errorMessage` / `element` | 当前错误文字 / 字段元素 |
+
+## 校验规则
+
+| 字段 | 说明 |
+| --- | --- |
+| `required` / `whitespace` | 必填 / 排除纯空白 |
+| `type` / `enum` / `pattern` | 类型、枚举值、正则匹配 |
+| `len` / `min` / `max` | 长度或数值限制 |
+| `transform` / `defaultField` / `fields` | 值转换与嵌套字段规则 |
+| `message` / `trigger` | 错误提示与触发时机（`change` / `blur`） |
+| `validator` / `asyncValidator` | 自定义同步或异步校验 |

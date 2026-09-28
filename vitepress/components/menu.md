@@ -8,15 +8,12 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
 
 # Menu 导航菜单
 
-`AuMenu`、`AuMenuGroup` 与 `AuMenuItem` 用于侧栏、设置分类和工作区视图等持续可见的导航。临时操作集合应使用 `AuDropdown` 或 `AuContextMenu`。
+`AuMenu`、`AuMenuGroup` 与 `AuMenuItem` 用于侧栏、设置分类和工作区视图等持续可见的导航。
 
 ## 基础用法
 
-使用 `v-model` 管理当前项，菜单项的 `index` 是唯一业务值。图标既可通过 `icon` 属性传入，也可由 `icon` 插槽完全自定义。
-
 <DemoBlock
   title="侧栏导航"
-  description="支持分组、选中、图标、徽标、状态点和完整键盘导航。"
   :source="menuBasicSource"
 >
   <MenuBasic />
@@ -24,23 +21,12 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
 
 ## 图标侧边栏
 
-`mode="rail"` 将菜单渲染为窄图标侧边栏：图标在上、文字在下，适合高频导航放置于应用边缘。徽标会退化为图标右上角的计数点；`#bottom` 插槽可固定通知、账户等底部入口，菜单容器需要设置高度才能让底部区域贴底。
-
 <DemoBlock
   title="图标侧边栏"
-  description="窄栏纵向排布，底部插槽固定通知与账户入口。"
   :source="menuRailSource"
 >
   <MenuRail />
 </DemoBlock>
-
-## 使用建议
-
-- 菜单适合放在持续可见的侧栏或设置区域中，当前项会显示浅色选中面和左侧激活条。
-- 分组标题使用 `AuMenuGroup`，需要更大的段落间距时设置 `spaced`。
-- 纵向菜单使用 `ArrowUp`、`ArrowDown`，横向菜单使用 `ArrowLeft`、`ArrowRight`；`Home`、`End` 定位首尾项，Enter 和 Space 选择当前项。
-- `mode="rail"` 适合应用边缘的高频导航：保持 56px 窄栏，分组标题不展示，`spaced` 分组退化为段落间距；为菜单容器设置高度后，`#bottom` 插槽会贴底固定。
-- 折叠菜单应为每个菜单项提供 `label`，组件会将它保留为鼠标提示；rail 模式同样支持 `collapse` 折叠为纯图标。
 
 ## AuMenu API
 
@@ -53,8 +39,6 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
 | `collapse` | 纵向菜单是否折叠为仅图标模式 | `boolean` | `false` |
 | `disabled` | 是否禁用整个菜单 | `boolean` | `false` |
 | `loop` | 方向键到达边界后是否循环 | `boolean` | `true` |
-
-未声明的属性会透传至根 `ul`。
 
 ### Events
 

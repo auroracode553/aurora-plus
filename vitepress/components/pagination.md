@@ -6,13 +6,11 @@ import paginationBasicSource from '../.vitepress/theme/examples/pagination/Pagin
 
 # Pagination 分页
 
-`AuPagination` 用于切换分段数据，支持页码折叠、每页条数、跳页与自定义布局。当前页和每页条数均可独立使用 `v-model`。
-
-每页条数选择框和跳页输入框沿用 Input 的轻透材质与聚焦边框色。开启 `background` 后页码按钮使用相同材质，当前页保留轻量主题色强调；表面跟随全局材质与明暗主题。
+`AuPagination` 用于切换分段数据，支持页码折叠、每页条数、跳页与自定义布局。
 
 ## 基础用法
 
-<DemoBlock title="完整分页" description="布局中的箭头分隔符会把后续控件推到容器右侧。" :source="paginationBasicSource">
+<DemoBlock title="完整分页" :source="paginationBasicSource">
   <PaginationBasic />
 </DemoBlock>
 
@@ -31,11 +29,29 @@ import paginationBasicSource from '../.vitepress/theme/examples/pagination/Pagin
 | `disabled` / `background` | 禁用 / 为页码按钮添加表面 | `boolean` | `false` |
 | `hideOnSinglePage` | 只有一页时隐藏 | `boolean` | `false` |
 | `prevText` / `nextText` | 替代前后翻页图标的文字 | `string` | `''` |
+| `jumpText` | 跳页输入框前的文字 | `string` | `前往` |
 | `totalFormatter` | 总数文字格式化 | `(total) => string` | — |
 | `pageSizeFormatter` | 每页条数文字格式化 | `(size) => string` | — |
 
-## Events 与 Slots
+## Events
 
-事件包括 `update:currentPage`、`update:pageSize`、`current-change(page)`、`size-change(size)`、`change(page, size)`、`prev-click(page)` 和 `next-click(page)`。插槽包括 `prev`、`next`，以及 `layout` 含 `slot` 时使用的默认插槽。
+| 事件 | 参数 | 说明 |
+| --- | --- | --- |
+| `update:currentPage` / `current-change` | `(page)` | 当前页变化 |
+| `update:pageSize` / `size-change` | `(size)` | 每页条数变化 |
+| `change` | `(page, size)` | 页码或每页条数变化 |
+| `prev-click` / `next-click` | `(page)` | 点击上一页 / 下一页 |
 
-组件暴露 `setCurrentPage(page)`、`currentPage` 和 `pageCount`。
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `prev` / `next` | 前后翻页按钮内容；提供 `{ disabled }` |
+| `default` | `layout` 中 `slot` 的内容 |
+
+## Exposes
+
+| 名称 | 说明 |
+| --- | --- |
+| `currentPage` / `pageCount` | 当前页 / 总页数 |
+| `setCurrentPage(value)` | 切换当前页 |

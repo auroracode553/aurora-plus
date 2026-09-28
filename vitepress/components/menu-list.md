@@ -6,29 +6,16 @@ import menuListBasicSource from '../.vitepress/theme/examples/menu-list/MenuList
 
 # MenuList 菜单列表
 
-`AuMenuList` 与 `AuMenuListItem` 用于苹果式分组菜单、设置入口和带尾部控件的配置行。它与导航选中的 `AuMenu`、大数据滚动的 `AuVirtualList` 职责不同。
-
-默认面板使用 Aurora Plus 的材质、圆角与表面阴影，自动适配明暗主题。
+`AuMenuList` 与 `AuMenuListItem` 用于苹果式分组菜单、设置入口和带尾部控件的配置行。
 
 ## 基础用法
 
 <DemoBlock
   title="分组菜单与设置行"
-  description="同一组件既可承载分组菜单，也可只声明一个 MenuListItem 作为独立操作入口。"
   :source="menuListBasicSource"
 >
   <MenuListBasic />
 </DemoBlock>
-
-## 使用建议
-
-- 带 `clickable` 或 `href` 的菜单项会获得即时按压反馈和完整键盘焦点。
-- 页面跳转或进入下一级时使用 `accessory="chevron"`，普通设置行不显示箭头。
-- 需要强化入口识别时使用 `leadingVariant="tinted"`；危险操作配合 `tone="danger"`，不要仅靠图标颜色表达风险。
-- 快捷键使用 `shortcut`，组件会以适合尾部信息的 `kbd` 样式展示。
-- `trailing` 可放置 `AuSwitch`、状态文字或业务按钮；包含交互控件时不要同时设置 `clickable`，避免嵌套交互元素。
-- 标题保持短而明确，补充信息放在 `description`，不要把整段说明塞入标题。
-- 面板阴影由组件内置处理，业务页面不需要重复设置背景、圆角、分隔线或 box-shadow。
 
 ## AuMenuList API
 

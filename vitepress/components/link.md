@@ -6,24 +6,16 @@ import linkBasicSource from '../.vitepress/theme/examples/link/LinkBasic.vue?dem
 
 # Link 文字链接
 
-用于页面跳转、打开外部资源或触发与导航含义一致的轻量交互。组件保持原生 `<a>` 语义，不使用按钮表面。
+用于页面跳转、打开外部资源或触发与导航含义一致的轻量交互。
 
 ## 基础用法
 
 <DemoBlock
   title="类型、下划线、禁用与图标"
-  description="默认在悬停时显示下划线；语义类型只改变文字颜色，不增加背景、边框或按钮内边距。"
   :source="linkBasicSource"
 >
   <LinkBasic />
 </DemoBlock>
-
-## 使用建议
-
-- 页面跳转或打开资源使用 `AuLink`，提交、确认等操作使用 `AuButton`。
-- `target="_blank"` 时同时传入 `rel="noopener noreferrer"`。
-- `href` 会直接透传给原生 `<a>`；对于不可信输入，业务侧必须校验协议和目标地址。
-- 禁用状态不会渲染 `href` 和 `target`，也不会触发组件的 `click` 事件。
 
 ## Link API
 
@@ -37,8 +29,6 @@ import linkBasicSource from '../.vitepress/theme/examples/link/LinkBasic.vue?dem
 | `href` | 原生链接地址 | `string` | — | `''` |
 | `target` | 原生链接目标 | `string` | `_self / _blank / _parent / _top` 或其他合法目标 | `_self` |
 | `icon` | 链接前置图标组件 | `Component` | — | `null` |
-
-未被组件声明的属性（例如 `rel`、`download`、`hreflang`）会透传到原生 `<a>`。
 
 ### Events
 

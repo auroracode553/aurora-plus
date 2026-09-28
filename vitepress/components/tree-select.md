@@ -6,13 +6,12 @@ import treeSelectBasicSource from '../.vitepress/theme/examples/tree-select/Tree
 
 # TreeSelect 树形选择
 
-`AuTreeSelect` 在紧凑输入框中选择单个层级节点。组件接收嵌套数据，内部生成可见树行，并支持展开、搜索、禁用节点和仅叶节点选择。
+`AuTreeSelect` 在紧凑输入框中选择单个层级节点。
 
 ## 基础用法
 
 <DemoBlock
   title="搜索与叶节点选择"
-  description="搜索时保留匹配节点的祖先路径；仅叶节点模式仍允许通过父节点的展开按钮浏览层级。"
   :source="treeSelectBasicSource"
 >
   <TreeSelectBasic />
@@ -55,4 +54,8 @@ import treeSelectBasicSource from '../.vitepress/theme/examples/tree-select/Tree
 
 ## Exposes
 
-`focus(options?)`、`blur()`、`open()`、`close(reason?)`，以及 `inputRef`、`treeRef`、`popoverRef`。
+| 名称 | 说明 |
+| --- | --- |
+| `focus(options?)` / `blur()` | 输入框聚焦 / 失焦 |
+| `open()` / `close(reason?)` | 打开 / 关闭浮层 |
+| `inputRef` / `treeRef` / `popoverRef` | 输入框、树、浮层引用 |

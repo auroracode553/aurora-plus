@@ -6,31 +6,24 @@ import popoverBasicSource from '../.vitepress/theme/examples/popover/PopoverBasi
 
 # Popover 弹出层
 
-`AuPopover` 是可承载任意 Vue 内容的锚点浮层，提供受控显示、主轴自动翻转、视口避让、点击外部关闭、Escape 关闭和焦点返回。简单命令列表继续使用 `AuDropdown`，复杂设置或混合控件使用 `AuPopover`。
+`AuPopover` 是可承载任意 Vue 内容的锚点浮层，提供受控显示、主轴自动翻转、视口避让、点击外部关闭、Escape 关闭和焦点返回。
 
 ## 基础用法
 
 <DemoBlock
   title="锚定操作面板"
-  description="Popover 负责交互与定位，Panel 和其中的所有内容均由使用者组合。"
   :source="popoverBasicSource"
 >
   <PopoverBasic />
 </DemoBlock>
 
-## 使用建议
-
-- 默认浮层自带材质表面；内容使用 `AuPanel`、`AuCard` 等表面组件时，设置 `:surface="false"`，避免重复材质层。
-- 键盘在触发器上按 `ArrowDown` 会打开浮层并聚焦第一个可操作元素；Escape 关闭并把焦点还给触发器。
-- `manual` 模式不从触发器自动打开，适合由 `v-model` 或公开方法统一控制；已打开时仍保留点击外部和 Escape 关闭。
-
-## API
+## Popover API
 
 ### Attributes
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `v-model` | 是否显示浮层 | `boolean` | `false` |
+| `modelValue` / `v-model` | 是否显示浮层 | `boolean` | `false` |
 | `placement` | 方位，支持 `top / right / bottom / left` 及 `-start / -end` | `string` | `bottom` |
 | `offset` | 浮层与触发器的距离 | `number` | `8` |
 | `trigger` | 触发方式，可选 `click / manual` | `string` | `click` |

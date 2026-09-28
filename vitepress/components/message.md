@@ -6,13 +6,12 @@ import messageBasicSource from '../.vitepress/theme/examples/message/MessageBasi
 
 # Message 消息提示
 
-在页面顶部展示非阻塞反馈。支持成功、警告、信息、错误四种类型，也支持常驻、手动关闭和相同消息合并。
+在页面顶部展示非阻塞反馈。
 
 ## 基础用法
 
 <DemoBlock
   title="消息类型与合并"
-  description="连续发送相同消息可查看合并计数效果。"
   :source="messageBasicSource"
 >
   <MessageBasic />
@@ -46,10 +45,6 @@ AuMessage.warning({
 | `AuMessage.error(options)` | 同上 | `AuMessageHandler` | 打开错误消息 |
 | `AuMessage.closeAll()` | — | `void` | 关闭当前全部消息 |
 
-`AuMessageHandler` 包含一个 `close(): void` 方法，可精确关闭本次调用创建或合并到的消息。
-
-四种消息类型使用相同的默认关闭时长。`AuMessage.error()` 默认也会自动关闭；只有显式传入 `duration: 0` 时，消息才会常驻并等待手动关闭。
-
 ### Options
 
 | 配置 | 说明 | 类型 | 默认值 |
@@ -61,5 +56,3 @@ AuMessage.warning({
 | `grouping` | 是否合并相同类型与正文并累加次数 | `boolean` | `false` |
 | `offset` | 消息容器距视口顶部的距离，单位 px | `number` | `20` |
 | `onClose` | 消息关闭后的回调 | `() => void` | — |
-
-鼠标悬停在消息上会暂停自动关闭计时，移出后从剩余时间继续。

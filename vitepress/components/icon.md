@@ -7,11 +7,9 @@ import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?dem
 
 # Icon 图标
 
-Aurora Plus 通过独立的 `aurora-plus/icons` 入口提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。图标实现已包含在 Aurora Plus 的发布产物中，只需安装 `aurora-plus`。`AuIcon` 用于统一图标的尺寸、颜色和对齐方式。
+Aurora Plus 通过独立的 `aurora-plus/icons` 入口提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。
 
 ## 基础用法
-
-从 `aurora-plus/icons` 导入需要的图标组件：
 
 ```vue
 <script setup>
@@ -26,7 +24,6 @@ import { IconHome, IconSearch } from 'aurora-plus/icons';
 
 <DemoBlock
   title="常用图标"
-  description="图标组件可以直接使用，也可以交给 AuIcon 统一控制尺寸、颜色和描边。"
   :source="iconBasicSource"
 >
   <IconBasic />
@@ -34,13 +31,9 @@ import { IconHome, IconSearch } from 'aurora-plus/icons';
 
 ## 图标集合
 
-下方目录收录当前版本的全部图标。可以按功能分类、样式或英文组件名筛选，点击图标即可复制组件名。
-
 <IconGallery />
 
 ## 在 Aurora Plus 组件中使用
-
-接受图标的 Aurora Plus 组件统一接收 Vue 图标组件本身，而不是字符串名称：
 
 ```vue
 <script setup>
@@ -59,11 +52,7 @@ const menuItems = [
 </template>
 ```
 
-`AuButton`、`AuDropdown` 和 `AuContextMenu` 的 `icon` 字段都遵循同一约定，并支持描边和填充图标变体。
-
 ## AuIcon API
-
-`AuIcon` 适合需要统一对齐、尺寸或颜色的场景：
 
 ```vue
 <script setup>
@@ -89,9 +78,3 @@ import { IconHeart } from 'aurora-plus/icons';
 | `color` | 图标颜色 | `string` | `''` |
 | `size` | 根节点宽高及字号；数字会转换为 px | `string / number` | `''` |
 | `strokeWidth` | 图标描边宽度 | `number` | `2` |
-
-其他 HTML 属性会透传到 `.au-icon` 根节点。
-
-## 图标变体与查找
-
-图标组件名以 `Icon` 开头，例如 `IconHeart` 与 `IconHeartFilled`。完整图标清单、预览和组件名可在本页的图标集合中查看。

@@ -12,29 +12,22 @@ import loadingServiceSource from '../.vitepress/theme/examples/loading/LoadingSe
 
 # Loading 加载
 
-在异步数据尚未就绪时覆盖目标区域并显示进度状态。支持组件、`v-loading` 指令和命令式服务三种用法；短请求可通过 `delay` 避免加载层闪烁。
+在异步数据尚未就绪时覆盖目标区域并显示进度状态。
 
 ## 区域加载
 
-完整安装 Aurora Plus 后可直接使用 `v-loading`。指令既接受布尔值，也接受包含 `loading` 的配置对象。
-
 <DemoBlock
   title="区域加载与自定义图标"
-  description="加载层继承页面表面；自定义 SVG 只改变进度图标，不改变目标区域尺寸。"
   :source="loadingBasicSource"
 >
   <LoadingBasic />
 </DemoBlock>
-
-按需注册指令：
 
 ```js
 import { vLoading } from 'aurora-plus';
 
 app.directive('loading', vLoading);
 ```
-
-`.body` 将区域加载层挂到 `document.body` 并持续对齐目标元素；`.fullscreen` 覆盖视口；`.lock` 在加载层显示期间锁定页面滚动：
 
 ```vue
 <main v-loading.body="loading">...</main>
@@ -43,11 +36,8 @@ app.directive('loading', vLoading);
 
 ## Loading 服务
 
-服务默认创建全屏加载层；传入 `target` 后默认只覆盖该元素。返回实例可更新文案、更新视觉配置或主动关闭。
-
 <DemoBlock
   title="区域与全屏服务"
-  description="全屏 Loading 是单例；重复打开会返回当前实例。"
   :source="loadingServiceSource"
 >
   <LoadingService />
@@ -65,15 +55,10 @@ loading.setText('正在刷新列表…');
 loading.close();
 ```
 
-完整安装后，Options API 中也可以调用 `this.$loading(options)`；该入口会继承当前应用上下文。
-
 ## AuLoading 组件
-
-组件用默认插槽包裹内容，通过 `loading` 控制区域加载；设置 `fullscreen` 后加载层会传送到 `body`，默认插槽仍保留原位置。
 
 <DemoBlock
   title="组件容器与独立 Spinner"
-  description="切换容器加载层，并对比小型、默认和大型加载图标。"
   :source="loadingComponentSource"
 >
   <LoadingComponent />
@@ -81,11 +66,8 @@ loading.close();
 
 ## 组件内加载状态
 
-按钮、按钮组操作项、输入框、复选框、开关和虚拟表格复用同一个加载图标，并在加载期间阻止重复操作。
-
 <DemoBlock
   title="控件与数据组件加载态"
-  description="集中展示所有已接入统一 Loading 的组件。"
   :source="loadingControlStatesSource"
 >
   <LoadingControlStates />
@@ -113,11 +95,7 @@ loading.close();
 | `beforeClose` | 服务关闭前调用；返回 false 可阻止关闭 | `() => boolean / void` | — |
 | `closed` | 服务关闭过渡和 DOM 清理完成后调用 | `() => void` | — |
 
-`target` 与 `body` 仅用于服务；服务实例创建后不能通过 `update()` 改变 `target`、`body` 或 `fullscreen`。
-
 ## 指令附加属性
-
-布尔值指令可以通过以下属性配置内容；配置对象中的同名选项优先级更高。
 
 | 属性 | 说明 |
 | --- | --- |
@@ -127,8 +105,6 @@ loading.close();
 | `au-loading-background` | 加载层背景 |
 | `au-loading-custom-class` | 自定义类名 |
 | `au-loading-color` | 加载图标颜色 |
-
-从 Element Plus 迁移时，同名的 `element-loading-*` 属性仍可使用；新代码建议统一采用 `au-loading-*`。
 
 ::: warning 安全提示
 `svg`、`au-loading-svg`、`au-loading-spinner` 及兼容的 `element-loading-spinner / element-loading-svg` 会渲染为 SVG 标记。只使用源码内可信内容，不要传入用户提交或未经清理的字符串，以免造成 XSS。
@@ -155,7 +131,14 @@ loading.close();
 | `closed` | 加载层离开过渡完成后触发 |
 | `rootRef` | 组件内容根元素引用 |
 
+## AuLoadingSpinner 属性
 
-## AuLoadingSpinner
-
-需要在自定义控件中复用同一加载图标时，可按需导入 `AuLoadingSpinner`。它支持 `size`、`text`、`color`、`spinner`、`svg`、`svgViewBox` 和紧凑图标模式 `compact`；默认不包含遮罩和滚动锁行为。
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `size` | 尺寸：`small / default / large` | `string` | `default` |
+| `text` | 加载文字 | `string` | `''` |
+| `color` | 图标颜色 | `string` | `''` |
+| `spinner` | 图标组件 | `Component` | `null` |
+| `compact` | 紧凑布局 | `boolean` | `false` |
+| `svg` | 可信 SVG 内部标记 | `string` | `''` |
+| `svgViewBox` | SVG viewBox | `string` | `0 0 24 24` |

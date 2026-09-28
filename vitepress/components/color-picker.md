@@ -6,24 +6,16 @@ import colorPickerBasicSource from '../.vitepress/theme/examples/color-picker/Co
 
 # ColorPicker 颜色选择器
 
-`AuColorPicker` 使用系统取色面板；`AuColorSwatch` 用于从固定的预设颜色中选择。两者提供一致的紧凑尺寸。
+`AuColorPicker` 使用系统取色面板；`AuColorSwatch` 用于从固定的预设颜色中选择。
 
 ## 基础用法
 
 <DemoBlock
   title="系统取色与预设颜色"
-  description="系统取色器和预设色块可以绑定同一个颜色值，并提供清晰的选中状态。"
   :source="colorPickerBasicSource"
 >
   <ColorPickerBasic />
 </DemoBlock>
-
-## 使用建议
-
-- `modelValue` 使用完整的六位十六进制颜色，例如 `#3478f6`。
-- 禁用状态用于展示不可修改的颜色；需要展示颜色值时在控件旁提供文本。
-
-固定色板使用 `AuColorSwatch`，不要用空内容按钮或在业务页面重新绘制颜色项。
 
 ## ColorPicker API
 

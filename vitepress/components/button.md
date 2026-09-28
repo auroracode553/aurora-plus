@@ -8,13 +8,12 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
 
 # Button 按钮
 
-常用的操作触发器。支持七种视觉类型、三种尺寸、加载态、禁用态以及图标插槽。
+常用的操作触发器。
 
 ## 基础用法
 
 <DemoBlock
   title="类型、状态与尺寸"
-  description="类型、尺寸、禁用和 loading 状态集中展示，点击加载按钮可观察即时状态变化。"
   :source="buttonBasicSource"
 >
   <ButtonBasic />
@@ -27,13 +26,6 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
 >
   <ButtonMenu />
 </DemoBlock>
-
-## 使用建议
-
-- 一个操作区域通常只保留一个 `primary` 按钮，避免多个主操作争夺注意力。
-- 异步提交期间使用 `loading`。加载状态会同时禁用按钮，防止重复提交。
-- 关闭入口直接使用 `<AuButton :icon="IconX" circle />`，其中 `IconX` 从 `aurora-plus` 导入。
-- 表单内若不希望触发表单提交，保留默认的 `native-type="button"`。
 
 ## Button API
 
@@ -52,8 +44,6 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
 | `circle` | 是否为圆形图标按钮 | `boolean` | — | `false` |
 | `disabled` | 是否禁用 | `boolean` | — | `false` |
 | `loading` | 是否显示加载状态；开启时按钮不可点击 | `boolean` | — | `false` |
-
-未被组件声明的属性（例如 `autofocus`、`form`）会透传到原生 `<button>`。
 
 ### Events
 

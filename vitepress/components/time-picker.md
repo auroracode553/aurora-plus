@@ -6,15 +6,12 @@ import timePickerBasicSource from '../.vitepress/theme/examples/time-picker/Time
 
 # TimePicker 时间选择器
 
-`AuTimePicker` 用于选择本地时、分、秒。浮层内的值先作为草稿编辑，点击“确定”后才更新模型，避免滚动或键盘操作产生中间提交。
-
-时间面板仅在点击输入控件，或聚焦后按方向键时打开；单纯通过 Tab 聚焦不会自动展开。
+`AuTimePicker` 用于选择本地时、分、秒。
 
 ## 基础用法
 
 <DemoBlock
   title="时间边界与步长"
-  description="可限制可用时间范围，并分别控制小时、分钟和秒的选项步长。"
   :source="timePickerBasicSource"
 >
   <TimePickerBasic />
@@ -40,8 +37,6 @@ import timePickerBasicSource from '../.vitepress/theme/examples/time-picker/Time
 | `placement` | 浮层方位 | `string` | `bottom-start` |
 | `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string \| Element / number` | `true / body / 1200` |
 
-默认完整格式为 `HH:mm:ss`，隐藏秒后为 `HH:mm`。字符串模型使用本地时间语义；传入 `Date` 时会保留其日期部分并更新时间部分。
-
 ## Events
 
 | 事件名 | 说明 | 参数 |
@@ -52,7 +47,3 @@ import timePickerBasicSource from '../.vitepress/theme/examples/time-picker/Time
 | `focus` / `blur` | 输入框焦点变化 | `(event)` |
 | `visible-change` | 浮层显隐变化 | `(visible)` |
 | `invalid-input` | 输入无法解析或不可用 | `(text, event)` |
-
-## Exposes
-
-`focus(options?)`、`blur()`、`open()`、`close(reason?)`，以及 `inputRef`、`popoverRef`。

@@ -6,27 +6,16 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 
 # DatePicker 日期选择器
 
-`AuDatePickerPane` 提供可独立嵌入的日历面板，`AuDatePicker` 将面板组合为输入控件，`AuDateTimePicker` 在同一浮层中完成日期与时间确认。组件使用本地日期语义，不会把纯日期转换为 UTC。
+`AuDatePickerPane` 提供可独立嵌入的日历面板，`AuDatePicker` 将面板组合为输入控件，`AuDateTimePicker` 在同一浮层中完成日期与时间确认。
 
 ## 基础用法
 
 <DemoBlock
   title="日期与日期时间"
-  description="日期即时提交，日期范围在选完起止日期后提交，日期时间在点击确定后提交。"
   :source="datePickerBasicSource"
 >
   <DatePickerBasic />
 </DemoBlock>
-
-`AuDatePickerPane` 是不包含触发器的裸面板，直接使用时会像普通内容一样常驻显示；需要点击后弹出的日期控件应使用 `AuDatePicker`。业务确实需要自行控制裸面板时，可配合 `v-if` 管理其显隐。
-
-## 值与格式
-
-- 默认字符串格式分别为 `YYYY-MM-DD` 和 `YYYY-MM-DD HH:mm:ss`；可用标记为 `YYYY`、`MM`、`DD`、`HH`、`mm`、`ss`。
-- `valueType="auto"` 会保留已有值的类型：`Date` 继续回传 `Date`，时间戳继续回传时间戳，其余情况回传字符串。也可显式指定 `string`、`date` 或 `timestamp`。
-- `valueFormat` 控制字符串模型格式，`displayFormat` 只控制输入框显示与手动输入格式。
-- `disabledDate(date)` 应返回布尔值；返回 `true` 的日期不可选择。
-- 使用 `type="daterange"` 时，模型为长度为 2 的数组；未完成第二次选择前仅触发 `calendar-change`，不会提交半成品模型。
 
 ## DatePicker API
 
@@ -36,8 +25,8 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | --- | --- | --- | --- |
 | `modelValue` | 当前日期；范围模式为二元数组 | `string / Date / number / array` | `''` |
 | `type` | 单日期或日期范围 | `date / daterange` | `date` |
-| `valueType` | 输出类型 | `auto / string / date / timestamp` | `auto` |
-| `valueFormat` | 字符串模型格式 | `string` | `YYYY-MM-DD` |
+| `valueType` | 输出类型；`auto` 保留现有模型类型 | `auto / string / date / timestamp` | `auto` |
+| `valueFormat` | 字符串模型格式，日期时间默认 `YYYY-MM-DD HH:mm:ss` | `string` | `YYYY-MM-DD` |
 | `displayFormat` | 输入框显示与解析格式 | `string` | `YYYY-MM-DD` |
 | `size` | 尺寸 | `small / default / large` | `default` |
 | `placeholder` | 占位文字 | `string` | `选择日期` |
@@ -50,15 +39,13 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | `locale` | `Intl` 区域标识 | `string` | `zh-CN` |
 | `firstDayOfWeek` | 每周起始日，`0` 为周日 | `number` | `1` |
 | `minDate` / `maxDate` | 日期边界 | `string / Date / number` | `null` |
-| `disabledDate` | 日期禁用函数 | `(date) => boolean` | `null` |
+| `disabledDate` | 返回 `true` 时禁用日期 | `(date) => boolean` | `null` |
 | `defaultValue` | 无值时默认展示日期；范围可传数组 | `string / Date / number / array` | `null` |
 | `showAdjacentDates` | 是否显示相邻月份日期 | `boolean` | `true` |
 | `showToday` | 是否显示“今天”操作 | `boolean` | `true` |
 | `unlinkPanels` | 范围模式下两个面板是否独立切月 | `boolean` | `false` |
 | `placement` | 浮层方位 | `string` | `bottom-start` |
 | `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string \| Element / number` | `true / body / 1200` |
-
-`class` 和 `style` 作用于组件外壳；`name` 会生成隐藏表单字段，其他原生属性传给可编辑输入框。
 
 ### Events
 
@@ -73,34 +60,64 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | `panel-change` | 浏览月份变化 | `(viewDate)` |
 | `calendar-change` | 范围选择草稿变化 | `([start, end])` |
 
-### Exposes
+## DateRangePicker API
 
-`focus(options?)`、`blur()`、`open()`、`close(reason?)`，以及 `inputRef`、`paneRef`、`popoverRef`。
-
-范围模式也可直接使用 `AuDateRangePicker`，其属性和事件与 `AuDatePicker type="daterange"` 相同，并额外暴露左右面板与两个输入框引用。
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `modelValue` | 起止日期，支持 `v-model` | `array` | `[]` |
+| `valueType` | 输出类型：`auto / string / date / timestamp` | `string` | `auto` |
+| `valueFormat` / `displayFormat` | 模型 / 输入框日期格式 | `string` | `YYYY-MM-DD` |
+| `size` | 尺寸：`small / default / large` | `string` | `default` |
+| `startPlaceholder` / `endPlaceholder` | 起止占位文字 | `string` | `开始日期 / 结束日期` |
+| `rangeSeparator` | 范围分隔文字 | `string` | `至` |
+| `disabled` / `readonly` / `invalid` | 禁用 / 只读 / 错误状态 | `boolean` | `false` |
+| `editable` / `clearable` | 可输入 / 可清空 | `boolean` | `true` |
+| `locale` | 区域标识 | `string` | `zh-CN` |
+| `firstDayOfWeek` | 每周起始日，`0` 为周日 | `number` | `1` |
+| `minDate` / `maxDate` | 可选日期边界 | `string / Date / number` | `null` |
+| `disabledDate` | 返回 `true` 时禁用日期 | `(date) => boolean` | `null` |
+| `defaultValue` | 无值时默认展示日期 | `array / string / Date / number` | `null` |
+| `showAdjacentDates` / `showToday` | 显示相邻月份日期 / 今天操作 | `boolean` | `true` |
+| `unlinkPanels` | 两个月份面板独立切换 | `boolean` | `false` |
+| `placement` | 浮层方位 | `string` | `bottom-start` |
+| `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string / Element / number` | `true / body / 1200` |
 
 ## DatePickerPane API
 
-面板支持 `modelValue`、`valueType`、`valueFormat`、`locale`、`firstDayOfWeek`、`minDate`、`maxDate`、`disabledDate`、`showAdjacentDates`，并额外提供：
-
-| 属性 | 说明 | 默认值 |
-| --- | --- | --- |
-| `defaultDate` | 无值时首次展示的月份 | `null` |
-| `showToday` | 显示今天操作 | `true` |
-| `surface` | 显示独立材质、边框与层级 | `true` |
-
-事件包括 `update:modelValue`、`change(value, date, event)`、`select(value, date, event)` 和 `panel-change(viewDate)`；`footer` 插槽接收 `today()`。面板暴露 `focus()`、`showDate(value)` 和 `paneRef`。
-
-键盘可使用方向键按日 / 周移动，`Home` / `End` 移动到周边界，`PageUp` / `PageDown` 切换月份，配合 Shift 切换年份，Enter 或空格选择。
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `modelValue` | 当前日期 | `string / Date / number` | `''` |
+| `valueType` | 输出类型：`auto / string / date / timestamp` | `string` | `auto` |
+| `valueFormat` | 字符串模型格式 | `string` | `YYYY-MM-DD` |
+| `locale` | 区域标识 | `string` | `zh-CN` |
+| `firstDayOfWeek` | 每周起始日，`0` 为周日 | `number` | `1` |
+| `minDate` / `maxDate` | 可选日期边界 | `string / Date / number` | `null` |
+| `disabledDate` | 返回 `true` 时禁用日期 | `(date) => boolean` | `null` |
+| `defaultDate` | 无值时首次展示的月份 | `string / Date / number` | `null` |
+| `showAdjacentDates` | 显示相邻月份日期 | `boolean` | `true` |
+| `showToday` | 显示今天操作 | `boolean` | `true` |
+| `showPreviousMonth` / `showNextMonth` | 显示切月按钮 | `boolean` | `true` |
+| `rangeStart` / `rangeEnd` | 范围起止日期 | `string / Date / number` | `null` |
+| `hoverDate` | 范围预览日期 | `string / Date / number` | `null` |
+| `rangeSelecting` | 范围选择进行中 | `boolean` | `false` |
+| `surface` | 显示独立材质与边框 | `boolean` | `true` |
 
 ## DateTimePicker API
 
-日期时间选择器继承 DatePicker 的输入、浮层、日期边界和格式属性，并增加：
-
-| 属性 | 说明 | 默认值 |
-| --- | --- | --- |
-| `showSeconds` | 是否显示秒；未设置格式时同步切换短格式 | `true` |
-| `hourStep` / `minuteStep` / `secondStep` | 时间选项步长 | `1` |
-| `disabledTime` | 日期时间禁用函数 `(date) => boolean` | `null` |
-
-默认 `valueFormat` 与 `displayFormat` 为 `YYYY-MM-DD HH:mm:ss`；隐藏秒时为 `YYYY-MM-DD HH:mm`。事件和 Exposes 与 DatePicker 一致，`datePaneRef` 代替 `paneRef`。
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `modelValue` | 当前日期时间，支持 `v-model` | `string / Date / number` | `''` |
+| `valueType` | 输出类型：`auto / string / date / timestamp` | `string` | `auto` |
+| `valueFormat` / `displayFormat` | 模型 / 输入框格式；默认随 `showSeconds` | `string` | 自动 |
+| `size` | 尺寸：`small / default / large` | `string` | `default` |
+| `placeholder` | 占位文字 | `string` | `选择日期和时间` |
+| `disabled` / `readonly` / `invalid` | 禁用 / 只读 / 错误状态 | `boolean` | `false` |
+| `editable` / `clearable` | 可输入 / 可清空 | `boolean` | `true` |
+| `locale` | 区域标识 | `string` | `zh-CN` |
+| `firstDayOfWeek` | 每周起始日，`0` 为周日 | `number` | `1` |
+| `showAdjacentDates` / `showSeconds` | 显示相邻月份日期 / 秒 | `boolean` | `true` |
+| `hourStep` / `minuteStep` / `secondStep` | 时间选项步长 | `number` | `1` |
+| `minDate` / `maxDate` | 日期时间边界 | `string / Date / number` | `null` |
+| `disabledDate` / `disabledTime` | 日期 / 时间禁用函数 | `(date) => boolean` | `null` |
+| `placement` | 浮层方位 | `string` | `bottom-start` |
+| `teleported` / `appendTo` / `zIndex` | 浮层挂载与层级 | `boolean / string / Element / number` | `true / body / 1200` |

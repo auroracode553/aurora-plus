@@ -6,21 +6,16 @@ import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasi
 
 # Tooltip 文字提示
 
-用于解释图标按钮、缩略文本或状态。提示层默认 Teleport 到 `body`，滚动时更新位置，主轴空间不足时自动翻转。
+用于解释图标按钮、缩略文本或状态。
 
 ## 基础用法
 
 <DemoBlock
   title="方向与自定义内容"
-  description="将鼠标移到按钮上或使用键盘聚焦按钮。"
   :source="tooltipBasicSource"
 >
   <TooltipBasic />
 </DemoBlock>
-
-## Placement
-
-支持 `top`、`bottom`、`left`、`right`，并可添加 `-start` 或 `-end` 对齐后缀，例如 `bottom-start`。当首选方向越过视口边界时，组件会在主轴方向翻转；交叉轴位置会被限制在视口内。
 
 ## Tooltip API
 

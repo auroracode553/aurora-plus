@@ -6,25 +6,16 @@ import tabsBasicSource from '../.vitepress/theme/examples/tabs/TabsBasic.vue?dem
 
 # Tabs 标签页
 
-`AuTabs` 用于同一内容区域内的并列视图切换。组件自带紧凑下划线样式和键盘方向键导航，业务侧无需覆盖视觉样式。
-
-选中下划线与标签文字等宽。启用 `fill` 后，按钮等分容器宽度、文字居中，下划线仍跟随文字长度，不随按钮拉长。
+`AuTabs` 用于同一内容区域内的并列视图切换。
 
 ## 基础用法
 
 <DemoBlock
   title="基础标签页"
-  description="标签按内容宽度紧凑排列；切换标签会更新对应内容，支持禁用项以及方向键、Home、End 键导航。启用 fill 可让标签等分容器宽度。"
   :source="tabsBasicSource"
 >
   <TabsBasic />
 </DemoBlock>
-
-## 使用建议
-
-- 标签用于切换同一空间内的内容视图，不用于执行一次性命令。
-- 标签数量保持克制，标题使用短名词；不可进入的标签使用 `disabled`。
-- 侧栏等分标签启用 `fill`，内容宽度不一致的顶部标签保留默认自适应宽度。
 
 ## Tabs API
 

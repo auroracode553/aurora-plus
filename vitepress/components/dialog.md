@@ -6,18 +6,12 @@ import dialogBasicSource from '../.vitepress/theme/examples/dialog/DialogBasic.v
 
 # Dialog 对话框
 
-通过 `v-model` 控制的模态内容容器。组件负责遮罩、Escape、焦点进入与恢复、滚动锁和过渡事件；表单数据及提交逻辑由业务层维护。
-
-Dialog 面板统一读取全局或局部的 `soft`、`clear`、`solid` 材质设置，内部 Aurora Plus 组件继承同一材质上下文。模态交互层保持完全透明，不改变对话框之外的页面亮度；面板自身使用背景模糊、细边框和通用浮层阴影表达层级。
-
-
-打开时默认聚焦对话框容器，不会自动聚焦关闭按钮。需要让表单控件或操作按钮获得初始焦点时，在目标元素上显式添加 `autofocus`。
+通过 `v-model` 控制的模态内容容器。
 
 ## 基础用法
 
 <DemoBlock
   title="编辑项目资料"
-  description="表单绑定 draftProfile，并通过底部操作区完成取消或保存。"
   :source="dialogBasicSource"
 >
   <DialogBasic />
@@ -29,7 +23,7 @@ Dialog 面板统一读取全局或局部的 `soft`、`clear`、`solid` 材质设
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `modelValue / v-model` | 是否显示 | `boolean` | `true` |
+| `modelValue` / `v-model` | 是否显示 | `boolean` | `true` |
 | `title` | 默认标题 | `string` | `''` |
 | `width` | 宽度；数字转换为 px | `string / number` | `min(560px, calc(100vw - 32px))` |
 | `height` | 固定高度；数字转换为 px | `string / number` | `''` |
@@ -54,8 +48,6 @@ Dialog 面板统一读取全局或局部的 `soft`、`clear`、`solid` 材质设
 | `opened` | 打开过渡结束后触发 | — |
 | `close` | 组件内部触发关闭时调用 | `(reason: DialogCloseReason)` |
 | `closed` | 关闭过渡结束后触发 | — |
-
-`DialogCloseReason` 为 `api`、`overlay`、`escape` 或 `close-button`。父组件直接把 `v-model` 改为 `false` 时不会额外触发 `close`。
 
 ### Slots
 

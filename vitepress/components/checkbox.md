@@ -12,19 +12,10 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
 
 <DemoBlock
   title="布尔值、数组与半选"
-  description="展示布尔值、加载态、数组模型与 indeterminate 半选状态。"
   :source="checkboxBasicSource"
 >
   <CheckboxBasic />
 </DemoBlock>
-
-## 使用建议
-
-- 单个设置使用布尔值模型；同组多选时让每个复选框传入不同的 `value`，并绑定到同一个数组。
-- 全选控件使用 `indeterminate` 告知用户当前处于部分选择状态，业务层负责计算全选和半选逻辑。
-- 异步提交期间使用 `loading`，它会替换选择标记 并阻止重复切换。
-- 复选框文字应说明选择后影响的范围。
-- 不要用复选框代替需要立即生效的二元开关，后者使用 `AuSwitch` 更清晰。
 
 ## Checkbox API
 
@@ -43,8 +34,6 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
 | `disabled` | 是否禁用 | `boolean` | `false` |
 | `loading` | 是否处于加载中；开启时不可切换 | `boolean` | `false` |
 
-`size` 可选 `small`、`default`、`large`。未声明的属性会透传到原生 `input`，例如 `id` 和 `form`。
-
 ### Events
 
 | 事件名 | 说明 | 参数 |
@@ -57,5 +46,3 @@ import checkboxBasicSource from '../.vitepress/theme/examples/checkbox/CheckboxB
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 自定义复选框文字；存在时优先于 `label` |
-
-组件使用原生 checkbox 语义。点击文字区域也会触发选择。

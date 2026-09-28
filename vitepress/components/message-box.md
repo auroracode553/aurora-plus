@@ -6,21 +6,18 @@ import messageBoxBasicSource from '../.vitepress/theme/examples/message-box/Mess
 
 # MessageBox 消息确认框
 
-命令式确认框，返回 `Promise<boolean>`。适合删除、发布等必须先获得用户选择的流程；多个调用会按先入先出顺序排队。
+命令式确认框，返回 `Promise<boolean>`。
 
 ## 基础用法
 
 <DemoBlock
   title="数据驱动的确认动作"
-  description="点击操作按钮查看不同的确认配置。"
   :source="messageBoxBasicSource"
 >
   <MessageBoxBasic />
 </DemoBlock>
 
 ## 异步关闭校验
-
-`beforeClose` 可同步或异步返回 `false` 阻止关闭，适合提交前校验或保存：
 
 ```js
 const confirmed = await AuMessageBox.confirm({
@@ -43,8 +40,6 @@ const confirmed = await AuMessageBox.confirm({
 | `AuMessageBox.confirm(options)` | 同上 | `Promise<boolean>` | 语义更明确的等价调用 |
 | `AuMessageBox.close()` | — | `void` | 关闭当前确认框并以 `false` 完成 Promise |
 
-点击确定返回 `true`；点击取消、关闭按钮、遮罩或按 Escape 返回 `false`。`beforeClose` 抛出的错误会使 Promise reject。
-
 ### Options
 
 | 配置 | 说明 | 类型 | 默认值 |
@@ -63,5 +58,3 @@ const confirmed = await AuMessageBox.confirm({
 | `closeOnClickModal` | 是否允许点击遮罩关闭 | `boolean` | `false` |
 | `closeOnPressEscape` | 是否允许按 Escape 关闭 | `boolean` | `true` |
 | `beforeClose` | 关闭前守卫 | `(action, options) => boolean \| Promise<boolean>` | — |
-
-`action` 的可选值为 `confirm`、`cancel`、`close`。
