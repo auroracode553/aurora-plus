@@ -16,6 +16,6 @@ import dividerBasicSource from '../.vitepress/theme/examples/divider/DividerBasi
 
 | 属性 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
-| `orientation` | 分割线方向 | `string` | `horizontal / vertical` | `horizontal` |
+| orientation | 分割线方向 | string | horizontal / vertical | horizontal |
 
 未声明的原生属性会透传到根元素。

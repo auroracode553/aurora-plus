@@ -74,7 +74,7 @@ import { IconHeart } from 'aurora-plus/icons';
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `icon` | 图标组件 | `Component` | `null` |
-| `color` | 图标颜色 | `string` | `''` |
-| `size` | 根节点宽高及字号；数字会转换为 px | `string / number` | `''` |
-| `strokeWidth` | 图标描边宽度 | `number` | `2` |
+| icon | 图标组件 | Component | null |
+| color | 图标颜色 | string | '' |
+| size | 根节点宽高及字号；数字会转换为 px | string / number | '' |
+| strokeWidth | 图标描边宽度 | number | 2 |

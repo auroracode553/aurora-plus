@@ -23,24 +23,24 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `modelValue` / `v-model` | 是否显示 | `boolean` | `false` |
-| `title` | 默认标题 | `string` | `` |
-| `direction` | 打开方向：`ltr` 左侧、`rtl` 右侧、`ttb` 顶部、`btt` 底部 | `string` | `rtl` |
-| `size` | 水平方向为宽度，垂直方向为高度；数字转换为 px | `string / number` | `min(420px, calc(100vw - 16px))` |
-| `fullWidth` | 左右侧抽屉铺满可用宽度，覆盖 `size` 与默认侧边留白，并移除圆角；上下抽屉不受影响 | `boolean` | `false` |
-| `modal` | 是否启用透明模态交互层 | `boolean` | `true` |
-| `lockScroll` | 显示期间是否锁定页面滚动 | `boolean` | `true` |
-| `teleported` | 是否 Teleport 到 `appendTo` | `boolean` | `true` |
-| `appendTo` | Teleport 目标节点或选择器 | `string / object` | `body` |
-| `viewportPadding` | 抽屉交互层的视口内边距；支持 CSS `padding` 简写，数字转换为 px | `string / number` | `0` |
-| `closeOnClickModal` | 点击模态交互层是否关闭 | `boolean` | `true` |
-| `closeOnPressEscape` | 按 Escape 是否关闭 | `boolean` | `true` |
-| `showClose` | 是否显示标题栏关闭按钮 | `boolean` | `true` |
-| `withHeader` | 是否渲染标题栏；关闭后标题、关闭按钮和 `header` 插槽均不渲染 | `boolean` | `true` |
-| `closeLabel` | 关闭按钮提示 | `string` | `关闭抽屉` |
-| `destroyOnClose` | 关闭过渡完成后是否销毁内容 | `boolean` | `false` |
-| `beforeClose` | 关闭前守卫；接收 `done`，也支持返回布尔值或 Promise | `(done) => void \| boolean \| Promise<boolean>` | — |
-| `zIndex` | 基础层级；嵌套时实际层级至少比父浮层高 1，内部浮层自动继承 | `number` | `10000` |
+| modelValue / v-model | 是否显示 | boolean | false |
+| title | 默认标题 | string |  |
+| direction | 打开方向：ltr 左侧、rtl 右侧、ttb 顶部、btt 底部 | string | rtl |
+| size | 水平方向为宽度，垂直方向为高度；数字转换为 px | string / number | min(420px, calc(100vw - 16px)) |
+| fullWidth | 左右侧抽屉铺满可用宽度，覆盖 size 与默认侧边留白，并移除圆角；上下抽屉不受影响 | boolean | false |
+| modal | 是否启用透明模态交互层 | boolean | true |
+| lockScroll | 显示期间是否锁定页面滚动 | boolean | true |
+| teleported | 是否 Teleport 到 appendTo | boolean | true |
+| appendTo | Teleport 目标节点或选择器 | string / object | body |
+| viewportPadding | 抽屉交互层的视口内边距；支持 CSS padding 简写，数字转换为 px | string / number | 0 |
+| closeOnClickModal | 点击模态交互层是否关闭 | boolean | true |
+| closeOnPressEscape | 按 Escape 是否关闭 | boolean | true |
+| showClose | 是否显示标题栏关闭按钮 | boolean | true |
+| withHeader | 是否渲染标题栏；关闭后标题、关闭按钮和 header 插槽均不渲染 | boolean | true |
+| closeLabel | 关闭按钮提示 | string | 关闭抽屉 |
+| destroyOnClose | 关闭过渡完成后是否销毁内容 | boolean | false |
+| beforeClose | 关闭前守卫；接收 done，也支持返回布尔值或 Promise | (done) =&gt; void \| boolean \| Promise&lt;boolean&gt; | — |
+| zIndex | 基础层级；嵌套时实际层级至少比父浮层高 1，内部浮层自动继承 | number | 10000 |
 
 ```vue
 <AuDrawer
@@ -55,24 +55,24 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
-| `update:modelValue` | 组件内部请求关闭时更新绑定值 | `(visible: boolean)` |
-| `open` | 开始打开时触发 | — |
-| `opened` | 打开过渡结束后触发 | — |
-| `close` | 组件内部触发关闭时调用 | `(reason: DrawerCloseReason)` |
-| `closed` | 关闭过渡结束后触发 | — |
-| `before-close-error` | `beforeClose` 抛出异常或 Promise reject | `(error: unknown)` |
+| update:modelValue | 组件内部请求关闭时更新绑定值 | (visible: boolean) |
+| open | 开始打开时触发 | — |
+| opened | 打开过渡结束后触发 | — |
+| close | 组件内部触发关闭时调用 | (reason: DrawerCloseReason) |
+| closed | 关闭过渡结束后触发 | — |
+| before-close-error | beforeClose 抛出异常或 Promise reject | (error: unknown) |
 
 ### Slots
 
 | 插槽名 | 作用域参数 | 说明 |
 | --- | --- | --- |
-| `default` | `{ close }` | 抽屉正文 |
-| `header` | `{ close }` | 自定义标题栏内容 |
-| `footer` | `{ close }` | 底部操作区；未提供时不渲染 footer |
+| default | { close } | 抽屉正文 |
+| header | { close } | 自定义标题栏内容 |
+| footer | { close } | 底部操作区；未提供时不渲染 footer |
 
 ### Exposes
 
 | 属性或方法 | 说明 |
 | --- | --- |
-| `close(reason?)` | 从组件实例主动关闭；默认 reason 为 `api`，仍会执行 `beforeClose` |
-| `drawerRef` | 抽屉内容根元素引用 |
+| close(reason?) | 从组件实例主动关闭；默认 reason 为 api，仍会执行 beforeClose |
+| drawerRef | 抽屉内容根元素引用 |

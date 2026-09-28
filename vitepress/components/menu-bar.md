@@ -21,14 +21,14 @@ import menuBarBasicSource from '../.vitepress/theme/examples/menu-bar/MenuBarBas
 
 | 字段 | 说明 | 类型 |
 | --- | --- | --- |
-| `label` | 菜单或命令名称 | `string` |
-| `command` | 业务命令标识 | `unknown` |
-| `children` | 子菜单项 | `Array` |
-| `icon` | 菜单项前导图标 | `Component` |
-| `accelerator` | 仅用于展示的快捷键提示 | `string` |
-| `disabled` | 是否禁用 | `boolean` |
-| `type` | `checkbox` 表示复选命令，`separator` 表示分隔线 | `string` |
-| `checked` | 复选命令是否选中 | `boolean` |
+| label | 菜单或命令名称 | string |
+| command | 业务命令标识 | unknown |
+| children | 子菜单项 | Array |
+| icon | 菜单项前导图标 | Component |
+| accelerator | 仅用于展示的快捷键提示 | string |
+| disabled | 是否禁用 | boolean |
+| type | checkbox 表示复选命令，separator 表示分隔线 | string |
+| checked | 复选命令是否选中 | boolean |
 
 ## MenuBar API
 
@@ -36,13 +36,13 @@ import menuBarBasicSource from '../.vitepress/theme/examples/menu-bar/MenuBarBas
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `items` | 根菜单及 `children` 命令项 | `Array` | `[]` |
-| `draggable` | 将根菜单后的空白区域设为窗口拖拽区 | `boolean` | `false` |
+| items | 根菜单及 children 命令项 | Array | [] |
+| draggable | 将根菜单后的空白区域设为窗口拖拽区 | boolean | false |
 
 ### Events
 
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
-| `select` | 选择可执行叶子菜单项 | `(item)` |
-| `open` | 打开根菜单 | `(item, index)` |
-| `close` | 关闭根菜单 | `(item, index)` |
+| select | 选择可执行叶子菜单项 | (item) |
+| open | 打开根菜单 | (item, index) |
+| close | 关闭根菜单 | (item, index) |

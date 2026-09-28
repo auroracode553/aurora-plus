@@ -21,18 +21,18 @@ import panelBasicSource from '../.vitepress/theme/examples/panel/PanelBasic.vue?
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `tag` | 根元素或动态组件 | `string / Component` | `section` |
-| `padding` | 内容留白，可选 `none / compact / default / comfortable` | `string` | `default` |
-| `depth` | 深度，可选 `none / surface / overlay` | `string` | `surface` |
-| `bordered` | 是否显示材质边框 | `boolean` | `true` |
-| `scrollable` | 主体区域是否独立滚动 | `boolean` | `false` |
-| `width` | 面板宽度，数字自动转为 px | `string / number` | `''` |
-| `maxHeight` | 最大高度，数字自动转为 px | `string / number` | `''` |
+| tag | 根元素或动态组件 | string / Component | section |
+| padding | 内容留白，可选 none / compact / default / comfortable | string | default |
+| depth | 深度，可选 none / surface / overlay | string | surface |
+| bordered | 是否显示材质边框 | boolean | true |
+| scrollable | 主体区域是否独立滚动 | boolean | false |
+| width | 面板宽度，数字自动转为 px | string / number | '' |
+| maxHeight | 最大高度，数字自动转为 px | string / number | '' |
 
 ### Slots
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `header` | 用户自定义头部内容 |
-| `default` | 用户自定义主体内容 |
-| `footer` | 用户自定义尾部内容 |
+| header | 用户自定义头部内容 |
+| default | 用户自定义主体内容 |
+| footer | 用户自定义尾部内容 |

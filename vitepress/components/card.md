@@ -34,12 +34,12 @@ import cardVariantsSource from '../.vitepress/theme/examples/card/CardVariants.v
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `tag` | 根元素或动态组件 | `string / Component` | `div` |
-| `type` | 卡片类型，可选 `default / flat / elevated / subtle` | `string` | `default` |
-| `padding` | 内容留白，可选 `none / compact / default / comfortable` | `string` | `default` |
+| tag | 根元素或动态组件 | string / Component | div |
+| type | 卡片类型，可选 default / flat / elevated / subtle | string | default |
+| padding | 内容留白，可选 none / compact / default / comfortable | string | default |
 
 ### Slots
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `default` | 卡片内容 |
+| default | 卡片内容 |

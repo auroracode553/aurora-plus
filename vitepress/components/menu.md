@@ -34,33 +34,33 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `modelValue` | 当前菜单项的 `index` | `string / number` | `''` |
-| `mode` | 排列方向，可选 `vertical / horizontal / rail` | `string` | `vertical` |
-| `collapse` | 纵向菜单是否折叠为仅图标模式 | `boolean` | `false` |
-| `disabled` | 是否禁用整个菜单 | `boolean` | `false` |
-| `loop` | 方向键到达边界后是否循环 | `boolean` | `true` |
+| modelValue | 当前菜单项的 index | string / number | '' |
+| mode | 排列方向，可选 vertical / horizontal / rail | string | vertical |
+| collapse | 纵向菜单是否折叠为仅图标模式 | boolean | false |
+| disabled | 是否禁用整个菜单 | boolean | false |
+| loop | 方向键到达边界后是否循环 | boolean | true |
 
 ### Events
 
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
-| `update:modelValue` | 选中项发生变化 | `(index)` |
-| `select` | 菜单项被选择；重复选择当前项也会触发 | `(index, event)` |
-| `change` | 选中值实际变化 | `(index, previousIndex)` |
+| update:modelValue | 选中项发生变化 | (index) |
+| select | 菜单项被选择；重复选择当前项也会触发 | (index, event) |
+| change | 选中值实际变化 | (index, previousIndex) |
 
 ### Slots
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `default` | 放置 `AuMenuItem` |
-| `bottom` | 仅 `rail` 模式下渲染；底部固定内容，不参与键盘导航与选中 |
+| default | 放置 AuMenuItem |
+| bottom | 仅 rail 模式下渲染；底部固定内容，不参与键盘导航与选中 |
 
 ### Exposes
 
 | 属性或方法 | 说明 |
 | --- | --- |
-| `focus(index?)` | 聚焦指定可用项；未找到时聚焦当前项或首个可用项 |
-| `menuRef` | 菜单根元素引用 |
+| focus(index?) | 聚焦指定可用项；未找到时聚焦当前项或首个可用项 |
+| menuRef | 菜单根元素引用 |
 
 ## AuMenuGroup API
 
@@ -68,14 +68,14 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `label` | 分组标题 | `string` | `''` |
-| `spaced` | 是否增加与上一组的间距 | `boolean` | `false` |
+| label | 分组标题 | string | '' |
+| spaced | 是否增加与上一组的间距 | boolean | false |
 
 ### Slots
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `default` | 自定义分组标题 |
+| default | 自定义分组标题 |
 
 ## AuMenuItem API
 
@@ -83,19 +83,19 @@ import menuRailSource from '../.vitepress/theme/examples/menu/MenuRail.vue?demo-
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `index` | 菜单项唯一值 | `string / number` | 必填 |
-| `label` | 文本回退值，并为折叠模式提供鼠标提示 | `string` | `''` |
-| `icon` | Aurora Plus 图标组件 | `Component` | `null` |
-| `iconColor` | 图标颜色 | `string` | `''` |
-| `badge` | 尾部徽标文本；`rail` 模式下退化为右上角计数点 | `string / number` | `''` |
-| `indicator` | 是否显示尾部状态点 | `boolean` | `false` |
-| `disabled` | 是否禁用当前项 | `boolean` | `false` |
-| `title` | 原生鼠标提示；折叠时默认回退为 `label` | `string` | `''` |
+| index | 菜单项唯一值 | string / number | 必填 |
+| label | 文本回退值，并为折叠模式提供鼠标提示 | string | '' |
+| icon | Aurora Plus 图标组件 | Component | null |
+| iconColor | 图标颜色 | string | '' |
+| badge | 尾部徽标文本；rail 模式下退化为右上角计数点 | string / number | '' |
+| indicator | 是否显示尾部状态点 | boolean | false |
+| disabled | 是否禁用当前项 | boolean | false |
+| title | 原生鼠标提示；折叠时默认回退为 label | string | '' |
 
 ### Slots
 
 | 插槽名 | 作用域参数 | 说明 |
 | --- | --- | --- |
-| `default` | — | 菜单项文字 |
-| `icon` | `{ active, disabled }` | 自定义图标 |
-| `suffix` | `{ active, disabled }` | 徽标、数量或快捷提示等尾部内容 |
+| default | — | 菜单项文字 |
+| icon | { active, disabled } | 自定义图标 |
+| suffix | { active, disabled } | 徽标、数量或快捷提示等尾部内容 |

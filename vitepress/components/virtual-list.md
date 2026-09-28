@@ -25,32 +25,32 @@ import virtualListBasicSource from '../.vitepress/theme/examples/virtual-list/Vi
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `items` | 完整数据数组 | `T[]` | `[]` |
-| `itemHeight` | 固定行高，单位 px，必须大于 0 | `number` | `28` |
-| `overscan` | 视口上下额外渲染的行数 | `number` | `8` |
-| `keyField` | 从对象数据读取 key 的字段 | `string` | `id` |
-| `itemKey` | 自定义 key 计算函数，优先级高于 `keyField` | `(item: T, index: number) => string \| number` | — |
-| `plain` | 移除容器边框、内边距和表面阴影，供复合组件承载内容 | `boolean` | `false` |
-| `fill` | 填满父级可用宽高并参与弹性布局 | `boolean` | `false` |
+| items | 完整数据数组 | T[] | [] |
+| itemHeight | 固定行高，单位 px，必须大于 0 | number | 28 |
+| overscan | 视口上下额外渲染的行数 | number | 8 |
+| keyField | 从对象数据读取 key 的字段 | string | id |
+| itemKey | 自定义 key 计算函数，优先级高于 keyField | (item: T, index: number) =&gt; string \| number | — |
+| plain | 移除容器边框、内边距和表面阴影，供复合组件承载内容 | boolean | false |
+| fill | 填满父级可用宽高并参与弹性布局 | boolean | false |
 
 ### Events
 
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
-| `scroll` | 原生滚动事件 | `(event: Event)` |
-| `range-change` | 实际渲染范围变化；`end` 为不包含的结束索引 | `({ start, end })` |
+| scroll | 原生滚动事件 | (event: Event) |
+| range-change | 实际渲染范围变化；end 为不包含的结束索引 | ({ start, end }) |
 
 ### Slots
 
 | 插槽名 | 作用域参数 | 说明 |
 | --- | --- | --- |
-| `default` | `{ item: T, index: number }` | 每一个当前可见列表项 |
-| `empty` | — | `items` 为空时的内容 |
+| default | { item: T, index: number } | 每一个当前可见列表项 |
+| empty | — | items 为空时的内容 |
 
 ### Exposes
 
 | 属性或方法 | 说明 |
 | --- | --- |
-| `scrollToTop()` | 滚动到顶部 |
-| `scrollToIndex(index, align?)` | 滚动到指定索引；`align` 支持 `auto / start / center / end` |
-| `scrollContainerRef` | 内部滚动容器元素引用 |
+| scrollToTop() | 滚动到顶部 |
+| scrollToIndex(index, align?) | 滚动到指定索引；align 支持 auto / start / center / end |
+| scrollContainerRef | 内部滚动容器元素引用 |

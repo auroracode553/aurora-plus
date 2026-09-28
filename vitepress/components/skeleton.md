@@ -55,24 +55,24 @@ const loading = ref(true);
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `loading` | 是否正在加载 | `boolean` | `true` |
-| `animated` | 子占位块是否启用呼吸动画 | `boolean` | `false` |
-| `rows` | 默认模板的段落行数，不含标题；非负整数 | `number` | `3` |
-| `count` | 占位模板重复数量；正整数 | `number` | `1` |
-| `throttle` | 延迟显示，或分别控制显隐，单位 ms | `number / { leading?: number, trailing?: number }` | `0` |
+| loading | 是否正在加载 | boolean | true |
+| animated | 子占位块是否启用呼吸动画 | boolean | false |
+| rows | 默认模板的段落行数，不含标题；非负整数 | number | 3 |
+| count | 占位模板重复数量；正整数 | number | 1 |
+| throttle | 延迟显示，或分别控制显隐，单位 ms | number / { leading?: number, trailing?: number } | 0 |
 
 ## AuSkeleton 插槽
 
 | 插槽 | 说明 | 参数 |
 | --- | --- | --- |
-| `template` | 加载期间重复渲染的占位模板 | `{ index: number }`，从 0 开始 |
-| `default` | 加载结束且隐藏延迟完成后的业务内容 | — |
+| template | 加载期间重复渲染的占位模板 | { index: number }，从 0 开始 |
+| default | 加载结束且隐藏延迟完成后的业务内容 | — |
 
 ## AuSkeletonItem 属性
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `variant` | 占位形状 | `text / p / h1 / h2 / h3 / caption / button / circle / rect / image` | `text` |
-| `width` | 宽度；数字为 px，字符串为 CSS 长度 | `number / string` | 由形状决定 |
-| `height` | 高度；数字为 px，字符串为 CSS 长度 | `number / string` | 由形状决定 |
-| `animated` | 覆盖容器的动画设置 | `boolean` | 跟随最近的 AuSkeleton，独立使用时为 false |
+| variant | 占位形状 | text / p / h1 / h2 / h3 / caption / button / circle / rect / image | text |
+| width | 宽度；数字为 px，字符串为 CSS 长度 | number / string | 由形状决定 |
+| height | 高度；数字为 px，字符串为 CSS 长度 | number / string | 由形状决定 |
+| animated | 覆盖容器的动画设置 | boolean | 跟随最近的 AuSkeleton，独立使用时为 false |
