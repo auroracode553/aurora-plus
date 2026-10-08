@@ -17,6 +17,14 @@ import windowTitleBarBasicSource from '../.vitepress/theme/examples/window-title
   <WindowTitleBarBasic />
 </DemoBlock>
 
+## 受限高度视图中的按钮提示
+
+标题栏提示使用 Aurora 的 Tooltip 样式。Teleport 只能避开 DOM 祖先裁剪，不能越过桌面宿主视图的边界。
+
+标题栏独占较矮的桌面视图时，宿主需监听 `tooltip-open-change`：收到 `true` 时为提示扩展视图，收到 `false` 时再收回。组件会合并三个按钮的提示状态，最后一个提示退场结束后才发出 `false`，避免切换按钮或退场时被裁剪。视口扩展尚未生效时，气泡保持不可见，视口变化后重新定位。
+
+替换 `controls` 插槽时，由插槽内容自行管理提示及宿主浮层状态。
+
 ## WindowTitleBar API
 
 ### Attributes
@@ -54,6 +62,7 @@ import windowTitleBarBasicSource from '../.vitepress/theme/examples/window-title
 | close | 请求关闭窗口 | (event: MouseEvent) |
 | icon-click | 单击应用图标 | (event: MouseEvent) |
 | title-double-click | 双击标题区域；先于自动的 toggle-maximize 发出 | (event: MouseEvent) |
+| tooltip-open-change | 至少一个默认按钮提示准备显示时为 true，全部退场或卸载后为 false | (open: boolean) |
 
 ### Slots
 

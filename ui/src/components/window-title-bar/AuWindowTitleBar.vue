@@ -58,6 +58,8 @@
           :show-after="tooltipShowAfter"
           :disabled="!showTooltips"
           fill-trigger
+          @open="setTooltipOpen('minimize', true)"
+          @closed="setTooltipOpen('minimize', false)"
         >
           <button
             class="au-window-title-bar__button au-control-reset au-inline-center"
@@ -79,6 +81,8 @@
           :show-after="tooltipShowAfter"
           :disabled="!showTooltips"
           fill-trigger
+          @open="setTooltipOpen('maximize', true)"
+          @closed="setTooltipOpen('maximize', false)"
         >
           <button
             class="au-window-title-bar__button au-control-reset au-inline-center"
@@ -103,6 +107,8 @@
           :show-after="tooltipShowAfter"
           :disabled="!showTooltips"
           fill-trigger
+          @open="setTooltipOpen('close', true)"
+          @closed="setTooltipOpen('close', false)"
         >
           <button
             class="au-window-title-bar__button is-close au-control-reset au-inline-center"
@@ -127,6 +133,7 @@ import { IconCopy, IconMinus, IconSquare, IconX } from '../../icons/internal.js'
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 
+// 标题栏不依赖桌面宿主，只上报按钮提示的整体开关状态，由宿主管理浮层边界。
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
@@ -163,9 +170,11 @@ const emit = defineEmits([
   'close',
   'icon-click',
   'title-double-click',
+  'tooltip-open-change',
 ]);
 
 const slots = useSlots();
+const openTooltips = new Set();
 const titleText = computed(() => String(props.title ?? ''));
 const hasIcon = computed(() => Boolean(props.showIcon || props.iconSrc || slots.icon));
 const hasWindowControls = computed(() => (
@@ -175,6 +184,15 @@ const hasControlsArea = computed(() => Boolean(slots.controls || hasWindowContro
 const maximizeButtonLabel = computed(() => (
   props.maximized ? props.restoreLabel : props.maximizeLabel
 ));
+
+function setTooltipOpen(button, open) {
+  const wasOpen = openTooltips.size > 0;
+  if (open) openTooltips.add(button);
+  else openTooltips.delete(button);
+  const isOpen = openTooltips.size > 0;
+  // 切换按钮时，旧提示仍在退场；最后一个提示退出后才能收回宿主视图。
+  if (wasOpen !== isOpen) emit('tooltip-open-change', isOpen);
+}
 
 function requestToggleMaximize(event) {
   if (props.maximizeDisabled) return;

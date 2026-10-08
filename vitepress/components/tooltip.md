@@ -8,6 +8,8 @@ import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasi
 
 用于解释图标按钮、缩略文本或状态。
 
+气泡检查首选方向与对侧的可用空间，两侧都不足时保持不可见，等待视口变化后重新定位。Teleport 不会扩大桌面宿主视图；宿主可通过 `open`、`closed` 事件协调视图边界。
+
 ## 基础用法
 
 <DemoBlock
@@ -33,6 +35,13 @@ import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasi
 | maxWidth | 最大宽度；数字会转换为 px | string / number | 280 |
 | teleported | 是否传送到 appendTo | boolean | true |
 | appendTo | Teleport 目标 | string / HTMLElement | body |
+
+### Events
+
+| 事件名 | 说明 | 参数 |
+| --- | --- | --- |
+| open | 显示延迟结束后、气泡挂载前触发；宿主可据此扩展视图 | — |
+| closed | 气泡退场结束或组件卸载后触发；挂载前取消也会释放打开状态 | — |
 
 ### Slots
 

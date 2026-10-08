@@ -7,12 +7,13 @@
     @mouseleave="hide"
     @focusin="show"
     @focusout="hide"
+    @pointerdown="close"
   >
     <slot></slot>
   </span>
 
   <Teleport :to="appendTo" :disabled="!teleported">
-    <Transition name="au-float">
+    <Transition name="au-float" @after-leave="notifyClosed">
       <div
         v-if="visible && hasContent"
         ref="tooltipRef"
@@ -28,7 +29,7 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onBeforeUnmount, ref, useSlots } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue';
 import { useOverlayLayer } from '../../utils/overlay-layer.js';
 
 const VIEWPORT_GAP = 8;
@@ -47,10 +48,12 @@ const props = defineProps({
   appendTo: { type: [String, Object], default: 'body' },
 });
 
+const emit = defineEmits(['open', 'closed']);
 const slots = useSlots();
 const triggerRef = ref(null);
 const tooltipRef = ref(null);
 const visible = ref(false);
+const positioned = ref(false);
 const activePlacement = ref('top');
 const popperPosition = ref({ x: 0, y: 0 });
 const arrowPosition = ref({});
@@ -59,12 +62,14 @@ let showTimer = null;
 let hideTimer = null;
 let updateFrame = null;
 let eventsBound = false;
+let openReported = false;
 
 const tooltipText = computed(() => String(props.content ?? '').trim());
 const hasContent = computed(() => Boolean(tooltipText.value || slots.content));
 const maxWidthValue = computed(() => (typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth));
 const overlayLayer = useOverlayLayer(() => 'var(--au-z-index-hint)');
 const popperStyle = computed(() => ({
+  visibility: positioned.value ? 'visible' : 'hidden',
   zIndex: overlayLayer.value,
   left: `${popperPosition.value.x}px`,
   top: `${popperPosition.value.y}px`,
@@ -76,21 +81,50 @@ function show() {
   clearTimeout(showTimer);
   clearTimeout(hideTimer);
   if (props.disabled || !hasContent.value) return;
+  if (visible.value) return;
+  // 等待显示期间也监听失焦，防止切换窗口后延迟任务仍弹出提示。
+  bindWindowEvents();
 
   showTimer = globalThis.setTimeout(async () => {
+    showTimer = null;
+    if (props.disabled || !hasContent.value) return;
+    positioned.value = false;
+    // 先通知宿主扩展视图，再挂载气泡；视口尚未扩展时保持不可见，等 resize 重新定位。
+    if (!openReported) {
+      openReported = true;
+      emit('open');
+    }
     visible.value = true;
     await nextTick();
+    if (!visible.value) return;
     updatePosition();
-    bindWindowEvents();
   }, Math.max(props.showAfter, 0));
 }
 
 function hide() {
   clearTimeout(showTimer);
-  hideTimer = globalThis.setTimeout(() => {
-    visible.value = false;
-    unbindWindowEvents();
-  }, Math.max(props.hideAfter, 0));
+  clearTimeout(hideTimer);
+  hideTimer = globalThis.setTimeout(close, Math.max(props.hideAfter, 0));
+}
+
+/** 点击、失焦或禁用立即取消提示，避免窗口操作后留下旧气泡。 */
+function close() {
+  clearTimeout(showTimer);
+  clearTimeout(hideTimer);
+  showTimer = null;
+  hideTimer = null;
+  const closedBeforeMount = visible.value && !tooltipRef.value;
+  visible.value = false;
+  if (updateFrame !== null && typeof window !== 'undefined') window.cancelAnimationFrame(updateFrame);
+  updateFrame = null;
+  unbindWindowEvents();
+  if (closedBeforeMount) notifyClosed();
+}
+
+function notifyClosed() {
+  if (!openReported) return;
+  openReported = false;
+  emit('closed');
 }
 
 function getTriggerElement() {
@@ -113,9 +147,15 @@ function updatePosition() {
   if (!trigger || !tooltip || typeof window === 'undefined') return;
 
   const triggerRect = trigger.getBoundingClientRect();
-  const tooltipRect = tooltip.getBoundingClientRect();
+  // 布局尺寸不受进入动画的 scale 影响，避免用缩小后的气泡尺寸计算边界。
+  const tooltipRect = { width: tooltip.offsetWidth, height: tooltip.offsetHeight };
   const preferred = parsePlacement();
   const placement = choosePlacement(preferred.base, triggerRect, tooltipRect);
+  if (!placement || tooltipRect.width > window.innerWidth - VIEWPORT_GAP * 2
+      || tooltipRect.height > window.innerHeight - VIEWPORT_GAP * 2) {
+    positioned.value = false;
+    return;
+  }
   const position = calculatePosition(placement, preferred.align, triggerRect, tooltipRect);
 
   activePlacement.value = placement;
@@ -124,14 +164,22 @@ function updatePosition() {
     y: clamp(position.y, VIEWPORT_GAP, window.innerHeight - tooltipRect.height - VIEWPORT_GAP),
   };
   arrowPosition.value = calculateArrowPosition(placement, triggerRect, tooltipRect, popperPosition.value);
+  positioned.value = true;
 }
 
 function choosePlacement(base, triggerRect, tooltipRect) {
-  if (base === 'top' && triggerRect.top - tooltipRect.height - props.offset < VIEWPORT_GAP) return 'bottom';
-  if (base === 'bottom' && triggerRect.bottom + tooltipRect.height + props.offset > window.innerHeight - VIEWPORT_GAP) return 'top';
-  if (base === 'left' && triggerRect.left - tooltipRect.width - props.offset < VIEWPORT_GAP) return 'right';
-  if (base === 'right' && triggerRect.right + tooltipRect.width + props.offset > window.innerWidth - VIEWPORT_GAP) return 'left';
-  return base;
+  const space = {
+    top: triggerRect.top - VIEWPORT_GAP,
+    bottom: window.innerHeight - triggerRect.bottom - VIEWPORT_GAP,
+    left: triggerRect.left - VIEWPORT_GAP,
+    right: window.innerWidth - triggerRect.right - VIEWPORT_GAP,
+  };
+  const opposite = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[base];
+  const size = ['top', 'bottom'].includes(base) ? tooltipRect.height : tooltipRect.width;
+  if (space[base] >= size + props.offset) return base;
+  if (space[opposite] >= size + props.offset) return opposite;
+  // 两侧都不足时先等待宿主视口变化，不能夹紧坐标把气泡压回触发按钮。
+  return null;
 }
 
 function calculatePosition(base, align, triggerRect, tooltipRect) {
@@ -164,7 +212,7 @@ function calculateArrowPosition(base, triggerRect, tooltipRect, popper) {
 }
 
 function scheduleUpdatePosition() {
-  if (updateFrame || typeof window === 'undefined') return;
+  if (!visible.value || updateFrame !== null || typeof window === 'undefined') return;
   updateFrame = window.requestAnimationFrame(() => {
     updateFrame = null;
     updatePosition();
@@ -174,15 +222,17 @@ function scheduleUpdatePosition() {
 function bindWindowEvents() {
   if (eventsBound || typeof window === 'undefined') return;
   eventsBound = true;
-  window.addEventListener('resize', hide, { passive: true });
+  window.addEventListener('resize', scheduleUpdatePosition, { passive: true });
   window.addEventListener('scroll', scheduleUpdatePosition, true);
+  window.addEventListener('blur', close);
 }
 
 function unbindWindowEvents() {
   if (!eventsBound || typeof window === 'undefined') return;
   eventsBound = false;
-  window.removeEventListener('resize', hide);
+  window.removeEventListener('resize', scheduleUpdatePosition);
   window.removeEventListener('scroll', scheduleUpdatePosition, true);
+  window.removeEventListener('blur', close);
 }
 
 function clamp(value, min, max) {
@@ -190,11 +240,20 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+watch([() => props.disabled, hasContent], ([disabled, contentAvailable]) => {
+  if (disabled || !contentAvailable) close();
+});
+
+watch(
+  () => [props.content, props.placement, props.offset, props.maxWidth, props.teleported, props.appendTo],
+  scheduleUpdatePosition,
+  { flush: 'post' },
+);
+
 onBeforeUnmount(() => {
-  clearTimeout(showTimer);
-  clearTimeout(hideTimer);
-  if (updateFrame && typeof window !== 'undefined') window.cancelAnimationFrame(updateFrame);
-  unbindWindowEvents();
+  close();
+  // 组件卸载没有退场回调，也必须释放宿主浮层状态。
+  notifyClosed();
 });
 
 defineExpose({ hide, show, updatePosition });
