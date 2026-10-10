@@ -40,15 +40,13 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 
 ## 调用者配置与多源自动检查
 
-更新源由调用者配置，通过 `sources` 传入展示信息，组件不内置平台、仓库或地址配置表单。`source` 默认为空字符串，表示自动检查所有未禁用的源；通过 `v-model:source` 可以手动指定一个源。`active-source` 表示本次检查最终使用的源，与选择偏好分开保存。
+更新源由调用者配置，通过 `sources` 传入展示信息，组件不内置平台、仓库或地址配置表单。`source` 默认为空字符串，表示由更新服务自动选择来源；通过 `v-model:source` 可以手动指定一个源。`active-source` 表示本次检查最终使用的源，与选择偏好分开保存。
 
 <DemoBlock title="并行检查、备用源与失败结果" :source="updateSourcesSource">
   <UpdateSources />
 </DemoBlock>
 
-可选的 `useUpdateCheck` 辅助函数接收源配置和调用者提供的 `checkSource`，并行检查各源，等待结果后按配置顺序选择第一个可更新的源。优先源读取失败或没有新版本时，继续使用其他可更新的源；结果不受响应速度影响，也不会自动改为选择版本最高的源。各源独立超时，全部失败时显示失败，至少一个源成功且均无新版本时显示已是最新。
-
-手动指定源时只检查该源，不自动切换到其他源。使用辅助函数时，切换源、修改源配置或当前版本会取消检查并清空旧结果；其他受控接入方式应在 `source-change` 中自行清空旧版本与更新说明，再重新检查。
+多源检查、优先级、失败回退和版本比较由更新服务管理。组件只展示 `sources` 与 `active-source`，切换选择时通过 `source-change` 通知调用者。
 
 检查中、下载中、下载完成、安装中及安装失败阶段禁止切换源。`source-disabled` 可额外锁定源区域；`:source-selectable="false"` 可将列表作为只读状态展示，适用于已有更新服务自动决定实际源的应用。
 
@@ -77,75 +75,39 @@ const sources = [
 
 源状态 `ready` 表示元数据已发现新版本、等待更新服务确认，与对话框的下载完成状态不同；`not-available` 表示该源没有可更新版本。这两个状态和 `active` 字段可用于接收已有更新 SDK 的源快照。
 
-### useUpdateCheck
+### Electron 应用接入
 
-辅助函数仅协调独立的源检查请求，不依赖 Electron 或特定网络协议。每次 `checkSource` 应完成该源所需的读取与有效性校验，失败时抛出异常。如果应用的更新 SDK 已负责多源检查和切换，直接将它的状态、源快照和实际源传给对话框即可，无需再使用辅助函数并行调用同一个更新客户端。
+检查、下载和状态恢复统一交给 `electron-update-sdk`；它的 Vue 适配器提供可直接绑定的属性与事件。应用通过 `transport` 接入自己的 IPC，不在组件里重复维护更新流程。
 
 ```vue
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuUpdateDialog, useUpdateCheck } from 'aurora-plus';
+import { AuButton, AuUpdateDialog } from 'aurora-plus';
+import { useUpdateDialog } from 'electron-update-sdk/vue';
 
 const visible = ref(false);
-const configurations = [
-  { id: 'primary', name: '主要更新源', url: 'https://updates.example.com/stable.json' },
-  { id: 'backup', name: '备用更新源', url: 'https://backup.example.com/stable.json' },
-];
-const { source, dialogProps, check, cancel } = useUpdateCheck({
-  sources: configurations,
-  currentVersion: '1.8.0',
-  async checkSource(configuration, { signal }) {
-    const response = await fetch(configuration.url, { signal });
-    if (!response.ok) throw new Error(`读取失败：${response.status}`);
-    // 服务返回 { version, releaseNotes?, releaseDate?, releaseUrl?, channel?, downloadSize? }。
-    return response.json();
-  },
-});
-function open() { visible.value = true; check(); }
-function retry(stage, context) { if (stage === 'check') check(context); }
-function download(version, { activeSource }) {
-  const configuration = configurations.find((item) => item.id === activeSource);
-  // 用 configuration 和 version 调用应用自己的下载服务。
-  console.log(configuration, version);
-}
+// preload 暴露这些方法，主进程将它们连接到 SDK Client。
+const api = window.applicationUpdates;
+const update = useUpdateDialog({ visible, transport: {
+  getSnapshot: () => api.getSnapshot(), subscribe: (listener) => api.subscribe(listener),
+  check: () => api.check(), download: () => api.download(),
+  cancelDownload: () => api.cancelDownload(), install: () => api.install(),
+  skipVersion: (version) => api.skipVersion(version),
+} });
 </script>
 
 <template>
-  <AuButton @click="open">检查更新</AuButton>
-  <AuUpdateDialog v-model="visible" v-bind="dialogProps" v-model:source="source"
-    @check="check" @retry="retry" @download="download" @cancel="cancel" @close="cancel" />
+  <AuButton @click="visible = true">检查更新</AuButton>
+  <AuUpdateDialog v-model="visible" v-bind="update.dialogProps.value"
+    v-on="update.dialogEvents" app-name="Aurora Editor" show-skip />
 </template>
 ```
 
-#### Options
-
-| 字段 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| sources | 按优先级排列的源配置，包含唯一 id、name 和调用者所需的其他字段；支持 ref 或 getter | array / ref / function | — |
-| currentVersion | 当前版本，支持 ref 或 getter | string / ref / function | — |
-| checkSource | 检查单个源，接收完整配置和 `{ signal, currentVersion }`，返回包含 version 的结果 | async function | 必填 |
-| compareVersions | 自定义版本比较，返回正数 / 0 / 负数；同步执行 | (candidate, current) => number | 默认比较数字版本与预发布标识，忽略构建信息和 v 前缀 |
-| timeout | 每个源的超时毫秒数，必须大于 0 | number | 15000 |
-
-结果必须包含非空字符串 `version`；可包含对话框的 `releaseNotes`、`releaseDate`、`releaseUrl`、`channel`、`downloadSize` 展示字段及 `message`。结果还可显式返回布尔值 `available` 替代版本比较，例如已跳过的版本返回 `available: false`。涉及地址、令牌或更新客户端的字段不会传入源展示列表。
-
-#### Returns
-
-| 字段或方法 | 说明 |
-| --- | --- |
-| source | 可写 ref；空字符串表示自动选择，用于 v-model:source |
-| status / activeSource / errorMessage / updateInfo | 只读 ref；检查状态、实际源、失败文案与选中的新版本结果 |
-| sources | 源展示快照 computed，包含逐源状态、版本、消息及 active 标记 |
-| dialogProps | 可直接 v-bind 给对话框的 computed；仅包含检查与版本展示属性 |
-| check(context?) | 返回 Promise，完成结果为 `{ status, activeSource, info }`；同目标重复调用共用当前任务；可通过 context.source 指定源 |
-| cancel() | 取消正在进行的检查并恢复 idle；已完成的结果不受影响 |
-| reset() | 取消任务并清空结果，恢复 idle |
-
-取消后的 `check()` 返回 `status: 'cancelled'`，迟到响应不会覆盖新任务。辅助函数在所属 Vue 作用域销毁时取消任务；离开作用域使用时由调用者执行 `cancel()`。下载、安装及其状态由应用维护，不要调用 `check()` 重试下载。
+`getSnapshot` 返回 SDK 公开状态，`subscribe` 返回取消订阅函数；操作方法返回主进程结果。其他更新服务也可以直接以受控属性和事件接入。
 
 ## 业务接入
 
-组件负责界面展示与操作事件，辅助函数按需协调检查与版本比较。请求实现、下载、安装、自动检查偏好的保存及跳过版本的记录由应用处理；创建辅助函数不会立即发起检查。
+组件负责界面展示与操作事件。检查、版本比较、下载、取消、安装和跳过版本由更新服务处理；自动检查偏好由调用者配置。原有 `useUpdateCheck` 已移除，Electron 应用改用更新 SDK 的 `useUpdateDialog`。
 
 `check`、`download`、`install`、`retry` 不会自动改变 `status` 或关闭窗口，业务应在任务开始与完成时更新状态。百分比使用 0 到 100 的数值，显示时取整并限制在该范围内。
 

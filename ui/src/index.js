@@ -42,7 +42,6 @@ import { AuTooltip } from './components/tooltip/index.js';
 import { AuTree } from './components/tree/index.js';
 import { AuTreeSelect } from './components/tree-select/index.js';
 import { AuUpdateDialog } from './components/update-dialog/index.js';
-export { useUpdateCheck } from './components/update-dialog/index.js';
 import { AuVirtualList } from './components/virtual-list/index.js';
 import { AuVirtualTable } from './components/virtual-table/index.js';
 import { AuWindowTitleBar } from './components/window-title-bar/index.js';
