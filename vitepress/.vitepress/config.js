@@ -161,6 +161,7 @@ export default defineConfig({
         items: [
           { text: 'FloatingToolbar 浮动工具条', link: '/components/floating-toolbar' },
           { text: 'WindowTitleBar 窗口标题栏', link: '/components/window-title-bar' },
+          { text: 'UpdateDialog 更新对话框', link: '/components/update-dialog' },
         ],
       },
     ],

@@ -11,4 +11,4 @@ Aurora Plus 是 Vue 3 通用组件库，提供基础、表单、数据展示、�
 | Data 数据展示 | [Panel](/components/panel)、[Card](/components/card)、[ImagePreview](/components/image-preview)、[VirtualList](/components/virtual-list)、[VirtualTable](/components/virtual-table) |
 | Navigation 导航 | [Pagination](/components/pagination)、[Dropdown](/components/dropdown)、[Menu](/components/menu)、[MenuBar](/components/menu-bar)、[MenuList](/components/menu-list)、[Tabs](/components/tabs)、[Tree](/components/tree)、[ContextMenu](/components/context-menu) |
 | Feedback 反馈组件 | [Popover](/components/popover)、[Popconfirm](/components/popconfirm)、[Tooltip](/components/tooltip)、[Dialog](/components/dialog)、[Drawer](/components/drawer)、[Loading](/components/loading)、[Message](/components/message)、[MessageBox](/components/message-box) |
-| Application 应用组件 | [FloatingToolbar](/components/floating-toolbar)、[WindowTitleBar](/components/window-title-bar) |
+| Application 应用组件 | [FloatingToolbar](/components/floating-toolbar)、[WindowTitleBar](/components/window-title-bar)、[UpdateDialog](/components/update-dialog) |
