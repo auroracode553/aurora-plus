@@ -86,14 +86,8 @@ import { AuButton, AuUpdateDialog } from 'aurora-plus';
 import { useUpdateDialog } from 'electron-update-sdk/vue';
 
 const visible = ref(false);
-// preload 暴露这些方法，主进程将它们连接到 SDK Client。
-const api = window.applicationUpdates;
-const update = useUpdateDialog({ visible, transport: {
-  getSnapshot: () => api.getSnapshot(), subscribe: (listener) => api.subscribe(listener),
-  check: () => api.check(), download: () => api.download(),
-  cancelDownload: () => api.cancelDownload(), install: () => api.install(),
-  skipVersion: (version) => api.skipVersion(version),
-} });
+// preload 使用 SDK 的 createUpdateTransport 暴露更新能力。
+const update = useUpdateDialog({ visible, transport: window.applicationUpdates });
 </script>
 
 <template>
@@ -103,7 +97,7 @@ const update = useUpdateDialog({ visible, transport: {
 </template>
 ```
 
-`getSnapshot` 返回 SDK 公开状态，`subscribe` 返回取消订阅函数；操作方法返回主进程结果。其他更新服务也可以直接以受控属性和事件接入。
+`transport` 包含 `getSnapshot`、`subscribeState`、`check`、`download`、`cancel`，应用安装更新还提供 `install` 和 `skipVersion`。`subscribeState` 返回取消订阅函数；操作方法返回主进程结果。其他更新服务也可以直接以受控属性和事件接入。
 
 ## 业务接入
 

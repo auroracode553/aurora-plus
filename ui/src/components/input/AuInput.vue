@@ -67,16 +67,11 @@
         v-if="showPasswordToggle && type === 'password'"
         class="au-input__password-toggle au-action-control"
         type="button"
-        :aria-label="passwordVisible ? '隐藏密码' : '显示密码'"
         :title="passwordVisible ? '隐藏密码' : '显示密码'"
         @mousedown.prevent
         @click="passwordVisible = !passwordVisible"
       >
-        <AuIcon
-          :icon="passwordVisible ? IconEyeOff : IconEye"
-          :size="18"
-          aria-hidden="true"
-        />
+        <AuIcon :icon="passwordVisible ? IconEyeOff : IconEye" :size="18" />
       </button>
       <span
         v-if="hasSuffixContent && !shouldReplaceSuffix"
