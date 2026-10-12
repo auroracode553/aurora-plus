@@ -20,6 +20,9 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .au-loading__content {

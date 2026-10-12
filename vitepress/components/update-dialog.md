@@ -12,11 +12,9 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 
 # UpdateDialog 更新对话框
 
-一套覆盖检查更新、发现新版本、下载和安装的应用更新界面。通过 `v-model` 控制显示，通过 `status` 控制状态，自动沿用全局主题和材质。
+展示检查、下载与安装状态，通过受控属性更新界面，通过事件通知操作。
 
 ## 检查更新
-
-`idle` 显示检查入口，`checking` 显示检查进度，`latest` 显示已是最新版本。`show-auto-check` 显示自动检查选项，选项值由 `v-model:auto-check` 控制。
 
 <DemoBlock title="检查、已是最新与检查失败" :source="updateCheckSource">
   <UpdateCheck />
@@ -24,42 +22,27 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 
 ## 发现新版本与下载
 
-通过版本号、发布信息和分组更新说明展示新版本。点击下载时触发 `download`，业务开始下载后将状态切换为 `downloading`，并传入 `progress`。下载完成后设为 `ready`，安装期间设为 `installing`。
-
 <DemoBlock title="版本说明、下载进度与安装" :source="updateAvailableSource">
   <UpdateAvailable />
 </DemoBlock>
 
 ## 未知进度与失败重试
 
-无法获得下载百分比时，将 `progress` 设为 `null`，组件展示循环进度。失败时设为 `error`，通过 `error-stage` 区分检查、下载或安装失败；`retry` 事件携带该阶段，业务据此重试对应任务。
-
 <DemoBlock title="连接中与下载重试" :source="updateRecoverySource">
   <UpdateRecovery />
 </DemoBlock>
 
-## 调用者配置与多源自动检查
+## 更新源
 
-更新源由调用者配置，通过 `sources` 传入展示信息，组件不内置平台、仓库或地址配置表单。`source` 默认为空字符串，表示由更新服务自动选择来源；通过 `v-model:source` 可以手动指定一个源。`active-source` 表示本次检查最终使用的源，与选择偏好分开保存。
+`source` 表示选择偏好，`active-source` 表示当前操作实际使用的源；空 `source` 表示自动选择。
 
 <DemoBlock title="并行检查、备用源与失败结果" :source="updateSourcesSource">
   <UpdateSources />
 </DemoBlock>
 
-多源检查、优先级、失败回退和版本比较由更新服务管理。组件只展示 `sources` 与 `active-source`，切换选择时通过 `source-change` 通知调用者。
-
-检查中、下载中、下载完成、安装中及安装失败阶段禁止切换源。`source-disabled` 可额外锁定源区域；`:source-selectable="false"` 可将列表作为只读状态展示，适用于已有更新服务自动决定实际源的应用。
-
-下载时使用 `activeSource` 定位检查结果对应的配置，避免混用不同源的版本与文件。自动检查显示逐源读取状态和完成数量；下载进度显示实际源名称。`show-auto-check` 只是偏好选项，是否在启动时或定期调用 `check()` 由应用决定。
+检查中、下载中、下载完成、安装中及安装失败阶段禁止切换源。
 
 ### UpdateSource
-
-```js
-const sources = [
-  { id: 'github', name: 'GitHub', status: 'success', version: '1.9.0' },
-  { id: 'gitee', name: 'Gitee', status: 'error', message: '暂时无法连接，请稍后再试。' },
-];
-```
 
 | 字段 | 说明 | 类型 |
 | --- | --- | --- |
@@ -71,43 +54,15 @@ const sources = [
 | disabled | 该源不可选择；默认 false | boolean |
 | active | 实际使用标记；未传 active-source 时从该标记获取源标识 | boolean |
 
-地址、认证和请求逻辑保留在应用自己的配置中，通过 `id` 与展示数据关联。检查中与读取失败的状态优先于旧版本信息展示。全部源禁用或指定的源已不存在时，检查按钮不可用；下载优先依据实际使用的源判断可用性。
+全部源禁用或指定的源已不存在时，检查按钮不可用。
 
-源状态 `ready` 表示元数据已发现新版本、等待更新服务确认，与对话框的下载完成状态不同；`not-available` 表示该源没有可更新版本。这两个状态和 `active` 字段可用于接收已有更新 SDK 的源快照。
+源状态 `ready` 表示已发现新版本；对话框状态 `ready` 表示下载完成。`not-available` 表示该源没有可更新版本。
 
-### Electron 应用接入
+## 操作语义
 
-检查、下载和状态恢复统一交给 `electron-update-sdk`；它的 Vue 适配器提供可直接绑定的属性与事件。应用通过 `transport` 接入自己的 IPC，不在组件里重复维护更新流程。
+`check`、`download`、`install`、`retry` 只发出事件，不自动改变 `status`。`cancel`、`later`、`skip` 同时关闭窗口；关闭按钮、Escape 和实例 `close()` 只关闭窗口。
 
-```vue
-<script setup>
-import { ref } from 'vue';
-import { AuButton, AuUpdateDialog } from 'aurora-plus';
-import { useUpdateDialog } from 'electron-update-sdk/vue';
-
-const visible = ref(false);
-// preload 使用 SDK 的 createUpdateTransport 暴露更新能力。
-const update = useUpdateDialog({ visible, transport: window.applicationUpdates });
-</script>
-
-<template>
-  <AuButton @click="visible = true">检查更新</AuButton>
-  <AuUpdateDialog v-model="visible" v-bind="update.dialogProps.value"
-    v-on="update.dialogEvents" app-name="Aurora Editor" show-skip />
-</template>
-```
-
-`transport` 包含 `getSnapshot`、`subscribeState`、`check`、`download`、`cancel`，应用安装更新还提供 `install` 和 `skipVersion`。`subscribeState` 返回取消订阅函数；操作方法返回主进程结果。其他更新服务也可以直接以受控属性和事件接入。
-
-## 业务接入
-
-组件负责界面展示与操作事件。检查、版本比较、下载、取消、安装和跳过版本由更新服务处理；自动检查偏好由调用者配置。原有 `useUpdateCheck` 已移除，Electron 应用改用更新 SDK 的 `useUpdateDialog`。
-
-`check`、`download`、`install`、`retry` 不会自动改变 `status` 或关闭窗口，业务应在任务开始与完成时更新状态。百分比使用 0 到 100 的数值，显示时取整并限制在该范围内。
-
-取消检查或下载会触发 `cancel` 并关闭窗口，应用应在该事件中中止对应任务。右上角关闭、Escape 或实例 `close()` 只关闭窗口；如需中止任务，请在 `close` 中处理。稍后提醒与跳过版本会发送对应事件并关闭窗口，提醒时间与版本记录由应用决定。
-
-更新说明以普通文本展示，不解析 HTML。`release-notes` 插槽可以替换为应用自己的说明内容。
+更新说明为普通文本，自定义内容使用 `release-notes` 插槽。
 
 ## UpdateDialog API
 
@@ -167,7 +122,7 @@ const releaseNotes = [
 ];
 ```
 
-`title` 为可选分组标题，`items` 为该组的字符串数组。长说明在内容区域滚动，正文默认保持透明背景。
+`title` 为可选分组标题，`items` 为该组的字符串数组。
 
 ### Events
 
@@ -190,7 +145,7 @@ const releaseNotes = [
 
 操作按钮产生的关闭原因为 `cancel`、`later`、`skip` 或 `dismiss`，其余原因沿用 `AuDialog`。
 
-`UpdateSourceContext` 为 `{ source: string, activeSource: string }`，可用它定位应用中的源配置；`source` 为空表示自动检查所有可用源，下载使用 `activeSource`。未配置源时这两个字段均为空字符串。下载与重试保留原有第一个参数，源信息作为第二个参数传递。安装使用已下载的文件，不重新选择源。
+`UpdateSourceContext` 为 `{ source: string, activeSource: string }`；未配置源时两字段均为空字符串。
 
 ### Slots
 

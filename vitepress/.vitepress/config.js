@@ -35,7 +35,7 @@ export default defineConfig({
   base: siteBase,
   lang: 'zh-CN',
   title: 'Aurora Plus',
-  description: '从 Aurora Editor 抽离的 Vue 3 通用组件库',
+  description: 'Vue 3 通用组件库',
   cleanUrls: true,
   lastUpdated: false,
   head: [
@@ -122,6 +122,7 @@ export default defineConfig({
         items: [
           { text: 'Badge 徽章', link: '/components/badge' },
           { text: 'Panel 通用面板', link: '/components/panel' },
+          { text: 'Collapse 折叠面板', link: '/components/collapse' },
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'Skeleton 骨架屏', link: '/components/skeleton' },
           { text: 'ImagePreview 图片预览', link: '/components/image-preview' },

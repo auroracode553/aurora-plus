@@ -5,9 +5,8 @@
     <AuButton @click="open('fallback')">备用源结果</AuButton>
     <AuButton @click="open('latest')">均无新版本</AuButton>
     <AuButton @click="open('error')">全部失败</AuButton>
-    <AuUpdateDialog v-model="visible" v-bind="dialogProps" app-name="Aurora Editor"
+    <AuUpdateDialog v-model="visible" v-bind="dialogProps" app-name="示例应用"
       :source-selectable="false" @check="open('checking')" @retry="requestCheck" @download="requestDownload">
-      <p class="update-sources-demo__hint">此示例使用预设状态。实际检查和下载由更新服务执行，组件展示其结果。</p>
     </AuUpdateDialog>
   </div>
 </template>
@@ -44,5 +43,4 @@ function requestDownload(version, { activeSource }) { AuMessage.info(`应用收�
 
 <style scoped>
 .update-sources-demo { display: flex; flex-wrap: wrap; gap: 8px; }
-.update-sources-demo__hint { margin: 0; font-size: 12px; color: var(--au-color-text-secondary); }
 </style>

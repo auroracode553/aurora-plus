@@ -1,10 +1,12 @@
 import './theme/index.scss';
+import { version as packageVersion } from '../package.json';
 
 import { AuBadge } from './components/badge/index.js';
 import { AuButton } from './components/button/index.js';
 import { AuButtonGroup, AuButtonGroupItem } from './components/button-group/index.js';
 import { AuCard } from './components/card/index.js';
 import { AuCheckbox } from './components/checkbox/index.js';
+import { AuCollapse, AuCollapseItem } from './components/collapse/index.js';
 import { AuColorPicker, AuColorSwatch } from './components/color-picker/index.js';
 import { AuContextMenu } from './components/context-menu/index.js';
 import { AuDatePicker, AuDatePickerPane, AuDateRangePicker } from './components/date-picker/index.js';
@@ -69,6 +71,8 @@ const components = [
   AuButtonGroupItem,
   AuCard,
   AuCheckbox,
+  AuCollapse,
+  AuCollapseItem,
   AuColorPicker,
   AuColorSwatch,
   AuContextMenu,
@@ -88,6 +92,7 @@ const components = [
   AuInput,
   AuLink,
   AuLoading,
+  AuLoadingSpinner,
   AuMenu,
   AuMenuGroup,
   AuMenuItem,
@@ -116,7 +121,7 @@ const components = [
   AuWindowTitleBar,
 ];
 
-export const version = '0.1.0';
+export const version = packageVersion;
 
 export const AuroraPlus = {
   version,
@@ -142,6 +147,8 @@ export {
   AuButtonGroupItem,
   AuCard,
   AuCheckbox,
+  AuCollapse,
+  AuCollapseItem,
   AuColorPicker,
   AuColorSwatch,
   AuContextMenu,

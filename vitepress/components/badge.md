@@ -11,20 +11,11 @@ import badgeBasicSource from '../.vitepress/theme/examples/badge/BadgeBasic.vue?
 ## 基础用法
 
 <DemoBlock
-  title="方形与圆形主体"
+  title="数量、状态点与自定义内容"
   :source="badgeBasicSource"
 >
   <BadgeBasic />
 </DemoBlock>
-
-## 自定义内容
-
-```vue
-<AuBadge :value="3" type="primary">
-  <AuButton>通知</AuButton>
-  <template #content="{ value }">{{ value }} 条</template>
-</AuBadge>
-```
 
 ## Badge API
 

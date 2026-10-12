@@ -30,27 +30,6 @@ import throttleSource from '../.vitepress/theme/examples/skeleton/SkeletonThrott
   <SkeletonThrottle />
 </DemoBlock>
 
-## 按需引入
-
-```vue
-<script setup>
-import { ref } from 'vue';
-import { AuSkeleton, AuSkeletonItem } from 'aurora-plus';
-import 'aurora-plus/style.css';
-
-const loading = ref(true);
-</script>
-
-<template>
-  <AuSkeleton :loading="loading" animated>
-    <template #template>
-      <AuSkeletonItem variant="image" :height="120" />
-    </template>
-    <template #default>内容已加载</template>
-  </AuSkeleton>
-</template>
-```
-
 ## AuSkeleton 属性
 
 | 属性 | 说明 | 类型 | 默认值 |

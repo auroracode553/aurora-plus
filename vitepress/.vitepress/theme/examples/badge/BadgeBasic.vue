@@ -16,6 +16,10 @@
       <AuBadge :value="0" :show-zero="false">
         <AuButton>无未读</AuButton>
       </AuBadge>
+      <AuBadge :value="3" type="primary">
+        <AuButton>通知</AuButton>
+        <template #content="{ value }">{{ value }} 条</template>
+      </AuBadge>
     </div>
     <div class="badge-demo__row">
       <AuBadge :value="12">

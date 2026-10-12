@@ -5,7 +5,7 @@
     <AuUpdateDialog
       v-model="visible"
       :status="status"
-      app-name="Aurora Editor"
+      app-name="示例应用"
       :current-version="currentVersion"
       latest-version="1.9.0"
       channel="稳定版"

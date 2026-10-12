@@ -23,16 +23,7 @@ import loadingServiceSource from '../.vitepress/theme/examples/loading/LoadingSe
   <LoadingBasic />
 </DemoBlock>
 
-```js
-import { vLoading } from 'aurora-plus';
-
-app.directive('loading', vLoading);
-```
-
-```vue
-<main v-loading.body="loading">...</main>
-<AuButton v-loading.fullscreen.lock="saving" @click="save">保存</AuButton>
-```
+`v-loading.body` 将区域加载层挂到 body；`v-loading.fullscreen.lock` 覆盖视口并锁定滚动。
 
 ## Loading 服务
 
@@ -88,7 +79,7 @@ loading.close();
 | svg | 自定义 SVG 内部标记 | string | '' |
 | svgViewBox | 自定义 SVG 的 viewBox | string | 0 0 24 24 |
 | color | 加载图标颜色 | string | 主题主色 |
-| background | 加载层背景 CSS 值 | string | 当前材质半透明表面 |
+| background | 加载层背景 CSS 值 | string | 区域为材质半透明表面，全屏为透明 |
 | customClass | 加载层自定义类名 | string / array / object | '' |
 | zIndex | 加载层层级 | number | 1000 |
 | delay | 延迟显示时间，单位 ms | number | 0 |
@@ -106,9 +97,7 @@ loading.close();
 | au-loading-custom-class | 自定义类名 |
 | au-loading-color | 加载图标颜色 |
 
-::: warning 安全提示
-`svg`、`au-loading-svg`、`au-loading-spinner` 及兼容的 `element-loading-spinner / element-loading-svg` 会渲染为 SVG 标记。只使用源码内可信内容，不要传入用户提交或未经清理的字符串，以免造成 XSS。
-:::
+SVG 字符串直接作为标记渲染，仅传入可信内容。
 
 ## Service API
 

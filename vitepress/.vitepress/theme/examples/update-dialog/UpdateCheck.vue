@@ -7,7 +7,7 @@
       v-model="visible"
       v-model:auto-check="autoCheck"
       :status="status"
-      app-name="Aurora Editor"
+      app-name="示例应用"
       current-version="1.8.0"
       show-auto-check
       error-message="暂时无法连接更新服务，请检查网络连接后重试。"

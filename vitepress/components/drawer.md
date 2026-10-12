@@ -42,15 +42,6 @@ import drawerBasicSource from '../.vitepress/theme/examples/drawer/DrawerBasic.v
 | beforeClose | 关闭前守卫；接收 done，也支持返回布尔值或 Promise | (done) =&gt; void \| boolean \| Promise&lt;boolean&gt; | — |
 | zIndex | 基础层级；嵌套时实际层级至少比父浮层高 1，内部浮层自动继承 | number | 10000 |
 
-```vue
-<AuDrawer
-  v-model="open"
-  viewport-padding="var(--safe-top, 0px) var(--safe-right, 0px) var(--safe-bottom, 0px) var(--safe-left, 0px)"
->
-  抽屉内容
-</AuDrawer>
-```
-
 ### Events
 
 | 事件名 | 说明 | 参数 |

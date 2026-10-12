@@ -29,7 +29,7 @@ import { AuButton, AuLoading, AuLoadingSpinner } from 'aurora-plus';
 
 const loading = ref(true);
 const projects = [
-  { name: 'Aurora Editor', updatedAt: '刚刚更新' },
+  { name: '示例应用', updatedAt: '刚刚更新' },
   { name: 'Design Tokens', updatedAt: '5 分钟前' },
   { name: 'Component Lab', updatedAt: '昨天' },
 ];

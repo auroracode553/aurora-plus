@@ -14,7 +14,7 @@
 
 <script setup>
 import { computed, inject } from 'vue';
-import { skeletonContextKey } from './skeleton-context.js';
+import { skeletonContextKey } from './use-skeleton-loading.js';
 
 const props = defineProps({
   variant: {

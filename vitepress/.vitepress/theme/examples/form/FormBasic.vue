@@ -1,36 +1,38 @@
 <template>
-  <AuForm :model="form" label-width="76" @submit.prevent="validateForm">
-    <AuFormItem
-      ref="nameItemRef"
-      v-slot="{ invalid }"
-      label="名称"
-      prop="name"
-      :rules="nameRules"
-    >
-      <AuInput v-model="form.name" placeholder="输入日程名称" :invalid="invalid" />
-    </AuFormItem>
+  <div class="form-demo">
+    <AuForm :model="form" label-width="76" @submit.prevent="validateForm">
+      <AuFormItem
+        ref="nameItemRef"
+        v-slot="{ invalid }"
+        label="名称"
+        prop="name"
+        :rules="nameRules"
+      >
+        <AuInput v-model="form.name" placeholder="输入日程名称" :invalid="invalid" />
+      </AuFormItem>
 
-    <AuFormItem
-      ref="dateItemRef"
-      v-slot="{ invalid }"
-      label="日期"
-      prop="date"
-      :rules="dateRules"
-    >
-      <AuDatePicker v-model="form.date" :invalid="invalid" />
-    </AuFormItem>
+      <AuFormItem
+        ref="dateItemRef"
+        v-slot="{ invalid }"
+        label="日期"
+        prop="date"
+        :rules="dateRules"
+      >
+        <AuDatePicker v-model="form.date" :invalid="invalid" />
+      </AuFormItem>
 
-    <AuFormItem>
-      <div class="form-demo__actions">
-        <AuButton native-type="submit" type="primary">保存并校验</AuButton>
-        <AuButton @click="resetForm">重置</AuButton>
-      </div>
-    </AuFormItem>
+      <AuFormItem>
+        <div class="form-demo__actions">
+          <AuButton native-type="submit" type="primary">保存并校验</AuButton>
+          <AuButton @click="resetForm">重置</AuButton>
+        </div>
+      </AuFormItem>
 
-    <p v-if="result" class="form-demo__result">
-      {{ result }}
-    </p>
-  </AuForm>
+      <p v-if="result" class="form-demo__result">
+        {{ result }}
+      </p>
+    </AuForm>
+  </div>
 </template>
 
 <script setup>
@@ -86,7 +88,7 @@ function resetForm() {
 </script>
 
 <style scoped>
-.au-form {
+.form-demo {
   width: min(100%, 480px);
 }
 

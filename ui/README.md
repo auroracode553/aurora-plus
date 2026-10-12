@@ -26,11 +26,12 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuMenuBar` | 桌面应用顶部菜单栏与层级命令菜单 |
 | `AuMenuList`、`AuMenuListItem` | 苹果式分组菜单与设置行 |
 | `AuPanel` | 仅提供表面、尺寸、滚动和区域插槽的通用面板 |
+| `AuCollapse`、`AuCollapseItem` | 独立折叠面板、多项展开与手风琴，支持懒加载、关闭销毁及独立操作区 |
 | `AuPopover` | 支持任意内容、自动翻转和视口避让的锚点浮层 |
 | `AuPopconfirm` | 锚定触发元素的轻量确认气泡 |
 | `AuPagination` | 页码折叠、条数切换和跳页导航 |
 | `AuTabs` | 紧凑的受控标签页导航 |
-| `AuCard` | 卡片容器，支持表面层级、区域插槽与悬停反馈 |
+| `AuCard` | 卡片容器，提供表面层级与内容内边距 |
 | `AuSkeleton`、`AuSkeletonItem` | 支持自定义占位模板、重复数量、呼吸动画和延迟显隐的骨架屏 |
 | `AuIcon` | 图标尺寸、颜色与对齐外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |

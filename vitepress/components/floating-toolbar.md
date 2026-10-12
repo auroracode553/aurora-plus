@@ -19,11 +19,6 @@ import floatingToolbarBasicSource from '../.vitepress/theme/examples/floating-to
 
 ## 目标矩形
 
-```js
-const { top, right, bottom, left, width, height } = element.getBoundingClientRect();
-toolbarRect.value = { top, right, bottom, left, width, height };
-```
-
 ## FloatingToolbar API
 
 ### Attributes

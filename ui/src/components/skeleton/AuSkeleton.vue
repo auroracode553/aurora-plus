@@ -22,8 +22,7 @@
 <script setup>
 import { computed, provide } from 'vue';
 import AuSkeletonItem from './AuSkeletonItem.vue';
-import { skeletonContextKey } from './skeleton-context.js';
-import { useSkeletonLoading } from './use-skeleton-loading.js';
+import { skeletonContextKey, useSkeletonLoading } from './use-skeleton-loading.js';
 
 const props = defineProps({
   loading: { type: Boolean, default: true },

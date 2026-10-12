@@ -129,6 +129,7 @@ async function activateDialog() {
     scrollLocked = true;
   }
   await nextTick();
+  if (!visible.value) return;
   focusInitialElement();
 }
 

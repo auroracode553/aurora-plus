@@ -1,101 +1,42 @@
-# Aurora Plus VitePress 文档站
-
-该目录只负责 Aurora Plus 的文档与实时示例，不作为组件库发布。文档站使用 VitePress、Vue 和 Shiki，拥有独立的依赖、锁文件和 npm scripts。
+# Aurora Plus 文档站
 
 ## 目录
 
-```text
-vitepress/
-├─ .vitepress/
-│  ├─ config.js              导航、侧栏和 Vite 配置
-│  ├─ demo-source-plugin.js  示例源码的构建期语法高亮
-│  ├─ icon-metadata-plugin.js 图标官方分类的构建期索引
-│  └─ theme/                 文档主题、全站材质状态、DemoBlock 和真实示例
-├─ guide/                    介绍、快速开始和主题配置
-├─ components/               每个组件的独立文档页
-├─ index.md                  文档首页
-├─ package.json              文档依赖与命令
-└─ package-lock.json         文档依赖版本锁
-```
+- `.vitepress/config.js`：导航、侧栏与 Vite 配置。
+- `.vitepress/theme/`：文档主题、公共展示组件与组件示例。
+- `.vitepress/demo-source-plugin.js`：示例源码高亮。
+- `.vitepress/icon-metadata-plugin.js`：图标分类索引。
+- `guide/`：使用指南；`components/`：组件 API；`index.md`：首页。
 
 ## 组件库连接
 
-文档站保留 `"aurora-plus": "file:../ui"` 作为组件库依赖，示例始终使用公开入口 `import 'aurora-plus'`，不暴露组件库内部文件路径。Vite 根据环境切换公开入口的实际来源：
+文档站通过 `file:../ui` 引用组件库。默认将 `aurora-plus`、`aurora-plus/icons` 和 `aurora-plus/style.css` 映射到 `ui/src`，组件示例使用公开入口。
 
-- 默认开发模式将 `aurora-plus`、`aurora-plus/icons` 和 `aurora-plus/style.css` 映射到 `../ui/src`，组件源码、图标入口与 SCSS 主题修改后可直接更新实时示例。
-- 设置 `AURORA_PLUS_USE_DIST=true` 时不启用源码映射，由 UI 包自身的 `exports` 解析到 `ui/dist`，用于发布前验证和 GitHub Pages 构建。
+`AURORA_PLUS_USE_DIST=true` 时使用包的正式入口。GitHub Pages 工作流先生成 UI 产物，再以该模式生成文档。
 
-`ui` 和 `vitepress` 各自维护 `package.json`、锁文件与 `node_modules`。文档站独立安装 Vue、VitePress 和 Shiki；图标示例通过本地 `aurora-plus/icons` 公共入口使用，Tabler 只保留为 UI 包的构建期依赖。源码模式只改变 Vite 的模块解析目标，不改变文档示例展示给使用者的导入方式。
+依赖和版本以本目录的 `package.json` 与锁文件为准；`ui` 与文档站分别维护依赖。
 
-文档站使用 VitePress 2 预发布版及 Vite 8。Vite 8 仅支持 Sass 现代 API，因此 `.vitepress/config.js` 不再声明已移除的 `scss.api` 兼容选项。Vite 8 使用 Rolldown 和 Oxc，运行环境需满足 Node.js 20.19+ 或 22.12+；GitHub Pages 工作流使用 Node.js 24。
+## 手动运行
 
-图标目录的分类索引由 `icon-metadata-plugin.js` 在构建期读取 Aurora Plus 构建所用版本的 Tabler 官方元数据，并通过虚拟模块交给文档页面。分类数据不会打进 UI 库产物，也不需要在文档站重复维护图标版本。
-
-## 联调流程
-
-首次联调前，分别在 `ui` 和 `vitepress` 目录手动安装各自依赖。源码模式不需要启动 UI 库的监听构建；完成依赖安装后，在文档目录启动开发服务：
+在本目录按锁文件安装依赖，再执行所需命令：
 
 ```powershell
-cd .\vitepress
+npm ci
 npm run dev
 ```
 
-VitePress 会直接读取 `ui/src`。修改组件源码或主题样式时，不需要先更新 `ui/dist`。
-
-需要手动验证发布产物时，先在 `ui` 目录构建组件库，再在当前终端设置 `AURORA_PLUS_USE_DIST=true` 后构建 VitePress。dist 模式会通过 `ui/package.json` 的 `exports` 使用正式 JS 和 CSS 产物。
-
-GitHub Pages 流水线使用 dist 模式：先安装并构建 `ui`，然后以 `AURORA_PLUS_USE_DIST=true` 构建 VitePress。因此线上文档验证的是当前提交生成的组件库产物，而不是旧的 npm 发布版本。
+| 命令 | 用途 | 地址或输出 |
+| --- | --- | --- |
+| `npm run dev` | 启动开发服务 | `http://127.0.0.1:8899` |
+| `npm run build` | 生成文档 | `.vitepress/dist/` |
+| `npm run preview` | 预览产物 | `http://127.0.0.1:8899` |
 
 ## 示例机制
 
-组件与示例统一通过业务属性表达状态，按钮选中使用 `selected`。文档演示组件不再维护读屏专用节点、ARIA 属性或系统无障碍偏好样式；原生输入、菜单操作、复制代码和展开示例功能保持独立。
+示例保存在 `.vitepress/theme/examples/`。组件页面通过 `DemoBlock` 展示同一 Vue 文件的预览与源码，`?demo-source` 由插件读取并交给 Shiki 高亮。
 
-骨架屏页面 `components/skeleton.md` 复用现有 DemoBlock 机制，示例位于 `.vitepress/theme/examples/skeleton/`，分别覆盖形状与动画、自定义重复模板和延迟显隐。手动验收时检查快速请求不出现占位、连续点击不会被旧计时器覆盖、离开页面后计时器清理，以及明暗主题下的表现。
+图标分类来自 UI 包所用 Tabler 版本的元数据，不进入 UI 产物。文档主题通过公开的主题和材质接口设置全站外观，材质偏好由 `theme/utils/material-preference.js` 持久化。
 
-更新对话框页面 `components/update-dialog.md` 的示例位于 `.vitepress/theme/examples/update-dialog/`，覆盖检查结果、发现新版本、模拟下载与安装、未知进度和失败重试。检查与下载示例在关闭窗口及卸载时清理计时器。手动验收时检查取消后重新打开不会受到上一次任务影响、长更新说明可滚动，以及明暗主题和窄屏下的版本信息与操作区。
+示例须完整定义数据、状态与事件。样式仅作用于示例自有容器和插槽内容，组件外观通过公开属性控制，不使用库内部选择器或样式穿透。
 
-其中 `UpdateSources.vue` 使用预设展示数据演示检查中、多个源的读取结果、备用源、无更新和全部失败。UI 库不执行联网、版本比较或来源切换；真实流程由更新 SDK 管理。手动验收时检查逐源状态、任务期间的源锁定，以及明暗主题和窄屏下的表现。
-
-示例文件位于 `.vitepress/theme/examples/`。同一个 `.vue` 文件同时用于实时预览和完整源码展示：
-
-- 示例组件直接挂载到组件文档页。
-- `?demo-source` 在构建阶段读取示例源码。
-- Shiki 生成支持明暗主题的 Vue 语法高亮。
-- `DemoBlock.vue` 提供展开、收起和复制功能。
-
-文档主题入口直接继承 Aurora Plus 的全站默认 `solid` 材质。`theme/utils/material-preference.js` 负责读取、更新和持久化文档站材质偏好；主题配置页的 `MaterialPreview.vue` 通过该工具调用组件库公开的 `setAuroraMaterial` 修改根节点材质，不再使用局部预览容器覆盖。因此普通示例、Teleport 浮层和命令式服务都会继承同一材质，切换路由或刷新页面后仍保持一致。
-
-新增示例时，应完整定义演示数据、状态、事件逻辑和预览布局，避免展示未定义的 `items`、`visible` 等变量。实时示例只通过 Aurora Plus 的公开 props、事件和插槽控制组件，并遵循以下约束：
-
-- 示例可以使用 `<style scoped>`、普通 class 和主题语义变量组织预览容器、网格、间距、说明文字及业务插槽内容。
-- 禁止使用样式穿透选择器、Aurora Plus 组件类名选择器（如 `.au-button`）或组件内部 DOM 结构覆盖组件的尺寸、颜色、边框、圆角、材质和交互状态。
-- 需要限制预览宽高或添加展示边框时，把样式放在组件外层容器；组件自身只使用公开属性和变体。
-- 若组件必须依赖业务 CSS 才能完成基础展示，应先把通用能力补充为明确的组件属性，再由示例调用公开 API。
-
-## 依赖
-
-- VitePress `^1.6.4`
-- Vue `^3.5.40`
-- Shiki `^2.5.0`
-- Sass `^1.103.1`（编译源码模式下的 Aurora Plus SCSS）
-
-依赖由使用者手动安装：
-
-```powershell
-cd .\vitepress
-npm install
-```
-
-## 命令
-
-| 命令 | 用途 | 默认地址或输出 |
-| --- | --- | --- |
-| `npm run dev` | 启动文档开发服务 | `http://127.0.0.1:5174` |
-| `npm run build` | 构建文档站 | `.vitepress/dist/` |
-| `npm run preview` | 预览构建产物 | `http://127.0.0.1:4174` |
-
-命令仅作为手动执行说明，本项目不会自动启动或构建文档站。
-
-## 文档内容边界
-
-`index.md`、`guide/` 和 `components/` 面向 Aurora Plus 使用者，只记录组件库的安装、API、示例和主题等内容，不介绍文档站工具链。VitePress 的依赖、脚本、配置和维护说明统一保留在本 README；修改文档站实现时请只更新这里。
+维护者说明留在本文件；使用指南和组件页面只保留组件库使用信息。

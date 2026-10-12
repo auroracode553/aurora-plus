@@ -8,7 +8,7 @@ import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasi
 
 用于解释图标按钮、缩略文本或状态。
 
-气泡检查首选方向与对侧的可用空间，两侧都不足时保持不可见，等待视口变化后重新定位。Teleport 不会扩大桌面宿主视图；宿主可通过 `open`、`closed` 事件协调视图边界。
+首选方向与对侧空间均不足时隐藏气泡。Teleport 不会超出宿主视图边界。
 
 ## 基础用法
 

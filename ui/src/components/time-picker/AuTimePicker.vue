@@ -82,6 +82,7 @@
 </template>
 
 <script setup>
+import { usePickerInputCommit } from '../../utils/use-picker-input-commit.js';
 import { computed, ref, useAttrs, watch } from 'vue';
 import { IconClock } from '../../icons/internal.js';
 import { AuInput } from '../input/index.js';
@@ -151,7 +152,7 @@ const selectedDate = ref(parseDateValue(props.modelValue, resolvedValueFormat.va
 const draftDate = ref(cloneDate(selectedDate.value || new Date()));
 const inputText = ref(formatDate(selectedDate.value, resolvedDisplayFormat.value));
 const inputInvalid = ref(false);
-let closeCommittedInput = false;
+const inputCommit = usePickerInputCommit();
 let inputDirty = false;
 
 const inputAttrs = computed(() => Object.fromEntries(
@@ -195,9 +196,8 @@ function close(reason = 'api') {
 
 function handlePopoverClose(reason) {
   if (props.editable && inputDirty && ['outside', 'tab'].includes(reason)) {
-    closeCommittedInput = true;
+    inputCommit.mark();
     commitTypedValue(true);
-    globalThis.setTimeout(() => { closeCommittedInput = false; }, 0);
     return;
   }
   resetInputText();
@@ -213,8 +213,7 @@ function handleTriggerClick(event) {
 }
 
 function handleBlur(event) {
-  if (closeCommittedInput) closeCommittedInput = false;
-  else if (props.editable && inputDirty) commitTypedValue(false, event);
+  if (!inputCommit.consume() && props.editable && inputDirty) commitTypedValue(false, event);
   emit('blur', event);
 }
 
