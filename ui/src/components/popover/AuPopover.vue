@@ -1,7 +1,7 @@
 <template>
   <span
     ref="triggerRef"
-    class="au-popover au-component au-inline-trigger"
+    class="au-popover au-component au-inline-trigger au-motion-state"
     :class="{ 'is-disabled': disabled }"
     v-bind="$attrs"
     @click="handleTriggerClick"
@@ -21,7 +21,7 @@
       <div
         v-if="visible"
         ref="contentRef"
-        class="au-popover__content au-component au-motion-popover au-floating-viewport"
+        class="au-popover__content au-component au-motion-popover au-floating-viewport au-motion-state"
         :class="[
           `is-${activePlacement}`,
           {

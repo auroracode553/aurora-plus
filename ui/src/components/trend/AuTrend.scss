@@ -1,0 +1,6 @@
+@use '../../theme/mixins/motion';
+
+.au-trend { display: inline-flex; align-items: center; flex: none; gap: 4px; min-height: 20px; padding: 2px 6px; border-radius: var(--au-radius-pill); color: var(--au-color-text-secondary); background: color-mix(in srgb, currentColor 8%, transparent); font-size: 11px; font-variant-numeric: tabular-nums; line-height: 1.2; white-space: nowrap; @include motion.transition(color, background); }
+.au-trend > svg { flex: none; }
+.au-trend--success { color: var(--au-color-success); }
+.au-trend--danger { color: var(--au-color-danger); }

@@ -71,5 +71,5 @@
 }
 
 .au-checkbox:active:not(.is-disabled) .au-checkbox__box {
-  @include motion.press(scale(0.94));
+  @include motion.press(0.94);
 }

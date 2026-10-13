@@ -25,7 +25,7 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  @include motion.transition(background, color, outline-color);
+  @include motion.control;
 }
 
 .au-button-group-item:hover:not(.is-disabled, .is-selected) {

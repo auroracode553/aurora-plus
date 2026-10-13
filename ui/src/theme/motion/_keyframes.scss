@@ -1,0 +1,9 @@
+// 入场与进行中反馈仅动透明度或位移，不增加背景、高光或反射层。
+@keyframes au-motion-reveal { from { opacity: 0; } }
+@keyframes au-motion-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.62; } }
+@keyframes au-spin { to { transform: rotate(360deg); } }
+@keyframes au-skeleton-pulse {
+  0%, 100% { background-color: var(--au-color-border-muted); }
+  50% { background-color: var(--au-color-border-default); }
+}
+@keyframes au-update-progress { from { transform: translateX(-105%); } to { transform: translateX(300%); } }

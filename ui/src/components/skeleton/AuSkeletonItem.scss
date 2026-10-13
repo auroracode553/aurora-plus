@@ -1,3 +1,5 @@
+@use "../../theme/mixins/motion";
+
 .au-skeleton-item {
   display: inline-flex;
   flex-shrink: 0;
@@ -21,7 +23,7 @@
   &.is-rect { height: 80px; border-radius: 6px; }
   &.is-image { height: 120px; border-radius: 6px; }
 
-  &.is-animated { animation: au-skeleton-pulse 1.8s ease-in-out infinite; }
+  &.is-animated { animation: au-skeleton-pulse motion.duration(pulse) var(--au-transition-timing) infinite; }
 
   svg {
     width: 32px;
@@ -33,10 +35,4 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-}
-
-/* 仅改变平面填充色，不引入扫光、渐变或反射层。 */
-@keyframes au-skeleton-pulse {
-  0%, 100% { background-color: var(--au-color-border-muted); }
-  50% { background-color: var(--au-color-border-default); }
 }

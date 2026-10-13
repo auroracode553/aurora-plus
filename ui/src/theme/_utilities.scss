@@ -1,3 +1,5 @@
+@use './mixins/motion';
+
 /* 无业务语义的跨组件布局、裁剪与滚动工具。 */
 .au-inline-trigger {
   display: inline-flex;
@@ -68,6 +70,7 @@
 }
 
 .au-thin-scrollbar {
+  @include motion.transition(scrollbar-color);
   scrollbar-color: color-mix(in srgb, var(--au-color-text-secondary) 40%, transparent) transparent;
   scrollbar-width: thin;
 }
@@ -82,6 +85,7 @@
 }
 
 .au-thin-scrollbar::-webkit-scrollbar-thumb {
+  @include motion.transition(background-color);
   border: 3px solid transparent;
   border-radius: var(--au-radius-pill);
   background: color-mix(in srgb, var(--au-color-text-secondary) 34%, transparent);

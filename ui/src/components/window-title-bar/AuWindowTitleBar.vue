@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-window-title-bar au-component au-material-surface au-material-surface--base"
+    class="au-window-title-bar au-component au-material-surface au-material-surface--base au-motion-state"
     :class="{
       'is-drag-disabled': !draggable,
       'is-controls-start': controlsPosition === 'start',
@@ -62,7 +62,7 @@
           @closed="setTooltipOpen('minimize', false)"
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center"
+            class="au-window-title-bar__button au-control-reset au-inline-center au-motion-control"
             :class="{ 'au-disabled': minimizeDisabled }"
             type="button"
             :disabled="minimizeDisabled"
@@ -85,7 +85,7 @@
           @closed="setTooltipOpen('maximize', false)"
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center"
+            class="au-window-title-bar__button au-control-reset au-inline-center au-motion-control"
             :class="{ 'au-disabled': maximizeDisabled }"
             type="button"
             :disabled="maximizeDisabled"
@@ -111,7 +111,7 @@
           @closed="setTooltipOpen('close', false)"
         >
           <button
-            class="au-window-title-bar__button is-close au-control-reset au-inline-center"
+            class="au-window-title-bar__button is-close au-control-reset au-inline-center au-motion-control"
             :class="{ 'au-disabled': closeDisabled }"
             type="button"
             :disabled="closeDisabled"

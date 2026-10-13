@@ -7,7 +7,7 @@
   >
     <div
       v-if="displayLoading"
-      class="au-loading au-component"
+      class="au-loading au-component au-motion-state"
       :class="[{ 'is-fullscreen': fullscreen }, customClass]"
       :style="overlayStyle"
     >

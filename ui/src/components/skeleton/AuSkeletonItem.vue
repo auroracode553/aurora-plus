@@ -1,6 +1,6 @@
 <template>
   <span
-    class="au-skeleton-item au-component"
+    class="au-skeleton-item au-component au-motion-state"
     :class="[`is-${variant}`, { 'is-animated': isAnimated }]"
     :style="{ width: toDimension(width), height: toDimension(height) }"
   >

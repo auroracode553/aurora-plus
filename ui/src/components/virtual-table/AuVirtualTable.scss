@@ -60,7 +60,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  @include motion.transition(background);
+  @include motion.row;
 }
 
 .au-virtual-table__row:hover {
@@ -78,6 +78,7 @@
 
 .au-virtual-table__header-cell,
 .au-virtual-table__cell {
+  @include motion.row;
   display: flex;
   align-items: center;
   min-width: 0;

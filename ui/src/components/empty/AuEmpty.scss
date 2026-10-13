@@ -1,0 +1,8 @@
+.au-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; gap: 8px; padding: 24px 12px; color: var(--au-color-text-secondary); text-align: center; }
+.au-empty__image { display: flex; align-items: center; justify-content: center; color: var(--au-color-text-placeholder); }
+.au-empty__title { max-width: 100%; color: var(--au-color-text-default); font-size: 14px; font-weight: var(--au-font-weight-medium); overflow-wrap: anywhere; }
+.au-empty__description { max-width: 100%; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.au-empty__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; max-width: 100%; gap: 6px; margin-top: 4px; }
+.au-empty--small { gap: 6px; padding: 16px 8px; }
+.au-empty--small .au-empty__image { transform: scale(0.75); }
+.au-empty--small .au-empty__title { font-size: 12px; }

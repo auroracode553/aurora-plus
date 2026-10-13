@@ -31,7 +31,7 @@
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
-  @include motion.transition(color, background);
+  @include motion.control;
 }
 
 .au-menu-action:hover:not(:disabled),
@@ -41,7 +41,6 @@
 
 .au-menu-action:active:not(:disabled) {
   @include interaction.pressed;
-  transition-duration: 0s;
 }
 
 .au-menu-action.is-danger:not(:disabled) {

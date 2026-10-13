@@ -1,0 +1,39 @@
+@use '../mixins/motion';
+
+// 内置浮层与公开 Transition 组件共用阶段时长；组件仅保留自己的方向几何。
+$names: au-motion-fade, au-motion-slide-up, au-motion-slide-down, au-motion-scale,
+  au-float, au-dialog-fade, au-drawer, au-floating-toolbar-fade, au-image-preview-fade,
+  au-loading-fade, au-form-item-message, au-message-list, au-badge-pop;
+@each $name in $names {
+  // 过渡类只在进退期间持有动画属性，避免组件自身 transition 覆盖过渡生命周期。
+  .#{$name}-enter-active {
+    transition-property: opacity, transform, translate, scale !important;
+    transition-duration: motion.duration(enter) !important;
+    transition-timing-function: var(--au-transition-timing) !important;
+  }
+  .#{$name}-leave-active {
+    transition-property: opacity, transform, translate, scale !important;
+    transition-duration: motion.duration(leave) !important;
+    transition-timing-function: var(--au-transition-timing) !important;
+    pointer-events: none;
+  }
+}
+.au-motion-fade-enter-from, .au-motion-fade-leave-to { opacity: 0; }
+.au-motion-slide-up-enter-from, .au-motion-slide-up-leave-to { opacity: 0; translate: 0 8px; }
+.au-motion-slide-down-enter-from, .au-motion-slide-down-leave-to { opacity: 0; translate: 0 -8px; }
+.au-motion-scale-enter-from, .au-motion-scale-leave-to { opacity: 0; scale: 0.97; }
+.au-badge-pop-enter-from, .au-badge-pop-leave-to { opacity: 0; scale: 0.75; }
+.au-float-enter-from, .au-float-leave-to { opacity: 0; translate: 0 -4px; scale: 0.985; }
+:is(.is-top, .is-top-start, .is-top-end).au-float-enter-from,
+:is(.is-top, .is-top-start, .is-top-end).au-float-leave-to { translate: 0 4px; }
+:is(.is-left, .is-left-start, .is-left-end).au-float-enter-from,
+:is(.is-left, .is-left-start, .is-left-end).au-float-leave-to { translate: 4px 0; }
+:is(.is-right, .is-right-start, .is-right-end).au-float-enter-from,
+:is(.is-right, .is-right-start, .is-right-end).au-float-leave-to { translate: -4px 0; }
+.au-motion-list-move, .au-message-list-move { transition: transform motion.duration(release) var(--au-transition-timing) !important; }
+.au-motion-list { position: relative; }
+.au-motion-list > :is(.au-motion-fade-leave-active, .au-motion-slide-up-leave-active, .au-motion-slide-down-leave-active, .au-motion-scale-leave-active) { position: absolute; }
+.au-motion-collapse-enter-active { @include motion.phase(enter, height, opacity); }
+.au-motion-collapse-leave-active { @include motion.phase(leave, height, opacity); pointer-events: none; }
+.au-motion-collapse-enter-from, .au-motion-collapse-leave-to { opacity: 0; }
+:is(.au-dialog-fade-leave-active, .au-drawer-leave-active) .au-motion-panel { pointer-events: none; }

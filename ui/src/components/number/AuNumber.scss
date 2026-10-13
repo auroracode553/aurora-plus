@@ -1,0 +1,8 @@
+@use "../../theme/mixins/motion";
+
+.au-number { display: inline-flex; align-items: baseline; max-width: 100%; font-variant-numeric: tabular-nums; line-height: 1; white-space: nowrap; }
+.au-number__cell { display: inline-block; flex: none; height: 1em; overflow: hidden; }
+.au-number__cell.is-separator { overflow: visible; }
+.au-number__strip { display: flex; flex-direction: column; }
+.au-number__strip > span { display: block; height: 1em; line-height: 1; text-align: center; }
+.au-number.is-animated .au-number__strip { @include motion.phase(progress, transform); }

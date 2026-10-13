@@ -1,6 +1,6 @@
 <template>
   <li
-    class="au-menu-item au-component au-list-reset"
+    class="au-menu-item au-component au-list-reset au-motion-state"
     :class="[`is-${menuMode}`, { 'is-collapsed': collapsed }]"
   >
     <button

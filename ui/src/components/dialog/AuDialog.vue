@@ -10,7 +10,7 @@
       >
         <section
           ref="dialogRef"
-          class="au-dialog au-component au-material-surface au-depth-overlay au-motion-popover au-overlay-surface"
+          class="au-dialog au-component au-material-surface au-depth-overlay au-motion-panel au-overlay-surface au-motion-state"
           :style="dialogStyle"
           tabindex="-1"
           @mousedown.stop

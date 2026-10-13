@@ -1,6 +1,6 @@
 <template>
   <label
-    class="au-checkbox au-component au-choice-control"
+    class="au-checkbox au-component au-choice-control au-motion-state"
     :class="[
       `is-${size}`,
       {

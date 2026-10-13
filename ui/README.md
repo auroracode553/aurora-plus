@@ -7,6 +7,15 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | 导出 | 用途 |
 | --- | --- |
 | `AuBadge` | 数字、文字和状态点徽章 |
+| `AuTag` | 语义色标签、状态点与关闭操作 |
+| `AuAvatar` | 图片头像、姓名缩写与加载失败回退 |
+| `AuNumber` | 支持小数、负数和地区格式的逐位滚动数字 |
+| `AuTrend` | 变化幅度与方向语义 |
+| `AuSegmented` | 带滑动材质选中层的分段选择器 |
+| `AuEmpty` | 图标、说明和操作区组成的空状态 |
+| `AuProgress` | 线形、圆环与刻度环进度 |
+| `AuPageHeader` | 标题、说明、返回事件与操作区 |
+| `AuTransition`、`AuTransitionGroup` | 内容显隐、列表增删与依次进入动画 |
 | `AuButton` | 多类型、多尺寸、加载态按钮 |
 | `AuButtonGroup`、`AuButtonGroupItem` | 控制组容器与专用操作项 |
 | `AuDivider` | 横向与纵向内容分割线 |
@@ -31,7 +40,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuPopconfirm` | 锚定触发元素的轻量确认气泡 |
 | `AuPagination` | 页码折叠、条数切换和跳页导航 |
 | `AuTabs` | 紧凑的受控标签页导航 |
-| `AuCard` | 卡片容器，提供表面层级与内容内边距 |
+| `AuCard` | 卡片容器，提供表面层级、内容内边距和可选悬停抬升 |
 | `AuSkeleton`、`AuSkeletonItem` | 支持自定义占位模板、重复数量、呼吸动画和延迟显隐的骨架屏 |
 | `AuIcon` | 图标尺寸、颜色与对齐外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
@@ -50,6 +59,10 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuWindowTitleBar` | 桌面无边框窗口的受控标题栏 |
 | `AuMessage` | 命令式消息提示 |
 | `AuMessageBox` | Promise 风格确认框 |
+
+## 交互动效
+
+组件共用状态过渡、按压回弹、浮层进退和进度动画。动效时长与曲线由全局 `--au-transition-duration`、`--au-transition-timing` 控制。自定义元素可使用 `au-motion-state`、`au-motion-control`、`au-motion-row`、`au-motion-lift`、`au-motion-reveal`、`au-motion-pulse` 和 `au-spin`；内容显隐与列表增删、排序可使用 `AuTransition`、`AuTransitionGroup`。
 
 ## 弹性布局
 

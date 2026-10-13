@@ -1,0 +1,19 @@
+@use '../mixins/motion';
+
+// 公共类均只作用于自身，尺寸、颜色状态和交互逻辑仍归组件所有。
+.au-motion-state { @include motion.state; }
+.au-motion-control { @include motion.control; }
+.au-motion-row { @include motion.row; }
+.au-motion-lift { @include motion.lift; }
+.au-motion-reveal { @include motion.reveal; }
+.au-motion-collapse { @include motion.phase(enter, height, opacity); }
+.au-motion-popover { @include motion.transition(opacity, transform, translate); }
+
+// 模态面板显式继承交互层的进退时长，保持 Vue 生命周期与面板动画同步。
+.au-motion-panel {
+  @include motion.transition(opacity, transform, translate);
+  transition-duration: inherit;
+  transition-timing-function: inherit;
+}
+.au-motion-pulse { animation: au-motion-pulse motion.duration(pulse) var(--au-transition-timing) infinite; }
+.au-spin { animation: au-spin motion.duration(spin) linear infinite; }

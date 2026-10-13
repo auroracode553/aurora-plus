@@ -2,6 +2,15 @@ import './theme/index.scss';
 import { version as packageVersion } from '../package.json';
 
 import { AuBadge } from './components/badge/index.js';
+import { AuAvatar } from './components/avatar/index.js';
+import { AuEmpty } from './components/empty/index.js';
+import { AuNumber } from './components/number/index.js';
+import { AuPageHeader } from './components/page-header/index.js';
+import { AuProgress } from './components/progress/index.js';
+import { AuSegmented } from './components/segmented/index.js';
+import { AuTag } from './components/tag/index.js';
+import { AuTransition, AuTransitionGroup } from './components/transition/index.js';
+import { AuTrend } from './components/trend/index.js';
 import { AuButton } from './components/button/index.js';
 import { AuButtonGroup, AuButtonGroupItem } from './components/button-group/index.js';
 import { AuCard } from './components/card/index.js';
@@ -65,6 +74,16 @@ import {
 } from './utils/theme.js';
 
 const components = [
+  AuAvatar,
+  AuEmpty,
+  AuNumber,
+  AuPageHeader,
+  AuProgress,
+  AuSegmented,
+  AuTag,
+  AuTransition,
+  AuTransitionGroup,
+  AuTrend,
   AuBadge,
   AuButton,
   AuButtonGroup,
@@ -141,6 +160,16 @@ export const AuroraPlus = {
 };
 
 export {
+  AuAvatar,
+  AuEmpty,
+  AuNumber,
+  AuPageHeader,
+  AuProgress,
+  AuSegmented,
+  AuTag,
+  AuTransition,
+  AuTransitionGroup,
+  AuTrend,
   AuBadge,
   AuButton,
   AuButtonGroup,

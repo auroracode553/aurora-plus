@@ -4,7 +4,7 @@
       <div
         v-if="visible"
         ref="toolbarRef"
-        class="au-floating-toolbar au-component au-material-surface au-depth-overlay au-motion-popover"
+        class="au-floating-toolbar au-component au-material-surface au-depth-overlay au-motion-popover au-motion-state"
         :class="`is-${activePlacement}`"
         :style="toolbarStyle"
         @pointerdown.stop

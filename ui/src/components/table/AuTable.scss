@@ -62,7 +62,7 @@
 }
 
 .au-table__row {
-  @include motion.transition(background);
+  @include motion.row;
 }
 
 .au-table__row:hover {
@@ -80,6 +80,7 @@
 
 .au-table__header-cell,
 .au-table__cell {
+  @include motion.row;
   display: flex;
   align-items: center;
   min-width: 0;

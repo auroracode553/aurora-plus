@@ -1,6 +1,7 @@
 <script setup>
 import { computed, inject, ref, watch } from 'vue';
 import { COLLAPSE_CONTEXT } from './AuCollapse.vue';
+import { useCollapseTransition } from './use-collapse-transition.js';
 
 const props = defineProps({
   name: { type: [String, Number], default: undefined },
@@ -16,6 +17,7 @@ const props = defineProps({
   variant: { type: String, default: 'panel', validator: (value) => ['panel', 'plain'].includes(value) },
 });
 const emit = defineEmits(['update:modelValue', 'change']);
+const transition = useCollapseTransition(() => props.fill);
 const group = inject(COLLAPSE_CONTEXT, null);
 const grouped = computed(() => group != null && props.name != null);
 const localOpen = ref(props.defaultOpen);
@@ -43,7 +45,7 @@ function toggle() {
 
 <template>
   <section
-    class="au-collapse-item au-component"
+    class="au-collapse-item au-component au-motion-state"
     :class="[
       `au-collapse-item--${variant}`, `au-collapse-item--${size}`,
       { 'is-expanded': expanded, 'is-disabled': disabled, 'is-fill': fill },
@@ -61,7 +63,11 @@ function toggle() {
       </button>
       <div v-if="$slots.actions" class="au-collapse-item__actions"><slot name="actions" :expanded="expanded" /></div>
     </div>
-    <div v-if="renderContent" v-show="expanded" class="au-collapse-item__body"><slot :expanded="expanded" /></div>
+    <Transition name="au-motion-collapse" :css="!fill" @before-enter="transition.beforeEnter" @enter="transition.enter" @before-leave="transition.beforeLeave" @leave="transition.leave" @after-enter="transition.restore" @after-leave="transition.restore" @enter-cancelled="transition.cancel" @leave-cancelled="transition.cancel">
+      <div v-if="renderContent" v-show="expanded" class="au-collapse-item__content au-motion-collapse">
+        <div class="au-collapse-item__body"><slot :expanded="expanded" /></div>
+      </div>
+    </Transition>
   </section>
 </template>
 

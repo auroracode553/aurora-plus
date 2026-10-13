@@ -65,7 +65,7 @@
   font-weight: var(--au-font-weight-medium);
   cursor: pointer;
   appearance: none;
-  @include motion.transition(color, background, transform);
+  @include motion.control;
 }
 
 .au-action-control:active:not(:disabled) {

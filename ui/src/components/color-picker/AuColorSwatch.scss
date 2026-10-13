@@ -13,7 +13,7 @@
   color: var(--au-color-text-primary);
   background: transparent;
   cursor: pointer;
-  @include motion.transition(border-color, background, transform);
+  @include motion.control;
 }
 
 .au-color-swatch.is-small {
@@ -35,7 +35,7 @@
 }
 
 .au-color-swatch:active:not(.is-disabled) {
-  @include motion.press(scale(0.95));
+  @include motion.press(0.95);
 }
 
 .au-color-swatch__color {

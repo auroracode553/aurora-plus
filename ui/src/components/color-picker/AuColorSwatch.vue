@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-color-swatch au-component au-control-reset"
+    class="au-color-swatch au-component au-control-reset au-motion-state"
     :class="[`is-${size}`, { 'is-selected': selected, 'is-disabled': disabled, 'au-disabled': disabled }]"
     type="button"
     :disabled="disabled"

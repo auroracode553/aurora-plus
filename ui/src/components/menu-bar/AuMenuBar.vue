@@ -1,7 +1,7 @@
 <template>
   <nav
     ref="menuBarRef"
-    class="au-menu-bar au-component"
+    class="au-menu-bar au-component au-motion-state"
     :class="{ 'is-draggable': draggable }"
     @contextmenu.prevent
     @keydown="handleKeydown"
@@ -24,12 +24,14 @@
           {{ item.label }}
         </button>
 
-        <AuMenuBarPanel
-          v-if="openIndex === index"
-          :items="item.children || []"
-          @select="selectItem"
-          @close="closeMenu"
-        />
+        <Transition name="au-float">
+          <AuMenuBarPanel
+            v-if="openIndex === index"
+            :items="item.children || []"
+            @select="selectItem"
+            @close="closeMenu"
+          />
+        </Transition>
       </div>
     </div>
     <div
@@ -42,6 +44,7 @@
 
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { getFloatingActions } from '../../utils/floating-actions.js';
 import AuMenuBarPanel from './AuMenuBarPanel.vue';
 
 const props = defineProps({
@@ -92,7 +95,8 @@ function getRootButtons() {
 
 async function focusPanelFirstItem() {
   await nextTick();
-  const firstItem = menuBarRef.value?.querySelector('.au-menu-bar-panel .au-menu-bar-panel__item:not(:disabled)');
+  const currentRoot = menuBarRef.value?.querySelector('.au-menu-bar__trigger.is-open')?.closest('.au-menu-bar__root');
+  const [firstItem] = getFloatingActions(currentRoot, '.au-menu-bar-panel__item:not(:disabled)');
   if (firstItem) firstItem.focus();
 }
 

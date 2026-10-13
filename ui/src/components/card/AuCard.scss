@@ -1,3 +1,5 @@
+@use '../../theme/mixins/motion';
+
 /* 卡片默认（default）：细边框 + 轻阴影，轮廓清晰但不厚重。圆角与材质背景跟随全局语义变量。 */
 .au-card {
   display: flex;
@@ -45,3 +47,6 @@
   padding: 20px;
   gap: 20px;
 }
+
+// 仅显式可交互卡片启用抬升，普通内容卡片保持稳定。
+.au-card.is-hoverable { @include motion.lift; }

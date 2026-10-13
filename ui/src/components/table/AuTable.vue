@@ -1,7 +1,7 @@
 <template>
   <div
     ref="rootRef"
-    class="au-table au-component"
+    class="au-table au-component au-motion-state"
     :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow, 'au-hover-scrollbars': showScroll }"
     :style="{ width: formatSize(width), height: autoHeight ? 'auto' : formatSize(height) }"
   >
@@ -33,7 +33,7 @@
             <button
               v-else-if="column.sortable"
               type="button"
-              class="au-table__sort-button au-control-reset"
+              class="au-table__sort-button au-control-reset au-motion-control"
               :style="{ justifyContent: getJustifyContent(column.align) }"
               @click="toggleSort(column)"
             >
@@ -82,7 +82,7 @@
         </div>
       </div>
     </div>
-    <div v-if="loading" class="au-table__loading au-material-surface au-depth-surface">
+    <div v-if="loading" class="au-table__loading au-material-surface au-depth-surface au-motion-reveal">
       <slot name="loading"><AuLoadingSpinner :text="loadingText" /></slot>
     </div>
   </div>

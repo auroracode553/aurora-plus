@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-button-group au-component"
+    class="au-button-group au-component au-motion-state"
     :class="[
       `is-${variant}`,
       `is-${orientation}`,

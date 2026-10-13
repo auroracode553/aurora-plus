@@ -1,12 +1,23 @@
 @use 'sass:list';
+@use 'sass:map';
 
-// 组件只声明需要过渡的属性，时长与曲线共用一套规则。
-@mixin transition($properties...) {
+// 仅使用现有全局时长和曲线；不同交互阶段以统一倍率表达节奏。
+$phases: (state: 1, press: 0.55, release: 1.6, enter: 1.5, leave: 0.8, progress: 2.4, pulse: 9, spin: 4, working: 7);
+
+@function duration($phase: state) {
+  $ratio: map.get($phases, $phase);
+  @if not $ratio { @error 'Unknown motion phase: #{$phase}'; }
+  @return calc(var(--au-transition-duration) * #{$ratio});
+}
+
+@mixin phase($phase, $properties...) {
   $transitions: ();
+  // scale 与 transform 独立，按压反馈不会覆盖定位、旋转或滑动位移。
+  @if not list.index($properties, scale) { $properties: list.append($properties, scale); }
   @each $property in $properties {
     $transitions: list.append(
       $transitions,
-      $property var(--au-transition-duration) var(--au-transition-timing),
+      $property duration($phase) var(--au-transition-timing),
       comma
     );
   }
@@ -14,8 +25,27 @@
 
 }
 
-@mixin press($transform: scale(0.96)) {
-  transform: $transform;
-  transition-duration: 0s;
+@mixin transition($properties...) { @include phase(state, $properties...); }
 
+@mixin state { @include transition(color, background-color, border-color, box-shadow, opacity); }
+
+@mixin press($scale: 0.97) {
+  scale: $scale;
+  transition-duration: duration(press);
+}
+
+@mixin control {
+  @include phase(release, color, background-color, border-color, box-shadow, opacity, transform, translate);
+  &:active:not(:disabled, .is-disabled, .is-loading, .is-readonly) { @include press; }
+}
+
+@mixin row { @include transition(color, background-color, border-color, opacity); }
+@mixin reveal { animation: au-motion-reveal duration(enter) var(--au-transition-timing) backwards; }
+
+@mixin lift {
+  @include phase(release, translate, border-color, box-shadow);
+  @media (hover: hover) {
+    &:hover:not(:disabled, .is-disabled) { translate: 0 -2px; }
+    &:active:not(:disabled, .is-disabled) { translate: 0 0; transition-duration: duration(press); }
+  }
 }

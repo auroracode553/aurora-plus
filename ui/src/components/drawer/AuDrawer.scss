@@ -91,15 +91,7 @@
   flex-shrink: 0;
 }
 
-.au-drawer-enter-active,
-.au-drawer-leave-active {
-  @include motion.transition(opacity);
-}
 
-.au-drawer-enter-active .au-drawer,
-.au-drawer-leave-active .au-drawer {
-  @include motion.transition(transform);
-}
 
 .au-drawer-enter-from,
 .au-drawer-leave-to {

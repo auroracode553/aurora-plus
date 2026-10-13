@@ -1,7 +1,7 @@
 <template>
   <div
     ref="rootRef"
-    class="au-loading-host au-component"
+    class="au-loading-host au-component au-motion-state"
     :class="{ 'is-positioned': !fullscreen }"
     v-bind="$attrs"
   >

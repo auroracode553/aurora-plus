@@ -1,6 +1,6 @@
 <template>
   <label
-    class="au-color-picker au-component"
+    class="au-color-picker au-component au-motion-state"
     :class="[`is-${size}`, { 'is-disabled': disabled }, $attrs.class]"
     :style="$attrs.style"
   >

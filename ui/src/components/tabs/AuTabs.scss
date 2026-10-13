@@ -1,6 +1,7 @@
 @use '../../theme/mixins/motion';
 
 .au-tabs {
+  position: relative;
   display: flex;
   align-items: stretch;
   width: 100%;
@@ -23,7 +24,7 @@
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
   cursor: pointer;
-  @include motion.transition(color);
+  @include motion.control;
 }
 
 .au-tabs:not(.is-fill) .au-tabs__tab {
@@ -43,19 +44,16 @@
   max-width: 100%;
 }
 
-.au-tabs__label::after {
-  content: '';
+.au-tabs__indicator {
   position: absolute;
-  right: 0;
-  bottom: -1px;
+  top: 0;
   left: 0;
   height: 2px;
   border-radius: var(--au-radius-pill);
   background: var(--au-color-primary);
-  opacity: 0;
-  transform: scaleX(0.5);
-  @include motion.transition(opacity, transform);
+  pointer-events: none;
 }
+.au-tabs__indicator.is-animated { @include motion.phase(release, opacity, transform, width); }
 
 .au-tabs__tab:hover:not(:disabled) {
   color: var(--au-color-text-primary);
@@ -64,11 +62,6 @@
 .au-tabs__tab.is-active {
   color: var(--au-color-primary);
   font-weight: var(--au-font-weight-semibold);
-}
-
-.au-tabs__tab.is-active .au-tabs__label::after {
-  opacity: 1;
-  transform: scaleX(1);
 }
 
 .au-tabs__tab:active:not(:disabled) {

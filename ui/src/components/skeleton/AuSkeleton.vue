@@ -1,7 +1,7 @@
 <template>
-  <div class="au-skeleton au-component">
+  <div class="au-skeleton au-component au-motion-state">
     <template v-if="visible">
-      <div v-for="index in safeCount" :key="index" class="au-skeleton__group">
+      <div v-for="index in safeCount" :key="index" class="au-skeleton__group" :class="{ 'au-motion-reveal': animated }">
         <slot name="template" :index="index - 1">
           <div class="au-skeleton__paragraph">
             <AuSkeletonItem variant="p" width="33%" />

@@ -1,0 +1,16 @@
+@use '../../theme/mixins/motion';
+
+.au-progress { display: flex; align-items: center; min-width: 0; max-width: 100%; gap: 8px; }
+.au-progress__track { flex: 1; min-width: 0; overflow: hidden; border-radius: var(--au-radius-pill); background: var(--au-color-background-hover); }
+.au-progress__fill { width: 100%; height: 100%; border-radius: inherit; background: currentColor; transform-origin: left center; }
+.au-progress__text { flex: none; color: var(--au-color-text-secondary); font-size: 12px; font-variant-numeric: tabular-nums; }
+.au-progress__ring { position: relative; flex: none; aspect-ratio: 1; }
+.au-progress__graphic { display: block; width: 100%; height: 100%; overflow: visible; }
+.au-progress__circle-track { stroke: var(--au-color-background-hover); }
+.au-progress__circle-fill, .au-progress__tick { stroke: currentColor; }
+.au-progress__tick { opacity: 0.14; }
+.au-progress__tick.is-lit { opacity: 1; }
+.au-progress__center { position: absolute; inset: 25%; display: flex; align-items: center; justify-content: center; overflow: hidden; color: var(--au-color-text-primary); font-size: 16px; font-variant-numeric: tabular-nums; text-align: center; }
+.au-progress.is-animated .au-progress__fill { @include motion.phase(progress, transform); }
+.au-progress.is-animated .au-progress__circle-fill { @include motion.phase(progress, stroke-dashoffset); }
+.au-progress.is-animated .au-progress__tick { @include motion.transition(opacity); }

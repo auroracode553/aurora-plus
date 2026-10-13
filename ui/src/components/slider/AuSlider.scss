@@ -66,6 +66,8 @@
   inset-inline-start: 0;
   border-radius: inherit;
   background: var(--au-color-primary);
+  // 填充与滑块使用相同节奏，键盘和外部值变化时保持端点重合。
+  @include motion.phase(release, inline-size);
 }
 
 .au-slider__thumb {
@@ -76,7 +78,7 @@
   border-radius: var(--au-radius-pill);
   background: var(--au-color-primary);
   transform: translate(-50%, -50%);
-  @include motion.transition(transform, box-shadow);
+  @include motion.phase(release, transform, box-shadow, inset-inline-start);
 }
 
 .au-slider:dir(rtl) .au-slider__thumb {
@@ -99,12 +101,11 @@
 
 .au-slider.is-dragging .au-slider__thumb {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--au-color-primary) 14%, transparent);
-  transform: translate(-50%, -50%) scale(0.94);
+  @include motion.press(0.94);
+  transition-property: box-shadow, scale;
 }
 
-.au-slider.is-dragging:dir(rtl) .au-slider__thumb {
-  transform: translate(50%, -50%) scale(0.94);
-}
+.au-slider.is-dragging .au-slider__fill { transition: none; }
 
 .au-slider__value {
   min-width: 3ch;

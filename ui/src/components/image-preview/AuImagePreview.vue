@@ -4,7 +4,7 @@
       <section
         v-if="visible"
         ref="viewerRef"
-        class="au-image-preview au-component au-overscroll-contain"
+        class="au-image-preview au-component au-overscroll-contain au-motion-state"
         :style="viewerStyle"
         tabindex="-1"
         @keydown="handleKeydown"

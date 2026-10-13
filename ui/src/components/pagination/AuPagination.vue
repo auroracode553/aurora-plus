@@ -1,7 +1,7 @@
 <template>
   <nav
     v-if="!hidden"
-    class="au-pagination au-component"
+    class="au-pagination au-component au-motion-state"
     :class="[`is-${size}`, { 'is-disabled': disabled, 'has-background': background }]"
   >
     <template v-for="(item, index) in layoutItems" :key="`${item}-${index}`">

@@ -52,10 +52,6 @@
   font-size: var(--au-font-size-large);
 }
 
-.au-loading-fade-enter-active,
-.au-loading-fade-leave-active {
-  @include motion.transition(opacity);
-}
 
 .au-loading-fade-enter-from,
 .au-loading-fade-leave-to {

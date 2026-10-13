@@ -1,7 +1,7 @@
 <template>
   <div
     ref="rootRef"
-    class="au-virtual-table au-component"
+    class="au-virtual-table au-component au-motion-state"
     :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow, 'au-hover-scrollbars': showScroll }"
     :style="rootStyle"
   >
@@ -34,7 +34,7 @@
           <span v-else-if="column.type === 'index'">{{ column.title }}</span>
           <button
             v-else-if="column.sortable"
-            class="au-virtual-table__sort-button au-control-reset"
+            class="au-virtual-table__sort-button au-control-reset au-motion-control"
             type="button"
             :style="{ justifyContent: getJustifyContent(column.align) }"
             @click="toggleSort(column)"
@@ -101,7 +101,7 @@
 
     <div
       v-if="loading"
-      class="au-virtual-table__loading au-material-surface au-depth-surface"
+      class="au-virtual-table__loading au-material-surface au-depth-surface au-motion-reveal"
       :style="loadingStyle"
     >
       <slot name="loading">

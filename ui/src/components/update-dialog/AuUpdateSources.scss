@@ -1,3 +1,5 @@
+@use "../../theme/mixins/motion";
+
 .au-update-sources {
   min-width: 0;
   margin-top: 16px;
@@ -40,7 +42,7 @@
   font-size: 12px;
   text-align: left;
   cursor: pointer;
-  transition: background var(--au-transition-duration) var(--au-transition-timing), border-color var(--au-transition-duration) var(--au-transition-timing);
+  @include motion.control;
 
   &:hover:not(:disabled) { background: var(--au-color-background-hover); }
 

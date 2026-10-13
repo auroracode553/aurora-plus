@@ -10,7 +10,7 @@
 // 可用于组件外壳或原生输入；同时识别 class 与原生 disabled 状态。
 @mixin field {
   @include surfaces.surface;
-  @include motion.transition(border-color, background, box-shadow);
+  @include motion.state;
 
   @media (hover: hover) {
     &:hover:not(.is-disabled, :disabled, .is-invalid, .is-readonly) {

@@ -41,7 +41,7 @@ provide(COLLAPSE_CONTEXT, {
 </script>
 
 <template>
-  <div class="au-collapse au-component"><slot /></div>
+  <div class="au-collapse au-component au-motion-state"><slot /></div>
 </template>
 
 <style scoped>

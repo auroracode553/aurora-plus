@@ -1,112 +1,117 @@
 <template>
   <Teleport :to="appendTo" :disabled="!teleported">
-    <div
-      v-if="visible"
-      ref="menuRef"
-      class="au-context-menu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel"
-      :style="menuStyle"
-      tabindex="-1"
-      @contextmenu.prevent
-      @mousedown.stop
-      @keydown="handleKeydown"
-    >
-      <template v-for="(section, sectionIndex) in items" :key="section.id || sectionIndex">
-        <div
-          v-if="section.type === 'icon-row' || section.type === 'icon-grid'"
-          :class="section.type === 'icon-row' ? 'au-context-menu__icon-row' : 'au-context-menu__icon-grid'"
-        >
-          <AuTooltip v-for="item in section.items" :key="item.id" :content="item.label" placement="top">
-            <button
-              class="au-context-menu__tool-button au-grid-center au-disabled-text"
-              :class="{ 'is-danger': item.danger }"
-              type="button"
-              :disabled="item.disabled || selecting"
-              @click="selectItem(item)"
-            >
-              <AuIcon class="au-context-menu__tool-icon" :icon="item.icon" :color="iconColor" />
-            </button>
-          </AuTooltip>
-        </div>
-
-        <template v-else-if="section.type === 'button-group' || section.type === 'group'">
-          <button
-            v-for="item in section.items"
-            :key="item.id"
-            class="au-context-menu__item au-menu-action"
-            :class="{ 'is-danger': item.danger }"
-            type="button"
-            :title="item.title"
-            :disabled="item.disabled || selecting"
-            @click="selectItem(item)"
-          >
-            <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
-            <span class="au-context-menu__label au-menu-label">{{ item.label }}</span>
-            <span v-if="item.shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ item.shortcut }}</span>
-          </button>
-        </template>
-
-        <button
-          v-else-if="section.type === 'button' || section.type === 'item'"
-          class="au-context-menu__item au-menu-action"
-          :class="{ 'is-danger': resolveSectionItem(section).danger }"
-          type="button"
-          :disabled="resolveSectionItem(section).disabled || selecting"
-          @click="selectItem(resolveSectionItem(section))"
-        >
-          <AuIcon v-if="resolveSectionItem(section).icon" class="au-context-menu__item-icon" :icon="resolveSectionItem(section).icon" />
-          <span class="au-context-menu__label au-menu-label">{{ resolveSectionItem(section).label }}</span>
-          <span v-if="resolveSectionItem(section).shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ resolveSectionItem(section).shortcut }}</span>
-        </button>
-
-        <div
-          v-else-if="section.type === 'submenu'"
-          class="au-context-menu__submenu-wrapper au-menu-submenu-host"
-          @mouseenter="showSubmenu(section.id)"
-          @mouseleave="hideSubmenu"
-        >
-          <button
-            class="au-context-menu__item au-menu-action has-submenu"
-            :class="{ 'is-active': activeSubmenu === section.id }"
-            type="button"
-            :disabled="section.disabled"
-            @focus="showSubmenu(section.id)"
-          >
-            <AuIcon v-if="section.icon" class="au-context-menu__item-icon" :icon="section.icon" />
-            <span class="au-context-menu__label au-menu-label">{{ section.label }}</span>
-            <AuIcon class="au-context-menu__arrow" :icon="IconChevronRight" />
-          </button>
-
+    <Transition name="au-float" appear>
+      <div
+        v-if="visible"
+        ref="menuRef"
+        class="au-context-menu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
+        :style="menuStyle"
+        tabindex="-1"
+        @contextmenu.prevent
+        @mousedown.stop
+        @keydown="handleKeydown"
+      >
+        <template v-for="(section, sectionIndex) in items" :key="section.id || sectionIndex">
           <div
-            v-if="activeSubmenu === section.id"
-            class="au-context-submenu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile"
-            @mouseenter="showSubmenu(section.id)"
-            @mouseleave="hideSubmenu"
+            v-if="section.type === 'icon-row' || section.type === 'icon-grid'"
+            :class="section.type === 'icon-row' ? 'au-context-menu__icon-row' : 'au-context-menu__icon-grid'"
           >
-            <template v-for="(item, itemIndex) in section.items" :key="item.id || itemIndex">
-              <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
+            <AuTooltip v-for="item in section.items" :key="item.id" :content="item.label" placement="top">
               <button
-                v-else
-                class="au-context-menu__item au-menu-action"
+                class="au-context-menu__tool-button au-grid-center au-disabled-text"
                 :class="{ 'is-danger': item.danger }"
                 type="button"
                 :disabled="item.disabled || selecting"
                 @click="selectItem(item)"
               >
-                <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
-                <span class="au-context-menu__label au-menu-label">{{ item.label }}</span>
-                <span v-if="item.shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ item.shortcut }}</span>
+                <AuIcon class="au-context-menu__tool-icon" :icon="item.icon" :color="iconColor" />
               </button>
-            </template>
+            </AuTooltip>
           </div>
-        </div>
 
-        <div v-else-if="section.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
-      </template>
-    </div>
+          <template v-else-if="section.type === 'button-group' || section.type === 'group'">
+            <button
+              v-for="item in section.items"
+              :key="item.id"
+              class="au-context-menu__item au-menu-action"
+              :class="{ 'is-danger': item.danger }"
+              type="button"
+              :title="item.title"
+              :disabled="item.disabled || selecting"
+              @click="selectItem(item)"
+            >
+              <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
+              <span class="au-context-menu__label au-menu-label">{{ item.label }}</span>
+              <span v-if="item.shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ item.shortcut }}</span>
+            </button>
+          </template>
+
+          <button
+            v-else-if="section.type === 'button' || section.type === 'item'"
+            class="au-context-menu__item au-menu-action"
+            :class="{ 'is-danger': resolveSectionItem(section).danger }"
+            type="button"
+            :disabled="resolveSectionItem(section).disabled || selecting"
+            @click="selectItem(resolveSectionItem(section))"
+          >
+            <AuIcon v-if="resolveSectionItem(section).icon" class="au-context-menu__item-icon" :icon="resolveSectionItem(section).icon" />
+            <span class="au-context-menu__label au-menu-label">{{ resolveSectionItem(section).label }}</span>
+            <span v-if="resolveSectionItem(section).shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ resolveSectionItem(section).shortcut }}</span>
+          </button>
+
+          <div
+            v-else-if="section.type === 'submenu'"
+            class="au-context-menu__submenu-wrapper au-menu-submenu-host"
+            @mouseenter="showSubmenu(section.id)"
+            @mouseleave="hideSubmenu"
+          >
+            <button
+              class="au-context-menu__item au-menu-action has-submenu"
+              :class="{ 'is-active': activeSubmenu === section.id }"
+              type="button"
+              :disabled="section.disabled"
+              @focus="showSubmenu(section.id)"
+            >
+              <AuIcon v-if="section.icon" class="au-context-menu__item-icon" :icon="section.icon" />
+              <span class="au-context-menu__label au-menu-label">{{ section.label }}</span>
+              <AuIcon class="au-context-menu__arrow" :icon="IconChevronRight" />
+            </button>
+
+            <Transition name="au-float">
+              <div
+                v-if="activeSubmenu === section.id"
+                class="au-context-submenu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile au-motion-state"
+                @mouseenter="showSubmenu(section.id)"
+                @mouseleave="hideSubmenu"
+              >
+                <template v-for="(item, itemIndex) in section.items" :key="item.id || itemIndex">
+                  <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
+                  <button
+                    v-else
+                    class="au-context-menu__item au-menu-action"
+                    :class="{ 'is-danger': item.danger }"
+                    type="button"
+                    :disabled="item.disabled || selecting"
+                    @click="selectItem(item)"
+                  >
+                    <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
+                    <span class="au-context-menu__label au-menu-label">{{ item.label }}</span>
+                    <span v-if="item.shortcut" class="au-context-menu__shortcut au-menu-shortcut au-meta-muted">{{ item.shortcut }}</span>
+                  </button>
+                </template>
+              </div>
+            </Transition>
+          </div>
+
+          <div v-else-if="section.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
+        </template>
+      </div>
+    </Transition>
   </Teleport>
 </template>
 
 <script setup>
+import { getFloatingActions } from '../../utils/floating-actions.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
@@ -210,8 +215,8 @@ function handleKeydown(event) {
 }
 
 function getEnabledButtons() {
-  if (!menuRef.value) return [];
-  return Array.from(menuRef.value.querySelectorAll('button:not(:disabled)'));
+  if (!visible.value) return [];
+  return getFloatingActions(menuRef.value);
 }
 
 async function updatePosition() {

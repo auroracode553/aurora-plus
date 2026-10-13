@@ -1,0 +1,4 @@
+.au-avatar { display: inline-flex; flex: none; align-items: center; justify-content: center; overflow: hidden; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: 50%; background: color-mix(in srgb, currentColor 10%, transparent); font-weight: var(--au-font-weight-semibold); line-height: 1; vertical-align: middle; }
+.au-avatar--square { border-radius: var(--au-radius-control); }
+.au-avatar__image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.au-avatar__fallback { display: inline-flex; align-items: center; justify-content: center; width: 100%; height: 100%; }

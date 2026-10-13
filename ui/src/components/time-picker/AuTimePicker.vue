@@ -46,7 +46,7 @@
       />
     </template>
 
-    <section class="au-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport">
+    <section class="au-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-motion-state">
       <AuTimePickerPanel
         :model-value="draftDate"
         :hour-step="hourStep"

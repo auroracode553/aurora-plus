@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-switch au-component au-choice-control au-control-reset"
+    class="au-switch au-component au-choice-control au-control-reset au-motion-state"
     :class="[
       `is-${size}`,
       {

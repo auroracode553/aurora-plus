@@ -23,7 +23,7 @@
   border-radius: var(--au-radius-compact);
   @include surfaces.surface;
   cursor: pointer;
-  @include motion.transition(color, background, border-color, transform);
+  @include motion.control;
 }
 
 .au-context-menu__tool-button:hover:not(:disabled) {
@@ -32,7 +32,7 @@
 }
 
 .au-context-menu__tool-button:active:not(:disabled) {
-  @include motion.press(scale(0.94));
+  @include motion.press(0.94);
 }
 
 .au-context-menu__tool-button:disabled {

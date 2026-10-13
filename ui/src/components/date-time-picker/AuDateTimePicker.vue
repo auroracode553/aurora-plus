@@ -46,7 +46,7 @@
       />
     </template>
 
-    <section class="au-date-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
+    <section class="au-date-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar au-motion-state">
       <AuDatePickerPane
         ref="datePaneRef"
         class="au-date-time-picker__date-pane"

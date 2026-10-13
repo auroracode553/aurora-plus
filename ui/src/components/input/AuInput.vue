@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-input au-component"
+    class="au-input au-component au-motion-state"
     :class="[
       `is-${size}`,
       { 'is-textarea': type === 'textarea', [`is-resize-${resize}`]: type === 'textarea' },

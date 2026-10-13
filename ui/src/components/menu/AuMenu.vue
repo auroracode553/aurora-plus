@@ -1,7 +1,7 @@
 <template>
   <ul
     ref="menuRef"
-    class="au-menu au-component au-list-reset"
+    class="au-menu au-component au-list-reset au-motion-state"
     :class="[`is-${mode}`, { 'is-collapsed': collapsed, 'is-disabled': disabled }]"
     v-bind="$attrs"
     @focusin="handleFocusin"

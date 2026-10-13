@@ -1,3 +1,5 @@
+@use "../../theme/mixins/motion";
+
 .au-update-dialog {
   min-width: 0;
   font-size: var(--au-font-size-base);
@@ -190,7 +192,7 @@
 
   &.is-indeterminate .au-update-dialog__progress-fill {
     width: 34%;
-    animation: au-update-progress 1.4s ease-in-out infinite;
+    animation: au-update-progress motion.duration(working) var(--au-transition-timing) infinite;
   }
 }
 
@@ -199,7 +201,7 @@
   height: 100%;
   border-radius: inherit;
   background: var(--au-color-primary);
-  transition: width var(--au-transition-duration) var(--au-transition-timing);
+  @include motion.phase(progress, width);
 }
 
 .au-update-dialog__download-meta { margin-top: 6px; font-variant-numeric: tabular-nums; }
@@ -244,10 +246,6 @@
   max-width: 100%;
 }
 
-@keyframes au-update-progress {
-  from { transform: translateX(-105%); }
-  to { transform: translateX(300%); }
-}
 
 @media (max-width: 400px) {
   .au-update-dialog__intro { gap: 10px; }

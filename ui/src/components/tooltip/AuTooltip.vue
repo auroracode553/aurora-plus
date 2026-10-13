@@ -17,7 +17,7 @@
       <div
         v-if="visible && hasContent"
         ref="tooltipRef"
-        class="au-tooltip__popper au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere"
+        class="au-tooltip__popper au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere au-motion-state"
         :class="`is-${activePlacement}`"
         :style="popperStyle"
       >

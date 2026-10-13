@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel"
+    class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
     :class="{ 'has-leading-column': hasLeadingColumn }"
     @mousedown.prevent
     @keydown.esc.stop="emit('close')"
@@ -33,13 +33,15 @@
           <AuIcon class="au-menu-bar-panel__arrow au-inline-center" :icon="IconChevronRight" />
         </button>
 
-        <AuMenuBarPanel
-          v-if="activeSubmenuKey === resolveItemKey(item, index)"
-          class="au-menu-bar-panel__nested au-menu-submenu-mobile"
-          :items="item.children"
-          @select="emit('select', $event)"
-          @close="emit('close')"
-        />
+        <Transition name="au-float">
+          <AuMenuBarPanel
+            v-if="activeSubmenuKey === resolveItemKey(item, index)"
+            class="au-menu-bar-panel__nested au-menu-submenu-mobile"
+            :items="item.children"
+            @select="emit('select', $event)"
+            @close="emit('close')"
+          />
+        </Transition>
       </div>
 
       <button

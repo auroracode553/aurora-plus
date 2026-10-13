@@ -1,16 +1,18 @@
 <template>
-  <span class="au-badge au-component" :class="{ 'has-content': hasDefaultSlot }">
+  <span class="au-badge au-component au-motion-state" :class="{ 'has-content': hasDefaultSlot }">
     <slot />
-    <span
-      v-if="visible"
-      class="au-badge__mark"
-      :class="[`is-${type}`, badgeClass, { 'is-dot': isDot }]"
-      :style="markStyle"
-    >
-      <template v-if="!isDot">
-        <slot name="content" :value="value">{{ displayValue }}</slot>
-      </template>
-    </span>
+    <Transition name="au-badge-pop">
+      <span
+        v-if="visible"
+        class="au-badge__mark au-motion-state"
+        :class="[`is-${type}`, badgeClass, { 'is-dot': isDot }]"
+        :style="markStyle"
+      >
+        <template v-if="!isDot">
+          <slot name="content" :value="value">{{ displayValue }}</slot>
+        </template>
+      </span>
+    </Transition>
   </span>
 </template>
 
