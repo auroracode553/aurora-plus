@@ -62,5 +62,8 @@
     "ui",
     "vue",
     "vue3"
-  ]
+  ],
+  "dependencies": {
+    "marked": "^18.0.7"
+  }
 }

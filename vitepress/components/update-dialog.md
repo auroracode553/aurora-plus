@@ -4,6 +4,8 @@ import UpdateCheck from '../.vitepress/theme/examples/update-dialog/UpdateCheck.
 import updateCheckSource from '../.vitepress/theme/examples/update-dialog/UpdateCheck.vue?demo-source';
 import UpdateAvailable from '../.vitepress/theme/examples/update-dialog/UpdateAvailable.vue';
 import updateAvailableSource from '../.vitepress/theme/examples/update-dialog/UpdateAvailable.vue?demo-source';
+import UpdateMarkdown from '../.vitepress/theme/examples/update-dialog/UpdateMarkdown.vue';
+import updateMarkdownSource from '../.vitepress/theme/examples/update-dialog/UpdateMarkdown.vue?demo-source';
 import UpdateRecovery from '../.vitepress/theme/examples/update-dialog/UpdateRecovery.vue';
 import updateRecoverySource from '../.vitepress/theme/examples/update-dialog/UpdateRecovery.vue?demo-source';
 import UpdateSources from '../.vitepress/theme/examples/update-dialog/UpdateSources.vue';
@@ -24,6 +26,14 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 
 <DemoBlock title="版本说明、下载进度与安装" :source="updateAvailableSource">
   <UpdateAvailable />
+</DemoBlock>
+
+## 更新日志
+
+`release-notes` 可直接传入日志原文，支持标题、列表、引用、链接、表格和代码块。原始 HTML 按文本展示；链接支持 HTTP、HTTPS 和邮件地址，图片支持 HTTP、HTTPS 地址。
+
+<DemoBlock title="更新日志" :source="updateMarkdownSource">
+  <UpdateMarkdown />
 </DemoBlock>
 
 ## 未知进度与失败重试
@@ -62,7 +72,7 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 
 `check`、`download`、`install`、`retry` 只发出事件，不自动改变 `status`。`cancel`、`later`、`skip` 同时关闭窗口；关闭按钮、Escape 和实例 `close()` 只关闭窗口。
 
-更新说明为普通文本，自定义内容使用 `release-notes` 插槽。
+自定义更新说明正文使用 `release-notes` 插槽。
 
 ## UpdateDialog API
 
@@ -80,7 +90,7 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 | latestVersion | 最新版本，按原样展示 | string | '' |
 | channel | 版本渠道标签，如稳定版 | string | '' |
 | releaseDate | 发布时间的展示文本 | string | '' |
-| releaseNotes | 分组更新说明 | UpdateReleaseNote[] | [] |
+| releaseNotes | 日志原文或更新说明数组；分组 items 按纯文本展示 | string / (string \| UpdateReleaseNote \| UpdateVersionNote)[] | [] |
 | releaseUrl | 完整更新说明链接，在新窗口打开 | string | '' |
 | progress | 下载百分比；null 表示未知进度 | number / null | null |
 | progressText | 自定义检查、下载或安装进度文案 | string | '' |
@@ -123,6 +133,31 @@ const releaseNotes = [
 ```
 
 `title` 为可选分组标题，`items` 为该组的字符串数组。
+
+### UpdateVersionNote
+
+| 字段 | 说明 | 类型 |
+| --- | --- | --- |
+| version | 可选版本标题，按纯文本展示 | string |
+| note | 更新日志原文 | string |
+
+### renderReleaseNotesMarkdown
+
+需要在其他区域展示同一份日志时，可调用 `renderReleaseNotesMarkdown(notes)` 获取 HTML。参数支持字符串或由字符串、`UpdateVersionNote` 组成的数组；空内容返回空字符串，样式由调用方提供。
+
+```vue
+<template>
+  <div v-html="notesHtml"></div>
+</template>
+
+<script setup>
+import { computed } from 'vue';
+import { renderReleaseNotesMarkdown } from 'aurora-plus';
+
+const notes = '## 新增功能\n\n- 支持 **专注模式**。';
+const notesHtml = computed(() => renderReleaseNotesMarkdown(notes));
+</script>
+```
 
 ### Events
 

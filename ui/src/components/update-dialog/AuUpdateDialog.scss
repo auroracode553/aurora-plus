@@ -144,29 +144,6 @@
   background: transparent;
 }
 
-.au-update-dialog__note-group {
-  & + & { margin-top: 12px; }
-
-  h5 {
-    margin: 0 0 4px;
-    color: var(--au-color-text-default);
-    font-size: 12px;
-    font-weight: var(--au-font-weight-medium);
-    overflow-wrap: anywhere;
-  }
-
-  ul { margin: 0; padding-left: 17px; }
-
-  li {
-    padding-left: 2px;
-    color: var(--au-color-text-secondary);
-    font-size: 13px;
-    overflow-wrap: anywhere;
-    & + li { margin-top: 4px; }
-    &::marker { color: var(--au-color-text-placeholder); }
-  }
-}
-
 .au-update-dialog__progress-area { margin-top: 18px; }
 
 .au-update-dialog__progress-copy,

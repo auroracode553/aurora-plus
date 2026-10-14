@@ -159,6 +159,7 @@ export default defineConfig({
           { text: 'Popconfirm 气泡确认框', link: '/components/popconfirm' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
           { text: 'Dialog 对话框', link: '/components/dialog' },
+          { text: 'AboutDialog 关于对话框', link: '/components/about-dialog' },
           { text: 'Drawer 抽屉', link: '/components/drawer' },
           { text: 'Loading 加载', link: '/components/loading' },
           { text: 'Empty 空状态', link: '/components/empty' },

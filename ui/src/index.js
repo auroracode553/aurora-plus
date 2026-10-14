@@ -21,6 +21,7 @@ import { AuContextMenu } from './components/context-menu/index.js';
 import { AuDatePicker, AuDatePickerPane, AuDateRangePicker } from './components/date-picker/index.js';
 import { AuDateTimePicker } from './components/date-time-picker/index.js';
 import { AuDialog } from './components/dialog/index.js';
+import { AuAboutDialog } from './components/about-dialog/index.js';
 import { AuDrawer } from './components/drawer/index.js';
 import { AuDivider } from './components/divider/index.js';
 import { AuDropdown } from './components/dropdown/index.js';
@@ -74,6 +75,7 @@ import {
 } from './utils/theme.js';
 
 const components = [
+  AuAboutDialog,
   AuAvatar,
   AuEmpty,
   AuNumber,
@@ -160,6 +162,7 @@ export const AuroraPlus = {
 };
 
 export {
+  AuAboutDialog,
   AuAvatar,
   AuEmpty,
   AuNumber,
@@ -238,5 +241,7 @@ export {
   setAuroraMaterial,
   setAuroraTheme,
 };
+
+export { renderReleaseNotesMarkdown } from './utils/release-notes.js';
 
 export default AuroraPlus;

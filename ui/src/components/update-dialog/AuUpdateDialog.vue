@@ -64,19 +64,14 @@
         <span v-if="downloadSize">{{ downloadSize }}</span>
       </div>
 
-      <section v-if="hasRelease && (releaseNotes.length || $slots['release-notes'] || releaseUrl)" class="au-update-dialog__notes">
+      <section v-if="hasRelease && (normalizedReleaseNotes.length || $slots['release-notes'] || releaseUrl)" class="au-update-dialog__notes">
         <div class="au-update-dialog__section-heading">
           <h4>更新内容</h4>
           <AuLink v-if="releaseUrl" :href="releaseUrl" target="_blank" rel="noopener noreferrer" type="primary">完整更新说明</AuLink>
         </div>
-        <div v-if="releaseNotes.length || $slots['release-notes']" class="au-update-dialog__notes-scroll au-scroll-region au-thin-scrollbar">
+        <div v-if="normalizedReleaseNotes.length || $slots['release-notes']" class="au-update-dialog__notes-scroll au-scroll-region au-thin-scrollbar">
           <slot name="release-notes" :version="latestVersion" :notes="releaseNotes">
-            <div v-for="(group, index) in releaseNotes" :key="index" class="au-update-dialog__note-group">
-              <h5 v-if="group.title">{{ group.title }}</h5>
-              <ul>
-                <li v-for="(item, itemIndex) in group.items" :key="itemIndex">{{ item }}</li>
-              </ul>
-            </div>
+            <AuReleaseNotes :groups="normalizedReleaseNotes" />
           </slot>
         </div>
       </section>
@@ -127,6 +122,8 @@ import { AuDialog } from '../dialog/index.js';
 import { AuIcon } from '../icon/index.js';
 import { AuLink } from '../link/index.js';
 import AuUpdateSources from './AuUpdateSources.vue';
+import AuReleaseNotes from '../release-notes/AuReleaseNotes.vue';
+import { normalizeReleaseNotes } from '../../utils/release-notes.js';
 import { isUpdateSourceLocked, normalizeUpdateSources } from './update-sources.js';
 import { getUpdatePresentation, normalizeUpdateProgress, UPDATE_ERROR_STAGES, UPDATE_STATUSES } from './update-state.js';
 
@@ -143,7 +140,7 @@ const props = defineProps({
   latestVersion: { type: String, default: '' },
   channel: { type: String, default: '' },
   releaseDate: { type: String, default: '' },
-  releaseNotes: { type: Array, default: () => [] },
+  releaseNotes: { type: [String, Array], default: () => [] },
   releaseUrl: { type: String, default: '' },
   progress: { type: Number, default: null },
   progressText: { type: String, default: '' },
@@ -164,6 +161,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'update:autoCheck', 'update:source', 'source-change', 'check', 'download', 'install', 'retry', 'cancel', 'later', 'skip', 'open', 'opened', 'close', 'closed']);
 const dialogRef = ref(null);
+const normalizedReleaseNotes = computed(() => normalizeReleaseNotes(props.releaseNotes));
 const normalizedSources = computed(() => normalizeUpdateSources(props.sources));
 const sourceLocked = computed(() => props.sourceDisabled || isUpdateSourceLocked(props.status, props.errorStage));
 const effectiveActiveSource = computed(() => props.activeSource || normalizedSources.value.find((item) => item.active)?.id || '');
