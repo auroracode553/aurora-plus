@@ -20,9 +20,12 @@
   justify-content: center;
   min-width: 0;
   max-width: 100%;
-  padding: 4px 8px;
+  min-height: 30px;
+  // 底部 8px 为指示线保留空间，文字与横线保持紧凑间距。
+  padding: 4px 8px 8px;
   font-size: 13px;
   font-weight: var(--au-font-weight-medium);
+  line-height: 18px;
   cursor: pointer;
   @include motion.control;
 }

@@ -40,7 +40,8 @@ const tabsRef = ref(null);
 const { style: indicatorStyle, animated } = useSlidingIndicator(tabsRef, {
   target: () => tabsRef.value?.querySelector('.au-tabs__tab.is-active .au-tabs__label'),
   dependencies: [() => props.modelValue, () => props.items, () => props.valueKey, () => props.fill],
-  geometry: ({ x, y, width, height }) => ({ x, y: y + height - 1, width, height: 2 }),
+  // 横线与文字容器分离，避免贴住字形下缘。
+  geometry: ({ x, y, width, height }) => ({ x, y: y + height + 1, width, height: 2 }),
 });
 
 function resolveValue(item) {
