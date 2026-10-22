@@ -32,7 +32,18 @@
 .au-about-dialog__description { margin: 3px 0 0; color: var(--au-color-text-secondary); }
 .au-about-dialog__platform { font-size: 12px; }
 .au-about-dialog__version { font-variant-numeric: tabular-nums; }
-.au-about-dialog__credit { margin-top: 5px; color: var(--au-color-text-secondary); font-size: 12px; }
+.au-about-dialog__credit {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  margin-top: 5px;
+  color: var(--au-color-text-secondary);
+  font-size: 12px;
+
+  // 署名链接沿用本行的文字尺寸，避免默认链接字号造成基线错位。
+  :deep(.au-link) { font-size: inherit; line-height: inherit; }
+}
 .au-about-dialog__release { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--au-color-border-muted); }
 .au-about-dialog__section-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .au-about-dialog__section-heading h4,
