@@ -1,5 +1,7 @@
 <script setup>
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
+import LoadingVariants from '../.vitepress/theme/examples/loading/LoadingVariants.vue';
+import loadingVariantsSource from '../.vitepress/theme/examples/loading/LoadingVariants.vue?demo-source';
 import LoadingBasic from '../.vitepress/theme/examples/loading/LoadingBasic.vue';
 import LoadingComponent from '../.vitepress/theme/examples/loading/LoadingComponent.vue';
 import LoadingControlStates from '../.vitepress/theme/examples/loading/LoadingControlStates.vue';
@@ -13,6 +15,16 @@ import loadingServiceSource from '../.vitepress/theme/examples/loading/LoadingSe
 # Loading 加载
 
 在异步数据尚未就绪时覆盖目标区域并显示进度状态。
+
+## 内置样式
+
+通过 `variant` 选择环形 ring、三点 dots、律动条 bars 或轨道 orbit。默认 ring 保持原有紧凑尺寸；各样式共用主题主色，支持 small / default / large 与独立 Spinner 的 compact。
+
+<DemoBlock title="四种加载样式" :source="loadingVariantsSource">
+  <LoadingVariants />
+</DemoBlock>
+
+组件、服务和指令使用同名属性，例如 `v-loading="{ loading: true, variant: 'dots' }"` 与 `AuLoading.service({ variant: 'orbit' })`。自定义 spinner 插槽、svg 或图标组件优先于内置样式。
 
 ## 区域加载
 
@@ -40,6 +52,7 @@ import { AuLoading } from 'aurora-plus';
 const loading = AuLoading.service({
   lock: true,
   text: '正在保存…',
+  variant: 'orbit',
 });
 
 loading.setText('正在刷新列表…');
@@ -75,6 +88,7 @@ loading.close();
 | lock | 显示期间是否锁定页面滚动 | boolean | false |
 | text | 加载文案；服务还接受 VNode / VNode[] | string / number / VNode / VNode[] | '' |
 | size | 图标与文字尺寸，可选 small / default / large | string | default |
+| variant | 内置样式：ring / dots / bars / orbit | string | ring |
 | spinner | 自定义 Vue 图标组件；服务中的字符串值按 SVG 标记处理 | Component / string | — |
 | svg | 自定义 SVG 内部标记 | string | '' |
 | svgViewBox | 自定义 SVG 的 viewBox | string | 0 0 24 24 |
@@ -96,6 +110,7 @@ loading.close();
 | au-loading-background | 加载层背景 |
 | au-loading-custom-class | 自定义类名 |
 | au-loading-color | 加载图标颜色 |
+| au-loading-variant | 内置样式：ring / dots / bars / orbit |
 
 SVG 字符串直接作为标记渲染，仅传入可信内容。
 
@@ -115,7 +130,7 @@ SVG 字符串直接作为标记渲染，仅传入可信内容。
 | 名称 | 说明 |
 | --- | --- |
 | default | 被加载层覆盖的内容 |
-| spinner | 自定义加载图标，作用域参数为 { size } |
+| spinner | 自定义加载图标，作用域参数为 { size, variant } |
 | opened | 加载层进入过渡完成后触发 |
 | closed | 加载层离开过渡完成后触发 |
 | rootRef | 组件内容根元素引用 |
@@ -125,6 +140,7 @@ SVG 字符串直接作为标记渲染，仅传入可信内容。
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | size | 尺寸：small / default / large | string | default |
+| variant | 内置样式：ring / dots / bars / orbit | string | ring |
 | text | 加载文字 | string | '' |
 | color | 图标颜色 | string | '' |
 | spinner | 图标组件 | Component | null |

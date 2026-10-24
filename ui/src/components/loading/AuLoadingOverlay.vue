@@ -12,9 +12,10 @@
       :style="overlayStyle"
     >
       <div class="au-loading__content" :class="`is-${size}`">
-        <slot name="spinner" :size="size">
+        <slot name="spinner" :size="size" :variant="variant">
           <AuLoadingSpinner
             :size="size"
+            :variant="variant"
             :spinner="spinner"
             :svg="svg"
             :svg-view-box="svgViewBox"
@@ -41,9 +42,11 @@ import {
 } from 'vue';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import AuLoadingSpinner from './AuLoadingSpinner.vue';
+import { loadingVariantProp } from './loading-variants.js';
 
 const props = defineProps({
   loading: { type: Boolean, default: false },
+  variant: loadingVariantProp,
   text: { type: [String, Number, Array, Object], default: '' },
   size: {
     type: String,
