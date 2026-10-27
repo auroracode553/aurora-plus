@@ -23,33 +23,17 @@
   position: relative;
   flex: 1;
   min-width: 0;
+  overflow-x: hidden;
   /* 纵向到达边界后可继续滚动外层容器，横向滚动仅作用于表格。 */
   overscroll-behavior: contain auto;
 }
 
+.au-virtual-table.has-horizontal-overflow .au-virtual-table__body {
+  overflow-x: auto;
+}
+
 .au-virtual-table.is-auto-height .au-virtual-table__body {
   overflow-y: hidden;
-}
-
-.au-virtual-table__body::-webkit-scrollbar-button {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.au-virtual-table__body::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-@media (hover: hover) {
-  /* Keep scrollbar geometry stable so hovering never changes column widths. */
-  .au-virtual-table:not(:hover) .au-virtual-table__body {
-    scrollbar-color: transparent transparent;
-  }
-
-  .au-virtual-table:not(:hover) .au-virtual-table__body::-webkit-scrollbar-thumb {
-    background: transparent;
-  }
 }
 
 .au-virtual-table__canvas {
@@ -76,7 +60,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  @include motion.transition(background);
+  @include motion.row;
 }
 
 .au-virtual-table__row:hover {
@@ -87,8 +71,14 @@
   background: color-mix(in srgb, var(--au-color-text-primary) 2.5%, transparent);
 }
 
+.au-virtual-table__row.is-current-row,
+.au-virtual-table__row.is-current-row:hover {
+  background: color-mix(in srgb, var(--au-color-primary) 11%, transparent);
+}
+
 .au-virtual-table__header-cell,
 .au-virtual-table__cell {
+  @include motion.row;
   display: flex;
   align-items: center;
   min-width: 0;
@@ -103,6 +93,15 @@
   border-right: 1px solid var(--au-material-border);
 }
 
+.au-virtual-table__header-cell.is-utility,
+.au-virtual-table__cell.is-utility {
+  justify-content: center;
+}
+
+.au-virtual-table__checkbox {
+  flex: none;
+}
+
 .au-virtual-table__header-cell.is-fixed,
 .au-virtual-table__cell.is-fixed {
   position: sticky;
@@ -111,6 +110,10 @@
 
 .au-virtual-table__row:hover .au-virtual-table__cell.is-fixed {
   background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
+}
+
+.au-virtual-table__row.is-current-row .au-virtual-table__cell.is-fixed {
+  background: color-mix(in srgb, var(--au-color-primary) 11%, var(--au-material-background-elevated));
 }
 
 .au-virtual-table__sort-button {

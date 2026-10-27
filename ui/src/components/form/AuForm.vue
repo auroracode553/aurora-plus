@@ -1,7 +1,7 @@
 <template>
   <form
     ref="formRef"
-    class="au-form au-component"
+    class="au-form au-component au-motion-state"
     :class="[
       `is-label-${labelPosition}`,
       `is-${size}`,

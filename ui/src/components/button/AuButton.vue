@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-button au-component au-control-reset au-inline-center au-depth-control"
+    class="au-button au-component au-control-reset au-inline-center au-depth-control au-motion-state au-motion-control"
     :class="buttonClasses"
     :type="nativeType"
     :disabled="disabled || loading"

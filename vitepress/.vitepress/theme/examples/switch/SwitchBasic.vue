@@ -13,7 +13,7 @@
 import { ref } from 'vue';
 import { AuSwitch } from 'aurora-plus';
 
-const enabled = ref(true);
+const enabled = ref(false);
 const syncMode = ref('sync');
 </script>
 

@@ -33,7 +33,7 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  @include motion.transition(transform, color, background, border-color);
+  @include motion.control;
 }
 
 .au-menu-item__content:hover:not(:disabled) {
@@ -47,7 +47,7 @@
 }
 
 .au-menu-item__content:active:not(:disabled) {
-  @include motion.press(scale(0.98));
+  @include motion.press(0.98);
 }
 
 .au-menu-item__icon {

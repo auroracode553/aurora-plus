@@ -82,7 +82,7 @@
   margin: 0;
   border-radius: 0;
   cursor: pointer;
-  @include motion.transition(color, background-color, opacity);
+  @include motion.control;
 }
 
 .au-window-title-bar__button:hover:not(:disabled) {

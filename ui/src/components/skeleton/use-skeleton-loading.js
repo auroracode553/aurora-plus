@@ -1,5 +1,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
+export const skeletonContextKey = Symbol('AuSkeleton');
+
 function normalizeDelay(value) {
   return Number.isFinite(value) ? Math.min(2147483647, Math.max(0, value)) : 0;
 }

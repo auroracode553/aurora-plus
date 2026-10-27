@@ -3,7 +3,7 @@
     <div
       v-for="item in items"
       :key="item.id"
-      class="au-message au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere"
+      class="au-message au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere au-motion-state"
       :class="`au-message--${item.type}`"
       @mouseenter="$emit('pause', item.id)"
       @mouseleave="$emit('resume', item.id)"

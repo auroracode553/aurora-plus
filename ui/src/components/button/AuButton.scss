@@ -24,7 +24,7 @@
   cursor: pointer;
   user-select: none;
   transform: translateZ(0);
-  @include motion.transition(background, border-color, box-shadow, color, transform);
+  @include motion.control;
 }
 
 .au-button:hover:not(.is-disabled) {
@@ -39,7 +39,7 @@
   color: var(--au-color-primary);
   background: color-mix(in srgb, var(--au-color-primary) 14%, var(--au-material-background));
   box-shadow: var(--au-shadow-control);
-  @include motion.press(scale(0.97));
+  @include motion.press(0.97);
 }
 
 .au-button--small {
@@ -169,7 +169,7 @@
     color: var(--au-color-text-primary);
     @include interaction.pressed;
     box-shadow: none;
-    @include motion.press(scale(0.98));
+    @include motion.press(0.98);
   }
 
   &.is-selected {

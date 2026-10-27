@@ -24,7 +24,7 @@
   height: 28px;
   border: 1px solid color-mix(in srgb, var(--au-color-text-primary) 16%, transparent);
   border-radius: var(--au-radius-compact);
-  @include motion.transition(color, border-color, background, transform);
+  @include motion.control;
 }
 
 .au-pagination__button {
@@ -49,8 +49,7 @@
 }
 
 .au-pagination__button:active:not(:disabled) {
-  @include motion.press(scale(0.96));
-  transition-duration: 0s;
+  @include motion.press(0.96);
 }
 
 .au-pagination .au-pagination__button.is-active {

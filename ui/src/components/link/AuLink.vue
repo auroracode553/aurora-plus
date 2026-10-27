@@ -1,6 +1,6 @@
 <template>
   <a
-    class="au-link au-component au-inline-center au-disabled-text"
+    class="au-link au-component au-inline-center au-disabled-text au-motion-state au-motion-control"
     :class="linkClasses"
     v-bind="$attrs"
     :href="disabled || !href ? undefined : href"

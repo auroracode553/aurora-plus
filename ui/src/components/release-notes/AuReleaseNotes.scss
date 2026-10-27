@@ -1,0 +1,68 @@
+// 由 AuReleaseNotes.vue 引入，供更新对话框与关于对话框共用。
+.au-release-notes__group {
+  & + & { margin-top: 12px; }
+  h5 {
+    margin: 0 0 4px;
+    color: var(--au-color-text-default);
+    font-size: 12px;
+    font-weight: var(--au-font-weight-medium);
+    overflow-wrap: anywhere;
+  }
+  ul { margin: 0; padding-left: 17px; }
+  li {
+    padding-left: 2px;
+    color: var(--au-color-text-secondary);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+    & + li { margin-top: 4px; }
+    &::marker { color: var(--au-color-text-placeholder); }
+  }
+}
+
+.au-release-notes__markdown {
+  color: var(--au-color-text-secondary);
+  font-size: 13px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+
+  :deep(h1), :deep(h2), :deep(h3), :deep(h4), :deep(h5), :deep(h6) {
+    margin: 10px 0 6px;
+    color: var(--au-color-text-default);
+    font-size: 13px;
+    font-weight: var(--au-font-weight-semibold);
+    line-height: 1.5;
+  }
+
+  :deep(p) { margin: 0 0 6px; }
+  :deep(ul), :deep(ol) { margin: 0 0 8px; padding-left: 18px; }
+  :deep(li) { padding-left: 2px; }
+  :deep(li + li) { margin-top: 4px; }
+  :deep(li::marker) { color: var(--au-color-text-placeholder); }
+  :deep(li > p) { margin-bottom: 4px; }
+  :deep(li > ul), :deep(li > ol) { margin: 4px 0 0; }
+  :deep(a) { color: var(--au-color-primary); text-decoration: underline; }
+
+  :deep(blockquote) {
+    margin: 8px 0;
+    padding-left: 10px;
+    border-left: 2px solid var(--au-color-border-muted);
+  }
+
+  :deep(code) { font-size: 12px; font-family: monospace; }
+  :deep(pre) {
+    margin: 8px 0;
+    padding: 6px 8px;
+    border: 1px solid var(--au-color-border-muted);
+    border-radius: var(--au-radius-compact);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  :deep(table) { width: 100%; margin: 8px 0; border-collapse: collapse; }
+  :deep(th), :deep(td) { padding: 4px 6px; border: 1px solid var(--au-color-border-muted); }
+  :deep(th) { color: var(--au-color-text-default); font-weight: var(--au-font-weight-semibold); }
+  :deep(img) { max-width: 100%; height: auto; }
+  :deep(hr) { margin: 8px 0; border: 0; border-top: 1px solid var(--au-color-border-muted); }
+  :deep(> :first-child) { margin-top: 0; }
+  :deep(> :last-child) { margin-bottom: 0; }
+}

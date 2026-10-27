@@ -8,7 +8,7 @@
   left: 0;
   overflow: hidden;
   color: var(--au-color-text-primary);
-  background: rgb(0 0 0 / 50%);
+  background: transparent;
   outline: none;
   user-select: none;
 }
@@ -82,7 +82,7 @@
   box-shadow: none;
   font-size: 22px;
   cursor: pointer;
-  @include motion.transition(color, background, transform);
+  @include motion.control;
 }
 
 .au-image-preview__close:hover:not(:disabled),
@@ -95,11 +95,11 @@
 .au-image-preview__navigation:active:not(:disabled) {
   @include surfaces.inverse-pressed($standalone: true);
   box-shadow: none;
-  @include motion.press(scale(0.96));
+  @include motion.press(0.96);
 }
 
 .au-image-preview__navigation:active:not(:disabled) {
-  transform: translateY(-50%) scale(0.96);
+  transform: translateY(-50%);
 }
 
 .au-image-preview__navigation:disabled {
@@ -150,10 +150,6 @@
   transform: translateX(-50%);
 }
 
-.au-image-preview-fade-enter-active,
-.au-image-preview-fade-leave-active {
-  @include motion.transition(opacity);
-}
 
 .au-image-preview-fade-enter-from,
 .au-image-preview-fade-leave-to {

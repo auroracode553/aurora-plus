@@ -77,7 +77,7 @@
 }
 
 .au-message__close:active {
-  @include motion.press(scale(0.9));
+  @include motion.press(0.9);
 }
 
 .au-message-list-enter-from,

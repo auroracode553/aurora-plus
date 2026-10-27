@@ -1,7 +1,7 @@
 <template>
   <section
     ref="paneRef"
-    class="au-date-picker-pane au-component"
+    class="au-date-picker-pane au-component au-motion-state"
     :class="{
       'has-surface': surface,
       'au-material-surface': surface,

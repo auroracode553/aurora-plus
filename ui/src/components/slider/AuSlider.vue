@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-slider au-component"
+    class="au-slider au-component au-motion-state"
     :class="[
       `is-${size}`,
       {

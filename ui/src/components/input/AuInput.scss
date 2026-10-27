@@ -43,6 +43,55 @@
   gap: 8px;
 }
 
+.au-input.is-textarea {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: auto;
+  min-height: 68px;
+  padding: 8px 10px;
+}
+
+.au-input.is-textarea .au-input__textarea {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 68px;
+  height: auto;
+  padding: 0;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/*
+ * textarea 的原生 resize 手柄属于 textarea 自身。
+ * 后缀若参与 flex 布局会压缩 textarea 宽度，使手柄偏离外框右下角。
+ * 将后缀移出布局流，只保留其视觉位置，保证手柄始终贴着外框右侧。
+ */
+.au-input.is-textarea > .au-input__suffix {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.au-input.is-textarea > .au-input__suffix > * {
+  pointer-events: auto;
+}
+
+.au-input.is-textarea.is-small .au-input__textarea {
+  min-height: 58px;
+}
+
+.au-input.is-textarea.is-large .au-input__textarea {
+  min-height: 82px;
+}
+
+.au-input.is-textarea.is-resize-none .au-input__textarea { resize: none; }
+.au-input.is-textarea.is-resize-both .au-input__textarea { resize: both; }
+.au-input.is-textarea.is-resize-horizontal .au-input__textarea { resize: horizontal; }
+.au-input.is-textarea.is-resize-vertical .au-input__textarea { resize: vertical; }
+
 .au-input__control {
   width: 100%;
   min-width: 0;
@@ -95,6 +144,21 @@
   font-size: var(--au-font-size-small);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.au-input__password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  padding: 0;
+  color: var(--au-color-text-secondary);
+}
+
+.au-input__password-toggle:hover {
+  color: var(--au-color-text-primary);
 }
 
 .au-input__loading {

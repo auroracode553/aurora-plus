@@ -1,6 +1,6 @@
 <template>
   <span
-    class="au-divider au-component"
+    class="au-divider au-component au-motion-state"
     :class="`is-${orientation}`"
   ></span>
 </template>

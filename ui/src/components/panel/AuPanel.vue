@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag"
-    class="au-panel au-component au-material-surface"
+    class="au-panel au-component au-material-surface au-motion-state"
     :class="[
       `has-${padding}-padding`,
       {

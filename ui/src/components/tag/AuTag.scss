@@ -1,0 +1,11 @@
+@use '../../theme/config';
+@use '../../theme/mixins/motion';
+
+.au-tag { display: inline-flex; align-items: center; max-width: 100%; height: 24px; gap: 5px; padding: 0 7px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: var(--au-radius-compact); color: var(--au-color-text-secondary); background: color-mix(in srgb, currentColor 8%, transparent); font-size: 12px; line-height: 1; vertical-align: middle; @include motion.transition(color, background, border-color); }
+.au-tag__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.au-tag__dot { flex: none; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.au-tag__close { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 16px; height: 16px; padding: 0; border: 0; border-radius: 3px; color: inherit; background: transparent; cursor: pointer; @include motion.control; }
+.au-tag__close:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
+.au-tag--small { height: 20px; padding-inline: 5px; font-size: 11px; }
+.au-tag--large { height: 28px; padding-inline: 9px; font-size: 13px; }
+@each $tone, $color in config.$semantic-colors { .au-tag--#{$tone} { color: $color; } }

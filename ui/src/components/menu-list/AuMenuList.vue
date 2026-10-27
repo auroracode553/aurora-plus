@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="au-menu-list au-component au-material-surface au-material-surface--base au-surface-frame au-surface-frame--rounded"
+    class="au-menu-list au-component au-material-surface au-material-surface--base au-surface-frame au-surface-frame--rounded au-motion-state"
     :class="[`is-${density}`, { 'au-depth-surface': elevated }]"
   >
     <slot></slot>

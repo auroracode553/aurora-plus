@@ -32,7 +32,7 @@ import { AuButton, AuDialog } from 'aurora-plus';
 
 const dialogVisible = ref(false);
 const draftProfile = reactive({
-  name: 'Aurora Editor',
+  name: '示例应用',
   description: '一个专注 Markdown 编辑体验的桌面应用。',
 });
 

@@ -1,5 +1,6 @@
 import { createVNode, render } from 'vue';
 import LoadingOverlay from '../../components/loading/AuLoadingOverlay.vue';
+import { normalizeLoadingVariant } from '../../components/loading/loading-variants.js';
 
 const controllers = new Set();
 const positionedTargets = new WeakMap();
@@ -38,6 +39,7 @@ function normalizeOptions(options = {}) {
     fullscreen,
     lock: Boolean(source.lock),
     text: normalizeText(source.text),
+    variant: normalizeLoadingVariant(source.variant),
     size: ['small', 'default', 'large'].includes(source.size) ? source.size : 'default',
     spinner: typeof source.spinner === 'string' ? null : (source.spinner || null),
     svg: customSvg == null ? '' : String(customSvg),
@@ -135,6 +137,7 @@ function toOverlayProps(options, onClosed) {
     loading: options.loading,
     text: options.text,
     size: options.size,
+    variant: options.variant,
     spinner: options.spinner,
     svg: options.svg,
     svgViewBox: options.svgViewBox,
@@ -247,6 +250,7 @@ function readDirectiveAttributes(element) {
     background: ['au-loading-background', 'element-loading-background'],
     customClass: ['au-loading-custom-class', 'element-loading-custom-class'],
     color: ['au-loading-color'],
+    variant: ['au-loading-variant'],
   };
 
   Object.entries(mappings).forEach(([key, names]) => {

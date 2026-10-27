@@ -1,14 +1,15 @@
 <template>
   <div
     ref="tabsRef"
-    class="au-tabs au-component"
+    class="au-tabs au-component au-motion-state"
     :class="{ 'is-fill': fill }"
     @keydown="handleKeydown"
   >
+    <span class="au-tabs__indicator" :class="{ 'is-animated': animated }" :style="indicatorStyle" />
     <button
       v-for="item in items"
       :key="resolveValue(item)"
-      class="au-tabs__tab au-control-reset au-disabled-text"
+      class="au-tabs__tab au-control-reset au-disabled-text au-motion-control"
       :class="{ 'is-active': isActive(item) }"
       type="button"
       :disabled="item.disabled"
@@ -16,7 +17,7 @@
       :title="item.title || undefined"
       @click="selectItem(item)"
     >
-      <span class="au-tabs__label">
+      <span class="au-tabs__label" data-au-indicator-target>
         <span class="au-truncate">{{ item.label }}</span>
       </span>
     </button>
@@ -25,6 +26,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useSlidingIndicator } from '../../utils/use-sliding-indicator.js';
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: '' },
@@ -35,6 +37,12 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'change', 'select']);
 const tabsRef = ref(null);
+const { style: indicatorStyle, animated } = useSlidingIndicator(tabsRef, {
+  target: () => tabsRef.value?.querySelector('.au-tabs__tab.is-active .au-tabs__label'),
+  dependencies: [() => props.modelValue, () => props.items, () => props.valueKey, () => props.fill],
+  // 横线与文字容器分离，避免贴住字形下缘。
+  geometry: ({ x, y, width, height }) => ({ x, y: y + height + 1, width, height: 2 }),
+});
 
 function resolveValue(item) {
   return item?.[props.valueKey];

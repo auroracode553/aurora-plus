@@ -40,18 +40,19 @@
   @include motion.transition(color, background, transform);
 }
 
-.au-menu-list-item.is-interactive .au-menu-list-item__row {
+.au-menu-list-item.is-interactive:not(.is-disabled) .au-menu-list-item__row {
+  @include motion.control;
   cursor: pointer;
 }
 
-.au-menu-list-item.is-interactive .au-menu-list-item__row:hover,
+.au-menu-list-item.is-interactive:not(.is-disabled) .au-menu-list-item__row:hover,
 .au-menu-list-item.is-selected .au-menu-list-item__row {
   background: color-mix(in srgb, var(--au-color-primary) 7%, transparent);
 }
 
-.au-menu-list-item.is-interactive .au-menu-list-item__row:active {
+.au-menu-list-item.is-interactive:not(.is-disabled) .au-menu-list-item__row:active {
   background: color-mix(in srgb, var(--au-color-primary) 12%, transparent);
-  @include motion.press(scale(0.99));
+  @include motion.press(0.99);
 }
 
 .au-menu-list-item.is-disabled {

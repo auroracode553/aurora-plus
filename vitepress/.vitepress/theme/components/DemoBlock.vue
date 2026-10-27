@@ -1,19 +1,11 @@
 <template>
   <section class="au-doc-demo">
-    <header v-if="title || description" class="au-doc-demo__header">
-      <div>
-        <strong v-if="title">{{ title }}</strong>
-        <p v-if="description">{{ description }}</p>
-      </div>
-    </header>
-
     <div class="au-doc-demo__preview">
       <slot></slot>
     </div>
 
     <div v-if="normalizedSource" class="au-doc-demo__source">
       <div class="au-doc-demo__source-actions">
-        <span class="au-doc-demo__language">{{ language }}</span>
         <div class="au-doc-demo__source-actions-right">
           <button
             type="button"

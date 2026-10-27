@@ -6,12 +6,21 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 
 | 导出 | 用途 |
 | --- | --- |
+| `AuBadge` | 数字、文字和状态点徽章 |
+| `AuTag` | 语义色标签、状态点与关闭操作 |
+| `AuAvatar` | 图片头像、姓名缩写与加载失败回退 |
+| `AuNumber` | 支持小数、负数和地区格式的逐位滚动数字 |
+| `AuTrend` | 变化幅度与方向语义 |
+| `AuSegmented` | 带滑动材质选中层的分段选择器 |
+| `AuEmpty` | 图标、说明和操作区组成的空状态 |
+| `AuProgress` | 线形、圆环与刻度环进度 |
+| `AuPageHeader` | 标题、说明、返回事件与操作区 |
+| `AuTransition`、`AuTransitionGroup` | 内容显隐、列表增删与依次进入动画 |
 | `AuButton` | 多类型、多尺寸、加载态按钮 |
 | `AuButtonGroup`、`AuButtonGroupItem` | 控制组容器与专用操作项 |
 | `AuDivider` | 横向与纵向内容分割线 |
 | `AuLink` | 支持语义类型、下划线策略、禁用态与图标的文字链接 |
-| `AuInput` | 支持清空、前后缀和错误态的单行输入框 |
-| `AuTextarea` | 支持尺寸、字数限制和缩放方向的多行输入框 |
+| `AuInput` | 通过 `type` 支持单行、密码和 `textarea` 多行输入，支持清空、前后缀和错误态 |
 | `AuSelect` | 带统一选项弹层、键盘导航、禁用态和错误态的选择框 |
 | `AuTreeSelect` | 支持嵌套数据、搜索、展开与仅叶节点模式的树形选择 |
 | `AuDatePickerPane`、`AuDatePicker`、`AuDateRangePicker` | 独立日历面板、日期输入与日期范围选择器 |
@@ -26,20 +35,24 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuMenuBar` | 桌面应用顶部菜单栏与层级命令菜单 |
 | `AuMenuList`、`AuMenuListItem` | 苹果式分组菜单与设置行 |
 | `AuPanel` | 仅提供表面、尺寸、滚动和区域插槽的通用面板 |
+| `AuCollapse`、`AuCollapseItem` | 独立折叠面板、多项展开与手风琴，支持懒加载、关闭销毁及独立操作区 |
 | `AuPopover` | 支持任意内容、自动翻转和视口避让的锚点浮层 |
 | `AuPopconfirm` | 锚定触发元素的轻量确认气泡 |
 | `AuPagination` | 页码折叠、条数切换和跳页导航 |
 | `AuTabs` | 紧凑的受控标签页导航 |
-| `AuCard` | 卡片容器，支持表面层级、区域插槽与悬停反馈 |
+| `AuCard` | 卡片容器，提供表面层级、内容内边距和可选悬停抬升 |
 | `AuSkeleton`、`AuSkeletonItem` | 支持自定义占位模板、重复数量、呼吸动画和延迟显隐的骨架屏 |
 | `AuIcon` | 图标尺寸、颜色与对齐外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
 | `AuDialog` | 模态对话框 |
+| `AuAboutDialog` | 应用信息、版本日志与可展开详情的通用关于对话框 |
+| `AuUpdateDialog` | 检查更新、版本说明、下载进度、安装与失败重试的受控界面，展示更新服务提供的多源状态 |
 | `AuDrawer` | 支持四向打开、焦点管理与关闭守卫的抽屉面板 |
 | `AuLoading`、`vLoading` | 组件、指令及 `AuLoading.service(options)` 命令式加载服务 |
 | `AuLoadingSpinner` | 按钮、表单控件和数据组件复用的加载图标 |
 | `AuVirtualList` | 固定行高虚拟列表 |
-| `AuVirtualTable` | 列配置、固定列、排序和固定行高虚拟表格 |
+| `AuTable`、`AuTableColumn` | 默认无外框，支持声明式列、内容自适应行高、固定列、排序、行选择与索引列 |
+| `AuVirtualTable` | 共用列与选择 API 的固定行高虚拟表格，默认无外框 |
 | `AuImagePreview` | 多图切换、缩放、拖拽与旋转图片预览器 |
 | `AuTree` | 支持虚拟滚动、选中与折叠的树形导航 |
 | `AuContextMenu` | 配置式右键菜单 |
@@ -47,6 +60,10 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuWindowTitleBar` | 桌面无边框窗口的受控标题栏 |
 | `AuMessage` | 命令式消息提示 |
 | `AuMessageBox` | Promise 风格确认框 |
+
+## 交互动效
+
+组件共用状态过渡、按压回弹、浮层进退和进度动画。动效时长与曲线由全局 `--au-transition-duration`、`--au-transition-timing` 控制。自定义元素可使用 `au-motion-state`、`au-motion-control`、`au-motion-row`、`au-motion-lift`、`au-motion-reveal`、`au-motion-pulse` 和 `au-spin`；内容显隐与列表增删、排序可使用 `AuTransition`、`AuTransitionGroup`。
 
 ## 弹性布局
 

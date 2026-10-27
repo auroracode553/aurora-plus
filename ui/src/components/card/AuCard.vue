@@ -1,11 +1,13 @@
 <template>
   <component
     :is="tag"
-    class="au-card au-component au-material-surface au-material-surface--base"
+    class="au-card au-component au-material-surface au-material-surface--base au-motion-state"
     :class="[
       typeClass,
       `has-${padding}-padding`,
+      { 'is-hoverable': hoverable },
     ]"
+    :type="tag === 'button' ? 'button' : undefined"
     v-bind="$attrs"
   >
     <slot></slot>
@@ -18,6 +20,7 @@ import { computed } from 'vue';
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
+  hoverable: { type: Boolean, default: false },
   tag: { type: [String, Object, Function], default: 'div' },
   type: {
     type: String,

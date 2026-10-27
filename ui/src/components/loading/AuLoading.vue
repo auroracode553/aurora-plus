@@ -1,7 +1,7 @@
 <template>
   <div
     ref="rootRef"
-    class="au-loading-host au-component"
+    class="au-loading-host au-component au-motion-state"
     :class="{ 'is-positioned': !fullscreen }"
     v-bind="$attrs"
   >
@@ -12,6 +12,7 @@
         :loading="loading"
         :text="text"
         :size="size"
+        :variant="variant"
         :spinner="spinner"
         :svg="svg"
         :svg-view-box="svgViewBox"
@@ -36,12 +37,14 @@
 <script setup>
 import { ref } from 'vue';
 import AuLoadingOverlay from './AuLoadingOverlay.vue';
+import { loadingVariantProp } from './loading-variants.js';
 
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
   /** 是否显示加载覆盖层。 */
   loading: { type: Boolean, default: false },
+  variant: loadingVariantProp,
   text: { type: [String, Number, Array, Object], default: '' },
   size: {
     type: String,

@@ -1,5 +1,5 @@
 <template>
-  <section class="au-time-picker-panel au-component">
+  <section class="au-time-picker-panel au-component au-motion-state">
     <div class="au-time-picker-panel__field">
       <label :for="`${panelId}-hour`">时</label>
       <AuSelect

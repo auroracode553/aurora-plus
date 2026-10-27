@@ -1,6 +1,6 @@
 <template>
   <span
-    class="au-icon au-component au-inline-center"
+    class="au-icon au-component au-inline-center au-motion-state"
     :style="iconStyle"
     v-bind="$attrs"
   >

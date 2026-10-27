@@ -8,7 +8,21 @@
       clearable
     />
     <AuInput v-model="account" placeholder="账号" :prefix-icon="IconUser" />
+    <AuInput
+      v-model="password"
+      type="password"
+      show-password-toggle
+      placeholder="请输入密码"
+    />
     <AuInput v-model="description" placeholder="最多输入 24 个字符" maxlength="24" show-word-limit />
+    <AuInput
+      v-model="textarea"
+      type="textarea"
+      :rows="4"
+      placeholder="请输入多行内容"
+      maxlength="80"
+      show-word-limit
+    />
     <AuInput model-value="不可编辑" readonly />
     <AuInput model-value="正在读取账户信息" loading />
     <div class="input-demo__validation">
@@ -26,7 +40,9 @@ import { IconSearch, IconUser } from 'aurora-plus/icons';
 
 const keyword = ref('');
 const account = ref('');
+const password = ref('');
 const description = ref('');
+const textarea = ref('');
 </script>
 
 <style>

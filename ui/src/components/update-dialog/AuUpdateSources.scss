@@ -1,0 +1,103 @@
+@use "../../theme/mixins/motion";
+
+.au-update-sources {
+  min-width: 0;
+  margin-top: 16px;
+}
+
+.au-update-sources__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  h4 {
+    margin: 0;
+    color: var(--au-color-text-default);
+    font-size: 13px;
+    font-weight: var(--au-font-weight-semibold);
+  }
+}
+
+.au-update-sources__list {
+  display: grid;
+  gap: 2px;
+  max-height: 144px;
+  margin-top: 6px;
+  background: transparent;
+}
+
+.au-update-sources__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--au-radius-compact);
+  color: var(--au-color-text-default);
+  background: transparent;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  @include motion.control;
+
+  &:hover:not(:disabled) { background: var(--au-color-background-hover); }
+
+  &.is-selected {
+    border-color: color-mix(in srgb, var(--au-color-primary) 20%, transparent);
+    background: color-mix(in srgb, var(--au-color-primary) 5%, transparent);
+  }
+
+  &.is-disabled { cursor: default; }
+}
+
+.au-update-sources__marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  color: var(--au-color-primary);
+}
+
+.au-update-sources__name { flex: 1; }
+
+.au-update-sources__policy {
+  color: var(--au-color-text-secondary);
+  font-size: 11px;
+  text-align: right;
+}
+
+.au-update-sources__active {
+  flex: none;
+  color: var(--au-color-primary);
+  font-size: 11px;
+}
+
+.au-update-sources__summary {
+  flex: none;
+  max-width: 55%;
+  color: var(--au-color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.au-update-sources__item.is-error .au-update-sources__summary { color: var(--au-color-danger); }
+.au-update-sources__item.is-selected .au-update-sources__name { color: var(--au-color-primary); }
+.au-update-sources__item.is-unavailable :is(.au-update-sources__name, .au-update-sources__summary, .au-update-sources__marker) { color: var(--au-color-text-disabled); }
+
+.au-update-sources__hint {
+  margin: 6px 0 0;
+  color: var(--au-color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+
+  strong { color: var(--au-color-text-default); font-weight: var(--au-font-weight-medium); }
+  &.is-error { color: var(--au-color-danger); }
+}

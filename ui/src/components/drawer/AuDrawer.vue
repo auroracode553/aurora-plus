@@ -8,7 +8,7 @@
       <div
         v-if="rendered"
         v-show="visible"
-        class="au-drawer__overlay au-component au-overscroll-contain"
+        class="au-drawer__overlay au-component au-overscroll-contain au-motion-state"
         :class="{ 'is-modal': modal }"
         :style="overlayStyle"
         @mousedown.self="handleOverlayClick"
@@ -16,7 +16,7 @@
         <aside
           ref="drawerRef"
           v-bind="$attrs"
-          class="au-drawer au-component au-material-surface au-depth-overlay au-overlay-surface"
+          class="au-drawer au-motion-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-motion-state"
           :class="['is-' + direction, { 'is-full-width': fullWidth && (direction === 'ltr' || direction === 'rtl') }]"
           :style="drawerStyle"
           tabindex="-1"

@@ -1,5 +1,5 @@
 <template>
-  <div class="au-dropdown au-component au-inline-trigger" :class="{ 'is-disabled': disabled }" v-bind="$attrs">
+  <div class="au-dropdown au-component au-inline-trigger au-motion-state" :class="{ 'is-disabled': disabled }" v-bind="$attrs">
     <span
       ref="triggerRef"
       class="au-dropdown__trigger au-inline-trigger"
@@ -18,7 +18,7 @@
         <div
           v-if="visible"
           ref="menuRef"
-          class="au-dropdown__menu au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar"
+          class="au-dropdown__menu au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
           :class="`is-${activePlacement}`"
           :style="menuStyle"
           tabindex="-1"

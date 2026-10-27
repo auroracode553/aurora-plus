@@ -1,14 +1,27 @@
 import './theme/index.scss';
+import { version as packageVersion } from '../package.json';
 
+import { AuBadge } from './components/badge/index.js';
+import { AuAvatar } from './components/avatar/index.js';
+import { AuEmpty } from './components/empty/index.js';
+import { AuNumber } from './components/number/index.js';
+import { AuPageHeader } from './components/page-header/index.js';
+import { AuProgress } from './components/progress/index.js';
+import { AuSegmented } from './components/segmented/index.js';
+import { AuTag } from './components/tag/index.js';
+import { AuTransition, AuTransitionGroup } from './components/transition/index.js';
+import { AuTrend } from './components/trend/index.js';
 import { AuButton } from './components/button/index.js';
 import { AuButtonGroup, AuButtonGroupItem } from './components/button-group/index.js';
 import { AuCard } from './components/card/index.js';
 import { AuCheckbox } from './components/checkbox/index.js';
+import { AuCollapse, AuCollapseItem } from './components/collapse/index.js';
 import { AuColorPicker, AuColorSwatch } from './components/color-picker/index.js';
 import { AuContextMenu } from './components/context-menu/index.js';
 import { AuDatePicker, AuDatePickerPane, AuDateRangePicker } from './components/date-picker/index.js';
 import { AuDateTimePicker } from './components/date-time-picker/index.js';
 import { AuDialog } from './components/dialog/index.js';
+import { AuAboutDialog } from './components/about-dialog/index.js';
 import { AuDrawer } from './components/drawer/index.js';
 import { AuDivider } from './components/divider/index.js';
 import { AuDropdown } from './components/dropdown/index.js';
@@ -34,12 +47,13 @@ import { AuSelect } from './components/select/index.js';
 import { AuSlider } from './components/slider/index.js';
 import { AuSkeleton, AuSkeletonItem } from './components/skeleton/index.js';
 import { AuSwitch } from './components/switch/index.js';
+import { AuTable, AuTableColumn } from './components/table/index.js';
 import { AuTabs } from './components/tabs/index.js';
-import { AuTextarea } from './components/textarea/index.js';
 import { AuTimePicker } from './components/time-picker/index.js';
 import { AuTooltip } from './components/tooltip/index.js';
 import { AuTree } from './components/tree/index.js';
 import { AuTreeSelect } from './components/tree-select/index.js';
+import { AuUpdateDialog } from './components/update-dialog/index.js';
 import { AuVirtualList } from './components/virtual-list/index.js';
 import { AuVirtualTable } from './components/virtual-table/index.js';
 import { AuWindowTitleBar } from './components/window-title-bar/index.js';
@@ -61,11 +75,25 @@ import {
 } from './utils/theme.js';
 
 const components = [
+  AuAboutDialog,
+  AuAvatar,
+  AuEmpty,
+  AuNumber,
+  AuPageHeader,
+  AuProgress,
+  AuSegmented,
+  AuTag,
+  AuTransition,
+  AuTransitionGroup,
+  AuTrend,
+  AuBadge,
   AuButton,
   AuButtonGroup,
   AuButtonGroupItem,
   AuCard,
   AuCheckbox,
+  AuCollapse,
+  AuCollapseItem,
   AuColorPicker,
   AuColorSwatch,
   AuContextMenu,
@@ -85,6 +113,7 @@ const components = [
   AuInput,
   AuLink,
   AuLoading,
+  AuLoadingSpinner,
   AuMenu,
   AuMenuGroup,
   AuMenuItem,
@@ -100,18 +129,20 @@ const components = [
   AuSkeleton,
   AuSkeletonItem,
   AuSwitch,
+  AuTable,
+  AuTableColumn,
   AuTabs,
-  AuTextarea,
   AuTimePicker,
   AuTooltip,
   AuTree,
   AuTreeSelect,
+  AuUpdateDialog,
   AuVirtualList,
   AuVirtualTable,
   AuWindowTitleBar,
 ];
 
-export const version = '0.1.0';
+export const version = packageVersion;
 
 export const AuroraPlus = {
   version,
@@ -131,11 +162,25 @@ export const AuroraPlus = {
 };
 
 export {
+  AuAboutDialog,
+  AuAvatar,
+  AuEmpty,
+  AuNumber,
+  AuPageHeader,
+  AuProgress,
+  AuSegmented,
+  AuTag,
+  AuTransition,
+  AuTransitionGroup,
+  AuTrend,
+  AuBadge,
   AuButton,
   AuButtonGroup,
   AuButtonGroupItem,
   AuCard,
   AuCheckbox,
+  AuCollapse,
+  AuCollapseItem,
   AuColorPicker,
   AuColorSwatch,
   AuContextMenu,
@@ -174,12 +219,14 @@ export {
   AuSkeleton,
   AuSkeletonItem,
   AuSwitch,
+  AuTable,
+  AuTableColumn,
   AuTabs,
-  AuTextarea,
   AuTimePicker,
   AuTooltip,
   AuTree,
   AuTreeSelect,
+  AuUpdateDialog,
   AuVirtualList,
   AuVirtualTable,
   AuWindowTitleBar,
@@ -194,5 +241,7 @@ export {
   setAuroraMaterial,
   setAuroraTheme,
 };
+
+export { renderReleaseNotesMarkdown } from './utils/release-notes.js';
 
 export default AuroraPlus;

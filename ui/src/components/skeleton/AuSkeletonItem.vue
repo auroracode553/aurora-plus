@@ -1,6 +1,6 @@
 <template>
   <span
-    class="au-skeleton-item au-component"
+    class="au-skeleton-item au-component au-motion-state"
     :class="[`is-${variant}`, { 'is-animated': isAnimated }]"
     :style="{ width: toDimension(width), height: toDimension(height) }"
   >
@@ -14,7 +14,7 @@
 
 <script setup>
 import { computed, inject } from 'vue';
-import { skeletonContextKey } from './skeleton-context.js';
+import { skeletonContextKey } from './use-skeleton-loading.js';
 
 const props = defineProps({
   variant: {

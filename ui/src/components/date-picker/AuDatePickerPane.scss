@@ -37,8 +37,7 @@
 .au-date-picker-pane__nav:active,
 .au-date-picker-pane__today:active:not(:disabled),
 .au-date-picker-pane__day:active:not(:disabled) {
-  @include motion.press(scale(0.94));
-  transition-duration: 0s;
+  @include motion.press(0.94);
 }
 
 .au-date-picker-pane__weekdays,

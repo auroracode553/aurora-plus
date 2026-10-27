@@ -1,8 +1,8 @@
 <template>
   <div
     ref="rootRef"
-    class="au-virtual-table au-component au-surface-frame au-surface-frame--rounded"
-    :class="{ 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight }"
+    class="au-virtual-table au-component au-motion-state"
+    :class="{ 'au-surface-frame': border, 'has-border': border, 'is-striped': stripe, 'is-loading': loading, 'is-auto-height': autoHeight, 'has-horizontal-overflow': hasHorizontalOverflow, 'au-hover-scrollbars': showScroll }"
     :style="rootStyle"
   >
     <div
@@ -22,28 +22,37 @@
           :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
           :style="getColumnStyle(column)"
         >
+          <AuCheckbox
+            v-if="column.type === 'selection'"
+            class="au-virtual-table__checkbox"
+            :model-value="selectionStates.get(column.key).checked"
+            :indeterminate="selectionStates.get(column.key).indeterminate"
+            :disabled="selectionStates.get(column.key).disabled"
+            @click.stop
+            @change="toggleAllSelection(column)"
+          />
+          <span v-else-if="column.type === 'index'">{{ column.title }}</span>
           <button
-            v-if="column.sortable"
-            class="au-virtual-table__sort-button au-control-reset"
+            v-else-if="column.sortable"
+            class="au-virtual-table__sort-button au-control-reset au-motion-control"
             type="button"
             :style="{ justifyContent: getJustifyContent(column.align) }"
             @click="toggleSort(column)"
           >
-            <slot :name="`header-${column.key}`" :column="column">
-              <span class="au-virtual-table__cell-text au-truncate">{{ column.title ?? column.label ?? '' }}</span>
-            </slot>
+            <TableSlot v-if="column.renderHeader" :render="column.renderHeader" :context="{ column }" />
+            <span v-else class="au-virtual-table__cell-text au-truncate">{{ column.title }}</span>
             <AuIcon class="au-virtual-table__sort-icon au-meta-muted" :icon="getSortIcon(column)" />
           </button>
-          <slot v-else :name="`header-${column.key}`" :column="column">
-            <span class="au-virtual-table__cell-text au-truncate">{{ column.title ?? column.label ?? '' }}</span>
-          </slot>
+          <TableSlot v-else-if="column.renderHeader" :render="column.renderHeader" :context="{ column }" />
+          <span v-else class="au-virtual-table__cell-text au-truncate">{{ column.title }}</span>
         </div>
       </div>
     </div>
 
     <div
       ref="scrollContainerRef"
-      class="au-virtual-table__body au-scroll-region au-thin-scrollbar"
+      class="au-virtual-table__body au-scroll-region au-thin-scrollbar au-table-scrollbar"
+      :class="{ 'au-scrollbar-hidden': !showScroll }"
       tabindex="0"
       @scroll.passive="handleScroll"
     >
@@ -59,10 +68,11 @@
             class="au-virtual-table__row"
             :class="[
               resolveRowClass(entry),
-              { 'is-striped-row': stripe && entry.visibleIndex % 2 === 1 },
+              { 'is-striped-row': stripe && entry.visibleIndex % 2 === 1,
+                'is-current-row': highlightCurrentRow && isCurrent(entry.row, entry.sourceIndex) },
             ]"
             :style="getRowStyle(entry.visibleIndex)"
-            @click="emit('row-click', entry.row, entry.sourceIndex, $event)"
+            @click="handleRowClick(entry, $event)"
             @dblclick="emit('row-dblclick', entry.row, entry.sourceIndex, $event)"
           >
             <div
@@ -71,19 +81,18 @@
               class="au-virtual-table__cell"
               :class="[getColumnClasses(column), { 'au-forced-canvas': column.fixed }]"
               :style="getColumnStyle(column)"
-              @click="emit('cell-click', entry.row, column, entry.sourceIndex, $event)"
+              @click="handleCellClick(entry, column, $event)"
             >
-              <slot
-                :name="`cell-${column.key}`"
-                :row="entry.row"
-                :column="column"
-                :value="getCellValue(entry.row, column)"
-                :index="entry.sourceIndex"
-              >
-                <span class="au-virtual-table__cell-text au-truncate">
-                  {{ formatCell(entry.row, column, entry.sourceIndex) }}
-                </span>
-              </slot>
+              <AuCheckbox
+                v-if="column.type === 'selection'"
+                class="au-virtual-table__checkbox"
+                :model-value="isSelected(entry.row, entry.sourceIndex)"
+                :disabled="!isSelectable(column, entry.row, entry.sourceIndex)"
+                @change="toggleRowSelection(entry.row, undefined, column)"
+              />
+              <span v-else-if="column.type === 'index'">{{ entry.visibleIndex + 1 }}</span>
+              <TableSlot v-else-if="column.renderCell" :render="column.renderCell" :context="{ row: entry.row, column, value: getCellValue(entry.row, column), index: entry.sourceIndex }" />
+              <span v-else class="au-virtual-table__cell-text au-truncate">{{ formatCell(entry.row, column, entry.sourceIndex) }}</span>
             </div>
           </div>
         </template>
@@ -92,7 +101,7 @@
 
     <div
       v-if="loading"
-      class="au-virtual-table__loading au-material-surface au-depth-surface"
+      class="au-virtual-table__loading au-material-surface au-depth-surface au-motion-reveal"
       :style="loadingStyle"
     >
       <slot name="loading">
@@ -103,116 +112,17 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { IconArrowDown, IconArrowUp, IconArrowsSort } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
+import { AuCheckbox } from '../checkbox/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
-
-function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function toPositiveNumber(value, fallback) {
-  const number = Number(value);
-  return Number.isFinite(number) && number > 0 ? number : fallback;
-}
-
-function getColumnKey(column, index) {
-  return column.key ?? column.dataKey ?? `column-${index}`;
-}
-
-function resolveTableColumns(columns, viewportWidth = 0) {
-  const normalized = columns.map((column, index) => {
-    const minWidth = toPositiveNumber(column.minWidth, 60);
-    const maxWidth = toPositiveNumber(column.maxWidth, Number.POSITIVE_INFINITY);
-    const baseWidth = clamp(toPositiveNumber(column.width, 120), minWidth, maxWidth);
-    return {
-      ...column,
-      key: getColumnKey(column, index),
-      dataKey: column.dataKey ?? column.key ?? '',
-      width: baseWidth,
-      minWidth,
-      maxWidth,
-      flexGrow: Math.max(Number(column.flexGrow) || 0, 0),
-      align: ['left', 'center', 'right'].includes(column.align) ? column.align : 'left',
-    };
-  });
-
-  const baseWidth = normalized.reduce((sum, column) => sum + column.width, 0);
-  const totalFlex = normalized.reduce((sum, column) => sum + column.flexGrow, 0);
-  const extraWidth = Math.max(viewportWidth - baseWidth, 0);
-  const withWidths = normalized.map((column) => ({
-    ...column,
-    resolvedWidth: clamp(
-      column.width + (totalFlex > 0 ? extraWidth * column.flexGrow / totalFlex : 0),
-      column.minWidth,
-      column.maxWidth,
-    ),
-  }));
-
-  let leftOffset = 0;
-  withWidths.forEach((column) => {
-    if (column.fixed === true || column.fixed === 'left') {
-      column.fixedSide = 'left';
-      column.fixedOffset = leftOffset;
-      leftOffset += column.resolvedWidth;
-    }
-  });
-
-  let rightOffset = 0;
-  [...withWidths].reverse().forEach((column) => {
-    if (column.fixed === 'right') {
-      column.fixedSide = 'right';
-      column.fixedOffset = rightOffset;
-      rightOffset += column.resolvedWidth;
-    }
-  });
-  return withWidths;
-}
-
-function getValueByPath(target, path) {
-  if (!path) return undefined;
-  const segments = Array.isArray(path)
-    ? path
-    : String(path).replace(/\[([^\]]+)\]/g, '.$1').split('.').filter(Boolean);
-  return segments.reduce((value, segment) => value?.[segment], target);
-}
-
-function sortTableRows(data, columns, sortBy) {
-  if (!sortBy?.key || !sortBy.order) {
-    return data.map((row, index) => ({ row, sourceIndex: index }));
-  }
-  const column = columns.find((item) => item.key === sortBy.key);
-  if (!column) return data.map((row, index) => ({ row, sourceIndex: index }));
-
-  const direction = sortBy.order === 'descending' ? -1 : 1;
-  return data
-    .map((row, index) => ({ row, sourceIndex: index }))
-    .sort((left, right) => {
-      const comparison = typeof column.sortMethod === 'function'
-        ? column.sortMethod(left.row, right.row, column)
-        : compareValues(
-            getValueByPath(left.row, column.dataKey),
-            getValueByPath(right.row, column.dataKey),
-          );
-      return comparison === 0 ? left.sourceIndex - right.sourceIndex : comparison * direction;
-    });
-}
-
-function compareValues(left, right) {
-  if (Object.is(left, right)) return 0;
-  if (left == null) return -1;
-  if (right == null) return 1;
-  if (typeof left === 'number' && typeof right === 'number') return left - right;
-  if (left instanceof Date && right instanceof Date) return left.getTime() - right.getTime();
-  return String(left).localeCompare(String(right), undefined, {
-    numeric: true,
-    sensitivity: 'base',
-  });
-}
+import { TableSlot } from '../../utils/TableSlot.js';
+import { useTableColumns } from '../../utils/tableColumns.js';
+import { useTableSelection } from '../../utils/tableSelection.js';
+import { formatSize, getValueByPath, normalizeSort, resolveTableColumns, sortTableRows } from '../../utils/tableModel.js';
 
 const props = defineProps({
-  columns: { type: Array, default: () => [] },
   data: { type: Array, default: () => [] },
   width: { type: [String, Number], default: '100%' },
   height: { type: [String, Number], default: 400 },
@@ -227,6 +137,8 @@ const props = defineProps({
   remoteSort: { type: Boolean, default: false },
   stripe: { type: Boolean, default: false },
   border: { type: Boolean, default: false },
+  showScroll: { type: Boolean, default: false },
+  highlightCurrentRow: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   loadingText: { type: String, default: '加载中' },
   emptyText: { type: String, default: '暂无数据' },
@@ -240,6 +152,7 @@ const emit = defineEmits([
   'row-click',
   'row-dblclick',
   'cell-click',
+  'select', 'select-all', 'selection-change', 'current-change',
 ]);
 
 const headerViewportRef = ref(null);
@@ -252,14 +165,24 @@ const viewportHeight = ref(0);
 const horizontalScrollbarHeight = ref(0);
 const frameBorderHeight = ref(0);
 const innerSort = ref(normalizeSort(props.sortBy || props.defaultSort));
+const declaredColumns = useTableColumns(useSlots());
+const {
+  selection, currentRow, isSelected, isSelectable, selectionStatus, isCurrent,
+  toggleRowSelection, toggleAllSelection: toggleAllRows, clearSelection, setCurrentRow,
+} = useTableSelection(props, emit);
 let resizeObserver = null;
 let listeningWindowResize = false;
 
-const resolvedColumns = computed(() => resolveTableColumns(props.columns, viewportWidth.value));
+const resolvedColumns = computed(() => resolveTableColumns(declaredColumns.value, viewportWidth.value));
+const selectionStates = computed(() => new Map(resolvedColumns.value
+  .filter((column) => column.type === 'selection')
+  .map((column) => [column.key, selectionStatus(column)])));
 const tableWidth = computed(() => resolvedColumns.value.reduce(
   (sum, column) => sum + column.resolvedWidth,
   0,
 ));
+// 仅在列宽确实超出视口时启用横向滚动，避免亚像素宽度误差。
+const hasHorizontalOverflow = computed(() => viewportWidth.value > 0 && tableWidth.value > viewportWidth.value);
 const canvasWidth = computed(() => Math.max(tableWidth.value, viewportWidth.value));
 const gridTemplateColumns = computed(() => resolvedColumns.value
   .map((column) => `${column.resolvedWidth}px`)
@@ -274,7 +197,7 @@ const visibleRange = computed(() => {
   const visibleHeight = Math.max(viewportHeight.value, props.rowHeight);
   const start = Math.max(Math.floor(bodyScrollTop / props.rowHeight) - props.overscan, 0);
   const end = Math.ceil((bodyScrollTop + visibleHeight) / props.rowHeight) + props.overscan;
-  return { start, end: Math.min(end, sortedRows.value.length) };
+  return { start, end: Math.min(end, props.data.length) };
 });
 const visibleRows = computed(() => sortedRows.value
   .slice(visibleRange.value.start, visibleRange.value.end)
@@ -317,16 +240,6 @@ const loadingStyle = computed(() => ({
   bottom: `${horizontalScrollbarHeight.value + 8}px`,
 }));
 
-function formatSize(value) {
-  return typeof value === 'number' ? `${value}px` : value;
-}
-
-function normalizeSort(value) {
-  const key = value?.key ?? value?.columnKey ?? '';
-  const order = ['ascending', 'descending'].includes(value?.order) ? value.order : '';
-  return { key, order };
-}
-
 function getCellValue(row, column) {
   return getValueByPath(row, column.dataKey);
 }
@@ -358,7 +271,7 @@ function getColumnClasses(column) {
   return [
     `is-align-${column.align}`,
     column.class,
-    { 'is-fixed': Boolean(column.fixedSide) },
+    { 'is-fixed': Boolean(column.fixedSide), 'is-utility': column.type === 'selection' || column.type === 'index' },
   ];
 }
 
@@ -396,6 +309,20 @@ function toggleSort(column) {
   emit('update:sortBy', nextSort);
   emit('sort-change', { ...nextSort, column });
   scrollToTop();
+}
+
+function handleRowClick(entry, event) {
+  if (props.highlightCurrentRow) setCurrentRow(entry.row);
+  emit('row-click', entry.row, entry.sourceIndex, event);
+}
+
+function handleCellClick(entry, column, event) {
+  if (column.type === 'selection') event.stopPropagation();
+  emit('cell-click', entry.row, column, entry.sourceIndex, event);
+}
+
+function toggleAllSelection(column = resolvedColumns.value.find((item) => item.type === 'selection')) {
+  if (column) toggleAllRows(column);
 }
 
 function handleScroll(event) {
@@ -502,24 +429,24 @@ watch(
 );
 
 watch(
-  () => [props.data.length, props.rowHeight, props.headerHeight, props.width, props.height, props.autoHeight, tableWidth.value],
+  () => [props.data.length, props.rowHeight, props.headerHeight, props.width, props.height, props.autoHeight],
   updateViewport,
   { flush: 'post' },
 );
 
-watch(
-  [viewportWidth, canvasWidth, scrollLeft],
-  syncHeaderScroll,
-  { flush: 'post' },
-);
+watch([viewportWidth, scrollLeft], syncHeaderScroll, { flush: 'post' });
 
 watch(
   visibleRange,
   (range) => emit('rows-rendered', { ...range }),
-  { immediate: true },
+  { flush: 'post' },
 );
 
-onMounted(bindResizeObserver);
+onMounted(() => {
+  bindResizeObserver();
+  emit('rows-rendered', { ...visibleRange.value });
+  watch(tableWidth, updateViewport, { flush: 'post' });
+});
 onBeforeUnmount(() => {
   resizeObserver?.disconnect();
   if (listeningWindowResize && typeof window !== 'undefined') {
@@ -533,6 +460,7 @@ defineExpose({
   scrollToLeft,
   scrollToRow,
   scrollToTop,
+  selection, currentRow, toggleRowSelection, toggleAllSelection, clearSelection, setCurrentRow,
 });
 </script>
 

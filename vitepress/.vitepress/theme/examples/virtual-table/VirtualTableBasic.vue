@@ -5,42 +5,45 @@
       <AuButton size="small" :type="loading ? 'primary' : 'default'" @click="loading = !loading">
         {{ loading ? '结束刷新' : '模拟刷新' }}
       </AuButton>
+      <AuButton size="small" :type="showScroll ? 'primary' : 'default'" @click="showScroll = !showScroll">
+        {{ showScroll ? '始终隐藏滚动条' : '悬浮显示滚动条' }}
+      </AuButton>
       <span>当前渲染 {{ rendered.start + 1 }}–{{ rendered.end }} 行</span>
+      <span>已选 {{ selectedRows.length }} 行</span>
     </div>
     <AuVirtualTable
       ref="tableRef"
-      :columns="columns"
       :data="rows"
       :height="360"
       :loading="loading"
+      :show-scroll="showScroll"
       loading-text="正在刷新任务"
       stripe
-      border
+      highlight-current-row
       @rows-rendered="rendered = $event"
+      @selection-change="selectedRows = $event"
     >
-      <template #cell-status="{ value }">
-        <span class="virtual-table-demo__status" :class="{ 'is-active': value === '进行中' }">
-          {{ value }}
-        </span>
-      </template>
+      <AuTableColumn type="selection" :width="48" fixed />
+      <AuTableColumn prop="id" label="编号" :width="90" fixed sortable />
+      <AuTableColumn prop="name" label="名称" :width="180" :flex-grow="1" />
+      <AuTableColumn prop="owner" label="负责人" :width="130" sortable />
+      <AuTableColumn prop="status" label="状态" :width="110" align="center">
+        <template #default="{ value }"><span class="virtual-table-demo__status" :class="{ 'is-active': value === '进行中' }">{{ value }}</span></template>
+      </AuTableColumn>
+      <AuTableColumn prop="updatedAt" label="更新时间" :width="160" />
     </AuVirtualTable>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuVirtualTable } from 'aurora-plus';
+import { AuButton, AuTableColumn, AuVirtualTable } from 'aurora-plus';
 
 const tableRef = ref(null);
 const loading = ref(true);
+const showScroll = ref(false);
 const rendered = ref({ start: 0, end: 0 });
-const columns = [
-  { key: 'id', title: '编号', dataKey: 'id', width: 90, fixed: 'left', sortable: true },
-  { key: 'name', title: '名称', dataKey: 'name', width: 180, flexGrow: 1 },
-  { key: 'owner', title: '负责人', dataKey: 'owner', width: 130, sortable: true },
-  { key: 'status', title: '状态', dataKey: 'status', width: 110, align: 'center' },
-  { key: 'updatedAt', title: '更新时间', dataKey: 'updatedAt', width: 160 },
-];
+const selectedRows = ref([]);
 const rows = Array.from({ length: 10000 }, (_, index) => ({
   id: index + 1,
   name: `Aurora 任务 ${index + 1}`,

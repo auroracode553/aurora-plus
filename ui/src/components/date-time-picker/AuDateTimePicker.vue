@@ -46,7 +46,7 @@
       />
     </template>
 
-    <section class="au-date-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
+    <section class="au-date-time-picker__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar au-motion-state">
       <AuDatePickerPane
         ref="datePaneRef"
         class="au-date-time-picker__date-pane"
@@ -104,6 +104,7 @@
 </template>
 
 <script setup>
+import { usePickerInputCommit } from '../../utils/use-picker-input-commit.js';
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
 import { IconCalendarTime } from '../../icons/internal.js';
 import { AuDatePickerPane } from '../date-picker/index.js';
@@ -190,7 +191,7 @@ const selectedDate = ref(parseDateValue(props.modelValue, resolvedValueFormat.va
 const draftDate = ref(cloneDate(selectedDate.value || new Date()));
 const inputText = ref(formatDate(selectedDate.value, resolvedDisplayFormat.value));
 const inputInvalid = ref(false);
-let closeCommittedInput = false;
+const inputCommit = usePickerInputCommit();
 let inputDirty = false;
 
 const inputAttrs = computed(() => Object.fromEntries(
@@ -228,9 +229,8 @@ function close(reason = 'api') {
 
 function handlePopoverClose(reason) {
   if (props.editable && inputDirty && ['outside', 'tab'].includes(reason)) {
-    closeCommittedInput = true;
+    inputCommit.mark();
     commitTypedValue(true);
-    globalThis.setTimeout(() => { closeCommittedInput = false; }, 0);
     return;
   }
   resetInputText();
@@ -246,8 +246,7 @@ function handleTriggerClick(event) {
 }
 
 function handleBlur(event) {
-  if (closeCommittedInput) closeCommittedInput = false;
-  else if (props.editable && inputDirty) commitTypedValue(false, event);
+  if (!inputCommit.consume() && props.editable && inputDirty) commitTypedValue(false, event);
   emit('blur', event);
 }
 

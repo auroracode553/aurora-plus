@@ -1,7 +1,7 @@
 <template>
   <div
     ref="element"
-    class="au-form-item au-component"
+    class="au-form-item au-component au-motion-state"
     :class="[
       `is-label-${resolvedLabelPosition}`,
       `is-${resolvedSize}`,

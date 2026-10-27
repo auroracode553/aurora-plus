@@ -1,0 +1,78 @@
+.au-about-dialog {
+  min-width: 0;
+  color: var(--au-color-text-default);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.au-about-dialog__intro { display: flex; align-items: center; gap: 16px; }
+.au-about-dialog__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: var(--au-radius-surface);
+  :deep(img), :deep(svg) { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+}
+
+.au-about-dialog__heading { min-width: 0; overflow-wrap: anywhere; }
+.au-about-dialog__name {
+  margin: 0;
+  color: var(--au-color-text-primary);
+  font-size: 20px;
+  font-weight: var(--au-font-weight-semibold);
+  line-height: 1.4;
+}
+
+.au-about-dialog__platform,
+.au-about-dialog__version,
+.au-about-dialog__description { margin: 3px 0 0; color: var(--au-color-text-secondary); }
+.au-about-dialog__platform { font-size: 12px; }
+.au-about-dialog__version { font-variant-numeric: tabular-nums; }
+.au-about-dialog__credit {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  margin-top: 5px;
+  color: var(--au-color-text-secondary);
+  font-size: 12px;
+
+  // 署名链接沿用本行的文字尺寸，避免默认链接字号造成基线错位。
+  :deep(.au-link) { font-size: inherit; line-height: inherit; }
+}
+.au-about-dialog__release { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--au-color-border-muted); }
+.au-about-dialog__section-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.au-about-dialog__section-heading h4,
+.au-about-dialog__info-group h4 { margin: 0; font-size: 13px; font-weight: var(--au-font-weight-semibold); }
+.au-about-dialog__section-heading > span { color: var(--au-color-primary); font-size: 12px; }
+.au-about-dialog__notes-scroll { max-height: 160px; margin-top: 8px; padding-right: 6px; background: transparent; }
+.au-about-dialog__empty { margin: 8px 0 0; color: var(--au-color-text-secondary); }
+.au-about-dialog__details { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--au-color-border-muted); }
+.au-about-dialog__info-group + .au-about-dialog__info-group { margin-top: 12px; }
+.au-about-dialog__info-group h4 { margin-bottom: 4px; font-size: 12px; }
+.au-about-dialog__info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 3px 0;
+  font-size: 12px;
+  &.is-extra { font-size: 11px; }
+}
+.au-about-dialog__info-label { flex: none; color: var(--au-color-text-secondary); }
+.au-about-dialog__info-value { min-width: 0; text-align: right; overflow-wrap: anywhere; }
+.au-about-dialog__info-value.is-danger { color: var(--au-color-danger); }
+.au-about-dialog__extra { margin-top: 14px; }
+.au-about-dialog__copyright { margin: 14px 0 0; color: var(--au-color-text-secondary); font-size: 12px; overflow-wrap: anywhere; }
+.au-about-dialog__footer { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; width: 100%; }
+.au-about-dialog__close { margin-left: auto; }
+
+@media (max-width: 400px) {
+  .au-about-dialog__intro { gap: 12px; }
+  .au-about-dialog__icon { width: 48px; height: 48px; }
+  .au-about-dialog__name { font-size: 18px; }
+}

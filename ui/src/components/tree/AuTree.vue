@@ -24,7 +24,7 @@
       >
         <button
           v-if="collapsible && item.hasChildren"
-          class="au-tree__toggle au-control-reset au-grid-center au-hover-control"
+          class="au-tree__toggle au-control-reset au-grid-center au-hover-control au-motion-control"
           :class="{ 'is-expanded': !item.isCollapsed }"
           type="button"
           @click.stop="emit('toggle', item)"
@@ -34,7 +34,7 @@
         <span v-else-if="collapsible" class="au-tree__toggle-placeholder"></span>
 
         <button
-          class="au-tree__label au-control-reset"
+          class="au-tree__label au-control-reset au-motion-control"
           type="button"
           :disabled="isDisabled(item)"
           :tabindex="!isDisabled(item) && (isSelected(item) || isInitialFocusable(item, index)) ? 0 : -1"

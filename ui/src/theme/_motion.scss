@@ -1,13 +1,4 @@
-@use './mixins/motion';
-
-.au-motion-popover {
-  @include motion.transition(opacity, transform);
-}
-
-.au-spin {
-  animation: au-spin 0.8s linear infinite;
-}
-
-@keyframes au-spin {
-  to { transform: rotate(360deg); }
-}
+// 通用动效入口：组件通过显式类或 mixin 复用，不扫描页面和业务选择器。
+@use './motion/feedback';
+@use './motion/transitions';
+@use './motion/keyframes';

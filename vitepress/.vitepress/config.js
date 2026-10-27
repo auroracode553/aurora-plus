@@ -35,7 +35,7 @@ export default defineConfig({
   base: siteBase,
   lang: 'zh-CN',
   title: 'Aurora Plus',
-  description: '从 Aurora Editor 抽离的 Vue 3 通用组件库',
+  description: 'Vue 3 通用组件库',
   cleanUrls: true,
   lastUpdated: false,
   head: [
@@ -73,6 +73,7 @@ export default defineConfig({
         items: [
           { text: 'Color 颜色', link: '/guide/colors' },
           { text: 'Theme 主题配置', link: '/guide/theme' },
+          { text: 'Motion 通用动效', link: '/guide/motion' },
         ],
       },
       { text: '组件', link: '/components/button' },
@@ -90,6 +91,7 @@ export default defineConfig({
         items: [
           { text: 'Color 颜色', link: '/guide/colors' },
           { text: 'Theme 主题配置', link: '/guide/theme' },
+          { text: 'Motion 通用动效', link: '/guide/motion' },
         ],
       },
       {
@@ -100,14 +102,15 @@ export default defineConfig({
           { text: 'Divider 分割线', link: '/components/divider' },
           { text: 'Link 文字链接', link: '/components/link' },
           { text: 'Icon 图标', link: '/components/icon' },
+          { text: 'Transition 动画', link: '/components/transition' },
         ],
       },
       {
         text: 'Form 表单组件',
         items: [
           { text: 'Input 输入框', link: '/components/input' },
-          { text: 'Textarea 多行输入框', link: '/components/textarea' },
           { text: 'Select 选择器', link: '/components/select' },
+          { text: 'Segmented 分段选择', link: '/components/segmented' },
           { text: 'TreeSelect 树形选择', link: '/components/tree-select' },
           { text: 'DatePicker 日期选择器', link: '/components/date-picker' },
           { text: 'TimePicker 时间选择器', link: '/components/time-picker' },
@@ -121,11 +124,18 @@ export default defineConfig({
       {
         text: 'Data 数据展示',
         items: [
+          { text: 'Badge 徽章', link: '/components/badge' },
+          { text: 'Tag 标签', link: '/components/tag' },
+          { text: 'Avatar 头像', link: '/components/avatar' },
+          { text: 'Number 滚动数字', link: '/components/number' },
+          { text: 'Trend 变化幅度', link: '/components/trend' },
           { text: 'Panel 通用面板', link: '/components/panel' },
+          { text: 'Collapse 折叠面板', link: '/components/collapse' },
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'Skeleton 骨架屏', link: '/components/skeleton' },
           { text: 'ImagePreview 图片预览', link: '/components/image-preview' },
           { text: 'VirtualList 虚拟列表', link: '/components/virtual-list' },
+          { text: 'Table 表格', link: '/components/table' },
           { text: 'VirtualTable 虚拟表格', link: '/components/virtual-table' },
         ],
       },
@@ -149,8 +159,11 @@ export default defineConfig({
           { text: 'Popconfirm 气泡确认框', link: '/components/popconfirm' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
           { text: 'Dialog 对话框', link: '/components/dialog' },
+          { text: 'AboutDialog 关于对话框', link: '/components/about-dialog' },
           { text: 'Drawer 抽屉', link: '/components/drawer' },
           { text: 'Loading 加载', link: '/components/loading' },
+          { text: 'Empty 空状态', link: '/components/empty' },
+          { text: 'Progress 进度', link: '/components/progress' },
           { text: 'Message 消息提示', link: '/components/message' },
           { text: 'MessageBox 消息确认框', link: '/components/message-box' },
         ],
@@ -159,7 +172,9 @@ export default defineConfig({
         text: 'Application 应用组件',
         items: [
           { text: 'FloatingToolbar 浮动工具条', link: '/components/floating-toolbar' },
+          { text: 'PageHeader 页面标题', link: '/components/page-header' },
           { text: 'WindowTitleBar 窗口标题栏', link: '/components/window-title-bar' },
+          { text: 'UpdateDialog 更新对话框', link: '/components/update-dialog' },
         ],
       },
     ],

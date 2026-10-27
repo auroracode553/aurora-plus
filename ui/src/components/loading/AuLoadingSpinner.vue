@@ -4,7 +4,7 @@
     :class="[`is-${size}`, { 'is-compact': compact }]"
     :style="{ color: color || undefined }"
   >
-    <slot name="spinner">
+    <slot name="spinner" :size="size" :variant="variant">
       <svg
         v-if="svg"
         class="au-loading-spinner__icon au-loading-spinner__svg au-spin"
@@ -14,20 +14,25 @@
         v-html="svg"
       ></svg>
       <AuIcon
-        v-else
+        v-else-if="spinner"
         class="au-loading-spinner__icon au-spin"
-        :icon="spinner || IconLoader2"
+        :icon="spinner"
       />
+      <span v-else class="au-loading-spinner__indicator" :class="`is-${variant}`">
+        <i v-for="index in segmentCount" :key="index"></i>
+      </span>
     </slot>
     <span v-if="text" class="au-loading-spinner__text au-wrap-anywhere">{{ text }}</span>
   </span>
 </template>
 
 <script setup>
-import { IconLoader2 } from '../../icons/internal.js';
+import { computed } from 'vue';
 import { AuIcon } from '../icon/index.js';
+import { loadingVariantProp } from './loading-variants.js';
 
-defineProps({
+const props = defineProps({
+  variant: loadingVariantProp,
   size: {
     type: String,
     default: 'default',
@@ -35,13 +40,15 @@ defineProps({
   },
   text: { type: String, default: '' },
   color: { type: String, default: '' },
-  /** Tabler 图标组件；不传时使用统一的环形加载图标。 */
+  /** 自定义图标优先于内置 variant。 */
   spinner: { type: [Object, Function], default: null },
   compact: { type: Boolean, default: false },
   /** 可信的 SVG 内部标记；不要传入未经清理的用户内容。 */
   svg: { type: String, default: '' },
   svgViewBox: { type: String, default: '0 0 24 24' },
 });
+
+const segmentCount = computed(() => ({ ring: 1, dots: 3, bars: 4, orbit: 2 })[props.variant] || 1);
 </script>
 
 <style scoped lang="scss" src="./AuLoadingSpinner.scss"></style>

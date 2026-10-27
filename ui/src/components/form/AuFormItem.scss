@@ -116,10 +116,6 @@
   font-size: var(--au-font-size-base);
 }
 
-.au-form-item-message-enter-active,
-.au-form-item-message-leave-active {
-  @include motion.transition(opacity);
-}
 
 .au-form-item-message-enter-from,
 .au-form-item-message-leave-to {

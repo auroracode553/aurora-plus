@@ -1,6 +1,6 @@
 <template>
   <div class="tabs-demo">
-    <AuTabs v-model="activeTab" :items="tabs" fill />
+    <AuTabs v-model="activeTab" :items="tabs" />
     <div class="tabs-demo__panel">
       <strong>{{ activeContent.title }}</strong>
       <span>{{ activeContent.description }}</span>

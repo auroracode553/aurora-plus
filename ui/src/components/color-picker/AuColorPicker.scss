@@ -1,4 +1,5 @@
 @use '../../theme/mixins/fields';
+@use '../../theme/mixins/motion';
 
 .au-color-picker {
   position: relative;
@@ -14,6 +15,8 @@
   cursor: pointer;
   @include fields.field;
 }
+
+.au-color-picker:active:not(.is-disabled) { @include motion.press; }
 
 .au-color-picker.is-small {
   height: 28px;

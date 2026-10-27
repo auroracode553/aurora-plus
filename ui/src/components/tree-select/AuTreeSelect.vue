@@ -54,7 +54,7 @@
       />
     </template>
 
-    <section class="au-tree-select__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport">
+    <section class="au-tree-select__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-motion-state">
       <AuTree
         ref="treeRef"
         class="au-tree-select__tree"

@@ -38,7 +38,7 @@ import { AuButton, AuDrawer } from 'aurora-plus';
 const drawerVisible = ref(false);
 const drawerDirection = ref('rtl');
 const settings = reactive({
-  name: 'Aurora Editor',
+  name: '示例应用',
   description: '一个专注 Markdown 编辑体验的桌面应用。',
 });
 

@@ -2,7 +2,6 @@
 @use '../../theme/mixins/surfaces';
 
 .au-switch {
-
   border-radius: var(--au-radius-compact);
 }
 
@@ -17,6 +16,8 @@
   border: 1px solid var(--au-material-border-emphasis);
   border-radius: var(--au-radius-pill);
   @include surfaces.surface;
+  // 关闭轨道沿用次级材质，与滑块表面保持区分。
+  background: var(--au-material-background-subtle);
   @include motion.transition(background, border-color);
 }
 
@@ -28,7 +29,7 @@
   border-radius: var(--au-radius-pill);
   background: var(--au-material-background-elevated);
   transform: translateX(0);
-  @include motion.transition(transform, background);
+  @include motion.phase(release, transform, background);
 }
 
 .au-switch.is-checked .au-switch__track {
@@ -76,17 +77,5 @@
 }
 
 .au-switch:active:not(:disabled) .au-switch__thumb {
-  transform: translateX(0) scale(0.94);
-}
-
-.au-switch.is-checked:active:not(:disabled) .au-switch__thumb {
-  transform: translateX(16px) scale(0.94);
-}
-
-.au-switch.is-small.is-checked:active:not(:disabled) .au-switch__thumb {
-  transform: translateX(12px) scale(0.94);
-}
-
-.au-switch.is-large.is-checked:active:not(:disabled) .au-switch__thumb {
-  transform: translateX(18px) scale(0.94);
+  @include motion.press(0.94);
 }

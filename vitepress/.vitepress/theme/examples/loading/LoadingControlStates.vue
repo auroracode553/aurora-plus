@@ -17,12 +17,14 @@
     </div>
 
     <AuVirtualTable
-      :columns="columns"
       :data="rows"
       :height="184"
       loading
       loading-text="正在刷新表格"
-    />
+    >
+      <AuTableColumn prop="name" label="任务" :flex-grow="1" :min-width="150" />
+      <AuTableColumn prop="owner" label="负责人" :width="100" />
+    </AuVirtualTable>
   </div>
 </template>
 
@@ -34,14 +36,11 @@ import {
   AuCheckbox,
   AuInput,
   AuSwitch,
+  AuTableColumn,
   AuVirtualTable,
 } from 'aurora-plus';
 import { IconRefresh, IconSettings } from 'aurora-plus/icons';
 
-const columns = [
-  { key: 'name', title: '任务', dataKey: 'name', flexGrow: 1, minWidth: 150 },
-  { key: 'owner', title: '负责人', dataKey: 'owner', width: 100 },
-];
 const rows = [
   { id: 1, name: '同步设计资源', owner: '林晨' },
   { id: 2, name: '更新组件索引', owner: '周言' },

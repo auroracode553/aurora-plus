@@ -16,24 +16,3 @@
   gap: 2px;
   border-top: 1px solid var(--au-material-border);
 }
-
-.au-float-enter-from,
-.au-float-leave-to {
-  opacity: 0;
-  transform: translateY(-3px) scale(0.985);
-}
-
-:is(.is-top, .is-top-start, .is-top-end).au-float-enter-from,
-:is(.is-top, .is-top-start, .is-top-end).au-float-leave-to {
-  transform: translateY(3px) scale(0.985);
-}
-
-:is(.is-left, .is-left-start, .is-left-end).au-float-enter-from,
-:is(.is-left, .is-left-start, .is-left-end).au-float-leave-to {
-  transform: translateX(3px) scale(0.985);
-}
-
-:is(.is-right, .is-right-start, .is-right-end).au-float-enter-from,
-:is(.is-right, .is-right-start, .is-right-end).au-float-leave-to {
-  transform: translateX(-3px) scale(0.985);
-}
