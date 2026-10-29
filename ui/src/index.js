@@ -49,7 +49,7 @@ import { AuSwitch } from './components/switch/index.js';
 import { AuTable, AuTableColumn } from './components/table/index.js';
 import { AuTabs } from './components/tabs/index.js';
 import { AuTimePicker } from './components/time-picker/index.js';
-import { AuTooltip } from './components/tooltip/index.js';
+import { AuHelpTooltip, AuTooltip } from './components/tooltip/index.js';
 import { AuTree } from './components/tree/index.js';
 import { AuTreeSelect } from './components/tree-select/index.js';
 import { AuUpdateDialog } from './components/update-dialog/index.js';
@@ -132,6 +132,7 @@ const components = [
   AuTabs,
   AuTimePicker,
   AuTooltip,
+  AuHelpTooltip,
   AuTree,
   AuTreeSelect,
   AuUpdateDialog,
@@ -221,6 +222,7 @@ export {
   AuTabs,
   AuTimePicker,
   AuTooltip,
+  AuHelpTooltip,
   AuTree,
   AuTreeSelect,
   AuUpdateDialog,

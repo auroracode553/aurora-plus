@@ -18,6 +18,7 @@ export { default as IconCopy } from '@tabler/icons-vue/dist/esm/icons/IconCopy.m
 export { default as IconFileText } from '@tabler/icons-vue/dist/esm/icons/IconFileText.mjs';
 export { default as IconEye } from '@tabler/icons-vue/dist/esm/icons/IconEye.mjs';
 export { default as IconEyeOff } from '@tabler/icons-vue/dist/esm/icons/IconEyeOff.mjs';
+export { default as IconHelpCircle } from '@tabler/icons-vue/dist/esm/icons/IconHelpCircle.mjs';
 export { default as IconLoader2 } from '@tabler/icons-vue/dist/esm/icons/IconLoader2.mjs';
 export { default as IconMinus } from '@tabler/icons-vue/dist/esm/icons/IconMinus.mjs';
 export { default as IconPhotoOff } from '@tabler/icons-vue/dist/esm/icons/IconPhotoOff.mjs';

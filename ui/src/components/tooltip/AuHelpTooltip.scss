@@ -1,0 +1,21 @@
+.au-help-tooltip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.au-help-tooltip.is-disabled {
+  cursor: default;
+}
+
+.au-help-tooltip__content {
+  display: grid;
+  gap: 6px;
+  max-height: 60vh;
+  overflow-y: auto;
+  pointer-events: auto;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}

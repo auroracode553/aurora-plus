@@ -2,6 +2,8 @@
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import TooltipBasic from '../.vitepress/theme/examples/tooltip/TooltipBasic.vue';
 import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasic.vue?demo-source';
+import HelpTooltipBasic from '../.vitepress/theme/examples/tooltip/HelpTooltipBasic.vue';
+import helpTooltipBasicSource from '../.vitepress/theme/examples/tooltip/HelpTooltipBasic.vue?demo-source';
 </script>
 
 # Tooltip 文字提示
@@ -18,6 +20,44 @@ import tooltipBasicSource from '../.vitepress/theme/examples/tooltip/TooltipBasi
 >
   <TooltipBasic />
 </DemoBlock>
+
+## HelpTooltip 图标提示
+
+`AuHelpTooltip` 提供 16px 圆形问号图标，悬浮立即显示说明，点击后保留；点击外部、窗口失焦、禁用或 `active` 变为 `false` 时关闭。没有标题、正文、说明行或内容插槽时不显示入口。
+
+说明可通过 `title`、`content` 和 `lines` 组合，也可用 `content` 插槽完全提供。正文完整换行，内容区最高 60vh，超出后在提示内部滚动；浮层的翻转和视口边界沿用 Tooltip。
+
+<DemoBlock title="圆形图标与多行说明" :source="helpTooltipBasicSource">
+  <HelpTooltipBasic />
+</DemoBlock>
+
+### HelpTooltip Attributes
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| title | 说明标题 | string | '' |
+| content | 说明正文 | string / number | '' |
+| lines | 多行说明，按顺序展示 | string[] | [] |
+| size | 图标尺寸；数字单位 px | string / number | 16 |
+| placement | 首选方向，支持四向及 -start / -end | string | bottom |
+| offset | 气泡距图标的距离，单位 px | number | 10 |
+| maxWidth | 最大宽度；数字单位 px | string / number | 360 |
+| active | 所属视图是否活动；关闭时立即停止提示 | boolean | true |
+| disabled | 禁用提示 | boolean | false |
+
+### HelpTooltip Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| content | 完全替代 title、content 和 lines 的正文 |
+
+### HelpTooltip Exposes
+
+| 方法 | 说明 |
+| --- | --- |
+| show() | 显示并保留提示；禁用或非活动时无效 |
+| hide() | 关闭提示 |
+| updatePosition() | 重新计算浮层位置 |
 
 ## Tooltip API
 

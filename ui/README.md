@@ -43,6 +43,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuSkeleton`、`AuSkeletonItem` | 支持自定义占位模板、重复数量、呼吸动画和延迟显隐的骨架屏 |
 | `AuIcon` | 图标尺寸、颜色与对齐外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
+| `AuHelpTooltip` | 圆形问号图标提示，支持悬浮说明、点击保留、点击外部关闭与长正文滚动 |
 | `AuDialog` | 模态对话框 |
 | `AuAboutDialog` | 应用信息、版本日志与可展开详情的通用关于对话框 |
 | `AuUpdateDialog` | 检查更新、版本说明、下载进度、安装与失败重试的受控界面，展示更新服务提供的多源状态 |
