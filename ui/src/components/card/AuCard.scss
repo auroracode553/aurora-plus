@@ -12,14 +12,10 @@
   color: var(--au-color-text-primary);
 }
 
-/* 类型：flat 为纯白无边框无阴影；elevated 用更明显的阴影浮起；subtle 为浅灰面。 */
+/* 类型：flat 无边框无阴影；subtle 为浅灰面。 */
 .au-card--flat {
   border-color: transparent;
   box-shadow: none;
-}
-
-.au-card--elevated {
-  box-shadow: var(--au-shadow-surface);
 }
 
 .au-card--subtle {

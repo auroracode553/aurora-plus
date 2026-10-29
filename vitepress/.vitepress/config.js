@@ -129,7 +129,6 @@ export default defineConfig({
           { text: 'Avatar 头像', link: '/components/avatar' },
           { text: 'Number 滚动数字', link: '/components/number' },
           { text: 'Trend 变化幅度', link: '/components/trend' },
-          { text: 'Panel 通用面板', link: '/components/panel' },
           { text: 'Collapse 折叠面板', link: '/components/collapse' },
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'Skeleton 骨架屏', link: '/components/skeleton' },

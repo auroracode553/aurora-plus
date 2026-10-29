@@ -26,7 +26,7 @@
 | Popover、Tooltip、Dropdown、ContextMenu、MenuBar、FloatingToolbar | `au-float` 或同阶段的命名过渡，位置测量留在组件 |
 | Badge、Avatar、Skeleton、Empty | 徽章显隐、图片替换、骨架反馈或空状态入场复用公共动效；Skeleton 保留直接插槽布局 |
 | Number、Progress、更新进度 | `motion.phase(progress, ...)`；不确定状态使用公共关键帧 |
-| Panel、Card、Form、Divider、Icon、Tag、Trend、PageHeader 和分组容器 | 状态类；可交互 Card 显式启用 `motion.lift`，内容进退可使用 AuTransition |
+| Card、Form、Divider、Icon、Tag、Trend、PageHeader 和分组容器 | 状态类；可交互 Card 显式启用 `motion.lift`，内容进退可使用 AuTransition |
 | 组合式日期、时间、树选择、Popconfirm、MessageBox、UpdateDialog | 复用内部控件和浮层的动画，不叠加整组缩放 |
 
 `AuTableColumn` 只声明列数据，不渲染可动画元素。`vLoading` 与命令式服务沿用相应组件，不独立声明动画。

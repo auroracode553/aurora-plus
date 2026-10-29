@@ -6,7 +6,7 @@ const selected = ref(false);
 </script>
 
 <template>
-  <AuCard tag="button" type="default" padding="compact" hoverable class="card-interactive-example" @click="selected = !selected">
+  <AuCard tag="button" padding="compact" hoverable class="card-interactive-example" @click="selected = !selected">
     {{ selected ? '已选择，点击取消' : '悬停抬升，点击选择' }}
   </AuCard>
 </template>

@@ -25,7 +25,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'default',
-    validator: (value) => ['default', 'flat', 'elevated', 'subtle'].includes(value),
+    validator: (value) => ['default', 'flat', 'subtle'].includes(value),
   },
   padding: {
     type: String,

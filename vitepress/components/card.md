@@ -14,6 +14,8 @@ import cardInteractiveSource from '../.vitepress/theme/examples/card/CardInterac
 
 ## 基础用法
 
+不传 `type` 时使用 `default` 类型。
+
 <DemoBlock
   title="空卡片容器"
   :source="cardBasicSource"
@@ -24,7 +26,7 @@ import cardInteractiveSource from '../.vitepress/theme/examples/card/CardInterac
 ## 类型
 
 <DemoBlock
-  title="四种卡片类型"
+  title="三种卡片类型"
   :source="cardVariantsSource"
 >
   <CardVariants />
@@ -45,7 +47,7 @@ import cardInteractiveSource from '../.vitepress/theme/examples/card/CardInterac
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | tag | 根元素或动态组件 | string / Component | div |
-| type | 卡片类型，可选 default / flat / elevated / subtle | string | default |
+| type | 卡片类型，可选 default / flat / subtle | string | default |
 | padding | 内容留白，可选 none / compact / default / comfortable | string | default |
 | hoverable | 开启悬停抬升 | boolean | false |
 

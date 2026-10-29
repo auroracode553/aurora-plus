@@ -39,7 +39,6 @@ import {
 import { AuMenu, AuMenuGroup, AuMenuItem } from './components/menu/index.js';
 import { AuMenuBar } from './components/menu-bar/index.js';
 import { AuMenuList, AuMenuListItem } from './components/menu-list/index.js';
-import { AuPanel } from './components/panel/index.js';
 import { AuPagination } from './components/pagination/index.js';
 import { AuPopconfirm } from './components/popconfirm/index.js';
 import { AuPopover } from './components/popover/index.js';
@@ -120,7 +119,6 @@ const components = [
   AuMenuBar,
   AuMenuList,
   AuMenuListItem,
-  AuPanel,
   AuPagination,
   AuPopconfirm,
   AuPopover,
@@ -208,7 +206,6 @@ export {
   AuMenuBar,
   AuMenuList,
   AuMenuListItem,
-  AuPanel,
   AuPagination,
   AuPopover,
   AuPopconfirm,
