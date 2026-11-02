@@ -44,7 +44,7 @@
   .au-pagination .au-pagination__button:hover:not(:disabled) {
     border-color: color-mix(in srgb, var(--au-color-text-primary) 26%, transparent);
     color: var(--au-color-text-primary);
-    background: var(--au-material-background-elevated);
+    background: var(--au-surface-background-elevated);
   }
 }
 
@@ -55,14 +55,14 @@
 .au-pagination .au-pagination__button.is-active {
   border-color: color-mix(in srgb, var(--au-color-primary) 42%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-material-background));
+  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-surface-background));
   font-weight: var(--au-font-weight-semibold);
 }
 
 .au-pagination .au-pagination__button.is-active:hover:not(:disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 55%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 10%, var(--au-material-background));
+  background: color-mix(in srgb, var(--au-color-primary) 10%, var(--au-surface-background));
 }
 
 .au-pagination .au-pagination__button.is-more {
@@ -126,12 +126,12 @@
 @mixin solid-buttons {
   .au-pagination:where(.has-background) .au-pagination__button,
   .au-pagination .au-pagination__button:hover:not(:disabled) {
-    @include surfaces.solid-surface;
+    @include surfaces.opaque-surface;
   }
 
   .au-pagination .au-pagination__button.is-active,
   .au-pagination .au-pagination__button.is-active:hover:not(:disabled) {
-    @include surfaces.solid-surface;
+    @include surfaces.opaque-surface;
     background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-color-background-overlay));
   }
 }

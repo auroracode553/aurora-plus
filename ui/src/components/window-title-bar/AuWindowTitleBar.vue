@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-window-title-bar au-component au-material-surface au-material-surface--base au-motion-state"
+    class="au-window-title-bar au-component au-surface au-surface--base au-motion-state"
     :class="{
       'is-drag-disabled': !draggable,
       'is-controls-start': controlsPosition === 'start',

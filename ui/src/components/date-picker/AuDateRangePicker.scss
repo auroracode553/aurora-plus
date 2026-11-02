@@ -12,7 +12,7 @@
   height: 32px;
   gap: 6px;
   padding: 0 9px;
-  border: 1px solid var(--au-material-border-emphasis);
+  border: 1px solid var(--au-surface-border-emphasis);
   border-radius: var(--au-radius-control);
   @include fields.field;
 }
@@ -56,7 +56,7 @@
 }
 
 .au-date-range-picker__pane + .au-date-range-picker__pane {
-  border-left: 1px solid var(--au-material-border);
+  border-left: 1px solid var(--au-surface-border);
 }
 
 .au-date-range-picker__footer {
@@ -74,7 +74,7 @@
   }
 
   .au-date-range-picker__pane + .au-date-range-picker__pane {
-    border-top: 1px solid var(--au-material-border);
+    border-top: 1px solid var(--au-surface-border);
     border-left: 0;
   }
 }

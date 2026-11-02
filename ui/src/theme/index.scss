@@ -1,6 +1,6 @@
 // 主题入口仅组织公共样式，组件专属样式由各自 Vue 文件引入。
 @use './tokens';
-@use './materials';
+@use './surface-tokens';
 @use './base';
 @use './motion';
 @use './surfaces';
@@ -8,3 +8,4 @@
 @use './controls';
 @use './overlays';
 @use './menus';
+@use './glass';

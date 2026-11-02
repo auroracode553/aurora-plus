@@ -8,11 +8,12 @@
   max-width: 100%;
   gap: 2px;
   padding: 2px;
-  border: 1px solid var(--au-material-border);
+  border: 1px solid var(--au-surface-border);
   border-radius: 9px;
   overflow-x: auto;
   isolation: isolate;
   vertical-align: middle;
+  touch-action: pan-y;
 }
 .au-segmented__indicator {
   position: absolute;
@@ -22,7 +23,6 @@
   pointer-events: none;
   @include surfaces.selected(var(--au-color-text-primary));
 }
-.au-segmented__indicator.is-animated { @include motion.phase(release, transform, width, height, opacity); }
 .au-segmented__item {
   position: relative;
   display: inline-flex;
@@ -41,7 +41,7 @@
   font-size: 13px;
   white-space: nowrap;
   cursor: pointer;
-  @include motion.control;
+  @include motion.transition(color, background-color);
 }
 .au-segmented__item:hover:not(:disabled) { color: var(--au-color-text-primary); background: var(--au-color-background-hover); }
 .au-segmented__item.is-selected { color: var(--au-color-text-primary); font-weight: var(--au-font-weight-semibold); }

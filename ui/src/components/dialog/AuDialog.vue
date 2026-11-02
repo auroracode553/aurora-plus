@@ -9,8 +9,9 @@
         @mousedown.self="handleOverlayClick"
       >
         <section
+          v-glass="{ role: 'dialog' }"
           ref="dialogRef"
-          class="au-dialog au-component au-material-surface au-depth-overlay au-motion-panel au-overlay-surface au-motion-state"
+          class="au-dialog au-component au-surface au-depth-overlay au-motion-panel au-overlay-surface au-motion-state"
           :style="dialogStyle"
           tabindex="-1"
           @mousedown.stop
@@ -42,6 +43,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { useOverlayLayer } from '../../utils/overlay-layer.js';
 import { IconX } from '../../icons/internal.js';

@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import AuIcon from '../icon/AuIcon.vue';
 import { useSlidingIndicator } from '../../utils/use-sliding-indicator.js';
+import { vGlass } from '../../utils/glass/directive.js';
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: undefined },
@@ -16,9 +17,14 @@ const root = ref(null);
 const items = computed(() => props.items.map((item) => typeof item === 'object' && item !== null
   ? { ...item, value: item[props.valueKey] }
   : { label: String(item), value: item }));
-const { style: indicatorStyle, animated } = useSlidingIndicator(root, {
+const { style: indicatorStyle, animated, progress } = useSlidingIndicator(root, {
+  liquid: true,
+  onDragSelect: (element) => {
+    const index = Array.from(root.value.querySelectorAll(':scope > button')).indexOf(element);
+    if (index >= 0) select(items.value[index]);
+  },
   target: () => root.value?.querySelector('.au-segmented__item.is-selected'),
-  dependencies: [() => props.modelValue, items, () => props.fill, () => props.size],
+  dependencies: [() => props.modelValue, items, () => props.fill, () => props.size, () => props.disabled],
 });
 
 function select(item) {
@@ -42,9 +48,9 @@ function handleKeydown(event) {
 </script>
 
 <template>
-  <div ref="root" class="au-segmented au-component au-material-surface au-material-surface--base au-motion-state" :class="[`au-segmented--${size}`, { 'is-fill': fill, 'is-disabled': disabled }]" @keydown="handleKeydown">
-    <span class="au-segmented__indicator" :class="{ 'is-animated': animated }" :style="indicatorStyle" />
-    <button v-for="item in items" :key="item.value" type="button" class="au-segmented__item au-motion-control" :class="{ 'is-selected': Object.is(item.value, modelValue) }" :disabled="disabled || item.disabled" @click="select(item)">
+  <div ref="root" v-glass="{ role: 'navigation' }" class="au-segmented au-component au-surface au-surface--base au-motion-state" :class="[`au-segmented--${size}`, { 'is-fill': fill, 'is-disabled': disabled }]" @keydown="handleKeydown">
+    <span v-glass="{ role: 'selection', progress, enabled: !disabled }" class="au-segmented__indicator" :style="indicatorStyle" />
+    <button v-for="item in items" :key="item.value" type="button" class="au-segmented__item" :class="{ 'is-selected': Object.is(item.value, modelValue) }" :disabled="disabled || item.disabled" @click="select(item)">
       <slot name="item" :item="item" :selected="Object.is(item.value, modelValue)">
         <AuIcon v-if="item.icon" :icon="item.icon" :size="14" />
         <span class="au-truncate">{{ item.label }}</span>

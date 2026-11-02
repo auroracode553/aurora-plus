@@ -30,8 +30,8 @@
   z-index: 4;
   flex: none;
   min-width: 0;
-  border-bottom: 1px solid var(--au-material-border);
-  background: var(--au-material-background-elevated);
+  border-bottom: 1px solid var(--au-surface-border);
+  background: var(--au-surface-background-elevated);
 }
 
 .au-table__header-viewport {
@@ -85,7 +85,7 @@
   align-items: center;
   min-width: 0;
   padding: 0 10px;
-  border-bottom: 1px solid var(--au-material-border);
+  border-bottom: 1px solid var(--au-surface-border);
 }
 
 .au-table__header-cell {
@@ -114,21 +114,21 @@
 
 .au-table.has-border .au-table__header-cell,
 .au-table.has-border .au-table__cell {
-  border-right: 1px solid var(--au-material-border);
+  border-right: 1px solid var(--au-surface-border);
 }
 
 .au-table__header-cell.is-fixed,
 .au-table__cell.is-fixed {
   position: sticky;
-  background: var(--au-material-background-elevated);
+  background: var(--au-color-background-overlay);
 }
 
 .au-table__row:hover .au-table__cell.is-fixed {
-  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
+  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-color-background-overlay));
 }
 
 .au-table__row.is-current-row .au-table__cell.is-fixed {
-  background: color-mix(in srgb, var(--au-color-primary) 11%, var(--au-material-background-elevated));
+  background: color-mix(in srgb, var(--au-color-primary) 11%, var(--au-color-background-overlay));
 }
 
 .au-table__sort-button {
@@ -163,7 +163,7 @@
   width: max-content;
   gap: 6px;
   padding: 6px 10px;
-  border: 1px solid var(--au-material-border);
+  border: 1px solid var(--au-surface-border);
   border-radius: var(--au-radius-pill);
   color: var(--au-color-text-primary);
 }

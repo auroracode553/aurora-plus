@@ -1,6 +1,7 @@
 <template>
   <button
-    class="au-button au-component au-control-reset au-inline-center au-depth-control au-motion-state au-motion-control"
+    v-glass="{ role: 'button', interactive: true, enabled: !disabled, sample: type !== 'menu', shadow: type !== 'menu', outline: type === 'default' }"
+    class="au-button au-component au-control-reset au-inline-center au-depth-control au-motion-state"
     :class="buttonClasses"
     :type="nativeType"
     :disabled="disabled || loading"
@@ -20,6 +21,7 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
+import { vGlass } from '../../utils/glass/directive.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
@@ -73,15 +75,16 @@ const buttonStyle = computed(() => {
 
 const buttonClasses = computed(() => [
   `au-button--${props.type}`,
-  `au-button--${props.size}`,
+  `au-button--size-${props.size}`,
   {
     'is-plain': props.plain,
     'is-round': props.round,
     'is-circle': props.circle,
     'is-icon-only': isIconOnly.value,
     'is-selected': isSelected.value,
-    'is-disabled': props.disabled || props.loading,
-    'au-disabled': props.disabled || props.loading,
+    'is-disabled': props.disabled,
+    'is-loading': props.loading,
+    'au-disabled': props.disabled,
   },
 ]);
 

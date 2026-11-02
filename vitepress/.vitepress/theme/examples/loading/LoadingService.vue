@@ -45,7 +45,7 @@ function openFullscreenLoading() {
   const instance = AuLoading.service({
     lock: true,
     text: '正在同步工作区…',
-    background: 'color-mix(in srgb, var(--au-material-background) 82%, transparent)',
+    background: 'color-mix(in srgb, var(--au-surface-background) 82%, transparent)',
   });
   const textTimer = globalThis.setTimeout(() => {
     timers.delete(textTimer);

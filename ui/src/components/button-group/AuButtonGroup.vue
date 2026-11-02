@@ -1,5 +1,6 @@
 <template>
   <div
+    v-glass="{ role: 'navigation' }"
     class="au-button-group au-component au-motion-state"
     :class="[
       `is-${variant}`,
@@ -8,7 +9,7 @@
       {
         'is-icon-only': iconOnly,
         'is-inverse': inverse,
-        'au-material-blur': variant === 'segmented',
+        'au-backdrop': variant === 'segmented',
       },
     ]"
   >
@@ -17,6 +18,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, provide } from 'vue';
 
 const BUTTON_GROUP_CONTEXT = Symbol.for('aurora-plus.button-group-context');

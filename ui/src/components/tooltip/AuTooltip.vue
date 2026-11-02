@@ -17,7 +17,7 @@
       <div
         v-if="visible && hasContent"
         ref="tooltipRef"
-        class="au-tooltip__popper au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere au-motion-state"
+        v-glass="{ role: 'navigation' }" class="au-tooltip__popper au-component au-surface au-depth-overlay au-motion-popover au-wrap-anywhere au-motion-state"
         :class="`is-${activePlacement}`"
         :style="popperStyle"
       >
@@ -29,6 +29,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue';
 import { useOverlayLayer } from '../../utils/overlay-layer.js';
 

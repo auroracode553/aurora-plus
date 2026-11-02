@@ -1,0 +1,16 @@
+/* 全库统一表面令牌；不存在材质属性或可切换档位。 */
+:root,
+[data-au-theme] {
+  --au-surface-background: rgb(255 255 255 / 40%);
+  --au-surface-background-elevated: rgb(255 255 255 / 60%);
+  --au-surface-background-subtle: color-mix(in srgb, var(--au-color-background-subtle) 40%, transparent);
+  --au-surface-border: var(--au-color-border-subtle);
+  --au-surface-border-emphasis: var(--au-color-border-default);
+  --au-surface-blur: 8px;
+  --au-surface-saturation: 100%;
+}
+
+[data-au-theme='dark'] {
+  --au-surface-background: rgb(255 255 255 / 13.6%);
+  --au-surface-background-elevated: rgb(255 255 255 / 27.2%);
+}

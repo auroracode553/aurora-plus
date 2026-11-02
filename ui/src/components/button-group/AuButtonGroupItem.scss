@@ -25,7 +25,9 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  @include motion.control;
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--au-transition-duration);
+  transition-timing-function: var(--au-transition-timing);
 }
 
 .au-button-group-item:hover:not(.is-disabled, .is-selected) {
@@ -43,11 +45,11 @@
 }
 
 .au-button-group-item.is-selected:hover:not(.is-disabled) {
-  background: color-mix(in srgb, currentColor 9%, var(--au-material-background-elevated));
+  background: color-mix(in srgb, currentColor 9%, var(--au-surface-background-elevated));
 }
 
 .au-button-group-item.is-selected:active:not(.is-disabled) {
-  background: color-mix(in srgb, currentColor 12%, var(--au-material-background-elevated));
+  background: color-mix(in srgb, currentColor 12%, var(--au-surface-background-elevated));
 }
 
 .au-button-group-item.is-disabled {

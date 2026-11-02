@@ -133,11 +133,4 @@ setAuroraTheme('dark');
 setAuroraTheme('light');
 ```
 
-使用 `setAuroraMaterial` 切换玻璃材质，默认 `solid`，可选 `soft`、`clear` 和 `solid`：
-
-```js
-import { setAuroraMaterial } from 'aurora-plus';
-
-setAuroraMaterial('clear');
-setAuroraMaterial('solid');
-```
+组件统一使用内置的玻璃表面、光学边缘和弹簧反馈，无材质属性或全局档位。具体行为见[动效指南](https://auroracode553.github.io/aurora-plus/guide/motion)。

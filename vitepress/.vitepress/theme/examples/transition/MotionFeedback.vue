@@ -83,7 +83,7 @@ onBeforeUnmount(() => clearTimeout(timer));
 .motion-feedback__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: var(--au-color-text-secondary); }
 .motion-feedback__fields { display: grid; min-width: 0; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 8px; }
 .motion-feedback__list { display: grid; gap: 6px; }
-.motion-feedback__native { height: 28px; padding: 0 9px; border: 1px solid var(--au-material-border); border-radius: var(--au-radius-compact); color: var(--au-color-text-default); background: transparent; font: inherit; cursor: pointer; }
+.motion-feedback__native { height: 28px; padding: 0 9px; border: 1px solid var(--au-surface-border); border-radius: var(--au-radius-compact); color: var(--au-color-text-default); background: transparent; font: inherit; cursor: pointer; }
 .motion-feedback__native:hover { color: var(--au-color-primary); border-color: var(--au-color-primary); }
 .motion-feedback p { margin: 0; font-size: 13px; line-height: 1.5; }
 @media (max-width: 440px) { .motion-feedback__fields { grid-template-columns: minmax(0, 1fr); } }

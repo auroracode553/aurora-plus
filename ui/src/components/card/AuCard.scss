@@ -6,7 +6,7 @@
   min-width: 0;
   max-width: 100%;
   flex-direction: column;
-  border: 1px solid var(--au-material-border);
+  border: 1px solid var(--au-surface-border);
   border-radius: var(--au-radius-surface);
   box-shadow: var(--au-shadow-control);
   color: var(--au-color-text-primary);
@@ -21,7 +21,7 @@
 .au-card--subtle {
   border-color: transparent;
   /* 极淡灰白：30% 浅灰材质 + 纯白表面，比纯白稍灰，贴合参考图的内层浅色卡。 */
-  background: color-mix(in srgb, var(--au-color-background-subtle) 30%, var(--au-material-background));
+  background: color-mix(in srgb, var(--au-color-background-subtle) 30%, var(--au-surface-background));
   box-shadow: none;
 }
 

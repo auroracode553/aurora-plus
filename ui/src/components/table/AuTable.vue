@@ -82,7 +82,7 @@
         </div>
       </div>
     </div>
-    <div v-if="loading" class="au-table__loading au-material-surface au-depth-surface au-motion-reveal">
+    <div v-if="loading" class="au-table__loading au-surface au-depth-surface au-motion-reveal">
       <slot name="loading"><AuLoadingSpinner :text="loadingText" /></slot>
     </div>
   </div>

@@ -69,7 +69,7 @@ function showPreview(index) {
   display: block;
   width: 100%;
   aspect-ratio: 8 / 5;
-  border: 1px solid var(--au-material-border);
+  border: 1px solid var(--au-surface-border);
   border-radius: var(--au-radius-control);
   object-fit: cover;
 }

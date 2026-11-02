@@ -12,10 +12,10 @@
   gap: 6px;
   padding: 8px 15px;
   overflow: hidden;
-  border: 1px solid var(--au-material-border-emphasis);
+  border: 1px solid var(--au-surface-border-emphasis);
   border-radius: var(--au-radius-control);
   color: var(--au-color-text-default);
-  background: var(--au-material-background);
+  background: var(--au-surface-background);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1;
@@ -24,32 +24,32 @@
   cursor: pointer;
   user-select: none;
   transform: translateZ(0);
-  @include motion.control;
+  // 缩放由玻璃按压时间函数逐帧驱动，不能再由 CSS 追赶同一个展示值。
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--au-transition-duration);
+  transition-timing-function: var(--au-transition-timing);
 }
 
 .au-button:hover:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 42%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-material-background));
-  box-shadow: var(--au-shadow-surface);
+  background: var(--au-glass-tint);
 }
 
 .au-button:active:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 58%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 14%, var(--au-material-background));
-  box-shadow: var(--au-shadow-control);
-  @include motion.press(0.97);
+  background: var(--au-glass-tint);
 }
 
-.au-button--small {
+.au-button--size-small {
   height: 28px;
   padding: 5px 11px;
   border-radius: var(--au-radius-compact);
   font-size: var(--au-font-size-small);
 }
 
-.au-button--large {
+.au-button--size-large {
   height: 40px;
   padding: 10px 19px;
   border-radius: var(--au-radius-control);
@@ -87,24 +87,24 @@
   .au-button--#{$tone} {
     border-color: color-mix(in srgb, $color 78%, #ffffff);
     color: #ffffff;
-    background: color-mix(in srgb, $color 92%, #ffffff);
+    background: color-mix(in srgb, $color 90%, transparent);
 
     &:hover:not(.is-disabled) {
       border-color: $color;
       color: #ffffff;
-      background: color-mix(in srgb, $color 82%, #ffffff);
+      background: color-mix(in srgb, $color 94%, transparent);
     }
 
     &:active:not(.is-disabled) {
       border-color: $color;
       color: #ffffff;
-      background: color-mix(in srgb, $color 100%, map.get(config.$button-active-blends, $tone));
+      background: color-mix(in srgb, $color 90%, transparent);
     }
 
     &.is-plain {
-      border-color: $color;
+      border-color: color-mix(in srgb, $color 35%, transparent);
       color: $color;
-      background: color-mix(in srgb, $color 12%, var(--au-material-background));
+      background: color-mix(in srgb, $color 12%, var(--au-surface-background));
 
       &:hover:not(.is-disabled) {
         background: $color;
@@ -129,7 +129,7 @@
   letter-spacing: 0;
   -webkit-app-region: no-drag;
 
-  &.au-button--small {
+  &.au-button--size-small {
     min-width: 24px;
     height: 24px;
     padding: 0 6px;
@@ -141,7 +141,7 @@
     }
   }
 
-  &.au-button--large {
+  &.au-button--size-large {
     min-width: 30px;
     height: 30px;
     padding: 0 10px;
@@ -200,3 +200,11 @@
   }
 
 }
+
+.au-button.is-disabled:not(.au-button--menu) {
+  color: var(--au-color-text-disabled);
+  border-color: var(--au-color-border-muted);
+  background: var(--au-color-background-subtle);
+  box-shadow: none;
+}
+.au-button.is-loading { cursor: progress; }

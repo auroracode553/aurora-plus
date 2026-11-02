@@ -59,13 +59,6 @@ import { AuWindowTitleBar } from './components/window-title-bar/index.js';
 import { AuMessage } from './services/message/index.js';
 import { AuMessageBox } from './services/message-box/index.js';
 import {
-  AURORA_MATERIALS,
-  DEFAULT_AURORA_MATERIAL,
-  getAuroraMaterial,
-  isAuroraMaterial,
-  setAuroraMaterial,
-} from './utils/material.js';
-import {
   AURORA_THEMES,
   DEFAULT_AURORA_THEME,
   getAuroraTheme,
@@ -147,7 +140,6 @@ export const AuroraPlus = {
   version,
   install(app, options = {}) {
     if (options.theme) setAuroraTheme(options.theme);
-    if (options.material) setAuroraMaterial(options.material);
     components.forEach((component) => app.component(component.componentName, component));
     app.directive('loading', vLoading);
     app.config.globalProperties.$loading = Object.assign(
@@ -229,18 +221,15 @@ export {
   AuVirtualList,
   AuVirtualTable,
   AuWindowTitleBar,
-  AURORA_MATERIALS,
   AURORA_THEMES,
-  DEFAULT_AURORA_MATERIAL,
   DEFAULT_AURORA_THEME,
-  getAuroraMaterial,
   getAuroraTheme,
-  isAuroraMaterial,
   isAuroraTheme,
-  setAuroraMaterial,
   setAuroraTheme,
 };
 
 export { renderReleaseNotesMarkdown } from './utils/release-notes.js';
 
 export default AuroraPlus;
+
+export { createAuroraGlassSurface } from './utils/glass/surface.js';

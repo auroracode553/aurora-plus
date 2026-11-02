@@ -35,7 +35,7 @@ npm run dev
 
 示例保存在 `.vitepress/theme/examples/`。组件页面通过 `DemoBlock` 展示同一 Vue 文件的预览与源码，`?demo-source` 由插件读取并交给 Shiki 高亮。
 
-图标分类来自 UI 包所用 Tabler 版本的元数据，不进入 UI 产物。文档主题通过公开的主题和材质接口设置全站外观，材质偏好由 `theme/utils/material-preference.js` 持久化。
+图标分类来自 UI 包所用 Tabler 版本的元数据，不进入 UI 产物。文档示例使用组件库统一外观，不保存或恢复材质偏好。亮暗模式通过公开主题接口同步。
 
 示例须完整定义数据、状态与事件。样式仅作用于示例自有容器和插槽内容，组件外观通过公开属性控制，不使用库内部选择器或样式穿透。
 

@@ -38,10 +38,11 @@
       />
 
       <span ref="trackRef" class="au-slider__track">
-        <span class="au-slider__fill" :style="{ inlineSize: `${percentage}%` }"></span>
+        <span class="au-slider__fill" :style="{ inlineSize: `${displayedPercentage}%` }"></span>
         <span
+          v-glass="{ role: 'thumb', progress, enabled: !disabled }"
           class="au-slider__thumb"
-          :style="{ insetInlineStart: `${percentage}%` }"
+          :style="{ insetInlineStart: `${displayedPercentage}%` }"
         ></span>
       </span>
     </div>
@@ -65,6 +66,8 @@
 
 <script setup>
 import { computed, ref, useAttrs, useSlots, watch } from 'vue';
+import { vGlass } from '../../utils/glass/directive.js';
+import { useSliderMotion } from './use-slider-motion.js';
 
 defineOptions({ inheritAttrs: false });
 
@@ -119,6 +122,7 @@ const formattedValue = computed(() => {
   return String(value);
 });
 const hasValue = computed(() => props.showValue || Boolean(slots.value));
+const { displayedPercentage, progress } = useSliderMotion(percentage, isDragging, computed(() => props.disabled));
 
 function toFiniteNumber(value, fallback) {
   const numericValue = Number(value);

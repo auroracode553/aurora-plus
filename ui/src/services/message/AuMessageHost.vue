@@ -3,7 +3,7 @@
     <div
       v-for="item in items"
       :key="item.id"
-      class="au-message au-component au-material-surface au-depth-overlay au-motion-popover au-wrap-anywhere au-motion-state"
+      v-glass="{ role: 'navigation' }" class="au-message au-component au-surface au-depth-overlay au-motion-popover au-wrap-anywhere au-motion-state"
       :class="`au-message--${item.type}`"
       @mouseenter="$emit('pause', item.id)"
       @mouseleave="$emit('resume', item.id)"
@@ -24,6 +24,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed } from 'vue';
 import { IconX } from '../../icons/internal.js';
 import { AuIcon } from '../../components/icon/index.js';

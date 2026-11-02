@@ -10,7 +10,7 @@
 - `../../utils/layout-box.js` 与 `use-sliding-indicator.js`：布局坐标测量和选中层同步，供组件及列表过渡引用。
 - `../../utils/floating-actions.js`：过滤退出中的浮层操作项，供菜单键盘导航引用。
 
-时长和曲线仅取自 `--au-transition-duration`、`--au-transition-timing`。阶段倍率集中在 mixin 中，不新增组件级 CSS 变量。静态表面使用状态过渡；交互动作才触发按压、切换或进退，不为整页控件添加常驻装饰动画。
+普通 CSS 动效的时长和曲线取自 `--au-transition-duration`、`--au-transition-timing`。阶段倍率集中在 mixin 中，不新增组件级 CSS 变量。光学按钮使用固定 85/180ms 时间函数；镜片、开关和滑块由公共物理弹簧驱动，不能再叠加 CSS 位置过渡。实现分工和参数见[统一外观实现](../../../../docs/appearance.md)。
 
 ## 接入规则
 
@@ -19,8 +19,9 @@
 | 表面、主题及禁用颜色变化 | 根元素 `au-motion-state` 或 `motion.state` |
 | 按钮、链接、菜单命令、标签关闭、窗口控制 | `au-motion-control`、`motion.control`；局部按压使用数值参数 `motion.press` |
 | 输入框及选择器外壳 | `fields.field` 复用 `motion.state`，编辑区域不缩放 |
-| Switch、Checkbox、Slider | 状态轨道及标记使用共享过渡；按压只改变独立 scale 属性 |
-| Tabs、Segmented | 选中层使用共享过渡和位置测量工具，不修改父容器尺寸 |
+| Switch、Slider | 各自 motion 模块维护展示弹簧，受控业务值留在组件 |
+| Checkbox | 轨道和标记复用公共状态过渡 |
+| Tabs、Segmented | 公共测量和位置弹簧；Segmented 额外使用按压、双轴伸展与速度通道 |
 | Table、VirtualTable、Tree、菜单列表 | `motion.row` 过渡悬停及选中颜色；不动画虚拟滚动偏移 |
 | Dialog、Drawer、ImagePreview、Loading | 统一进退类；模态面板通过 `au-motion-panel` 继承交互层节奏 |
 | Popover、Tooltip、Dropdown、ContextMenu、MenuBar、FloatingToolbar | `au-float` 或同阶段的命名过渡，位置测量留在组件 |
@@ -33,6 +34,6 @@
 
 ## 生命周期与布局
 
-进入比退出稍长，按压立即响应、释放平滑恢复。缩放与位移优先用独立 `scale`、`translate` 属性，保留组件自身的 transform 定位。对 DOM 尺寸进行测量的 Collapse 只由 JS 设置起止高度，帧与节奏归公共 CSS；完成后恢复自然高度。
+进入和退出默认均为 250ms，按压立即响应、释放平滑恢复。缩放与位移优先用独立 `scale`、`translate` 属性，保留组件自身的 transform 定位。对 DOM 尺寸进行测量的 Collapse 只由 JS 设置起止高度，帧与节奏归公共 CSS；完成后恢复自然高度。
 
 AuTransitionGroup 的稳定 key 支持原生 Vue 位置过渡；元素插入后设置逐项间隔，退出前锁定布局位置和尺寸。动态时长、间隔和布局样式在结束、取消与卸载时恢复，保留调用方的行内样式优先级。列表退出元素取消指针交互；菜单键盘导航过滤退出中的操作项。调用方的拖拽位置和虚拟列表偏移不设置 transition，避免运动跟随滞后。

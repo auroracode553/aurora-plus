@@ -54,7 +54,7 @@
       />
     </template>
 
-    <section class="au-tree-select__popover au-component au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-motion-state">
+    <section v-glass="{ role: 'navigation' }" class="au-tree-select__popover au-component au-surface au-depth-overlay au-overlay-surface au-floating-viewport au-motion-state">
       <AuTree
         ref="treeRef"
         class="au-tree-select__tree"
@@ -75,6 +75,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
 import { IconChevronDown } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';

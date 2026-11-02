@@ -1,6 +1,7 @@
 <template>
   <button
-    class="au-button-group-item au-component au-control-reset au-inline-center au-motion-state au-motion-control"
+    v-glass="{ role: 'button', interactive: true, enabled: !disabled, sample: isSelected, shadow: isSelected, outline: false }"
+    class="au-button-group-item au-component au-control-reset au-inline-center au-motion-state"
     :class="itemClasses"
     :type="nativeType"
     :disabled="disabled || loading"
@@ -19,6 +20,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, inject, useSlots } from 'vue';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
@@ -72,7 +74,8 @@ const itemClasses = computed(() => [
     'is-inverse': inverse.value,
     'is-icon-only': isIconOnly.value,
     'is-selected': isSelected.value,
-    'is-disabled': props.disabled || props.loading,
+    'is-disabled': props.disabled,
+    'is-loading': props.loading,
   },
 ]);
 

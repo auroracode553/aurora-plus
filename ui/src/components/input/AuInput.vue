@@ -1,5 +1,6 @@
 <template>
   <div
+    v-glass="{ role: 'navigation', enabled: !disabled && !loading, outline: false }"
     class="au-input au-component au-motion-state"
     :class="[
       `is-${size}`,
@@ -102,6 +103,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, inject, nextTick, ref, useAttrs, useSlots } from 'vue';
 import { IconEye, IconEyeOff, IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';

@@ -203,6 +203,6 @@
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .au-select__listbox {
-    @include surfaces.solid-surface;
+    @include surfaces.opaque-surface;
   }
 }

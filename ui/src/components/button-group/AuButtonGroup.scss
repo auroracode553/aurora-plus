@@ -36,7 +36,7 @@
   border: 0;
   border-radius: var(--au-radius-surface);
   color: var(--au-color-text-default);
-  background: var(--au-material-background-subtle);
+  background: var(--au-surface-background-subtle);
 }
 
 .au-button-group:is(.is-connected, .is-floating).is-small {
@@ -54,7 +54,7 @@
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .au-button-group:is(.is-connected, .is-floating) {
-    @include surfaces.solid-surface;
+    @include surfaces.opaque-surface;
   }
 
   .au-button-group.au-component.is-inverse {

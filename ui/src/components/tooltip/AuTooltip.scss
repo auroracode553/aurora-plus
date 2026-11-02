@@ -6,7 +6,7 @@
   position: fixed;
   min-height: 24px;
   padding: 5px 8px;
-  border: 1px solid var(--au-material-border-emphasis);
+  border: 1px solid var(--au-surface-border-emphasis);
   border-radius: var(--au-radius-control);
   color: var(--au-color-text-primary);
   font-size: var(--au-font-size-small);
@@ -28,8 +28,8 @@
   width: auto;
   height: 8px;
   aspect-ratio: 1;
-  border: 1px solid var(--au-material-border-emphasis);
-  background: var(--au-material-background-elevated);
+  border: 1px solid var(--au-surface-border-emphasis);
+  background: var(--au-surface-background-elevated);
   transform: rotate(45deg);
 }
 

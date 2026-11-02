@@ -74,7 +74,7 @@
       </div>
     </template>
 
-    <div class="au-date-range-picker__panel au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
+    <div v-glass="{ role: 'navigation' }" class="au-date-range-picker__panel au-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
       <div class="au-date-range-picker__calendars">
         <AuDatePickerPane
           ref="leftPaneRef"
@@ -131,6 +131,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
 import { IconCalendar, IconX } from '../../icons/internal.js';
 import { AuButton } from '../button/index.js';

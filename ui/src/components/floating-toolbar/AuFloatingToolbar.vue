@@ -4,7 +4,8 @@
       <div
         v-if="visible"
         ref="toolbarRef"
-        class="au-floating-toolbar au-component au-material-surface au-depth-overlay au-motion-popover au-motion-state"
+        v-glass="{ role: 'navigation' }"
+        class="au-floating-toolbar au-component au-surface au-depth-overlay au-motion-popover au-motion-state"
         :class="`is-${activePlacement}`"
         :style="toolbarStyle"
         @pointerdown.stop
@@ -25,6 +26,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 const props = defineProps({

@@ -1,5 +1,6 @@
 <template>
   <button
+    ref="root"
     class="au-switch au-component au-choice-control au-control-reset au-motion-state"
     :class="[
       `is-${size}`,
@@ -11,10 +12,18 @@
     type="button"
     :disabled="disabled || loading"
     v-bind="$attrs"
-    @click="toggle"
+    @click="motion.click"
+    @pointerdown="motion.down"
+    @pointermove="motion.move"
+    @pointerup="motion.up"
+    @pointercancel="motion.lost"
+    @lostpointercapture="motion.lost"
+    @keydown="motion.keydown"
+    @keyup="motion.keyup"
+    @blur="motion.cancel"
   >
-    <span class="au-switch__track">
-      <span class="au-switch__thumb au-depth-control au-inline-center">
+    <span class="au-switch__track" :style="trackStyle">
+      <span v-glass="{ role: 'switch', progress, enabled: !disabled && !loading }" class="au-switch__thumb au-inline-center" :style="thumbStyle">
         <AuLoadingSpinner
           v-if="loading"
           class="au-switch__loading"
@@ -31,7 +40,9 @@
 </template>
 
 <script setup>
-import { computed, useSlots } from 'vue';
+import { computed, ref, useSlots } from 'vue';
+import { vGlass } from '../../utils/glass/directive.js';
+import { useSwitchMotion } from './use-switch-motion.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
 defineOptions({ inheritAttrs: false });
@@ -57,12 +68,14 @@ const slots = useSlots();
 const checked = computed(() => Object.is(props.modelValue, props.activeValue));
 const hasLabel = computed(() => Boolean(slots.default || props.activeText || props.inactiveText));
 
-function toggle() {
+const root = ref(null);
+const motion = useSwitchMotion(props, checked, root, (active) => {
   if (props.disabled || props.loading) return;
-  const value = checked.value ? props.inactiveValue : props.activeValue;
+  const value = active ? props.activeValue : props.inactiveValue;
   emit('update:modelValue', value);
   emit('change', value);
-}
+});
+const { progress, thumbStyle, trackStyle } = motion;
 </script>
 
 <style scoped lang="scss" src="./AuSwitch.scss"></style>

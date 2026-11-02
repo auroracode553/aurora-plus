@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
+    v-glass="{ role: 'navigation' }" class="au-menu-bar-panel au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
     :class="{ 'has-leading-column': hasLeadingColumn }"
     @mousedown.prevent
     @keydown.esc.stop="emit('close')"
@@ -67,6 +67,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, ref } from 'vue';
 import { IconCheck, IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';

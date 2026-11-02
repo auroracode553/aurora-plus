@@ -1,10 +1,10 @@
 <template>
   <section
     ref="paneRef"
-    class="au-date-picker-pane au-component au-motion-state"
+    v-glass="{ role: 'navigation', enabled: surface }" class="au-date-picker-pane au-component au-motion-state"
     :class="{
       'has-surface': surface,
-      'au-material-surface': surface,
+      'au-surface': surface,
       'au-depth-overlay': surface,
       'au-overlay-surface': surface,
       'au-floating-viewport': surface,
@@ -88,6 +88,7 @@
 </template>
 
 <script setup>
+import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, ref, watch } from 'vue';
 import { IconChevronLeft, IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';

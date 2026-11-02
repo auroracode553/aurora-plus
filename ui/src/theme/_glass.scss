@@ -1,0 +1,50 @@
+// 全库只共享材质角色，不开放组件专属变量，也不改变尺寸和命中区域。
+:root, [data-au-theme] {
+  --au-glass-tint: rgb(255 255 255 / 40%);
+  --au-glass-dialog-tint: rgb(255 255 255 / 60%);
+  --au-glass-shadow-color: rgb(0 0 0 / 8%);
+  --au-glass-dialog-blur: 16px;
+  --au-glass-selection: rgb(0 0 0 / 10%);
+  --au-glass-switch-on: rgb(52 199 89);
+  --au-glass-switch-off: rgb(120 120 120 / 20%);
+}
+[data-au-theme='dark'] {
+  --au-glass-tint: rgb(255 255 255 / 13.6%);
+  --au-glass-dialog-tint: rgb(255 255 255 / 27.2%);
+  --au-glass-shadow-color: rgb(0 0 0 / 18%);
+  --au-glass-dialog-blur: 8px;
+  --au-glass-selection: rgb(255 255 255 / 10%);
+  --au-glass-switch-on: rgb(48 209 88);
+  --au-glass-switch-off: rgb(120 120 128 / 36%);
+}
+.au-button.au-button--default:not(.is-disabled),
+.au-segmented,
+.au-button-group:is(.is-connected, .is-floating, .is-segmented),
+.au-floating-toolbar {
+  background: var(--au-glass-tint);
+  backdrop-filter: blur(8px);
+}
+.au-button:not(.au-button--menu) { scale: 1; }
+.au-button.is-disabled {
+  color: var(--au-color-text-disabled);
+  background: var(--au-color-background-subtle);
+  border-color: var(--au-color-border-muted);
+  box-shadow: none;
+}
+.au-segmented, .au-button-group:is(.is-connected, .is-floating, .is-segmented), .au-floating-toolbar {
+  box-shadow: 0 0 8px var(--au-glass-shadow-color);
+}
+.au-dialog, .au-drawer {
+  background: var(--au-glass-dialog-tint);
+  backdrop-filter: blur(var(--au-glass-dialog-blur)) saturate(1.5);
+  box-shadow: 0 0 16px var(--au-glass-shadow-color);
+}
+@media (prefers-reduced-motion: reduce) {
+  .au-component, .au-component * { transition-duration: 0s !important; }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .au-button:not(.au-button--menu), .au-dialog, .au-drawer, .au-segmented,
+  .au-floating-toolbar, .au-button-group {
+    background: var(--au-color-background-overlay);
+  }
+}

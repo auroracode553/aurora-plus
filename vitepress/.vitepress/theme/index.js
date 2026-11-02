@@ -1,13 +1,20 @@
 import DefaultTheme from 'vitepress/theme';
-import AuroraPlus from 'aurora-plus';
+import { useData } from 'vitepress';
+import { defineComponent, h, watch } from 'vue';
+import AuroraPlus, { setAuroraTheme } from 'aurora-plus';
 import 'aurora-plus/style.css';
 import './custom.css';
-import { initializeDocsMaterial } from './utils/material-preference.js';
 
 export default {
   extends: DefaultTheme,
+  Layout: defineComponent({
+    setup() {
+      const { isDark } = useData();
+      watch(isDark, (dark) => setAuroraTheme(dark ? 'dark' : 'light'), { immediate: true });
+      return () => h(DefaultTheme.Layout);
+    },
+  }),
   enhanceApp({ app }) {
     app.use(AuroraPlus);
-    initializeDocsMaterial();
   },
 };

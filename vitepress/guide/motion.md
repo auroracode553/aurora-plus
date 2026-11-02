@@ -2,13 +2,27 @@
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import MotionFeedback from '../.vitepress/theme/examples/transition/MotionFeedback.vue';
 import motionFeedbackSource from '../.vitepress/theme/examples/transition/MotionFeedback.vue?demo-source';
+import LiquidGlassPreview from '../.vitepress/theme/examples/theme/LiquidGlassPreview.vue';
+import liquidGlassSource from '../.vitepress/theme/examples/theme/LiquidGlassPreview.vue?demo-source';
 </script>
 
 # Motion 通用动效
 
-Aurora Plus 按交互阶段提供统一反馈：按压快速响应，释放平滑恢复，进入略长于退出。动效保持原有组件尺寸，使用轻微缩放、位移、透明度和状态色变化。
+Aurora Plus 按交互阶段提供统一反馈：按压快速响应，释放平滑恢复，浮层平滑进退。动效保持原有组件尺寸，使用轻微缩放、位移、透明度和状态色变化。
 
 ## 交互反馈
+
+组件默认使用玻璃表面、细轮廓和中性阴影。表格、树及滚动列表的正文保持透明，选中和悬停状态沿用主题颜色。组件没有材质属性或全局档位。
+
+<DemoBlock title="玻璃表面与液态反馈" :source="liquidGlassSource">
+  <LiquidGlassPreview />
+</DemoBlock>
+
+按钮按住时整颗表面缩放到 0.975、透明度到 0.92；模糊从 8px 过渡到 6px，边缘折射随按压增强。进入 85ms、释放和取消 180ms，快速反向从当前展示值继续。加载态保留正常表面并阻止点击，禁用态无采样和按压。
+
+Segmented 的选中镜片沿弹簧移动、伸展并恢复；Tabs 的细指示线保留原有布局，使用同一位置弹簧。Switch 支持连续拖动，松手以行程 0.5 为阈值提交一次；取消或禁用恢复绑定值。Slider 拖动直接跟随，键盘和外部值更新沿弹簧定位，滑块不缩放。Dialog 和 Drawer 保留原有关闭与滚动生命周期，全屏交互层透明。
+
+Chromium 使用实时背景位移采样；其他浏览器使用模糊表面，无法提供同样的折射与色散。不支持背景模糊时使用可读的实色背景。减少动态效果偏好下位置直接定位，不执行形变。
 
 按钮、链接、菜单项和窗口操作使用按压反馈；输入与选择器平滑切换悬停、编辑及选中状态。弹层共用进入和退出节奏，关闭中的浮层停止接收指针操作。
 
@@ -40,13 +54,30 @@ Aurora Plus 按交互阶段提供统一反馈：按压快速响应，释放平�
 
 ## 时长与曲线
 
-动效复用全局 `--au-transition-duration` 和 `--au-transition-timing`。默认基础时长为 200ms，状态过渡 200ms、按压 110ms、释放 320ms、进入 300ms、退出 160ms；修改基础时长后各阶段按比例调整。
+普通状态动效复用全局 `--au-transition-duration` 和 `--au-transition-timing`。默认基础时长为 200ms，状态过渡 200ms、按压 85ms、释放 180ms、进入与退出 250ms；修改基础时长后这些阶段按比例调整。光学按钮采用上文固定时长，开关、滑块和选中镜片采用物理弹簧，不受基础时长覆盖。
 
 ```css
 :root {
   --au-transition-duration: 0.2s;
-  --au-transition-timing: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --au-transition-timing: cubic-bezier(0.23, 1, 0.32, 1);
 }
 ```
 
 独立数字和进度组件可通过 `animated` 关闭对应动画；`AuTransition` 和 `AuTransitionGroup` 也支持 `animated` 与 `duration`。
+
+## DOM 浮层集成
+
+框架外创建的浮层可以复用内置表面绘制器。元素需要已挂载并有实际尺寸；绘制器不替换内容或提交业务状态。移除元素前必须释放，避免保留观察器和滤镜资源。
+
+```js
+import { createAuroraGlassSurface } from 'aurora-plus';
+
+const surface = createAuroraGlassSurface(panelElement, {
+  themeElement: themeContainer,
+});
+
+// 移除浮层时释放；Vue 内置组件自动管理自己的资源。
+surface.destroy();
+```
+
+`themeElement` 可省略，默认使用最近的 `data-au-theme` 容器或文档根节点。SDK 等独立实例应传入自己的主题所有者，保持实例隔离。
