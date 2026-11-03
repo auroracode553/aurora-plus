@@ -1,7 +1,7 @@
 @use 'sass:map';
 
 // 输入类控件与 FormItem 标签共用尺寸；不生成组件级 CSS 变量。
-$heights: (small: 28px, default: 36px, large: 44px);
+$heights: (small: 28px, default: 32px, large: 40px);
 $touch-heights: (small: 36px, default: 44px, large: 48px);
 $font-sizes: (small: 13px, default: 14px, large: 16px);
 

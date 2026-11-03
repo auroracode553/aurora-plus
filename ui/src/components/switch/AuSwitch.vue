@@ -6,6 +6,7 @@
       `is-${size}`,
       {
         'is-checked': checked,
+        'is-dragging': dragging,
         'au-disabled': disabled || loading,
       },
     ]"
@@ -18,12 +19,10 @@
     @pointerup="motion.up"
     @pointercancel="motion.lost"
     @lostpointercapture="motion.lost"
-    @keydown="motion.keydown"
-    @keyup="motion.keyup"
     @blur="motion.cancel"
   >
     <span class="au-switch__track" :style="trackStyle">
-      <span v-glass="{ role: 'switch', progress, enabled: !disabled && !loading }" class="au-switch__thumb au-inline-center" :style="thumbStyle">
+      <span class="au-switch__thumb au-inline-center" :style="thumbStyle">
         <AuLoadingSpinner
           v-if="loading"
           class="au-switch__loading"
@@ -41,7 +40,6 @@
 
 <script setup>
 import { computed, ref, useSlots } from 'vue';
-import { vGlass } from '../../utils/glass/directive.js';
 import { useSwitchMotion } from './use-switch-motion.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
@@ -75,7 +73,7 @@ const motion = useSwitchMotion(props, checked, root, (active) => {
   emit('update:modelValue', value);
   emit('change', value);
 });
-const { progress, thumbStyle, trackStyle } = motion;
+const { dragging, thumbStyle, trackStyle } = motion;
 </script>
 
 <style scoped lang="scss" src="./AuSwitch.scss"></style>

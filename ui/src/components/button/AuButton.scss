@@ -1,7 +1,14 @@
 @use '../../theme/mixins/interaction';
 @use '../../theme/mixins/motion';
-@use 'sass:map';
 @use '../../theme/config';
+
+// 同时约束最小尺寸，保证图标按钮在 Flex 布局和触发器包装内保持方形。
+@mixin icon-size($size) {
+  width: $size;
+  min-width: $size;
+  height: $size;
+  min-height: $size;
+}
 
 .au-button {
 
@@ -23,11 +30,7 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  transform: translateZ(0);
-  // 缩放由玻璃按压时间函数逐帧驱动，不能再由 CSS 追赶同一个展示值。
-  transition-property: color, background-color, border-color;
-  transition-duration: var(--au-transition-duration);
-  transition-timing-function: var(--au-transition-timing);
+  @include motion.control;
 }
 
 .au-button:hover:not(.is-disabled) {
@@ -60,10 +63,21 @@
   border-radius: var(--au-radius-pill);
 }
 
-.au-button.is-circle {
-  width: auto;
-  aspect-ratio: 1;
+.au-button:is(.is-circle, .is-icon-only) {
+  flex: none;
+  @include icon-size(32px);
   padding: 0;
+
+  &.au-button--size-small {
+    @include icon-size(28px);
+  }
+
+  &.au-button--size-large {
+    @include icon-size(40px);
+  }
+}
+
+.au-button.is-circle {
   border-radius: var(--au-radius-pill);
 }
 
@@ -137,7 +151,7 @@
     font-size: var(--au-font-size-small);
 
     &:is(.is-circle, .is-icon-only) {
-      width: 32px;
+      @include icon-size(24px);
     }
   }
 
@@ -148,12 +162,12 @@
     font-size: var(--au-font-size-base);
 
     &:is(.is-circle, .is-icon-only) {
-      width: 40px;
+      @include icon-size(30px);
     }
   }
 
   &:is(.is-circle, .is-icon-only) {
-    width: 36px;
+    @include icon-size(26px);
     padding: 0;
     border-radius: var(--au-radius-compact);
   }

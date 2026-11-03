@@ -8,6 +8,8 @@ import sliderBasicSource from '../.vitepress/theme/examples/slider/SliderBasic.v
 
 `AuSlider` 用于在连续或分级数值范围内选择单个值，适合权重、强度、音量和模型参数等设置。
 
+拖动、键盘和外部值更新均直接定位，填充与实体滑块保持同步。
+
 ## 基础用法
 
 <DemoBlock

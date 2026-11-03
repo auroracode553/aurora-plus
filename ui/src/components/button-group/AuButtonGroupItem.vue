@@ -1,6 +1,5 @@
 <template>
   <button
-    v-glass="{ role: 'button', interactive: true, enabled: !disabled, sample: isSelected, shadow: false, outline: false }"
     class="au-button-group-item au-component au-control-reset au-inline-center au-motion-state"
     :class="itemClasses"
     :type="nativeType"
@@ -20,7 +19,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { computed, useSlots } from 'vue';
 import { useButtonGroup } from '../../utils/button-group-context.js';
 import { AuIcon } from '../icon/index.js';

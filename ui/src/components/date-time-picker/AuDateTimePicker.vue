@@ -46,7 +46,7 @@
       />
     </template>
 
-    <section v-glass="{ role: 'navigation' }" class="au-date-time-picker__popover au-component au-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar au-motion-state">
+    <section class="au-date-time-picker__popover au-component au-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar au-motion-state">
       <AuDatePickerPane
         ref="datePaneRef"
         class="au-date-time-picker__date-pane"
@@ -104,7 +104,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { usePickerInputCommit } from '../../utils/use-picker-input-commit.js';
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
 import { IconCalendarTime } from '../../icons/internal.js';

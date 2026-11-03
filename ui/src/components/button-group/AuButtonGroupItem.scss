@@ -1,4 +1,5 @@
 @use '../../theme/mixins/interaction';
+@use '../../theme/mixins/motion';
 @use '../../theme/config';
 @use '../../theme/mixins/surfaces';
 @use '../../theme/mixins/control-group';
@@ -24,9 +25,7 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  transition-property: color, background-color, border-color;
-  transition-duration: var(--au-transition-duration);
-  transition-timing-function: var(--au-transition-timing);
+  @include motion.control;
 }
 
 .au-button-group-item:hover:not(.is-disabled, .is-selected) {

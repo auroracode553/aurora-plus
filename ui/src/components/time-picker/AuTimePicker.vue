@@ -46,7 +46,7 @@
       />
     </template>
 
-    <section v-glass="{ role: 'navigation' }" class="au-time-picker__popover au-component au-surface au-depth-overlay au-overlay-surface au-floating-viewport au-motion-state">
+    <section class="au-time-picker__popover au-component au-surface au-depth-overlay au-overlay-surface au-floating-viewport au-motion-state">
       <AuTimePickerPanel
         :model-value="draftDate"
         :hour-step="hourStep"
@@ -82,7 +82,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { usePickerInputCommit } from '../../utils/use-picker-input-commit.js';
 import { computed, ref, useAttrs, watch } from 'vue';
 import { IconClock } from '../../icons/internal.js';

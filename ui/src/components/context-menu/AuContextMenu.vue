@@ -4,7 +4,7 @@
       <div
         v-if="visible"
         ref="menuRef"
-        v-glass="{ role: 'navigation' }" class="au-context-menu au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
+        class="au-context-menu au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
         :style="menuStyle"
         tabindex="-1"
         @contextmenu.prevent
@@ -80,7 +80,7 @@
             <Transition name="au-float">
               <div
                 v-if="activeSubmenu === section.id"
-                v-glass="{ role: 'navigation' }" class="au-context-submenu au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile au-motion-state"
+                class="au-context-submenu au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile au-motion-state"
                 @mouseenter="showSubmenu(section.id)"
                 @mouseleave="hideSubmenu"
               >
@@ -111,7 +111,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { getFloatingActions } from '../../utils/floating-actions.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { IconChevronRight } from '../../icons/internal.js';

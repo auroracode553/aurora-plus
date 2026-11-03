@@ -13,7 +13,7 @@
   }
 }
 
-// 光学指令负责按压进度；这里只过渡颜色，避免重复驱动缩放。
+// 操作项共用 CSS 状态与按压反馈，不创建逐实例动画控制器。
 @mixin action {
   position: relative;
   border: 0;
@@ -21,6 +21,6 @@
   color: inherit;
   background: transparent;
   cursor: pointer;
-  @include motion.phase(release, color, background-color, box-shadow);
+  @include motion.control;
   &:disabled { color: var(--au-color-text-disabled); cursor: not-allowed; }
 }

@@ -1,5 +1,4 @@
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { computed, inject, ref, watch } from 'vue';
 import { COLLAPSE_CONTEXT } from './AuCollapse.vue';
 import { useCollapseTransition } from './use-collapse-transition.js';
@@ -46,7 +45,7 @@ function toggle() {
 
 <template>
   <section
-    v-glass="{ role: 'navigation', enabled: variant === 'panel' }" class="au-collapse-item au-component au-motion-state"
+    class="au-collapse-item au-component au-motion-state"
     :class="[
       `au-collapse-item--${variant}`, `au-collapse-item--${size}`,
       { 'is-expanded': expanded, 'is-disabled': disabled, 'is-fill': fill },

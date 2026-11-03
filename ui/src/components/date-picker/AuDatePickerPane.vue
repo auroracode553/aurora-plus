@@ -1,7 +1,7 @@
 <template>
   <section
     ref="paneRef"
-    v-glass="{ role: 'navigation', enabled: surface }" class="au-date-picker-pane au-component au-motion-state"
+    class="au-date-picker-pane au-component au-motion-state"
     :class="{
       'has-surface': surface,
       'au-surface': surface,
@@ -88,7 +88,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, ref, watch } from 'vue';
 import { IconChevronLeft, IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';

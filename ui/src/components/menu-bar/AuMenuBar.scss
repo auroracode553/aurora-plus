@@ -46,7 +46,7 @@
   -webkit-app-region: no-drag;
 }
 
-.au-menu-bar__trigger.has-surface {
+.au-menu-bar__trigger:is(:hover, :focus-visible, .is-open):not(:disabled) {
   @include surfaces.surface;
   color: var(--au-color-primary);
 }

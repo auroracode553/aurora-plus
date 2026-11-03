@@ -1,4 +1,4 @@
-// Hyper 的弹簧与按压时间函数；只计算展示值，不提交组件业务状态。
+// Tabs 共用的位置弹簧；只计算展示值，不提交组件业务状态。
 export const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 export const prefersReducedMotion = () => typeof matchMedia === 'function'
   && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,48 +46,5 @@ export function createFrameLoop(render, view = globalThis) {
   return {
     start() { if (!frame) frame = view.requestAnimationFrame(tick); },
     stop() { view.cancelAnimationFrame(frame); frame = 0; previous = 0; },
-  };
-}
-
-// CubicBezier(0.23, 1, 0.32, 1)，反解 x 后计算 y。
-export function pressEasing(progress) {
-  const x = clamp(progress);
-  let low = 0;
-  let high = 1;
-  let parameter = x;
-  for (let index = 0; index < 14; index += 1) {
-    const inverse = 1 - parameter;
-    const position = 3 * inverse * inverse * parameter * 0.23
-      + 3 * inverse * parameter * parameter * 0.32 + parameter ** 3;
-    if (position < x) low = parameter;
-    else high = parameter;
-    parameter = (low + high) / 2;
-  }
-  return 1 - (1 - parameter) ** 3;
-}
-
-export function createPressMotion(render, view = globalThis) {
-  let value = 0;
-  let source = 0;
-  let target = 0;
-  let elapsed = 0;
-  const loop = createFrameLoop((seconds) => {
-    elapsed += seconds * 1000;
-    const fraction = clamp(elapsed / (target ? 85 : 180));
-    value = source + (target - source) * pressEasing(fraction);
-    render(value);
-    return fraction < 1;
-  }, view);
-  return {
-    set(pressed) {
-      const next = pressed ? 1 : 0;
-      if (target === next) return;
-      source = value;
-      target = next;
-      elapsed = 0;
-      if (prefersReducedMotion()) { loop.stop(); value = next; render(value); }
-      else loop.start();
-    },
-    destroy: loop.stop,
   };
 }

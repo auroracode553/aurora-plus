@@ -1,3 +1,8 @@
+.au-tooltip__trigger {
+  // 保留插槽控件的最小宽度，避免包装层被压窄后让控件溢出。
+  min-width: min-content;
+}
+
 .au-tooltip__trigger.is-fill {
   height: 100%;
 }

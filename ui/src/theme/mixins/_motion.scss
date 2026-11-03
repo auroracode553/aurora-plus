@@ -37,6 +37,7 @@ $phases: (state: 1, press: 0.425, release: 0.9, enter: 1.25, leave: 1.25, progre
 @mixin control {
   @include phase(release, color, background-color, border-color, box-shadow, opacity, transform, translate);
   &:active:not(:disabled, .is-disabled, .is-loading, .is-readonly) { @include press; }
+  @media (prefers-reduced-motion: reduce) { scale: 1 !important; }
 }
 
 @mixin row { @include transition(color, background-color, border-color, opacity); }

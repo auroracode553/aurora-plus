@@ -21,7 +21,6 @@
       <div
         v-if="visible"
         ref="contentRef"
-        v-glass="{ role: 'navigation', enabled: surface }"
         class="au-popover__content au-component au-motion-popover au-floating-viewport au-motion-state"
         :class="[
           `is-${activePlacement}`,
@@ -51,7 +50,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useOverlayLayer } from '../../utils/overlay-layer.js';
 

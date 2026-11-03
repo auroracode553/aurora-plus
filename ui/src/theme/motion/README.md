@@ -10,7 +10,7 @@
 - `../../utils/layout-box.js` 与 `use-sliding-indicator.js`：布局坐标测量和选中层同步，供组件及列表过渡引用。
 - `../../utils/floating-actions.js`：过滤退出中的浮层操作项，供菜单键盘导航引用。
 
-普通 CSS 动效的时长和曲线取自 `--au-transition-duration`、`--au-transition-timing`。阶段倍率集中在 mixin 中，不新增组件级 CSS 变量。光学按钮使用固定 85/180ms 时间函数；镜片、开关和滑块由公共物理弹簧驱动，不能再叠加 CSS 位置过渡。实现分工和参数见[统一外观实现](../../../../docs/appearance.md)。
+普通 CSS 动效的时长和曲线取自 `--au-transition-duration`、`--au-transition-timing`。阶段倍率集中在 mixin 中，不新增组件级 CSS 变量。按钮使用 CSS 按压配方，默认 85/180ms；Switch 普通切换使用 CSS，拖动直接定位；Slider 的拖动、键盘和外部值直接定位，仅 Tabs 指示线使用公共位置弹簧。内置表面不创建 JS 绘制器，磨砂只用于浮层与贴边栏。实现分工和参数见[统一外观实现](../../../../docs/appearance.md)。
 
 ## 接入规则
 
@@ -19,7 +19,7 @@
 | 表面、主题及禁用颜色变化 | 根元素 `au-motion-state` 或 `motion.state` |
 | 按钮、链接、菜单命令、标签关闭、窗口控制 | `au-motion-control`、`motion.control`；局部按压使用数值参数 `motion.press` |
 | 输入框及选择器外壳 | `fields.field` 复用 `motion.state`，编辑区域不缩放 |
-| Switch、Slider | 各自 motion 模块维护展示弹簧，受控业务值留在组件 |
+| Switch、Slider | Switch 只维护拖动位置并复用 CSS 过渡；Slider 直接使用实际比例，受控业务值留在组件 |
 | Checkbox | 轨道和标记复用公共状态过渡 |
 | Tabs | 公共测量和位置弹簧驱动细指示线 |
 | Table、VirtualTable、Tree、菜单列表 | `motion.row` 过渡悬停及选中颜色；不动画虚拟滚动偏移 |

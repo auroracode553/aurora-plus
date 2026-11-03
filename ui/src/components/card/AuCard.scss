@@ -1,7 +1,10 @@
 @use '../../theme/mixins/motion';
+@use '../../theme/mixins/surfaces';
 
 /* 卡片默认（default）：细边框 + 轻阴影，轮廓清晰但不厚重。圆角与材质背景跟随全局语义变量。 */
 .au-card {
+  @include surfaces.content;
+  position: relative;
   display: flex;
   min-width: 0;
   max-width: 100%;

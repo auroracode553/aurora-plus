@@ -2,8 +2,10 @@
 import DemoBlock from '../.vitepress/theme/components/DemoBlock.vue';
 import ButtonBasic from '../.vitepress/theme/examples/button/ButtonBasic.vue';
 import ButtonMenu from '../.vitepress/theme/examples/button/ButtonMenu.vue';
+import ButtonIcons from '../.vitepress/theme/examples/button/ButtonIcons.vue';
 import buttonBasicSource from '../.vitepress/theme/examples/button/ButtonBasic.vue?demo-source';
 import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue?demo-source';
+import buttonIconsSource from '../.vitepress/theme/examples/button/ButtonIcons.vue?demo-source';
 </script>
 
 # Button 按钮
@@ -17,6 +19,14 @@ import buttonMenuSource from '../.vitepress/theme/examples/button/ButtonMenu.vue
   :source="buttonBasicSource"
 >
   <ButtonBasic />
+</DemoBlock>
+
+## 图标按钮
+
+只有图标的按钮保持等宽高，small/default/large 分别为 28/32/40px；`circle` 使用圆形轮廓。菜单式图标按钮更紧凑，对应为 24/26/30px。图标按钮不会被同行输入框挤压变形。
+
+<DemoBlock :source="buttonIconsSource">
+  <ButtonIcons />
 </DemoBlock>
 
 ## 菜单式按钮

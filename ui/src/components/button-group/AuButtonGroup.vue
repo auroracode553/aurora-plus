@@ -1,6 +1,5 @@
 <template>
   <div
-    v-glass="{ role: 'navigation' }"
     class="au-button-group au-component au-motion-state"
     :class="[
       `is-${variant}`,
@@ -9,7 +8,6 @@
       {
         'is-icon-only': iconOnly,
         'is-inverse': inverse,
-        'au-backdrop': variant === 'segmented',
       },
     ]"
   >
@@ -18,7 +16,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { provideButtonGroup } from '../../utils/button-group-context.js';
 
 const props = defineProps({

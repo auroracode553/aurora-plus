@@ -13,7 +13,6 @@
   --au-glass-switch-on: rgb(48 209 88);
   --au-glass-switch-off: color-mix(in srgb, rgb(120 120 128) 36%, var(--au-surface-background));
 }
-.au-button:not(.au-button--menu) { scale: 1; }
 .au-button.is-disabled {
   color: var(--au-color-text-disabled);
   background: var(--au-color-background-subtle);

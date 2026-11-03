@@ -81,7 +81,7 @@
 
         <div
           v-if="showProgress && normalizedImages.length"
-          v-glass="{ role: 'navigation' }" class="au-image-preview__progress au-surface au-depth-overlay"
+          class="au-image-preview__progress au-surface au-depth-overlay"
         >
           <slot
             name="progress"
@@ -124,7 +124,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import {
   computed,
   nextTick,

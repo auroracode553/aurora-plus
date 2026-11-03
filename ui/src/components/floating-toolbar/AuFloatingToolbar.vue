@@ -4,7 +4,6 @@
       <div
         v-if="visible"
         ref="toolbarRef"
-        v-glass="{ role: 'navigation' }"
         class="au-floating-toolbar au-component au-surface au-depth-overlay au-motion-popover au-motion-state"
         :class="[`is-${activePlacement}`, `is-${size}`]"
         :style="toolbarStyle"
@@ -18,7 +17,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { provideButtonGroup } from '../../utils/button-group-context.js';
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 

@@ -69,7 +69,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 - 表单、列表、面板和导航组件默认允许随父容器收缩，长文本会换行、截断或在横向导航内滚动，避免内容撑破布局。
 - Dialog、Drawer、Popover、Dropdown、Tooltip、ContextMenu 和 FloatingToolbar 的可用尺寸受视口约束；窄屏下的层级菜单会改为容器内展开。
 - Button、Link、Checkbox 和 Switch 保留内容驱动宽度，但不会超过父容器；可伸缩文本区域不会挤压图标、状态标记等结构元素。
-- Input、Select、TreeSelect、日期/时间及范围输入框、ColorPicker 的 small/default/large 高度为 28/36/44px；视口宽度不超过 640px，或设备主要使用无悬停能力的触屏时为 36/44/48px，文字为 16px。Input 多行模式由 `rows` 决定高度。
+- Input、Select、TreeSelect、日期/时间及范围输入框、ColorPicker 的 small/default/large 高度为 28/32/40px；视口宽度不超过 640px，或设备主要使用无悬停能力的触屏时为 36/44/48px，文字为 16px。Input 多行模式由 `rows` 决定高度。
 - 图标、颜色样本、开关轨道、圆形按钮和桌面窗口控制键需要保持形状，因此仍使用明确的结构尺寸。
 
 ## 安装
@@ -133,4 +133,4 @@ setAuroraTheme('dark');
 setAuroraTheme('light');
 ```
 
-组件统一使用内置的玻璃表面、光学边缘和弹簧反馈，无材质属性或全局档位。具体行为见[动效指南](https://auroracode553.github.io/aurora-plus/guide/motion)。
+组件使用统一主题表面和轻量交互反馈，浮层保留磨砂质感，无材质属性或全局档位。具体行为见[动效指南](https://auroracode553.github.io/aurora-plus/guide/motion)。

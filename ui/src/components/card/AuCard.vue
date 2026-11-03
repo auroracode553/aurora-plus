@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag"
-    v-glass="{ role: 'navigation', outline: type === 'default' }" class="au-card au-component au-surface au-surface--base au-motion-state"
+    class="au-card au-component au-surface au-surface--base au-motion-state"
     :class="[
       typeClass,
       `has-${padding}-padding`,
@@ -15,7 +15,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { computed } from 'vue';
 
 defineOptions({ inheritAttrs: false });

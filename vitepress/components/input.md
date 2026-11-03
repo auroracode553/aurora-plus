@@ -21,7 +21,7 @@ import inputSizesSource from '../.vitepress/theme/examples/input/InputSizes.vue?
 
 ## 尺寸
 
-单行输入框的 `small`、`default`、`large` 高度分别为 28、36、44px。视口宽度不超过 640px，或设备主要使用无悬停能力的触屏时，分别为 36、44、48px，输入文字为 16px。多行输入框仍由 `rows` 和内容高度决定。
+单行输入框的 `small`、`default`、`large` 高度分别为 28、32、40px。视口宽度不超过 640px，或设备主要使用无悬停能力的触屏时，分别为 36、44、48px，输入文字为 16px。多行输入框仍由 `rows` 和内容高度决定。
 
 <DemoBlock title="三种尺寸" :source="inputSizesSource">
   <InputSizes />

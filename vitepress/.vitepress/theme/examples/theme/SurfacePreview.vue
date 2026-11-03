@@ -38,7 +38,7 @@ const moreActions = [{ label: '复制链接', command: 'copy' }, { label: '另�
         </div>
         <div class="glass-preview__content">
           <div class="glass-preview__row">
-            <AuButton>按住观察折射</AuButton>
+            <AuButton>按住观察反馈</AuButton>
             <AuButton type="primary">主要操作</AuButton>
             <AuButton loading>加载中</AuButton>
             <AuButton disabled>禁用</AuButton>
@@ -50,7 +50,7 @@ const moreActions = [{ label: '复制链接', command: 'copy' }, { label: '另�
             </div>
           </section>
           <AuCard>
-            <div class="glass-preview__row"><strong>流动的光，清晰的内容</strong><AuSwitch v-model="enabled" active-text="开启" inactive-text="关闭" /></div>
+            <div class="glass-preview__row"><strong>统一表面，清晰内容</strong><AuSwitch v-model="enabled" active-text="开启" inactive-text="关闭" /></div>
             <AuSlider v-model="volume" show-value />
             <div class="glass-preview__row">
               <AuInput v-model="text" class="glass-preview__input" placeholder="输入内容" clearable />

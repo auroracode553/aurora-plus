@@ -18,7 +18,7 @@
         <div
           v-if="visible"
           ref="menuRef"
-          v-glass="{ role: 'navigation' }" class="au-dropdown__menu au-component au-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
+          class="au-dropdown__menu au-component au-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
           :class="`is-${activePlacement}`"
           :style="menuStyle"
           tabindex="-1"
@@ -54,7 +54,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useOverlayLayer } from '../../utils/overlay-layer.js';
 import { AuButton } from '../button/index.js';

@@ -17,7 +17,6 @@
   >
     <button
       ref="selectRef"
-      v-glass="{ role: 'navigation', enabled: !disabled, outline: false }"
       class="au-select__control au-control-reset"
       v-bind="getControlAttrs()"
       type="button"
@@ -56,7 +55,7 @@
       <div
         v-if="visible"
         ref="listboxRef"
-        v-glass="{ role: 'navigation' }" class="au-select__listbox au-component au-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
+        class="au-select__listbox au-component au-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
         :data-au-floating-owner="selectId"
         :class="[`is-${size}`, `is-${activePlacement}`]"
         :style="listboxStyle"
@@ -98,7 +97,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import {
   computed,
   nextTick,

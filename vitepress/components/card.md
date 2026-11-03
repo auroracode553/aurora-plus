@@ -10,7 +10,7 @@ import cardInteractiveSource from '../.vitepress/theme/examples/card/CardInterac
 
 # Card 卡片
 
-`AuCard` 是内容容器组件，提供材质表面、圆角、可选边框/阴影和内边距。
+`AuCard` 是内容容器组件，提供主题表面、圆角、可选边框/阴影和内边距，背景不作模糊处理。
 
 ## 基础用法
 

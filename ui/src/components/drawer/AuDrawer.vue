@@ -16,7 +16,6 @@
         <aside
           ref="drawerRef"
           v-bind="$attrs"
-          v-glass="{ role: 'dialog' }"
           class="au-drawer au-motion-panel au-component au-surface au-depth-overlay au-overlay-surface au-motion-state"
           :class="['is-' + direction, { 'is-full-width': fullWidth && (direction === 'ltr' || direction === 'rtl') }]"
           :style="drawerStyle"
@@ -55,7 +54,6 @@
 </template>
 
 <script setup>
-import { vGlass } from '../../utils/glass/directive.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { IconX } from '../../icons/internal.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';

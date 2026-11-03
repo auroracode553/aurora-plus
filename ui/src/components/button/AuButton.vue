@@ -1,6 +1,5 @@
 <template>
   <button
-    v-glass="{ role: 'button', interactive: true, enabled: !disabled, sample: type !== 'menu', shadow: type !== 'menu', outline: type === 'default' }"
     class="au-button au-component au-control-reset au-inline-center au-depth-control au-motion-state"
     :class="buttonClasses"
     :type="nativeType"
@@ -21,7 +20,6 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
-import { vGlass } from '../../utils/glass/directive.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 

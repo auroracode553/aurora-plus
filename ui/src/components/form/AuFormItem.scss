@@ -70,7 +70,7 @@
 
 .au-form-item__status-icon {
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 8px;
   color: var(--au-color-text-secondary);
   pointer-events: none;
@@ -115,7 +115,7 @@
 }
 
 .au-form-item.is-small .au-form-item__status-icon { top: 6px; }
-.au-form-item.is-large .au-form-item__status-icon { top: 14px; }
+.au-form-item.is-large .au-form-item__status-icon { top: 12px; }
 
 @include field-sizing.touch {
   .au-form-item__status-icon { top: 14px; }

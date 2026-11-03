@@ -12,6 +12,8 @@ import helpTooltipBasicSource from '../.vitepress/theme/examples/tooltip/HelpToo
 
 首选方向与对侧空间均不足时隐藏气泡。Teleport 不会超出宿主视图边界。
 
+触发区域保留插槽内容的最小宽度；包装固定尺寸的图标按钮时，按钮与触发区域不会被同行输入框压窄。
+
 ## 基础用法
 
 <DemoBlock

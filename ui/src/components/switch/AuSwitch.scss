@@ -1,3 +1,5 @@
+@use '../../theme/mixins/motion';
+
 .au-switch { border-radius: var(--au-radius-compact); touch-action: pan-y; }
 .au-switch__track {
   position: relative;
@@ -9,6 +11,7 @@
   border: 0;
   border-radius: var(--au-radius-pill);
   background: var(--au-glass-switch-off);
+  @include motion.transition(background-color);
   overflow: visible;
 }
 .au-switch__thumb {
@@ -18,9 +21,10 @@
   height: 16px;
   border-radius: var(--au-radius-pill);
   background: white;
-  transform-origin: center;
-  will-change: transform;
+  box-shadow: var(--au-shadow-control);
+  @include motion.transition(transform);
 }
+.au-switch.is-dragging :is(.au-switch__track, .au-switch__thumb) { transition: none; }
 .au-switch.is-small .au-switch__track { width: 30px; height: 18px; }
 .au-switch.is-small .au-switch__thumb { width: 14px; height: 14px; }
 .au-switch.is-large .au-switch__track { width: 42px; height: 24px; }
