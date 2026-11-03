@@ -28,7 +28,7 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | valueType | 输出类型；auto 保留现有模型类型 | auto / string / date / timestamp | auto |
 | valueFormat | 字符串模型格式，日期时间默认 YYYY-MM-DD HH:mm:ss | string | YYYY-MM-DD |
 | displayFormat | 输入框显示与解析格式 | string | YYYY-MM-DD |
-| size | 尺寸 | small / default / large | default |
+| size | 输入框尺寸与 [Input](/components/input#尺寸) 一致 | small / default / large | default |
 | placeholder | 占位文字 | string | 选择日期 |
 | startPlaceholder / endPlaceholder | 范围模式起止占位文字 | string | 开始日期 / 结束日期 |
 | rangeSeparator | 范围输入分隔文字 | string | 至 |
@@ -67,7 +67,7 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | modelValue | 起止日期，支持 v-model | array | [] |
 | valueType | 输出类型：auto / string / date / timestamp | string | auto |
 | valueFormat / displayFormat | 模型 / 输入框日期格式 | string | YYYY-MM-DD |
-| size | 尺寸：small / default / large | string | default |
+| size | 范围输入框尺寸与 [Input](/components/input#尺寸) 一致：small / default / large | string | default |
 | startPlaceholder / endPlaceholder | 起止占位文字 | string | 开始日期 / 结束日期 |
 | rangeSeparator | 范围分隔文字 | string | 至 |
 | disabled / readonly / invalid | 禁用 / 只读 / 错误状态 | boolean | false |
@@ -109,7 +109,7 @@ import datePickerBasicSource from '../.vitepress/theme/examples/date-picker/Date
 | modelValue | 当前日期时间，支持 v-model | string / Date / number | '' |
 | valueType | 输出类型：auto / string / date / timestamp | string | auto |
 | valueFormat / displayFormat | 模型 / 输入框格式；默认随 showSeconds | string | 自动 |
-| size | 尺寸：small / default / large | string | default |
+| size | 输入框尺寸与 [Input](/components/input#尺寸) 一致：small / default / large | string | default |
 | placeholder | 占位文字 | string | 选择日期和时间 |
 | disabled / readonly / invalid | 禁用 / 只读 / 错误状态 | boolean | false |
 | editable / clearable | 可输入 / 可清空 | boolean | true |

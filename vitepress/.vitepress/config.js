@@ -110,7 +110,6 @@ export default defineConfig({
         items: [
           { text: 'Input 输入框', link: '/components/input' },
           { text: 'Select 选择器', link: '/components/select' },
-          { text: 'Segmented 分段选择', link: '/components/segmented' },
           { text: 'TreeSelect 树形选择', link: '/components/tree-select' },
           { text: 'DatePicker 日期选择器', link: '/components/date-picker' },
           { text: 'TimePicker 时间选择器', link: '/components/time-picker' },

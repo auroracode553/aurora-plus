@@ -21,7 +21,7 @@
 | 输入框及选择器外壳 | `fields.field` 复用 `motion.state`，编辑区域不缩放 |
 | Switch、Slider | 各自 motion 模块维护展示弹簧，受控业务值留在组件 |
 | Checkbox | 轨道和标记复用公共状态过渡 |
-| Tabs、Segmented | 公共测量和位置弹簧；Segmented 额外使用按压、双轴伸展与速度通道 |
+| Tabs | 公共测量和位置弹簧驱动细指示线 |
 | Table、VirtualTable、Tree、菜单列表 | `motion.row` 过渡悬停及选中颜色；不动画虚拟滚动偏移 |
 | Dialog、Drawer、ImagePreview、Loading | 统一进退类；模态面板通过 `au-motion-panel` 继承交互层节奏 |
 | Popover、Tooltip、Dropdown、ContextMenu、MenuBar、FloatingToolbar | `au-float` 或同阶段的命名过渡，位置测量留在组件 |

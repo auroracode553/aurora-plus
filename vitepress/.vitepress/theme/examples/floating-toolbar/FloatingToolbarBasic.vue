@@ -1,6 +1,8 @@
 <template>
   <div class="floating-toolbar-demo">
-    <AuSegmented v-model="toolbarSize" :items="sizeOptions" />
+    <AuSelect v-model="toolbarSize" aria-label="工具条尺寸" fit-content>
+      <option v-for="item in sizeOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
+    </AuSelect>
     <button ref="anchorRef" class="floating-toolbar-demo__anchor" type="button" @click="showToolbar">
       点击此处显示浮动工具条
     </button>
@@ -31,7 +33,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { AuButtonGroupItem, AuDivider, AuFloatingToolbar, AuMessage, AuSegmented, AuTooltip } from 'aurora-plus';
+import { AuButtonGroupItem, AuDivider, AuFloatingToolbar, AuMessage, AuSelect, AuTooltip } from 'aurora-plus';
 import {
   IconAlignLeft,
   IconAlignCenter,

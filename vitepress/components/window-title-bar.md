@@ -8,6 +8,8 @@ import windowTitleBarBasicSource from '../.vitepress/theme/examples/window-title
 
 用于 Electron、Tauri 等无边框桌面窗口。
 
+标题栏固定高 32px，使用贴边玻璃表面；窗口按钮保留 40px 宽的完整命中区域，以内缩胶囊表达悬停、按压和键盘焦点。关闭按钮使用主题危险色，最大化图标随受控状态切换。
+
 ## 基础用法
 
 <DemoBlock

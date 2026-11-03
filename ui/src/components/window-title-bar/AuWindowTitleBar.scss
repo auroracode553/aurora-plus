@@ -1,4 +1,5 @@
 @use '../../theme/mixins/motion';
+@use '../../theme/mixins/window-chrome';
 
 .au-window-title-bar {
   position: relative;
@@ -10,8 +11,7 @@
   height: 32px;
   min-height: 32px;
   padding: 0;
-  border-bottom: 1px solid var(--au-surface-border-emphasis);
-  color: var(--au-color-text-primary);
+  @include window-chrome.bar;
   -webkit-app-region: drag;
   user-select: none;
   pointer-events: none;
@@ -76,22 +76,41 @@
 }
 
 .au-window-title-bar__button {
+  @include window-chrome.action;
   width: 40px;
   height: 100%;
   padding: 0;
   margin: 0;
-  border-radius: 0;
-  cursor: pointer;
-  @include motion.control;
+  isolation: isolate;
+  // 命中仍为完整的窗口按钮宽度，内缩胶囊只负责视觉反馈。
+  &::before {
+    position: absolute;
+    inset: 3px 4px;
+    z-index: -1;
+    border-radius: inherit;
+    content: '';
+    pointer-events: none;
+    @include motion.phase(release, background-color, box-shadow);
+  }
 }
 
-.au-window-title-bar__button:hover:not(:disabled) {
+.au-window-title-bar__button:hover:not(:disabled)::before {
   background: var(--au-color-background-hover);
 }
 
-.au-window-title-bar__button.is-close:hover:not(:disabled) {
-  color: #ffffff;
-  background: #e81123;
+.au-window-title-bar__button:focus-visible:not(:disabled)::before {
+  background: var(--au-glass-selection);
+  box-shadow: inset 0 0 0 2px var(--au-color-primary);
+}
+
+.au-window-title-bar__button:active:not(:disabled)::before {
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  transition-duration: motion.duration(press);
+}
+
+.au-window-title-bar__button.is-close:is(:hover, :active):not(:disabled) {
+  color: #fff;
+  &::before { background: var(--au-color-danger); }
 }
 
 .au-window-title-bar__button-icon {

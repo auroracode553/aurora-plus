@@ -29,7 +29,7 @@ import timePickerBasicSource from '../.vitepress/theme/examples/time-picker/Time
 | hourStep / minuteStep / secondStep | 各时间单位步长 | number | 1 |
 | minTime / maxTime | 时间边界 | string / Date / number | null |
 | disabledTime | 禁用函数 | (date) =&gt; boolean | null |
-| size | 尺寸 | small / default / large | default |
+| size | 输入框尺寸与 [Input](/components/input#尺寸) 一致 | small / default / large | default |
 | placeholder | 占位文字 | string | 选择时间 |
 | disabled / readonly | 禁用 / 只读 | boolean | false |
 | editable / clearable | 可输入 / 可清空；有值时清除按钮原位替换时间图标 | boolean | true |

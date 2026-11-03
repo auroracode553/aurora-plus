@@ -11,7 +11,6 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuAvatar` | 图片头像、姓名缩写与加载失败回退 |
 | `AuNumber` | 支持小数、负数和地区格式的逐位滚动数字 |
 | `AuTrend` | 变化幅度与方向语义 |
-| `AuSegmented` | 带滑动材质选中层的分段选择器 |
 | `AuEmpty` | 图标、说明和操作区组成的空状态 |
 | `AuProgress` | 线形、圆环与刻度环进度 |
 | `AuPageHeader` | 标题、说明、返回事件与操作区 |
@@ -70,7 +69,8 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 - 表单、列表、面板和导航组件默认允许随父容器收缩，长文本会换行、截断或在横向导航内滚动，避免内容撑破布局。
 - Dialog、Drawer、Popover、Dropdown、Tooltip、ContextMenu 和 FloatingToolbar 的可用尺寸受视口约束；窄屏下的层级菜单会改为容器内展开。
 - Button、Link、Checkbox 和 Switch 保留内容驱动宽度，但不会超过父容器；可伸缩文本区域不会挤压图标、状态标记等结构元素。
-- 图标、颜色样本、开关轨道、圆形按钮和桌面窗口控制键需要保持形状，因此仍使用明确的结构尺寸。控件高度继续由 `size` 或组件变体控制，不随屏幕宽度自动放大。
+- Input、Select、TreeSelect、日期/时间及范围输入框、ColorPicker 的 small/default/large 高度为 28/36/44px；视口宽度不超过 640px，或设备主要使用无悬停能力的触屏时为 36/44/48px，文字为 16px。Input 多行模式由 `rows` 决定高度。
+- 图标、颜色样本、开关轨道、圆形按钮和桌面窗口控制键需要保持形状，因此仍使用明确的结构尺寸。
 
 ## 安装
 

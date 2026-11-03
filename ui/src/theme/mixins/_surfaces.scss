@@ -1,4 +1,6 @@
 // 仅输出声明；由调用方选择自己的元素，不匹配其他组件。
+@use '../config';
+
 @mixin blur {
   backdrop-filter: blur(var(--au-surface-blur)) saturate(var(--au-surface-saturation));
   -webkit-backdrop-filter: blur(var(--au-surface-blur)) saturate(var(--au-surface-saturation));
@@ -28,13 +30,13 @@
 // 反色材质只由显式 inverse 外观或图片预览操作选择。
 @mixin inverse {
   color: rgb(255 255 255 / 88%);
-  background: rgb(48 49 51 / 72%);
+  background: config.surface-background(rgb(48 49 51));
 }
 
 @mixin inverse-hover($standalone: false) {
   color: #ffffff;
   @if $standalone {
-    background: rgb(48 49 51 / 88%);
+    background: config.surface-background(rgb(48 49 51));
   } @else {
     background: rgb(255 255 255 / 9%);
   }
@@ -43,7 +45,7 @@
 @mixin inverse-pressed($standalone: false) {
   color: #ffffff;
   @if $standalone {
-    background: rgb(31 32 34 / 92%);
+    background: config.surface-background(rgb(31 32 34));
   } @else {
     background: rgb(255 255 255 / 18%);
   }

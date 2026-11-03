@@ -1,5 +1,6 @@
 @use '../../theme/mixins/fields';
 @use '../../theme/mixins/motion';
+@use '../../theme/mixins/field-sizing';
 
 .au-color-picker {
   position: relative;
@@ -7,24 +8,16 @@
   place-items: center;
   flex: none;
   width: auto;
-  height: 32px;
   aspect-ratio: 1;
   padding: 0;
   border: 0.5px solid var(--au-color-border-muted);
   border-radius: var(--au-radius-pill);
   cursor: pointer;
+  @include field-sizing.control;
   @include fields.field;
 }
 
 .au-color-picker:active:not(.is-disabled) { @include motion.press; }
-
-.au-color-picker.is-small {
-  height: 28px;
-}
-
-.au-color-picker.is-large {
-  height: 40px;
-}
 
 .au-color-picker__swatch {
   width: auto;

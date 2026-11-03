@@ -169,6 +169,12 @@ html:not(.dark) .au-doc-demo__highlighted .vp-code span {
 }
 
 @media (max-width: 640px) {
+  .vp-doc > div > table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
   .au-doc-demo__preview {
     padding-right: 15px;
     padding-left: 15px;

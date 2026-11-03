@@ -61,6 +61,7 @@
           v-if="clearable && hasValue && !disabled && !readonly"
           class="au-date-range-picker__clear au-action-control"
           type="button"
+          aria-label="清空日期范围"
           @pointerdown.prevent
           @click.stop="clear"
         >

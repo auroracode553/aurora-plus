@@ -1,0 +1,44 @@
+@use 'sass:map';
+
+// 输入类控件与 FormItem 标签共用尺寸；不生成组件级 CSS 变量。
+$heights: (small: 28px, default: 36px, large: 44px);
+$touch-heights: (small: 36px, default: 44px, large: 48px);
+$font-sizes: (small: 13px, default: 14px, large: 16px);
+
+@mixin touch {
+  @media (max-width: 640px), (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin touch-target($size: default, $fixed: false) {
+  @include touch {
+    @if $fixed {
+      height: map.get($touch-heights, $size);
+    }
+    min-height: map.get($touch-heights, $size);
+    font-size: 16px;
+  }
+}
+
+@mixin metrics($size: default, $fixed: true) {
+  @if $fixed {
+    height: map.get($heights, $size);
+  }
+  // 在纵向 flex 容器空间不足时，仍保留可操作的高度。
+  min-height: map.get($heights, $size);
+  font-size: map.get($font-sizes, $size);
+  @include touch-target($size, $fixed);
+}
+
+@mixin control {
+  @include metrics;
+
+  &.is-small {
+    @include metrics(small);
+  }
+
+  &.is-large {
+    @include metrics(large);
+  }
+}

@@ -1,7 +1,8 @@
 <template>
   <nav
     ref="menuBarRef"
-    class="au-menu-bar au-component au-motion-state"
+    v-glass="{ role: 'navigation', outline: false }"
+    class="au-menu-bar au-component au-surface au-motion-state"
     :class="{ 'is-draggable': draggable }"
     @contextmenu.prevent
     @keydown="handleKeydown"
@@ -13,13 +14,19 @@
         class="au-menu-bar__root"
       >
         <button
-          class="au-menu-bar__trigger au-action-control au-truncate"
-          :class="{ 'is-open': openIndex === index }"
+          v-glass="{ role: 'button', interactive: true, enabled: !item.disabled, sample: isRootSurfaceActive(index), shadow: isRootSurfaceActive(index), outline: isRootSurfaceActive(index) }"
+          class="au-menu-bar__trigger au-control-reset au-inline-center au-truncate"
+          :class="{ 'is-open': openIndex === index, 'has-surface': isRootSurfaceActive(index) }"
           type="button"
           :disabled="item.disabled"
+          aria-haspopup="menu"
+          :aria-expanded="openIndex === index"
           :tabindex="index === focusableIndex ? 0 : -1"
           @click="toggleMenu(index)"
-          @mouseenter="switchMenu(index)"
+          @mouseenter="enterRoot(index)"
+          @mouseleave="hoveredIndex = -1"
+          @focus="focusRootSurface(index, $event)"
+          @blur="focusedIndex = -1"
         >
           {{ item.label }}
         </button>
@@ -44,6 +51,7 @@
 
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { vGlass } from '../../utils/glass/directive.js';
 import { getFloatingActions } from '../../utils/floating-actions.js';
 import AuMenuBarPanel from './AuMenuBarPanel.vue';
 
@@ -56,6 +64,23 @@ const emit = defineEmits(['select', 'open', 'close']);
 const menuBarRef = ref(null);
 const openIndex = ref(-1);
 const focusableIndex = ref(0);
+const hoveredIndex = ref(-1);
+const focusedIndex = ref(-1);
+
+// 只决定按钮材质的展示，菜单是否展开仍由 openIndex 独立管理。
+function isRootSurfaceActive(index) {
+  return !props.items[index].disabled
+    && [openIndex.value, hoveredIndex.value, focusedIndex.value].includes(index);
+}
+
+function enterRoot(index) {
+  hoveredIndex.value = index;
+  switchMenu(index);
+}
+
+function focusRootSurface(index, event) {
+  focusedIndex.value = event.currentTarget.matches(':focus-visible') ? index : -1;
+}
 
 function toggleMenu(index) {
   if (openIndex.value === index) {

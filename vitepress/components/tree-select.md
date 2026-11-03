@@ -34,7 +34,7 @@ import treeSelectBasicSource from '../.vitepress/theme/examples/tree-select/Tree
 | emptyText / noMatchText | 空数据 / 无匹配文字 | string | 暂无数据 / 无匹配节点 |
 | clearable | 是否允许清空；有值时清除按钮原位替换展开图标 | boolean | true |
 | disabled / invalid | 禁用 / 错误状态 | boolean | false |
-| size | 尺寸 | small / default / large | default |
+| size | 输入框尺寸与 [Input](/components/input#尺寸) 一致 | small / default / large | default |
 | itemHeight / overscan | 虚拟列表行高 / 预渲染数 | number | 28 / 8 |
 | placement | 浮层方位 | string | bottom-start |
 | teleported / appendTo / zIndex | 浮层挂载与层级 | boolean / string \| Element / number | true / body / 1200 |

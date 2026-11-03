@@ -25,7 +25,7 @@ import colorPickerBasicSource from '../.vitepress/theme/examples/color-picker/Co
 | --- | --- | --- | --- |
 | modelValue | 当前十六进制颜色 | string | #000000 |
 | fallback | 当前值不是六位十六进制颜色时的显示值 | string | #ffffff |
-| size | 尺寸 | small / default / large | default |
+| size | 控件直径与 [Input 的单行高度](/components/input#尺寸) 一致 | small / default / large | default |
 | disabled | 是否禁用 | boolean | false |
 
 ### Events

@@ -19,6 +19,15 @@
     </label>
 
     <label class="select-demo__field">
+      <span>大号选择框</span>
+      <AuSelect v-model="format" size="large">
+        <option value="markdown">Markdown</option>
+        <option value="html">HTML</option>
+        <option value="text">纯文本</option>
+      </AuSelect>
+    </label>
+
+    <label class="select-demo__field">
       <span>不可用选项</span>
       <AuSelect model-value="system" disabled>
         <option value="system">跟随系统</option>

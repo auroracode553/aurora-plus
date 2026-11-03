@@ -12,17 +12,29 @@
       </template>
     </AuWindowTitleBar>
 
+    <AuMenuBar :items="menuItems" @select="lastAction = `执行命令：${$event.label}`" />
+
     <p class="window-title-bar-demo__status">{{ lastAction }}</p>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { AuIcon, AuWindowTitleBar } from 'aurora-plus';
+import { AuIcon, AuMenuBar, AuWindowTitleBar } from 'aurora-plus';
 import { IconSparkles } from 'aurora-plus/icons';
 
 const maximized = ref(false);
 const lastAction = ref('等待窗口操作');
+const menuItems = [
+  { label: '文件', children: [
+    { label: '新建文档', command: 'new', accelerator: 'Ctrl+N' },
+    { label: '保存', command: 'save', accelerator: 'Ctrl+S' },
+  ] },
+  { label: '视图', children: [
+    { label: '实际大小', command: 'actual-size', accelerator: 'Ctrl+0' },
+    { label: '重置布局', command: 'reset-layout', disabled: true },
+  ] },
+];
 
 function toggleMaximize() {
   maximized.value = !maximized.value;
@@ -32,14 +44,14 @@ function toggleMaximize() {
 
 <style scoped>
 .window-title-bar-demo {
-  overflow: hidden;
   border: 1px solid var(--au-color-border-subtle);
   border-radius: var(--au-radius-surface);
   isolation: isolate;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--au-color-primary) 14%, transparent), transparent 65%);
 }
 
 .window-title-bar-demo__status {
-  min-height: 72px;
+  min-height: 140px;
   margin: 0;
   padding: 24px 16px;
   color: var(--au-color-text-secondary);

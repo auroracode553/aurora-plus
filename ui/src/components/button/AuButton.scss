@@ -33,13 +33,13 @@
 .au-button:hover:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 42%, transparent);
   color: var(--au-color-primary);
-  background: var(--au-glass-tint);
+  background: var(--au-surface-background);
 }
 
 .au-button:active:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 58%, transparent);
   color: var(--au-color-primary);
-  background: var(--au-glass-tint);
+  background: var(--au-surface-background);
 }
 
 .au-button--size-small {
@@ -87,18 +87,18 @@
   .au-button--#{$tone} {
     border-color: color-mix(in srgb, $color 78%, #ffffff);
     color: #ffffff;
-    background: color-mix(in srgb, $color 90%, transparent);
+    background: config.surface-background($color);
 
     &:hover:not(.is-disabled) {
       border-color: $color;
       color: #ffffff;
-      background: color-mix(in srgb, $color 94%, transparent);
+      background: config.surface-background($color);
     }
 
     &:active:not(.is-disabled) {
       border-color: $color;
       color: #ffffff;
-      background: color-mix(in srgb, $color 90%, transparent);
+      background: config.surface-background($color);
     }
 
     &.is-plain {

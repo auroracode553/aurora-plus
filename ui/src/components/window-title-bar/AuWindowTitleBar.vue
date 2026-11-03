@@ -1,5 +1,6 @@
 <template>
   <div
+    v-glass="{ role: 'navigation', outline: false }"
     class="au-window-title-bar au-component au-surface au-surface--base au-motion-state"
     :class="{
       'is-drag-disabled': !draggable,
@@ -62,10 +63,12 @@
           @closed="setTooltipOpen('minimize', false)"
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center au-motion-control"
+            v-glass="{ role: 'button', interactive: true, enabled: !minimizeDisabled, sample: false, shadow: false, outline: false }"
+            class="au-window-title-bar__button au-control-reset au-inline-center"
             :class="{ 'au-disabled': minimizeDisabled }"
             type="button"
             :disabled="minimizeDisabled"
+            :aria-label="minimizeLabel"
             @click="requestMinimize"
           >
             <slot name="minimize-icon">
@@ -85,10 +88,12 @@
           @closed="setTooltipOpen('maximize', false)"
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center au-motion-control"
+            v-glass="{ role: 'button', interactive: true, enabled: !maximizeDisabled, sample: false, shadow: false, outline: false }"
+            class="au-window-title-bar__button au-control-reset au-inline-center"
             :class="{ 'au-disabled': maximizeDisabled }"
             type="button"
             :disabled="maximizeDisabled"
+            :aria-label="maximizeButtonLabel"
             @click="requestToggleMaximize"
           >
             <slot v-if="maximized" name="restore-icon">
@@ -111,10 +116,12 @@
           @closed="setTooltipOpen('close', false)"
         >
           <button
-            class="au-window-title-bar__button is-close au-control-reset au-inline-center au-motion-control"
+            v-glass="{ role: 'button', interactive: true, enabled: !closeDisabled, sample: false, shadow: false, outline: false }"
+            class="au-window-title-bar__button is-close au-control-reset au-inline-center"
             :class="{ 'au-disabled': closeDisabled }"
             type="button"
             :disabled="closeDisabled"
+            :aria-label="closeLabel"
             @click="requestClose"
           >
             <slot name="close-icon">
@@ -129,6 +136,7 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
+import { vGlass } from '../../utils/glass/directive.js';
 import { IconCopy, IconMinus, IconSquare, IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';

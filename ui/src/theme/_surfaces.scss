@@ -34,5 +34,7 @@
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .au-surface { @include surfaces.opaque-surface; }
+  .au-surface,
+  .au-button:not(.au-button--menu),
+  .au-button-group { @include surfaces.opaque-surface; }
 }

@@ -7,7 +7,6 @@ import { AuEmpty } from './components/empty/index.js';
 import { AuNumber } from './components/number/index.js';
 import { AuPageHeader } from './components/page-header/index.js';
 import { AuProgress } from './components/progress/index.js';
-import { AuSegmented } from './components/segmented/index.js';
 import { AuTag } from './components/tag/index.js';
 import { AuTransition, AuTransitionGroup } from './components/transition/index.js';
 import { AuTrend } from './components/trend/index.js';
@@ -73,7 +72,6 @@ const components = [
   AuNumber,
   AuPageHeader,
   AuProgress,
-  AuSegmented,
   AuTag,
   AuTransition,
   AuTransitionGroup,
@@ -159,7 +157,6 @@ export {
   AuNumber,
   AuPageHeader,
   AuProgress,
-  AuSegmented,
   AuTag,
   AuTransition,
   AuTransitionGroup,

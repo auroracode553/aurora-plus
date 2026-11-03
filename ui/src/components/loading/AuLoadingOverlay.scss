@@ -10,7 +10,7 @@
   min-height: 48px;
   overflow: hidden;
   color: var(--au-color-text-primary);
-  background: color-mix(in srgb, var(--au-surface-background) 72%, transparent);
+  background: var(--au-surface-background);
   backdrop-filter: blur(2px) saturate(110%);
   -webkit-backdrop-filter: blur(2px) saturate(110%);
   pointer-events: auto;
