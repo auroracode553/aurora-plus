@@ -8,6 +8,8 @@ import floatingToolbarBasicSource from '../.vitepress/theme/examples/floating-to
 
 `AuFloatingToolbar` 根据目标矩形定位，并在上方空间不足时自动切换到下方。
 
+工具条使用玻璃胶囊轮廓。插槽内的 `AuButtonGroupItem` 自动继承工具条尺寸，图标操作项保持正圆，边框与留白合计 4px；`AuDivider` 自动采用控制组间距。无需再嵌套带背景的按钮组容器。
+
 ## 基础用法
 
 <DemoBlock
@@ -17,8 +19,6 @@ import floatingToolbarBasicSource from '../.vitepress/theme/examples/floating-to
   <FloatingToolbarBasic />
 </DemoBlock>
 
-## 目标矩形
-
 ## FloatingToolbar API
 
 ### Attributes
@@ -27,6 +27,7 @@ import floatingToolbarBasicSource from '../.vitepress/theme/examples/floating-to
 | --- | --- | --- | --- |
 | modelValue / v-model | 显式控制显示；为 null 时跟随 triggerRect | boolean / null | null |
 | triggerRect | 定位目标矩形 | DOMRect / Record&lt;string, number&gt; / null | null |
+| size | 操作项尺寸，small / default / large；图标项为 24 / 28 / 40px，工具条最小高度为 32 / 36 / 48px | string | default |
 | placement | 首选方向 | auto / top / bottom | auto |
 | gap | 工具条与目标的距离，单位 px | number | 6 |
 | viewportPadding | 与视口边缘的最小距离，单位 px | number | 8 |

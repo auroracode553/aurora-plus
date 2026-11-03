@@ -1,52 +1,54 @@
 <template>
-  <div>
+  <div class="floating-toolbar-demo">
+    <AuSegmented v-model="toolbarSize" :items="sizeOptions" />
     <button ref="anchorRef" class="floating-toolbar-demo__anchor" type="button" @click="showToolbar">
       点击此处显示浮动工具条
     </button>
     <AuFloatingToolbar
       :trigger-rect="toolbarRect"
+      :size="toolbarSize"
       :refresh-target="anchorRef"
       :keep-visible-target="anchorRef"
       @hide="handleHide"
     >
-      <AuButton
-        v-for="action in toolbarActions"
-        :key="action.id"
-        :icon="action.icon"
-        size="small"
-        circle
-        :title="action.label"
-        @click="runAction(action)"
-      />
-      <AuButton
-        :icon="deleteAction.icon"
-        type="danger"
-        size="small"
-        circle
-        title="删除"
-        @click="runAction(deleteAction)"
-      />
+      <AuTooltip content="放大预览">
+        <AuButtonGroupItem :icon="IconZoomIn" title="放大预览" @click="runAction({ id: 'preview', label: '放大预览' })" />
+      </AuTooltip>
+      <AuDivider orientation="vertical" />
+      <div class="floating-toolbar-demo__group">
+        <AuTooltip v-for="action in alignmentActions" :key="action.id" :content="action.label">
+          <AuButtonGroupItem :icon="action.icon" :selected="alignment === action.id" :title="action.label" @click="runAction(action)" />
+        </AuTooltip>
+      </div>
+      <AuDivider orientation="vertical" />
+      <div class="floating-toolbar-demo__group">
+        <AuTooltip content="查看源码"><AuButtonGroupItem :icon="IconCode" title="查看源码" @click="runAction({ id: 'source', label: '查看源码' })" /></AuTooltip>
+        <AuTooltip content="删除"><AuButtonGroupItem :icon="IconTrash" type="danger" title="删除" @click="runAction({ id: 'delete', label: '删除' })" /></AuTooltip>
+      </div>
     </AuFloatingToolbar>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { AuButton, AuFloatingToolbar, AuMessage } from 'aurora-plus';
+import { AuButtonGroupItem, AuDivider, AuFloatingToolbar, AuMessage, AuSegmented, AuTooltip } from 'aurora-plus';
 import {
-  IconBold,
-  IconItalic,
+  IconAlignLeft,
+  IconAlignCenter,
+  IconAlignRight,
+  IconCode,
   IconTrash,
-  IconUnderline,
+  IconZoomIn,
 } from 'aurora-plus/icons';
 
-const toolbarActions = [
-  { id: 'bold', label: '加粗', icon: IconBold },
-  { id: 'italic', label: '斜体', icon: IconItalic },
-  { id: 'underline', label: '下划线', icon: IconUnderline },
+const alignmentActions = [
+  { id: 'left', label: '左对齐', icon: IconAlignLeft },
+  { id: 'center', label: '居中', icon: IconAlignCenter },
+  { id: 'right', label: '右对齐', icon: IconAlignRight },
 ];
-
-const deleteAction = { id: 'delete', label: '删除', icon: IconTrash };
+const alignment = ref('center');
+const toolbarSize = ref('default');
+const sizeOptions = [{ label: '小号', value: 'small' }, { label: '默认', value: 'default' }, { label: '大号', value: 'large' }];
 const anchorRef = ref(null);
 const toolbarRect = ref(null);
 
@@ -64,6 +66,7 @@ function showToolbar() {
 }
 
 function runAction(action) {
+  if (alignmentActions.some((item) => item.id === action.id)) alignment.value = action.id;
   AuMessage.info(`已执行：${action.label}`);
 }
 
@@ -73,6 +76,8 @@ function handleHide() {
 </script>
 
 <style scoped>
+.floating-toolbar-demo { display: grid; gap: 12px; }
+.floating-toolbar-demo__group { display: inline-flex; align-items: center; gap: 2px; }
 .floating-toolbar-demo__anchor {
   display: grid;
   width: 100%;

@@ -15,6 +15,16 @@ Aurora Plus 全库使用统一外观，没有材质属性、档位、切换 API 
 | `ui/src/utils/use-sliding-indicator.js` | Tabs/Segmented 的布局坐标测量和位置弹簧；Segmented 的临时镜片、拖动与单次提交 |
 | `ui/src/components/switch/use-switch-motion.js` | 开关五通道展示值、位置样本速度、指针取消及受控状态恢复 |
 | `ui/src/components/slider/use-slider-motion.js` | 滑块展示位置与按压材质；值提交仍由原组件处理 |
+| `ui/src/utils/button-group-context.js` | ButtonGroup/FloatingToolbar 注入统一的尺寸、方向和配色，操作项与 Divider 通过 Vue 上下文读取 |
+| `ui/src/theme/mixins/_control-group.scss` | 胶囊边框、留白、操作项和图标尺寸的单一配方，由按钮组、工具条和操作项各自样式引用 |
+
+## 控制组几何
+
+ButtonGroup 与 FloatingToolbar 使用 Hyper TabBar 的胶囊轮廓和同心内缩规则，Web 保留紧凑操作尺寸。图标项 small/default/large 为 24/28/40px，图标为 14/16/20px；悬浮容器 3px 留白加 1px 边框形成 4px 内缩，总高度为 32/36/48px。Connected 维持 2px 留白加 1px 边框，选中项使用柔和底面，无独立硬描边和外阴影。
+
+FloatingToolbar 自身提供 `button-group-context.js` 上下文，插槽内直接使用 AuButtonGroupItem；Tooltip 和 Popover 包装不会中断注入，动态 size 更新会触发重新定位。Divider 在该上下文内使用 12/14/20px 高度和左右各 2px 外距，普通 Divider 不变。组内操作项间隔 2px，内容分组只负责排列，不再叠加容器背景。
+
+动作项沿用点击提交、禁用、加载与自定义语义色；selected 由宿主控制，支持独立操作项的选中状态。按压复用现有 85/180ms 整面反馈和光学实现，深浅主题与反色组沿用既有语义。Flutter 参考的 TabBar 是 56px 导航结构，不能据此宣称紧凑 Web 操作组与其逐帧或像素一致。
 
 ## 光学链路
 
@@ -34,6 +44,7 @@ Selection 为 blur=0、edge=10p、amount=14p、dispersion=p；Slider Thumb 为 b
 - Switch 指针横移立即更新临时目标，RTL 反转方向；松手以 0.5 吸附，最多提交一次。取消、纵向接管、窗口失焦和失去可用性均恢复宿主值。宿主拒绝更新时，下一次 Vue 更新后回到绑定值，不保留另一份业务状态。
 - Slider 拖动直接定位；键盘和外部值使用位置弹簧，填充与滑块共用展示比例。原有 input/change 触发时机和键盘 range 保留，滑块不缩放。
 - 普通 CSS 状态默认 200ms、按压 85ms、释放 180ms、浮层进入/退出 250ms。Dialog/Drawer 的 Vue 退出生命周期、点击外部关闭、滚动锁和透明全屏交互层保持原机制。
+- ImagePreview 使用独立灰色磨砂底幕隔离正文，blur=20px、saturate=75%；浅色画布承接透明图片，图片本身不做模糊。无 backdrop-filter 能力时底幕不透明。底幕仍服从现有 topOffset 和视口边界，缩放、拖动、关闭、滚动锁与退出生命周期不变。
 
 ## 生命周期、性能与平台边界
 

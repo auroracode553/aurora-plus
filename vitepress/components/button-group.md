@@ -12,6 +12,8 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 
 `AuButtonGroup` 将一组相关操作组织成统一的操作单元。
 
+连体与悬浮控制组使用同心胶囊轮廓，图标操作项在 small / default / large 下为 24 / 28 / 40px，图标为 14 / 16 / 20px。悬浮组从外轮廓到操作项保留 4px 内缩；连体组为 3px。选中项通过柔和的胶囊底面和文字强调色表达状态。
+
 ## 连体按钮组
 
 <DemoBlock
@@ -48,7 +50,7 @@ import buttonGroupFloatingSource from '../.vitepress/theme/examples/button-group
 | variant | 外观类型 | string | connected / segmented / floating | connected |
 | orientation | 按钮排列方向 | string | horizontal / vertical | horizontal |
 | size | 控制组尺寸 | string | small / default / large | default |
-| iconOnly | 是否将直接子按钮统一为方形图标按钮 | boolean | — | false |
+| iconOnly | 是否将直接子按钮统一为等宽圆形图标按钮 | boolean | — | false |
 | inverse | 使用适合灰色遮罩等深色背景的反色材质 | boolean | — | false |
 
 ### AuButtonGroupItem Attributes

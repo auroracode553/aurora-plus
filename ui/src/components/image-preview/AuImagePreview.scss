@@ -8,7 +8,10 @@
   left: 0;
   overflow: hidden;
   color: var(--au-color-text-primary);
-  background: transparent;
+  // 图片查看需要独立底幕，避免文档文字透过透明图片；只模糊背后的页面。
+  background: color-mix(in srgb, var(--au-color-background-subtle) 80%, rgb(100 108 124 / 72%));
+  -webkit-backdrop-filter: blur(20px) saturate(75%);
+  backdrop-filter: blur(20px) saturate(75%);
   outline: none;
   user-select: none;
 }
@@ -38,6 +41,9 @@
   transform-origin: center;
   will-change: transform;
   -webkit-user-drag: none;
+  // 浅色画布让带透明通道的图示在深色主题中仍能辨认，不修改图片数据。
+  background: #f7f8fa;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 6%), 0 4px 16px rgb(0 0 0 / 10%);
 }
 
 .au-image-preview__empty,
@@ -154,6 +160,13 @@
 .au-image-preview-fade-enter-from,
 .au-image-preview-fade-leave-to {
   opacity: 0;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .au-image-preview {
+    // 无背景模糊能力时使用不透明底幕，保证正文不会重新透出。
+    background: color-mix(in srgb, var(--au-color-background-subtle) 80%, rgb(100 108 124));
+  }
 }
 
 @media (max-width: 720px) {

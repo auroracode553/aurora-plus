@@ -19,9 +19,7 @@
 
 <script setup>
 import { vGlass } from '../../utils/glass/directive.js';
-import { computed, provide } from 'vue';
-
-const BUTTON_GROUP_CONTEXT = Symbol.for('aurora-plus.button-group-context');
+import { provideButtonGroup } from '../../utils/button-group-context.js';
 
 const props = defineProps({
   variant: {
@@ -43,12 +41,12 @@ const props = defineProps({
   inverse: { type: Boolean, default: false },
 });
 
-provide(BUTTON_GROUP_CONTEXT, {
-  variant: computed(() => props.variant),
-  orientation: computed(() => props.orientation),
-  size: computed(() => props.size),
-  iconOnly: computed(() => props.iconOnly),
-  inverse: computed(() => props.inverse),
+provideButtonGroup({
+  variant: () => props.variant,
+  orientation: () => props.orientation,
+  size: () => props.size,
+  iconOnly: () => props.iconOnly,
+  inverse: () => props.inverse,
 });
 </script>
 

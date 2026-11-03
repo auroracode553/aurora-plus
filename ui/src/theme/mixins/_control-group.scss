@@ -1,0 +1,31 @@
+@use 'sass:map';
+
+$control-heights: (small: 24px, default: 28px, large: 40px);
+$icon-sizes: (small: 14px, default: 16px, large: 20px);
+
+@function control-height($size: default) { @return map.get($control-heights, $size); }
+
+// 胶囊与内部胶囊使用相同圆心；悬浮容器的边框加 3px 留白形成 4px 内缩。
+@mixin frame($padding: 2px) {
+  gap: 2px;
+  padding: $padding;
+  border: 1px solid var(--au-surface-border);
+  border-radius: var(--au-radius-pill);
+}
+
+@mixin control($size: default) {
+  min-height: control-height($size);
+  border-radius: var(--au-radius-pill);
+  &.is-icon-only {
+    width: control-height($size);
+    padding: 0;
+    aspect-ratio: 1;
+  }
+}
+
+@mixin icon($size: default) {
+  width: map.get($icon-sizes, $size);
+  height: map.get($icon-sizes, $size);
+  font-size: map.get($icon-sizes, $size);
+  flex: none;
+}

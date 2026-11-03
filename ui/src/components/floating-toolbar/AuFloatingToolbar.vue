@@ -6,19 +6,11 @@
         ref="toolbarRef"
         v-glass="{ role: 'navigation' }"
         class="au-floating-toolbar au-component au-surface au-depth-overlay au-motion-popover au-motion-state"
-        :class="`is-${activePlacement}`"
+        :class="[`is-${activePlacement}`, `is-${size}`]"
         :style="toolbarStyle"
         @pointerdown.stop
         @click.stop
       >
-        <span
-          class="au-floating-toolbar__arrow au-floating-toolbar__arrow--border"
-          :style="{ left: `${arrowLeft}px` }"
-        ></span>
-        <span
-          class="au-floating-toolbar__arrow au-floating-toolbar__arrow--surface"
-          :style="{ left: `${arrowLeft}px` }"
-        ></span>
         <slot :hide="hide" :placement="activePlacement"></slot>
       </div>
     </Transition>
@@ -27,11 +19,13 @@
 
 <script setup>
 import { vGlass } from '../../utils/glass/directive.js';
+import { provideButtonGroup } from '../../utils/button-group-context.js';
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 const props = defineProps({
   modelValue: { type: Boolean, default: null },
   triggerRect: { type: Object, default: null },
+  size: { type: String, default: 'default', validator: (value) => ['small', 'default', 'large'].includes(value) },
   placement: {
     type: String,
     default: 'auto',
@@ -49,11 +43,11 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue', 'show', 'hide']);
+provideButtonGroup({ variant: () => 'floating', size: () => props.size });
 const toolbarRef = ref(null);
 const visible = ref(props.modelValue == null ? Boolean(props.triggerRect) : props.modelValue);
 const targetRect = ref(props.triggerRect ? copyRect(props.triggerRect) : null);
 const activePlacement = ref('top');
-const arrowLeft = ref(12);
 const toolbarStyle = ref({ display: 'none' });
 
 let updateFrame = null;
@@ -105,11 +99,8 @@ function updatePosition() {
   const left = clamp(targetCenter - toolbarWidth / 2, padding, window.innerWidth - toolbarWidth - padding);
   const desiredTop = placement === 'top' ? rect.top - props.gap - toolbarRect.height : rect.bottom + props.gap;
   const top = clamp(desiredTop, padding, window.innerHeight - toolbarRect.height - padding);
-  const arrowInset = Math.min(12, toolbarWidth / 2);
-  const nextArrowLeft = clamp(targetCenter - left, arrowInset, toolbarWidth - arrowInset);
 
   activePlacement.value = placement;
-  arrowLeft.value = nextArrowLeft;
   toolbarStyle.value = {
     left: `${left}px`,
     top: `${top}px`,
@@ -185,6 +176,8 @@ watch(
   },
   { deep: true }
 );
+
+watch(() => props.size, () => { if (visible.value) nextTick(updatePosition); });
 
 onMounted(() => {
   if (typeof document !== 'undefined') {
