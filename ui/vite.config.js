@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 const libraryEntries = {
   'aurora-plus': fileURLToPath(new URL('./src/index.js', import.meta.url)),
   icons: fileURLToPath(new URL('./src/icons.js', import.meta.url)),
+  electron: fileURLToPath(new URL('./src/electron/index.js', import.meta.url)),
 };
 
 export default defineConfig({
@@ -26,7 +27,7 @@ export default defineConfig({
     cssCodeSplit: false,
     rollupOptions: {
       // Vue 由业务项目提供；Tabler 图标则内联到 Aurora Plus 的发布产物。
-      external: ['vue'],
+      external: ['vue', 'electron'],
       output: {
         exports: 'named',
       },

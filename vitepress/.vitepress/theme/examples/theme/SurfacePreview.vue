@@ -77,7 +77,7 @@ const moreActions = [{ label: '复制链接', command: 'copy' }, { label: '另�
 .glass-preview__actions, .glass-preview__row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .glass-preview__actions { margin-bottom: 16px; font-size: 13px; }
 .glass-preview__scene { position: relative; overflow: hidden; border-radius: 12px; }
-.glass-preview__backdrop { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(140deg, color-mix(in srgb,var(--au-color-primary) 11%,var(--au-color-background-subtle)),var(--au-color-background-subtle) 52%,color-mix(in srgb,#9a82d7 11%,var(--au-color-background-subtle))); }
+.glass-preview__backdrop { position: absolute; inset: 0; overflow: hidden; background: var(--au-color-background-subtle); }
 .glass-preview__backdrop i { position: absolute; width: 84px; height: 84px; transform: translate(-50%,-50%); border-radius: 50%; background: color-mix(in srgb,var(--au-color-primary) 30%,transparent); }
 .glass-preview__content { position: relative; display: grid; gap: 20px; padding: 24px; }
 .glass-preview__input { flex: 1; min-width: 100px; }

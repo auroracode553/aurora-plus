@@ -39,6 +39,10 @@ npm run dev
 
 示例须完整定义数据、状态与事件。样式仅作用于示例自有容器和插槽内容，组件外观通过公开属性控制，不使用库内部选择器或样式穿透。
 
+组件页面通过主题的 `doc-before` 插槽统一显示适用平台。`frontmatter.platforms` 接受 `browser`、`electron`，未声明时默认两者；用于 Electron 的组件页面声明 `platforms: [electron]`。平台名称与默认规则集中在 `theme/utils/componentPlatforms.js`，`ComponentPlatforms.vue` 只渲染平台标识，不限制预览；`DemoBlock.vue` 始终挂载示例并保留可复制源码。Electron 标识表示实际使用场景，浏览器仍可预览组件外观和受控交互；窗口系统能力仅由 Electron 宿主提供，不伪造 Electron 环境或原生覆盖区。
+
+组件预览默认继承文档背景，不使用渐变；表面观察示例可使用纯色背景。
+
 主题的 `custom.css` 在视口宽度不超过 640px 时将正文 API 表格限制在内容宽度内，超长内容在表格内部横向滚动，避免撑宽整页并触发移动浏览器缩小显示。
 
 维护者说明留在本文件；使用指南和组件页面只保留组件库使用信息。

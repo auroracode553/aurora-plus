@@ -22,7 +22,7 @@ npm publish --dry-run --access public
 npm publish --access public
 ```
 
-已有完整依赖时可跳过 `npm ci`。包入口指向 `dist/`，发布不会自动生成产物；预检清单应包含 UI、图标的 ES Module / CommonJS 文件、CSS、README 和第三方许可证声明。
+已有完整依赖时可跳过 `npm ci`。包入口指向 `dist/`，发布不会自动生成产物；预检清单应包含 UI、图标及 Electron 适配器的 ES Module / CommonJS 文件、CSS、README 和第三方许可证声明。`aurora-plus/electron` 独立保留 Electron 外部依赖，普通组件与文档站不加载该入口。
 
 发布后核对版本：
 

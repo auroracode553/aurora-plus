@@ -33,6 +33,10 @@
       "import": "./dist/icons.js",
       "require": "./dist/icons.cjs"
     },
+    "./electron": {
+      "import": "./dist/electron.js",
+      "require": "./dist/electron.cjs"
+    },
     "./style.css": "./dist/aurora-plus.css",
     "./package.json": "./package.json"
   },

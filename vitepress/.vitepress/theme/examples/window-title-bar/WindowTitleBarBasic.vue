@@ -47,7 +47,6 @@ function toggleMaximize() {
   border: 1px solid var(--au-color-border-subtle);
   border-radius: var(--au-radius-surface);
   isolation: isolate;
-  background: linear-gradient(110deg, color-mix(in srgb, var(--au-color-primary) 14%, transparent), transparent 65%);
 }
 
 .window-title-bar-demo__status {

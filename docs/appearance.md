@@ -16,7 +16,7 @@ Aurora Plus 全库使用统一外观，没有材质属性、档位、切换 API 
 | `ui/src/components/slider/AuSlider.vue` | 填充与实体滑块直接读取同一比例；指针、键盘和值提交统一由组件处理 |
 | `ui/src/utils/button-group-context.js` | ButtonGroup/FloatingToolbar 注入统一的尺寸、方向和配色，操作项与 Divider 通过 Vue 上下文读取 |
 | `ui/src/theme/mixins/_control-group.scss` | 胶囊边框、留白、操作项和图标尺寸的单一配方，由按钮组、工具条和操作项各自样式引用 |
-| `ui/src/theme/mixins/_window-chrome.scss` | WindowTitleBar/MenuBar 共用的贴边玻璃表面与胶囊操作项布局，菜单按钮的材质直接复用公共 surfaces 模块 |
+| `ui/src/theme/mixins/_window-chrome.scss` | WindowTitleBar/MenuBar 共用的贴边玻璃表面与菜单操作项布局，菜单按钮的材质直接复用公共 surfaces 模块 |
 
 ## 独立图标按钮几何
 
@@ -42,13 +42,13 @@ FloatingToolbar 自身提供 `button-group-context.js` 上下文，插槽内直�
 
 ## 表面绘制
 
-WindowTitleBar 和 MenuBar 的整栏使用公共固定磨砂，底色直接引用公共表面令牌，不单独维护透明度；分界线使用前景色的 6%。浅色呈清亮白色磨砂，深色采用石墨底，避免系统 Acrylic 的灰底主导长条外观。整栏不加高光与浮动阴影。标题栏仍高 32px，窗口按钮完整命中宽 40px、高度填满栏体，视觉底面向内缩上下 3px、左右 4px；菜单栏仍高 30px、根操作项高 26px。根菜单在悬停、键盘焦点和展开时复用公共表面和静止半径 6px 的中性阴影；鼠标和焦点只影响展示，菜单业务状态仍由 openIndex 管理。两类按钮复用公共 CSS 按压配方，不建立 JS 动画控制器。
+WindowTitleBar 和 MenuBar 的整栏使用公共固定磨砂，底色直接引用公共表面令牌，不单独维护透明度；分界线使用前景色的 6%。浅色呈清亮白色磨砂，深色采用石墨底，避免系统 Acrylic 的灰底主导长条外观。整栏不加高光与浮动阴影。标题栏默认高 32px，自绘窗口控件完整命中宽 40px、高度填满栏体，默认透明，悬停与按压使用铺满命中区的矩形反馈，不使用胶囊、内缩底面或按压缩放；键盘焦点保留内描边。标题栏在浏览器与 Electron 中均可渲染自绘外观和受控交互，仅在 Electron 中自动检测 Window Controls Overlay，启用后隐藏自绘控件并通过覆盖区环境变量预留位置及高度；独立的 `aurora-plus/electron` 主进程入口管理原生控件、主题与关闭意图，普通组件入口不引入 Electron。菜单栏仍高 30px、根操作项高 26px。根菜单在悬停、键盘焦点和展开时复用公共表面和静止半径 6px 的中性阴影；鼠标和焦点只影响展示，菜单业务状态仍由 openIndex 管理。不建立 JS 动画控制器。
 
 MenuBarPanel 保留公共菜单面板材质、28px 行高、快捷键与勾选列，根面板与栏体间隔 4px，子菜单仍按现有偏移定位。拖拽区、no-drag 操作区、标题双击、窗口事件、菜单键盘及点击外部关闭仍由原组件管理；视觉层不依赖 Electron 或宿主业务。
 
 背景磨砂仅用于浮层和贴边栏，使用公共 `--au-surface-blur=8px`、`--au-surface-saturation=100%`；Dialog/Drawer 的浅/深 blur 为 16/8px，saturation=1.5。普通按钮、输入框、选择器控制区、按钮组和实体滑块不启用背景滤镜。表面直接通过公共 CSS 声明，不生成 Canvas 位移图、PNG data URL、SVG 滤镜或附加高光节点。
 
-Button、ButtonGroupItem 和窗口/菜单操作项通过 CSS `:active` 缩放到 0.975，释放恢复到 1；按压/恢复的默认时长为 85/180ms，曲线复用全局 `(0.23,1,0.32,1)`，不改变透明度或逐帧重绘阴影。颜色与阴影使用全局语义变量，主题变化由 CSS 继承即时生效。
+Button、ButtonGroupItem 和菜单操作项通过 CSS `:active` 缩放到 0.975，释放恢复到 1；按压/恢复的默认时长为 85/180ms，曲线复用全局 `(0.23,1,0.32,1)`，不改变透明度或逐帧重绘阴影。窗口控件只切换背景与文字颜色，不执行缩放。颜色与阴影使用全局语义变量，主题变化由 CSS 继承即时生效。
 
 Card、CollapseItem 和 MenuList 属于正文承载表面：保留既有底色、边框、阴影与 hoverable/展开动画，不建立背景滤镜。`mixins/_surfaces.scss` 的 content 配方统一关闭标准与 WebKit 背景滤镜，避免长页面中大面积、嵌套表面随滚动重复合成。模态全屏交互层保持透明，图片预览保留独立底幕。
 

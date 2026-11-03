@@ -4,6 +4,7 @@
     :class="{
       'is-drag-disabled': !draggable,
       'is-controls-start': controlsPosition === 'start',
+      'is-native-controls': usesNativeControls,
     }"
     v-bind="$attrs"
   >
@@ -135,6 +136,7 @@ import { computed, useSlots } from 'vue';
 import { IconCopy, IconMinus, IconSquare, IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
+import { useNativeWindowControls } from './useNativeWindowControls.js';
 
 // 标题栏不依赖桌面宿主，只上报按钮提示的整体开关状态，由宿主管理浮层边界。
 defineOptions({ inheritAttrs: false });
@@ -177,13 +179,16 @@ const emit = defineEmits([
 ]);
 
 const slots = useSlots();
+const { available: usesNativeControls } = useNativeWindowControls();
 const openTooltips = new Set();
 const titleText = computed(() => String(props.title ?? ''));
 const hasIcon = computed(() => Boolean(props.showIcon || props.iconSrc || slots.icon));
 const hasWindowControls = computed(() => (
   props.showMinimize || props.showMaximize || props.showClose
 ));
-const hasControlsArea = computed(() => Boolean(slots.controls || hasWindowControls.value));
+const hasControlsArea = computed(() => (
+  !usesNativeControls.value && Boolean(slots.controls || hasWindowControls.value)
+));
 const maximizeButtonLabel = computed(() => (
   props.maximized ? props.restoreLabel : props.maximizeLabel
 ));

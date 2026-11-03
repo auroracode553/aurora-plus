@@ -56,9 +56,11 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuTree` | 支持虚拟滚动、选中与折叠的树形导航 |
 | `AuContextMenu` | 配置式右键菜单 |
 | `AuFloatingToolbar` | 锚点浮动工具条 |
-| `AuWindowTitleBar` | 桌面无边框窗口的受控标题栏 |
+| `AuWindowTitleBar` | 面向 Electron 的受控标题栏，支持浏览器预览，自动识别原生窗口控件 |
 | `AuMessage` | 命令式消息提示 |
 | `AuMessageBox` | Promise 风格确认框 |
+
+Electron 主进程可通过 `aurora-plus/electron` 的 `createElectronWindowTitleBar()` 配置原生窗口控件、主题同步和关闭意图回调，支持 Win11 最大化按钮的悬停贴靠布局。组件 API 与接入示例见 [WindowTitleBar](https://auroracode553.github.io/aurora-plus/components/window-title-bar)。
 
 ## 交互动效
 

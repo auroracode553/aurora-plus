@@ -6,7 +6,7 @@ import exampleSource from '../.vitepress/theme/examples/empty/EmptyBasic.vue?dem
 
 # Empty 空状态
 
-`AuEmpty` 为无内容区域提供图标、说明和操作位置，默认继承容器背景。
+`AuEmpty` 为无内容区域提供统一的图标和说明，默认显示“暂无数据”并继承容器背景。
 
 ## 基础用法
 
