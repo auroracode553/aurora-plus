@@ -1,13 +1,13 @@
 <template>
   <div class="table-demo">
     <div class="table-demo__toolbar">
-      <AuButton size="small" :type="border ? 'primary' : 'default'" @click="border = !border">
+      <AuButton :type="border ? 'primary' : 'default'" @click="border = !border">
         {{ border ? '关闭边框' : '显示边框' }}
       </AuButton>
-      <AuButton size="small" :type="stripe ? 'primary' : 'default'" @click="stripe = !stripe">
+      <AuButton :type="stripe ? 'primary' : 'default'" @click="stripe = !stripe">
         {{ stripe ? '关闭斑马纹' : '显示斑马纹' }}
       </AuButton>
-      <AuButton size="small" @click="tableRef?.clearSelection()">清空选择</AuButton>
+      <AuButton @click="tableRef?.clearSelection()">清空选择</AuButton>
       <span class="table-demo__summary">已选 {{ selectedRows.length }} 行 · 当前行 {{ currentRow?.name || '无' }}</span>
     </div>
 

@@ -1,10 +1,9 @@
 <template>
   <div class="button-icons-demo">
-    <div v-for="size in sizes" :key="size.value" class="button-icons-demo__sizes">
-      <span>{{ size.label }}</span>
-      <AuButton :icon="IconX" :size="size.value" :aria-label="`${size.label}图标按钮`" />
-      <AuButton :icon="IconX" :size="size.value" circle :aria-label="`${size.label}圆形按钮`" />
-      <AuButton :icon="IconX" :size="size.value" type="menu" :aria-label="`${size.label}菜单按钮`" />
+    <div class="button-icons-demo__actions">
+      <AuButton :icon="IconX" aria-label="图标按钮" />
+      <AuButton :icon="IconX" circle aria-label="圆形按钮" />
+      <AuButton :icon="IconX" type="menu" aria-label="菜单按钮" />
     </div>
 
     <div v-for="(row, index) in searchRows" :key="row.label" class="button-icons-demo__example">
@@ -12,9 +11,9 @@
       <div class="button-icons-demo__search" :style="{ maxWidth: `${row.width}px` }">
         <AuInput v-model="queries[index]" type="search" placeholder="搜索内容" />
         <AuTooltip v-if="row.tooltip" content="清空">
-          <AuButton :icon="IconX" size="small" circle aria-label="清空搜索" @click="queries[index] = ''" />
+          <AuButton :icon="IconX" circle aria-label="清空搜索" @click="queries[index] = ''" />
         </AuTooltip>
-        <AuButton v-else :icon="IconX" size="small" circle aria-label="清空搜索" @click="queries[index] = ''" />
+        <AuButton v-else :icon="IconX" circle aria-label="清空搜索" @click="queries[index] = ''" />
       </div>
     </div>
   </div>
@@ -25,11 +24,6 @@ import { ref } from 'vue';
 import { AuButton, AuInput, AuTooltip } from 'aurora-plus';
 import { IconX } from 'aurora-plus/icons';
 
-const sizes = [
-  { value: 'small', label: '小型' },
-  { value: 'default', label: '默认' },
-  { value: 'large', label: '大型' },
-];
 const searchRows = [
   { label: '210px 容器', width: 210, tooltip: false },
   { label: '210px 容器，带提示', width: 210, tooltip: true },
@@ -44,13 +38,12 @@ const queries = ref(searchRows.map(() => ''));
   gap: 16px;
 }
 
-.button-icons-demo__sizes {
+.button-icons-demo__actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.button-icons-demo__sizes > span,
 .button-icons-demo__example > span {
   color: var(--au-color-text-secondary);
   font-size: var(--au-font-size-small);

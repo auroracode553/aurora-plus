@@ -1,11 +1,11 @@
 <template>
   <div class="table-scroll-demo">
     <div class="table-scroll-demo__actions">
-      <AuButton size="small" :type="showScroll ? 'primary' : 'default'" @click="showScroll = !showScroll">
+      <AuButton :type="showScroll ? 'primary' : 'default'" @click="showScroll = !showScroll">
         {{ showScroll ? '始终隐藏滚动条' : '悬浮显示滚动条' }}
       </AuButton>
-      <AuButton size="small" @click="tableRef?.scrollToLeft(520)">查看右侧列</AuButton>
-      <AuButton size="small" @click="tableRef?.scrollToLeft(0)">回到左侧</AuButton>
+      <AuButton @click="tableRef?.scrollToLeft(520)">查看右侧列</AuButton>
+      <AuButton @click="tableRef?.scrollToLeft(0)">回到左侧</AuButton>
     </div>
 
     <AuTable ref="tableRef" :data="rows" :height="210" :show-scroll="showScroll" row-key="id">

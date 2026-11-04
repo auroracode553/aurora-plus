@@ -16,7 +16,7 @@ const visible = ref(true);
     <AuTransition preset="scale">
       <AuTag v-if="visible" closable @close="visible = false">可移除</AuTag>
     </AuTransition>
-    <AuButton v-if="!visible" size="small" @click="visible = true">恢复标签</AuButton>
+    <AuButton v-if="!visible" @click="visible = true">恢复标签</AuButton>
   </div>
 </template>
 

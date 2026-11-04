@@ -1,0 +1,13 @@
+// 连接相邻菜单面板的透明命中区，额外重叠 1px 避免缩放后的亚像素断缝。
+@mixin hover-bridge($gap) {
+  @media (min-width: 481px) {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 100%;
+      width: $gap + 1px;
+    }
+  }
+}

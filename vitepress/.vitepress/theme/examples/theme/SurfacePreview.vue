@@ -29,7 +29,7 @@ const moreActions = [{ label: '复制链接', command: 'copy' }, { label: '另�
   <div class="glass-preview">
     <div class="glass-preview__actions">
       <span>清晰的磨砂表面 · 统一交互</span>
-      <AuButton size="small" @click="theme = theme === 'light' ? 'dark' : 'light'">{{ theme === 'light' ? '切换深色' : '切换浅色' }}</AuButton>
+      <AuButton @click="theme = theme === 'light' ? 'dark' : 'light'">{{ theme === 'light' ? '切换深色' : '切换浅色' }}</AuButton>
     </div>
     <div ref="themeRef" class="glass-preview__themed" :data-au-theme="theme">
       <section class="glass-preview__scene">

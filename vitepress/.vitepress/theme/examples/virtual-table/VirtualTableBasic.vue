@@ -1,11 +1,11 @@
 <template>
   <div class="virtual-table-demo">
     <div class="virtual-table-demo__actions">
-      <AuButton size="small" @click="tableRef?.scrollToRow(5000, 'center')">定位第 5,001 行</AuButton>
-      <AuButton size="small" :type="loading ? 'primary' : 'default'" @click="loading = !loading">
+      <AuButton @click="tableRef?.scrollToRow(5000, 'center')">定位第 5,001 行</AuButton>
+      <AuButton :type="loading ? 'primary' : 'default'" @click="loading = !loading">
         {{ loading ? '结束刷新' : '模拟刷新' }}
       </AuButton>
-      <AuButton size="small" :type="showScroll ? 'primary' : 'default'" @click="showScroll = !showScroll">
+      <AuButton :type="showScroll ? 'primary' : 'default'" @click="showScroll = !showScroll">
         {{ showScroll ? '始终隐藏滚动条' : '悬浮显示滚动条' }}
       </AuButton>
       <span>当前渲染 {{ rendered.start + 1 }}–{{ rendered.end }} 行</span>

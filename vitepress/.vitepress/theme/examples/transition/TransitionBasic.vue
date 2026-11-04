@@ -16,8 +16,8 @@ function remove(id) { items.value = items.value.filter(item => item.id !== id); 
 <template>
   <div class="transition-example">
     <div class="transition-example__actions">
-      <AuButton size="small" @click="visible = !visible">切换内容</AuButton>
-      <AuButton size="small" :disabled="items.length >= 6" @click="add">添加条目</AuButton>
+      <AuButton @click="visible = !visible">切换内容</AuButton>
+      <AuButton :disabled="items.length >= 6" @click="add">添加条目</AuButton>
     </div>
     <div class="transition-example__single">
       <AuTransition preset="scale" appear>
@@ -28,7 +28,7 @@ function remove(id) { items.value = items.value.filter(item => item.id !== id); 
       <AuCard v-for="item in items" :key="item.id" padding="compact">
         <div class="transition-example__row">
           <span>{{ item.label }}</span>
-          <AuButton type="menu" size="small" @click="remove(item.id)">移除</AuButton>
+          <AuButton type="menu" @click="remove(item.id)">移除</AuButton>
         </div>
       </AuCard>
     </AuTransitionGroup>

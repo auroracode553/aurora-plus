@@ -21,12 +21,6 @@
       </AuButton>
       <AuButton v-if="saving" @click="saving = false">重置加载状态</AuButton>
     </div>
-
-    <div class="au-doc-row">
-      <AuButton v-for="size in buttonSizes" :key="size.value" :size="size.value">
-        {{ size.label }}
-      </AuButton>
-    </div>
   </div>
 </template>
 
@@ -42,12 +36,6 @@ const buttonTypes = [
   { type: 'warning', label: '警告按钮' },
   { type: 'danger', label: '危险按钮' },
   { type: 'info', label: '信息按钮' },
-];
-
-const buttonSizes = [
-  { value: 'small', label: '小型按钮' },
-  { value: 'default', label: '默认尺寸' },
-  { value: 'large', label: '大型按钮' },
 ];
 
 const saving = ref(false);

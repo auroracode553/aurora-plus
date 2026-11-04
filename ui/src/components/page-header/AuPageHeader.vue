@@ -13,7 +13,7 @@ const emit = defineEmits(['back']);
 <template>
   <header class="au-page-header au-component au-motion-state au-motion-reveal">
     <div class="au-page-header__main">
-      <AuButton v-if="back" type="menu" size="small" circle title="返回" @click="emit('back', $event)">
+      <AuButton v-if="back" type="menu" circle title="返回" @click="emit('back', $event)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 5-7 7 7 7M5 12h14" /></svg>
       </AuButton>
       <div class="au-page-header__heading">

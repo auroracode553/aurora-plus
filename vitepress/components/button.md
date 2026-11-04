@@ -12,10 +12,12 @@ import buttonIconsSource from '../.vitepress/theme/examples/button/ButtonIcons.v
 
 常用的操作触发器。
 
+按钮仅提供默认大小，普通按钮高 32px，menu 类型高 26px。
+
 ## 基础用法
 
 <DemoBlock
-  title="类型、状态与尺寸"
+  title="类型与状态"
   :source="buttonBasicSource"
 >
   <ButtonBasic />
@@ -23,7 +25,7 @@ import buttonIconsSource from '../.vitepress/theme/examples/button/ButtonIcons.v
 
 ## 图标按钮
 
-只有图标的按钮保持等宽高，small/default/large 分别为 28/32/40px；`circle` 使用圆形轮廓。菜单式图标按钮更紧凑，对应为 24/26/30px。图标按钮不会被同行输入框挤压变形。
+只有图标的按钮保持 32×32px，`circle` 使用圆形轮廓；menu 类型为 26×26px。图标按钮不会被同行输入框挤压变形。
 
 <DemoBlock :source="buttonIconsSource">
   <ButtonIcons />
@@ -44,7 +46,6 @@ import buttonIconsSource from '../.vitepress/theme/examples/button/ButtonIcons.v
 | 属性 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
 | type | 视觉类型 | string | default / primary / success / info / warning / danger / menu | default |
-| size | 按钮尺寸 | string | small / default / large | default |
 | selected | 是否选中 | boolean | — | undefined |
 | selectedColor | menu 类型的选中颜色，背景由组件自动生成 | string | 十六进制、rgb()、rgba() 等颜色值 | '' |
 | nativeType | 原生 button 的 type | string | button / submit / reset | button |

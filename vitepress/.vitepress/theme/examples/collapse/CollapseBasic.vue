@@ -11,7 +11,7 @@ const refreshCount = ref(0);
 <template>
   <div class="collapse-demo">
     <AuCollapseItem v-model="opened" title="分析依据" summary="来源与更新时间" lazy>
-      <template #actions><AuButton size="small" @click="refreshCount += 1">刷新</AuButton></template>
+      <template #actions><AuButton @click="refreshCount += 1">刷新</AuButton></template>
       <p>操作按钮独立于展开按钮。已刷新 {{ refreshCount }} 次。</p>
       <p>内容完整换行；首次展开后保留状态。</p>
     </AuCollapseItem>

@@ -124,7 +124,7 @@
       </div>
       <div v-if="showToday || $slots.footer" class="au-date-range-picker__footer au-picker-footer">
         <slot name="footer" :select-today="selectToday" :clear="clear">
-          <AuButton v-if="showToday" type="menu" size="small" @click="selectToday">今天</AuButton>
+          <AuButton v-if="showToday" type="menu" @click="selectToday">今天</AuButton>
         </slot>
       </div>
     </div>

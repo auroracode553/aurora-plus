@@ -2,8 +2,8 @@
   <div>
     <div class="virtual-list-demo__controls">
       <input v-model.trim="keyword" type="search" placeholder="按名称或状态筛选" />
-      <AuButton size="small" @click="listRef?.scrollToTop()">回到顶部</AuButton>
-      <AuButton size="small" @click="scrollToMiddle">定位到中间</AuButton>
+      <AuButton @click="listRef?.scrollToTop()">回到顶部</AuButton>
+      <AuButton @click="scrollToMiddle">定位到中间</AuButton>
       <span>共 {{ filteredItems.length }} 条，当前渲染 {{ renderedRangeText }}</span>
     </div>
 

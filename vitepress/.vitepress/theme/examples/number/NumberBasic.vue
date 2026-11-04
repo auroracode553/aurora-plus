@@ -12,8 +12,8 @@ function increase() { value.value = Math.round((value.value + 12.75) * 100) / 10
       <AuNumber :value="value" :precision="2" />
     </div>
     <div class="number-example__actions">
-      <AuButton size="small" @click="increase">增加数值</AuButton>
-      <AuButton size="small" @click="value = 998.5">重置</AuButton>
+      <AuButton @click="increase">增加数值</AuButton>
+      <AuButton @click="value = 998.5">重置</AuButton>
     </div>
   </div>
 </template>

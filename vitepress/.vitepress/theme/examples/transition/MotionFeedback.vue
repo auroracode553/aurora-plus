@@ -59,7 +59,7 @@ onBeforeUnmount(() => clearTimeout(timer));
       <p>{{ text }}</p>
     </AuCollapseItem>
     <div class="motion-feedback__row">
-      <AuButton size="small" @click="rows = [...rows].reverse()">调整顺序</AuButton>
+      <AuButton @click="rows = [...rows].reverse()">调整顺序</AuButton>
       <span>悬停卡片可观察轻微抬升</span>
     </div>
     <AuTransitionGroup class="motion-feedback__list">

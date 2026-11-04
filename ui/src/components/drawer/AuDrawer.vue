@@ -30,7 +30,6 @@
               <AuTooltip v-if="showClose" :content="closeLabel" :disabled="!closeLabel">
                 <AuButton
                   class="au-drawer__close"
-                  size="small"
                   :icon="IconX"
                   circle
                   :disabled="closingPending"

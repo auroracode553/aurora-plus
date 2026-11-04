@@ -15,7 +15,7 @@ function advance() { percentage.value = (percentage.value + 16) % 101; }
       <AuProgress type="ticks" :percentage="percentage" />
       <AuProgress type="circle" :percentage="72" status="warning" :width="80" :format="value => String(value)" />
     </div>
-    <AuButton size="small" @click="advance">更新进度</AuButton>
+    <AuButton @click="advance">更新进度</AuButton>
   </div>
 </template>
 

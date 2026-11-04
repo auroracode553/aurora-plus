@@ -1,6 +1,6 @@
 # 统一外观与动效实现
 
-Aurora Plus 全库使用统一外观，没有材质属性、档位、切换 API 或偏好存储。亮暗主题仍由 `setAuroraTheme` 管理，语义颜色沿用宿主覆盖值。Button 为 28/32/40px；Switch 三档轨道为 30×18、36×20、42×24px，滑块为 14/16/20px；Slider 为 14/16/18px。输入类控件采用下述独立尺寸配方。它们是 Web 布局对原生设计基线的几何适配。
+Aurora Plus 全库使用统一外观，没有材质属性、档位、切换 API 或偏好存储。亮暗主题仍由 `setAuroraTheme` 管理，语义颜色沿用宿主覆盖值。Button 仅提供默认大小，普通按钮高 32px、menu 类型高 26px；Switch 三档轨道为 30×18、36×20、42×24px，滑块为 14/16/20px；Slider 为 14/16/18px。输入类控件采用下述独立尺寸配方。它们是 Web 布局对原生设计基线的几何适配。
 
 ## 文件与依赖
 
@@ -17,12 +17,21 @@ Aurora Plus 全库使用统一外观，没有材质属性、档位、切换 API 
 | `ui/src/utils/button-group-context.js` | ButtonGroup/FloatingToolbar 注入统一的尺寸、方向和配色，操作项与 Divider 通过 Vue 上下文读取 |
 | `ui/src/theme/mixins/_control-group.scss` | 胶囊边框、留白、操作项和图标尺寸的单一配方，由按钮组、工具条和操作项各自样式引用 |
 | `ui/src/theme/mixins/_window-chrome.scss` | WindowTitleBar/MenuBar 共用的贴边玻璃表面与菜单操作项布局，菜单按钮的材质直接复用公共 surfaces 模块 |
+| `ui/src/utils/use-submenu-hover.js`、`ui/src/theme/mixins/_submenu.scss` | MenuBar 与 ContextMenu 共用的悬停意图、关闭缓冲与透明鼠标通道 |
 
 ## 独立图标按钮几何
 
-`AuButton` 仅含图标或显式设置 `circle` 时，small/default/large 的宽高分别固定为 28/32/40px；menu 类型对应为 24/26/30px。普通图标按钮沿用控件圆角，circle 使用圆形，menu 保留紧凑圆角。尺寸与最小尺寸由 `AuButton.scss` 的同一 Sass 配方设置，并关闭 Flex 伸缩，避免同行输入框压缩按钮或纵向布局拉伸按钮。文字按钮继续按内容确定宽度。
+`AuButton` 不提供 `size` 属性。仅含图标或显式设置 `circle` 时，宽高固定为 32px；menu 类型为 26px。普通图标按钮沿用控件圆角，circle 使用圆形，menu 保留紧凑圆角。尺寸与最小尺寸由 `AuButton.scss` 的同一 Sass 配方设置，并关闭 Flex 伸缩，避免同行输入框压缩按钮或纵向布局拉伸按钮。文字按钮继续按内容确定宽度。
 
 Tooltip 触发区域使用 `min-width: min-content`，通过内容自身的最小宽度约束包装层，不依赖具体按钮类型或尺寸。同行输入框允许收缩，固定尺寸按钮及其提示触发区域保留操作宽度。
+
+## 级联菜单悬停
+
+MenuBar 和 ContextMenu 共用 `useSubmenuHover`，各面板通过回调提供当前子菜单元素，不直接操作另一组件的内部状态。离开父项或面板后延迟 240ms 关闭，重新进入父项或子菜单时取消待处理动作；朝子菜单近侧边缘与上下角组成的三角区域移动时，相邻项切换最多延迟 320ms。方向判断使用最近 300ms 内的鼠标位置，子菜单上下边缘各保留 8px 容错；反向移动或移出通道立即切换，停留超过延迟仍执行新项，避免菜单粘滞。键盘聚焦立即切换，不等待悬停定时器。
+
+透明通道由 `_submenu.scss` 的 `hover-bridge($gap)` 生成，分别衔接 MenuBar 的 3px 与 ContextMenu 的 6px 间距，并增加 1px 重叠以避免缩放断缝；视口宽度不超过 480px 时沿用内联子菜单，不生成横向通道。面板卸载时清除定时器；ContextMenu 通过 v-model 隐藏或主动关闭时同时清空悬停状态，展开或收起内联子菜单后重新执行视口避让。
+
+Dropdown 的 `items` 只渲染单层命令，不处理 `children`；`menu` 插槽替换默认菜单内容，插槽内交互由使用方组织。
 
 ## 输入类控件几何
 

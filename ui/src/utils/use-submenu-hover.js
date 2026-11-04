@@ -23,7 +23,7 @@ export function useSubmenuHover({ getSubmenuElement }) {
   function activateItem(key, host = null) {
     cancelPending();
     activeSubmenuKey.value = key;
-    activeHost = key ? host : null;
+    activeHost = key !== '' ? host : null;
     departurePoint = null;
     previousPoint = null;
   }
@@ -65,7 +65,7 @@ export function useSubmenuHover({ getSubmenuElement }) {
       previousPoint = readPoint(event);
       return;
     }
-    if (activeSubmenuKey.value && isAimingAtSubmenu(event)) {
+    if (activeSubmenuKey.value !== '' && isAimingAtSubmenu(event)) {
       // 斜向进入子菜单时暂缓切换相邻项；停留超过上限仍会执行切换。
       departurePoint ||= previousPoint;
       schedule(key, event.currentTarget, AIM_DELAY, 'aim');
@@ -82,7 +82,7 @@ export function useSubmenuHover({ getSubmenuElement }) {
   }
 
   function leavePanel() {
-    if (activeSubmenuKey.value) schedule('', null, CLOSE_DELAY, 'close');
+    if (activeSubmenuKey.value !== '') schedule('', null, CLOSE_DELAY, 'close');
   }
 
   function keepOpen() {

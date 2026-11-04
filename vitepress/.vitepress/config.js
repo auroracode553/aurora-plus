@@ -73,7 +73,6 @@ export default defineConfig({
         items: [
           { text: 'Color 颜色', link: '/guide/colors' },
           { text: 'Theme 主题配置', link: '/guide/theme' },
-          { text: 'Motion 通用动效', link: '/guide/motion' },
         ],
       },
       { text: '组件', link: '/components/button' },
@@ -91,7 +90,6 @@ export default defineConfig({
         items: [
           { text: 'Color 颜色', link: '/guide/colors' },
           { text: 'Theme 主题配置', link: '/guide/theme' },
-          { text: 'Motion 通用动效', link: '/guide/motion' },
         ],
       },
       {

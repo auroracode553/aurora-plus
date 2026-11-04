@@ -15,7 +15,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuProgress` | 线形、圆环与刻度环进度 |
 | `AuPageHeader` | 标题、说明、返回事件与操作区 |
 | `AuTransition`、`AuTransitionGroup` | 内容显隐、列表增删与依次进入动画 |
-| `AuButton` | 多类型、多尺寸、加载态按钮 |
+| `AuButton` | 默认尺寸、多类型、加载态按钮 |
 | `AuButtonGroup`、`AuButtonGroupItem` | 控制组容器与专用操作项 |
 | `AuDivider` | 横向与纵向内容分割线 |
 | `AuLink` | 支持语义类型、下划线策略、禁用态与图标的文字链接 |
@@ -135,4 +135,4 @@ setAuroraTheme('dark');
 setAuroraTheme('light');
 ```
 
-组件使用统一主题表面和轻量交互反馈，浮层保留磨砂质感，无材质属性或全局档位。具体行为见[动效指南](https://auroracode553.github.io/aurora-plus/guide/motion)。
+组件使用统一主题表面和轻量交互反馈，浮层保留磨砂质感，无材质属性或全局档位。

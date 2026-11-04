@@ -22,7 +22,6 @@
             <AuTooltip v-if="showClose" :content="closeLabel" :disabled="!closeLabel">
               <AuButton
                 class="au-dialog__close"
-                size="small"
                 :icon="IconX"
                 circle
                 @click="close('close-button')"

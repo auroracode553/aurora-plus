@@ -8,6 +8,8 @@ import dropdownBasicSource from '../.vitepress/theme/examples/dropdown/DropdownB
 
 用于将一组低频或次级操作收纳到触发器附近。
 
+`items` 渲染单层命令列表，不解析 `children`。需要自定义菜单结构时使用 `menu` 插槽，并通过作用域方法 `select(item)` 执行选择、`close()` 关闭菜单。
+
 ## 基础用法
 
 <DemoBlock

@@ -9,12 +9,16 @@
         tabindex="-1"
         @contextmenu.prevent
         @mousedown.stop
+        @mousemove="trackPointer"
+        @mouseleave="leavePanel"
         @keydown="handleKeydown"
       >
-        <template v-for="(section, sectionIndex) in items" :key="section.id || sectionIndex">
+        <template v-for="(section, sectionIndex) in items" :key="section.id ?? sectionIndex">
           <div
             v-if="section.type === 'icon-row' || section.type === 'icon-grid'"
             :class="section.type === 'icon-row' ? 'au-context-menu__icon-row' : 'au-context-menu__icon-grid'"
+            @mouseenter="hoverItem('', $event)"
+            @focusin="activateItem('')"
           >
             <AuTooltip v-for="item in section.items" :key="item.id" :content="item.label" placement="top">
               <button
@@ -38,6 +42,8 @@
               type="button"
               :title="item.title"
               :disabled="item.disabled || selecting"
+              @mouseenter="hoverItem('', $event)"
+              @focus="activateItem('')"
               @click="selectItem(item)"
             >
               <AuIcon v-if="item.icon" class="au-context-menu__item-icon" :icon="item.icon" />
@@ -52,6 +58,8 @@
             :class="{ 'is-danger': resolveSectionItem(section).danger }"
             type="button"
             :disabled="resolveSectionItem(section).disabled || selecting"
+            @mouseenter="hoverItem('', $event)"
+            @focus="activateItem('')"
             @click="selectItem(resolveSectionItem(section))"
           >
             <AuIcon v-if="resolveSectionItem(section).icon" class="au-context-menu__item-icon" :icon="resolveSectionItem(section).icon" />
@@ -62,15 +70,18 @@
           <div
             v-else-if="section.type === 'submenu'"
             class="au-context-menu__submenu-wrapper au-menu-submenu-host"
-            @mouseenter="showSubmenu(section.id)"
-            @mouseleave="hideSubmenu"
+            @mouseenter="hoverItem(section.disabled || selecting ? '' : resolveSectionKey(section, sectionIndex), $event)"
+            @mouseleave="leaveItem(resolveSectionKey(section, sectionIndex), $event)"
           >
             <button
               class="au-context-menu__item au-menu-action has-submenu"
-              :class="{ 'is-active': activeSubmenu === section.id }"
+              :class="{ 'is-active': activeSubmenuKey === resolveSectionKey(section, sectionIndex) }"
               type="button"
-              :disabled="section.disabled"
-              @focus="showSubmenu(section.id)"
+              :disabled="section.disabled || selecting"
+              aria-haspopup="menu"
+              :aria-expanded="!section.disabled && activeSubmenuKey === resolveSectionKey(section, sectionIndex)"
+              @focus="activateItem(resolveSectionKey(section, sectionIndex), $event.currentTarget.parentElement)"
+              @keydown.right.prevent="activateItem(resolveSectionKey(section, sectionIndex), $event.currentTarget.parentElement)"
             >
               <AuIcon v-if="section.icon" class="au-context-menu__item-icon" :icon="section.icon" />
               <span class="au-context-menu__label au-menu-label">{{ section.label }}</span>
@@ -79,10 +90,9 @@
 
             <Transition name="au-float">
               <div
-                v-if="activeSubmenu === section.id"
+                v-if="!section.disabled && activeSubmenuKey === resolveSectionKey(section, sectionIndex)"
                 class="au-context-submenu au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile au-motion-state"
-                @mouseenter="showSubmenu(section.id)"
-                @mouseleave="hideSubmenu"
+                @mouseenter="keepOpen"
               >
                 <template v-for="(item, itemIndex) in section.items" :key="item.id || itemIndex">
                   <div v-if="item.kind === 'separator' || item.type === 'separator'" class="au-context-menu__separator au-menu-separator"></div>
@@ -112,6 +122,7 @@
 
 <script setup>
 import { getFloatingActions } from '../../utils/floating-actions.js';
+import { useSubmenuHover } from '../../utils/use-submenu-hover.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { IconChevronRight } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
@@ -136,10 +147,10 @@ const emit = defineEmits(['update:modelValue', 'select', 'action', 'cancel', 'cl
 const menuRef = ref(null);
 const visible = ref(props.modelValue);
 const selecting = ref(false);
-const activeSubmenu = ref('');
+const { activeSubmenuKey, activateItem, hoverItem, leaveItem, leavePanel, keepOpen, trackPointer } = useSubmenuHover({
+  getSubmenuElement: (host) => host.querySelector(':scope > .au-context-submenu:not(.au-float-leave-active)'),
+});
 const adjustedPosition = ref({ x: props.position.x || 0, y: props.position.y || 0 });
-
-let submenuCloseTimer = null;
 
 const menuStyle = computed(() => ({
   left: `${adjustedPosition.value.x}px`,
@@ -147,16 +158,8 @@ const menuStyle = computed(() => ({
   zIndex: props.zIndex,
 }));
 
-function showSubmenu(name) {
-  clearTimeout(submenuCloseTimer);
-  activeSubmenu.value = name;
-  nextTick(updatePosition);
-}
-
-function hideSubmenu() {
-  submenuCloseTimer = globalThis.setTimeout(() => {
-    activeSubmenu.value = '';
-  }, 180);
+function resolveSectionKey(section, index) {
+  return section.id ?? `submenu-${index}`;
 }
 
 function resolveSectionItem(section) {
@@ -184,7 +187,7 @@ async function selectItem(item) {
 function close(reason = 'api') {
   if (!visible.value) return;
   visible.value = false;
-  activeSubmenu.value = '';
+  activateItem('');
   emit('update:modelValue', false);
   emit('close', reason);
 }
@@ -239,6 +242,7 @@ watch(
   () => props.modelValue,
   (value) => {
     visible.value = value;
+    if (!value) activateItem('');
     if (value) {
       updatePosition();
       nextTick(() => {
@@ -254,6 +258,11 @@ watch(
   { deep: true }
 );
 
+// 内联子菜单会改变根面板高度，展开与收起后继续执行原有的视口避让。
+watch(activeSubmenuKey, () => {
+  if (visible.value) updatePosition();
+}, { flush: 'post' });
+
 onMounted(() => {
   if (typeof document !== 'undefined') document.addEventListener('pointerdown', handleOutsidePointer, true);
   if (typeof window !== 'undefined') window.addEventListener('resize', updatePosition);
@@ -266,7 +275,6 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  clearTimeout(submenuCloseTimer);
   if (typeof document !== 'undefined') document.removeEventListener('pointerdown', handleOutsidePointer, true);
   if (typeof window !== 'undefined') window.removeEventListener('resize', updatePosition);
 });

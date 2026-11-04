@@ -1,6 +1,7 @@
 @use '../../theme/mixins/motion';
 @use '../../theme/mixins/surfaces';
 @use '../../theme/mixins/interaction';
+@use '../../theme/mixins/submenu';
 
 .au-context-menu,
 .au-context-submenu {
@@ -69,4 +70,5 @@
   top: -5px;
   left: calc(100% + 6px);
   min-width: min(200px, calc(100vw - 16px));
+  @include submenu.hover-bridge(6px);
 }

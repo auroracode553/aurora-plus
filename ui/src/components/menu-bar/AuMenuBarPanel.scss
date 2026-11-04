@@ -1,3 +1,5 @@
+@use '../../theme/mixins/submenu';
+
 .au-menu-bar-panel {
   position: absolute;
   top: calc(100% + 4px);
@@ -43,16 +45,5 @@
 .au-menu-bar-panel__nested {
   top: -5px;
   left: calc(100% + 3px);
-}
-
-@media (min-width: 481px) {
-  .au-menu-bar-panel__nested::before {
-    // 衔接 3px 面板间距，额外重叠 1px 避免缩放后的亚像素断缝。
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 100%;
-    width: 4px;
-  }
+  @include submenu.hover-bridge(3px);
 }

@@ -98,7 +98,7 @@
         <div class="au-update-dialog__footer">
           <div class="au-update-dialog__preferences">
             <AuCheckbox v-if="showAutoCheck" :model-value="autoCheck" size="small" @update:model-value="emit('update:autoCheck', $event)">自动检查更新</AuCheckbox>
-            <AuButton v-if="showSkip && status === 'available'" type="menu" size="small" @click="skip">跳过此版本</AuButton>
+            <AuButton v-if="showSkip && status === 'available'" type="menu" @click="skip">跳过此版本</AuButton>
           </div>
           <div class="au-update-dialog__actions">
             <AuButton v-if="status === 'checking' || status === 'downloading'" @click="cancel">{{ status === 'checking' ? '取消检查' : '取消下载' }}</AuButton>

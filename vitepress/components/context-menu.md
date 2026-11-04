@@ -8,6 +8,8 @@ import contextMenuBasicSource from '../.vitepress/theme/examples/context-menu/Co
 
 `AuContextMenu` 只负责菜单展示与交互，业务确认通过 `beforeSelect` 注入。
 
+二级菜单支持横向和斜向移入，6px 面板间距可连续通过。离开父项或菜单后保留 240ms，移回父项或子菜单取消关闭；朝子菜单移动时经过相邻项最多暂缓切换 320ms，反向或移出通道立即响应新项。禁用项不展开子菜单，键盘聚焦立即展开。视口宽度不超过 480px 时，子菜单在当前面板内展开。
+
 ## 基础用法
 
 <DemoBlock

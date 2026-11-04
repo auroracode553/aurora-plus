@@ -9,7 +9,7 @@
     @click="handleClick"
   >
     <slot v-if="loading" name="loading">
-      <AuLoadingSpinner class="au-button__loading-icon" :size="size" color="currentColor" />
+      <AuLoadingSpinner class="au-button__loading-icon" color="currentColor" />
     </slot>
     <slot v-else name="icon">
       <AuIcon v-if="icon" class="au-button__icon" :icon="icon" />
@@ -30,11 +30,6 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator: (value) => ['default', 'primary', 'success', 'info', 'warning', 'danger', 'menu'].includes(value),
-  },
-  size: {
-    type: String,
-    default: 'default',
-    validator: (value) => ['small', 'default', 'large'].includes(value),
   },
   selected: { type: Boolean, default: undefined },
   selectedColor: { type: String, default: '' },
@@ -73,7 +68,6 @@ const buttonStyle = computed(() => {
 
 const buttonClasses = computed(() => [
   `au-button--${props.type}`,
-  `au-button--size-${props.size}`,
   {
     'is-plain': props.plain,
     'is-round': props.round,

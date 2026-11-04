@@ -39,7 +39,6 @@
       <div class="au-popconfirm__actions">
         <AuButton
           :type="cancelButtonType"
-          size="small"
           :disabled="cancelButtonDisabled || confirmButtonLoading"
           @click="cancel"
         >
@@ -47,7 +46,6 @@
         </AuButton>
         <AuButton
           :type="confirmButtonType"
-          size="small"
           :loading="confirmButtonLoading"
           :disabled="confirmButtonDisabled"
           @click="confirm"
