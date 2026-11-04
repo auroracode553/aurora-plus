@@ -1,4 +1,5 @@
 @use '../../theme/mixins/motion';
+@use '../../theme/mixins/window-chrome';
 
 .au-window-title-bar {
   position: relative;
@@ -10,8 +11,7 @@
   height: 32px;
   min-height: 32px;
   padding: 0;
-  border-bottom: 1px solid var(--au-material-border-emphasis);
-  color: var(--au-color-text-primary);
+  @include window-chrome.bar;
   -webkit-app-region: drag;
   user-select: none;
   pointer-events: none;
@@ -20,6 +20,15 @@
 .au-window-title-bar.is-drag-disabled,
 .au-window-title-bar.is-drag-disabled .au-window-title-bar__title {
   -webkit-app-region: no-drag;
+}
+
+// 原生控件尺寸由宿主提供，环境变量随 DPI、窗口缩放和最大化状态更新。
+.au-window-title-bar.is-native-controls {
+  box-sizing: border-box;
+  height: env(titlebar-area-height, 32px);
+  min-height: env(titlebar-area-height, 32px);
+  padding-left: env(titlebar-area-x, 0px);
+  padding-right: max(0px, calc(100% - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100%)));
 }
 
 .au-window-title-bar__icon {
@@ -76,22 +85,38 @@
 }
 
 .au-window-title-bar__button {
+  position: relative;
   width: 40px;
   height: 100%;
   padding: 0;
   margin: 0;
+  border: 0;
   border-radius: 0;
-  cursor: pointer;
-  @include motion.control;
+  color: inherit;
+  background: transparent;
+  cursor: default;
+  @include motion.phase(release, background-color, color, box-shadow);
+
+  &:disabled { color: var(--au-color-text-disabled); }
 }
 
 .au-window-title-bar__button:hover:not(:disabled) {
   background: var(--au-color-background-hover);
 }
 
-.au-window-title-bar__button.is-close:hover:not(:disabled) {
-  color: #ffffff;
-  background: #e81123;
+.au-window-title-bar__button:focus-visible:not(:disabled) {
+  background: var(--au-glass-selection);
+  box-shadow: inset 0 0 0 2px var(--au-color-primary);
+}
+
+.au-window-title-bar__button:active:not(:disabled) {
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  transition-duration: motion.duration(press);
+}
+
+.au-window-title-bar__button.is-close:is(:hover, :active):not(:disabled) {
+  color: #fff;
+  background: var(--au-color-danger);
 }
 
 .au-window-title-bar__button-icon {

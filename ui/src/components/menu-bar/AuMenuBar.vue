@@ -1,7 +1,7 @@
 <template>
   <nav
     ref="menuBarRef"
-    class="au-menu-bar au-component au-motion-state"
+    class="au-menu-bar au-component au-surface au-motion-state"
     :class="{ 'is-draggable': draggable }"
     @contextmenu.prevent
     @keydown="handleKeydown"
@@ -13,10 +13,12 @@
         class="au-menu-bar__root"
       >
         <button
-          class="au-menu-bar__trigger au-action-control au-truncate"
+          class="au-menu-bar__trigger au-control-reset au-inline-center au-truncate"
           :class="{ 'is-open': openIndex === index }"
           type="button"
           :disabled="item.disabled"
+          aria-haspopup="menu"
+          :aria-expanded="openIndex === index"
           :tabindex="index === focusableIndex ? 0 : -1"
           @click="toggleMenu(index)"
           @mouseenter="switchMenu(index)"

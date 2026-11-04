@@ -4,7 +4,7 @@
       <div
         v-if="visible"
         ref="menuRef"
-        class="au-context-menu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
+        class="au-context-menu au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
         :style="menuStyle"
         tabindex="-1"
         @contextmenu.prevent
@@ -80,7 +80,7 @@
             <Transition name="au-float">
               <div
                 v-if="activeSubmenu === section.id"
-                class="au-context-submenu au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile au-motion-state"
+                class="au-context-submenu au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-menu-submenu-mobile au-motion-state"
                 @mouseenter="showSubmenu(section.id)"
                 @mouseleave="hideSubmenu"
               >

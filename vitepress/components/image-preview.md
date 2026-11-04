@@ -8,6 +8,8 @@ import imagePreviewBasicSource from '../.vitepress/theme/examples/image-preview/
 
 `AuImagePreview` 支持多图切换、缩放、拖拽与旋转。
 
+预览使用灰色磨砂底幕隔开页面内容，背景模糊 20px、饱和度 75%，图片和操作控件保持清晰。底幕随亮暗主题调整；不支持背景模糊时使用不透明背景。透明图片使用浅色画布承接，便于查看图示与文字，不改变原始图片数据。
+
 ## 基础用法
 
 <DemoBlock title="多图预览" :source="imagePreviewBasicSource">

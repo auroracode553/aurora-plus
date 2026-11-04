@@ -4,7 +4,7 @@
 
 @mixin focus {
   border-color: var(--au-color-primary);
-  background: var(--au-material-background-elevated);
+  background: var(--au-surface-background-elevated);
 }
 
 // 可用于组件外壳或原生输入；同时识别 class 与原生 disabled 状态。
@@ -15,7 +15,7 @@
   @media (hover: hover) {
     &:hover:not(.is-disabled, :disabled, .is-invalid, .is-readonly) {
       border-color: color-mix(in srgb, var(--au-color-text-primary) 26%, transparent);
-      background: var(--au-material-background-elevated);
+      background: var(--au-surface-background-elevated);
     }
   }
 
@@ -50,7 +50,7 @@
   &:hover:not(.is-disabled, :disabled, .is-invalid, .is-readonly),
   &:is(:focus-within, .is-open):not(.is-disabled, :disabled) {
     @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-      @include surfaces.solid-surface;
+      @include surfaces.opaque-surface;
     }
   }
 }

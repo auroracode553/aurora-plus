@@ -1,5 +1,8 @@
+@use '../../theme/mixins/surfaces';
+
 /* 在组件边界内重置语义列表，避免宿主页面的 ul 样式缩进交互行。 */
 .au-menu-list {
+  @include surfaces.content;
   display: block;
   width: 100%;
   min-width: 0;

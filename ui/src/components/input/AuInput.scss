@@ -1,17 +1,17 @@
 @use '../../theme/mixins/motion';
 @use '../../theme/mixins/fields';
+@use '../../theme/mixins/field-sizing';
 
 .au-input {
   display: inline-flex;
   align-items: center;
   width: 100%;
   min-width: 0;
-  height: 30px;
   padding: 0 10px;
   gap: 7px;
   border: 0.5px solid transparent;
   border-radius: var(--au-radius-control);
-  font-size: 13px;
+  @include field-sizing.control;
   @include fields.field;
 }
 
@@ -29,21 +29,17 @@
 }
 
 .au-input.is-small {
-  height: 26px;
   border-radius: var(--au-radius-compact);
-  font-size: var(--au-font-size-small);
   padding-inline: 8px;
   gap: 6px;
 }
 
 .au-input.is-large {
-  height: 36px;
-  font-size: var(--au-font-size-base);
   padding-inline: 12px;
   gap: 8px;
 }
 
-.au-input.is-textarea {
+.au-input.is-textarea:is(.is-small, .is-default, .is-large) {
   position: relative;
   display: flex;
   align-items: stretch;
@@ -215,4 +211,20 @@
 
 .au-input__clear:disabled {
   cursor: default;
+}
+
+@include field-sizing.touch {
+  .au-input__clear,
+  .au-input__password-toggle,
+  .au-input__replaceable-suffix {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  // 触屏没有 hover，有内容时直接展示清除操作。
+  .au-input__clear.is-visible {
+    opacity: 1;
+  }
 }

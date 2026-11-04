@@ -81,7 +81,7 @@
 
         <div
           v-if="showProgress && normalizedImages.length"
-          class="au-image-preview__progress au-material-surface au-depth-overlay"
+          class="au-image-preview__progress au-surface au-depth-overlay"
         >
           <slot
             name="progress"

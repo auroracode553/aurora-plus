@@ -101,7 +101,7 @@
 
     <div
       v-if="loading"
-      class="au-virtual-table__loading au-material-surface au-depth-surface au-motion-reveal"
+      class="au-virtual-table__loading au-surface au-depth-surface au-motion-reveal"
       :style="loadingStyle"
     >
       <slot name="loading">

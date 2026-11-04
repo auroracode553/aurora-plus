@@ -1,6 +1,9 @@
 @use '../../theme/mixins/motion';
+@use '../../theme/mixins/surfaces';
 
 .au-collapse-item {
+  @include surfaces.content;
+  position: relative;
   min-width: 0;
   max-width: 100%;
   border-radius: var(--au-radius-overlay);

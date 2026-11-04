@@ -1,31 +1,30 @@
 @use '../../theme/mixins/motion';
+@use '../../theme/mixins/surfaces';
 
 /* 卡片默认（default）：细边框 + 轻阴影，轮廓清晰但不厚重。圆角与材质背景跟随全局语义变量。 */
 .au-card {
+  @include surfaces.content;
+  position: relative;
   display: flex;
   min-width: 0;
   max-width: 100%;
   flex-direction: column;
-  border: 1px solid var(--au-material-border);
+  border: 1px solid var(--au-surface-border);
   border-radius: var(--au-radius-surface);
   box-shadow: var(--au-shadow-control);
   color: var(--au-color-text-primary);
 }
 
-/* 类型：flat 为纯白无边框无阴影；elevated 用更明显的阴影浮起；subtle 为浅灰面。 */
+/* 类型：flat 无边框无阴影；subtle 为浅灰面。 */
 .au-card--flat {
   border-color: transparent;
   box-shadow: none;
 }
 
-.au-card--elevated {
-  box-shadow: var(--au-shadow-surface);
-}
-
 .au-card--subtle {
   border-color: transparent;
   /* 极淡灰白：30% 浅灰材质 + 纯白表面，比纯白稍灰，贴合参考图的内层浅色卡。 */
-  background: color-mix(in srgb, var(--au-color-background-subtle) 30%, var(--au-material-background));
+  background: color-mix(in srgb, var(--au-color-background-subtle) 30%, var(--au-surface-background));
   box-shadow: none;
 }
 

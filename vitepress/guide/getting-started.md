@@ -50,3 +50,9 @@ import { IconBold } from 'aurora-plus/icons';
 ```
 
 图标按需从 `aurora-plus/icons` 导入，图标实现已包含在 Aurora Plus 的发布产物中，无需安装其他图标包。完整用法和 `AuIcon` API 见 [Icon 图标](/components/icon)。
+
+## 可用平台
+
+组件文档顶部显示适用平台。通用组件支持浏览器和 Electron；[WindowTitleBar 窗口标题栏](/components/window-title-bar) 用于 Electron 桌面窗口，文档示例可在浏览器中正常预览外观与按钮交互，实际窗口操作由 Electron 宿主处理。
+
+浏览器和 Electron 渲染进程使用普通 `aurora-plus` 组件入口；窗口原生控件适配器从 `aurora-plus/electron` 导入，仅在 Electron 主进程使用。普通组件入口不会加载 `electron` 模块，浏览器项目无需配置 Electron 依赖或垫片。完整的主进程接入方式见窗口标题栏文档。

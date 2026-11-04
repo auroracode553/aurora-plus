@@ -1,0 +1,26 @@
+@use 'surfaces';
+@use 'motion';
+
+// 标题栏和应用菜单栏共用贴边材质，不套用浮动卡片的阴影和外圆角。
+@mixin bar {
+  @include surfaces.blur;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 6%, transparent);
+  color: var(--au-color-text-primary);
+  background: var(--au-surface-background);
+  box-shadow: none;
+  @supports not (backdrop-filter: blur(1px)) {
+    @include surfaces.opaque-surface;
+  }
+}
+
+// 操作项共用 CSS 状态与按压反馈，不创建逐实例动画控制器。
+@mixin action {
+  position: relative;
+  border: 0;
+  border-radius: var(--au-radius-pill);
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  @include motion.control;
+  &:disabled { color: var(--au-color-text-disabled); cursor: not-allowed; }
+}

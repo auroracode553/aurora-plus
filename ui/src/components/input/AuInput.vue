@@ -90,6 +90,7 @@
           'is-replacement': shouldReplaceSuffix,
         }"
         type="button"
+        aria-label="清空输入"
         :disabled="!canClear"
         :tabindex="canClear ? 0 : -1"
         @mousedown.prevent

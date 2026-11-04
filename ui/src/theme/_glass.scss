@@ -1,0 +1,31 @@
+// 全库只共享材质角色，不开放组件专属变量，也不改变尺寸和命中区域。
+:root, [data-au-theme] {
+  --au-glass-shadow-color: rgb(0 0 0 / 8%);
+  --au-glass-dialog-blur: 16px;
+  --au-glass-selection: rgb(0 0 0 / 10%);
+  --au-glass-switch-on: rgb(52 199 89);
+  --au-glass-switch-off: color-mix(in srgb, rgb(120 120 120) 20%, var(--au-surface-background));
+}
+[data-au-theme='dark'] {
+  --au-glass-shadow-color: rgb(0 0 0 / 18%);
+  --au-glass-dialog-blur: 8px;
+  --au-glass-selection: rgb(255 255 255 / 10%);
+  --au-glass-switch-on: rgb(48 209 88);
+  --au-glass-switch-off: color-mix(in srgb, rgb(120 120 128) 36%, var(--au-surface-background));
+}
+.au-button.is-disabled {
+  color: var(--au-color-text-disabled);
+  background: var(--au-color-background-subtle);
+  border-color: var(--au-color-border-muted);
+  box-shadow: none;
+}
+.au-button-group:is(.is-connected, .is-floating, .is-segmented), .au-floating-toolbar {
+  box-shadow: 0 0 8px var(--au-glass-shadow-color);
+}
+.au-dialog, .au-drawer {
+  backdrop-filter: blur(var(--au-glass-dialog-blur)) saturate(1.5);
+  box-shadow: 0 0 16px var(--au-glass-shadow-color);
+}
+@media (prefers-reduced-motion: reduce) {
+  .au-component, .au-component * { transition-duration: 0s !important; }
+}

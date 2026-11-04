@@ -8,6 +8,8 @@ import selectBasicSource from '../.vitepress/theme/examples/select/SelectBasic.v
 
 `AuSelect` 使用 Aurora Plus 的紧凑列表弹层呈现选项，并统一尺寸、焦点、禁用态和错误态。
 
+`small`、`default`、`large` 触发框高度分别为 28、32、40px。视口宽度不超过 640px，或设备主要使用无悬停能力的触屏时，分别为 36、44、48px，选项最小行高同步适配，文字为 16px。
+
 ## 基础用法
 
 <DemoBlock

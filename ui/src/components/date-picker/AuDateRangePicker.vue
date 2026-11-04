@@ -61,6 +61,7 @@
           v-if="clearable && hasValue && !disabled && !readonly"
           class="au-date-range-picker__clear au-action-control"
           type="button"
+          aria-label="清空日期范围"
           @pointerdown.prevent
           @click.stop="clear"
         >
@@ -74,7 +75,7 @@
       </div>
     </template>
 
-    <div class="au-date-range-picker__panel au-material-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
+    <div class="au-date-range-picker__panel au-surface au-depth-overlay au-overlay-surface au-floating-viewport au-scroll-region au-thin-scrollbar">
       <div class="au-date-range-picker__calendars">
         <AuDatePickerPane
           ref="leftPaneRef"

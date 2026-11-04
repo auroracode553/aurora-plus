@@ -8,6 +8,8 @@ import switchBasicSource from '../.vitepress/theme/examples/switch/SwitchBasic.v
 
 用于在两个互斥状态之间快速切换。
 
+实体滑块在普通切换时平滑移动，拖动时直接跟随指针；松手以行程中点吸附，再触发一次绑定值更新。纵向滚动接管、取消或进入禁用/加载态时恢复受控值。点击标签与键盘操作沿用同一提交入口，RTL 下拖动方向反转。
+
 ## 基础用法
 
 <DemoBlock

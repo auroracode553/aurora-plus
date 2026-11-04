@@ -1,9 +1,10 @@
 <template>
   <div
-    class="au-window-title-bar au-component au-material-surface au-material-surface--base au-motion-state"
+    class="au-window-title-bar au-component au-surface au-surface--base au-motion-state"
     :class="{
       'is-drag-disabled': !draggable,
       'is-controls-start': controlsPosition === 'start',
+      'is-native-controls': usesNativeControls,
     }"
     v-bind="$attrs"
   >
@@ -62,10 +63,11 @@
           @closed="setTooltipOpen('minimize', false)"
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center au-motion-control"
+            class="au-window-title-bar__button au-control-reset au-inline-center"
             :class="{ 'au-disabled': minimizeDisabled }"
             type="button"
             :disabled="minimizeDisabled"
+            :aria-label="minimizeLabel"
             @click="requestMinimize"
           >
             <slot name="minimize-icon">
@@ -85,10 +87,11 @@
           @closed="setTooltipOpen('maximize', false)"
         >
           <button
-            class="au-window-title-bar__button au-control-reset au-inline-center au-motion-control"
+            class="au-window-title-bar__button au-control-reset au-inline-center"
             :class="{ 'au-disabled': maximizeDisabled }"
             type="button"
             :disabled="maximizeDisabled"
+            :aria-label="maximizeButtonLabel"
             @click="requestToggleMaximize"
           >
             <slot v-if="maximized" name="restore-icon">
@@ -111,10 +114,11 @@
           @closed="setTooltipOpen('close', false)"
         >
           <button
-            class="au-window-title-bar__button is-close au-control-reset au-inline-center au-motion-control"
+            class="au-window-title-bar__button is-close au-control-reset au-inline-center"
             :class="{ 'au-disabled': closeDisabled }"
             type="button"
             :disabled="closeDisabled"
+            :aria-label="closeLabel"
             @click="requestClose"
           >
             <slot name="close-icon">
@@ -132,6 +136,7 @@ import { computed, useSlots } from 'vue';
 import { IconCopy, IconMinus, IconSquare, IconX } from '../../icons/internal.js';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
+import { useNativeWindowControls } from './useNativeWindowControls.js';
 
 // 标题栏不依赖桌面宿主，只上报按钮提示的整体开关状态，由宿主管理浮层边界。
 defineOptions({ inheritAttrs: false });
@@ -174,13 +179,16 @@ const emit = defineEmits([
 ]);
 
 const slots = useSlots();
+const { available: usesNativeControls } = useNativeWindowControls();
 const openTooltips = new Set();
 const titleText = computed(() => String(props.title ?? ''));
 const hasIcon = computed(() => Boolean(props.showIcon || props.iconSrc || slots.icon));
 const hasWindowControls = computed(() => (
   props.showMinimize || props.showMaximize || props.showClose
 ));
-const hasControlsArea = computed(() => Boolean(slots.controls || hasWindowControls.value));
+const hasControlsArea = computed(() => (
+  !usesNativeControls.value && Boolean(slots.controls || hasWindowControls.value)
+));
 const maximizeButtonLabel = computed(() => (
   props.maximized ? props.restoreLabel : props.maximizeLabel
 ));

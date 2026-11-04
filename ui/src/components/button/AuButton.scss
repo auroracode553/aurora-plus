@@ -1,7 +1,14 @@
 @use '../../theme/mixins/interaction';
 @use '../../theme/mixins/motion';
-@use 'sass:map';
 @use '../../theme/config';
+
+// 同时约束最小尺寸，保证图标按钮在 Flex 布局和触发器包装内保持方形。
+@mixin icon-size($size) {
+  width: $size;
+  min-width: $size;
+  height: $size;
+  min-height: $size;
+}
 
 .au-button {
 
@@ -12,10 +19,10 @@
   gap: 6px;
   padding: 8px 15px;
   overflow: hidden;
-  border: 1px solid var(--au-material-border-emphasis);
+  border: 1px solid var(--au-surface-border-emphasis);
   border-radius: var(--au-radius-control);
   color: var(--au-color-text-default);
-  background: var(--au-material-background);
+  background: var(--au-surface-background);
   font-size: var(--au-font-size-base);
   font-weight: var(--au-font-weight-medium);
   line-height: 1;
@@ -23,33 +30,29 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  transform: translateZ(0);
   @include motion.control;
 }
 
 .au-button:hover:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 42%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 7%, var(--au-material-background));
-  box-shadow: var(--au-shadow-surface);
+  background: var(--au-surface-background);
 }
 
 .au-button:active:not(.is-disabled) {
   border-color: color-mix(in srgb, var(--au-color-primary) 58%, transparent);
   color: var(--au-color-primary);
-  background: color-mix(in srgb, var(--au-color-primary) 14%, var(--au-material-background));
-  box-shadow: var(--au-shadow-control);
-  @include motion.press(0.97);
+  background: var(--au-surface-background);
 }
 
-.au-button--small {
+.au-button--size-small {
   height: 28px;
   padding: 5px 11px;
   border-radius: var(--au-radius-compact);
   font-size: var(--au-font-size-small);
 }
 
-.au-button--large {
+.au-button--size-large {
   height: 40px;
   padding: 10px 19px;
   border-radius: var(--au-radius-control);
@@ -60,10 +63,21 @@
   border-radius: var(--au-radius-pill);
 }
 
-.au-button.is-circle {
-  width: auto;
-  aspect-ratio: 1;
+.au-button:is(.is-circle, .is-icon-only) {
+  flex: none;
+  @include icon-size(32px);
   padding: 0;
+
+  &.au-button--size-small {
+    @include icon-size(28px);
+  }
+
+  &.au-button--size-large {
+    @include icon-size(40px);
+  }
+}
+
+.au-button.is-circle {
   border-radius: var(--au-radius-pill);
 }
 
@@ -87,24 +101,24 @@
   .au-button--#{$tone} {
     border-color: color-mix(in srgb, $color 78%, #ffffff);
     color: #ffffff;
-    background: color-mix(in srgb, $color 92%, #ffffff);
+    background: config.surface-background($color);
 
     &:hover:not(.is-disabled) {
       border-color: $color;
       color: #ffffff;
-      background: color-mix(in srgb, $color 82%, #ffffff);
+      background: config.surface-background($color);
     }
 
     &:active:not(.is-disabled) {
       border-color: $color;
       color: #ffffff;
-      background: color-mix(in srgb, $color 100%, map.get(config.$button-active-blends, $tone));
+      background: config.surface-background($color);
     }
 
     &.is-plain {
-      border-color: $color;
+      border-color: color-mix(in srgb, $color 35%, transparent);
       color: $color;
-      background: color-mix(in srgb, $color 12%, var(--au-material-background));
+      background: color-mix(in srgb, $color 12%, var(--au-surface-background));
 
       &:hover:not(.is-disabled) {
         background: $color;
@@ -129,7 +143,7 @@
   letter-spacing: 0;
   -webkit-app-region: no-drag;
 
-  &.au-button--small {
+  &.au-button--size-small {
     min-width: 24px;
     height: 24px;
     padding: 0 6px;
@@ -137,23 +151,23 @@
     font-size: var(--au-font-size-small);
 
     &:is(.is-circle, .is-icon-only) {
-      width: 32px;
+      @include icon-size(24px);
     }
   }
 
-  &.au-button--large {
+  &.au-button--size-large {
     min-width: 30px;
     height: 30px;
     padding: 0 10px;
     font-size: var(--au-font-size-base);
 
     &:is(.is-circle, .is-icon-only) {
-      width: 40px;
+      @include icon-size(30px);
     }
   }
 
   &:is(.is-circle, .is-icon-only) {
-    width: 36px;
+    @include icon-size(26px);
     padding: 0;
     border-radius: var(--au-radius-compact);
   }
@@ -200,3 +214,11 @@
   }
 
 }
+
+.au-button.is-disabled:not(.au-button--menu) {
+  color: var(--au-color-text-disabled);
+  border-color: var(--au-color-border-muted);
+  background: var(--au-color-background-subtle);
+  box-shadow: none;
+}
+.au-button.is-loading { cursor: progress; }

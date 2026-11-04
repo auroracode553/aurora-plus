@@ -1,3 +1,10 @@
+$surface-opacity: 98%;
+
+// 所有承载文字的表面共用覆盖率；状态色与反色也走同一配方。
+@function surface-background($color) {
+  @return color-mix(in srgb, $color $surface-opacity, transparent);
+}
+
 $semantic-colors: (
   primary: var(--au-color-primary),
   success: var(--au-color-success),

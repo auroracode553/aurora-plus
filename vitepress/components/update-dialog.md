@@ -89,7 +89,6 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 | currentVersion | 当前版本，按原样展示 | string | '' |
 | latestVersion | 最新版本，按原样展示 | string | '' |
 | channel | 版本渠道标签，如稳定版 | string | '' |
-| releaseDate | 发布时间的展示文本 | string | '' |
 | releaseNotes | 日志原文或更新说明数组；分组 items 按纯文本展示 | string / (string \| UpdateReleaseNote \| UpdateVersionNote)[] | [] |
 | releaseUrl | 完整更新说明链接，在新窗口打开 | string | '' |
 | progress | 下载百分比；null 表示未知进度 | number / null | null |

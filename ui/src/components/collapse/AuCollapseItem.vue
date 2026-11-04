@@ -49,7 +49,7 @@ function toggle() {
     :class="[
       `au-collapse-item--${variant}`, `au-collapse-item--${size}`,
       { 'is-expanded': expanded, 'is-disabled': disabled, 'is-fill': fill },
-      variant === 'panel' ? 'au-material-surface au-material-surface--base au-surface-frame' : '',
+      variant === 'panel' ? 'au-surface au-surface--base au-surface-frame' : '',
     ]"
   >
     <div class="au-collapse-item__header">

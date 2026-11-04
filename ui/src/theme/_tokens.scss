@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-au-theme='light'] {
   color-scheme: light;
 
   /* 品牌色与状态色。 */
@@ -43,7 +44,7 @@
 
   /* 所有组件共用一套轻量、可中断的状态过渡。 */
   --au-transition-duration: 0.2s;
-  --au-transition-timing: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --au-transition-timing: cubic-bezier(0.23, 1, 0.32, 1);
 
   /* 全局服务浮层层级。 */
   --au-z-index-notification: 11000;

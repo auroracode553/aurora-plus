@@ -18,7 +18,7 @@
         <div
           v-if="visible"
           ref="menuRef"
-          class="au-dropdown__menu au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
+          class="au-dropdown__menu au-component au-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
           :class="`is-${activePlacement}`"
           :style="menuStyle"
           tabindex="-1"

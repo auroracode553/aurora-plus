@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag"
-    class="au-card au-component au-material-surface au-material-surface--base au-motion-state"
+    class="au-card au-component au-surface au-surface--base au-motion-state"
     :class="[
       typeClass,
       `has-${padding}-padding`,
@@ -25,7 +25,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'default',
-    validator: (value) => ['default', 'flat', 'elevated', 'subtle'].includes(value),
+    validator: (value) => ['default', 'flat', 'subtle'].includes(value),
   },
   padding: {
     type: String,

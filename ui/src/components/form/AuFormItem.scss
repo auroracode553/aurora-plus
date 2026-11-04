@@ -1,4 +1,5 @@
 @use '../../theme/mixins/motion';
+@use '../../theme/mixins/field-sizing';
 
 .au-form-item {
   display: flex;
@@ -20,12 +21,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
-  min-height: 30px;
   padding-right: 10px;
   flex: 0 0 auto;
   color: var(--au-color-text-default);
-  font-size: 13px;
   line-height: 1.35;
+  @include field-sizing.metrics($fixed: false);
 }
 
 .au-form-item.is-label-left .au-form-item__label {
@@ -102,20 +102,26 @@
   margin-bottom: 13px;
 }
 
-.au-form-item.is-small .au-form-item__label {
-  min-height: 26px;
-  font-size: var(--au-font-size-small);
+.au-form-item.is-small:not(.is-label-top) .au-form-item__label {
+  @include field-sizing.metrics(small, $fixed: false);
 }
 
 .au-form-item.is-large {
   margin-bottom: 18px;
 }
 
-.au-form-item.is-large .au-form-item__label {
-  min-height: 36px;
-  font-size: var(--au-font-size-base);
+.au-form-item.is-large:not(.is-label-top) .au-form-item__label {
+  @include field-sizing.metrics(large, $fixed: false);
 }
 
+.au-form-item.is-small .au-form-item__status-icon { top: 6px; }
+.au-form-item.is-large .au-form-item__status-icon { top: 12px; }
+
+@include field-sizing.touch {
+  .au-form-item__status-icon { top: 14px; }
+  .au-form-item.is-small .au-form-item__status-icon { top: 10px; }
+  .au-form-item.is-large .au-form-item__status-icon { top: 16px; }
+}
 
 .au-form-item-message-enter-from,
 .au-form-item-message-leave-to {

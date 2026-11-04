@@ -7,7 +7,6 @@ import { AuEmpty } from './components/empty/index.js';
 import { AuNumber } from './components/number/index.js';
 import { AuPageHeader } from './components/page-header/index.js';
 import { AuProgress } from './components/progress/index.js';
-import { AuSegmented } from './components/segmented/index.js';
 import { AuTag } from './components/tag/index.js';
 import { AuTransition, AuTransitionGroup } from './components/transition/index.js';
 import { AuTrend } from './components/trend/index.js';
@@ -39,7 +38,6 @@ import {
 import { AuMenu, AuMenuGroup, AuMenuItem } from './components/menu/index.js';
 import { AuMenuBar } from './components/menu-bar/index.js';
 import { AuMenuList, AuMenuListItem } from './components/menu-list/index.js';
-import { AuPanel } from './components/panel/index.js';
 import { AuPagination } from './components/pagination/index.js';
 import { AuPopconfirm } from './components/popconfirm/index.js';
 import { AuPopover } from './components/popover/index.js';
@@ -50,7 +48,7 @@ import { AuSwitch } from './components/switch/index.js';
 import { AuTable, AuTableColumn } from './components/table/index.js';
 import { AuTabs } from './components/tabs/index.js';
 import { AuTimePicker } from './components/time-picker/index.js';
-import { AuTooltip } from './components/tooltip/index.js';
+import { AuHelpTooltip, AuTooltip } from './components/tooltip/index.js';
 import { AuTree } from './components/tree/index.js';
 import { AuTreeSelect } from './components/tree-select/index.js';
 import { AuUpdateDialog } from './components/update-dialog/index.js';
@@ -59,13 +57,6 @@ import { AuVirtualTable } from './components/virtual-table/index.js';
 import { AuWindowTitleBar } from './components/window-title-bar/index.js';
 import { AuMessage } from './services/message/index.js';
 import { AuMessageBox } from './services/message-box/index.js';
-import {
-  AURORA_MATERIALS,
-  DEFAULT_AURORA_MATERIAL,
-  getAuroraMaterial,
-  isAuroraMaterial,
-  setAuroraMaterial,
-} from './utils/material.js';
 import {
   AURORA_THEMES,
   DEFAULT_AURORA_THEME,
@@ -81,7 +72,6 @@ const components = [
   AuNumber,
   AuPageHeader,
   AuProgress,
-  AuSegmented,
   AuTag,
   AuTransition,
   AuTransitionGroup,
@@ -120,7 +110,6 @@ const components = [
   AuMenuBar,
   AuMenuList,
   AuMenuListItem,
-  AuPanel,
   AuPagination,
   AuPopconfirm,
   AuPopover,
@@ -134,6 +123,7 @@ const components = [
   AuTabs,
   AuTimePicker,
   AuTooltip,
+  AuHelpTooltip,
   AuTree,
   AuTreeSelect,
   AuUpdateDialog,
@@ -148,7 +138,6 @@ export const AuroraPlus = {
   version,
   install(app, options = {}) {
     if (options.theme) setAuroraTheme(options.theme);
-    if (options.material) setAuroraMaterial(options.material);
     components.forEach((component) => app.component(component.componentName, component));
     app.directive('loading', vLoading);
     app.config.globalProperties.$loading = Object.assign(
@@ -168,7 +157,6 @@ export {
   AuNumber,
   AuPageHeader,
   AuProgress,
-  AuSegmented,
   AuTag,
   AuTransition,
   AuTransitionGroup,
@@ -208,7 +196,6 @@ export {
   AuMenuBar,
   AuMenuList,
   AuMenuListItem,
-  AuPanel,
   AuPagination,
   AuPopover,
   AuPopconfirm,
@@ -224,24 +211,22 @@ export {
   AuTabs,
   AuTimePicker,
   AuTooltip,
+  AuHelpTooltip,
   AuTree,
   AuTreeSelect,
   AuUpdateDialog,
   AuVirtualList,
   AuVirtualTable,
   AuWindowTitleBar,
-  AURORA_MATERIALS,
   AURORA_THEMES,
-  DEFAULT_AURORA_MATERIAL,
   DEFAULT_AURORA_THEME,
-  getAuroraMaterial,
   getAuroraTheme,
-  isAuroraMaterial,
   isAuroraTheme,
-  setAuroraMaterial,
   setAuroraTheme,
 };
 
 export { renderReleaseNotesMarkdown } from './utils/release-notes.js';
 
 export default AuroraPlus;
+
+export { createAuroraGlassSurface } from './utils/glass/surface.js';

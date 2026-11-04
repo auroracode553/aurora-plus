@@ -6,7 +6,7 @@ import collapseBasicSource from '../.vitepress/theme/examples/collapse/CollapseB
 
 # Collapse 折叠面板
 
-`AuCollapseItem` 提供紧凑的标题、摘要、展开入口与完整内容区域，可独立使用。`AuCollapse` 管理多个子项的展开状态；开启 `accordion` 后成为手风琴，同一时间只展开一项。
+`AuCollapseItem` 提供紧凑的标题、摘要、展开入口与完整内容区域，可独立使用。`AuCollapse` 管理多个子项的展开状态；开启 `accordion` 后成为手风琴，同一时间只展开一项。面板表面不模糊背景。
 
 ## 基础用法
 

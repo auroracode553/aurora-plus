@@ -1,6 +1,6 @@
 <template>
   <div
-    class="au-menu-bar-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
+    class="au-menu-bar-panel au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
     :class="{ 'has-leading-column': hasLeadingColumn }"
     @mousedown.prevent
     @keydown.esc.stop="emit('close')"

@@ -19,3 +19,12 @@
   margin: 0 5px;
   vertical-align: middle;
 }
+
+// 控制组内的分隔线只区分操作区，不重复叠加通用 Divider 的 5px 外距。
+.au-divider.is-vertical:is(.is-group-small, .is-group-default, .is-group-large) {
+  height: 14px;
+  margin-inline: 2px;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+.au-divider.is-vertical.is-group-small { height: 12px; }
+.au-divider.is-vertical.is-group-large { height: 20px; }

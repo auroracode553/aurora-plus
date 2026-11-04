@@ -1,4 +1,5 @@
 @use '../../theme/mixins/fields';
+@use '../../theme/mixins/field-sizing';
 
 .au-date-range-picker {
   width: 100%;
@@ -9,27 +10,18 @@
   align-items: center;
   width: 100%;
   min-width: 0;
-  height: 32px;
   gap: 6px;
   padding: 0 9px;
-  border: 1px solid var(--au-material-border-emphasis);
+  border: 1px solid var(--au-surface-border-emphasis);
   border-radius: var(--au-radius-control);
+  @include field-sizing.control;
   @include fields.field;
-}
-
-.au-date-range-picker__trigger.is-small {
-  height: 28px;
-}
-
-.au-date-range-picker__trigger.is-large {
-  height: 40px;
 }
 
 .au-date-range-picker__input {
   min-width: 0;
   width: 0;
   height: 100%;
-  font-size: var(--au-font-size-base);
   text-align: center;
   flex: 1;
 }
@@ -44,6 +36,11 @@
   padding: 0;
   border-radius: var(--au-radius-pill);
   flex: none;
+
+  @include field-sizing.touch {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .au-date-range-picker__panel {
@@ -56,7 +53,7 @@
 }
 
 .au-date-range-picker__pane + .au-date-range-picker__pane {
-  border-left: 1px solid var(--au-material-border);
+  border-left: 1px solid var(--au-surface-border);
 }
 
 .au-date-range-picker__footer {
@@ -74,7 +71,7 @@
   }
 
   .au-date-range-picker__pane + .au-date-range-picker__pane {
-    border-top: 1px solid var(--au-material-border);
+    border-top: 1px solid var(--au-surface-border);
     border-left: 0;
   }
 }

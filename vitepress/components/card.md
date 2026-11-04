@@ -10,9 +10,11 @@ import cardInteractiveSource from '../.vitepress/theme/examples/card/CardInterac
 
 # Card 卡片
 
-`AuCard` 是内容容器组件，提供材质表面、圆角、可选边框/阴影和内边距。
+`AuCard` 是内容容器组件，提供主题表面、圆角、可选边框/阴影和内边距，背景不作模糊处理。
 
 ## 基础用法
+
+不传 `type` 时使用 `default` 类型。
 
 <DemoBlock
   title="空卡片容器"
@@ -24,7 +26,7 @@ import cardInteractiveSource from '../.vitepress/theme/examples/card/CardInterac
 ## 类型
 
 <DemoBlock
-  title="四种卡片类型"
+  title="三种卡片类型"
   :source="cardVariantsSource"
 >
   <CardVariants />
@@ -45,7 +47,7 @@ import cardInteractiveSource from '../.vitepress/theme/examples/card/CardInterac
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | tag | 根元素或动态组件 | string / Component | div |
-| type | 卡片类型，可选 default / flat / elevated / subtle | string | default |
+| type | 卡片类型，可选 default / flat / subtle | string | default |
 | padding | 内容留白，可选 none / compact / default / comfortable | string | default |
 | hoverable | 开启悬停抬升 | boolean | false |
 

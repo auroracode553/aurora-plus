@@ -15,7 +15,7 @@
   height: 18px;
   aspect-ratio: 1;
   flex: none;
-  border: 1px solid var(--au-material-border-emphasis);
+  border: 1px solid var(--au-surface-border-emphasis);
   border-radius: var(--au-radius-compact);
   @include surfaces.surface;
   @include motion.transition(background, border-color, transform);
@@ -67,7 +67,7 @@
 }
 
 .au-checkbox:hover:not(.is-disabled) .au-checkbox__box {
-  border-color: color-mix(in srgb, var(--au-color-primary) 48%, var(--au-material-border-emphasis));
+  border-color: color-mix(in srgb, var(--au-color-primary) 48%, var(--au-surface-border-emphasis));
 }
 
 .au-checkbox:active:not(.is-disabled) .au-checkbox__box {

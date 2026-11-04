@@ -1,6 +1,6 @@
 {
   "name": "aurora-plus",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Aurora Plus Vue 3 component library",
   "homepage": "https://auroracode553.github.io/aurora-plus/",
   "bugs": {
@@ -32,6 +32,10 @@
     "./icons": {
       "import": "./dist/icons.js",
       "require": "./dist/icons.cjs"
+    },
+    "./electron": {
+      "import": "./dist/electron.js",
+      "require": "./dist/electron.cjs"
     },
     "./style.css": "./dist/aurora-plus.css",
     "./package.json": "./package.json"

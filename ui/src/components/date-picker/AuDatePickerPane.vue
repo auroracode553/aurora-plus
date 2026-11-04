@@ -4,7 +4,7 @@
     class="au-date-picker-pane au-component au-motion-state"
     :class="{
       'has-surface': surface,
-      'au-material-surface': surface,
+      'au-surface': surface,
       'au-depth-overlay': surface,
       'au-overlay-surface': surface,
       'au-floating-viewport': surface,

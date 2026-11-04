@@ -10,35 +10,35 @@
       </template>
 
       <template #default="{ close }">
-        <AuPanel width="320px" depth="overlay">
-          <template #header>
+        <div class="popover-demo__content">
+          <AuCard>
             <div class="popover-demo__heading">
               <strong>快速设置</strong>
               <span>常用的显示与启动选项</span>
             </div>
-          </template>
 
-          <AuMenuList :elevated="false">
-            <AuMenuListItem
-              title="启动时最小化"
-              description="应用启动后保持在后台"
-              :leading-icon="IconWindowMinimize"
-              leading-variant="tinted"
-            >
-              <template #trailing>
-                <AuSwitch v-model="startMinimized" />
-              </template>
-            </AuMenuListItem>
-            <AuMenuListItem
-              title="打开完整设置"
-              :leading-icon="IconSettings"
-              leading-variant="tinted"
-              accessory="chevron"
-              clickable
-              @click="selectSettings(close)"
-            />
-          </AuMenuList>
-        </AuPanel>
+            <AuMenuList :elevated="false">
+              <AuMenuListItem
+                title="启动时最小化"
+                description="应用启动后保持在后台"
+                :leading-icon="IconWindowMinimize"
+                leading-variant="tinted"
+              >
+                <template #trailing>
+                  <AuSwitch v-model="startMinimized" />
+                </template>
+              </AuMenuListItem>
+              <AuMenuListItem
+                title="打开完整设置"
+                :leading-icon="IconSettings"
+                leading-variant="tinted"
+                accessory="chevron"
+                clickable
+                @click="selectSettings(close)"
+              />
+            </AuMenuList>
+          </AuCard>
+        </div>
       </template>
     </AuPopover>
 
@@ -50,9 +50,9 @@
 import { computed, ref } from 'vue';
 import {
   AuButton,
+  AuCard,
   AuMenuList,
   AuMenuListItem,
-  AuPanel,
   AuPopover,
   AuSwitch,
 } from 'aurora-plus';
@@ -88,6 +88,8 @@ function selectSettings(close) {
   display: grid;
   gap: 3px;
 }
+
+.popover-demo__content { width: 320px; max-width: 100%; }
 
 .popover-demo__heading strong {
   font-size: var(--au-font-size-large);

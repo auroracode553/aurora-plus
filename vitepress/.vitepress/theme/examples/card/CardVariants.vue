@@ -1,7 +1,7 @@
 <template>
   <div class="card-demo">
     <div class="card-demo__group">
-      <AuCard type="default">
+      <AuCard>
         <h3>default</h3>
         <p>白卡 + 细边框 + 轻阴影，轮廓清晰。</p>
       </AuCard>
@@ -9,11 +9,6 @@
       <AuCard type="flat">
         <h3>flat</h3>
         <p>纯白表面，无边框无阴影。</p>
-      </AuCard>
-
-      <AuCard type="elevated">
-        <h3>elevated</h3>
-        <p>细边框配更明显的阴影，从背景中浮起。</p>
       </AuCard>
 
       <AuCard type="subtle">

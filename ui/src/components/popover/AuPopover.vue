@@ -26,7 +26,7 @@
           `is-${activePlacement}`,
           {
             'has-surface': surface,
-            'au-material-surface': surface,
+            'au-surface': surface,
             'au-depth-overlay': surface,
             'au-overlay-surface': surface,
             'au-scroll-region': surface,

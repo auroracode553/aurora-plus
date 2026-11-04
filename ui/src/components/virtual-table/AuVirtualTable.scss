@@ -52,7 +52,7 @@
   position: relative;
   z-index: 4;
   color: var(--au-color-text-primary);
-  background: var(--au-material-background-elevated);
+  background: var(--au-surface-background-elevated);
   font-weight: var(--au-font-weight-semibold);
 }
 
@@ -85,12 +85,12 @@
   height: 100%;
   padding: 0 10px;
   overflow: hidden;
-  border-bottom: 1px solid var(--au-material-border);
+  border-bottom: 1px solid var(--au-surface-border);
 }
 
 .au-virtual-table.has-border .au-virtual-table__header-cell,
 .au-virtual-table.has-border .au-virtual-table__cell {
-  border-right: 1px solid var(--au-material-border);
+  border-right: 1px solid var(--au-surface-border);
 }
 
 .au-virtual-table__header-cell.is-utility,
@@ -105,15 +105,15 @@
 .au-virtual-table__header-cell.is-fixed,
 .au-virtual-table__cell.is-fixed {
   position: sticky;
-  background: var(--au-material-background-elevated);
+  background: var(--au-color-background-overlay);
 }
 
 .au-virtual-table__row:hover .au-virtual-table__cell.is-fixed {
-  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-material-background-elevated));
+  background: color-mix(in srgb, var(--au-color-text-primary) 7%, var(--au-color-background-overlay));
 }
 
 .au-virtual-table__row.is-current-row .au-virtual-table__cell.is-fixed {
-  background: color-mix(in srgb, var(--au-color-primary) 11%, var(--au-material-background-elevated));
+  background: color-mix(in srgb, var(--au-color-primary) 11%, var(--au-color-background-overlay));
 }
 
 .au-virtual-table__sort-button {
@@ -151,7 +151,7 @@
   gap: 6px;
   transform: translateX(-50%);
   padding: 6px 10px;
-  border: 1px solid var(--au-material-border);
+  border: 1px solid var(--au-surface-border);
   border-radius: var(--au-radius-pill);
   color: var(--au-color-text-primary);
 }

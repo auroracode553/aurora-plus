@@ -1,4 +1,5 @@
 @use '../../theme/mixins/surfaces';
+@use '../../theme/mixins/control-group';
 
 .au-button-group {
   display: inline-flex;
@@ -17,14 +18,12 @@
 /* 连体与悬浮控制组共用 UI 库的玻璃表面，只保留布局差异。 */
 .au-button-group.is-connected,
 .au-button-group.is-floating {
-  gap: 2px;
-  padding: 2px;
-  border: 1px solid transparent;
-  border-radius: 9px;
+  @include control-group.frame;
   @include surfaces.surface;
 }
 
 .au-button-group.is-floating {
+  padding: 3px;
   box-shadow: var(--au-shadow-surface);
 }
 
@@ -34,17 +33,9 @@
   gap: 2px;
   padding: 2px;
   border: 0;
-  border-radius: var(--au-radius-surface);
+  border-radius: var(--au-radius-pill);
   color: var(--au-color-text-default);
-  background: var(--au-material-background-subtle);
-}
-
-.au-button-group:is(.is-connected, .is-floating).is-small {
-  border-radius: var(--au-radius-control);
-}
-
-.au-button-group:is(.is-connected, .is-floating).is-large {
-  border-radius: var(--au-radius-surface);
+  background: var(--au-surface-background-subtle);
 }
 
 .au-button-group.au-component.is-inverse {
@@ -54,7 +45,7 @@
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .au-button-group:is(.is-connected, .is-floating) {
-    @include surfaces.solid-surface;
+    @include surfaces.opaque-surface;
   }
 
   .au-button-group.au-component.is-inverse {

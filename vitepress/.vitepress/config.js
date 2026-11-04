@@ -110,7 +110,6 @@ export default defineConfig({
         items: [
           { text: 'Input 输入框', link: '/components/input' },
           { text: 'Select 选择器', link: '/components/select' },
-          { text: 'Segmented 分段选择', link: '/components/segmented' },
           { text: 'TreeSelect 树形选择', link: '/components/tree-select' },
           { text: 'DatePicker 日期选择器', link: '/components/date-picker' },
           { text: 'TimePicker 时间选择器', link: '/components/time-picker' },
@@ -129,7 +128,6 @@ export default defineConfig({
           { text: 'Avatar 头像', link: '/components/avatar' },
           { text: 'Number 滚动数字', link: '/components/number' },
           { text: 'Trend 变化幅度', link: '/components/trend' },
-          { text: 'Panel 通用面板', link: '/components/panel' },
           { text: 'Collapse 折叠面板', link: '/components/collapse' },
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'Skeleton 骨架屏', link: '/components/skeleton' },

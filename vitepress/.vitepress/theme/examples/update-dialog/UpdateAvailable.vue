@@ -9,7 +9,6 @@
       :current-version="currentVersion"
       latest-version="1.9.0"
       channel="稳定版"
-      release-date="2026-10-09"
       :release-notes="releaseNotes"
       download-size="48.6 MB"
       :downloaded-size="`${(48.6 * progress / 100).toFixed(1)} MB`"

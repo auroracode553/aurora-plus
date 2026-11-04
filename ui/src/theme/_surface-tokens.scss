@@ -1,0 +1,13 @@
+/* 全库统一表面令牌；不存在材质属性或可切换档位。 */
+@use './config';
+
+:root,
+[data-au-theme] {
+  --au-surface-background: #{config.surface-background(var(--au-color-background-overlay))};
+  --au-surface-background-elevated: var(--au-surface-background);
+  --au-surface-background-subtle: #{config.surface-background(var(--au-color-background-subtle))};
+  --au-surface-border: var(--au-color-border-subtle);
+  --au-surface-border-emphasis: var(--au-color-border-default);
+  --au-surface-blur: 8px;
+  --au-surface-saturation: 100%;
+}

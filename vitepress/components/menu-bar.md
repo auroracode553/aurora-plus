@@ -8,6 +8,8 @@ import menuBarBasicSource from '../.vitepress/theme/examples/menu-bar/MenuBarBas
 
 `AuMenuBar` 用于桌面应用窗口顶部的命令菜单。
 
+菜单栏高 30px，与窗口标题栏共用贴边玻璃表面；根菜单高 26px，悬停、键盘焦点和展开状态使用共享按钮玻璃面、细轮廓与中性轻阴影，按压沿用统一材质反馈。菜单面板与栏体间隔 4px，保留快捷键、复选状态及多级菜单。
+
 ## 基础用法
 
 <DemoBlock

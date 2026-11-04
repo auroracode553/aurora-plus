@@ -1,6 +1,6 @@
 <template>
   <button
-    class="au-button-group-item au-component au-control-reset au-inline-center au-motion-state au-motion-control"
+    class="au-button-group-item au-component au-control-reset au-inline-center au-motion-state"
     :class="itemClasses"
     :type="nativeType"
     :disabled="disabled || loading"
@@ -19,13 +19,12 @@
 </template>
 
 <script setup>
-import { computed, inject, useSlots } from 'vue';
+import { computed, useSlots } from 'vue';
+import { useButtonGroup } from '../../utils/button-group-context.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 
 defineOptions({ inheritAttrs: false });
-
-const BUTTON_GROUP_CONTEXT = Symbol.for('aurora-plus.button-group-context');
 
 const props = defineProps({
   type: {
@@ -47,7 +46,7 @@ const props = defineProps({
 
 const emit = defineEmits(['click']);
 const slots = useSlots();
-const group = inject(BUTTON_GROUP_CONTEXT, null);
+const group = useButtonGroup();
 
 const variant = computed(() => group?.variant.value || 'connected');
 const orientation = computed(() => group?.orientation.value || 'horizontal');
@@ -72,7 +71,8 @@ const itemClasses = computed(() => [
     'is-inverse': inverse.value,
     'is-icon-only': isIconOnly.value,
     'is-selected': isSelected.value,
-    'is-disabled': props.disabled || props.loading,
+    'is-disabled': props.disabled,
+    'is-loading': props.loading,
   },
 ]);
 

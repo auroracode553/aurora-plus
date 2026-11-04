@@ -2,7 +2,7 @@
 import { onBeforeUnmount, ref } from 'vue';
 import {
   AuBadge, AuButton, AuCard, AuCheckbox, AuCollapseItem, AuDialog,
-  AuDrawer, AuInput, AuMessage, AuProgress, AuSegmented, AuSelect,
+  AuDrawer, AuInput, AuMessage, AuProgress, AuSelect,
   AuSlider, AuSwitch, AuTag, AuTooltip, AuTransitionGroup,
 } from 'aurora-plus';
 
@@ -10,7 +10,6 @@ const checked = ref(false);
 const enabled = ref(true);
 const text = ref('点击或输入，观察状态反馈');
 const format = ref('text');
-const view = ref('列表');
 const percentage = ref(42);
 const dialogVisible = ref(false);
 const drawerVisible = ref(false);
@@ -56,7 +55,6 @@ onBeforeUnmount(() => clearTimeout(timer));
     </div>
     <AuSlider v-model="percentage" show-value />
     <AuProgress :percentage="percentage" />
-    <AuSegmented v-model="view" :items="['列表', '网格', '摘要']" fill />
     <AuCollapseItem title="展开内容" summary="高度过渡可以反向中断">
       <p>{{ text }}</p>
     </AuCollapseItem>
@@ -83,7 +81,7 @@ onBeforeUnmount(() => clearTimeout(timer));
 .motion-feedback__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: var(--au-color-text-secondary); }
 .motion-feedback__fields { display: grid; min-width: 0; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 8px; }
 .motion-feedback__list { display: grid; gap: 6px; }
-.motion-feedback__native { height: 28px; padding: 0 9px; border: 1px solid var(--au-material-border); border-radius: var(--au-radius-compact); color: var(--au-color-text-default); background: transparent; font: inherit; cursor: pointer; }
+.motion-feedback__native { height: 28px; padding: 0 9px; border: 1px solid var(--au-surface-border); border-radius: var(--au-radius-compact); color: var(--au-color-text-default); background: transparent; font: inherit; cursor: pointer; }
 .motion-feedback__native:hover { color: var(--au-color-primary); border-color: var(--au-color-primary); }
 .motion-feedback p { margin: 0; font-size: 13px; line-height: 1.5; }
 @media (max-width: 440px) { .motion-feedback__fields { grid-template-columns: minmax(0, 1fr); } }

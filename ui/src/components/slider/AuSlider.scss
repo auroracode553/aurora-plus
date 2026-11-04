@@ -1,5 +1,3 @@
-@use '../../theme/mixins/motion';
-
 .au-slider {
   display: inline-flex;
   align-items: center;
@@ -66,8 +64,7 @@
   inset-inline-start: 0;
   border-radius: inherit;
   background: var(--au-color-primary);
-  // 填充与滑块使用相同节奏，键盘和外部值变化时保持端点重合。
-  @include motion.phase(release, inline-size);
+  // 填充与滑块直接使用同一比例，避免过渡造成拖动滞后。
 }
 
 .au-slider__thumb {
@@ -76,9 +73,9 @@
   width: 16px;
   height: 16px;
   border-radius: var(--au-radius-pill);
-  background: var(--au-color-primary);
+  background: white;
+  box-shadow: var(--au-shadow-control);
   transform: translate(-50%, -50%);
-  @include motion.phase(release, transform, box-shadow, inset-inline-start);
 }
 
 .au-slider:dir(rtl) .au-slider__thumb {
@@ -95,17 +92,6 @@
   height: 18px;
 }
 
-.au-slider:not(.is-disabled) .au-slider__control:hover .au-slider__thumb {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--au-color-primary) 10%, transparent);
-}
-
-.au-slider.is-dragging .au-slider__thumb {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--au-color-primary) 14%, transparent);
-  @include motion.press(0.94);
-  transition-property: box-shadow, scale;
-}
-
-.au-slider.is-dragging .au-slider__fill { transition: none; }
 
 .au-slider__value {
   min-width: 3ch;

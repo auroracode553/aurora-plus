@@ -55,7 +55,7 @@
       <div
         v-if="visible"
         ref="listboxRef"
-        class="au-select__listbox au-component au-material-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
+        class="au-select__listbox au-component au-surface au-depth-surface au-motion-popover au-overlay-surface au-menu-surface au-scroll-region au-thin-scrollbar au-motion-state"
         :data-au-floating-owner="selectId"
         :class="[`is-${size}`, `is-${activePlacement}`]"
         :style="listboxStyle"

@@ -56,7 +56,6 @@
   background: var(--au-color-primary);
   pointer-events: none;
 }
-.au-tabs__indicator.is-animated { @include motion.phase(release, opacity, transform, width); }
 
 .au-tabs__tab:hover:not(:disabled) {
   color: var(--au-color-text-primary);

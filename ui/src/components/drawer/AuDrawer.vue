@@ -16,7 +16,7 @@
         <aside
           ref="drawerRef"
           v-bind="$attrs"
-          class="au-drawer au-motion-panel au-component au-material-surface au-depth-overlay au-overlay-surface au-motion-state"
+          class="au-drawer au-motion-panel au-component au-surface au-depth-overlay au-overlay-surface au-motion-state"
           :class="['is-' + direction, { 'is-full-width': fullWidth && (direction === 'ltr' || direction === 'rtl') }]"
           :style="drawerStyle"
           tabindex="-1"

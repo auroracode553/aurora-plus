@@ -11,7 +11,6 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuAvatar` | 图片头像、姓名缩写与加载失败回退 |
 | `AuNumber` | 支持小数、负数和地区格式的逐位滚动数字 |
 | `AuTrend` | 变化幅度与方向语义 |
-| `AuSegmented` | 带滑动材质选中层的分段选择器 |
 | `AuEmpty` | 图标、说明和操作区组成的空状态 |
 | `AuProgress` | 线形、圆环与刻度环进度 |
 | `AuPageHeader` | 标题、说明、返回事件与操作区 |
@@ -34,7 +33,6 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuMenu`、`AuMenuGroup`、`AuMenuItem` | 支持分组、受控选中和键盘导航的持久导航菜单 |
 | `AuMenuBar` | 桌面应用顶部菜单栏与层级命令菜单 |
 | `AuMenuList`、`AuMenuListItem` | 苹果式分组菜单与设置行 |
-| `AuPanel` | 仅提供表面、尺寸、滚动和区域插槽的通用面板 |
 | `AuCollapse`、`AuCollapseItem` | 独立折叠面板、多项展开与手风琴，支持懒加载、关闭销毁及独立操作区 |
 | `AuPopover` | 支持任意内容、自动翻转和视口避让的锚点浮层 |
 | `AuPopconfirm` | 锚定触发元素的轻量确认气泡 |
@@ -44,6 +42,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuSkeleton`、`AuSkeletonItem` | 支持自定义占位模板、重复数量、呼吸动画和延迟显隐的骨架屏 |
 | `AuIcon` | 图标尺寸、颜色与对齐外壳 |
 | `AuTooltip` | 自动翻转、视口避让的提示气泡 |
+| `AuHelpTooltip` | 圆形问号图标提示，支持悬浮说明、点击保留、点击外部关闭与长正文滚动 |
 | `AuDialog` | 模态对话框 |
 | `AuAboutDialog` | 应用信息、版本日志与可展开详情的通用关于对话框 |
 | `AuUpdateDialog` | 检查更新、版本说明、下载进度、安装与失败重试的受控界面，展示更新服务提供的多源状态 |
@@ -57,9 +56,11 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuTree` | 支持虚拟滚动、选中与折叠的树形导航 |
 | `AuContextMenu` | 配置式右键菜单 |
 | `AuFloatingToolbar` | 锚点浮动工具条 |
-| `AuWindowTitleBar` | 桌面无边框窗口的受控标题栏 |
+| `AuWindowTitleBar` | 面向 Electron 的受控标题栏，支持浏览器预览，自动识别原生窗口控件 |
 | `AuMessage` | 命令式消息提示 |
 | `AuMessageBox` | Promise 风格确认框 |
+
+Electron 主进程可通过 `aurora-plus/electron` 的 `createElectronWindowTitleBar()` 配置原生窗口控件、主题同步和关闭意图回调，支持 Win11 最大化按钮的悬停贴靠布局。组件 API 与接入示例见 [WindowTitleBar](https://auroracode553.github.io/aurora-plus/components/window-title-bar)。
 
 ## 交互动效
 
@@ -70,7 +71,8 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 - 表单、列表、面板和导航组件默认允许随父容器收缩，长文本会换行、截断或在横向导航内滚动，避免内容撑破布局。
 - Dialog、Drawer、Popover、Dropdown、Tooltip、ContextMenu 和 FloatingToolbar 的可用尺寸受视口约束；窄屏下的层级菜单会改为容器内展开。
 - Button、Link、Checkbox 和 Switch 保留内容驱动宽度，但不会超过父容器；可伸缩文本区域不会挤压图标、状态标记等结构元素。
-- 图标、颜色样本、开关轨道、圆形按钮和桌面窗口控制键需要保持形状，因此仍使用明确的结构尺寸。控件高度继续由 `size` 或组件变体控制，不随屏幕宽度自动放大。
+- Input、Select、TreeSelect、日期/时间及范围输入框、ColorPicker 的 small/default/large 高度为 28/32/40px；视口宽度不超过 640px，或设备主要使用无悬停能力的触屏时为 36/44/48px，文字为 16px。Input 多行模式由 `rows` 决定高度。
+- 图标、颜色样本、开关轨道、圆形按钮和桌面窗口控制键需要保持形状，因此仍使用明确的结构尺寸。
 
 ## 安装
 
@@ -133,11 +135,4 @@ setAuroraTheme('dark');
 setAuroraTheme('light');
 ```
 
-使用 `setAuroraMaterial` 切换玻璃材质，默认 `solid`，可选 `soft`、`clear` 和 `solid`：
-
-```js
-import { setAuroraMaterial } from 'aurora-plus';
-
-setAuroraMaterial('clear');
-setAuroraMaterial('solid');
-```
+组件使用统一主题表面和轻量交互反馈，浮层保留磨砂质感，无材质属性或全局档位。具体行为见[动效指南](https://auroracode553.github.io/aurora-plus/guide/motion)。

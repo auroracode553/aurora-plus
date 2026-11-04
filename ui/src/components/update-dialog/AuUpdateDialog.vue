@@ -59,8 +59,7 @@
         <span v-else-if="hasRelease && channel" class="au-update-dialog__tag">{{ channel }}</span>
       </div>
 
-      <div v-if="hasRelease && (releaseDate || downloadSize)" class="au-update-dialog__meta">
-        <span v-if="releaseDate">发布于 {{ releaseDate }}</span>
+      <div v-if="hasRelease && downloadSize" class="au-update-dialog__meta">
         <span v-if="downloadSize">{{ downloadSize }}</span>
       </div>
 
@@ -139,7 +138,6 @@ const props = defineProps({
   currentVersion: { type: String, default: '' },
   latestVersion: { type: String, default: '' },
   channel: { type: String, default: '' },
-  releaseDate: { type: String, default: '' },
   releaseNotes: { type: [String, Array], default: () => [] },
   releaseUrl: { type: String, default: '' },
   progress: { type: Number, default: null },

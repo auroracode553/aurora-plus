@@ -19,5 +19,5 @@ features:
   - title: 灵活引入
     details: 支持完整安装、组件按需导入和命令式反馈服务。
   - title: 主题配置
-    details: 支持暗色模式、玻璃材质和公开配置 API。
+    details: 支持亮暗主题、统一玻璃表面和弹性动效。
 ---

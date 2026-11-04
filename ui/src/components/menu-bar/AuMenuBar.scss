@@ -1,4 +1,5 @@
-@use '../../theme/mixins/interaction';
+@use '../../theme/mixins/surfaces';
+@use '../../theme/mixins/window-chrome';
 
 .au-menu-bar {
   position: relative;
@@ -9,9 +10,7 @@
   height: 30px;
   min-height: 30px;
   padding: 0 8px;
-  border-bottom: 1px solid var(--au-color-border-muted);
-  color: var(--au-color-text-default);
-  background: transparent;
+  @include window-chrome.bar;
   font-size: 13px;
   user-select: none;
 }
@@ -37,21 +36,24 @@
 }
 
 .au-menu-bar__trigger {
+  @include window-chrome.action;
   max-width: 100%;
   height: 26px;
   padding: 0 clamp(4px, 2vw, 9px);
-  border-radius: var(--au-radius-compact);
-  color: inherit;
+  font-size: inherit;
+  font-weight: var(--au-font-weight-medium);
   line-height: 1;
   -webkit-app-region: no-drag;
 }
 
-.au-menu-bar__trigger.is-open {
-  @include interaction.hover;
+.au-menu-bar__trigger:is(:hover, :focus-visible, .is-open):not(:disabled) {
+  @include surfaces.surface;
+  color: var(--au-color-primary);
 }
 
-.au-menu-bar__trigger:active:not(:disabled) {
-  background: color-mix(in srgb, var(--au-color-primary) 14%, transparent);
+.au-menu-bar__trigger:focus-visible:not(:disabled) {
+  outline: 2px solid color-mix(in srgb, var(--au-color-primary) 40%, transparent);
+  outline-offset: -2px;
 }
 
 .au-menu-bar__drag-fill {

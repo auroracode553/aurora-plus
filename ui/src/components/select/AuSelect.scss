@@ -2,28 +2,21 @@
 @use '../../theme/mixins/motion';
 @use '../../theme/mixins/interaction';
 @use '../../theme/mixins/fields';
+@use '../../theme/mixins/field-sizing';
 
 .au-select {
   display: inline-flex;
   align-items: center;
   width: 100%;
   min-width: 0;
-  height: 30px;
   border: 0.5px solid transparent;
   border-radius: var(--au-radius-control);
-  font-size: 13px;
+  @include field-sizing.control;
   @include fields.field;
 }
 
 .au-select.is-small {
-  height: 26px;
   border-radius: var(--au-radius-compact);
-  font-size: var(--au-font-size-small);
-}
-
-.au-select.is-large {
-  height: 36px;
-  font-size: var(--au-font-size-base);
 }
 
 .au-select.is-fit-content {
@@ -138,6 +131,7 @@
   cursor: pointer;
   user-select: none;
   @include motion.control;
+  @include field-sizing.touch-target;
 }
 
 .au-select__listbox.is-small .au-select__option {
@@ -146,6 +140,7 @@
   padding-inline: 7px 5px;
   gap: 5px;
   font-size: var(--au-font-size-small);
+  @include field-sizing.touch-target(small);
 }
 
 .au-select__listbox.is-small .au-select__option-marker {
@@ -157,6 +152,7 @@
   min-height: 34px;
   padding-inline: 11px 9px;
   font-size: var(--au-font-size-base);
+  @include field-sizing.touch-target(large);
 }
 
 .au-select__option.is-selected {
@@ -203,6 +199,6 @@
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .au-select__listbox {
-    @include surfaces.solid-surface;
+    @include surfaces.opaque-surface;
   }
 }
