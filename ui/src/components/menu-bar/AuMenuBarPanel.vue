@@ -3,6 +3,8 @@
     class="au-menu-bar-panel au-component au-surface au-depth-overlay au-overlay-surface au-menu-surface au-menu-panel au-motion-state"
     :class="{ 'has-leading-column': hasLeadingColumn }"
     @mousedown.prevent
+    @mousemove.stop="trackPointer"
+    @mouseleave="leavePanel"
     @keydown.esc.stop="emit('close')"
   >
     <template v-for="(item, index) in items" :key="resolveItemKey(item, index)">
@@ -11,16 +13,16 @@
       <div
         v-else-if="item.children && item.children.length"
         class="au-menu-bar-panel__submenu au-menu-submenu-host"
-        @mouseenter="activeSubmenuKey = resolveItemKey(item, index)"
-        @mouseleave="activeSubmenuKey = ''"
+        @mouseenter="hoverItem(item.disabled ? '' : resolveItemKey(item, index), $event)"
+        @mouseleave="leaveItem(resolveItemKey(item, index), $event)"
       >
         <button
           class="au-menu-bar-panel__item au-menu-action"
           :class="{ 'is-active': activeSubmenuKey === resolveItemKey(item, index) }"
           type="button"
           :disabled="item.disabled"
-          @focus="activeSubmenuKey = resolveItemKey(item, index)"
-          @keydown.right.prevent="activeSubmenuKey = resolveItemKey(item, index)"
+          @focus="activateItem(resolveItemKey(item, index), $event.currentTarget.parentElement)"
+          @keydown.right.prevent="activateItem(resolveItemKey(item, index), $event.currentTarget.parentElement)"
         >
           <span
             v-if="hasLeadingColumn"
@@ -35,9 +37,10 @@
 
         <Transition name="au-float">
           <AuMenuBarPanel
-            v-if="activeSubmenuKey === resolveItemKey(item, index)"
+            v-if="!item.disabled && activeSubmenuKey === resolveItemKey(item, index)"
             class="au-menu-bar-panel__nested au-menu-submenu-mobile"
             :items="item.children"
+            @mouseenter="keepOpen"
             @select="emit('select', $event)"
             @close="emit('close')"
           />
@@ -49,7 +52,8 @@
         class="au-menu-bar-panel__item au-menu-action"
         type="button"
         :disabled="item.disabled"
-        @mouseenter="activeSubmenuKey = ''"
+        @mouseenter="hoverItem('', $event)"
+        @focus="activateItem('')"
         @click="emit('select', item)"
       >
         <span
@@ -67,8 +71,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { IconCheck, IconChevronRight } from '../../icons/internal.js';
+import { useSubmenuHover } from '../../utils/use-submenu-hover.js';
 import { AuIcon } from '../icon/index.js';
 
 defineOptions({ name: 'AuMenuBarPanel' });
@@ -78,7 +83,9 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['select', 'close']);
-const activeSubmenuKey = ref('');
+const { activeSubmenuKey, activateItem, hoverItem, leaveItem, leavePanel, keepOpen, trackPointer } = useSubmenuHover({
+  getSubmenuElement: (host) => host.querySelector(':scope > .au-menu-bar-panel__nested:not(.au-float-leave-active)'),
+});
 const hasLeadingColumn = computed(() => props.items.some((item) => (
   item?.type !== 'separator' && Boolean(item?.icon || isCheckableItem(item))
 )));

@@ -20,6 +20,14 @@ const items = ref([
       { label: '打开文档', command: 'open', accelerator: 'Ctrl+O' },
       { type: 'separator' },
       { label: '保存', command: 'save', accelerator: 'Ctrl+S' },
+      {
+        label: '导出',
+        children: [
+          { label: 'PDF', command: 'export-pdf' },
+          { label: 'HTML', command: 'export-html' },
+          { label: 'Word', command: 'export-word' },
+        ],
+      },
     ],
   },
   {
