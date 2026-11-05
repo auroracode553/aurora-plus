@@ -90,11 +90,12 @@
       </div>
 
       <p v-if="status === 'error'" class="au-update-dialog__error">{{ errorMessage || '请检查网络连接或稍后重试。' }}</p>
+      <p v-if="showBackground && (status === 'available' || status === 'downloading')" class="au-update-dialog__background-hint">后台下载期间可继续使用应用，安装需另行确认。</p>
       <div v-if="$slots.default" class="au-update-dialog__extra"><slot :status="status"></slot></div>
     </div>
 
     <template #footer>
-      <slot name="footer" :status="status" :close="close" :check="check" :download="download" :install="install" :retry="retry" :cancel="cancel" :later="later" :skip="skip">
+      <slot name="footer" :status="status" :close="close" :check="check" :download="download" :background="background" :install="install" :retry="retry" :cancel="cancel" :later="later" :skip="skip">
         <div class="au-update-dialog__footer">
           <div class="au-update-dialog__preferences">
             <AuCheckbox v-if="showAutoCheck" :model-value="autoCheck" size="small" @update:model-value="emit('update:autoCheck', $event)">自动检查更新</AuCheckbox>
@@ -104,6 +105,7 @@
             <AuButton v-if="status === 'checking' || status === 'downloading'" @click="cancel">{{ status === 'checking' ? '取消检查' : '取消下载' }}</AuButton>
             <AuButton v-else-if="status === 'available' || status === 'ready'" @click="later">稍后提醒</AuButton>
             <AuButton v-else @click="close('dismiss')">关闭</AuButton>
+            <AuButton v-if="showBackground && (status === 'available' || status === 'downloading')" :type="status === 'downloading' ? 'primary' : 'default'" :disabled="status === 'available' && !hasUsableSource" @click="background">{{ status === 'downloading' ? '转到后台' : '后台更新' }}</AuButton>
             <AuButton v-if="presentation.action" type="primary" :icon="actionIcon" :disabled="requiresSource && !hasUsableSource" :loading="status === 'installing'" @click="handlePrimary">{{ presentation.action }}</AuButton>
           </div>
         </div>
@@ -150,6 +152,7 @@ const props = defineProps({
   showAutoCheck: { type: Boolean, default: false },
   autoCheck: { type: Boolean, default: false },
   showSkip: { type: Boolean, default: false },
+  showBackground: { type: Boolean, default: false },
   sources: { type: Array, default: () => [] },
   source: { type: String, default: '' },
   activeSource: { type: String, default: '' },
@@ -157,7 +160,7 @@ const props = defineProps({
   sourceDisabled: { type: Boolean, default: false },
 });
 
-const emit = defineEmits(['update:modelValue', 'update:autoCheck', 'update:source', 'source-change', 'check', 'download', 'install', 'retry', 'cancel', 'later', 'skip', 'open', 'opened', 'close', 'closed']);
+const emit = defineEmits(['update:modelValue', 'update:autoCheck', 'update:source', 'source-change', 'check', 'download', 'background', 'install', 'retry', 'cancel', 'later', 'skip', 'open', 'opened', 'close', 'closed']);
 const dialogRef = ref(null);
 const normalizedReleaseNotes = computed(() => normalizeReleaseNotes(props.releaseNotes));
 const normalizedSources = computed(() => normalizeUpdateSources(props.sources));
@@ -214,6 +217,14 @@ function check() {
 
 function download() {
   if (props.status === 'available' && hasUsableSource.value) emit('download', props.latestVersion, sourceContext());
+}
+
+function background() {
+  if (!props.showBackground || !['available', 'downloading'].includes(props.status)) return;
+  if (props.status === 'available' && !hasUsableSource.value) return;
+  // 先通知调用方保留任务，再关闭；不同时发出 download 或 cancel。
+  emit('background', props.status, sourceContext());
+  close('background');
 }
 
 function install() {

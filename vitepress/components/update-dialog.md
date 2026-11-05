@@ -72,6 +72,8 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 
 `check`、`download`、`install`、`retry` 只发出事件，不自动改变 `status`。`cancel`、`later`、`skip` 同时关闭窗口；关闭按钮、Escape 和实例 `close()` 只关闭窗口。
 
+启用 `show-background` 后，发现新版本时显示“后台更新”，下载中显示“转到后台”。点击先发出 `background`，再以 `background` 原因关闭窗口，不额外发出 `download` 或 `cancel`。调用方须在 `background` 回调中启动或保留下载，并在关闭处理时区分此原因；组件不执行下载或安装。
+
 自定义更新说明正文使用 `release-notes` 插槽。
 
 ## UpdateDialog API
@@ -101,6 +103,7 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 | showAutoCheck | 显示自动检查选项 | boolean | false |
 | autoCheck / v-model:auto-check | 自动检查选项值 | boolean | false |
 | showSkip | 发现新版本时显示跳过操作 | boolean | false |
+| showBackground | 在 available / downloading 状态显示后台操作及提示 | boolean | false |
 | sources | 更新源展示列表；不传时隐藏源区域 | UpdateSource[] | [] |
 | source / v-model:source | 指定的更新源标识；空字符串表示自动选择 | string | '' |
 | activeSource | 当前任务实际使用的源标识，优先于源列表 active 标记 | string | '' |
@@ -115,9 +118,9 @@ import updateSourcesSource from '../.vitepress/theme/examples/update-dialog/Upda
 | --- | --- | --- |
 | idle | 检查入口与当前版本 | 关闭、检查更新 |
 | checking | 检查中与循环进度 | 取消检查 |
-| available | 新版本、发布信息与更新说明 | 稍后提醒、下载更新，可选跳过 |
+| available | 新版本、发布信息与更新说明 | 稍后提醒、下载更新，可选跳过及后台更新 |
 | latest | 当前版本已是最新 | 关闭、再次检查 |
-| downloading | 更新说明与下载进度 | 取消下载 |
+| downloading | 更新说明与下载进度 | 取消下载，可选转到后台 |
 | ready | 下载完成与安装提示 | 稍后提醒、安装更新 |
 | installing | 安装中与循环进度 | 关闭、禁用的安装按钮 |
 | error | 失败原因及对应阶段 | 关闭、重新检查 / 下载 / 安装 |
@@ -168,6 +171,7 @@ const notesHtml = computed(() => renderReleaseNotesMarkdown(notes));
 | source-change | 用户切换源；空 id 表示自动选择 | (id: string, previousId: string) |
 | check | 请求检查更新 | context: UpdateSourceContext |
 | download | 请求下载新版本 | (latestVersion: string, context: UpdateSourceContext) |
+| background | 请求开始或继续后台下载，同时关闭 | (status: 'available' / 'downloading', context: UpdateSourceContext) |
 | install | 请求安装新版本 | latestVersion: string |
 | retry | 请求重试失败阶段 | (stage: 'check' / 'download' / 'install', context: UpdateSourceContext) |
 | cancel | 请求取消检查或下载，同时关闭 | 'checking' / 'downloading' |
@@ -177,7 +181,7 @@ const notesHtml = computed(() => renderReleaseNotesMarkdown(notes));
 | close | 内部关闭窗口 | reason: string |
 | closed | 关闭过渡完成 | — |
 
-操作按钮产生的关闭原因为 `cancel`、`later`、`skip` 或 `dismiss`，其余原因沿用 `AuDialog`。
+操作按钮产生的关闭原因为 `cancel`、`later`、`skip`、`background` 或 `dismiss`，其余原因沿用 `AuDialog`。
 
 `UpdateSourceContext` 为 `{ source: string, activeSource: string }`；未配置源时两字段均为空字符串。
 
@@ -189,7 +193,7 @@ const notesHtml = computed(() => renderReleaseNotesMarkdown(notes));
 | release-notes | { version, notes } | 替换更新说明正文 |
 | default | { status } | 补充正文，如安装提示 |
 | sources | { sources, source, activeSource, disabled, select } | 替换整个源区域；sources 为整理后的展示字段，select(id) 遵循任务锁定规则，select('') 请求自动选择 |
-| footer | { status, close, check, download, install, retry, cancel, later, skip } | 替换操作区；业务操作方法只在对应状态发出事件 |
+| footer | { status, close, check, download, background, install, retry, cancel, later, skip } | 替换操作区；业务操作方法只在对应状态发出事件 |
 
 ### Exposes
 

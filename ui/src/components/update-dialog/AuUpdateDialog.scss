@@ -195,6 +195,13 @@
 
 .au-update-dialog__extra { margin-top: 14px; }
 
+.au-update-dialog__background-hint {
+  margin: 12px 0 0;
+  color: var(--au-color-text-secondary);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
 .au-update-dialog__footer {
   display: flex;
   align-items: center;
