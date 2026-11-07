@@ -41,7 +41,7 @@
     </div>
 
     <p id="au-icon-gallery-title" class="au-icon-gallery__hint">
-      点击图标复制组件名；在代码中直接从 <code>aurora-plus</code> 按需导入。
+      点击图标复制组件名；在代码中直接从 <code>aurora-plus/icons</code> 具名导入。
     </p>
 
     <div v-if="visibleIcons.length" class="au-icon-gallery__grid">
