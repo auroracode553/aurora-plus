@@ -28,7 +28,7 @@ Aurora Plus 是 Vue 3 通用组件库，npm 包名为 `aurora-plus`。公共 API
 | `AuSlider` | 支持小数步进、连续拖动、键盘控制和数值格式化的单值滑块 |
 | `AuSwitch` | 二元状态切换开关 |
 | `AuCheckbox` | 布尔值、数组和半选状态复选框 |
-| `AuColorPicker`、`AuColorSwatch` | 系统取色与预设颜色选择控件 |
+| `AuColorPicker`、`AuColorSwatch` | 自定义颜色与固定色板控件 |
 | `AuDropdown` | 带视口避让和键盘导航的下拉菜单 |
 | `AuMenu`、`AuMenuGroup`、`AuMenuItem` | 支持分组、受控选中和键盘导航的持久导航菜单 |
 | `AuMenuBar` | 桌面应用顶部菜单栏与层级命令菜单 |
