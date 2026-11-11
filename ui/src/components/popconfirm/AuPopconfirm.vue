@@ -59,7 +59,7 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue';
-import { IconAlertCircle } from '../../icons/internal.js';
+import { IconAlertCircle } from '../../icons.js';
 import { AuButton } from '../button/index.js';
 import { AuIcon } from '../icon/index.js';
 import { AuPopover } from '../popover/index.js';

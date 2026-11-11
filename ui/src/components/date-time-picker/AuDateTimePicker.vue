@@ -106,7 +106,7 @@
 <script setup>
 import { usePickerInputCommit } from '../../utils/use-picker-input-commit.js';
 import { computed, nextTick, ref, useAttrs, watch } from 'vue';
-import { IconCalendarTime } from '../../icons/internal.js';
+import { IconCalendarTime } from '../../icons.js';
 import { AuDatePickerPane } from '../date-picker/index.js';
 import { AuInput } from '../input/index.js';
 import { AuPopover } from '../popover/index.js';

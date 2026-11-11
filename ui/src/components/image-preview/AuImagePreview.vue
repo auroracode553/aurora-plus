@@ -143,7 +143,7 @@ import {
   IconX,
   IconZoomIn,
   IconZoomOut,
-} from '../../icons/internal.js';
+} from '../../icons.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButtonGroup, AuButtonGroupItem } from '../button-group/index.js';
 import { AuIcon } from '../icon/index.js';

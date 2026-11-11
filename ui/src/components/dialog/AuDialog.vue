@@ -43,7 +43,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { useOverlayLayer } from '../../utils/overlay-layer.js';
-import { IconX } from '../../icons/internal.js';
+import { IconX } from '../../icons.js';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scroll-lock.js';
 import { AuButton } from '../button/index.js';
 import { AuTooltip } from '../tooltip/index.js';

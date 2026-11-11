@@ -68,7 +68,7 @@ import {
   ref,
   useSlots,
 } from 'vue';
-import { IconAlertCircle, IconCircleCheck, IconLoader2 } from '../../icons/internal.js';
+import { IconAlertCircle, IconCircleCheck, IconLoader2 } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import {
   cloneFieldValue,

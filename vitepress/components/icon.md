@@ -7,7 +7,7 @@ import iconBasicSource from '../.vitepress/theme/examples/icon/IconBasic.vue?dem
 
 # Icon 图标
 
-Aurora Plus 通过独立的 `aurora-plus/icons` 入口提供可按需导入的图标组件，并支持调整尺寸、颜色和描边宽度。
+Aurora Plus 通过 `aurora-plus/icons` 入口提供具名异步图标组件，支持调整尺寸、颜色和描边宽度。调用方普通导入后直接渲染即可，无需再封装异步组件。图标实现仅在首次渲染时加载，保存或注册组件引用不会触发加载；相同图标的多个实例共享加载结果，再次使用无需重复加载。
 
 ## 基础用法
 

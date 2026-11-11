@@ -35,7 +35,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, ref, useSlots, watch } from 'vue';
-import { IconHelpCircle } from '../../icons/internal.js';
+import { IconHelpCircle } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import AuTooltip from './AuTooltip.vue';
 

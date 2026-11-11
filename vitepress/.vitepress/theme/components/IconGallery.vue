@@ -71,7 +71,8 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { AuButton, AuMessage } from 'aurora-plus';
-import { IconSearch, icons as tablerIcons } from 'aurora-plus/icons';
+import { IconSearch } from 'aurora-plus/icons';
+import * as iconCatalog from 'aurora-plus/icons';
 import iconMetadata from 'virtual:aurora-plus-icon-metadata';
 import { writeTextToClipboard } from '../utils/clipboard.js';
 
@@ -124,7 +125,7 @@ const selectedCategory = ref('');
 const selectedStyle = ref('');
 const visibleLimit = ref(PAGE_SIZE);
 
-const allIcons = Object.entries(tablerIcons)
+const allIcons = Object.entries(iconCatalog)
   .filter(([name, component]) => name.startsWith('Icon') && component)
   .map(([name, component]) => {
     const [category = 'Other', style = name.endsWith('Filled') ? 'filled' : 'outline'] =

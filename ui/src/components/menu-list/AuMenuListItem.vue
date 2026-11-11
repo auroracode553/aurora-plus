@@ -59,7 +59,7 @@
 
 <script setup>
 import { computed, inject, useAttrs } from 'vue';
-import { IconChevronRight } from '../../icons/internal.js';
+import { IconChevronRight } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 
 defineOptions({ inheritAttrs: false });

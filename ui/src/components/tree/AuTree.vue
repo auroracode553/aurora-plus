@@ -52,7 +52,7 @@
 
 <script setup>
 import { nextTick, ref } from 'vue';
-import { IconChevronRight, IconFileText } from '../../icons/internal.js';
+import { IconChevronRight, IconFileText } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import { AuVirtualList } from '../virtual-list/index.js';
 

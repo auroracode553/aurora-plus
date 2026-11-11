@@ -72,7 +72,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { IconCheck, IconChevronRight } from '../../icons/internal.js';
+import { IconCheck, IconChevronRight } from '../../icons.js';
 import { useSubmenuHover } from '../../utils/use-submenu-hover.js';
 import { AuIcon } from '../icon/index.js';
 

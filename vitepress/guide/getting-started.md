@@ -49,7 +49,7 @@ import { IconBold } from 'aurora-plus/icons';
 </template>
 ```
 
-图标按需从 `aurora-plus/icons` 具名导入，图标实现已包含在 Aurora Plus 的发布产物中，无需安装其他图标包。完整安装注册 `AuIcon` 等 UI 组件，不会把全部 `Icon*` 图标自动注册到应用；直接传入所用图标即可。需要少量图标时避免导入、遍历或批量注册整个图标集合。完整用法和 `AuIcon` API 见 [Icon 图标](/components/icon)。
+图标从 `aurora-plus/icons` 具名导入，库提供的异步组件在首次渲染时加载对应实现，相同图标的多个实例共享结果，无需调用方封装或安装其他图标包。完整安装注册 `AuIcon` 等 UI 组件，不会把全部 `Icon*` 图标自动注册到应用，直接传入所用图标即可。需要少量图标时使用具名导入，不遍历或批量注册完整图标集合。完整用法和 `AuIcon` API 见 [Icon 图标](/components/icon)。
 
 ## 可用平台
 

@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
+import { asyncIcons } from './icons-plugin.js';
 
 const libraryEntries = {
   'aurora-plus': fileURLToPath(new URL('./src/index.js', import.meta.url)),
@@ -9,7 +10,7 @@ const libraryEntries = {
 };
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), asyncIcons()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -18,22 +19,17 @@ export default defineConfig({
   build: {
     lib: {
       entry: libraryEntries,
-      formats: ['es', 'cjs'],
-      fileName: (format, entryName) => {
-        // npm 会排除嵌套 node_modules，内联依赖统一输出到 vendor。
-        const moduleName = entryName.replace(/(^|\/)node_modules(?=\/)/g, '$1vendor');
-        return `${moduleName}.${format === 'es' ? 'js' : 'cjs'}`;
-      },
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
       cssFileName: 'aurora-plus',
     },
     cssCodeSplit: false,
     rolldownOptions: {
-      // Vue 由业务项目提供；Tabler 图标则内联到 Aurora Plus 的发布产物。
+      // Vue由业务项目提供，图标实现保留为按需请求的动态分块。
       external: ['vue', 'electron'],
-      output: {
-        exports: 'named',
-        preserveModules: true,
-      },
+      output: [
+        { format: 'es', exports: 'named', chunkFileNames: 'icons/[name]-[hash].js' },
+        { format: 'cjs', exports: 'named', chunkFileNames: 'icons/[name]-[hash].cjs' },
+      ],
     },
   },
 });

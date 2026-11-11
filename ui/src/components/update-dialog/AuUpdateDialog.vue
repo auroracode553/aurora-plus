@@ -116,7 +116,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { IconAlertCircle, IconArrowRight, IconArrowUp, IconCircleCheck, IconDownload, IconLoader2, IconRefresh } from '../../icons/internal.js';
+import { IconAlertCircle, IconArrowRight, IconArrowUp, IconCircleCheck, IconDownload, IconLoader2, IconRefresh } from '../../icons.js';
 import { AuButton } from '../button/index.js';
 import { AuCheckbox } from '../checkbox/index.js';
 import { AuDialog } from '../dialog/index.js';

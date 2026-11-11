@@ -48,7 +48,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { IconCheck } from '../../icons/internal.js';
+import { IconCheck } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import { AuLoadingSpinner } from '../loading/index.js';
 import { getUpdateSourceSummary } from './update-sources.js';

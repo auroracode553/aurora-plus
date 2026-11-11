@@ -133,7 +133,7 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
-import { IconCopy, IconMinus, IconSquare, IconX } from '../../icons/internal.js';
+import { IconCopy, IconMinus, IconSquare, IconX } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 import { useNativeWindowControls } from './useNativeWindowControls.js';

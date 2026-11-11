@@ -12,6 +12,8 @@
 
 文档站通过 `file:../ui` 引用组件库。默认将 `aurora-plus`、`aurora-plus/icons` 和 `aurora-plus/style.css` 映射到 `ui/src`，组件示例使用公开入口。
 
+源码模式注册 UI 包的 `ui/icons-plugin.js`，与 UI 构建共用同一图标入口转换；组件内置图标的相对引用和示例的公开引用均读取 `ui/src/icons.js`，无需特殊产物映射。组件、图标与样式保留源码更新；图库通过公开入口的命名空间浏览完整图标目录，分类元数据仅提供筛选信息，SVG 实现由库在实际渲染时异步加载。
+
 `AURORA_PLUS_USE_DIST=true` 时使用包的正式入口。GitHub Pages 工作流先生成 UI 产物，再以该模式生成文档。
 
 依赖和版本以本目录的 `package.json` 与锁文件为准；`ui` 与文档站分别维护依赖。

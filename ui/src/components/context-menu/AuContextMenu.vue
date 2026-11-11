@@ -124,7 +124,7 @@
 import { getFloatingActions } from '../../utils/floating-actions.js';
 import { useSubmenuHover } from '../../utils/use-submenu-hover.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { IconChevronRight } from '../../icons/internal.js';
+import { IconChevronRight } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import { AuTooltip } from '../tooltip/index.js';
 

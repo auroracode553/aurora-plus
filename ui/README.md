@@ -110,7 +110,7 @@ function save() {
 
 ## 图标
 
-从独立的 `aurora-plus/icons` 入口按需导入图标组件，并传给 `AuIcon` 或其他接受图标的 Aurora Plus 组件。图标实现已包含在 Aurora Plus 的发布产物中，只需安装 `aurora-plus`：
+从 `aurora-plus/icons` 具名导入库提供的异步图标组件，可直接传给 `AuIcon` 或其他接受图标的 Aurora Plus 组件，无需调用方再封装。图标实现仅在首次渲染时加载，同一图标的多个实例共享加载结果；图标实现包含在库中，只需安装 `aurora-plus`：
 
 ```vue
 <script setup>

@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 import { env } from 'node:process';
 import { defineConfig } from 'vitepress';
+import { asyncIcons } from '../../ui/icons-plugin.js';
 import { demoSourcePlugin } from './demo-source-plugin.js';
 import { iconMetadataPlugin } from './icon-metadata-plugin.js';
 
@@ -42,7 +43,11 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#409eff' }],
   ],
   vite: {
-    plugins: [demoSourcePlugin(), iconMetadataPlugin()],
+    plugins: [
+      demoSourcePlugin(),
+      iconMetadataPlugin(),
+      ...(useAuroraPlusDist ? [] : [asyncIcons()]),
+    ],
     resolve: {
       alias: auroraPlusSourceAliases,
       dedupe: ['vue'],

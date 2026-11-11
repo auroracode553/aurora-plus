@@ -90,7 +90,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
-import { IconArrowDown, IconArrowUp, IconArrowsSort } from '../../icons/internal.js';
+import { IconArrowDown, IconArrowUp, IconArrowsSort } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import { AuCheckbox } from '../checkbox/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';

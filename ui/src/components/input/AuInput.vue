@@ -104,7 +104,7 @@
 
 <script setup>
 import { computed, inject, nextTick, ref, useAttrs, useSlots } from 'vue';
-import { IconEye, IconEyeOff, IconX } from '../../icons/internal.js';
+import { IconEye, IconEyeOff, IconX } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 import AuLoadingSpinner from '../loading/AuLoadingSpinner.vue';
 

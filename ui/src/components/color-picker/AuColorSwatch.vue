@@ -21,7 +21,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { IconCheck } from '../../icons/internal.js';
+import { IconCheck } from '../../icons.js';
 import { AuIcon } from '../icon/index.js';
 
 const props = defineProps({
